@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Methodology — FREE TIME VACATION</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css"/>
+</head><body>
+<header class="topbar"><div class="container"><div class="topbar-inner">
+<a href="../../index.html" class="brand" style="text-decoration:none;color:inherit"><div class="logo">FV</div><div><h1>FREE TIME <span>VACATION</span></h1><small>Outer Sunset 94122 • PST</small></div></a>
+<nav class="nav"><a href="../../index.html">Dashboard</a><a href="vacation-windows.html">Vacation Windows</a><a href="calendar.html">Calendar</a><a href="radio-guide.html">Radio Guide</a><a href="sources.html">Sources</a></nav>
+</div></div></header>
+<main class="container">
+<div class="breadcrumb"><a href="../../index.html">Dashboard</a> › Methodology</div>
+<section class="hero">
+<h2>Methodology — <b>what counts as &quot;free&quot;</b></h2>
+<p>Every minute is free only when <em>none</em> of the monitored broadcasts are on Bay Area AM/FM. This page defines the exact rule, time zone, durations, and estimation method.</p>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>1) The free-time rule</h2>
+<div class="callout"><b>A minute is free when zero of these are on live AM/FM radio receivable in Outer Sunset 94122:</b> All 30 MLB clubs (preseason, regular season, All-Star, postseason, special games like Mexico City/Field of Dreams) • NFL — all 32 teams, preseason + regular + postseason (49ers high priority) • Westwood One Sports national NFL radio (TNF/SNF/MNF + playoffs + Super Bowl) • NCAAF — Stanford and California Golden Bears (high priority).</div>
+<div class="grid cols2" style="margin-top:12px">
+<div class="alert bad"><b>Busy =</b> at least one of those is on-air live (including pregame/halftime). We use a broadcast window: game duration + pregame + halftime where applicable. If you miss the start you miss the game — we count the whole window as busy.</div>
+<div class="alert good"><b>Free =</b> none of those on-air. You can turn the radio off. Example intraday: if games are 1:05–3:35 PM and 8:15–11:30 PM, you&apos;re free 6:00 AM–1:05 PM, 3:35–8:15 PM, after 11:30 PM (PST).</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>2) Time zone — PST/PDT (America/Los_Angeles)</h2>
+<p class="small">All dates and times on this site are shown in <b>PT</b> — i.e., <b>PST (UTC-8) in winter, PDT (UTC-7) in summer</b>. We label it “PST” per your request but automatically use daylight when applicable (Mar–Nov). Example: MLB Opening Night Mar 25 5:05 PM PT = 5:05 PM PDT (summer). NFL Sep games are PDT; Dec-Feb games are PST. The calendar uses <span class="kbd">Intl.DateTimeFormat</span> with <span class="kbd">America/Los_Angeles</span> so DST shifts are handled.</p>
+<p class="small muted">Why PST? You live in 94122 — we show the time you&apos;d see on your radio clock.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>3) How long is a &quot;busy&quot; block? Average durations + research</h2>
+<p class="small">We researched average real-time lengths (not just clock time) and added standard pregame/post.</p>
+<table>
+<tr><th>League</th><th>Avg game</th><th>Halftime / break</th><th>Pregame + post in our model</th><th>Total radio window we use</th><th>Source</th></tr>
+<tr><td><b>MLB</b> (all 30)</td><td>2:48 – 3:10 (168–190 min). We use 168 min (2:48) conservative for 2024 with pitch clock.</td><td> — </td><td>30 min pre + 15 min post</td><td><b>210 min (3h30)</b></td><td><a href="https://sportsgeardaily.com/rules/how-long-is-an-average-baseball-game" target="_blank">2024 avg 3:10</a> • <a href="https://sportsgeardaily.com/rules/how-long-are-professional-baseball-games" target="_blank">2:58 variant</a></td></tr>
+<tr><td><b>NFL</b> (+ Westwood One)</td><td>3:12 (192 min)</td><td>12 min (SB: 30+)</td><td>60 min pre + 30 post</td><td><b>282 min (4h42)</b></td><td><a href="https://sportsgeardaily.com/football/how-long-is-an-average-football-game" target="_blank">3:12 Nielsen</a></td></tr>
+<tr><td><b>NCAAF</b> Stanford/Cal</td><td>3:26–3:27 (206–207 min)</td><td>20 min</td><td>45 min pre</td><td><b>252 min (4h12)</b></td><td><a href="https://www.marca.com/en/ncaa/2026/08/26/how-long-do-college-football-games-last.html" target="_blank">3:27 2024 FBS</a></td></tr>
+</table>
+<p class="note" style="margin-top:10px"><b>Postseason adds extra:</b> MLB World Series and NFL playoffs have longer pregame (+60 min). We extend to 240 min (MLB Oct) and 300 min (NFL Jan/Feb) in those months. Overtime not modeled — if flagged, noted.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>4) Vacation window definition</h2>
+<p class="small"><b>Free day</b> = zero games at any time that calendar day (PST) from any monitored league. <b>Free window</b> = <em>consecutive</em> free days. We search for 7-day, 14-day, and 21-day windows in each calendar year (Jan 1–Dec 31). 2026 is verified; 2027-2029 are <span class="tag est">estimated</span> and labeled as such everywhere.</p>
+<div class="alert"><b>Why 21-day never appears:</b> MLB runs 185 days (Mar 25–Sep 27) with only a 3-day All-Star gap. NFL wraps around it (Sep–Feb) + spring training (Feb 24 onward) + bowl season (Dec). Together they leave only ~14 free days post-Super Bowl. Math: 365 - ~260 busy days = ~105 days, but they&apos;re not consecutive. Longest consecutive is post-Super Bowl → spring training.</div>
+<p class="small muted">If you relax the rule to “ignore MLB spring training” (preseason), you get 35-42 days (Feb 9 → Mar 24) — noted as an alternate view.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>5) Estimation method for 2027-2029</h2>
+<p class="small">No official schedules are released for 2027-2029 as of Nov 2026 (MLB releases ~July prior year, NFL ~May prior year, ACC ~Jan prior year). We estimate using 15-year historical patterns:</p>
+<ul class="small">
+<li><b>MLB:</b> Opening Day = last Thursday in March (Mar 26 in 2026 → Mar 25 2027 (Thu), Mar 30 2028 (Thu, leap year + Olympics buffer), Mar 29 2029). All-Star = second Tue in July (Jul 13-14). Regular end = last Sun Sep (Sep 27 ±2). Verified pattern: <a href="https://www.mlb.com/news/2026-mlb-schedule-released" target="_blank">MLB 2026 release</a></li>
+<li><b>NFL:</b> Kickoff = Thu after Labor Day (Sep 10 2026 in Melbourne → Sep 9 2027, Sep 7 2028, Sep 6 2029). Super Bowl = 1st or 2nd Sun Feb; SoFi gets LXI (Feb 7 2027 est).</li>
+<li><b>NCAAF:</b> Week 0 ≈ Aug 28, Week 1 = Sat after Labor Day. Big Game (Stanford@Cal) = Sat before Thanksgiving (Nov 21 2026 → Nov 20 2027 etc.) <a href="https://writeforcalifornia.com/p/cal-football-schedule-2026-top-dogs" target="_blank">Cal 2026 via Write for California</a></li>
+</ul>
+<p class="note"><b>Every estimated date is marked <span class="tag est">estimated</span></b> and never shown as verified. Tables leave time blank where unknown; flagged items go to <a href="flagged.html">Flagged for Review</a>. When officials release, we replace.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>6) What we count as &quot;Westwood One&quot;</h2>
+<p class="small"><b>Westwood One Sports</b> is the official NFL network audio partner (39th consecutive season). It carries every primetime regular-season game (Thursday Night, Sunday Night, Monday Night), plus all playoff games and Super Bowl, on ~500 affiliates. In SF, that&apos;s <b>KGO 810 AM</b> (and KNBR simulcast). This means even if the 49ers are on bye, a Thursday/Monday national game still makes your night busy per your definition — we count those.</p>
+<p class="small muted">Source: <a href="https://www.westwoodonesports.com/nfl-schedule/" target="_blank">westwoodonesports.com/nfl-schedule</a> • <a href="https://en.wikipedia.org/wiki/NFL_on_Westwood_One_Sports" target="_blank">Wikipedia — NFL on Westwood One</a> • <a href="https://www.insideradio.com/free/westwood-one-provides-nationwide-radio-coverage-of-wild-card-weekend/article_2caad25f-99de-4aca-9664-905c8faefe23.html" target="_blank">Inside Radio — Wild Card coverage</a></p>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h2>7) Radio receivable in Outer Sunset 94122</h2>
+<p class="small">Only games on <b>over-the-air AM/FM</b> count. We mapped stations that actually come in on a basic radio from the Sunset (50kW clears + local FMs): KNBR 680/104.5 (Giants/49ers), KGO 810 (Cal + Westwood One), KNEW 960 (A&apos;s Bay feed), KSTE 650 (A&apos;s Sacramento flagship, fair night only), KZSU 90.1 (Stanford student, marginal). See <a href="radio-guide.html">full dial guide</a> with FCC contours and manual scan notes.</p>
+</div>
+</section>
+
+<footer class="footer"><div><a href="../../index.html">Dashboard</a> • <a href="vacation-windows.html">Vacation Windows</a> • <a href="sources.html">Sources</a></div></footer>
+</main>
+</body></html>

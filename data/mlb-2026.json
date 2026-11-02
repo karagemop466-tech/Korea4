@@ -1,0 +1,26 @@
+{
+  "season": 2026,
+  "league": "MLB",
+  "verified": true,
+  "source": "https://www.mlb.com/news/2026-mlb-schedule-released",
+  "sources": [
+    "https://www.mlb.com/news/2026-mlb-schedule-released",
+    "https://en.wikipedia.org/wiki/2026_Major_League_Baseball_season",
+    "https://www.directv.com/insider/mlb-opening-day/",
+    "https://www.olympics.com/en/news/major-league-baseball-2026-key-dates-schedule-faq-watch-ohtani-dodgers"
+  ],
+  "key_dates": {
+    "opening_night": "2026-03-25T17:05:00-07:00",
+    "opening_night_matchup": "NYY @ SF (Oracle Park)",
+    "opening_day": "2026-03-26",
+    "all_star_game": "2026-07-14 (Citizens Bank Park, Philadelphia)",
+    "all_star_break": "2026-07-13 to 2026-07-16 (no regular season games)",
+    "regular_season_end": "2026-09-27",
+    "postseason_start": "2026-09-29",
+    "world_series_start": "2026-10-23"
+  },
+  "note": "Verified from official MLB release Aug 26 2025. Every team plays 162. Earliest Opening Day in MLB history.",
+  "high_priority": ["SF", "ATH"],
+  "broadcast_window_minutes": 210,
+  "average_game_duration_minutes": 168
+}

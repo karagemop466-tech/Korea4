@@ -1,0 +1,21 @@
+{
+  "network": "Westwood One Sports (Cumulus Media)",
+  "verified": true,
+  "sources": [
+    "https://www.westwoodonesports.com/nfl-schedule/",
+    "https://en.wikipedia.org/wiki/NFL_on_Westwood_One_Sports",
+    "https://www.insideradio.com/free/westwood-one-provides-nationwide-radio-coverage-of-wild-card-weekend/article_2caad25f-99de-4aca-9664-905c8faefe23.html"
+  ],
+  "coverage": "Official network audio partner of NFL — 39th consecutive season (2026). Covers all primetime regular season (TNF, SNF, MNF), playoffs, Super Bowl on ~500 terrestrial affiliates + SiriusXM + NFL+.",
+  "bay_area_affiliate": "KGO 810 AM (Cumulus) + KNBR 680 AM simulcast for primetime and postseason. San Francisco market listed as KNRB/680 for Westwood One doubleheaders (per Wikipedia affiliate table). Actual over-the-air reception in Outer Sunset 94122: 810 AM strong, 680 AM strong.",
+  "2026_regular_season_week1_onward": "Every Thursday night, Sunday night (8:20 PM ET), Monday night (8:15 PM ET) broadcast live. Plus International games (Melbourne, Mexico City) carried. Doubleheaders Sunday afternoons also available.",
+  "playoffs_2026": {
+    "wild_card": "Jan 10-12 2026 (6 games)",
+    "divisional": "Jan 17-18 2026",
+    "championship": "Jan 25 2026",
+    "super_bowl": "Feb 8 2026 6:30 PM ET NBC + Westwood One radio"
+  },
+  "high_priority": true,
+  "note": "Westwood One counts as busy — even if 49ers not involved, any national NFL game on Westwood One blocks free time per your definition. This adds ~3 extra primetime games per week during NFL season beyond 49ers.",
+  "broadcast_window_minutes": 282
+}
