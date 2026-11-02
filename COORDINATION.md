@@ -1,3 +1,154 @@
+# COORDINATION.md — unified shared task board
+
+Last integration update: 2026-11-02 (UTC)
+Active final verification session: `arena/72e6d3f7-korea4`
+Fixed working branch: `arena/72e6d3f7-korea4`
+
+## Branch constraint
+Arena fixes each session to its assigned branch and forbids switching to, creating, or pushing another branch. The requested `session-<id>/<task>` branch/worktree convention and a separate integration branch therefore cannot be used by this session. All work, the final PR, and the merge from this session are performed on `arena/72e6d3f7-korea4`.
+
+## Status of merged / open parallel work
+| PR / branch | State | Preserved work |
+|---|---|---|
+| #1 `arena/ccb3febc-korea4` | MERGED | `docs/`, legacy `site/` six pages, F1–F12 flags. |
+| #2 `arena/c697ef7b-korea4` | CLOSED, superseded | Root dashboard, `assets/`, `data/*.json`, `site/pages/`, `site/alt/`; later integrated via #5. |
+| #3 / #4 `arena/cab47657-korea4` | MERGED | Flat root dashboard, `data/schedules.js`, Pages workflow attempt. |
+| #5 `arena/c697ef7b-korea4` | MERGED at `edcea17` | Unified prior sessions, reconciled 4-day Feb 15–18 2027 finding, Pages built. |
+| #6 `arena/4c938fb2-korea4` | OPEN | Provisional planner branch; not merged into this verification pass because it deletes shared site pages. To be closed/superseded by final integration. |
+| #10 `arena/9d83abee-korea4` | MERGED | Source-aware `site/planner/` edition, redirects, refresh/reconcile scripts, tests and raw inspection snapshots; retained. |
+| #11 `arena/9d83abee-korea4` | MERGED at `b158cf9` | Pages publisher follow-up (`scripts/wait_for_legacy.py`, `tests/test_deploy.py`); retained, but final integration deliberately uses the clean legacy root publisher. |
+| `arena/9d83abee-korea4` | branch-local | Official source-inspection snapshots, `scripts/refresh.py`, Pacific-time interval tests; used as a cross-check, not bulk-merged. |
+| `arena/97161ae7-korea4` | PRs #7/#8/#9 MERGED | `docs/` HTML scoreboard edition, `EXECUTIVE-SUMMARY.md`, `research-notes.md`, `tools/`; retained and linked. |
+| `arena/72e6d3f7-korea4` | this session | `research/probe/` official runner snapshots, compressed collector, deeper line-by-line official-source verification, final generated site/data, PR + merge + Pages confirmation. |
+
+**Conflict resolution 2026-11-02:** merging `origin/main` (through `47bfbeb`) into this branch produced another add/add conflict in `COORDINATION.md`. No other session content was discarded: the full `main` board and this session's previous unified board are reproduced verbatim in the appendices below. All site/data/doc files from merged PRs were retained in the working tree.
+
+## Unified task board
+| Task | Status | Owner | File scope | Verification | Notes |
+|---|---|---|---|---|---|
+| C0 — Shared board and published claim | done | `arena/72e6d3f7-korea4` | `COORDINATION.md` | Initial claim `99376cd`, research claim `53af657`. | Multiple sessions started from the same initial commit. |
+| C1 — Repo/history/prior-site audit | done | integration | `research/reference-sites.md`, board | Git history, GitHub API, direct fetches. | IR-001: all three supplied reference GitHub Pages URLs and matching repos returned 404. |
+| C2 — Official-source research/probe | done | `arena/72e6d3f7-korea4` | `scripts/probe_sources.py`, `scripts/compact_probe.py`, `.github/workflows/probe-sources.yml`, `research/probe/` | 39 official raw responses with URL/status/SHA-256; Actions runs `41490904739` and `41491175465` succeeded. | IR-002: NFL 2027 selectors show no schedule data. IR-003: WWO affiliates may not air every network broadcast. |
+| C3 — Official schedule ingestion | done | integration | `scripts/fetch_official.py`, `scripts/collect_official.py`, `data/official/*`, `research/official/raw/*` | 675 fresh official raw responses plus 39 probe responses; 6,607 official event/anchor rows, all 30 MLB clubs, 272 NFL regular games, 49 preseason matchups, 311 WWO 2026–2027 event windows, 24 Stanford/Cal games, 19 49ers rows, 34 Earthquakes radio matches. | Every row has official source URL; TBD times blank; 2028/2029 unreleased rows blank + UNVERIFIED. |
+| C4 — Free-time/vacation-window analysis 2027–2029 | done | integration | `research/analysis/*`, `vacation.html`, `calendar.html`, `daily.html` | 14,364 merged busy intervals, 1,461 daily scoreboards, exact Pacific free windows, best 7/14/21-day candidates for 2027/2028/2029, official-anchor gaps and relaxed scenario. | Strict definition: any MLB/NFL/Stanford/Cal/WWO/live Bay Area radio sports game makes the minute busy. No strict 7/14/21-day fully free window; all long candidates are ESTIMATED/UNVERIFIED. |
+| C5 — Dashboard, category subpages, scoreboard calendar, tables, flags | done | integration | root HTML, `css/style.css`, `js/app.js`, `data/official/*`, `site/**`, `docs/**`, `EXECUTIVE-SUMMARY.md`, `README.md` | Clean 15-page primary dashboard with every entry in readable tables; legacy trees preserved and linked. | Shared outputs edited only in this final verification pass. |
+| C6 — Line-by-line verification, internal-link checker, build/deploy check | done | integration | `scripts/verify.py`, `research/verification-report.md`, `research/line_by_line.json` | 1,689 prior generated-data lines audited; 9,350 primary static table rows source-link checked; 652 internal links across 42 HTML pages checked with 0 broken; 9 JSON files valid; `node --check js/app.js` PASS; merge-marker scan clean. | PASS report written before PR. |
+| C7 — PR, merge, Pages deployment confirmation, record result | in progress | integration | board | PR from fixed branch to `main`, merge, then GitHub Pages build status. | Flagged items do not block merge; broken build does. |
+
+**Final merge conflict resolution 2026-11-02:** merging `origin/main` through `1f02131` (PR #10) produced add/add conflicts in `.gitignore`, `README.md`, `index.html` and `scripts/build_site.py`. The primary dashboard/generator/README from this final integration were kept; the complete `main` versions of `README.md`, `index.html` and `scripts/build_site.py` were preserved verbatim under `research/legacy/`. All `site/planner/`, `redirects/`, `scripts/refresh.py`, `scripts/reconcile_snapshot.py`, tests, workflow and Jekyll config files from PR #10 were retained. `.gitignore` was unioned; no session content was discarded.
+
+**Pages publisher conflict resolution 2026-11-02:** PR #10 had changed the legacy Jekyll config to exclude the root dashboard and redirect every non-planner URL to `site/planner/`. Its complete generator, workflows, config and redirects are preserved in `research/legacy/`; the final integration restores a clean root Pages source, keeps `site/planner/` as an archived sibling edition, and replaces the PR #10 deploy/check workflows with final `scripts/verify.py` gates. No session work was discarded.
+
+**PR #11 merge conflict resolution 2026-11-02:** merging `b158cf9` produced conflicts in `.github/workflows/pages.yml` and `README.md`. The final integration versions were kept; the PR #11 versions are preserved verbatim under `research/legacy/workflows/pages-9d83abee-pr11.yml` and `research/legacy/README-9d83abee-pr11.md`. `scripts/wait_for_legacy.py` and `tests/test_deploy.py` were retained. No work was discarded.
+
+## Official verification rules
+1. Official/league/team/network sources only for `VERIFIED` values.
+2. If an official value cannot be confirmed, leave that value blank and publish an `UNVERIFIED` flag with a source link.
+3. `TBD` official start times stay blank in the official-time column; separately labelled planning estimates may be shown only with an explicit model/assumption and official anchor links.
+4. Estimates are never presented as released schedules.
+5. Every table row must carry a source URL to an official site or an explicit unverified flag whose source URL points to the official source establishing the gap.
+6. Prior-session rows using CBS Sports, Wikipedia, cached/secondary pages, or untraceable values are not marked VERIFIED until independently confirmed from an official source.
+
+## Known irregularities
+- IR-001: three supplied reference GitHub Pages sites and matching repositories were dead/404 on 2026-11-02.
+- IR-002: official NFL 2027 game-by-game pages show `SCHEDULE DATA UNAVAILABLE`.
+- IR-003: WWO station finder warns that local affiliates may not carry every network broadcast.
+- IR-004: WWO event JSON-LD may encode local ET clock time with `+00:00`; use the page's Unix `data-time` attributes and displayed ET/EST timezone for Pacific conversion.
+- IR-005: official NFL announced that the AFC–NFC Pro Bowl game will no longer be staged beginning with the 2026 season; prior continuous Jan–Super-Bowl blocking is overly conservative.
+- IR-006: earlier parallel-session data contains secondary sources (CBS Sports, Wikipedia), invented/estimated fixtures, and conflicting 14-day vs 4-day vacation findings; these are being replaced or flagged line by line.
+- IR-007: 2028/2029 MLB/NFL and 2027–2029 Westwood One full schedules were not found as officially released; all modeled rows are explicitly ESTIMATED.
+
+## Change log / handoffs
+- 2026-11-02 — `arena/72e6d3f7-korea4` created/published initial claim `99376cd`, research claim/probe `53af657`, unified prior merge `552a078`, probe-publish commits `f25061f`/`956e637`/`10e1291`.
+- 2026-11-02 — PR #5 merged prior sessions to `main`; PR #2 closed; PR #6 remains open. `origin/main` at `47bfbeb` merged into this fixed branch with board conflict resolved by preserving both boards.
+- 2026-11-02 — Python dependency scratch `.venv-packages/` ignored; official HTML parsing uses locally installed `beautifulsoup4`/`lxml`, while repository collector uses stdlib parsing so GitHub Actions needs no extra dependencies.
+- 2026-11-02 — Merged `origin/main` through `e8fd325` (PR #7/#8/#9 `docs/` HTML scoreboard edition). Another `COORDINATION.md` add/add conflict was resolved by retaining this unified board and appending the new `arena/97161ae7-korea4` section verbatim; all `docs/`, `EXECUTIVE-SUMMARY.md`, `research-notes.md` and `tools/` files were retained.
+- 2026-11-02 — Expanded collector fetched 675 fresh official raw responses (all 18 NFL by-week pages, official preseason/by-week PDFs, 580 WWO event detail pages, future-date articles and radio pages); all HTTP errors were retried to zero. `scripts/collect_official.py`, `scripts/build_site.py` and `scripts/verify.py` generated the final official-only dashboard.
+- 2026-11-02 — Final verification PASS: 9,350 primary table rows carry official source links, 1,689 prior lines audited, 652 internal links across 42 HTML pages with zero broken, all JSON valid, JS syntax PASS, no merge markers.
+- Pending: create PR from this fixed branch, merge without approval, confirm GitHub Pages deploy, close superseded PR #6, and record PR/merge/deploy results below.
+
+## Final integration verification record
+
+| Item | Result |
+|---|---|
+| Official sources | 675 fresh raw responses in `research/official/manifest.json` + 39 earlier probe responses; 748 source-catalogue rows with URL/HTTP/SHA-256. |
+| Official rows | 6,607 event/anchor rows: MLB 2026/2027 all clubs, NFL 2026 preseason/regular/postseason/special, 49ers, Stanford/Cal, WWO nine categories, Earthquakes radio. |
+| Verification performed | `scripts/verify.py`: 9 JSON files, 9,350 primary static table rows, 652 internal links across 42 HTML pages, dynamic source-link renderer, merge-marker scan, `node --check js/app.js`. PASS with 0 errors/0 warnings. |
+| Line-by-line review | `research/line_by_line.json` and `review.html`: 1,689 prior generated-data/documentation lines with official replacement links and flags. |
+| Irregularities | 17 IR rows on `flagged.html` (dead reference sites, NFL 2027 unavailable, WWO affiliate caveat, JSON-LD mismatch, discontinued Pro Bowl, secondary-source corrections, TBD values, unreleased schedules, radio call-sign correction, duration flags, 2028 Olympic-break scenario). |
+| Site build | Static root dashboard + category pages; legacy `docs/`, `site/`, `site/pages/`, `site/alt/`, and PR #10 `site/planner/` trees retained and linked; `site/alt` and redirect relative links corrected. |
+| Verification after PR #10 merge | 9,350 primary table rows, 87 HTML pages, 674 internal links, 0 broken, all JSON valid, JS syntax PASS, no merge markers. |
+| Pages publisher reconciliation | PR #10 `_config.yml`, `pages.yml`, `check.yml`, `build_site.py` and redirect generator preserved under `research/legacy/`; final workflows run `scripts/verify.py`; final `_config.yml` publishes the root dashboard and excludes only superseded redirect/raw/tool trees. |
+| PR / merge / deploy | Pending — recorded after `gh pr create`, `gh pr merge`, and GitHub Pages API confirmation. |
+
+
+## Appendix A — this session's board before the `47bfbeb` merge (verbatim)
+
+# COORDINATION.md — unified shared task board
+
+Last integration update: 2026-11-02 (UTC)
+Final integration session: `arena/72e6d3f7-korea4`
+Fixed working branch: `arena/72e6d3f7-korea4`
+
+## Branch constraint
+Arena fixes each session to its assigned branch and forbids switching to, creating, or pushing another branch. The requested `session-<id>/<task>` branch/worktree convention and a separate integration branch therefore cannot be used in Arena. All work, the final PR, and the merge from this session are performed on `arena/72e6d3f7-korea4`.
+
+## Session registry (preserved, no work discarded)
+
+| Session / branch | Known status | Work preserved |
+|---|---|---|
+| `arena/ccb3febc-korea4` | PR #1 merged to `main` | `docs/`, `site/` six-page anchor-level site, root redirect, F1–F12 flags. |
+| `arena/cab47657-korea4` | PRs #3 and #4 merged to `main` | Root dashboard, `data/schedules.js`, flat pages, GitHub Pages workflow attempt. |
+| `arena/c697ef7b-korea4` | PR #2 open, branch has a reconciled integration board | `assets/`, `data/*.json`, `site/pages/`, `site/alt/`, extra dashboard pages and flags. |
+| `arena/9d83abee-korea4` | branch-local research claim; source-inspection artifacts | `site/data/_source-inspection/` on that branch; not merged until its task is complete. |
+| `arena/97161ae7-korea4` | branch-local research claim | Board/claim only; not merged until its task is complete. |
+| `arena/4c938fb2-korea4` | branch-local research/integration claim | Board/claim only; not merged until its task is complete. |
+| `arena/72e6d3f7-korea4` | this session; official-source probe and final line-by-line verification | `COORDINATION.md`, `scripts/`, `research/`, `.github/workflows/probe-sources.yml`, and final verified site/data after integration. |
+
+**Conflict resolution 2026-11-02:** merging `origin/main` into this branch produced an add/add conflict in `COORDINATION.md`. No other session's file content was discarded: the `main` board's tasks, log, rules and source notes are reproduced in the appendix below; the `ccb3febc` and `c697ef7b` boards remain in their branch histories, and all site/doc/data files from merged PRs were retained. This unified board supersedes the conflicting board files only on this integration branch.
+
+## Unified task board
+
+| Task | Status | Owner | File scope | Sources / verification | Irregularities / notes |
+|---|---|---|---|---|---|
+| C0 — Shared board and published claim | done | `arena/72e6d3f7-korea4` | `COORDINATION.md` | Initial claim pushed as `99376cd`; research claim pushed as `53af657`. | Repo initially contained only `README.md`. Multiple sessions began from the same commit. |
+| C1 — Repo/history/prior-site audit | done | integration | `research/reference-sites.md`, `COORDINATION.md` | Git history, GitHub API, and direct fetches. | **IR-001:** all three supplied GitHub Pages URLs and matching repository URLs/API endpoints returned 404 on 2026-11-02; search-engine cache descriptions are not authoritative. |
+| C2 — Official-source research/probe | in progress | `arena/72e6d3f7-korea4` | `scripts/probe_sources.py`, `.github/workflows/probe-sources.yml`, `research/sources.md` | MLB Stats API 2026/2027 schedule/teams, MLB.com schedule/press releases, NFL.com 2026 schedule/important dates, 49ers.com, Stanford/Cal official future schedules, Westwood One schedule/event/station pages, Giants/A's official radio pages were fetched. | **IR-002:** NFL 2027 selectors currently show "SCHEDULE DATA UNAVAILABLE"; **IR-003:** WWO warns local affiliates may not carry every broadcast. Earlier sessions used some secondary sources; these will be replaced or flagged during final verification. |
+| C3 — Official schedule ingestion (MLB 2026/2027 all clubs, NFL 2026 all games, WWO events, Stanford/Cal 2026) | claimed | integration | `data/official/*`, `scripts/collect_official.py` | Pending runner probe; every row will retain an official source URL and a blank official time when `TBD`. | 2028/2029 official rows remain blank/unverified; estimated planning windows must be separate. |
+| C4 — Free-time/vacation-window analysis 2027–2029 | claimed | integration | `research/analysis/*`, site analysis pages | Must recompute from official rows and clearly labelled estimates. | Strict definition: any MLB/NFL/Stanford/Cal/WWO radio game makes the minute busy. |
+| C5 — Dashboard, category subpages, scoreboard calendar, tables, flags | claimed | integration | `index.html`, `site/**`, `data/**`, `css/**`, `js/**`, `assets/**` | Final integration will unify merged pages, fix navigation, and remove fabricated/unsupported rows. | Shared outputs are edited only in this final integration pass. Older site directories are retained for traceability but linked consistently. |
+| C6 — Line-by-line verification, internal-link checker, build/deploy check | unclaimed pending C5 | integration | `scripts/verify.py`, all site files | Every table row: official source link; blank official value + `UNVERIFIED`/`ESTIMATED` flag where needed. | Must run before merge. |
+| C7 — PR, merge, Pages deployment confirmation, record result | unclaimed pending C6 | integration | `COORDINATION.md` | PR from fixed branch to `main`, merge, then GitHub Pages build status. | Flagged items do not block merge; broken build does. |
+
+**Final merge conflict resolution 2026-11-02:** merging `origin/main` through `1f02131` (PR #10) produced add/add conflicts in `.gitignore`, `README.md`, `index.html` and `scripts/build_site.py`. The primary dashboard/generator/README from this final integration were kept; the complete `main` versions of `README.md`, `index.html` and `scripts/build_site.py` were preserved verbatim under `research/legacy/`. All `site/planner/`, `redirects/`, `scripts/refresh.py`, `scripts/reconcile_snapshot.py`, tests, workflow and Jekyll config files from PR #10 were retained. `.gitignore` was unioned; no session content was discarded.
+
+**Pages publisher conflict resolution 2026-11-02:** PR #10 had changed the legacy Jekyll config to exclude the root dashboard and redirect every non-planner URL to `site/planner/`. Its complete generator, workflows, config and redirects are preserved in `research/legacy/`; the final integration restores a clean root Pages source, keeps `site/planner/` as an archived sibling edition, and replaces the PR #10 deploy/check workflows with final `scripts/verify.py` gates. No session work was discarded.
+
+**PR #11 merge conflict resolution 2026-11-02:** merging `b158cf9` produced conflicts in `.github/workflows/pages.yml` and `README.md`. The final integration versions were kept; the PR #11 versions are preserved verbatim under `research/legacy/workflows/pages-9d83abee-pr11.yml` and `research/legacy/README-9d83abee-pr11.md`. `scripts/wait_for_legacy.py` and `tests/test_deploy.py` were retained. No work was discarded.
+
+## Official verification rules
+1. Official/league/team/network sources only for `VERIFIED` values.
+2. If an official value cannot be confirmed, leave that value blank and publish an `UNVERIFIED` flag with a source link.
+3. `TBD` official start times stay blank in the official-time column; a separately labelled planning estimate may be shown only with an explicit model/assumption and official anchor links.
+4. Estimates are never presented as released schedules.
+5. Every table row must carry a source URL to an official site or an explicit unverified flag whose source URL points to the official source establishing the gap.
+
+## Change log / handoffs
+- 2026-11-02 — `arena/72e6d3f7-korea4` created and published initial claim (`99376cd`), then research claim/probe (`53af657`).
+- 2026-11-02 — Detected PR #1, #3 and #4 already merged, PR #2 open, and several branch-local claims. Merged `origin/main` into this branch, retained all site/data/doc files, and resolved the `COORDINATION.md` add/add conflict by preserving the earlier boards and creating this unified log.
+- Pending: runner probe artifact, official data collector, final re-verification, build/link check, PR/merge and Pages deployment confirmation.
+
+## Appendix — board content preserved from merged `main` (commit `8325e6a`)
+
+> Session `arena/cab47657-korea4` reported: COORDINATION.md setup, MLB/NFL/NCAAF/Westwood One/radio research, eight-page root dashboard, executive summary, `data/schedules.js`, PRs #3 and #4 merged, and a GitHub Pages workflow. It recorded sources including MLB.com/CBS Sports, NFL.com, 49ers.com/NFL.com, gostanford.com, calbears.com, westwoodonesports.com, knbr.com/Wikipedia, and duration research. It noted a GitHub Pages API 403 when attempting to switch deployment source. Its task rows were marked done and final integration done; this integration pass independently re-verifies those claims because some cited sources are secondary and some values conflict with newer official MLB/NFL releases.
+>
+> Session `arena/ccb3febc-korea4` reported: verified season anchors, 2027–2029 vacation windows, duration estimates, 94122 radio research, six-page `site/`, F1–F12 flags, and PR #1 merged. Its strict-definition finding was no 7/14/21-day window in 2027–2029 and a best verified anchor window of Feb 15–18, 2027. It recorded that the Pages source was legacy `main:/` and that a root `index.html` redirect served `/site/`.
+>
+> Session `arena/c697ef7b-korea4` PR #2 body reported: a root dashboard, `site/pages/` category pages, calendar, radio guide, data JSON, and a 2026-verified / 2027–2029-estimated model. It also reported an integration pass that corrected 2027 from an estimated 14-day gap to a four-day Feb 15–18 gap, retained both flag sets, and kept both site layouts. PR #2 remains open at the time of this integration note.
+
+
+## Appendix B — `origin/main` board at `47bfbeb` (verbatim)
+
 # COORDINATION.md — Shared Task Board
 
 > **Branches:** `arena/ccb3febc-korea4` (merged to main via #1) + `arena/c697ef7b-korea4` (this branch, PR #2)

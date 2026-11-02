@@ -1,174 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Schedule - Free Time Vacation Planner</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <nav>
-    <a href="index.html" class="brand">⚾🏈 Free Time Planner</a>
-    <div class="nav-links">
-      <a href="index.html">Dashboard</a>
-      <a href="daily.html" class="active">Daily Schedule</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="vacation.html">Vacation Windows</a>
-      <a href="teams.html">Teams & Games</a>
-      <a href="radio.html">Radio Stations</a>
-      <a href="executive-summary.html">Executive Summary</a>
-      <a href="flagged.html">Flagged for Review</a>
-    </div>
-  </nav>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily scoreboard — FREE TIME VACATION</title>
+<meta name="description" content="Official-source Bay Area sports radio free-time dashboard, 2026–2029.">
+<link rel="stylesheet" href="css/style.css">
 
-  <div class="container">
-    <div class="hero">
-      <h1>📅 Daily Schedule & Scoreboard</h1>
-      <p>Navigate day-by-day to see exactly which games are on the radio and when you're free. All times in PST (UTC-8).</p>
-    </div>
-
-    <div class="date-nav">
-      <button onclick="changeDay(-7)">◀◀ Week</button>
-      <button onclick="changeDay(-1)">◀ Yesterday</button>
-      <span class="current-date" id="currentDate">-</span>
-      <button onclick="changeDay(1)">Tomorrow ▶</button>
-      <button onclick="changeDay(7)">Week ▶▶</button>
-      <button onclick="goToToday()">Today</button>
-      <input type="date" id="datePicker" onchange="goToDate(this.value)">
-    </div>
-
-    <!-- Timeline -->
-    <div class="card">
-      <h2>⏰ 24-Hour Timeline (PST)</h2>
-      <div class="timeline">
-        <div class="timeline-bar" id="timelineBar"></div>
-        <div class="timeline-hours">
-          <span>12AM</span><span>3AM</span><span>6AM</span><span>9AM</span><span>12PM</span><span>3PM</span><span>6PM</span><span>9PM</span><span>12AM</span>
-        </div>
-      </div>
-      <p style="font-size:0.8rem;color:var(--text-dim);margin-top:0.5rem;">
-        <span style="color:var(--free);">■</span> Free &nbsp;
-        <span style="color:var(--busy);">■</span> Game on air &nbsp;
-        <span style="color:var(--high-priority);">■</span> High-priority game
-      </p>
-    </div>
-
-    <div class="grid-2">
-      <!-- Games -->
-      <div class="card">
-        <h2>🎮 Games On Air</h2>
-        <div id="todayGames"></div>
-      </div>
-      
-      <!-- Free Time -->
-      <div class="card">
-        <h2>✅ Free Time Blocks</h2>
-        <div id="freeBlocks"></div>
-      </div>
-    </div>
-
-    <!-- Day Summary -->
-    <div class="card">
-      <h2>📊 Day Summary</h2>
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="label">Total Games</div>
-          <div class="value" id="totalGames">-</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">High Priority</div>
-          <div class="value warn" id="highPriorityCount">-</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Free Hours</div>
-          <div class="value free" id="freeHoursCount">-</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Busy Hours</div>
-          <div class="value busy" id="busyHoursCount">-</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Full Game Table -->
-    <div class="card">
-      <h2>📋 All Games Detail</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Time (PST)</th>
-              <th>Sport</th>
-              <th>Matchup</th>
-              <th>Type</th>
-              <th>Est. Duration</th>
-              <th>Priority</th>
-              <th>Status</th>
-              <th>Source</th>
-            </tr>
-          </thead>
-          <tbody id="detailTable"></tbody>
-        </table>
-      </div>
-    </div>
+<script>window.K4_META={"system_today":"2026-11-02","date_range":["2026-11-01","2029-12-31"],"data_start":"2026-01-01","counts":{"official_sources":748,"official_event_rows":6607,"mlb_teams":30,"days":1461,"intervals":14364,"wwo_sf_affiliate_rows":13,"line_by_line_audit_rows":1689},"durations":{"MLB":158,"NFL":192,"NCAAF":204,"MLS":120},"default_source_url":"https://www.957thegame.com/","timezone":"America/Los_Angeles (PST in winter, PDT in summer)"};</script>
+<script src="js/app.js" defer></script>
+</head><body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">FREE TIME VACATION</a>
+  <span class="tz">America/Los_Angeles · PST/PDT · 94122 AM/FM</span>
+  <nav class="main-nav"><a href="index.html" class="">Dashboard</a><a href="daily.html" class="active" aria-current=page>Daily scoreboard</a><a href="calendar.html" class="">Calendar</a><a href="vacation.html" class="">Vacation windows</a><a href="mlb.html" class="">MLB</a><a href="nfl.html" class="">NFL</a><a href="ncaaf.html" class="">Stanford / Cal</a><a href="wwo.html" class="">Westwood One</a><a href="radio.html" class="">Radio map</a><a href="sources.html" class="">Sources</a><a href="flagged.html" class="">Flagged</a><a href="methodology.html" class="">Method</a><a href="review.html" class="">Repo review</a><a href="executive-summary.html" class="">Executive summary</a></nav>
+</div></header>
+<main>
+  <h1 class="page-title">Daily scoreboard</h1>
+  <p class="page-lead">Yesterday / today / tomorrow scoreboard with exact intraday free windows, game presence, and editable researched durations.</p>
+  
+<section class="panel"><h2>Date controls</h2>
+  <div class="day-nav">
+    <button type="button" data-day-step="-1">← Yesterday</button>
+    <button type="button" id="today-btn">Today · 2026-11-02</button>
+    <button type="button" data-day-step="1">Tomorrow →</button>
+    <label>Date <input type="date" id="selected-date" min="2026-11-01" max="2029-12-31" value="2026-11-02"></label>
   </div>
+  <div class="controls-grid">
+    <label><input class="filter-toggle" type="checkbox" id="show-tbd" checked> TBD planning estimates</label>
+    <label><input class="filter-toggle" type="checkbox" id="show-models" checked> Unreleased-season models</label>
+    <label><input class="filter-toggle" type="checkbox" id="show-unverified" checked> Unverified blocks</label>
+    <label><input class="filter-toggle" type="checkbox" data-cat="MLB" checked> MLB</label>
+    <label><input class="filter-toggle" type="checkbox" data-cat="NFL" checked> NFL</label>
+    <label><input class="filter-toggle" type="checkbox" data-cat="NCAAF" checked> NCAAF</label>
+    <label><input class="filter-toggle" type="checkbox" data-cat="WWO" checked> WWO</label>
+    <label><input class="filter-toggle" type="checkbox" data-cat="MLS" checked> MLS</label>
+  </div>
+  <div class="controls-grid">
+    <label>MLB minutes <input type="number" min="30" max="360" value="158" data-duration="MLB"></label>
+    <label>NFL minutes <input type="number" min="30" max="360" value="192" data-duration="NFL"></label>
+    <label>NCAAF minutes <input type="number" min="30" max="360" value="204" data-duration="NCAAF"></label>
+    <label>MLS minutes <input type="number" min="30" max="360" value="120" data-duration="MLS"></label>
+  </div>
+  <p class="mini">Durations default to researched averages and rule-book values; changing them recalculates the day without requiring manual schedule entry.</p>
+</section>
+<section class="panel"><h2 id="day-heading">Daily scoreboard</h2><div class="callout">All times are Pacific (PST in winter, PDT in summer). A green block is free; all other colors mean a game or unverified broadcast block is present.</div><div id="day-content"></div></section>
+<section class="panel"><h2>Duration research</h2><div class="table-wrap" data-table="duration-research" data-page-size="20">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter duration research rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="estimated">Estimated</button>
+        <button type="button" data-status-filter="unverified">Unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
+      </div>
+      <div class="scroll"><table><thead><tr><th>Sport</th><th>Average duration</th><th>Halftime</th><th>Regulation</th><th>Status</th><th>Official source</th></tr></thead><tbody><tr data-source-url="https://www.mlb.com/news/mlb-average-game-time-under-three-hours-third-straight-year" data-row-status="official verified" data-row-text="mlb 2:38 (158 min) not applicable — between-inning breaks 9 innings  official verified   mlb.com official 2025 average "><td>MLB</td><td>2:38 (158 min)</td><td>Not applicable — between-inning breaks</td><td>9 innings</td><td><span class="badge badge-verified">OFFICIAL VERIFIED</span></td><td><a class="source-link" href="https://www.mlb.com/news/mlb-average-game-time-under-three-hours-third-straight-year" target="_blank" rel="noopener">MLB.com official 2025 average</a></td></tr><tr data-source-url="https://media.nfl.com/content/dam/communications/Official%20Playing%20Rules/2026%20Official%20Playing%20Rules.pdf" data-row-status="official rule / secondary average" data-row-text="nfl 3:12 (192 min) — secondary average, flagged 13 minutes 60 minutes (4 × 15)  official rule / secondary average   official 2026 nfl playing rules "><td>NFL</td><td>3:12 (192 min) — secondary average, FLAGGED</td><td>13 minutes</td><td>60 minutes (4 × 15)</td><td><span class="badge badge-neutral">OFFICIAL RULE / SECONDARY AVERAGE</span></td><td><a class="source-link" href="https://media.nfl.com/content/dam/communications/Official%20Playing%20Rules/2026%20Official%20Playing%20Rules.pdf" target="_blank" rel="noopener">Official 2026 NFL Playing Rules</a></td></tr><tr data-source-url="https://www.ncaa.com/news/football/article/2017-02-28/competition-committee-advise-football-rules" data-row-status="official rule / dated official average" data-row-text="ncaaf fbs 3:24 (204 min) — 2016 official ncaa article, dated/flagged 20 minutes 60 minutes (4 × 15)  official rule / dated official average   ncaa.com official duration article "><td>NCAAF FBS</td><td>3:24 (204 min) — 2016 official NCAA article, dated/FLAGGED</td><td>20 minutes</td><td>60 minutes (4 × 15)</td><td><span class="badge badge-neutral">OFFICIAL RULE / DATED OFFICIAL AVERAGE</span></td><td><a class="source-link" href="https://www.ncaa.com/news/football/article/2017-02-28/competition-committee-advise-football-rules" target="_blank" rel="noopener">NCAA.com official duration article</a></td></tr><tr data-source-url="https://www.theifab.com/laws/latest/the-players/" data-row-status="official laws / estimated broadcast" data-row-text="mls / soccer 2:00 (120 min) — rule-based planning estimate 15 minutes 90 minutes (2 × 45)  official laws / estimated broadcast   official ifab laws of the game "><td>MLS / soccer</td><td>2:00 (120 min) — rule-based planning estimate</td><td>15 minutes</td><td>90 minutes (2 × 45)</td><td><span class="badge badge-estimated">OFFICIAL LAWS / ESTIMATED BROADCAST</span></td><td><a class="source-link" href="https://www.theifab.com/laws/latest/the-players/" target="_blank" rel="noopener">Official IFAB Laws of the Game</a></td></tr><tr data-source-url="https://www.westwoodonesports.com/events/548540/" data-row-status="official network window / end placeholder flagged" data-row-text="wwo network events official event start–end window varies by sport varies by sport  official network window / end placeholder flagged   official wwo event detail "><td>WWO network events</td><td>Official event start–end window</td><td>Varies by sport</td><td>Varies by sport</td><td><span class="badge badge-flagged">OFFICIAL NETWORK WINDOW / END PLACEHOLDER FLAGGED</span></td><td><a class="source-link" href="https://www.westwoodonesports.com/events/548540/" target="_blank" rel="noopener">Official WWO event detail</a></td></tr><tr data-source-url="https://www.nba.com/warriors/schedule" data-row-status="unverified — official game-by-game radio rows not captured" data-row-text="nba / nhl / wnba other sports     unverified — official game-by-game radio rows not captured   official warriors schedule "><td>NBA / NHL / WNBA other sports</td><td></td><td></td><td></td><td><span class="badge badge-unverified">UNVERIFIED — OFFICIAL GAME-BY-GAME RADIO ROWS NOT CAPTURED</span></td><td><a class="source-link" href="https://www.nba.com/warriors/schedule" target="_blank" rel="noopener">Official Warriors schedule</a></td></tr></tbody></table></div>
+    </div></section>
 
-  <footer>
-    <p>Free Time Vacation Planner | All times PST | Outer Sunset SF 94122</p>
+  <footer class="footer">
+    <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
+    <a href="docs/index.html">Docs HTML edition (parallel session)</a>
+    <a href="site/index.html">Legacy anchor site</a>
+    <a href="site/pages/sources.html">Legacy category pages</a>
+    <a href="data/official/events.json">Raw official event JSON</a>
+    <a href="research/line_by_line.json">Line-by-line audit JSON</a>
+    <br><span class="mini">Built 2026-11-02T18:00:25+00:00 from 748 captured official-source records. Deployment: GitHub Pages <code>main:/</code>.</span>
   </footer>
-
-  <script src="data/schedules.js"></script>
-  <script src="js/app.js"></script>
-  <script>
-    // Additional daily page functionality
-    function updateDetailTable() {
-      const dateStr = currentDate.toISOString().split('T')[0];
-      const daySched = getDaySchedule(allGames, dateStr);
-      const tbody = document.getElementById('detailTable');
-      
-      let html = '';
-      daySched.games.forEach(game => {
-        const duration = game.sport === 'MLB' ? '2h 38m' : game.sport === 'NFL' ? '3h 12m' : '3h 26m';
-        const sportBadge = game.sport === 'MLB' ? 'badge-mlb' : game.sport === 'NFL' ? 'badge-nfl' : 'badge-ncaaf';
-        const priorityBadge = game.highPriority ? '<span class="badge badge-high">⭐ HIGH</span>' : '<span class="badge" style="background:var(--surface2)">Normal</span>';
-        const verifiedBadge = game.verified ? '<span class="badge badge-verified">✓ Verified</span>' : '<span class="badge badge-estimated">~ Estimated</span>';
-        const matchup = game.matchup || `${game.away || ''} vs ${game.home || ''}`;
-        const sourceLink = game.source ? `<a href="${game.source}" target="_blank">Link</a>` : '-';
-        
-        html += `<tr>
-          <td><strong>${game.time || 'TBA'}</strong></td>
-          <td><span class="badge ${sportBadge}">${game.sport}</span></td>
-          <td>${matchup}</td>
-          <td>${game.type || '-'}</td>
-          <td>${duration}</td>
-          <td>${priorityBadge}</td>
-          <td>${verifiedBadge}</td>
-          <td>${sourceLink}</td>
-        </tr>`;
-      });
-      
-      if (daySched.games.length === 0) {
-        html = '<tr><td colspan="8" style="text-align:center;color:var(--free);font-weight:600;">🎉 No games today! Full day is free!</td></tr>';
-      }
-      
-      tbody.innerHTML = html;
-      
-      // Update summary stats
-      document.getElementById('totalGames').textContent = daySched.games.length;
-      document.getElementById('highPriorityCount').textContent = daySched.games.filter(g => g.highPriority).length;
-      document.getElementById('freeHoursCount').textContent = (daySched.totalFreeMinutes / 60).toFixed(1) + 'h';
-      document.getElementById('busyHoursCount').textContent = (daySched.totalBusyMinutes / 60).toFixed(1) + 'h';
-    }
-
-    // Override the original updateTodayView to include detail table
-    const origUpdate = updateTodayView;
-    updateTodayView = function() {
-      origUpdate();
-      updateDetailTable();
-    };
-    
-    // Re-initialize
-    updateTodayView();
-  </script>
-</body>
-</html>
+</main></body></html>

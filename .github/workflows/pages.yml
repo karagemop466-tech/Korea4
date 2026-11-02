@@ -1,82 +1,29 @@
-name: Refresh and deploy planner
+name: Verify static Pages source
 
 on:
   push:
-    branches: [main, arena/9d83abee-korea4]
-  schedule:
-    - cron: '17 11 * * *'
-  workflow_dispatch:
+    branches: [main, arena/72e6d3f7-korea4]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
-  actions: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-verify-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Save the committed fallback before cache restore
-        run: cp site/data/events.json "$RUNNER_TEMP/committed-events.json"
-      - name: Restore the last available published snapshot
-        uses: actions/cache/restore@v4
+      - uses: actions/setup-python@v5
         with:
-          path: site/data/events.json
-          key: official-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: official-snapshot-v1-
-      - name: Reconcile cached and committed source groups
-        run: python3 scripts/reconcile_snapshot.py "$RUNNER_TEMP/committed-events.json" site/data/events.json
-      - name: Refresh source-linked schedules
-        run: python3 scripts/refresh.py
-      - name: Check Cal basketball live feed on the session branch
-        if: github.ref != 'refs/heads/main'
-        run: |
-          python3 -c "import json,sys; s=json.load(open('site/data/events.json'))['sources']['cal_mbb']; print('::error::'+str(s.get('error')) if not s['ok'] else 'Cal basketball source parsed'); sys.exit(not s['ok'])"
-      - name: Check Valkyries live feed on the session branch
-        if: github.ref != 'refs/heads/main'
-        run: |
-          python3 -c "import json,sys; s=json.load(open('site/data/events.json'))['sources']['valkyries']; print('::error::'+str(s.get('error')) if not s['ok'] else 'Valkyries FM source parsed'); sys.exit(not s['ok'])"
-      - name: Validate snapshot, parsers and local links
-        run: |
-          python3 -m unittest discover -s tests -v
-          node tests/test_core.mjs
-          python3 scripts/build_site.py
-      - name: Preserve the refreshed snapshot for future fallback
-        uses: actions/cache/save@v4
-        with:
-          path: site/data/events.json
-          key: official-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Upload isolated site
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-  wait_for_legacy:
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-      - name: Wait until the legacy publisher finishes this commit
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/wait_for_legacy.py
-  deploy:
-    needs: [build, wait_for_legacy]
-    if: ${{ always() && github.ref == 'refs/heads/main' && needs.build.result == 'success' && (needs.wait_for_legacy.result == 'success' || needs.wait_for_legacy.result == 'skipped') }}
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          python-version: '3.11'
+      - name: Install verification dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Verify official data and internal links
+        run: python scripts/verify.py
+      - name: Check browser JavaScript syntax
+        run: node --check js/app.js

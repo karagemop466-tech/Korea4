@@ -1,6 +1,14 @@
 _site/
 __pycache__/
 *.pyc
+probe_out/
+.venv/
+_build/
+dist/
+.DS_Store
+
+# Local Python dependency scratch (not committed)
+.venv-packages/
 
 # Test output for the legacy Jekyll Pages publisher
 _legacy/

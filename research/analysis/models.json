@@ -1,0 +1,29 @@
+[
+  {
+    "year": 2027,
+    "model_intervals": 599,
+    "method": "Official 2026 busy windows shifted by 364-day multiples to preserve weekday",
+    "status": "ESTIMATED \u2014 NOT A REAL VERIFIED RELEASED SCHEDULE",
+    "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026",
+    "source_label": "Official MLB Stats API 2026 (representative model basis)",
+    "notes": "Exact teams, dates and official times are blank. The model exists only to surface plausible busy days for 2027\u20132029 planning."
+  },
+  {
+    "year": 2028,
+    "model_intervals": 3600,
+    "method": "Official 2026 busy windows shifted by 364-day multiples to preserve weekday",
+    "status": "ESTIMATED \u2014 NOT A REAL VERIFIED RELEASED SCHEDULE",
+    "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026",
+    "source_label": "Official MLB Stats API 2026 (representative model basis)",
+    "notes": "Exact teams, dates and official times are blank. The model exists only to surface plausible busy days for 2027\u20132029 planning."
+  },
+  {
+    "year": 2029,
+    "model_intervals": 3597,
+    "method": "Official 2026 busy windows shifted by 364-day multiples to preserve weekday",
+    "status": "ESTIMATED \u2014 NOT A REAL VERIFIED RELEASED SCHEDULE",
+    "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026",
+    "source_label": "Official MLB Stats API 2026 (representative model basis)",
+    "notes": "Exact teams, dates and official times are blank. The model exists only to surface plausible busy days for 2027\u20132029 planning."
+  }
+]
