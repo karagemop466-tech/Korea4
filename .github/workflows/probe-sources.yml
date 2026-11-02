@@ -1,0 +1,34 @@
+name: Probe official sources
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: official-source-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out fixed session branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/72e6d3f7-korea4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch official source responses
+        run: python scripts/probe_sources.py
+      - name: Upload raw official responses for offline verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-source-probe
+          path: probe_out/
+          retention-days: 3
+          if-no-files-found: error
