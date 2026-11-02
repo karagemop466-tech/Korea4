@@ -1,0 +1,7 @@
+*{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#14202b;background:#f4f6f8;line-height:1.5}
+header{background:#0b2a4a;color:#fff;padding:22px 18px}header h1{margin:0 0 6px;font-size:26px}header p{margin:0;opacity:.9;max-width:900px}
+nav{background:#123c63;padding:10px 18px;display:flex;gap:14px;flex-wrap:wrap}nav a{color:#fff;text-decoration:none;font-weight:600}nav a:hover{text-decoration:underline}
+main{max-width:1060px;margin:0 auto;padding:20px 18px 50px}.card{background:#fff;border:1px solid #dbe3ea;border-radius:10px;padding:16px 18px;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:10px 0}th,td{border:1px solid #dbe3ea;padding:7px 8px;text-align:left;vertical-align:top}th{background:#eef3f7}
+.badge{display:inline-block;padding:1px 8px;border-radius:20px;font-size:12px;font-weight:700}.free{background:#dff5e3;color:#145c22}.busy{background:#fde3e3;color:#8c1d1d}.est{background:#fff1cf;color:#7a5200}.unv{background:#eee;color:#555}
+button,input{font-size:16px;padding:8px 12px} .big{font-size:20px;font-weight:800} a{color:#0b5cad} .note{font-size:13px;color:#445} footer{padding:18px;text-align:center;color:#667;font-size:13px}
