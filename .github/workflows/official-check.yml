@@ -1,42 +1,56 @@
 name: Official source connectivity
 on:
   push:
+    branches: [arena/9d83abee-korea4]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   inspect:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/9d83abee-korea4
       - name: Inspect official source formats
         run: |
-          mkdir -p diagnostics
+          mkdir -p site/data/_source-inspection
           python - <<'PY'
+          import gzip, json
           from urllib.request import Request, urlopen
           from pathlib import Path
+          root = Path('site/data/_source-inspection')
           sources = {
-              'mlb.json': 'https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2027-02-19&endDate=2027-02-20',
+              'mlb.json': 'https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2027-01-01&endDate=2027-12-31&hydrate=broadcasts(all)',
               'nfl.html': 'https://www.nfl.com/schedules/2026/by-week/week-9',
               '49ers.html': 'https://www.49ers.com/schedule/',
               'cal.html': 'https://calbears.com/sports/football/schedule',
               'stanford.html': 'https://gostanford.com/sports/football/schedule',
               'westwood.html': 'https://www.westwoodonesports.com/nfl-schedule/',
+              'westwood-ncaa.html': 'https://www.westwoodonesports.com/ncaa-football-schedule/',
               'westwood-event.html': 'https://www.westwoodonesports.com/events/548540/',
               'nba.json': 'https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json',
           }
+          results = {}
           for name, url in sources.items():
               try:
                   req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; FreeTimeVacation/1.0)'})
-                  with urlopen(req, timeout=30) as response:
+                  with urlopen(req, timeout=40) as response:
                       data = response.read()
-                      Path('diagnostics', name).write_bytes(data)
-                      print(name, response.status, len(data))
+                      (root / (name + '.gz')).write_bytes(gzip.compress(data, mtime=0))
+                      results[name] = {'status': response.status, 'bytes': len(data), 'url': url}
               except Exception as exc:
-                  print(name, type(exc).__name__, str(exc))
+                  results[name] = {'error': type(exc).__name__ + ': ' + str(exc), 'url': url}
+          (root / 'manifest.json').write_text(json.dumps(results, indent=2) + '\n')
           PY
-      - uses: actions/upload-artifact@v4
-        with:
-          name: source-formats
-          path: diagnostics/
+      - name: Make source inspection available to integration session
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add site/data/_source-inspection/
+          git diff --cached --quiet || git commit -m 'Capture official source formats for verification [skip ci]'
+          git pull --rebase origin arena/9d83abee-korea4
+          git push origin arena/9d83abee-korea4
