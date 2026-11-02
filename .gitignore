@@ -6,3 +6,6 @@ _build/
 _site/
 dist/
 .DS_Store
+
+# Local Python dependency scratch (not committed)
+.venv-packages/
