@@ -17,6 +17,14 @@ class SourcesTest(unittest.TestCase):
         game["status"]["startTimeTBD"] = False
         self.assertEqual(refresh.parse_mlb({"dates": [{"games": [game]}]})[0]["start"], "2027-04-01T08:33:00Z")
 
+    def test_mlb_resumed_game_keeps_both_segments(self):
+        game = {"gamePk": 77, "gameType": "R", "officialDate": "2026-06-16", "gameDate": "2026-06-16T23:15:00Z", "status": {"startTimeTBD": False}, "teams": {"away": {"team": {"name": "Giants"}}, "home": {"team": {"name": "Braves"}}}}
+        resumed = {**game, "gameDate": "2026-06-17T18:00:00Z", "resumedFrom": game["gameDate"]}
+        rows = refresh.parse_mlb({"dates": [{"date": "2026-06-16", "games": [game]}, {"date": "2026-06-17", "games": [resumed]}]})
+        self.assertNotEqual(rows[0]["id"], rows[1]["id"])
+        self.assertEqual(rows[1]["date"], "2026-06-17")
+        self.assertEqual(rows[1]["dateBasis"], "Official resumed game start")
+
     def test_nfl_requires_requested_season_and_preserves_tbd(self):
         page = '''<li><a aria-label="Game Card" href="/games/raiders-at-49ers-2026-reg-18"><img alt="Las Vegas Raiders Team Logo"><img alt="San Francisco 49ers Team Logo"></a></li>'''
         self.assertEqual(refresh.parse_nfl(page, 2027), [])

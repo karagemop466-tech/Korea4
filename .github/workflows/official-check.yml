@@ -14,9 +14,11 @@ jobs:
         with:
           ref: arena/9d83abee-korea4
       - name: Test source parsers
-        run: python3 -m unittest discover -s tests -v
+        run: python3 -m unittest discover -s tests -p "test_refresh.py" -v
       - name: Fetch official schedules
         run: python3 scripts/refresh.py
+      - name: Validate refreshed snapshot
+        run: python3 -m unittest discover -s tests -v
       - name: Store initial snapshot on the session branch
         run: |
           git config user.name 'github-actions[bot]'
