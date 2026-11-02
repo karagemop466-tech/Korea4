@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Day Calendar — Free-Time Vacation Planner</title><link rel="stylesheet" href="style.css"></head><body>
+<header><h1>Free-Time Vacation Planner — SF Bay Area Radio Sports</h1><p>Scoreboard-style day view. A day is BUSY if any in-scope league is in season that day (season-level model from verified anchors — see limits below). All times America/Los_Angeles.</p></header>
+<nav><a href="index.html">Home / Executive Summary</a><a href="vacation.html">Vacation Windows 2027–2029</a><a href="calendar.html">Day Calendar &amp; Free-Time Clock</a><a href="radio.html">Bay Area Radio (94122)</a><a href="sources.html">Verified Sources</a><a href="flagged.html">⚠ Flagged for Review</a></nav>
+<main>
+<div class="card">
+<button id="prev">◀ Yesterday</button> <button id="today">Today</button> <button id="next">Tomorrow ▶</button>
+<input type="date" id="pick" min="2026-08-01" max="2029-12-31">
+<h2 id="dow"></h2><p id="verdict" class="big"></p><div id="detail"></div>
+<p class="note">Intraday model (ESTIMATE): on an MLB-season day, games typically cover ~09:30–22:30 PT (free mainly before 09:30 and after ~22:30). On an NFL/NCAAF-season day, games typically cover ~10:00–20:30 PT Sun / evening Thu &amp; Mon (Westwood One). On a fully-free day, all 24 hours are free. Durations: MLB 160 min, NFL 192 min, NCAAF 204 min — see <a href="vacation.html">Vacation page</a>. This is a season-level estimator, not a verified game-by-game schedule (Flagged F10): individual team off-days inside a season are not shown.</p>
+</div>
+<div class="card"><h3>How days are classified (ranges used)</h3><div id="ranges"></div></div>
+</main><footer>Sources on the Verified Sources page. ESTIMATED ranges are labelled.</footer>
+<script>
+// [label, start, end, status, source]
+const R=[
+["MLB spring training 2027","2027-02-19","2027-03-23","VERIFIED","https://www.mlb.com/phillies/spring-training"],
+["MLB regular season 2027","2027-03-24","2027-09-26","VERIFIED","https://www.mlb.com/press-release/press-release-brewers-announce-2027-regular-season-schedule"],
+["MLB All-Star events 2027 (Derby + ASG)","2027-07-12","2027-07-13","VERIFIED","https://www.mlb.com/press-release/press-release-mlb-cubs-unveil-official-logo-of-2027-all-star-game"],
+["NFL 2026 season thru Super Bowl LXI","2026-09-09","2027-02-14","VERIFIED anchor (SB)","https://news.radio-online.com/articles/n49383/Westwood-One-Sets-40th-Season-of-NFL-Coverage"],
+["NCAAF / CFP thru Championship","2026-08-29","2027-01-25","VERIFIED anchor (CFP)","https://collegefootballplayoff.com/news/2026/7/9/2028-31-bowls"],
+["MLB postseason 2027","2027-09-28","2027-10-31","ESTIMATED","flagged.html"],
+["NFL 2027 season thru Super Bowl LXII","2027-08-05","2028-02-13","ESTIMATED (SB verified)","https://awfulannouncing.com/nfl/sets-2028-super-bowl-date.html"],
+["NCAAF 2027 thru CFP Championship","2027-08-28","2028-01-24","ESTIMATED (CFP verified)","https://collegefootballplayoff.com/news/2026/7/9/2028-31-bowls"],
+["MLB 2028 (spring+regular, pattern)","2028-02-18","2028-09-24","ESTIMATED","flagged.html"],
+["NFL 2028 season thru Super Bowl LXIII (Feb 2029)","2028-08-03","2029-02-11","ESTIMATED","https://www.nfl.com/news/las-vegas-to-host-super-bowl-lxiii-in-2029"],
+["NCAAF 2028 thru CFP Championship","2028-08-26","2029-01-22","ESTIMATED (CFP verified)","https://collegefootballplayoff.com/news/2026/7/9/2028-31-bowls"],
+["MLB 2029 (spring+regular, pattern)","2029-02-16","2029-09-30","ESTIMATED","flagged.html"]];
+let cur=new Date(); cur.setHours(0,0,0,0);
+const fmt=d=>d.toISOString().slice(0,10);
+function render(){
+ const s=fmt(cur);
+ document.getElementById('pick').value=s;
+ document.getElementById('dow').textContent=cur.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric',timeZone:'America/Los_Angeles'});
+ const hits=R.filter(r=>s>=r[1]&&s<=r[2]);
+ const v=document.getElementById('verdict'),d=document.getElementById('detail');
+ if(hits.length===0){v.innerHTML='<span class="badge free">FREE — no in-scope league in season</span>';d.innerHTML='<p>All day free under the strict definition, at season level. Longest such stretch: Feb 15–18, 2027.</p>';}
+ else{v.innerHTML='<span class="badge busy">BUSY — in-scope games on air this day (season level)</span>';
+ d.innerHTML='<table><tr><th>Active</th><th>Status</th><th>Source</th></tr>'+hits.map(h=>`<tr><td>${h[0]}</td><td>${h[3]}</td><td><a href="${h[4]}">link</a></td></tr>`).join('')+'</table><p>Typical free minutes today: early morning before ~09:30 PT and after the last game ends (~20:30–22:30 PT depending on league). Exact per-game times are not yet verifiable for future seasons (F4/F10).</p>';}
+}
+document.getElementById('prev').onclick=()=>{cur.setDate(cur.getDate()-1);render()};
+document.getElementById('next').onclick=()=>{cur.setDate(cur.getDate()+1);render()};
+document.getElementById('today').onclick=()=>{cur=new Date();cur.setHours(0,0,0,0);render()};
+document.getElementById('pick').onchange=e=>{cur=new Date(e.target.value+'T12:00:00');render()};
+document.getElementById('ranges').innerHTML='<table><tr><th>Range</th><th>Start</th><th>End</th><th>Status</th></tr>'+R.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')+'</table>';
+render();
+</script></body></html>
