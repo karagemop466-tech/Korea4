@@ -1,8 +1,10 @@
-name: Deploy to GitHub Pages
+name: Refresh and deploy planner
 
 on:
   push:
-    branches: ["main"]
+    branches: [main, arena/9d83abee-korea4]
+  schedule:
+    - cron: '17 11 * * *'
   workflow_dispatch:
 
 permissions:
@@ -11,24 +13,58 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Save the committed fallback before cache restore
+        run: cp site/data/events.json "$RUNNER_TEMP/committed-events.json"
+      - name: Restore the last available published snapshot
+        uses: actions/cache/restore@v4
+        with:
+          path: site/data/events.json
+          key: official-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: official-snapshot-v1-
+      - name: Reconcile cached and committed source groups
+        run: python3 scripts/reconcile_snapshot.py "$RUNNER_TEMP/committed-events.json" site/data/events.json
+      - name: Refresh source-linked schedules
+        run: python3 scripts/refresh.py
+      - name: Check Cal basketball live feed on the session branch
+        if: github.ref != 'refs/heads/main'
+        run: |
+          python3 -c "import json,sys; s=json.load(open('site/data/events.json'))['sources']['cal_mbb']; print('::error::'+str(s.get('error')) if not s['ok'] else 'Cal basketball source parsed'); sys.exit(not s['ok'])"
+      - name: Check Valkyries live feed on the session branch
+        if: github.ref != 'refs/heads/main'
+        run: |
+          python3 -c "import json,sys; s=json.load(open('site/data/events.json'))['sources']['valkyries']; print('::error::'+str(s.get('error')) if not s['ok'] else 'Valkyries FM source parsed'); sys.exit(not s['ok'])"
+      - name: Validate snapshot, parsers and local links
+        run: |
+          python3 -m unittest discover -s tests -v
+          node tests/test_core.mjs
+          python3 scripts/build_site.py
+      - name: Preserve the refreshed snapshot for future fallback
+        uses: actions/cache/save@v4
+        with:
+          path: site/data/events.json
+          key: official-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
+      - name: Upload isolated site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
   deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

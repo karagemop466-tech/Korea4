@@ -1,0 +1,415 @@
+{
+  "reviewedAt": "2026-11-02",
+  "events": [
+    {
+      "id": "nfl-super-bowl-lxi",
+      "sport": "NFL",
+      "title": "Super Bowl LXI \u00b7 teams TBD",
+      "date": "2027-02-14",
+      "dateBasis": "Pacific date at the announced California venue; kickoff TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "priority": true,
+      "category": "Postseason"
+    },
+    {
+      "id": "cal-sac-state-2027",
+      "sport": "NCAAF",
+      "title": "Sacramento State at California",
+      "date": "2027-08-28",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://calbears.com/news/2026/6/25/football-cal-announces-matchups-against-odu-sac-state.aspx",
+      "priority": true,
+      "category": "California"
+    },
+    {
+      "id": "cal-ucla-2027",
+      "sport": "NCAAF",
+      "title": "California at UCLA",
+      "date": "2027-09-04",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California"
+    },
+    {
+      "id": "cal-odu-2027",
+      "sport": "NCAAF",
+      "title": "Old Dominion at California",
+      "date": "2027-09-11",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://calbears.com/news/2026/6/25/football-cal-announces-matchups-against-odu-sac-state.aspx",
+      "priority": true,
+      "category": "California"
+    },
+    {
+      "id": "stanford-notre-dame-2027",
+      "sport": "NCAAF",
+      "title": "Notre Dame at Stanford",
+      "date": "2027-11-27",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://gostanford.com/news/2026/05/20/two-dates-added-to-notre-dame-rivalry",
+      "priority": true,
+      "category": "Stanford"
+    },
+    {
+      "id": "stanford-notre-dame-2028",
+      "sport": "NCAAF",
+      "title": "Stanford at Notre Dame",
+      "date": "2028-10-14",
+      "dateBasis": "Venue-local date; kickoff and Pacific date TBD",
+      "possibleOffsetDays": [
+        -1,
+        0,
+        1
+      ],
+      "source": "https://gostanford.com/news/2026/05/20/two-dates-added-to-notre-dame-rivalry",
+      "priority": true,
+      "category": "Stanford"
+    },
+    {
+      "id": "cal-acc-2027-home-boston-college",
+      "sport": "NCAAF",
+      "title": "Boston College at California",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "Boston College"
+      }
+    },
+    {
+      "id": "cal-acc-2027-home-florida-state",
+      "sport": "NCAAF",
+      "title": "Florida State at California",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "Florida State"
+      }
+    },
+    {
+      "id": "cal-acc-2027-home-louisville",
+      "sport": "NCAAF",
+      "title": "Louisville at California",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "Louisville"
+      }
+    },
+    {
+      "id": "cal-acc-2027-home-smu",
+      "sport": "NCAAF",
+      "title": "SMU at California",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "SMU"
+      }
+    },
+    {
+      "id": "cal-acc-2027-away-georgia-tech",
+      "sport": "NCAAF",
+      "title": "California at Georgia Tech",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "Georgia Tech"
+      }
+    },
+    {
+      "id": "cal-acc-2027-away-miami",
+      "sport": "NCAAF",
+      "title": "California at Miami",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "Miami"
+      }
+    },
+    {
+      "id": "cal-acc-2027-away-pitt",
+      "sport": "NCAAF",
+      "title": "California at Pitt",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "Pitt"
+      }
+    },
+    {
+      "id": "cal-acc-2027-away-wake-forest",
+      "sport": "NCAAF",
+      "title": "California at Wake Forest",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "cal",
+        "season": 2027,
+        "opponent": "Wake Forest"
+      }
+    },
+    {
+      "id": "stanford-cal-acc-2027",
+      "sport": "NCAAF",
+      "title": "California at Stanford",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "California"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-home-duke",
+      "sport": "NCAAF",
+      "title": "Duke at Stanford",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "Duke"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-home-north-carolina",
+      "sport": "NCAAF",
+      "title": "North Carolina at Stanford",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "North Carolina"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-home-syracuse",
+      "sport": "NCAAF",
+      "title": "Syracuse at Stanford",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "Syracuse"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-home-virginia",
+      "sport": "NCAAF",
+      "title": "Virginia at Stanford",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "Virginia"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-away-boston-college",
+      "sport": "NCAAF",
+      "title": "Stanford at Boston College",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "Boston College"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-away-clemson",
+      "sport": "NCAAF",
+      "title": "Stanford at Clemson",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "Clemson"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-away-florida-state",
+      "sport": "NCAAF",
+      "title": "Stanford at Florida State",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "Florida State"
+      }
+    },
+    {
+      "id": "stanford-acc-2027-away-smu",
+      "sport": "NCAAF",
+      "title": "Stanford at SMU",
+      "date": null,
+      "season": 2027,
+      "dateBasis": "2027 conference opponent announced; date and kickoff TBD",
+      "source": "https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "Stanford \u00b7 2027",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "SMU"
+      }
+    },
+    {
+      "id": "stanford-vanderbilt-2027",
+      "sport": "NCAAF",
+      "title": "Vanderbilt at Stanford",
+      "date": "2027-09-11",
+      "dateBasis": "2015 announcement; recheck fixture and kickoff",
+      "source": "https://vucommodores.com/news/2015/03/25/vanderbilt-stanford-to-play-four-game-football-series",
+      "priority": true,
+      "category": "Stanford",
+      "replaceIfScheduled": {
+        "group": "stanford",
+        "season": 2027,
+        "opponent": "Vanderbilt"
+      }
+    }
+  ],
+  "restrictions": [
+    {
+      "id": "nfl-flex-week17-2026",
+      "startDate": "2026-12-31",
+      "endDate": "2027-01-05",
+      "title": "NFL Week 17 flexible games \u00b7 individual dates TBD",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-17",
+      "note": "Some games may move among the published Thursday, Saturday, Sunday and Monday windows; the whole range is conservative, not a claim that every day has a game."
+    },
+    {
+      "id": "nfl-flex-week16-2026",
+      "startDate": "2026-12-24",
+      "endDate": "2026-12-29",
+      "title": "NFL Week 16 flexible games \u00b7 individual dates TBD",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-16",
+      "note": "Some games may move among the published Thursday, Saturday, Sunday and Monday windows; the whole range is conservative, not a claim that every day has a game."
+    },
+    {
+      "id": "nfl-week18-2027",
+      "startDate": "2027-01-09",
+      "endDate": "2027-01-11",
+      "title": "NFL Week 18 \u00b7 individual dates and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league gives the Jan 9\u201310 weekend, not each matchup date; both dates remain uncertain."
+    },
+    {
+      "id": "nfl-wildcard-2027",
+      "startDate": "2027-01-16",
+      "endDate": "2027-01-19",
+      "title": "NFL Wild Card Weekend \u00b7 matchups and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league lists Jan 16\u201318 as the playoff window; do not assign unannounced games to specific days."
+    },
+    {
+      "id": "nfl-divisional-2027",
+      "startDate": "2027-01-23",
+      "endDate": "2027-01-25",
+      "title": "NFL Divisional Playoffs \u00b7 matchups and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league lists Jan 23\u201324; the matchups and kickoffs are not yet known."
+    },
+    {
+      "id": "nfl-conference-2027",
+      "startDate": "2027-01-31",
+      "endDate": "2027-02-01",
+      "title": "NFL Conference Championships \u00b7 teams and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league lists Jan 31, without matchups or kickoffs."
+    },
+    {
+      "id": "all-star-2028-month",
+      "startDate": "2028-07-01",
+      "endDate": "2028-08-01",
+      "title": "2028 MLB All-Star Game \u00b7 exact July date TBD",
+      "source": "https://www.mlb.com/giants/fans/all-star-game",
+      "note": "MLB specifies July, not a day; the entire month remains uncertain rather than assigning a guessed date."
+    }
+  ]
+}

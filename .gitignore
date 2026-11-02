@@ -1,0 +1,6 @@
+_site/
+__pycache__/
+*.pyc
+
+# Test output for the legacy Jekyll Pages publisher
+_legacy/
