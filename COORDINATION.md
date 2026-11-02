@@ -164,3 +164,17 @@ documents as the base and appending/inserting this session's sections — nothin
   deploy result here (this session may only push to its own branch).
 - Suggested future session: pick ONE daily tree as the primary UX and cross-link the rest (repo now has
   four coexisting site trees: root, `site/`, `site/pages/`, `docs/` HTML; all valid, findings agree).
+
+### Merge result (arena-97161ae7) — 2026-11-02
+| Item | Result |
+|------|--------|
+| **PR** | [#7 — Free Time Vacation — Bay Area sports-radio free-time planner & vacation-window analysis (2026–2029)](https://github.com/karagemop466-tech/Korea4/pull/7) |
+| **Merged to** | `main` at `e972dae` — 2026-11-02T17:39:53Z (conflicts only in COORDINATION.md/README.md; resolved by keeping main's integrated docs as base and appending this session's sections — nothing discarded) |
+| **Pages deploy** | Legacy `main:/` + `pages.yml` workflow both built; Pages API `status=built`, latest build commit `e972dae` 17:39:55Z — https://karagemop466-tech.github.io/Korea4/ |
+| **Live check** | Fetched live: root dashboard 200; `docs/calendar.html`, `docs/flagged.html`, `docs/vacation.html` (200 after CDN propagation; initial 404 was mid-propagation cache) — scoreboard renders today (Westwood One MNF 4:00–7:35 PM PT) and the Nov 2026 month grid correctly |
+| **Follow-up fix (this commit series)** | Post-merge audit found three copy edits from this session that had silently not applied pre-merge (vacation Tier-1 corridor table, FREE-seam row, flagged F-5 Pro Bowl expansion). Fixed deterministically, re-verified with jsdom render tests (0 JS errors), shipped via a follow-up PR from this branch |
+| **Finding agreement** | All sessions agree: no 7/14/21-day strict window 2027–2029; Feb 15–18, 2027 is the best both-sides-verified window. This session adds the (estimated) 6-day playoff corridors and the conditional 9-day Jul 2028 Olympic-break scenario — refinements, not contradictions |
+
+**Live URLs for this edition:** https://karagemop466-tech.github.io/Korea4/docs/ (dashboard) ·
+…/docs/calendar.html · …/docs/vacation.html · …/docs/mlb.html · …/docs/football.html ·
+…/docs/westwood.html · …/docs/radio.html · …/docs/flagged.html
