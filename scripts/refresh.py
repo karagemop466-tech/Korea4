@@ -85,15 +85,15 @@ def parse_mlb(payload):
             priority = bool({away.get("id"), home.get("id")} & {133, 137})
             tbd = bool(g.get("status", {}).get("startTimeTBD", True))
             start = None if tbd else g.get("gameDate")
-            day = g.get("officialDate") or bucket.get("date")
+            day = bucket.get("date") or g.get("officialDate")
             if not day:
                 continue
             row = {
-                "id": f"mlb-{g['gamePk']}", "group": "mlb", "sport": "MLB", "title": title,
+                "id": f"mlb-{g['gamePk']}-{day}", "group": "mlb", "sport": "MLB", "title": title,
                 "date": day, "start": start, "priority": priority,
                 "category": {"S": "Spring training", "E": "Exhibition", "R": "Regular season", "A": "All-Star", "F": "Postseason", "D": "Postseason", "L": "Postseason", "W": "World Series", "C": "Postseason"}.get(typ, "MLB"),
                 "durationMinutes": 158, "source": event_source_mlb(g["gamePk"]),
-                "dateBasis": "Venue-local date; first pitch TBD" if tbd else "Official first pitch",
+                "dateBasis": "Venue-local date; first pitch TBD" if tbd else ("Official resumed game start" if g.get("resumedFrom") else "Official first pitch"),
                 "radio": "unverified",
             }
             if tbd:
