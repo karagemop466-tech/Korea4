@@ -39,6 +39,18 @@ def legacy_destination(old: str) -> str:
     return 'site/planner/calendar.html'
 
 
+def legacy_paths():
+    tracked = subprocess.check_output(['git', 'ls-files', '*.html'], cwd=ROOT, text=True).splitlines()
+    return [old for old in tracked if old != 'index.html' and not old.startswith(('site/planner/', 'redirects/'))]
+
+
+def redirect_html(old: str) -> str:
+    destination = legacy_destination(old)
+    redirect = os.path.relpath(ROOT / destination, (ROOT / old).parent).replace(os.sep, '/')
+    link = html.escape(redirect, quote=True)
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url={link}"><meta name="robots" content="noindex"><title>Planner page moved</title></head><body><p>The previous page has been superseded by a source-linked planner with corrected uncertainty. <a href="{link}">Continue to the current page</a>.</p></body></html>\n'''
+
+
 def main():
     if OUT.resolve() != (ROOT / '_site').resolve():
         raise ValueError('Unsafe output location')
@@ -51,18 +63,12 @@ def main():
     shutil.copy2(ROOT / 'site/data/events.json', OUT / 'site/data/events.json')
     shutil.copy2(ROOT / 'site/assets/outer-sunset.jpg', OUT / 'site/assets/outer-sunset.jpg')
     (OUT / '.nojekyll').write_text('')
-    tracked = subprocess.check_output(['git', 'ls-files', '*.html'], cwd=ROOT, text=True).splitlines()
-    count = 0
-    for old in tracked:
-        if old == 'index.html' or old.startswith('site/planner/'):
-            continue
-        destination = legacy_destination(old)
-        redirect = os.path.relpath(OUT / destination, (OUT / old).parent).replace(os.sep, '/')
+    paths = legacy_paths()
+    for old in paths:
         p = OUT / old
         p.parent.mkdir(parents=True, exist_ok=True)
-        link = html.escape(redirect, quote=True)
-        p.write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url={link}"><meta name="robots" content="noindex"><title>Planner page moved</title></head><body><p>The previous page has been superseded by a source-linked planner with corrected uncertainty. <a href="{link}">Continue to the current page</a>.</p></body></html>\n''')
-        count += 1
+        p.write_text(redirect_html(old))
+    count = len(paths)
     print(f'Built {OUT.relative_to(ROOT)} with {count} legacy URL redirects')
 
 if __name__ == '__main__':

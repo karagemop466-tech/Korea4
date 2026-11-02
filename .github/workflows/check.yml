@@ -20,3 +20,9 @@ jobs:
           python3 -m unittest discover -s tests -v
           node tests/test_core.mjs
           python3 scripts/build_site.py
+      - name: Build the existing legacy Pages source with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          destination: ./_legacy
+      - name: Verify the legacy publisher also redirects old claims
+        run: TEST_SITE_DIR=_legacy python3 -m unittest discover -s tests -p test_build.py -v

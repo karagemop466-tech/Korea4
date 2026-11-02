@@ -215,3 +215,4 @@ documents as the base and appending/inserting this session's sections — nothin
 …/docs/westwood.html · …/docs/radio.html · …/docs/flagged.html
 
 - 2026-11-02: Merged `origin/main` after PRs #7–#9. Conflicts were limited to `README.md` and `COORDINATION.md`: kept the corrected root README, archived the parallel README with a warning, and retained both coordination histories with an explicit supersession note. No parallel files were deleted.
+- Both existing Pages publishers are now accommodated without changing another session’s original files: the custom Actions artifact contains 34 safe redirects, and the `main:/` Jekyll build excludes the historical trees and generates equivalent redirects from `redirects/`. CI builds and checks both outputs. The scheduling workflow refreshes sources for the artifact; a parallel legacy deploy can briefly expose the committed snapshot, whose timestamp and staleness are shown.
