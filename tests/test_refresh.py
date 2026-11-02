@@ -50,6 +50,9 @@ class SourcesTest(unittest.TestCase):
         page = '''<div class="schedule-event-item" data-x="1"><div class="schedule-event-date--time-tba"><time datetime="2026-11-14T16:00:00-08:00"></time><span class="schedule-event-item-team__opponent-name">Virginia Tech</span>'''
         row = refresh.parse_stanford(page, "2026-11-01")[0]
         self.assertIsNone(row["start"])
+        away_page = page.replace('data-x="1"', 'data-x="1"><div class="schedule-event-item__top--away"')
+        away_row = refresh.parse_stanford(away_page, "2026-11-01")[0]
+        self.assertEqual(away_row["possibleOffsetDays"], [-1, 0, 1])
 
     def test_cal_pacific_time_converts_during_standard_time(self):
         page = '''<div tabindex="0" aria-label="Game information for California Golden Bears Athletics Football versus Virginia on November 14, 2026" class="c-scoreboard__item c-scoreboard__item--away"><p class="c-scoreboard__time">12:30 PM</p>'''

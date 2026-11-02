@@ -164,10 +164,13 @@ def parse_stanford(source, today):
         away = "schedule-event-item__top--away" in block[:300]
         opponent = html.unescape(opp_m.group(1).strip())
         title = f"Stanford at {opponent}" if away else f"{opponent} at Stanford"
-        result.append({"id": f"stanford-{day}", "group": "stanford", "sport": "NCAAF", "title": title,
-                       "date": day, "start": None if tbd else stamp(dt), "priority": True, "category": "Stanford",
-                       "durationMinutes": 210, "source": STANFORD,
-                       "dateBasis": "Kickoff TBD or a choice of times" if tbd else "Official kickoff", "radio": "unverified"})
+        row = {"id": f"stanford-{day}", "group": "stanford", "sport": "NCAAF", "title": title,
+               "date": day, "start": None if tbd else stamp(dt), "priority": True, "category": "Stanford",
+               "durationMinutes": 210, "source": STANFORD,
+               "dateBasis": "Kickoff TBD or a choice of times" if tbd else "Official kickoff", "radio": "unverified"}
+        if tbd and away:
+            row["possibleOffsetDays"] = [-1, 0, 1]
+        result.append(row)
     return result
 
 
