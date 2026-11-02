@@ -2,7 +2,7 @@ name: Refresh and deploy planner
 
 on:
   push:
-    branches: [main]
+    branches: [main, arena/9d83abee-korea4]
   schedule:
     - cron: '17 11 * * *'
   workflow_dispatch:
