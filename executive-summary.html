@@ -1,295 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Executive Summary - Free Time Vacation Planner</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-  <nav>
-    <a href="index.html" class="brand">⚾🏈 Free Time Planner</a>
-    <div class="nav-links">
-      <a href="index.html">Dashboard</a>
-      <a href="daily.html">Daily Schedule</a>
-      <a href="calendar.html">Calendar</a>
-      <a href="vacation.html">Vacation Windows</a>
-      <a href="teams.html">Teams & Games</a>
-      <a href="radio.html">Radio Stations</a>
-      <a href="executive-summary.html" class="active">Executive Summary</a>
-      <a href="flagged.html">Flagged for Review</a>
-    </div>
-  </nav>
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary — FREE TIME VACATION</title>
+<meta name="description" content="Official-source Bay Area sports radio free-time dashboard, 2026–2029.">
+<link rel="stylesheet" href="css/style.css">
 
-  <div class="container">
-    <div class="hero">
-      <h1>📊 Executive Summary</h1>
-      <p>Comprehensive analysis of free time availability for vacation planning based on live sports radio broadcasts in the San Francisco Bay Area (Outer Sunset 94122).</p>
-    </div>
-
-    <!-- Key Findings -->
-    <div class="card">
-      <h2>🔑 Key Findings</h2>
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="label">Best 2026 Window</div>
-          <div class="value free" style="font-size:1.2rem;">Oct 29 - Nov 7</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Best Offseason Window</div>
-          <div class="value free" style="font-size:1.2rem;">Feb 15 - Mar 30</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Total Sports Days/Year</div>
-          <div class="value busy">~280+</div>
-        </div>
-        <div class="stat-card">
-          <div class="label">Truly Free Days</div>
-          <div class="value warn">~50-70</div>
-        </div>
+<script>window.K4_META={"system_today":"2026-11-02","date_range":["2026-11-01","2029-12-31"],"data_start":"2026-01-01","counts":{"official_sources":748,"official_event_rows":6607,"mlb_teams":30,"days":1461,"intervals":14364,"wwo_sf_affiliate_rows":13,"line_by_line_audit_rows":1689},"durations":{"MLB":158,"NFL":192,"NCAAF":204,"MLS":120},"default_source_url":"https://www.957thegame.com/","timezone":"America/Los_Angeles (PST in winter, PDT in summer)"};</script>
+<script src="js/app.js" defer></script>
+</head><body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">FREE TIME VACATION</a>
+  <span class="tz">America/Los_Angeles · PST/PDT · 94122 AM/FM</span>
+  <nav class="main-nav"><a href="index.html" class="">Dashboard</a><a href="daily.html" class="">Daily scoreboard</a><a href="calendar.html" class="">Calendar</a><a href="vacation.html" class="">Vacation windows</a><a href="mlb.html" class="">MLB</a><a href="nfl.html" class="">NFL</a><a href="ncaaf.html" class="">Stanford / Cal</a><a href="wwo.html" class="">Westwood One</a><a href="radio.html" class="">Radio map</a><a href="sources.html" class="">Sources</a><a href="flagged.html" class="">Flagged</a><a href="methodology.html" class="">Method</a><a href="review.html" class="">Repo review</a><a href="executive-summary.html" class="active" aria-current=page>Executive summary</a></nav>
+</div></header>
+<main>
+  <h1 class="page-title">Executive summary</h1>
+  <p class="page-lead">Concise executive summary of sources, verification, findings, vacation windows, and flagged irregularities.</p>
+  
+<section class="hero"><div class="kicker">Executive summary</div><h1>Verified rows, blank unknowns, clearly labelled estimates.</h1><p>The dashboard separates VERIFIED official rows, blank UNVERIFIED values, and ESTIMATED planning models. All MLB clubs, all 272 official 2026 NFL regular-season games, 49 preseason matchups, postseason date anchors, Stanford/Cal games, Westwood One events across nine categories, and official Earthquakes radio matches are shown with official links. Exact Pacific free intervals are computed every day from 2026-11-01 through 2029-12-31. Unreleased 2028/2029 schedules are never presented as real verified schedules.</p></section>
+<div class="grid cards"><div class="card"><div class="number">6607</div><div class="label">official rows</div></div><div class="card"><div class="number">748</div><div class="label">official sources</div></div><div class="card"><div class="number">1461</div><div class="label">daily scoreboards</div></div><div class="card"><div class="number">1689</div><div class="label">prior lines reviewed</div></div></div>
+<section class="panel"><h2>Key findings</h2><div class="table-wrap" data-table="exec-findings" data-page-size="50">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter exec findings rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="estimated">Estimated</button>
+        <button type="button" data-status-filter="unverified">Unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
       </div>
-    </div>
-
-    <!-- Project Overview -->
-    <div class="card">
-      <h2>📋 Project Overview</h2>
-      <p>This planner tracks all live sports broadcasts receivable on standard AM/FM radio in San Francisco's Outer Sunset neighborhood (ZIP 94122). The goal is to identify the best vacation windows — periods of 1, 2, or 3+ consecutive weeks where no MLB, NFL, or NCAAF games are being broadcast live.</p>
+      <div class="scroll"><table><thead><tr><th>Topic</th><th>Finding</th><th>Status</th><th>Official source</th></tr></thead><tbody><tr data-source-url="https://www.nfl.com/schedules/2026/by-week/week-1" data-row-status="verified" data-row-text="official 2026 nfl regular season 272 official game rows parsed from 18 nfl by-week pages; 272 have exact kickoff islands and 24 are official tbd matchups.  verified   official nfl by-week schedule "><td>Official 2026 NFL regular season</td><td>272 official game rows parsed from 18 NFL by-week pages; 272 have exact kickoff islands and 24 are official TBD matchups.</td><td><span class="badge badge-verified">VERIFIED</span></td><td><a class="source-link" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener">Official NFL by-week schedule</a></td></tr><tr data-source-url="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2027" data-row-status="verified" data-row-text="official mlb 2026/2027 5891 official mlb game rows from stats api, including all 30 clubs and tbd start times left blank.  verified   official mlb stats api "><td>Official MLB 2026/2027</td><td>5891 official MLB game rows from Stats API, including all 30 clubs and TBD start times left blank.</td><td><span class="badge badge-verified">VERIFIED</span></td><td><a class="source-link" href="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2027" target="_blank" rel="noopener">Official MLB Stats API</a></td></tr><tr data-source-url="https://www.westwoodonesports.com/nfl-schedule/" data-row-status="verified" data-row-text="westwood one sports 311 official 2026–2027 wwo event windows across all nine monitored categories; exact unix start/end timestamps converted to pacific.  verified   official wwo schedule "><td>Westwood One Sports</td><td>311 official 2026–2027 WWO event windows across all nine monitored categories; exact Unix start/end timestamps converted to Pacific.</td><td><span class="badge badge-verified">VERIFIED</span></td><td><a class="source-link" href="https://www.westwoodonesports.com/nfl-schedule/" target="_blank" rel="noopener">Official WWO schedule</a></td></tr><tr data-source-url="https://www.49ers.com/schedule/" data-row-status="verified" data-row-text="stanford/cal/49ers 12 stanford, 12 cal and 19 49ers official schedule rows with exact kickoffs/radio where published.  verified   official 49ers schedule "><td>Stanford/Cal/49ers</td><td>12 Stanford, 12 Cal and 19 49ers official schedule rows with exact kickoffs/radio where published.</td><td><span class="badge badge-verified">VERIFIED</span></td><td><a class="source-link" href="https://www.49ers.com/schedule/" target="_blank" rel="noopener">Official 49ers schedule</a></td></tr><tr data-source-url="https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season" data-row-status="verified / flagged" data-row-text="other bay area radio sports 34 official earthquakes terrestrial radio matches plus high-priority station rows for warriors, sharks and valkyries coverage; incomplete game windows are flagged.  verified / flagged   official earthquakes radio release "><td>Other Bay Area radio sports</td><td>34 official Earthquakes terrestrial radio matches plus high-priority station rows for Warriors, Sharks and Valkyries coverage; incomplete game windows are flagged.</td><td><span class="badge badge-verified">VERIFIED / FLAGGED</span></td><td><a class="source-link" href="https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season" target="_blank" rel="noopener">Official Earthquakes radio release</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="estimated / unverified" data-row-text="vacation analysis best 7/14/21-day candidates recomputed from exact official rows plus separately labelled unreleased-season models. no candidate is called certified free.  estimated / unverified   official nfl important dates "><td>Vacation analysis</td><td>Best 7/14/21-day candidates recomputed from exact official rows plus separately labelled unreleased-season models. No candidate is called certified free.</td><td><span class="badge badge-estimated">ESTIMATED / UNVERIFIED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL important dates</a></td></tr><tr data-source-url="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2027" data-row-status="verified audit" data-row-text="line-by-line repo audit 1689 prior generated-data/documentation lines reviewed; secondary sources and estimates are replaced or flagged with official links.  verified audit   official mlb stats api "><td>Line-by-line repo audit</td><td>1689 prior generated-data/documentation lines reviewed; secondary sources and estimates are replaced or flagged with official links.</td><td><span class="badge badge-verified">VERIFIED AUDIT</span></td><td><a class="source-link" href="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2027" target="_blank" rel="noopener">Official MLB Stats API</a></td></tr></tbody></table></div>
+    </div></section>
+<section class="panel"><h2>Vacation conclusion</h2><div class="callout danger">Using official rows plus separately labelled 2026-pattern estimates, no 7-, 14-, or 21-day fully free strict window appears in 2027–2029. The best short officially anchored gap is Feb 15–18, 2027; all longer vacation recommendations are least-conflict ESTIMATED candidates and must be rechecked when schedules are released.</div><div class="table-wrap" data-table="exec-windows" data-page-size="50">
       
-      <h3 style="margin-top:1rem;">Sports Tracked</h3>
-      <ul style="list-style:disc;padding-left:1.5rem;margin-top:0.5rem;">
-        <li><strong>MLB</strong> — All 30 teams, 162 regular-season games each + postseason. <span class="badge badge-high">SF Giants</span> and <span class="badge badge-high">Athletics</span> flagged high priority.</li>
-        <li><strong>NFL</strong> — All games, preseason through Super Bowl. <span class="badge badge-high">SF 49ers</span> flagged high priority.</li>
-        <li><strong>NCAAF</strong> — <span class="badge badge-high">Stanford Cardinal</span> and <span class="badge badge-high">Cal Golden Bears</span> flagged high priority.</li>
-        <li><strong>Westwood One Sports</strong> — National NFL radio broadcasts (MNF, TNF, SNF, Thanksgiving, Christmas, Playoffs).</li>
-      </ul>
-    </div>
-
-    <!-- Season Calendar -->
-    <div class="card">
-      <h2>📅 Season Calendar (2026 Verified / 2027-2029 Estimated)</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Sport</th><th>2026 Season</th><th>2027 (Est.)</th><th>2028 (Est.)</th><th>2029 (Est.)</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>⚾ MLB Regular</strong></td>
-              <td>Mar 25 - Sep 27 <span class="badge badge-verified">✓</span></td>
-              <td>~Mar 31 - Sep 30 <span class="badge badge-estimated">~</span></td>
-              <td>~Mar 29 - Sep 28 <span class="badge badge-estimated">~</span></td>
-              <td>~Mar 28 - Sep 27 <span class="badge badge-estimated">~</span></td>
-            </tr>
-            <tr>
-              <td><strong>⚾ MLB Postseason</strong></td>
-              <td>Sep 29 - Oct 28 <span class="badge badge-verified">✓</span></td>
-              <td>~Oct 2 - Oct 31 <span class="badge badge-estimated">~</span></td>
-              <td>~Sep 30 - Oct 29 <span class="badge badge-estimated">~</span></td>
-              <td>~Sep 29 - Oct 28 <span class="badge badge-estimated">~</span></td>
-            </tr>
-            <tr>
-              <td><strong>🏈 NFL Preseason</strong></td>
-              <td>Aug 6 - Sep 4 <span class="badge badge-verified">✓</span></td>
-              <td>~Aug 5 - Sep 3 <span class="badge badge-estimated">~</span></td>
-              <td>~Aug 10 - Sep 1 <span class="badge badge-estimated">~</span></td>
-              <td>~Aug 9 - Aug 31 <span class="badge badge-estimated">~</span></td>
-            </tr>
-            <tr>
-              <td><strong>🏈 NFL Regular</strong></td>
-              <td>Sep 9 - Jan 10 <span class="badge badge-verified">✓</span></td>
-              <td>~Sep 8 - Jan 9 <span class="badge badge-estimated">~</span></td>
-              <td>~Sep 6 - Jan 7 <span class="badge badge-estimated">~</span></td>
-              <td>~Sep 5 - Jan 6 <span class="badge badge-estimated">~</span></td>
-            </tr>
-            <tr>
-              <td><strong>🏈 NFL Playoffs</strong></td>
-              <td>Jan 16 - Feb 14, 2027 <span class="badge badge-verified">✓</span></td>
-              <td>~Jan 15 - Feb 13 <span class="badge badge-estimated">~</span></td>
-              <td>~Jan 14 - Feb 11 <span class="badge badge-estimated">~</span></td>
-              <td>~Jan 13 - Feb 10 <span class="badge badge-estimated">~</span></td>
-            </tr>
-            <tr>
-              <td><strong>🏈 NCAAF</strong></td>
-              <td>Aug 29 - Dec 5 <span class="badge badge-verified">✓</span></td>
-              <td>~Aug 28 - Dec 4 <span class="badge badge-estimated">~</span></td>
-              <td>~Aug 26 - Dec 2 <span class="badge badge-estimated">~</span></td>
-              <td>~Aug 25 - Dec 1 <span class="badge badge-estimated">~</span></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="table-controls">
+        <input type="search" placeholder="Filter exec windows rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="estimated">Estimated</button>
+        <button type="button" data-status-filter="unverified">Unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
       </div>
-    </div>
-
-    <!-- Game Duration Reference -->
-    <div class="card">
-      <h2>⏱️ Average Game Durations (Researched)</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Sport</th><th>Avg Duration</th><th>Halftime</th><th>Source</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>⚾ MLB (9 innings)</td>
-              <td><strong>2 hours 38 minutes</strong></td>
-              <td>N/A (7th inning stretch)</td>
-              <td><a href="https://www.lines.com/guides/how-long-is-baseball-game/1523" target="_blank">MLB 2025 data</a></td>
-            </tr>
-            <tr>
-              <td>🏈 NFL (Regular Season)</td>
-              <td><strong>3 hours 12 minutes</strong></td>
-              <td>12 minutes</td>
-              <td><a href="https://www.underarmour.com/en-us/t/playbooks/football/the-real-length-of-a-football-game/" target="_blank">Under Armour/NFL</a></td>
-            </tr>
-            <tr>
-              <td>🏈 NFL (Playoffs)</td>
-              <td><strong>~3 hours 20 minutes</strong></td>
-              <td>12 minutes</td>
-              <td>Estimated from regular season + extra reviews</td>
-            </tr>
-            <tr>
-              <td>🏈 NCAA Football (FBS)</td>
-              <td><strong>3 hours 26 minutes</strong></td>
-              <td>20 minutes</td>
-              <td><a href="https://www.academicjobs.com/en-us/higher-education-news/how-long-is-a-college-football-game-average-326-explained-or-academicjobs-12610" target="_blank">NCAA 2025 data</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="scroll"><table><thead><tr><th>Year</th><th>Length</th><th>Start</th><th>End</th><th>Busy days</th><th>Status</th><th>Official source</th></tr></thead><tbody><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2027  7  2027-02-03 2027-02-09  2   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2027</td><td><span class="num">7</span></td><td>2027-02-03</td><td>2027-02-09</td><td><span class="num">2</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2027  14  2027-02-03 2027-02-16  4   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2027</td><td><span class="num">14</span></td><td>2027-02-03</td><td>2027-02-16</td><td><span class="num">4</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2027  21  2027-01-27 2027-02-16  7   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2027</td><td><span class="num">21</span></td><td>2027-01-27</td><td>2027-02-16</td><td><span class="num">7</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2028  7  2028-02-07 2028-02-13  1   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2028</td><td><span class="num">7</span></td><td>2028-02-07</td><td>2028-02-13</td><td><span class="num">1</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2028  14  2028-02-02 2028-02-15  3   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2028</td><td><span class="num">14</span></td><td>2028-02-02</td><td>2028-02-15</td><td><span class="num">3</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2028  21  2028-01-26 2028-02-15  6   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2028</td><td><span class="num">21</span></td><td>2028-01-26</td><td>2028-02-15</td><td><span class="num">6</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2029  7  2029-02-05 2029-02-11  1   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2029</td><td><span class="num">7</span></td><td>2029-02-05</td><td>2029-02-11</td><td><span class="num">1</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2029  14  2029-01-31 2029-02-13  3   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2029</td><td><span class="num">14</span></td><td>2029-01-31</td><td>2029-02-13</td><td><span class="num">3</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="least-conflict candidate — estimated" data-row-text="2029  21  2029-01-24 2029-02-13  6   least-conflict candidate — estimated   official nfl 2026–27 important dates "><td>2029</td><td><span class="num">21</span></td><td>2029-01-24</td><td>2029-02-13</td><td><span class="num">6</span></td><td><span class="badge badge-estimated">LEAST-CONFLICT CANDIDATE — ESTIMATED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr></tbody></table></div>
+    </div></section>
+<section class="panel"><h2>Irregularities</h2><div class="table-wrap" data-table="exec-flags" data-page-size="100">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter exec flags rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="estimated">Estimated</button>
+        <button type="button" data-status-filter="unverified">Unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
       </div>
-    </div>
+      <div class="scroll"><table><thead><tr><th>ID</th><th>Issue</th><th>Status</th><th>Official source</th></tr></thead><tbody><tr data-source-url="https://buffedlizard55-lab.github.io/VacationSchedule/site/" data-row-status="unverified" data-row-text="ir-001 three supplied prior github pages/reference sites and matching repos returned 404.  unverified   prior reference url (dead link retained for review) "><td>IR-001</td><td>Three supplied prior GitHub Pages/reference sites and matching repos returned 404.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://buffedlizard55-lab.github.io/VacationSchedule/site/" target="_blank" rel="noopener">Prior reference URL (dead link retained for review)</a></td></tr><tr data-source-url="https://www.nfl.com/schedules/2027/by-team" data-row-status="unverified" data-row-text="ir-002 official nfl 2027 by-team and prime-time selectors show schedule data unavailable.  unverified   official nfl 2027 schedule "><td>IR-002</td><td>Official NFL 2027 by-team and prime-time selectors show schedule data unavailable.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://www.nfl.com/schedules/2027/by-team" target="_blank" rel="noopener">Official NFL 2027 schedule</a></td></tr><tr data-source-url="https://www.westwoodonesports.com/station-finder/" data-row-status="flagged" data-row-text="ir-003 wwo warns local affiliates may not carry every wwo broadcast.  flagged   official wwo station finder "><td>IR-003</td><td>WWO warns local affiliates may not carry every WWO broadcast.</td><td><span class="badge badge-flagged">FLAGGED</span></td><td><a class="source-link" href="https://www.westwoodonesports.com/station-finder/" target="_blank" rel="noopener">Official WWO station finder</a></td></tr><tr data-source-url="https://www.westwoodonesports.com/events/548540/" data-row-status="flagged" data-row-text="ir-004 wwo json-ld may encode local et clock time with +00:00; some end times are 11:59 pm placeholders.  flagged   official wwo event detail "><td>IR-004</td><td>WWO JSON-LD may encode local ET clock time with +00:00; some end times are 11:59 PM placeholders.</td><td><span class="badge badge-flagged">FLAGGED</span></td><td><a class="source-link" href="https://www.westwoodonesports.com/events/548540/" target="_blank" rel="noopener">Official WWO event detail</a></td></tr><tr data-source-url="https://www.nfl.com/news/nfl-elevates-pro-bowl-selection-game-s-will-cease-being-contested" data-row-status="corrected" data-row-text="ir-005 nfl announced no afc–nfc pro bowl game beginning with 2026 season; earlier continuous jan–super-bowl blocking is too conservative.  corrected   official nfl pro bowl announcement "><td>IR-005</td><td>NFL announced no AFC–NFC Pro Bowl game beginning with 2026 season; earlier continuous Jan–Super-Bowl blocking is too conservative.</td><td><span class="badge badge-corrected">CORRECTED</span></td><td><a class="source-link" href="https://www.nfl.com/news/nfl-elevates-pro-bowl-selection-game-s-will-cease-being-contested" target="_blank" rel="noopener">Official NFL Pro Bowl announcement</a></td></tr><tr data-source-url="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2026" data-row-status="replaced / flagged" data-row-text="ir-006 prior parallel-session data contains secondary sources (cbs sports, wikipedia, sportsgeardaily, fox sports) and untraceable rows.  replaced / flagged   official mlb stats api "><td>IR-006</td><td>Prior parallel-session data contains secondary sources (CBS Sports, Wikipedia, sportsgeardaily, FOX Sports) and untraceable rows.</td><td><span class="badge badge-flagged">REPLACED / FLAGGED</span></td><td><a class="source-link" href="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2026" target="_blank" rel="noopener">Official MLB Stats API</a></td></tr><tr data-source-url="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2028" data-row-status="unverified" data-row-text="ir-007 mlb stats api returned zero official 2028 and 2029 game rows.  unverified   official mlb stats api 2028 "><td>IR-007</td><td>MLB Stats API returned zero official 2028 and 2029 game rows.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2028" target="_blank" rel="noopener">Official MLB Stats API 2028</a></td></tr><tr data-source-url="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2027" data-row-status="unverified" data-row-text="ir-008 mlb 2027 official schedule has 2,011 tbd start times.  unverified   official mlb stats api 2027 "><td>IR-008</td><td>MLB 2027 official schedule has 2,011 TBD start times.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://statsapi.mlb.com/api/v1/schedule?sportId=1&amp;season=2027" target="_blank" rel="noopener">Official MLB Stats API 2027</a></td></tr><tr data-source-url="https://media.nfl.com/content/dam/communications/football-communications/2026/news/05%2014%2026%20-%202026%20NFL%20Schedule%20-%20By%20Week.pdf" data-row-status="unverified" data-row-text="ir-009 nfl 2026 week 16–18 official games have tbd kickoff/date in html; by-week pdf gives week date ranges only.  unverified   official nfl by-week schedule pdf "><td>IR-009</td><td>NFL 2026 Week 16–18 official games have TBD kickoff/date in HTML; by-week PDF gives week date ranges only.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://media.nfl.com/content/dam/communications/football-communications/2026/news/05%2014%2026%20-%202026%20NFL%20Schedule%20-%20By%20Week.pdf" target="_blank" rel="noopener">Official NFL by-week schedule PDF</a></td></tr><tr data-source-url="https://www.westwoodonesports.com/nfl-schedule/" data-row-status="unverified" data-row-text="ir-010 official 2027 wwo event grid currently ends jan 11, 2027; later 2027 network games are not published.  unverified   official wwo nfl schedule "><td>IR-010</td><td>Official 2027 WWO event grid currently ends Jan 11, 2027; later 2027 network games are not published.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://www.westwoodonesports.com/nfl-schedule/" target="_blank" rel="noopener">Official WWO NFL schedule</a></td></tr><tr data-source-url="https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents" data-row-status="unverified" data-row-text="ir-011 stanford/cal 2027–2029 acc dates/times are not released; only opponents and a few nonconference dates are official.  unverified   official cal 2027 opponents "><td>IR-011</td><td>Stanford/Cal 2027–2029 ACC dates/times are not released; only opponents and a few nonconference dates are official.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents" target="_blank" rel="noopener">Official Cal 2027 opponents</a></td></tr><tr data-source-url="https://www.ksfo.com/station-information/" data-row-status="corrected" data-row-text="ir-012 prior radio guide called 810 am &amp;#x27;kgo&amp;#x27;; official station and earthquakes sources identify ksfo 810 am.  corrected   official ksfo station information "><td>IR-012</td><td>Prior radio guide called 810 AM &#x27;KGO&#x27;; official station and Earthquakes sources identify KSFO 810 AM.</td><td><span class="badge badge-corrected">CORRECTED</span></td><td><a class="source-link" href="https://www.ksfo.com/station-information/" target="_blank" rel="noopener">Official KSFO station information</a></td></tr><tr data-source-url="https://media.nfl.com/content/dam/communications/Official%20Playing%20Rules/2026%20Official%20Playing%20Rules.pdf" data-row-status="flagged" data-row-text="ir-013 nfl 3:12 total duration and ncaaf 2016 3:24 average are not current official broadcast averages.  flagged   official 2026 nfl rulebook "><td>IR-013</td><td>NFL 3:12 total duration and NCAAF 2016 3:24 average are not current official broadcast averages.</td><td><span class="badge badge-flagged">FLAGGED</span></td><td><a class="source-link" href="https://media.nfl.com/content/dam/communications/Official%20Playing%20Rules/2026%20Official%20Playing%20Rules.pdf" target="_blank" rel="noopener">Official 2026 NFL rulebook</a></td></tr><tr data-source-url="https://www.nba.com/warriors/schedule" data-row-status="unverified" data-row-text="ir-014 warriors/valkyries/sharks station rows are high priority, but complete official game-by-game radio windows were not captured.  unverified   official warriors schedule "><td>IR-014</td><td>Warriors/Valkyries/Sharks station rows are high priority, but complete official game-by-game radio windows were not captured.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://www.nba.com/warriors/schedule" target="_blank" rel="noopener">Official Warriors schedule</a></td></tr><tr data-source-url="https://www.nfl.com/news/mercedes-benz-stadium-in-atlanta-to-host-super-bowl-lxii-in-2028" data-row-status="unverified" data-row-text="ir-015 2028 super bowl lxii host is official but exact date is tba; 2029 super bowl date/host not found in official captured sources.  unverified   official nfl super bowl lxii announcement "><td>IR-015</td><td>2028 Super Bowl LXII host is official but exact date is TBA; 2029 Super Bowl date/host not found in official captured sources.</td><td><span class="badge badge-unverified">UNVERIFIED</span></td><td><a class="source-link" href="https://www.nfl.com/news/mercedes-benz-stadium-in-atlanta-to-host-super-bowl-lxii-in-2028" target="_blank" rel="noopener">Official NFL Super Bowl LXII announcement</a></td></tr><tr data-source-url="https://www.nfl.com/news/2026-27-national-football-league-important-dates" data-row-status="corrected / unverified" data-row-text="ir-016 prior sessions claimed no 7-day strict window by blocking the entire jan–super-bowl span; exact official playoff dates and discontinued pro bowl game create published 7-day seams.  corrected / unverified   official nfl 2026–27 important dates "><td>IR-016</td><td>Prior sessions claimed no 7-day strict window by blocking the entire Jan–Super-Bowl span; exact official playoff dates and discontinued Pro Bowl game create published 7-day seams.</td><td><span class="badge badge-unverified">CORRECTED / UNVERIFIED</span></td><td><a class="source-link" href="https://www.nfl.com/news/2026-27-national-football-league-important-dates" target="_blank" rel="noopener">Official NFL 2026–27 important dates</a></td></tr><tr data-source-url="https://www.mlb.com/all-star/future-locations" data-row-status="flagged" data-row-text="ir-017 prior 2028 olympic-break vacation scenario is not an official released mlb schedule/mlbpa agreement.  flagged   official mlb future all-star locations "><td>IR-017</td><td>Prior 2028 Olympic-break vacation scenario is not an official released MLB schedule/MLBPA agreement.</td><td><span class="badge badge-flagged">FLAGGED</span></td><td><a class="source-link" href="https://www.mlb.com/all-star/future-locations" target="_blank" rel="noopener">Official MLB future All-Star locations</a></td></tr></tbody></table></div>
+    </div></section>
 
-    <!-- Best Vacation Windows -->
-    <div class="card">
-      <h2>🏖️ Best Vacation Windows by Year</h2>
-      
-      <h3>2026</h3>
-      <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;">
-        <li><strong>Late October - Early November (~10 days):</strong> After World Series ends (Oct 28) and before NFL Week 9 intensifies. NCAAF season ongoing (Saturdays busy). <span class="badge badge-verified">✓ Verified dates</span></li>
-        <li><strong>Mid-November bye periods:</strong> Some mid-week gaps exist between NCAAF ending (late Nov) and NFL playoffs starting (mid Jan). Weekdays (Tue-Fri) often free during NFL season outside of TNF.</li>
-      </ul>
-      
-      <h3>2026-2027 Offseason (Best Overall)</h3>
-      <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;">
-        <li><strong>February 15 - Late March (~6 weeks):</strong> After Super Bowl LXI (Feb 14) until MLB Opening Day 2027 (~Mar 31). This is the single best window each year. <span class="badge badge-verified">✓ Super Bowl date verified</span></li>
-      </ul>
-      
-      <h3>2027</h3>
-      <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;">
-        <li><strong>Late October - Late March 2028 (~5 months):</strong> After World Series until next MLB season. Note: NFL season runs Sep-Jan during this period, so Sundays/Mondays/Thursdays are busy. <span class="badge badge-estimated">~ Estimated</span></li>
-        <li><strong>Best pure vacation: February 2028 - March 2028 (~6 weeks):</strong> Same offseason pattern. <span class="badge badge-estimated">~ Estimated</span></li>
-      </ul>
-      
-      <h3>2028</h3>
-      <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;">
-        <li>Same pattern as 2027. <span class="badge badge-estimated">~ Estimated</span></li>
-      </ul>
-      
-      <h3>2029</h3>
-      <ul style="list-style:disc;padding-left:1.5rem;margin-bottom:1rem;">
-        <li>Same pattern as 2028. <span class="badge badge-estimated">~ Estimated</span></li>
-      </ul>
-    </div>
-
-    <!-- Important Constraints -->
-    <div class="card">
-      <h2>⚠️ Important Constraints</h2>
-      <ul style="list-style:disc;padding-left:1.5rem;color:var(--text-dim);">
-        <li><strong>During MLB season (late March - late October):</strong> Games are played nearly every day. It is essentially impossible to find a full week free of MLB broadcasts. Some individual weekdays may be free if no local games are scheduled.</li>
-        <li><strong>During NFL season (September - January):</strong> Sundays, Mondays, and Thursdays consistently have games. Tuesday and Wednesday are typically the only consistently free weekdays.</li>
-        <li><strong>During NCAAF season (late August - early December):</strong> Saturdays are consistently busy. Friday nights occasionally have games.</li>
-        <li><strong>The "perfect storm" period:</strong> September - October has MLB, NFL, and NCAAF all running simultaneously. This is the busiest time of year.</li>
-        <li><strong>The best overall strategy:</strong> Plan vacations during February-March (post-Super Bowl, pre-MLB) for maximum free time.</li>
-      </ul>
-    </div>
-
-    <!-- Data Sources -->
-    <div class="card">
-      <h2>📚 Data Sources</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Data</th><th>Source</th><th>Status</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>MLB 2026 Schedule</td>
-              <td><a href="https://www.cbssports.com/mlb/news/mlb-releases-2026-schedule/" target="_blank">CBS Sports / MLB Official (released Aug 26, 2025)</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>NFL 2026 Schedule</td>
-              <td><a href="https://www.nfl.com/nfl-schedule-release/" target="_blank">NFL.com Official Schedule Release</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>49ers 2026 Schedule</td>
-              <td><a href="https://www.nfl.com/nfl-schedule-release/" target="_blank">NFL.com / Printablepedia</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>Stanford NCAAF 2026</td>
-              <td><a href="https://gostanford.com/sports/football/schedule" target="_blank">GoStanford.com Official</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>Cal NCAAF 2026</td>
-              <td><a href="https://calbears.com/news/2026/1/26/california-football-announces-2026-schedule.aspx" target="_blank">CalBears.com Official</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>Westwood One NFL Schedule</td>
-              <td><a href="https://www.westwoodonesports.com/nfl-schedule/" target="_blank">WestwoodOneSports.com</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>KNBR Radio Schedule</td>
-              <td><a href="https://www.knbr.com/shows/" target="_blank">KNBR.com / TheSportsLeader.com</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>Athletics 2026 Schedule</td>
-              <td><a href="https://sactownsports.com/mlb/athletics-baseball/athletics-release-2026-mlb-schedule-sac" target="_blank">SacTown Sports</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>MLB 2027-2029</td>
-              <td>Estimated based on historical patterns</td>
-              <td><span class="badge badge-estimated">~ Estimated</span></td>
-            </tr>
-            <tr>
-              <td>NFL 2027-2029</td>
-              <td>Estimated based on historical patterns</td>
-              <td><span class="badge badge-estimated">~ Estimated</span></td>
-            </tr>
-            <tr>
-              <td>NCAAF 2027-2029</td>
-              <td>Estimated based on historical patterns</td>
-              <td><span class="badge badge-estimated">~ Estimated</span></td>
-            </tr>
-            <tr>
-              <td>Game Duration (MLB)</td>
-              <td><a href="https://www.lines.com/guides/how-long-is-baseball-game/1523" target="_blank">Lines.com (2025 MLB data: 2h 38m avg)</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>Game Duration (NFL)</td>
-              <td><a href="https://www.underarmour.com/en-us/t/playbooks/football/the-real-length-of-a-football-game/" target="_blank">Under Armour (2025 NFL data: 3h 12m avg)</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-            <tr>
-              <td>Game Duration (NCAAF)</td>
-              <td><a href="https://www.academicjobs.com/en-us/higher-education-news/how-long-is-a-college-football-game-average-326-explained" target="_blank">AcademicJobs (2025 FBS data: 3h 26m avg)</a></td>
-              <td><span class="badge badge-verified">✓ Verified</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p>Free Time Vacation Planner | All times PST | Outer Sunset SF 94122</p>
-    <p>Last updated: November 2, 2026</p>
+  <footer class="footer">
+    <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
+    <a href="docs/index.html">Docs HTML edition (parallel session)</a>
+    <a href="site/index.html">Legacy anchor site</a>
+    <a href="site/pages/sources.html">Legacy category pages</a>
+    <a href="data/official/events.json">Raw official event JSON</a>
+    <a href="research/line_by_line.json">Line-by-line audit JSON</a>
+    <br><span class="mini">Built 2026-11-02T18:00:25+00:00 from 748 captured official-source records. Deployment: GitHub Pages <code>main:/</code>.</span>
   </footer>
-</body>
-</html>
+</main></body></html>
