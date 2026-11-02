@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free-Time Scoreboard — Is today free? (Bay Area sports radio)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1 class="logo">FREE TIME <span>VACATION</span> 📻</h1>
+  <p class="tagline">Day-by-day free-time scoreboard · Nov 2026 → Dec 2029 · all times Pacific (SF 94122)</p>
+  <nav class="main">
+    <a href="index.html">🏠 Dashboard</a>
+    <a href="calendar.html" class="active">📅 Free-Time Scoreboard</a>
+    <a href="vacation.html">🏖️ Best Vacation Windows</a>
+    <a href="mlb.html">⚾ MLB</a>
+    <a href="football.html">🏈 NFL · Stanford · Cal</a>
+    <a href="westwood.html">🎙️ Westwood One</a>
+    <a href="radio.html">📻 Bay Area Radio Map</a>
+    <a href="flagged.html">🚩 Flagged for Review</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <p>Pick any day to see <b>exactly when you're free</b> (6:00 AM–midnight PT) and what's on the radio.
+  <span class="badge V">VERIFIED</span> items come straight from official schedules; <span class="badge E">ESTIMATE</span> items are modeled windows for schedules that don't exist yet. Orange = high priority (Giants/A's/49ers/Stanford/Cal).</p>
+
+  <div class="controls">
+    <button onclick="dayNav(-1)">◀ Yesterday</button>
+    <button class="primary" onclick="goToday()">Today</button>
+    <button onclick="dayNav(1)">Tomorrow ▶</button>
+    <input type="date" id="datepick" value="">
+    <label class="chk" title="Also count Warriors, Sharks, Valkyries, Earthquakes, CFP, Westwood One NCAA and Olympics as busy"><input type="checkbox" id="optOther"> All Bay Area radio sports</label>
+    <label class="chk" title="Scenario: MLB adopts the extended 2028 Olympic break (not yet agreed)"><input type="checkbox" id="optOly"> 2028 Olympic-break scenario</label>
+  </div>
+
+  <div class="card" id="dayview">Loading…</div>
+
+  <div class="card">
+    <h3>📅 Month at a glance</h3>
+    <div class="legend">
+      <span><i style="background:#123524;border:1px solid #2fbf71"></i>Fully free day</span>
+      <span><i style="background:#33300f;border:1px solid #8a7a1f"></i>light day (≤3.5 h on air)</span>
+      <span><i style="background:#1d2639;border:1px solid #2b3852"></i>Busy day</span>
+      <span>Number = must-hear hours on air · Tap a day to open it · Blue outline = today</span>
+    </div>
+    <div id="monthview">Loading…</div>
+  </div>
+
+  <div class="card">
+    <h3>🧮 How a day is classified</h3>
+    <ul>
+      <li><b>Explicit games first:</b> every Westwood One NFL broadcast for the rest of the 2026 season (from their official schedule), the 49ers' remaining 2026 games, Stanford/Cal's remaining 2026 games, the CFP bracket dates, and the Super Bowls are placed at their real times with average durations.</li>
+      <li><b>Then verified season rules:</b> the officially released 2027 MLB calendar (spring training Feb 19–Mar 23; season Mar 25–Sep 26; All-Star dark days Jul 12–14) is shown as a “typical slate window” by weekday — e.g., a Saturday has games somewhere in MLB from ~10:05 AM to ~10:00 PM PT. First-pitch times for 2027 are mostly TBD, so the window is labeled ESTIMATE even though the <i>dates</i> are officially released.</li>
+      <li><b>2028/2029:</b> no official MLB/NFL/ACC schedules exist. Windows follow the verified 2026/2027 patterns (Opening Day = last Thursday of March; NFL kickoff = Thursday after Labor Day; etc.) and are labeled ESTIMATE everywhere.</li>
+      <li><b>“light day”</b> = ≤3.5 hours total on air (e.g., a lone Monday Night Football). <b>“Free”</b> = zero minutes.</li>
+    </ul>
+    <p class="note">Model range: <b>Nov 2, 2026 – Dec 31, 2029</b>. Full source list and methodology: <code>research-notes.md</code> in the repo; open items on the <a href="flagged.html">Flagged for Review</a> page.</p>
+  </div>
+
+<footer class="site">Kickoff/first-pitch times can be flexed by leagues &amp; networks on 6–12 days' notice (esp. NCAAF) — confirm close to the day. Windows use average lengths: MLB 2:38 (MLB official, 2025) · NFL ~3:10 · NCAAF 3:26.</footer>
+</main>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
