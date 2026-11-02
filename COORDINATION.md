@@ -23,4 +23,4 @@ Started: 2026-11-02
 
 - 2026-11-02 ccb3febc: Sources verified via official MLB.com/NFL.com/CFP/Stanford/Cal/Westwood One pages (see docs/sources.md, 19 rows). Durations: MLB 2:38 official; NFL/NCAAF secondary estimates flagged F6.
 - Finding: no 7/14/21-day free window 2027-2029 (strict def.); best Feb 15-18 2027 verified; Feb 2028/2029 estimated. 12 irregularities in docs/flagged.md / site/flagged.html (F1-F12).
-- Site built in site/ (6 pages), internal-link check passed (1 false positive from JS template string in calendar.html). Pages workflow uploads site/.
+- Site built in site/ (6 pages), internal-link check passed (1 false positive from JS template string in calendar.html). Pages: repo already has Pages enabled (legacy, main:/, status built, https://karagemop466-tech.github.io/Korea4/). Token cannot switch it to workflow type (403), so site is served at /site/ with a root index.html redirect; Actions workflow removed to avoid a failing deploy.

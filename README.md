@@ -1,6 +1,6 @@
 # Korea4 — Free-Time Vacation Planner (SF Bay Area radio sports)
 
-**Live site:** https://karagemop466-tech.github.io/Korea4/
+**Live site:** https://karagemop466-tech.github.io/Korea4/site/
 
 When is it free? A minute is free only when no MLB game (all 30 clubs), no NFL game, no Stanford/Cal football game, and no Westwood One national NFL broadcast is on air.
 
