@@ -1,0 +1,743 @@
+{
+  "athletics_radio": {
+    "bytes": 869749,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "excerpt": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width\" data-next-head=\"\"/><script src=\"https://assets.adobedtm.com/267c22ecc15c/4a2ad2c78a04/launch-0febec0c5fac.min.js\" async=\"\" data-next-head=\"\"></script><title data-next-head=\"\">Where to Watch A&#x27;s games: TV &amp; Radio Broadcast Affiliates | Athletics</title><meta name=\"page_section\" content=\"Schedule\" data-next-head=\"\"/><meta name=\"page_name\" content=\"Athletics\" data-next-head=\"\"/><meta name=\"locale\" content=\"en\" data-next-head=\"\"/><meta name=\"env\" content=\"produc",
+    "http_status": 200,
+    "raw_file": "probe_out/athletics_radio.html",
+    "sha256": "aed420f896f7df3aafeac6536285426013be3962c22f791b69aa92fcbb3e0704",
+    "url": "https://www.mlb.com/athletics/schedule/affiliates"
+  },
+  "cal_schedule_2026": {
+    "bytes": 842536,
+    "content_type": "text/html;charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html  lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>2026 Football Schedule - California Golden Bears Athletics</title><link href=\"https://htlbid.com\" rel=\"preconnect\"><link href=\"https://transcend-cdn.com\" rel=\"preconnect\" data-hid=\"transcend-preconnect-link\"><link href=\"https://telemetry.transcend.io\" rel=\"preconnect\" data-hid=\"telemetry-preconnect-link\"><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/Brm3t_bh.js\"}}</script><script fetchpriority=\"high\" id=\"airgap-GPP\" src onload=\"this.dataset.onloadfired = true\" onerror=\"this.",
+    "http_status": 200,
+    "raw_file": "probe_out/cal_schedule_2026.html",
+    "react_query_markers": [
+      "gameDetail",
+      "schedule"
+    ],
+    "sf_mentions": [
+      "\"><svg data-test-id=\"s-icon__root\" focusable=\"false\" role=\"img\" fill=\"currentColor\" style=\"\" class=\"s-icon s-icon-more-horizontal text-[18px] transition-all duration-250 -translate-x-1/2 -translate-y-1/2 opacity-100\" aria-hidden=\"true\"><use xlink:href=\"/sidearm-icons.svg#icon-more-horizontal\"></use>"
+    ],
+    "sha256": "103763d67e9143f06bdba14ae63a8b21878b7ada2f4ad03b3b1fa3edbea6ee23",
+    "url": "https://calbears.com/sports/football/schedule/2026"
+  },
+  "cal_schedule_2027": {
+    "bytes": 842535,
+    "content_type": "text/html;charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html  lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>2026 Football Schedule - California Golden Bears Athletics</title><link href=\"https://htlbid.com\" rel=\"preconnect\"><link href=\"https://transcend-cdn.com\" rel=\"preconnect\" data-hid=\"transcend-preconnect-link\"><link href=\"https://telemetry.transcend.io\" rel=\"preconnect\" data-hid=\"telemetry-preconnect-link\"><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/Brm3t_bh.js\"}}</script><script fetchpriority=\"high\" id=\"airgap-GPP\" src onload=\"this.dataset.onloadfired = true\" onerror=\"this.",
+    "http_status": 200,
+    "raw_file": "probe_out/cal_schedule_2027.html",
+    "react_query_markers": [
+      "gameDetail",
+      "schedule"
+    ],
+    "sf_mentions": [
+      "\"><svg data-test-id=\"s-icon__root\" focusable=\"false\" role=\"img\" fill=\"currentColor\" style=\"\" class=\"s-icon s-icon-more-horizontal text-[18px] transition-all duration-250 -translate-x-1/2 -translate-y-1/2 opacity-100\" aria-hidden=\"true\"><use xlink:href=\"/sidearm-icons.svg#icon-more-horizontal\"></use>"
+    ],
+    "sha256": "f22bf2a3922d467ef3e20728fd16911610c3ae45ceecbbc1a2b9888e7a22fb2c",
+    "url": "https://calbears.com/sports/football/schedule/2027"
+  },
+  "giants_radio": {
+    "bytes": 913626,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "excerpt": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width\" data-next-head=\"\"/><script src=\"https://assets.adobedtm.com/267c22ecc15c/4a2ad2c78a04/launch-0febec0c5fac.min.js\" async=\"\" data-next-head=\"\"></script><title data-next-head=\"\">How to Watch the Giants | San Francisco Giants</title><meta name=\"page_section\" content=\"Schedule\" data-next-head=\"\"/><meta name=\"page_name\" content=\"San Francisco Giants\" data-next-head=\"\"/><meta name=\"locale\" content=\"en\" data-next-head=\"\"/><meta name=\"env\" content=\"production\" data-next-head=",
+    "http_status": 200,
+    "raw_file": "probe_out/giants_radio.html",
+    "sha256": "c22da0b44ddf51c533bee40e6e8e27b3e5b0a1199dcba2824dc3b04aa83b0a43",
+    "url": "https://www.mlb.com/giants/schedule/tv"
+  },
+  "mlb_2026_all": {
+    "bytes": 1319574,
+    "content_type": "application/json;charset=UTF-8",
+    "date_count": 242,
+    "error": null,
+    "excerpt": "{\"copyright\":\"Copyright 2026 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt\",\"totalGames\":2990,\"dates\":[{\"date\":\"2026-02-20\",\"totalGames\":7,\"games\":[{\"gamePk\":832034,\"gameType\":\"S\",\"season\":\"2026\",\"gameDate\":\"2026-02-20T18:05:00Z\",\"officialDate\":\"2026-02-20\",\"status\":{\"detailedState\":\"Final\",\"startTimeTBD\":false},\"teams\":{\"away\":{\"team\":{\"id\":147,\"name\":\"New York Yankees\"}},\"home\":{\"team\":{\"id\":110,\"name\":\"Baltimore Orioles\"}}},\"venue\":{\"id\":2508,\"name\":\"Ed Smith Stadium\"},\"gameNumber\":1,\"dou",
+    "first_date": "2026-02-20",
+    "game_types": {
+      "A": 1,
+      "D": 16,
+      "E": 38,
+      "F": 9,
+      "L": 11,
+      "R": 2459,
+      "S": 451,
+      "W": 5
+    },
+    "http_status": 200,
+    "last_date": "2026-10-28",
+    "raw_file": "probe_out/mlb_2026_all.json",
+    "samples": [
+      {
+        "away": "New York Yankees",
+        "description": null,
+        "gameDate": "2026-02-20T18:05:00Z",
+        "gamePk": 832034,
+        "gameType": "S",
+        "home": "Baltimore Orioles",
+        "officialDate": "2026-02-20",
+        "startTimeTBD": false
+      },
+      {
+        "away": "Northeastern Huskies",
+        "description": null,
+        "gameDate": "2026-02-20T18:05:00Z",
+        "gamePk": 832033,
+        "gameType": "E",
+        "home": "Boston Red Sox",
+        "officialDate": "2026-02-20",
+        "startTimeTBD": false
+      },
+      {
+        "away": "Kansas City Royals",
+        "description": null,
+        "gameDate": "2026-02-20T20:05:00Z",
+        "gamePk": 831829,
+        "gameType": "S",
+        "home": "Texas Rangers",
+        "officialDate": "2026-02-20",
+        "startTimeTBD": false
+      }
+    ],
+    "sha256": "15b2ca02fb24c34d4ed94d8372a5b61d4d85452d686ef9d780f2eae6c0ba39ac",
+    "start_time_tbd_count": 4,
+    "totalGames": 2990,
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026&fields=copyright%2CtotalGames%2Cdates%2Cdate%2CtotalGames%2Cgames%2CgamePk%2CgameDate%2CofficialDate%2CgameType%2Cseason%2Cteams%2Caway%2Cteam%2Cid%2Cname%2Chome%2Cteam%2Cid%2Cname%2Cvenue%2Cid%2Cname%2Cstatus%2CstartTimeTBD%2CdetailedState%2CseriesDescription%2CdoubleHeader%2CdayNight%2Cdescription%2CifNecessary%2CgameNumber"
+  },
+  "mlb_2027_all": {
+    "bytes": 1282429,
+    "content_type": "application/json;charset=UTF-8",
+    "date_count": 216,
+    "error": null,
+    "excerpt": "{\"copyright\":\"Copyright 2026 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt\",\"totalGames\":2901,\"dates\":[{\"date\":\"2027-02-19\",\"totalGames\":17,\"games\":[{\"gamePk\":868576,\"gameType\":\"S\",\"season\":\"2027\",\"gameDate\":\"2027-02-19T18:05:00Z\",\"officialDate\":\"2027-02-19\",\"status\":{\"detailedState\":\"Scheduled\",\"startTimeTBD\":false},\"teams\":{\"away\":{\"team\":{\"id\":144,\"name\":\"Atlanta Braves\"}},\"home\":{\"team\":{\"id\":110,\"name\":\"Baltimore Orioles\"}}},\"venue\":{\"id\":2508,\"name\":\"Ed Smith Stadium\"},\"gameNumber\":1,\"",
+    "first_date": "2027-02-19",
+    "game_types": {
+      "A": 1,
+      "E": 5,
+      "R": 2430,
+      "S": 465
+    },
+    "http_status": 200,
+    "last_date": "2027-09-26",
+    "raw_file": "probe_out/mlb_2027_all.json",
+    "samples": [
+      {
+        "away": "Atlanta Braves",
+        "description": null,
+        "gameDate": "2027-02-19T18:05:00Z",
+        "gamePk": 868576,
+        "gameType": "S",
+        "home": "Baltimore Orioles",
+        "officialDate": "2027-02-19",
+        "startTimeTBD": false
+      },
+      {
+        "away": "New York Yankees",
+        "description": null,
+        "gameDate": "2027-02-19T18:07:00Z",
+        "gamePk": 868572,
+        "gameType": "S",
+        "home": "Toronto Blue Jays",
+        "officialDate": "2027-02-19",
+        "startTimeTBD": false
+      },
+      {
+        "away": "Chicago Cubs",
+        "description": null,
+        "gameDate": "2027-02-19T20:05:00Z",
+        "gamePk": 868345,
+        "gameType": "S",
+        "home": "Athletics",
+        "officialDate": "2027-02-19",
+        "startTimeTBD": false
+      }
+    ],
+    "sha256": "2064a20beee2ef1ec1cae703bb15e244e31f1ca35d965431b1d567c175d031e6",
+    "start_time_tbd_count": 2011,
+    "totalGames": 2901,
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027&fields=copyright%2CtotalGames%2Cdates%2Cdate%2CtotalGames%2Cgames%2CgamePk%2CgameDate%2CofficialDate%2CgameType%2Cseason%2Cteams%2Caway%2Cteam%2Cid%2Cname%2Chome%2Cteam%2Cid%2Cname%2Cvenue%2Cid%2Cname%2Cstatus%2CstartTimeTBD%2CdetailedState%2CseriesDescription%2CdoubleHeader%2CdayNight%2Cdescription%2CifNecessary%2CgameNumber"
+  },
+  "mlb_2027_reg_release": {
+    "bytes": 347387,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "excerpt": "\n        <!doctype html>\n            <html lang=en>\n            <head>\n            <title>MLB 2027 schedule released</title><meta charset=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><meta name=\"robots\" content=\"max-image-preview:large\"/><meta name=\"description\" content=\"Major League Baseball announced its 2027 regular-season schedule on Thursday. It is slated to begin on Wednesday, March 24, with an Opening Night game streamed live on Netflix. The matchup is to be determined.\nTraditional Opening Day is set for Thursday, M",
+    "http_status": 200,
+    "raw_file": "probe_out/mlb_2027_reg_release.html",
+    "sha256": "c5043b6a1092caf7532978cd6c1cd6045117826b71cee1ff735dc55bcbd5b9c6",
+    "url": "https://www.mlb.com/tigers/news/mlb-2027-schedule-released"
+  },
+  "mlb_2027_schedule_page": {
+    "bytes": 539014,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "excerpt": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <title>MLB Schedule 2027  | MLB Schedule | MLB.com</title>\n    <meta charset=\"utf-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\">\n    <meta name=\"description\" content=\"The official schedule of Major League Baseball including probable pitchers, Gameday, ticket and postseason information.\">\n    <meta property=\"og:description\" content=\"The official schedule of Major League Baseball including probable pitchers, Gameday, ticket and",
+    "http_status": 200,
+    "raw_file": "probe_out/mlb_2027_schedule_page.html",
+    "sha256": "77ceef739eba9a9ab095e0bc4bfb0d61b8bccc2e8c56bae74d753be0947d4b25",
+    "url": "https://www.mlb.com/schedule/2027-03-25"
+  },
+  "mlb_2027_spring_release": {
+    "bytes": 294677,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "excerpt": "\n        <!doctype html>\n            <html lang=en>\n            <head>\n            <title>Press release: MLB announces 2027 Spring Training schedule</title><meta charset=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\"/><meta name=\"robots\" content=\"max-image-preview:large\"/><meta name=\"description\" content=\"Major League Baseball today announced that 2027 Spring Training will officially begin on Friday, February 19th with all 30 Clubs in action across Arizona\u2019s Cactus League and Florida\u2019s Grapefruit League.\nA number of exhibitio",
+    "http_status": 200,
+    "raw_file": "probe_out/mlb_2027_spring_release.html",
+    "sha256": "37742789adaa251d9340c4dc2369b0d37a0263d3d412cef52c42bc2b090bb651",
+    "url": "https://www.mlb.com/press-release/press-release-mlb-announces-2027-spring-training-schedule"
+  },
+  "mlb_2028_all": {
+    "bytes": 206,
+    "content_type": "application/json;charset=UTF-8",
+    "date_count": 0,
+    "error": null,
+    "excerpt": "{\"copyright\":\"Copyright 2026 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt\",\"totalGames\":0,\"dates\":[]}",
+    "first_date": "",
+    "game_types": {},
+    "http_status": 200,
+    "last_date": "",
+    "raw_file": "probe_out/mlb_2028_all.json",
+    "samples": [],
+    "sha256": "b6352566cfc36a074cda4c3e2c49f54fd6140200577f0141b2122dead8452527",
+    "start_time_tbd_count": 0,
+    "totalGames": 0,
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2028&fields=copyright%2CtotalGames%2Cdates%2Cdate%2CtotalGames%2Cgames%2CgamePk%2CgameDate%2CofficialDate%2CgameType%2Cseason%2Cteams%2Caway%2Cteam%2Cid%2Cname%2Chome%2Cteam%2Cid%2Cname%2Cvenue%2Cid%2Cname%2Cstatus%2CstartTimeTBD%2CdetailedState%2CseriesDescription%2CdoubleHeader%2CdayNight%2Cdescription%2CifNecessary%2CgameNumber"
+  },
+  "mlb_2029_all": {
+    "bytes": 206,
+    "content_type": "application/json;charset=UTF-8",
+    "date_count": 0,
+    "error": null,
+    "excerpt": "{\"copyright\":\"Copyright 2026 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt\",\"totalGames\":0,\"dates\":[]}",
+    "first_date": "",
+    "game_types": {},
+    "http_status": 200,
+    "last_date": "",
+    "raw_file": "probe_out/mlb_2029_all.json",
+    "samples": [],
+    "sha256": "b6352566cfc36a074cda4c3e2c49f54fd6140200577f0141b2122dead8452527",
+    "start_time_tbd_count": 0,
+    "totalGames": 0,
+    "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2029&fields=copyright%2CtotalGames%2Cdates%2Cdate%2CtotalGames%2Cgames%2CgamePk%2CgameDate%2CofficialDate%2CgameType%2Cseason%2Cteams%2Caway%2Cteam%2Cid%2Cname%2Chome%2Cteam%2Cid%2Cname%2Cvenue%2Cid%2Cname%2Cstatus%2CstartTimeTBD%2CdetailedState%2CseriesDescription%2CdoubleHeader%2CdayNight%2Cdescription%2CifNecessary%2CgameNumber"
+  },
+  "mlb_teams_2027": {
+    "bytes": 23219,
+    "content_type": "application/json;charset=UTF-8",
+    "error": null,
+    "excerpt": "{\"copyright\":\"Copyright 2026 MLB Advanced Media, L.P.  Use of any content on this page acknowledges agreement to the terms posted here http://gdx.mlb.com/components/copyright.txt\",\"teams\":[{\"springLeague\":{\"id\":114,\"name\":\"Cactus League\",\"link\":\"/api/v1/league/114\",\"abbreviation\":\"CL\"},\"allStarStatus\":\"N\",\"id\":133,\"name\":\"Athletics\",\"link\":\"/api/v1/teams/133\",\"season\":2027,\"venue\":{\"id\":2529,\"name\":\"Sutter Health Park\",\"link\":\"/api/v1/venues/2529\"},\"springVenue\":{\"id\":2507,\"link\":\"/api/v1/venues/2507\"},\"teamCode\":\"ath\",\"fileCode\":\"ath\",\"abbreviation\":\"ATH\",\"teamName\":\"Athletics\",\"locationName\"",
+    "http_status": 200,
+    "raw_file": "probe_out/mlb_teams_2027.html",
+    "sha256": "184eab8b24b286ad52808dffcd51b12c8b3e7d3dd691c0d35714b3c1054c1dd2",
+    "url": "https://statsapi.mlb.com/api/v1/teams?sportId=1&season=2027"
+  },
+  "nfl_2026_by_week": {
+    "bytes": 2425223,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/2c8615cd1853512d.css\" data-precedence=\"next\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/webpack-d69a89fc656b5d53.js\"/><script src=\"/_next/static/chunks/2312f46d-4790bde4d639ffb8.js\" async=\"\"></script><",
+    "http_status": 200,
+    "raw_file": "probe_out/nfl_2026_by_week.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-prec",
+      "<p>View Flexible Schedule Procedures: <a class=\"relative text-plus-650 dark:text-plus-350 underline\" href=\"https://www.nfl.com/legal/flexible-scheduling-procedures\" rel=\"noopener noreferrer\" data-headlessui-state=\"\">https://www.nfl.com/legal/flexible-scheduling-procedures</a></p></div></div></div></",
+      "$RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))?(a.previousSibling.data=\"$~\",$RB.push(a,b),2===$RB.length&&(\"number\"!==typeof $RT?requestAnimationFrame($RV.bind(null,$RB)):(a=performance.now(),setTimeout($RV.bind(null,$RB),2300>a&&2E3<a?2300-a:$RT+300-a)))):b.parentN"
+    ],
+    "sha256": "7f8a5f01fe558ecf1c222085dda71a430841799da4abbf7e6a5afa5b24a1ebab",
+    "url": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  "nfl_2026_reg1": {
+    "bytes": 2394261,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/2c8615cd1853512d.css\" data-precedence=\"next\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/webpack-d69a89fc656b5d53.js\"/><script src=\"/_next/static/chunks/2312f46d-4790bde4d639ffb8.js\" async=\"\"></script><",
+    "http_status": 200,
+    "raw_file": "probe_out/nfl_2026_reg1.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-prec",
+      "<p>View Flexible Schedule Procedures: <a class=\"relative text-plus-650 dark:text-plus-350 underline\" href=\"https://www.nfl.com/legal/flexible-scheduling-procedures\" rel=\"noopener noreferrer\" data-headlessui-state=\"\">https://www.nfl.com/legal/flexible-scheduling-procedures</a></p></div></div></div></",
+      "$RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))?(a.previousSibling.data=\"$~\",$RB.push(a,b),2===$RB.length&&(\"number\"!==typeof $RT?requestAnimationFrame($RV.bind(null,$RB)):(a=performance.now(),setTimeout($RV.bind(null,$RB),2300>a&&2E3<a?2300-a:$RT+300-a)))):b.parentN"
+    ],
+    "sha256": "4422f9c11d534ad25bade89910047e12adeb3953cb58b8d28a9b1ff29c3dd6f3",
+    "url": "https://www.nfl.com/schedules/2026/REG1/"
+  },
+  "nfl_2026_release": {
+    "bytes": 54952,
+    "content_type": "text/html;charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "\n<!DOCTYPE HTML>\n<html lang=\"en\">\n    <head>\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"/>\n    <meta charset=\"UTF-8\"/>\n    <meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"/>\n\n    <title>2026 NFL Schedule Announced</title>\n    <script defer type=\"text/javascript\" src=\"/.rum/@adobe/helix-rum-js@%5E2/dist/micro.js\"></script>\n<meta name=\"content-page-ref\" content=\"3y6SKoziT9LnAJzUZDHfvomfo_VpKaMIa-hUDRpCurtipMsPPOzFx4Z0-F6LvjDN2x8CzCgWSUrCaExvOyXg9cZPs9X-E77H7d9MlHzI__d0YKJpzktW8nqp-u94FIo6F3EW6rXSZdshqq17jOBSfQ\"/>\n<link rel=\"canonical\" href=\"https://media.nfl.com/fo",
+    "http_status": 200,
+    "raw_file": "probe_out/nfl_2026_release.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<div class=\"cmp-text\" data-cmp-data-layer=\"{&#34;text-9b474270e7&#34;:{&#34;@type&#34;:&#34;aem-nfl-base/components/content/text&#34;,&#34;repo:modifyDate&#34;:&#34;2026-05-15T00:09:00Z&#34;,&#34;xdm:text&#34;:&#34;&lt;p style=\\&#34;text-align: center;\\&#34;>&lt;i>Complete 18-Week, 272-Game Regular-",
+      "<p>On Thursday, September 10 (8:35 p.m. ET, Netflix), the Los Angeles Rams and San Francisco 49ers will meet at Melbourne Cricket Ground, in partnership with the Victorian State Government and Visit Victoria, in the first-ever regular-season NFL game to be played in Australia.</p>",
+      "<p>The international slate begins in Week 1 in Australia with the Los Angeles Rams and San Francisco (8:35 p.m. ET, Netflix) and follows with games in five consecutive weeks, beginning in Week 3 with the first-ever regular-season game in Rio de Janeiro at Maracan\u00e3 Stadium with the Baltimore Ravens a",
+      "<p>The international schedule will conclude in Week 11 with the first game in Mexico City since 2022 when San Francisco takes on Minnesota (Sunday night, 8:20 p.m. ET, NBC) at Estadio Banorte.</p>"
+    ],
+    "sha256": "d14a5793711d5bbeaf650593f0f43ea2c29e0a391ba042e66119f1756b860bd3",
+    "url": "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced"
+  },
+  "nfl_2027_by_team": {
+    "bytes": 2033809,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/2c8615cd1853512d.css\" data-precedence=\"next\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/webpack-d69a89fc656b5d53.js\"/><script src=\"/_next/static/chunks/2312f46d-4790bde4d639ffb8.js\" async=\"\"></script><",
+    "http_status": 200,
+    "raw_file": "probe_out/nfl_2027_by_team.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-prec",
+      "<p>View Flexible Schedule Procedures: <a class=\"relative text-plus-650 dark:text-plus-350 underline\" href=\"https://www.nfl.com/legal/flexible-scheduling-procedures\" rel=\"noopener noreferrer\" data-headlessui-state=\"\">https://www.nfl.com/legal/flexible-scheduling-procedures</a></p></div></div></div></",
+      "$RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))?(a.previousSibling.data=\"$~\",$RB.push(a,b),2===$RB.length&&(\"number\"!==typeof $RT?requestAnimationFrame($RV.bind(null,$RB)):(a=performance.now(),setTimeout($RV.bind(null,$RB),2300>a&&2E3<a?2300-a:$RT+300-a)))):b.parentN"
+    ],
+    "sha256": "953f8fd7d8fa6e1ea7ac284b553ada3e2cd04569068eaadacf85c9e1f13fddab",
+    "url": "https://www.nfl.com/schedules/2027/by-team"
+  },
+  "nfl_2027_prime": {
+    "bytes": 655189,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/2c8615cd1853512d.css\" data-precedence=\"next\"/><link rel=\"preload\" as=\"script\" fetchPriority=\"low\" href=\"/_next/static/chunks/webpack-d69a89fc656b5d53.js\"/><script src=\"/_next/static/chunks/2312f46d-4790bde4d639ffb8.js\" async=\"\"></script><",
+    "http_status": 200,
+    "raw_file": "probe_out/nfl_2027_prime.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"stylesheet\" href=\"/_next/static/css/42ed4b7f310fd6b5.css\" data-precedence=\"next\"/><link rel=\"stylesheet\" href=\"/_next/static/css/aa3ce5a626aa908e.css\" data-prec",
+      "<p>View Flexible Schedule Procedures: <a class=\"relative text-plus-650 dark:text-plus-350 underline\" href=\"https://www.nfl.com/legal/flexible-scheduling-procedures\" rel=\"noopener noreferrer\" data-headlessui-state=\"\">https://www.nfl.com/legal/flexible-scheduling-procedures</a></p></div></div></div></",
+      "$RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))?(a.previousSibling.data=\"$~\",$RB.push(a,b),2===$RB.length&&(\"number\"!==typeof $RT?requestAnimationFrame($RV.bind(null,$RB)):(a=performance.now(),setTimeout($RV.bind(null,$RB),2300>a&&2E3<a?2300-a:$RT+300-a)))):b.parentN"
+    ],
+    "sha256": "ecb21157b84c7aac0627a99059a2dff95163152b2a310109be449693dcce6c39",
+    "url": "https://www.nfl.com/schedules/2027/prime-time"
+  },
+  "nfl_important_dates": {
+    "bytes": 821531,
+    "content_type": "text/html; charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"https://static.www.nfl.com/image/private/c_fill,f_auto,g_face,h_28,dpr_2.0,q_auto,w_28/league/zy6u1v6ha5cvjjb3kamw\"/><link rel=\"preload\" as=\"image\" href=\"https://static.www.nfl.com/image/upload/f_auto,dpr_2.0,q_auto/league/u2hyje9gx30jjbt0yfe4\"/><link rel=\"preload\" as=\"image\" href=\"https://static.www.nfl.com/image/private/f_auto,dpr_2.0,q_auto/league/pyzxubxdovaubclvbvf0\"/><link rel=\"preload\" as=\"image\" href=\"https://static.www.nf",
+    "http_status": 200,
+    "raw_file": "probe_out/nfl_important_dates.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" as=\"image\" href=\"https://static.www.nfl.com/image/private/c_fill,f_auto,g_face,h_28,dpr_2.0,q_auto,w_28/league/zy6u1v6ha5cvjjb3kamw\"/><link rel=\"preloa",
+      "<p><strong>September 10</strong> - NFL International Game at Melbourne Cricket Ground (Melbourne, Australia): San Francisco 49ers vs. Los Angeles Rams</p></div></div></div><div><div class=\"rounded-2xl mb-5\"><div class=\"story-part-rich-text-editor-wrapper\"><p><strong>September 27</strong> - NFL Inter",
+      "<p><strong>November 22</strong> - NFL International Game at Estadio Banorte (Mexico City, Mexico): Minnesota Vikings vs. San Francisco 49ers</p>",
+      "<p><strong>May 25-26</strong> - Spring League Meeting (Las Colinas, Texas)</p></div></div></div><div><div class=\"flex justify-center relative focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ls-accessibility-focused focus-within:dark:outline-ds-accessibility-focused h-[50px]",
+      "$RC=function(a,b){if(b=document.getElementById(b))(a=document.getElementById(a))?(a.previousSibling.data=\"$~\",$RB.push(a,b),2===$RB.length&&(\"number\"!==typeof $RT?requestAnimationFrame($RV.bind(null,$RB)):(a=performance.now(),setTimeout($RV.bind(null,$RB),2300>a&&2E3<a?2300-a:$RT+300-a)))):b.parentN"
+    ],
+    "sha256": "25b51b149f427682553e989aff5c7b0db9ebfda9068f530bab3fe8bfb595cece",
+    "url": "https://www.nfl.com/news/2026-27-national-football-league-important-dates"
+  },
+  "nfl_reg_schedule_htm": {
+    "bytes": 0,
+    "content_type": null,
+    "error": "HTTPError: Not Found",
+    "excerpt": "",
+    "http_status": 404,
+    "raw_file": "probe_out/nfl_reg_schedule_htm.html",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "url": "https://static.www.nfl.com/static/content/public/static/html/schedules/2026/regSeasonSchedule.htm"
+  },
+  "nfl_scorestrip_post1": {
+    "bytes": 0,
+    "content_type": null,
+    "error": "URLError: <urlopen error [Errno -5] No address associated with hostname>",
+    "excerpt": "",
+    "http_status": null,
+    "raw_file": "probe_out/nfl_scorestrip_post1.xml",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "url": "https://static.nfl.com/ajax/scorestrip?season=2026&seasonType=POST&week=1"
+  },
+  "nfl_scorestrip_pre1": {
+    "bytes": 0,
+    "content_type": null,
+    "error": "URLError: <urlopen error [Errno -5] No address associated with hostname>",
+    "excerpt": "",
+    "http_status": null,
+    "raw_file": "probe_out/nfl_scorestrip_pre1.xml",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "url": "https://static.nfl.com/ajax/scorestrip?season=2026&seasonType=PRE&week=1"
+  },
+  "nfl_scorestrip_reg1": {
+    "bytes": 0,
+    "content_type": null,
+    "error": "URLError: <urlopen error [Errno -5] No address associated with hostname>",
+    "excerpt": "",
+    "http_status": null,
+    "raw_file": "probe_out/nfl_scorestrip_reg1.xml",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "url": "https://static.nfl.com/ajax/scorestrip?season=2026&seasonType=REG&week=1"
+  },
+  "nfl_ss_xml": {
+    "bytes": 0,
+    "content_type": null,
+    "error": "URLError: <urlopen error [Errno -5] No address associated with hostname>",
+    "excerpt": "",
+    "http_status": null,
+    "raw_file": "probe_out/nfl_ss_xml.xml",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "url": "https://static.nfl.com/liveupdate/scorestrip/ss.xml"
+  },
+  "nflers_schedule": {
+    "bytes": 390368,
+    "content_type": "text/html",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html lang=\"en-US\" dir=\"ltr\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"dns-prefetch\" href=\"//nflenterprises.tt.omtrdc.net\" crossorigin><link rel=\"preconnect\" href=\"//securepubads.g.doubleclick.net\" crossorigin><link rel=\"preconnect\" href=\"//cdn.onesignal.com\" crossorigin><link rel=\"preconnect\" href=\"//assets.adobedtm.com\" crossorigin><title>49ers 2026 Schedule | San Francisco 49ers - 49ers.com</title><meta name=\"description\" content=\"San Francisco 49er",
+    "http_status": 200,
+    "raw_file": "probe_out/nflers_schedule.html",
+    "react_query_markers": [
+      "gamedetail",
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html lang=\"en-US\" dir=\"ltr\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link rel=\"dns-prefetch\" href=\"//nflenterprises.tt.omtrdc.net\" crossorigin><link rel=\"preconnect",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('1785c633-95ec-4c31-b4a8-6fce88638a92')});});}</script><div class=\"d3-o-adv-block\" data-id=\"1785c6",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('f453dffb-c065-4929-b0b8-03b088543b8f')});});}</script><div class=\"d3-o-adv-block\" data-id=\"f453df",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('c5eeba31-c8b8-4433-b6d9-4fe3fa6e2bc9')});});}</script><div class=\"d3-o-adv-block\" data-id=\"c5eeba",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('0af2a08e-fa33-4d6e-b169-c74252695cb0')});});}</script><div class=\"d3-o-adv-block\" data-id=\"0af2a0",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('4e882bb2-cf1f-4e80-acea-bfb6e3252373')});});}</script><div class=\"d3-o-adv-block\" data-id=\"4e882b",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('be40e831-07c8-4126-9b19-cc096c9ee03d')});});}</script><div class=\"d3-o-adv-block\" data-id=\"be40e8",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('42ad2a3c-23f6-4aea-bf16-58fec04843a4')});});}</script><div class=\"d3-o-adv-block\" data-id=\"42ad2a",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('8dacdd36-dfeb-4d47-9a8c-9cb41f84ac25')});});}</script><div class=\"d3-o-adv-block\" data-id=\"8dacdd",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('f9515ec2-da84-471d-91c4-578978f56dc6')});});}</script><div class=\"d3-o-adv-block\" data-id=\"f9515e",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('f5343ba0-fbb6-4f07-bcba-fdbbcda730f2')});});}</script><div class=\"d3-o-adv-block\" data-id=\"f5343b",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('schedule_adv-10')});});}</script><div class=\"d3-o-adv-block\" data-id=\"schedule_adv-10\" id=\"schedu",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('83ea9572-ef48-4b6b-9651-fc5bc3127c1b')});});}</script><div class=\"d3-o-adv-block\" data-id=\"83ea95",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('69a89c8b-85be-4b12-8d6f-98499297a743')});});}</script><div class=\"d3-o-adv-block\" data-id=\"69a89c",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('40848e17-4604-4782-829c-66e2bddc79d3')});});}</script><div class=\"d3-o-adv-block\" data-id=\"40848e",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('c5308299-3840-4289-8c77-47891c609685')});});}</script><div class=\"d3-o-adv-block\" data-id=\"c53082",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('schedule_adv-14')});});}</script><div class=\"d3-o-adv-block\" data-id=\"schedule_adv-14\" id=\"schedu",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('617711f3-2c4c-4d4c-8140-6257f03d4694')});});}</script><div class=\"d3-o-adv-block\" data-id=\"617711",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('84e51346-8c13-40fd-9bb6-e9d11096d71e')});});}</script><div class=\"d3-o-adv-block\" data-id=\"84e513",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('09720ecf-4764-4d32-86ee-57f7523c3833')});});}</script><div class=\"d3-o-adv-block\" data-id=\"09720e",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('2f416c72-a29a-437e-827a-49f09f19ad8a')});});}</script><div class=\"d3-o-adv-block\" data-id=\"2f416c",
+      "return[1,1];});iasPETSlots.push({adSlotId:newSlot.getSlotElementId(),size:newSlotSizes,adUnitPath:newSlot.getAdUnitPath()});__iasPET.queue.push({adSlots:iasPETSlots,dataHandler:iasSingleSlotDataHandler('9bfa5f8b-d78b-4d2b-a0dc-5677758afd5c')});});}</script><div class=\"d3-o-adv-block\" data-id=\"9bfa5f",
+      "else{window.nflLibPath='/nfl/live';}</script><footer class=\"d3-o-footer\" role=\"contentinfo\" data-require=\"modules/footer\"><div class=\"d3-o-footer__nav\"><button id=\"d3-o-footer__tab-trigger-1\" class=\"d3-o-footer__tab-trigger\" href=\"#d3-o-footer__tab-panel-1\" aria-controls=\"d3-o-footer__tab-panel-1\" a"
+    ],
+    "sha256": "b2e7267a6c6c2ef8d12df7985b04c4ba34ed5c64fa959c9c4b836765875ea363",
+    "url": "https://www.49ers.com/schedule/"
+  },
+  "stanford_radio": {
+    "bytes": 513536,
+    "content_type": "text/html;charset=utf-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html  lang=\"en-US\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>2026 Football Radio Broadcast Team Announced - Stanford Cardinal - Official Athletics Website</title><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/DCZohxvI.js\"}}</script><style>@layer tenant-elements, tailwind-base, oas-content-blocks, oas-frontend, oas-frontend-dropdown-base, oas-frontend-dropdown;</style><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Esteban&family=Inter:wght@300;400;500;600;700&display=swap\"><link rel=\"style",
+    "http_status": 200,
+    "raw_file": "probe_out/stanford_radio.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html  lang=\"en-US\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>2026 Football Radio Broadcast Team Announced - Stanford Cardinal - Official Athletics Website</title><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/DCZohxv",
+      "<p>Fisk\u2019s son, Tucker, played tight end at Stanford from 2018-21 and has appeared in 25 career NFL games over three seasons for the Atlanta Falcons and Los Angeles Chargers.<br /><br />Fisk is a teacher at Monterey County\u2019s Chartwell School, mentoring children with dyslexia and other associated lear"
+    ],
+    "sha256": "3cc93c4a396d3640c9a7aae9da3e0178ebabd8c82f5c5166a11a1de87471b296",
+    "url": "https://gostanford.com/news/2026/07/30/2026-football-radio-broadcast-team-announced"
+  },
+  "stanford_schedule_2026": {
+    "bytes": 463435,
+    "content_type": "text/html;charset=utf-8",
+    "error": "HTTPError: Not Found",
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html  lang=\"en-US\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>404 - Stanford Cardinal - Official Athletics Website</title><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/DCZohxvI.js\"}}</script><style>@layer tenant-elements, tailwind-base, oas-content-blocks, oas-frontend, oas-frontend-dropdown-base, oas-frontend-dropdown;</style><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Esteban&family=Inter:wght@300;400;500;600;700&display=swap\"><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com",
+    "http_status": 404,
+    "raw_file": "probe_out/stanford_schedule_2026.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html  lang=\"en-US\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>404 - Stanford Cardinal - Official Athletics Website</title><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/DCZohxvI.js\"}}</script><style>@layer tenant-elem"
+    ],
+    "sha256": "57d7051f43ffdeb65338b87b3e6c9fd7de572c3d46010cf158a6b4ae5f01c047",
+    "url": "https://gostanford.com/sports/football/schedule/2026"
+  },
+  "stanford_schedule_2027": {
+    "bytes": 463435,
+    "content_type": "text/html;charset=utf-8",
+    "error": "HTTPError: Not Found",
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE html><html  lang=\"en-US\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>404 - Stanford Cardinal - Official Athletics Website</title><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/DCZohxvI.js\"}}</script><style>@layer tenant-elements, tailwind-base, oas-content-blocks, oas-frontend, oas-frontend-dropdown-base, oas-frontend-dropdown;</style><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Esteban&family=Inter:wght@300;400;500;600;700&display=swap\"><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com",
+    "http_status": 404,
+    "raw_file": "probe_out/stanford_schedule_2027.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [
+      "<!DOCTYPE html><html  lang=\"en-US\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>404 - Stanford Cardinal - Official Athletics Website</title><script type=\"importmap\">{\"imports\":{\"#entry\":\"/_nuxt/DCZohxvI.js\"}}</script><style>@layer tenant-elem"
+    ],
+    "sha256": "18025951fa701425e51777e9902f76d5a031747155e416376e23b817cb78150f",
+    "url": "https://gostanford.com/sports/football/schedule/2027"
+  },
+  "wwo_event_grid_ncaaf": {
+    "bytes": 65791,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid/?id=47030&range=current&offset=0&limit=100&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Football+Broadcasts",
+      "/more/eventGrid?id=47030&range=current&offset=100&limit=100&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Football+Broadcasts",
+      "/more/eventGrid?id=all&range=current&offset=0&limit=3&timezone=America/New_York&widgetTitle=Upcoming+Broadcasts",
+      "http:\\/\\/www.westwoodonesports.com\\/more\\/eventGrid\\/?id=47030&range=current&offset=0&limit=100&timezone=America\\/New_York&widgetTitle=Upcoming+NCAA+Football+Broadcasts",
+      "https://www.westwoodonesports.com/more/eventGrid/?id=47030&amp;range=current&amp;offset=0&amp;limit=100&amp;timezone=America/New_York&amp;widgetTitle=Upcoming+NCAA+Football+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_event_grid_ncaaf.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "bced2e7239c5ed909e6dd5166069489b5a00d00d0bc46e5841c2625fa15f76e8",
+    "url": "https://www.westwoodonesports.com/more/eventGrid?id=47030&range=current&offset=0&limit=100&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Football+Broadcasts"
+  },
+  "wwo_event_sample": {
+    "bytes": 65158,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=all&range=current&offset=0&limit=3&timezone=America/New_York&widgetTitle=Upcoming+Broadcasts"
+    ],
+    "event_links": [
+      "https://www.westwoodonesports.com/events/548540"
+    ],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_event_sample.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "c4cceae78bc20846a4ae11d5fe2174e1b607de387403d1b82f609b2309e091e5",
+    "url": "https://www.westwoodonesports.com/events/548540/"
+  },
+  "wwo_golf": {
+    "bytes": 61559,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47033&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+Golf+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_golf.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "c78a6105f76ee4f1c78e6f2ea7c9d97187c9aeefa358f64cfa20062a0a2dff58",
+    "url": "https://www.westwoodonesports.com/golf/"
+  },
+  "wwo_hockey": {
+    "bytes": 60756,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47044&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Hockey+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_hockey.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "29343d3cedf5c6b36002bef866c8be34213694ba680ec77408486b598f4ed5f4",
+    "url": "https://www.westwoodonesports.com/ncaa-hockey/"
+  },
+  "wwo_lacrosse": {
+    "bytes": 60754,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47418&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Lacrosse+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_lacrosse.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "4df78321a84911899ed069ec8cb174bb91281e58d6d17974b90e2ab8a2fcd3af",
+    "url": "https://www.westwoodonesports.com/ncaa-lacrosse/"
+  },
+  "wwo_mcws": {
+    "bytes": 61675,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47420&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Men%27s+College+World+Series+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_mcws.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "8ecf78a017148af1f0c4194870a2b2e94265caa6a65d76a7dff676f97ae0965d",
+    "url": "https://www.westwoodonesports.com/ncaa-mcws/"
+  },
+  "wwo_ncaa_basketball": {
+    "bytes": 63997,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47031&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Basketball+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_ncaa_basketball.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "12a3e69a314e8c9c528e2868eb7787517c3ce2812753cdece82f6f1e9439e12b",
+    "url": "https://www.westwoodonesports.com/ncaa-basketball/"
+  },
+  "wwo_ncaa_football": {
+    "bytes": 61592,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47030&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Football+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_ncaa_football.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [],
+    "sha256": "c4b61efcf733e56935a29d3c98a08343eb652b7f905b4de6f1fd138455c8f89e",
+    "url": "https://www.westwoodonesports.com/ncaa-football/"
+  },
+  "wwo_nfl_schedule": {
+    "bytes": 65277,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47029&range=current&offset=0&limit=100&timezone=America/New_York&widgetTitle=Event+Display",
+      "/more/eventGrid?id=all&range=current&offset=0&limit=3&timezone=America/New_York&widgetTitle=Upcoming+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_nfl_schedule.html",
+    "react_query_markers": [
+      "schedule"
+    ],
+    "sf_mentions": [],
+    "sha256": "10a94a9ef32abb543189ad3057b6087cb14aab896a9e131d3f417981300f5d4d",
+    "url": "https://www.westwoodonesports.com/nfl-schedule/"
+  },
+  "wwo_station_finder": {
+    "bytes": 127899,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_station_finder.html",
+    "react_query_markers": [],
+    "sf_mentions": [
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-AM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-F2</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-FM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KTCT-AM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-AM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-F2</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-FM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KTCT-AM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-AM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-F2</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KNBR-FM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KTCT-AM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KTCT-AM</td>",
+      "<td>San Francisco, CA</td>",
+      "<td>KTCT-AM</td>"
+    ],
+    "sha256": "1c4b7b0e2769eda1afcc71a48ad1abd334a801d7076499e00d53cf81355eb9ff",
+    "url": "https://www.westwoodonesports.com/station-finder/"
+  },
+  "wwo_us_soccer": {
+    "bytes": 61475,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47032&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+U.S.+Soccer+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_us_soccer.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "d0bdb38ad25973978dd04bce59f5d76f303c792038b6d46ce211386f5b10b954",
+    "url": "https://www.westwoodonesports.com/us-soccer/"
+  },
+  "wwo_wcws": {
+    "bytes": 63898,
+    "content_type": "text/html; charset=UTF-8",
+    "error": null,
+    "event_grid_links": [
+      "/more/eventGrid?id=47419&range=current&offset=0&limit=10&timezone=America/New_York&widgetTitle=Upcoming+NCAA+Women%27s+College+World+Series+Broadcasts"
+    ],
+    "event_links": [],
+    "excerpt": "<!DOCTYPE HTML>\n<!--[if IEMobile 7 ]><html class=\"no-js iem7\" manifest=\"default.appcache?v=1\"><![endif]-->\n<!--[if lt IE 7 ]><html class=\"no-js ie6\" lang=\"en\"><![endif]-->\n<!--[if IE 7 ]><html class=\"no-js ie7\" lang=\"en\"><![endif]-->\n<!--[if IE 8 ]><html class=\"no-js ie8\" lang=\"en\">&nbsp;<![endif]-->\n<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class=\"no-js\" lang=\"en\"><!--<![endif]-->\n<head>\n\n\t<!-- Begin : Custom Head HTML -->\n\t<script>\r\n  // Enable TCF support for gtag 2025 (global)\r\n  window['gtag_enable_tcf_support'] = true;\r\n</script>\r\n\r\n<style>\r\n/* Remove extra top mar",
+    "http_status": 200,
+    "raw_file": "probe_out/wwo_wcws.html",
+    "react_query_markers": [],
+    "sf_mentions": [],
+    "sha256": "d647ddcc9181ae43101f9df54703191015894dd5a1a658d61ce24ebdc9f51b52",
+    "url": "https://www.westwoodonesports.com/ncaa-wcws/"
+  }
+}
