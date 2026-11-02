@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar View - Free Time Vacation Planner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="brand">⚾🏈 Free Time Planner</a>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="daily.html">Daily Schedule</a>
+      <a href="calendar.html" class="active">Calendar</a>
+      <a href="vacation.html">Vacation Windows</a>
+      <a href="teams.html">Teams & Games</a>
+      <a href="radio.html">Radio Stations</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>📆 Calendar View</h1>
+      <p>Month-by-month view showing free and busy days. Click any day to see the full schedule.</p>
+    </div>
+
+    <div class="date-nav">
+      <button onclick="changeMonth(-1)">◀ Prev Month</button>
+      <span class="current-date" id="currentMonth">-</span>
+      <button onclick="changeMonth(1)">Next Month ▶</button>
+      <button onclick="goToCurrentMonth()">Current</button>
+    </div>
+
+    <div class="card">
+      <div class="calendar-header">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+      <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <div class="card">
+      <h2>Legend</h2>
+      <p style="font-size:0.85rem;">
+        <span style="display:inline-block;width:16px;height:16px;background:rgba(54,211,153,0.3);border:1px solid var(--free);border-radius:3px;vertical-align:middle;"></span>
+        <span style="margin-left:4px;">Free Day (no games)</span> &nbsp;&nbsp;
+        <span style="display:inline-block;width:16px;height:16px;background:rgba(251,191,36,0.3);border:1px solid var(--high-priority);border-radius:3px;vertical-align:middle;"></span>
+        <span style="margin-left:4px;">High Priority Games</span> &nbsp;&nbsp;
+        <span style="display:inline-block;width:16px;height:16px;background:rgba(248,113,113,0.15);border:1px solid var(--border);border-radius:3px;vertical-align:middle;"></span>
+        <span style="margin-left:4px;">Games On (low priority)</span>
+      </p>
+    </div>
+
+    <!-- Selected Day Detail -->
+    <div class="card" id="selectedDayCard" style="display:none;">
+      <h2 id="selectedDayTitle">Selected Day</h2>
+      <div id="selectedDayContent"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Free Time Vacation Planner | All times PST | Outer Sunset SF 94122</p>
+  </footer>
+
+  <script src="data/schedules.js"></script>
+  <script>
+    let calendarDate = new Date(2026, 10, 1); // November 2026
+
+    document.addEventListener('DOMContentLoaded', () => {
+      allGames = buildGameDatabase();
+      renderCalendar();
+    });
+
+    function changeMonth(offset) {
+      calendarDate.setMonth(calendarDate.getMonth() + offset);
+      renderCalendar();
+    }
+
+    function goToCurrentMonth() {
+      calendarDate = new Date(2026, 10, 1);
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const year = calendarDate.getFullYear();
+      const month = calendarDate.getMonth();
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      
+      document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+      
+      const firstDay = new Date(year, month, 1);
+      const lastDay = new Date(year, month + 1, 0);
+      const startDayOfWeek = firstDay.getDay();
+      
+      const grid = document.getElementById('calendarGrid');
+      grid.innerHTML = '';
+      
+      // Empty cells before first day
+      for (let i = 0; i < startDayOfWeek; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell';
+        cell.style.opacity = '0.3';
+        grid.appendChild(cell);
+      }
+      
+      // Day cells
+      for (let day = 1; day <= lastDay.getDate(); day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const daySched = getDaySchedule(allGames, dateStr);
+        
+        const cell = document.createElement('div');
+        cell.className = 'calendar-cell';
+        
+        if (daySched.games.length === 0) {
+          cell.classList.add('free-day');
+        } else if (daySched.hasHighPriority) {
+          cell.classList.add('high-priority-day');
+        } else {
+          cell.classList.add('busy-day');
+        }
+        
+        // Today
+        if (dateStr === '2026-11-02') {
+          cell.classList.add('today');
+        }
+        
+        const highCount = daySched.games.filter(g => g.highPriority).length;
+        const sportIcons = [...new Set(daySched.games.map(g => g.sport === 'MLB' ? '⚾' : g.sport === 'NFL' ? '🏈' : '🏈'))].join('');
+        
+        cell.innerHTML = `
+          <div class="day-num">${day}</div>
+          <div class="day-info">${sportIcons} ${daySched.games.length > 0 ? daySched.games.length + ' games' : 'FREE'}</div>
+          ${highCount > 0 ? '<div class="day-info" style="color:var(--warning);">⭐ ' + highCount + '</div>' : ''}
+        `;
+        
+        cell.onclick = () => selectDay(dateStr, daySched);
+        grid.appendChild(cell);
+      }
+    }
+
+    function selectDay(dateStr, daySched) {
+      const card = document.getElementById('selectedDayCard');
+      card.style.display = 'block';
+      
+      const date = new Date(dateStr + 'T12:00:00');
+      const opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('selectedDayTitle').textContent = '📅 ' + date.toLocaleDateString('en-US', opts);
+      
+      let html = '';
+      if (daySched.games.length === 0) {
+        html = '<p style="color:var(--free);font-weight:600;font-size:1.1rem;">🎉 Full day free! No sports broadcasts.</p>';
+      } else {
+        // Free time
+        html += '<h3>Free Time:</h3>';
+        daySched.freePeriods.forEach(p => {
+          const dur = p.end - p.start;
+          html += `<p style="color:var(--free);">✅ ${minutesToTime(p.start)} - ${minutesToTime(p.end)} (${Math.floor(dur/60)}h ${dur%60}m)</p>`;
+        });
+        
+        // Games
+        html += '<h3 style="margin-top:1rem;">Games:</h3>';
+        daySched.games.forEach(g => {
+          const matchup = g.matchup || `${g.away || ''} vs ${g.home || ''}`;
+          const flag = g.highPriority ? ' ⭐' : '';
+          html += `<p><strong>${g.time || 'TBA'}</strong> - ${g.sport}: ${matchup}${flag}</p>`;
+        });
+      }
+      
+      document.getElementById('selectedDayContent').innerHTML = html;
+      card.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

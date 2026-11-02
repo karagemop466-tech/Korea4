@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teams & Games - Free Time Vacation Planner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="brand">⚾🏈 Free Time Planner</a>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="daily.html">Daily Schedule</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="vacation.html">Vacation Windows</a>
+      <a href="teams.html" class="active">Teams & Games</a>
+      <a href="radio.html">Radio Stations</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>🏆 Teams & Games</h1>
+      <p>All tracked teams and their 2026 schedules with verified sources. High-priority teams are flagged with ⭐.</p>
+    </div>
+
+    <!-- High Priority Teams -->
+    <div class="card">
+      <h2>⭐ High-Priority Teams</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Team</th><th>Sport</th><th>2026 Season</th><th>Radio</th><th>Source</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>⭐ SF Giants</strong></td>
+              <td><span class="badge badge-mlb">MLB</span></td>
+              <td>Mar 25 - Sep 27 (162 games)</td>
+              <td>KNBR 680 AM / 104.5 FM</td>
+              <td><a href="https://www.mlb.com/giants/schedule" target="_blank">MLB.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>⭐ Athletics</strong></td>
+              <td><span class="badge badge-mlb">MLB</span></td>
+              <td>Mar 26 - Sep 27 (162 games, Sacramento)</td>
+              <td>KNBR 1050 AM / KSFN 1510 AM</td>
+              <td><a href="https://sactownsports.com/mlb/athletics-baseball/athletics-release-2026-mlb-schedule-sac" target="_blank">SacTown Sports</a></td>
+            </tr>
+            <tr>
+              <td><strong>⭐ SF 49ers</strong></td>
+              <td><span class="badge badge-nfl">NFL</span></td>
+              <td>Sep 10 - Jan 10 (17 games + playoffs)</td>
+              <td>KNBR 680 AM / 104.5 FM</td>
+              <td><a href="https://www.nfl.com/nfl-schedule-release/" target="_blank">NFL.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>⭐ Stanford Cardinal</strong></td>
+              <td><span class="badge badge-ncaaf">NCAAF</span></td>
+              <td>Aug 29 - Nov 28 (12 games)</td>
+              <td>KNBR 680 AM</td>
+              <td><a href="https://gostanford.com/sports/football/schedule" target="_blank">GoStanford.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>⭐ Cal Golden Bears</strong></td>
+              <td><span class="badge badge-ncaaf">NCAAF</span></td>
+              <td>Sep 5 - Nov 28 (12 games)</td>
+              <td>KNBR 680 AM</td>
+              <td><a href="https://calbears.com/news/2026/1/26/california-football-announces-2026-schedule.aspx" target="_blank">CalBears.com</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 49ers 2026 Schedule -->
+    <div class="card">
+      <h2>🏈 San Francisco 49ers - 2026 Schedule</h2>
+      <p class="source-link">Source: <a href="https://www.nfl.com/nfl-schedule-release/" target="_blank">NFL.com Official Schedule Release</a> | All times PST</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Week</th><th>Date</th><th>Time (PST)</th><th>Opponent</th><th>H/A</th><th>Venue</th><th>TV</th></tr>
+          </thead>
+          <tbody id="ninersTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Stanford 2026 -->
+    <div class="card">
+      <h2>🏈 Stanford Cardinal - 2026 Schedule</h2>
+      <p class="source-link">Source: <a href="https://gostanford.com/sports/football/schedule" target="_blank">GoStanford.com Official Schedule</a> | All times PST</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Time (PST)</th><th>Opponent</th><th>H/A</th><th>TV</th><th>Result</th></tr>
+          </thead>
+          <tbody id="stanfordTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Cal 2026 -->
+    <div class="card">
+      <h2>🏈 Cal Golden Bears - 2026 Schedule</h2>
+      <p class="source-link">Source: <a href="https://calbears.com/news/2026/1/26/california-football-announces-2026-schedule.aspx" target="_blank">CalBears.com Official Schedule</a> | All times PST</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Time (PST)</th><th>Opponent</th><th>H/A</th><th>TV</th><th>Result</th></tr>
+          </thead>
+          <tbody id="calTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- All 30 MLB Teams -->
+    <div class="card">
+      <h2>⚾ All 30 MLB Teams - 2026 Season</h2>
+      <p class="source-link">Source: <a href="https://www.cbssports.com/mlb/news/mlb-releases-2026-schedule/" target="_blank">CBS Sports / MLB Official</a> | Season: Mar 25 - Sep 27, 2026</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Team</th><th>League</th><th>Division</th><th>Games</th><th>Priority</th></tr>
+          </thead>
+          <tbody id="mlbTeamsTable"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Free Time Vacation Planner | All times PST | Outer Sunset SF 94122</p>
+  </footer>
+
+  <script src="data/schedules.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderNiners();
+      renderStanford();
+      renderCal();
+      renderMLBTeams();
+    });
+
+    function renderNiners() {
+      const tbody = document.getElementById('ninersTable');
+      let html = '';
+      NINERS_2026.forEach(g => {
+        const badge = g.verified ? '<span class="badge badge-verified">✓</span>' : '<span class="badge badge-estimated">~</span>';
+        html += `<tr>
+          <td>${g.week}</td>
+          <td>${g.date}</td>
+          <td>${g.time || 'TBD'}</td>
+          <td>${g.opponent} ${badge}</td>
+          <td>${g.location === 'home' ? 'HOME' : g.location === 'away' ? 'AWAY' : 'BYE'}</td>
+          <td>${g.venue}</td>
+          <td>${g.tv}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderStanford() {
+      const tbody = document.getElementById('stanfordTable');
+      let html = '';
+      STANFORD_2026.forEach(g => {
+        html += `<tr>
+          <td>${g.date}</td>
+          <td>${g.time || 'TBA'}</td>
+          <td>${g.opponent}</td>
+          <td>${g.location === 'home' ? 'HOME' : 'AWAY'}</td>
+          <td>${g.tv}</td>
+          <td>${g.result || '-'}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderCal() {
+      const tbody = document.getElementById('calTable');
+      let html = '';
+      CAL_2026.forEach(g => {
+        html += `<tr>
+          <td>${g.date}</td>
+          <td>${g.time || 'TBA'}</td>
+          <td>${g.opponent}</td>
+          <td>${g.location === 'home' ? 'HOME' : 'AWAY'}</td>
+          <td>${g.tv}</td>
+          <td>${g.result || '-'}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+
+    function renderMLBTeams() {
+      const teams = [
+        { name: 'Baltimore Orioles', league: 'AL', div: 'East' },
+        { name: 'Boston Red Sox', league: 'AL', div: 'East' },
+        { name: 'New York Yankees', league: 'AL', div: 'East' },
+        { name: 'Tampa Bay Rays', league: 'AL', div: 'East' },
+        { name: 'Toronto Blue Jays', league: 'AL', div: 'East' },
+        { name: 'Chicago White Sox', league: 'AL', div: 'Central' },
+        { name: 'Cleveland Guardians', league: 'AL', div: 'Central' },
+        { name: 'Detroit Tigers', league: 'AL', div: 'Central' },
+        { name: 'Kansas City Royals', league: 'AL', div: 'Central' },
+        { name: 'Minnesota Twins', league: 'AL', div: 'Central' },
+        { name: 'Athletics', league: 'AL', div: 'West', high: true },
+        { name: 'Houston Astros', league: 'AL', div: 'West' },
+        { name: 'LA Angels', league: 'AL', div: 'West' },
+        { name: 'Seattle Mariners', league: 'AL', div: 'West' },
+        { name: 'Texas Rangers', league: 'AL', div: 'West' },
+        { name: 'Atlanta Braves', league: 'NL', div: 'East' },
+        { name: 'Miami Marlins', league: 'NL', div: 'East' },
+        { name: 'New York Mets', league: 'NL', div: 'East' },
+        { name: 'Philadelphia Phillies', league: 'NL', div: 'East' },
+        { name: 'Washington Nationals', league: 'NL', div: 'East' },
+        { name: 'Chicago Cubs', league: 'NL', div: 'Central' },
+        { name: 'Cincinnati Reds', league: 'NL', div: 'Central' },
+        { name: 'Milwaukee Brewers', league: 'NL', div: 'Central' },
+        { name: 'Pittsburgh Pirates', league: 'NL', div: 'Central' },
+        { name: 'St. Louis Cardinals', league: 'NL', div: 'Central' },
+        { name: 'Arizona Diamondbacks', league: 'NL', div: 'West' },
+        { name: 'Colorado Rockies', league: 'NL', div: 'West' },
+        { name: 'LA Dodgers', league: 'NL', div: 'West' },
+        { name: 'San Diego Padres', league: 'NL', div: 'West' },
+        { name: 'SF Giants', league: 'NL', div: 'West', high: true },
+      ];
+
+      const tbody = document.getElementById('mlbTeamsTable');
+      let html = '';
+      teams.forEach(t => {
+        html += `<tr>
+          <td><strong>${t.name}</strong> ${t.high ? '⭐' : ''}</td>
+          <td>${t.league}</td>
+          <td>${t.div}</td>
+          <td>162</td>
+          <td>${t.high ? '<span class="badge badge-high">⭐ HIGH PRIORITY</span>' : '<span class="badge" style="background:var(--surface2)">All games tracked</span>'}</td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
