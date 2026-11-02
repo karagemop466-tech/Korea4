@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Westwood One Sports in the Bay Area — full NFL radio schedule (PT)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1 class="logo">FREE TIME <span>VACATION</span> 📻</h1>
+  <p class="tagline">🎙️ Westwood One Sports — the NFL's exclusive national radio partner. In San Francisco it airs on <b>KNBR 680 AM / 104.5 FM</b> (and overflow on KTCT 1050 AM). Every 2026-season broadcast below was taken from Westwood One's official schedule and converted to Pacific Time.</p>
+  <nav class="main">
+    <a href="index.html">🏠 Dashboard</a>
+    <a href="calendar.html">📅 Free-Time Scoreboard</a>
+    <a href="vacation.html">🏖️ Best Vacation Windows</a>
+    <a href="mlb.html">⚾ MLB</a>
+    <a href="football.html">🏈 NFL · Stanford · Cal</a>
+    <a href="westwood.html" class="active">🎙️ Westwood One</a>
+    <a href="radio.html">📻 Bay Area Radio Map</a>
+    <a href="flagged.html">🚩 Flagged for Review</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<div class="infobox"><b>How to hear it in the Outer Sunset (94122):</b> KNBR 680 AM (50,000-watt clear channel) / 104.5 FM simulcast — both are the San Francisco affiliates for Westwood One Sports; when the Giants or 49ers conflict, games overflow to sister station <b>KTCT 1050 AM</b>. Official lookup: <a href="https://www.westwoodonesports.com/station-finder">Westwood One Station Finder</a>.</div>
+
+<h2>📆 All Westwood One NFL broadcasts — rest of the 2026 season</h2>
+<p class="note">Source: <a href="https://www.westwoodonesports.com/nfl-schedule/">westwoodonesports.com/nfl-schedule</a>, captured line-by-line on Nov 2, 2026. Listed times are Westwood One's <b>broadcast start</b> (pregame included), ET→PT = −3 h. Each block is modeled at ~3 h 35 m from the listed start, matching Westwood One windows. ★ = 49ers game (high priority). Table is generated from the same data that powers the Scoreboard.</p>
+<table>
+<thead><tr><th>Date (2026-27)</th><th>Broadcast starts (PT)</th><th>Game</th><th>Package</th><th>Status</th></tr></thead>
+<tbody id="wwo-2026"></tbody>
+</table>
+<p class="note">Patterns to know: <b>MNF</b> coverage starts 4:00 PM PT Mondays · <b>Thursday Night Football &amp; SNF</b> 4:30 PM PT · <b>European games</b> (Madrid, Munich) start 6:15 AM PT · Thanksgiving &amp; Christmas are tripleheaders (9:30 AM–8:30 PM PT) · Week 18 ends the regular season on Jan 9–10, 2027. There is also a “Thanksgiving Wednesday” game on Nov 25 and a Black Friday game Nov 27 (11:30 AM PT).</p>
+
+<h2>🏆 Westwood One postseason (to come)</h2>
+<table>
+<thead><tr><th>Date</th><th>Broadcast</th><th>Status</th></tr></thead>
+<tbody id="wwo-post"></tbody>
+</table>
+<p class="note">Westwood One carries the <b>entire NFL postseason</b> (Wild Card through the Super Bowl) exclusively on national radio. The NFL publishes exact January dates/kickoffs during the season — the rows above are pattern estimates except the Super Bowls noted as announced.</p>
+
+<h2>🏟️ What else Westwood One puts on Bay Area radio</h2>
+<div class="card">
+<p>Beyond the NFL, these Westwood One properties are received in SF via KNBR/KTCT (from <a href="https://www.westwoodonesports.com">westwoodonesports.com</a>). They are <b>other-tier</b> — they don't block “free” time unless you switch on “All Bay Area radio sports” in the Scoreboard:</p>
+<table>
+<thead><tr><th>Property</th><th>When</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>NCAA Football game of the week</td><td>Saturdays, Sep–Nov</td><td>E.g., Oregon @ Ohio State, Sat Nov 7, 2026, 12:00 PM PT <span class="badge V">VERIFIED</span> (from the official schedule page)</td></tr>
+<tr><td>NCAA Basketball incl. <b>March Madness</b></td><td>Nov–Apr; tournament mid-Mar–early Apr</td><td>Evenings &amp; weekends; overlaps MLB spring training</td></tr>
+<tr><td>The Masters (golf)</td><td>April (2nd weekend)</td><td>Daytime hole-by-hole updates/coverage</td></tr>
+<tr><td>U.S. Soccer</td><td>Year-round friendlies/tournaments</td><td>USMNT/USWNT English-language radio</td></tr>
+<tr><td>NCAA Men's &amp; Women's College World Series</td><td>Late May – June</td><td>Overlaps MLB season anyway</td></tr>
+<tr><td>NCAA Frozen Four (hockey), lacrosse</td><td>April / May</td><td>Select championship coverage</td></tr>
+<tr><td>Olympics audio coverage</td><td><b>LA28: Jul 14–30, 2028</b></td><td>Relevant to the conditional 2028 July vacation window — in “All radio sports” mode the Games fill the very days the MLB break would free up. See <a href="vacation.html">Vacation page</a>.</td></tr>
+</tbody>
+</table>
+<p class="note">One 2026 listing needs a recheck: the Dec 27 SNF start time was truncated mid-capture; it is modeled at the standard 4:30 PM PT and listed on the <a href="flagged.html">Flagged page</a>.</p>
+</div>
+
+<footer class="site">© Westwood One / NFL for schedule data. Independent planning tool; not affiliated with Westwood One or Cumulus Media. Flex scheduling can move SNF/games — Westwood One updates its page as the NFL flexes.</footer>
+</main>
+<script src="data.js"></script>
+<script src="app.js"></script>
+<script>
+function rowEvt(e){
+  var t=e.t.replace('Westwood One ','');
+  var pkg=t.split(':')[0];
+  var game=t.indexOf(':')>-1 ? t.slice(t.indexOf(':')+1).trim() : t;
+  var sf = /49ers/.test(game) ? ' <span class="badge hp">★ 49ERS</span>' : '';
+  return '<tr><td>'+prettyShort(e.d)+'</td><td><b>'+mm(e.s)+'</b></td><td>'+game.replace(/</g,'&lt;')+sf+'</td><td>'+pkg.replace(/</g,'&lt;')+'</td><td>'+(e.st==='V'?'<span class="badge V">VERIFIED</span>':'<span class="badge E">ESTIMATE</span>')+'</td></tr>';
+}
+document.getElementById('wwo-2026').innerHTML = EVENTS.filter(function(e){return e.cat==='wwo' && e.d<'2027-01-12';}).map(rowEvt).join('');
+document.getElementById('wwo-post').innerHTML = EVENTS.filter(function(e){return e.cat==='nfl' && /Westwood One/.test(e.t) && e.d>='2027-01-14';})
+  .map(function(e){ return '<tr><td>'+prettyShort(e.d)+'</td><td>'+e.t.replace(/</g,'&lt;')+' — from '+mm(e.s)+' PT</td><td>'+(e.st==='V'?'<span class="badge V">VERIFIED</span>':'<span class="badge E">ESTIMATE</span>')+'</td></tr>'; }).join('');
+</script>
+</body>
+</html>

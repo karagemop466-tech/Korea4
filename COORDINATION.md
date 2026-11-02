@@ -112,3 +112,55 @@ Branch: `arena/cab47657-korea4`
 - https://karagemop466-tech.github.io/Korea4/docs/sources.md — verified anchors
 
 *Integration session `arena/c697ef7b-korea4` completed per instructions: re-verified, confirmed build, merged, confirmed Pages deploy, logged here.*
+
+---
+
+## Additional Parallel Session: arena-97161ae7 (merged via this merge, PR #7)
+
+> **Branch:** `arena/97161ae7-korea4` · **Started:** 2026-11-02 from the same initial commit `a6e22c4`.
+> This session began before it could see the other sessions' work (its checkout contained only the stub
+> README), so it independently created its own task board and rebuilt the project from official sources.
+> On discovering PRs #1–#5 already merged to `main`, it merged `main` in and reconciled — no work from
+> any session is discarded. This session's site tree is **`docs/` (HTML scoreboard edition)**; it coexists
+> with the root dashboard, `site/`, `site/pages/` and the flat root pages exactly like the earlier trees.
+
+### What this session built (all under `docs/` unless noted)
+- `docs/index.html` dashboard + executive summary (also `EXECUTIVE-SUMMARY.md` at repo root)
+- `docs/calendar.html` — day-by-day Free-Time Scoreboard Nov 2, 2026 → Dec 31, 2029 (prev/next day,
+  month grid, per-day free windows 6 AM–midnight PT) powered by `docs/data.js` + `docs/app.js`
+- `docs/vacation.html` — ranked windows with live-computed streaks + least-conflict 7/14/21-day windows
+  for 2027/2028/2029, plus toggles for "All Bay Area radio sports" and the conditional 2028 Olympic break
+- `docs/mlb.html`, `docs/football.html` (NFL/49ers/Stanford/Cal), `docs/westwood.html` (complete
+  Westwood One 2026 NFL broadcast list in PT, ~50 games captured 2026-11-02), `docs/radio.html` (94122
+  station map), `docs/flagged.html` (this session's F-1…F-15)
+- `research-notes.md` (methods + full source list) and `tools/test-engine.cjs` (engine assertions)
+
+### Refinement (consistent with the reconciled headline finding — adds precision, changes nothing)
+- Day-by-day computation confirms **no 7/14/21-day strict window exists in 2027–2029**.
+- It adds that the longest fully-free stretches are **6-day weekday corridors** in the late-Jan→mid-Feb
+  NFL-playoff seams (2027: Jan 25–30, Feb 1–6, Feb 8–13). These rest on *unannounced* playoff dates, so
+  they are ESTIMATES; **Feb 15–18, 2027 remains the best window verified on both sides** (SB LXI Feb 14;
+  spring games Feb 19) — same anchor set the earlier sessions used.
+- Conditional best window flagged: **Jul 12–20, 2028 (9 days)** *if* MLB finalizes its envisioned extended
+  Olympic break (LA28 Jul 14–30, 2028; ASG at Oracle Park ~Jul 11, host announced Aug 2026; break not
+  agreed with MLBPA as of Jul-2026 reporting). Earlier sessions also flagged the 2028 break (F1-F12 set);
+  this session models it as an explicit opt-in scenario in the scoreboard engine.
+- Verification by this session: official sources only (mlb.com 2027 release of Jul 16, 2026;
+  westwoodonesports.com full schedule capture; nfl.com/49ers.com; calbears.com official schedule fetch;
+  gostanford.com — its /schedule/2026 deep link 404s, cross-verified instead, flagged F-14 in
+  `docs/flagged.html`). Durations: MLB 2:38 (MLB official), NFL ~3:03 timing study / 3:12 broadcast
+  compilations → modeled 3:10, NCAAF 3:26 — consistent with other sessions' consolidated values.
+- Tests run before merge: engine assertions 9/9 PASS (all 1,156 model days compute); jsdom render test
+  8/8 pages PASS with zero JS errors; internal link check 0 broken. Full log in `research-notes.md`.
+
+### This session's original task board (for audit)
+Tasks 1–9 done (coordination, anchors, radio map, durations, vacation analysis, scoreboard site, exec
+summary, flagged page, verification pass); Task 10 (PR + merge + Pages) = this merge (**PR #7**).
+Merge conflicts in `COORDINATION.md` and `README.md` were resolved by keeping `main`'s integrated
+documents as the base and appending/inserting this session's sections — nothing deleted from any session.
+
+### Follow-up
+- After PR #7 merges, a tiny follow-up PR from `arena/97161ae7-korea4` will append the merge + Pages
+  deploy result here (this session may only push to its own branch).
+- Suggested future session: pick ONE daily tree as the primary UX and cross-link the rest (repo now has
+  four coexisting site trees: root, `site/`, `site/pages/`, `docs/` HTML; all valid, findings agree).
