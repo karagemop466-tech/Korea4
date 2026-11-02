@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Calendar — FREE TIME VACATION</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css"/>
+</head><body>
+<header class="topbar"><div class="container"><div class="topbar-inner">
+<a href="../../index.html" class="brand" style="text-decoration:none;color:inherit"><div class="logo">FV</div><div><h1>FREE TIME <span>VACATION</span></h1><small>Scoreboard calendar • PST</small></div></a>
+<nav class="nav"><a href="../../index.html">Dashboard</a><a href="vacation-windows.html">Vacation Windows</a><a href="calendar.html" class="active">Calendar</a><a href="sources.html">Sources</a></nav>
+</div></div></header>
+<main class="container">
+<div class="breadcrumb"><a href="../../index.html">Dashboard</a> › Calendar</div>
+<section class="hero">
+<h2>Scoreboard calendar — <b>every day 2026 – 2029</b> in PST</h2>
+<p>Like an MLB or NFL scoreboard: <b>Yesterday / Today / Tomorrow</b> + jump to any date. Free = green. Busy bars show exactly when a game is on-air (including pregame) in your timezone. Click a month cell to jump.</p>
+</section>
+
+<section class="section">
+<div class="card">
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<button class="btn" id="btn-prev">◀ Yesterday</button>
+<button class="btn primary" id="btn-today">Today</button>
+<button class="btn" id="btn-next">Tomorrow ▶</button>
+<input type="date" id="pick-date" min="2026-01-01" max="2029-12-31"/>
+<select id="year-jump" style="padding:8px 10px;border-radius:10px;border:1px solid var(--line2);background:var(--card);color:var(--text)">
+<option value="2026">2026 (verified)</option><option value="2027">2027 (est)</option><option value="2028">2028 (est)</option><option value="2029">2029 (est)</option>
+</select>
+</div>
+<div class="pill" id="cal-label">—</div>
+</div>
+<div class="divider"></div>
+<div id="day-timeline" class="timeline"></div>
+<div class="note" id="free-note" style="margin-top:10px"></div>
+<div class="legend" style="margin-top:10px">
+<span><i style="background:var(--accent)"></i> Free</span>
+<span><i style="background:#2e7cf6"></i> MLB</span>
+<span><i style="background:#ffb02e"></i> NFL / Westwood One</span>
+<span><i style="background:#ff4d5a"></i> NCAAF</span>
+<span><i style="background:#a78bfa"></i> WW1 national</span>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+<h3 style="margin:0">Month view — <span class="muted">click a day to load it above</span></h3>
+<div style="display:flex;gap:8px;align-items:center">
+<button class="btn" id="m-prev">◀</button><div class="pill" id="m-label">—</div><button class="btn" id="m-next">▶</button>
+</div>
+</div>
+<div class="divider"></div>
+<div class="calendar-grid" id="cal-grid">
+<!-- injected -->
+</div>
+<div class="note" style="margin-top:10px"><b>Tip:</b> Green cell = fully free day (vacation-safe). Red = busy (has games). Dots = leagues that day (blue=MLB, amber=NFL, red=NCAAF, purple=WW1). Dark border = today (PST).</div>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h3>How intraday free time is computed</h3>
+<p class="small">For each game we create a <b>radio window = pregame + game + halftime</b>. Example: Giants 1:35 PM PT start → window 1:05 PM – 4:35 PM (30 min pre + 168 min game + 15 post). 49ers 5:15 PM PT → 4:15 PM – 9:00 PM (60 pre + 192 game + 30 post). Any minute inside any window = busy. Gaps between windows = free slices we show.</p>
+<p class="small muted">Averages: MLB 2:48–3:10 <a href="https://sportsgeardaily.com/rules/how-long-is-an-average-baseball-game" target="_blank">2024 3:10 source</a>, NFL 3:12 <a href="https://sportsgeardaily.com/football/how-long-is-an-average-football-game" target="_blank">Nielsen</a>, NCAAF 3:27 <a href="https://www.marca.com/en/ncaa/2026/08/26/how-long-do-college-football-games-last.html" target="_blank">2024 FBS</a>. See <a href="methodology.html">methodology</a>.</p>
+</div>
+</section>
+
+<footer class="footer"><div><a href="../../index.html">Dashboard</a> • <a href="vacation-windows.html">Vacation windows</a></div></footer>
+</main>
+<script src="../../assets/js/app.js"></script>
+<script>
+// Month grid extension
+let monthCursor = new Date(todayPST()); monthCursor.setDate(1);
+function isFreeDate(d){
+  const iso = d.toISOString().slice(0,10);
+  // use getDayInfo from app.js
+  const info = getDayInfo(d);
+  return !info.busy;
+}
+function renderMonth(){
+  const label = document.getElementById('m-label');
+  const grid = document.getElementById('cal-grid');
+  if(!label || !grid) return;
+  label.textContent = monthCursor.toLocaleDateString('en-US',{timeZone:'America/Los_Angeles', month:'long', year:'numeric'});
+  const year = monthCursor.getFullYear(), mon = monthCursor.getMonth();
+  const first = new Date(year, mon, 1);
+  const startDay = first.getDay(); // 0 Sun
+  const daysInMonth = new Date(year, mon+1, 0).getDate();
+  let html = '<div class="cal-head">Sun</div><div class="cal-head">Mon</div><div class="cal-head">Tue</div><div class="cal-head">Wed</div><div class="cal-head">Thu</div><div class="cal-head">Fri</div><div class="cal-head">Sat</div>';
+  for(let i=0;i<startDay;i++) html += '<div class="cal-cell" style="opacity:.2"> </div>';
+  const todayIso = todayPST().toISOString().slice(0,10);
+  for(let d=1; d<=daysInMonth; d++){
+    const date = new Date(year, mon, d);
+    const iso = date.toISOString().slice(0,10);
+    const info = getDayInfo(date);
+    const free = !info.busy;
+    const isToday = iso===todayIso;
+    // dots
+    let dots = '';
+    if(info.leagues && info.leagues.length){
+      const map = {'MLB':'#2e7cf6','NFL':'#ffb02e','Westwood One':'#a78bfa','NCAAF':'#ff4d5a','MLB (est)':'#2e7cf6','NFL (est)':'#ffb02e','NCAAF Bowls':'#ff4d5a','MLB Postseason':'#2e7cf6'};
+      dots = '<div class="dots">'+ info.leagues.slice(0,4).map(l=> `<i style="background:${map[l]||'#2e7cf6'}"></i>`).join('') + '</div>';
+    }
+    html += `<div class="cal-cell ${free?'free':'busy'} ${isToday?'today':''}" data-iso="${iso}" style="cursor:pointer">
+      <b>${d}</b><small>${free? 'FREE' : (info.leagues? info.leagues.slice(0,2).join(' • ') : 'Busy')}</small>${info.est? '<small style="color:#ffcc66">est</small>':''}${dots}
+    </div>`;
+  }
+  grid.innerHTML = html;
+  // click handlers
+  grid.querySelectorAll('.cal-cell[data-iso]').forEach(c=>{
+    c.onclick = ()=>{ const iso=c.dataset.iso; current=new Date(iso+"T12:00:00"); renderDay(current); window.scrollTo({top:0,behavior:'smooth'}); };
+  });
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  renderMonth();
+  document.getElementById('m-prev').onclick = ()=>{ monthCursor.setMonth(monthCursor.getMonth()-1); renderMonth(); };
+  document.getElementById('m-next').onclick = ()=>{ monthCursor.setMonth(monthCursor.getMonth()+1); renderMonth(); };
+  document.getElementById('year-jump').onchange = (e)=>{ const y=parseInt(e.target.value); monthCursor=new Date(y, monthCursor.getMonth(), 1); renderMonth(); const iso = y+"-"+String(monthCursor.getMonth()+1).padStart(2,'0')+"-15"; current=new Date(iso+"T12:00:00"); renderDay(current); };
+});
+</script>
+</body></html>

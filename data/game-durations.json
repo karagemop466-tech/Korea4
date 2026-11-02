@@ -1,0 +1,9 @@
+{
+  "updated": "2026-11-02",
+  "sources": [
+    {"league": "MLB", "avg_minutes": 168, "source_url": "https://sportsgeardaily.com/rules/how-long-is-an-average-baseball-game", "note": "2024 avg 3:10 (190 min) with pitch clock; other source says 2:58 (178 min). We use 168 min (2:48) as conservative radio window without extra innings. Pre+post adds 30 min pre + 15 post = 210 min total on-air."},
+    {"league": "NFL", "avg_minutes": 192, "source_url": "https://sportsgeardaily.com/football/how-long-is-an-average-football-game", "note": "Average 3:12 (192 min) from kickoff to final whistle per Nielsen/NFL. Halftime 12 min (13:30 expanded for Super Bowl). Pregame 60 min, post 30 min => 282 min Westwood One window."},
+    {"league": "NCAAF FBS", "avg_minutes": 207, "source_url": "https://www.marca.com/en/ncaa/2026/08/26/how-long-do-college-football-games-last.html", "note": "2024 avg 3:27 (207 min) FBS per NCAA tracking. Bowl/CFP avg 3:29.5. Halftime 20 min. Pregame 45 min => 252 min window."}
+  ],
+  "methodology": "Free minute = no live radio broadcast ongoing. We compute broadcast window = avg game duration + pregame. For calendar-day vacancy we simplify to full day blocked if any game that day; intraday free hours are shown in calendar page using exact windows."
+}

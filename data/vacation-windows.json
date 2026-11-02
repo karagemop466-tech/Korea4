@@ -1,0 +1,34 @@
+{
+  "methodology": "A calendar day is FREE only if ZERO games from all monitored leagues are on AM/FM radio that day (including Westwood One national). Radio window includes pregame (30-60 min). We compute longest consecutive FREE stretches per calendar year. 2026 is verified; 2027-2029 are ESTIMATED based on historical scheduling patterns and flagged accordingly.",
+  "sources": [
+    "https://www.mlb.com/news/2026-mlb-schedule-released",
+    "https://legionreport.com/san-francisco-49ers-schedule/",
+    "https://writeforcalifornia.com/p/cal-football-schedule-2026-top-dogs",
+    "https://www.westwoodonesports.com/nfl-schedule/"
+  ],
+  "windows": {
+    "2026_verified": [
+      {"type": "7-day", "start": "2026-02-09", "end": "2026-02-15", "days": 7, "label": "Post-Super Bowl window #1", "note": "Super Bowl Feb 8. Next busy is MLB spring training reporting ~Feb 20. True free window. Verified.", "confidence": "high"},
+      {"type": "7-day", "start": "2026-02-16", "end": "2026-02-22", "days": 7, "label": "Pre-spring training #2", "note": "Spring training games start Feb 24 (Cactus/Grapefruit). Still free. Verified via MLB spring training schedule.", "confidence": "high"},
+      {"type": "14-day", "start": "2026-02-09", "end": "2026-02-22", "days": 14, "label": "BEST 2-week vacation 2026", "note": "Only 14+ consecutive free days in 2026. No MLB, NFL, NCAAF, WW. Ideal.", "confidence": "high", "recommended": true},
+      {"type": "21-day", "start": null, "end": null, "days": 0, "label": "No 21-day window in 2026", "note": "Longest free is 14 days; 21-day impossible due to spring training start Feb 24 and NFL playoffs Jan + MLB Oct. MLB postseason through Oct 31 + NFL from Sep 10 creates continuous busy.", "confidence": "high"},
+      {"type": "3-day", "start": "2026-07-14", "end": "2026-07-16", "days": 3, "label": "MLB All-Star break mini-window", "note": "Only gap during MLB season. Not enough for week vacation. No NFL/NCAAF then, but still only 3 days.", "confidence": "high"}
+    ],
+    "2027_estimated": [
+      {"type": "7-day", "start": "2027-02-08", "end": "2027-02-14", "days": 7, "label": "Post-Super Bowl LXI (est Feb 7) — week 1", "note": "ESTIMATED: Super Bowl LXI expected Feb 7 2027 at SoFi Stadium (awarded). Verify when NFL releases 2026 schedule May 2026. Treated as estimate.", "confidence": "estimate", "est": true},
+      {"type": "14-day", "start": "2027-02-08", "end": "2027-02-21", "days": 14, "label": "BEST 2-week 2027 (est)", "note": "ESTIMATED: Pre-spring training. If MLB Opening Day late March (expected Mar 25 2027), this remains free. Flagged as estimate.", "confidence": "estimate", "est": true, "recommended": true},
+      {"type": "21-day", "start": null, "end": null, "days": 0, "label": "No 21-day window (est)", "note": "Same constraint as 2026. 21 free days unlikely; would require skipping spring training which is defined as busy.", "confidence": "estimate", "est": true}
+    ],
+    "2028_estimated": [
+      {"type": "7-day", "start": "2028-02-07", "end": "2028-02-13", "days": 7, "label": "Post-Super Bowl LXII (est Feb 6)", "note": "ESTIMATED: Super Bowl 2028 location TBD, date ~Feb 6. Verify when released.", "confidence": "estimate", "est": true},
+      {"type": "14-day", "start": "2028-02-07", "end": "2028-02-20", "days": 14, "label": "BEST 2-week 2028 (est)", "note": "ESTIMATED: Pre-spring training. 2028 is leap year; MLB Opening Day expected Mar 30 2028 (after Olympics? Actually Summer Olympics 2028 Jul 14-30 in LA may shift MLB All-Star break). Still free Feb window.", "confidence": "estimate", "est": true, "recommended": true},
+      {"type": "21-day", "start": null, "end": null, "days": 0, "label": "No 21-day window (est)", "note": "ESTIMATED. Plus 2028 LA Olympics may create additional busy (not in scope) but not AM/FM per current definition.", "confidence": "estimate", "est": true}
+    ],
+    "2029_estimated": [
+      {"type": "7-day", "start": "2029-02-05", "end": "2029-02-11", "days": 7, "label": "Post-Super Bowl LXIII (est Feb 4)", "note": "ESTIMATED. Date ~Feb 4 2029 (1st Sunday Feb).", "confidence": "estimate", "est": true},
+      {"type": "14-day", "start": "2029-02-05", "end": "2029-02-18", "days": 14, "label": "BEST 2-week 2029 (est)", "note": "ESTIMATED: Pre-spring training. MLB Opening Day expected Mar 29 2029.", "confidence": "estimate", "est": true, "recommended": true},
+      {"type": "21-day", "start": null, "end": null, "days": 0, "label": "No 21-day window (est)", "note": "ESTIMATED.", "confidence": "estimate", "est": true}
+    ]
+  },
+  "conclusion": "Only reliable vacation windows are the 2 weeks immediately after the Super Bowl in early February each year (Feb 9-22 in 2026, similar in 2027-2029). No 3-week fully-free window exists under your definition (all MLB + NFL + NCAAF + Westwood One). If you relax to ignore MLB spring training (preseason), you gain ~5 weeks (Feb 9 to Mar 24). See methodology page."
+}

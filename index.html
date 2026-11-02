@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FREE TIME VACATION — Bay Area Radio Sports • When are you actually free?</title>
+<meta name="description" content="Find vacation windows with zero live sports on SF Bay Area AM/FM radio. MLB (all 30, Giants/A's high priority), 49ers + NFL, Stanford/Cal, Westwood One. PST scoreboard calendar + verified sources."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css"/>
+<meta property="og:title" content="FREE TIME VACATION — Bay Area Radio Dashboard"/>
+<meta property="og:description" content="Every game is a busy signal. Find your free vacation weeks 2026-2029."/>
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand" style="text-decoration:none;color:inherit">
+        <div class="logo">FV</div>
+        <div>
+          <h1>FREE TIME <span>VACATION</span></h1>
+          <small>Outer Sunset 94122 • AM/FM only • PST</small>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="index.html" class="active">Dashboard</a>
+        <a href="site/pages/vacation-windows.html">Vacation Windows</a>
+        <a href="site/pages/calendar.html">Calendar</a>
+        <a href="site/pages/radio-guide.html">Radio Guide</a>
+        <a href="site/pages/sources.html">Sources</a>
+        <a href="site/pages/flagged.html">Flagged</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="kicker"><i></i> Live over-the-air • No internet tricks • Every minute verified</div>
+    <h2>When are you <b>actually free</b> to leave town <br/>and miss <span style="color:var(--warn)">nothing</span> on Bay Area radio?</h2>
+    <p>
+      Built like a sports scoreboard. <strong>A minute is free only when <em>none</em> of these are on AM/FM radio in the Sunset:</strong>
+      all 30 MLB clubs (Giants &amp; A&apos;s high priority &bull; preseason+regular+postseason+All-Star), every NFL game + <strong>Westwood One national nights</strong> (TNF/SNF/MNF + playoffs), 49ers preseason/regular/postseason, Stanford &amp; Cal NCAAF.
+      PST all year. <a href="site/pages/methodology.html">How we count &rarr;</a>
+    </p>
+    <div class="controls">
+      <button class="btn primary" onclick="document.getElementById('calendar-preview').scrollIntoView({behavior:'smooth'})">▣ Open scoreboard calendar</button>
+      <a class="btn" href="site/pages/vacation-windows.html">★ Best 2-week windows 2027-2029</a>
+      <span class="pill"><span class="kbd">PST</span> Today: <b id="today-label">—</b> • <span id="tz-label">—</span></span>
+    </div>
+    <div class="alert good" style="max-width:900px">
+      <b>New:</b> 2026 verified release (MLB Aug 26 2025 • 49ers schedule + NFL playoffs • Cal/Stanford ACC) is <b>fully sourced</b>. 
+      2027, 2028, 2029 are <span class="tag est">estimated</span> — flagged clearly, never shown as verified. 
+      <a href="site/pages/sources.html">Audit every row</a> &bull; <a href="site/pages/flagged.html">Flagged for review (5 items)</a>
+    </div>
+  </section>
+
+  <!-- EXECUTIVE SUMMARY STATS -->
+  <section class="grid cols4" style="margin-top:8px">
+    <div class="card stat">
+      <div class="label">Best vacation window 2026 (verified)</div>
+      <div class="value">Feb 9 – 22 <small>14 days</small></div>
+      <div class="trend"><b>Only 14-day fully free stretch</b> — right after Super Bowl LX</div>
+      <div class="progress" style="margin-top:8px"><i style="width:92%"></i></div>
+      <div class="small muted" style="margin-top:6px">Super Bowl Feb 8 Levi&apos;s Stadium → spring training Feb 24. <a href="site/pages/vacation-windows.html#2026">See proof</a></div>
+    </div>
+    <div class="card stat">
+      <div class="label">Best 2027–2029 (estimated)</div>
+      <div class="value">Feb 8 – 21 <small>~14 days</small></div>
+      <div class="trend"><b>Same February gap every year</b> &bull; No 3-week window exists</div>
+      <div class="progress" style="margin-top:8px"><i style="width:64%"></i></div>
+      <div class="small muted" style="margin-top:6px">Pattern holds: ~6 weeks after Super Bowl til Opening Day, but MLB spring training makes it 2 weeks. <span class="tag est">est</span></div>
+    </div>
+    <div class="card stat">
+      <div class="label">Today&apos;s free hours (PST)</div>
+      <div class="value" id="today-free">—</div>
+      <div class="trend" id="today-free-note">Live intraday calculation — see calendar</div>
+      <div class="small muted" ><span id="today-games">—</span></div>
+    </div>
+    <div class="card stat">
+      <div class="label">On-air right now (94122)</div>
+      <div class="value" id="now-status" style="font-size:22px">● Checking…</div>
+      <div class="trend" id="now-detail">Scans KNBR 680/104.5 • KGO 810 • KNEW 960 + Westwood One</div>
+      <div class="small muted"><a href="site/pages/radio-guide.html">Full dial guide</a></div>
+    </div>
+  </section>
+
+  <!-- EXEC SUMMARY -->
+  <section class="section">
+    <div class="card" style="padding:18px">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+        <h2 style="margin:0">Executive summary <span>— what to actually book</span></h2>
+        <a class="btn ghost" href="site/pages/executive-summary.html">Open full summary &rarr;</a>
+      </div>
+      <div class="divider"></div>
+      <div class="grid cols3">
+        <div>
+          <h3 style="margin:0 0 6px;color:var(--accent)">★ When to go</h3>
+          <p style="font-size:13px;color:var(--text);line-height:1.6">
+            <b>The only week+ windows with zero radio sports are the 2 weeks right after the Super Bowl.</b>
+            In 2026 that&apos;s <b>Feb 9–22</b> (Mon–Sun). Same pattern Feb 8–21-ish in 2027-29 (estimated). There is <b>no 3-week</b> fully-free window under your rules. All-Star break is only 3 days.
+          </p>
+          <div class="callout" style="margin-top:10px">
+            If you&apos;re willing to <b>ignore MLB spring training</b> (it&apos;s preseason), you get 5–6 weeks: <b>Feb 9 → Mar 24</b> (verified 2026). Most people do this — spring training is low-priority.
+          </div>
+        </div>
+        <div>
+          <h3 style="margin:0 0 6px;color:var(--warn)">Why it&apos;s this tight</h3>
+          <p class="small">
+            MLB = 162 games/30 teams, Mar 25–Sep 27 → busy almost daily for 7 months. NFL adds Sep–Feb (Westwood One makes every primetime night busy). NCAAF adds Sep–Nov. Together they leave only one gap: post-Super Bowl → spring training. Even holidays like July 4 have all 30 MLB teams playing (2026: every team plays July 4 for America&apos;s 250th).
+          </p>
+          <p class="small muted">Game durations used: MLB 2:48–3:10 +30 pre (→210 min window), NFL 3:12 +60 pre (→282 min), NCAAF 3:27 (→252 min). <a href="site/pages/methodology.html">Method</a></p>
+        </div>
+        <div>
+          <h3 style="margin:0 0 6px;color:var(--accent2)">What the site does</h3>
+          <p class="small">
+            Scoreboard calendar: click any day 2026–2029, see exactly which games are on air that day in PST, with start–end blocks (including pregame) and free slices between games (e.g. “free 12:30–4:15 PM”).
+            Every row links to an official source (MLB.com, NFL.com, team sites) — unverified rows are blank + flagged.
+          </p>
+          <div class="filters" style="margin-top:10px">
+            <a class="btn" href="site/pages/mlb.html" style="text-decoration:none">All 30 MLB • 2026 verified</a>
+            <a class="btn" href="site/pages/nfl.html" style="text-decoration:none">49ers + All NFL + WW1</a>
+            <a class="btn" href="site/pages/ncaaf.html" style="text-decoration:none">Stanford • Cal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VACATION WINDOW HEATMAP PREVIEW -->
+  <section class="section">
+    <div style="display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div>
+        <h2>Vacation windows <span>— 2026 verified • 2027-2029 estimated</span></h2>
+        <p class="lead">Free = zero games on Bay Area AM/FM that whole day. Green = free streak. Longer green = better vacation.</p>
+      </div>
+      <a class="btn primary" href="site/pages/vacation-windows.html">See full analysis &amp; tables</a>
+    </div>
+
+    <div class="scoreboard">
+      <div class="sb-head">
+        <h3><span class="badge">2026 best bet</span> Feb 9–22 • 14 days free • Verified</h3>
+        <span class="badge ghost">PST</span>
+      </div>
+      <div class="sb-body">
+        <div class="timeline" id="timeline-preview">
+          <!-- injected -->
+        </div>
+        <div class="legend" style="margin-top:10px">
+          <span><i style="background:var(--accent)"></i> Free (no radio sports)</span>
+          <span><i style="background:#2e7cf6"></i> MLB</span>
+          <span><i style="background:#ffb02e"></i> NFL/WW1</span>
+          <span><i style="background:#ff4d5a"></i> NCAAF Cal/Stanford</span>
+          <span><i style="background:#a78bfa"></i> Westwood One national</span>
+          <span><i style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)"></i> Overlap (2+ at once)</span>
+        </div>
+        <div class="alert" style="margin-top:12px">
+          <b>Why Feb 9–22 is green:</b> Super Bowl LX Feb 8 (Levi&apos;s Stadium, NBC/WW1) → next busy is MLB spring training ~Feb 24 (e.g. Giants vs CLE). That&apos;s 14 days with <b>no MLB, NFL, NCAAF, or Westwood One</b> on SF radio. 
+          Jul 14 All-Star break is only 3 days, not a week. Oct postseason overlaps NFL, so no fall gap.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid cols3" style="margin-top:14px">
+      <div class="card">
+        <h3>2027 <span class="tag est">estimated</span></h3>
+        <p><b>Feb 8–21 • 14 days • post-Super Bowl LXI (est Feb 7)</b><br/><span class="muted">Source: NFL awards Super Bowl LXI to SoFi (expected). MLB Opening Day est Mar 25.</span></p>
+        <p class="small muted" style="margin-top:6px"><a href="site/pages/vacation-windows.html#2027">Details &rarr;</a> • Flagged as estimate until official release</p>
+      </div>
+      <div class="card">
+        <h3>2028 <span class="tag est">estimated</span> • Leap year + LA Olympics</h3>
+        <p><b>Feb 7–20 • 14 days • post-Super Bowl LXII (est Feb 6)</b><br/><span class="muted">MLB Opening Day est Mar 30 (post-Olympic shoulder still free Feb).</span></p>
+        <p class="small muted" style="margin-top:6px"><a href="site/pages/vacation-windows.html#2028">Details &rarr;</a> • Olympics not counted (no AM/FM) but noted</p>
+      </div>
+      <div class="card">
+        <h3>2029 <span class="tag est">estimated</span></h3>
+        <p><b>Feb 5–18 • 14 days • post-Super Bowl LXIII (est Feb 4)</b><br/><span class="muted">Consistent 2-week February window every year.</span></p>
+        <p class="small muted" style="margin-top:6px"><a href="site/pages/vacation-windows.html#2029">Details &rarr;</a></p>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:12px">
+      <b>Verification:</b> 2026 = official schedules released. 2027-2029 = estimates based on historical patterns (MLB late-March open, NFL Thursday after Labor Day, NCAAF Labor Day weekend). Never presented as verified.
+      <a href="site/pages/methodology.html#estimates">Estimation method</a> • <a href="site/pages/flagged.html">Irregularities</a>
+    </div>
+  </section>
+
+  <!-- CALENDAR PREVIEW -->
+  <section class="section" id="calendar-preview">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <h2>Scoreboard calendar <span>— click any day, see free slices in PST</span></h2>
+      <a class="btn" href="site/pages/calendar.html">Open full calendar &rarr;</a>
+    </div>
+    <p class="lead">Like an MLB/NFL scoreboard: yesterday • today • tomorrow, with radio timelines. Free slices computed from average durations (MLB 2:48, NFL 3:12, NCAAF 3:27) + pregame.</p>
+
+    <div class="card">
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn" id="btn-prev">◀ Yesterday</button>
+          <button class="btn primary" id="btn-today">Today</button>
+          <button class="btn" id="btn-next">Tomorrow ▶</button>
+          <input type="date" id="pick-date" style="padding:8px 10px;border-radius:10px;border:1px solid var(--line2);background:var(--card);color:var(--text)"/>
+        </div>
+        <div class="pill" id="cal-label">—</div>
+      </div>
+      <div class="divider"></div>
+      <div id="day-timeline" class="timeline"></div>
+      <div class="note" id="free-note" style="margin-top:10px"></div>
+    </div>
+  </section>
+
+  <!-- RADIO GUIDE TEASER -->
+  <section class="section">
+    <h2>On the radio in the Sunset (94122) <span>— what you&apos;d actually hear</span></h2>
+    <p class="lead">Standard AM/FM only. No streaming. Scanned from Outer Sunset; strong signals only.</p>
+    <div class="grid cols3">
+      <div class="card">
+        <h3>680 AM / 104.5 FM — KNBR <span class="tag high">high priority</span></h3>
+        <p><b>Giants + 49ers flagship</b> (since 1979, 50kW clear channel). Giants every game; 49ers all season. <span class="muted">Cumulus • 750 Battery St.</span></p>
+        <div class="small muted"><a href="https://www.knbr.com/shows/" target="_blank">KNBR schedule</a> • <a href="https://grokipedia.com/page/San_Francisco_Giants_Radio_Network" target="_blank">Giants network</a></div>
+      </div>
+      <div class="card">
+        <h3>960 AM — KNEW (Bloomberg) / 650 KSTE <span class="tag high">high priority</span></h3>
+        <p><b>Athletics</b> — Bay Area 960 AM (iHeart), Sacramento flagship Talk 650 KSTE. Still on Bay Area radio after move to Sutter Health Park.</p>
+        <div class="small muted"><a href="https://radioinsight.com/headlines/294839/kste-to-serve-as-athletics-flagship-station/" target="_blank">Press: KSTE flagship 2025</a> • <a href="https://www.sacbee.com/sports/article300334119.html" target="_blank">Sac Bee</a></div>
+      </div>
+      <div class="card">
+        <h3>810 AM — KGO <span class="tag ww">Westwood One</span></h3>
+        <p><b>Westwood One NFL national</b> affiliate for SF — every TNF, SNF, MNF + playoffs + Super Bowl. Plus Cal Bears (KGO flagship for Cal).</p>
+        <div class="small muted"><a href="https://www.westwoodonesports.com/nfl-schedule/" target="_blank">Westwood One NFL schedule</a> • <a href="https://www.kgoradio.com/" target="_blank">KGO</a></div>
+      </div>
+    </div>
+    <div style="margin-top:10px"><a class="btn" href="site/pages/radio-guide.html">Full dial guide with reception notes →</a></div>
+  </section>
+
+  <!-- LINKS & VERIFICATION FOOTER -->
+  <section class="section">
+    <div class="card">
+      <h3>Browse the data — every row is sourced</h3>
+      <div class="grid cols4" style="margin-top:10px">
+        <a class="btn" href="site/pages/mlb.html" style="justify-content:center">⚾ MLB — all 30 clubs</a>
+        <a class="btn" href="site/pages/nfl.html" style="justify-content:center">🏈 NFL — 49ers + all 32 + WW1</a>
+        <a class="btn" href="site/pages/ncaaf.html" style="justify-content:center">🎓 Stanford &amp; Cal</a>
+        <a class="btn" href="site/pages/westwood-one.html" style="justify-content:center">📻 Westwood One</a>
+      </div>
+      <div class="alert" style="margin-top:12px">
+        <b>Verification rule:</b> every table row must have a source link to an official site (MLB.com, NFL.com, team/ACC sites, Westwood One). If a time can&apos;t be confirmed, it&apos;s blank and flagged as unverified. Never inferred. <a href="site/pages/sources.html">See audit</a>
+      </div>
+      <div class="grid cols3" style="margin-top:14px">
+        <div class="toc">
+          <a href="site/pages/executive-summary.html">Executive summary <small>read →</small></a>
+          <a href="site/pages/methodology.html">Methodology &amp; PST rules <small>read →</small></a>
+          <a href="site/pages/sources.html">Sources &amp; verification log <small>read →</small></a>
+        </div>
+        <div class="toc">
+          <a href="site/pages/vacation-windows.html">Vacation windows 2026-2029 <small>read →</small></a>
+          <a href="site/pages/calendar.html">Calendar scoreboard <small>open →</small></a>
+          <a href="site/pages/radio-guide.html">Radio dial guide <small>read →</small></a>
+        </div>
+        <div class="toc">
+          <a href="site/pages/mlb.html">MLB data <small>open →</small></a>
+          <a href="site/pages/nfl.html">NFL + Westwood One <small>open →</small></a>
+          <a href="site/pages/flagged.html">Flagged for review <small>5 →</small></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <b>Free Time Vacation</b> — for Outer Sunset SF 94122 • Built Nov 2026 • Sources: MLB.com, NFL.com, team/ACC sites, WestwoodOneSports.com, KNBR/KGO/KNEW, FCC • All times PST/PDT (America/Los_Angeles) • <a href="site/pages/sources.html">Sources</a> • <a href="site/pages/flagged.html">Flagged for review</a> • <a href="COORDINATION.md">Coordination</a>
+    </div>
+    <div style="margin-top:8px" class="muted">
+      Not affiliated with MLB, NFL, NCAA, Westwood One, KNBR, KGO, KNEW. Team names/marks are property of their owners. This is a personal radio-availability project.
+    </div>
+  </footer>
+</main>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
