@@ -18,6 +18,7 @@ import time
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+from html.parser import HTMLParser
 from urllib.error import HTTPError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
@@ -35,7 +36,8 @@ CAL = "https://calbears.com/sports/football/schedule"
 STANFORD = "https://gostanford.com/sports/football/schedule"
 WWO = "https://www.westwoodonesports.com/ajax/eventCalendar"
 NBA = "https://nba-prod-us-east-1-mediaops-stats.s3.amazonaws.com/NBA/staticData/scheduleLeagueV2.json"
-GROUPS = ("mlb", "nfl", "cal", "stanford", "westwood", "warriors")
+QUAKES = "https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season"
+GROUPS = ("mlb", "nfl", "cal", "stanford", "westwood", "warriors", "earthquakes")
 
 
 def stamp(dt=None):
@@ -252,6 +254,62 @@ def parse_warriors(payload):
     return result
 
 
+
+class TableRows(HTMLParser):
+    """Extract text cells without relying on page-specific CSS or third-party libraries."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.in_row = self.in_cell = False
+        self.rows, self.row, self.cell = [], [], []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "tr":
+            self.in_row, self.row = True, []
+        elif self.in_row and tag in ("td", "th"):
+            self.in_cell, self.cell = True, []
+
+    def handle_data(self, text):
+        if self.in_cell:
+            self.cell.append(text)
+
+    def handle_endtag(self, tag):
+        if self.in_cell and tag in ("td", "th"):
+            self.row.append(" ".join(" ".join(self.cell).split()))
+            self.in_cell = False
+        elif tag == "tr" and self.in_row:
+            self.rows.append(self.row)
+            self.in_row = False
+
+
+def parse_earthquakes(source):
+    parser = TableRows()
+    parser.feed(source)
+    rows = []
+    for cells in parser.rows:
+        if len(cells) < 5 or cells[2].strip().lower() not in {"home", "away"}:
+            continue
+        # This source explicitly labels the table's kickoff values as PT.
+        d = cells[0].replace("Sept.", "Sep").replace(".", "")
+        parsed = None
+        for fmt in ("%A, %b %d, %Y %I:%M %p", "%A, %B %d, %Y %I:%M %p"):
+            try:
+                parsed = datetime.strptime(d + " " + cells[3].upper(), fmt).replace(tzinfo=PACIFIC)
+                break
+            except ValueError:
+                pass
+        if not parsed or parsed.year != 2026:
+            continue
+        opponent, away = cells[1], cells[2].lower() == "away"
+        title = f"San Jose Earthquakes at {opponent}" if away else f"{opponent} at San Jose Earthquakes"
+        station = {"810 / 1370": "KSFO 810 AM / KZSF 1370 AM", "680 / 1370": "KNBR 680 AM / KZSF 1370 AM"}.get(cells[4])
+        rows.append({"id": "mls-quakes-" + parsed.date().isoformat(), "group": "earthquakes", "sport": "MLS",
+                     "title": title, "date": parsed.date().isoformat(), "start": stamp(parsed), "priority": True,
+                     "category": "Earthquakes", "durationMinutes": 120, "source": QUAKES,
+                     "dateBasis": "Team's announced kickoff; check for changes", "radio": "announced-station" if station else "unverified",
+                     "station": station})
+    return rows
+
+
 def build_snapshot(offline=False, previous=None):
     previous = previous or {}
     old_events = previous.get("events", [])
@@ -346,6 +404,13 @@ def build_snapshot(offline=False, previous=None):
         except Exception as exc:
             preserve("westwood", exc)
         try:
+            rows = parse_earthquakes(request(QUAKES))
+            if len(rows) < 30:
+                raise ValueError("Earthquakes radio table could not be parsed completely")
+            success("earthquakes", rows, {"season": "2026", "note": "February 2026 team announcement; check for changes"})
+        except Exception as exc:
+            preserve("earthquakes", exc)
+        try:
             payload = json.loads(request(NBA))
             rows = parse_warriors(payload)
             if len(rows) < 20:
@@ -354,7 +419,7 @@ def build_snapshot(offline=False, previous=None):
         except Exception as exc:
             preserve("warriors", exc)
     else:
-        for group in ("westwood", "warriors"):
+        for group in ("westwood", "warriors", "earthquakes"):
             preserve(group, ValueError("not included in offline fixture"))
 
     handbook = json.loads(ANNOUNCED.read_text())

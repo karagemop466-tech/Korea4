@@ -49,6 +49,13 @@ class SourcesTest(unittest.TestCase):
         self.assertEqual(row["start"], "2026-11-14T20:30:00Z")
         self.assertEqual(row["title"], "California at Virginia")
 
+    def test_earthquakes_team_table_is_pacific_and_source_linked(self):
+        page = """<table><tr><td>Saturday, Nov. 7, 2026</td><td>Minnesota United FC</td><td>Away</td><td>4:00 PM</td><td>810 / 1370</td></tr></table>"""
+        row = refresh.parse_earthquakes(page)[0]
+        self.assertEqual(row["start"], "2026-11-08T00:00:00Z")
+        self.assertEqual(row["station"], "KSFO 810 AM / KZSF 1370 AM")
+        self.assertEqual(row["source"], refresh.QUAKES)
+
     def test_warriors_filter_excludes_preseason(self):
         game = {"gameId": "0022600001", "gameDateTimeUTC": "2027-02-16T03:00:00Z", "awayTeam": {"teamId": 1, "teamCity": "Indiana", "teamName": "Pacers"}, "homeTeam": {"teamId": 1610612744, "teamCity": "Golden State", "teamName": "Warriors"}}
         payload = {"leagueSchedule": {"gameDates": [{"games": [game, {**game, "gameId": "0012600001"}]}]}}
