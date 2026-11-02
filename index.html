@@ -1,1 +1,137 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Free-Time Vacation Planner</title><meta http-equiv="refresh" content="0; url=site/"><link rel="canonical" href="site/"></head><body><p><a href="site/">Open the Free-Time Vacation Planner →</a></p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Time Vacation Planner - SF Bay Area Sports Schedule</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="brand">⚾🏈 Free Time Planner</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="daily.html">Daily Schedule</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="vacation.html">Vacation Windows</a>
+      <a href="teams.html">Teams & Games</a>
+      <a href="radio.html">Radio Stations</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Hero -->
+    <div class="hero">
+      <h1>🏖️ Free Time Vacation Planner</h1>
+      <p>Find the best windows for vacation without conflicting with live sports broadcasts on AM/FM radio in San Francisco's Outer Sunset (94122). Covers MLB, NFL, and NCAAF schedules for 2026-2029.</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-row" id="statsRow">
+      <div class="stat-card">
+        <div class="label">Today's Status</div>
+        <div class="value free" id="todayStatus">Loading...</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Games Today</div>
+        <div class="value" id="gamesToday">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Free Hours Today</div>
+        <div class="value free" id="freeHours">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Best Vacation Window</div>
+        <div class="value warn" id="bestWindow">-</div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('today')">Today's Schedule</button>
+      <button class="tab-btn" onclick="switchTab('upcoming')">Upcoming Games</button>
+      <button class="tab-btn" onclick="switchTab('windows')">Vacation Windows</button>
+    </div>
+
+    <!-- Today Tab -->
+    <div class="tab-content active" id="tab-today">
+      <div class="date-nav">
+        <button onclick="changeDay(-1)">◀ Yesterday</button>
+        <span class="current-date" id="currentDate">-</span>
+        <button onclick="changeDay(1)">Tomorrow ▶</button>
+        <button onclick="goToToday()">Today</button>
+        <input type="date" id="datePicker" onchange="goToDate(this.value)">
+      </div>
+
+      <div class="card">
+        <h2>📅 24-Hour Timeline (PST)</h2>
+        <div class="timeline">
+          <div class="timeline-bar" id="timelineBar"></div>
+          <div class="timeline-hours">
+            <span>12AM</span><span>3AM</span><span>6AM</span><span>9AM</span><span>12PM</span><span>3PM</span><span>6PM</span><span>9PM</span><span>12AM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>🎯 Games Today</h2>
+          <div id="todayGames"></div>
+        </div>
+        <div class="card">
+          <h2>✅ Free Time Blocks</h2>
+          <div id="freeBlocks"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming Tab -->
+    <div class="tab-content" id="tab-upcoming">
+      <div class="card">
+        <h2>🏈 High-Priority Upcoming Games</h2>
+        <div class="table-wrap">
+          <table id="upcomingTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time (PST)</th>
+                <th>Matchup</th>
+                <th>Sport</th>
+                <th>Priority</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody id="upcomingBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vacation Windows Tab -->
+    <div class="tab-content" id="tab-windows">
+      <div class="year-selector">
+        <button class="year-btn active" onclick="filterYear(0, this)">All Years</button>
+        <button class="year-btn" onclick="filterYear(2026, this)">2026</button>
+        <button class="year-btn" onclick="filterYear(2027, this)">2027</button>
+        <button class="year-btn" onclick="filterYear(2028, this)">2028</button>
+        <button class="year-btn" onclick="filterYear(2029, this)">2029</button>
+      </div>
+      <div class="card">
+        <h2>🏖️ Best Vacation Windows (7+ days free)</h2>
+        <p style="color:var(--text-dim);margin-bottom:1rem;">Consecutive days with no MLB, NFL, or NCAAF games broadcast on SF Bay Area radio.</p>
+        <div id="vacationList"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Free Time Vacation Planner | Data from official MLB, NFL, NCAA, and Westwood One Sports sources</p>
+    <p>All times PST (UTC-8) | Outer Sunset SF 94122 radio reception area</p>
+  </footer>
+
+  <script src="data/schedules.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

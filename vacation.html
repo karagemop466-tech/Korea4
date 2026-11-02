@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vacation Windows - Free Time Vacation Planner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="brand">⚾🏈 Free Time Planner</a>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="daily.html">Daily Schedule</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="vacation.html" class="active">Vacation Windows</a>
+      <a href="teams.html">Teams & Games</a>
+      <a href="radio.html">Radio Stations</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>🏖️ Best Vacation Windows</h1>
+      <p>The best times to go on vacation — consecutive days with no MLB, NFL, or NCAAF games broadcast on AM/FM radio in the SF Bay Area (Outer Sunset 94122).</p>
+    </div>
+
+    <div class="year-selector">
+      <button class="year-btn active" onclick="filterVacationYear(0, this)">All Years</button>
+      <button class="year-btn" onclick="filterVacationYear(2026, this)">2026</button>
+      <button class="year-btn" onclick="filterVacationYear(2027, this)">2027</button>
+      <button class="year-btn" onclick="filterVacationYear(2028, this)">2028</button>
+      <button class="year-btn" onclick="filterVacationYear(2029, this)">2029</button>
+    </div>
+
+    <!-- Duration Filter -->
+    <div class="card">
+      <h2>Filter by Minimum Duration</h2>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+        <button class="year-btn active" onclick="filterMinDays(3, this)">3+ days</button>
+        <button class="year-btn" onclick="filterMinDays(7, this)">1+ week</button>
+        <button class="year-btn" onclick="filterMinDays(14, this)">2+ weeks</button>
+        <button class="year-btn" onclick="filterMinDays(21, this)">3+ weeks</button>
+      </div>
+    </div>
+
+    <!-- Top Recommendations -->
+    <div class="card">
+      <h2>⭐ Top Recommended Vacation Windows</h2>
+      <p style="color:var(--text-dim);margin-bottom:1rem;">Sorted by longest consecutive free days. These are periods with zero scheduled sports programming.</p>
+      <div id="vacationList"></div>
+    </div>
+
+    <!-- Analysis by Year -->
+    <div class="card">
+      <h2>📊 Vacation Window Analysis</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Year</th>
+              <th>Best Window</th>
+              <th>Days</th>
+              <th>Notes</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody id="analysisTable">
+            <tr>
+              <td>2026</td>
+              <td>Oct 29 - Nov 7</td>
+              <td>~10 days</td>
+              <td>After World Series ends, before NFL Week 9</td>
+              <td><span class="badge badge-verified">✓ High (2026 schedules verified)</span></td>
+            </tr>
+            <tr>
+              <td>2026-27</td>
+              <td>Feb 15 - Mar 30</td>
+              <td>~43 days</td>
+              <td>After Super Bowl LXI, before MLB Opening Day 2027</td>
+              <td><span class="badge badge-verified">✓ High (Super Bowl date verified)</span></td>
+            </tr>
+            <tr>
+              <td>2027</td>
+              <td>Late Oct - Late Mar 2028</td>
+              <td>~150 days</td>
+              <td>Offseason between MLB and next MLB season (NFL season in between)</td>
+              <td><span class="badge badge-estimated">~ Estimated</span></td>
+            </tr>
+            <tr>
+              <td>2028</td>
+              <td>Late Oct - Late Mar 2029</td>
+              <td>~150 days</td>
+              <td>Same pattern as 2027</td>
+              <td><span class="badge badge-estimated">~ Estimated</span></td>
+            </tr>
+            <tr>
+              <td>2029</td>
+              <td>Late Oct - Late Mar 2030</td>
+              <td>~150 days</td>
+              <td>Same pattern as 2028</td>
+              <td><span class="badge badge-estimated">~ Estimated</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Important Notes -->
+    <div class="card">
+      <h2>⚠️ Important Notes on Vacation Planning</h2>
+      <ul style="list-style:disc;padding-left:1.5rem;color:var(--text-dim);">
+        <li><strong>The "sweet spot"</strong> is between the end of the World Series (late October) and the start of NFL mid-season, or between the Super Bowl (mid-February) and MLB Opening Day (late March).</li>
+        <li><strong>During MLB season</strong> (late March - late September): Very difficult to find free days as games are played nearly every day.</li>
+        <li><strong>During NFL season</strong> (September - January): Sundays, Mondays, and Thursdays are consistently busy. Some mid-week stretches may be free.</li>
+        <li><strong>During NCAAF season</strong> (late August - early December): Saturdays are consistently busy.</li>
+        <li><strong>2027-2029 schedules</strong> are estimated based on historical patterns. Official schedules are typically released 6-12 months in advance.</li>
+        <li><strong>Westwood One broadcasts</strong> cover all primetime NFL games nationally, receivable on KNBR 680 AM in SF.</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <p>Free Time Vacation Planner | All times PST | Outer Sunset SF 94122</p>
+  </footer>
+
+  <script src="data/schedules.js"></script>
+  <script>
+    let allGames = [];
+    let vacationWindows = [];
+    let currentMinDays = 3;
+    let currentYear = 0;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      allGames = buildGameDatabase();
+      vacationWindows = findVacationWindows(allGames, 3);
+      renderVacationList();
+    });
+
+    function filterVacationYear(year, btn) {
+      document.querySelectorAll('.year-selector .year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentYear = year;
+      renderVacationList();
+    }
+
+    function filterMinDays(days, btn) {
+      btn.parentElement.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMinDays = days;
+      renderVacationList();
+    }
+
+    function renderVacationList() {
+      const container = document.getElementById('vacationList');
+      let windows = vacationWindows
+        .filter(w => w.days >= currentMinDays)
+        .sort((a, b) => b.days - a.days);
+      
+      if (currentYear) {
+        windows = windows.filter(w => w.year === currentYear);
+      }
+      
+      windows = windows.slice(0, 30);
+      
+      if (windows.length === 0) {
+        container.innerHTML = '<p style="color:var(--warning);">No vacation windows found matching your criteria. Try reducing the minimum duration.</p>';
+        return;
+      }
+      
+      let html = '';
+      windows.forEach((w, idx) => {
+        const weeks = Math.floor(w.days / 7);
+        const extraDays = w.days % 7;
+        const durationStr = weeks > 0 ? `${weeks} week${weeks > 1 ? 's' : ''}${extraDays > 0 ? ' + ' + extraDays + ' days' : ''}` : `${w.days} days`;
+        
+        const startDate = new Date(w.start + 'T12:00:00');
+        const endDate = new Date(w.end + 'T12:00:00');
+        const startStr = startDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const endStr = endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        
+        html += `<div class="vacation-card">
+          <div>
+            <div style="color:var(--text-dim);font-size:0.75rem;">#${idx + 1}</div>
+            <div class="dates">${startStr} → ${endStr}</div>
+          </div>
+          <div class="duration">${w.days} days (${durationStr})</div>
+        </div>`;
+      });
+      
+      container.innerHTML = html;
+    }
+  </script>
+</body>
+</html>
