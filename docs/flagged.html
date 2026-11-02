@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review — unverified items & irregularities</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1 class="logo">FREE TIME <span>VACATION</span> 📻</h1>
+  <p class="tagline">🚩 Everything that could not be confirmed from an official source — published openly, left blank or clearly estimated, never invented. Nothing here blocks the site; review and request changes any time.</p>
+  <nav class="main">
+    <a href="index.html">🏠 Dashboard</a>
+    <a href="calendar.html">📅 Free-Time Scoreboard</a>
+    <a href="vacation.html">🏖️ Best Vacation Windows</a>
+    <a href="mlb.html">⚾ MLB</a>
+    <a href="football.html">🏈 NFL · Stanford · Cal</a>
+    <a href="westwood.html">🎙️ Westwood One</a>
+    <a href="radio.html">📻 Bay Area Radio Map</a>
+    <a href="flagged.html" class="active">🚩 Flagged for Review</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+<table>
+<thead><tr><th>#</th><th>Item</th><th>Problem / irregularity</th><th>What we did (and what you should check)</th><th>Check it here</th></tr></thead>
+<tbody>
+
+<tr><td>F-1</td><td><b>Your three earlier project sites are gone</b></td>
+<td><span class="badge U">IRREGULARITY</span> VacationSchedule, ScheduleFreeTime and RADIOSF (github.com/buffedlizard55-lab/…) all return GitHub Pages 404, and the repositories return “not found.” No data, code or history could be recovered from them.</td>
+<td>Rebuilt this project from scratch from official sources (Nov 2, 2026). If you still have copies/backups of those repos (or they are private under another account), share them and we'll merge anything useful after re-verifying it.</td>
+<td class="src"><a href="https://buffedlizard55-lab.github.io/ScheduleFreeTime/">ScheduleFreeTime (404)</a><br><a href="https://buffedlizard55-lab.github.io/VacationSchedule/site/">VacationSchedule (404)</a><br><a href="https://buffedlizard55-lab.github.io/RADIOSF/">RADIOSF (404)</a></td></tr>
+
+<tr><td>F-2</td><td><b>MLB 2027 labor risk</b></td>
+<td>The MLB–MLBPA CBA expires <b>Dec 1, 2026</b>. A lockout could delay spring training and/or Opening Day 2027 (2022 precedent: Opening Day moved to Apr 7). This would <i>widen</i> the Feb 2027 free window, but makes all 2027 spring dates provisional.</td>
+<td>Site shows the officially released 2027 schedule and flags the risk on the Dashboard, MLB and Vacation pages. Re-check after a CBA is signed.</td>
+<td class="src"><a href="https://www.mlb.com">mlb.com</a> news</td></tr>
+
+<tr><td>F-3</td><td><b>MLB 2028 &amp; 2029 schedules do not exist yet</b></td>
+<td>MLB releases each season's schedule roughly the preceding July. All 2028/29 dates (Opening Day, All-Star break dark days, season end, postseason) are pattern estimates anchored to verified 2026/2027 values.</td>
+<td>Labeled <span class="badge E">ESTIMATE</span> everywhere; estimates use fixed rules (Opening Day = last Thu of March, etc.) that regenerate when official dates post.</td>
+<td class="src"><a href="https://www.mlb.com/schedule">mlb.com/schedule</a></td></tr>
+
+<tr><td>F-4</td><td><b>2028 extended Olympic break is not agreed</b></td>
+<td>MLB “envisions” an ~11-day break (Jul 10–20, 2028 dark except the ASG) for LA28, but the players' association called the talks early-stage (Jul 2026). The 2028 ASG host (Oracle Park, SF) was announced Aug 2026; the Jul 11 date is tentative.</td>
+<td>Default model uses a normal 4-day break. The 9-day window appears only when you switch on the “2028 Olympic-break scenario.” Do not book travel on it yet.</td>
+<td class="src"><a href="https://www.mlb.com">mlb.com</a>; Jul-2026 reporting on MLB/MLBPA Olympic talks</td></tr>
+
+<tr><td>F-5</td><td><b>NFL 2027–2029 schedules, exact Super Bowl dates &amp; the Pro Bowl Games</b></td>
+<td>NFL publishes schedules each May. Super Bowl LXII's site (Atlanta) is official but the exact date (expected Feb 13, 2028) is locked later. Super Bowl LXIII's site (Las Vegas) and date (expected Feb 11, 2029) come only from secondary sources/pattern. January playoff dates are pattern estimates. The <b>Pro Bowl Games gate two of the headline 6-day windows</b>: their 2027 date and Westwood One radio carriage could not be confirmed from an official source (one secondary listing says Feb 7, 2027, Los Angeles; Westwood One's Sep-2026 season announcement covers “the entire NFL postseason” and Super Bowl LXI without enumerating the Pro Bowl). A possible 18-game NFL season could shift everything ~1 week.</td>
+<td>All labeled <span class="badge E">ESTIMATE</span>/<span class="badge U">UNVERIFIED</span>; Pro Bowl Games modeled on the Sunday before each Super Bowl (Feb 7, 2027 etc.). If the Pro Bowl lands elsewhere (or skips radio), the Feb 2027 corridors merge into longer windows — the Scoreboard engine recomputes the moment official dates post.</td>
+<td class="src"><a href="https://www.nfl.com/schedules">nfl.com/schedules</a> · <a href="https://www.westwoodonesports.com/nfl-schedule/">Westwood One NFL schedule</a></td></tr>
+
+<tr><td>F-6</td><td><b>49ers kickoff, Nov 8, 2026 vs Raiders</b></td>
+<td><span class="badge U">DISCREPANCY</span> Two schedule sources list 4:05 PM ET (1:05 PM PT); one lists 4:25 PM.</td>
+<td>Using <b>1:05 PM PT</b> (majority) and flagging. 20 minutes doesn't change the day's free-window shape, but confirm before the game.</td>
+<td class="src"><a href="https://www.49ers.com/schedule">49ers.com/schedule</a></td></tr>
+
+<tr><td>F-7</td><td><b>Westwood One SNF, Dec 27, 2026 (JAX @ DAL)</b></td>
+<td>The start time was cut off mid-capture on Westwood One's schedule page; every other 2026 listing was captured fully.</td>
+<td>Modeled at the standard SNF window (7:30 PM ET = 4:30 PM PT) and marked <span class="badge E">ESTIMATE</span>.</td>
+<td class="src"><a href="https://www.westwoodonesports.com/nfl-schedule/">westwoodonesports.com/nfl-schedule</a></td></tr>
+
+<tr><td>F-8</td><td><b>Stanford / Cal late-Nov 2026 kickoff times</b></td>
+<td>The ACC announces kickoff times 6–12 days before each game, so Nov 14 (Stanford @ VT), Nov 21 (Big Game) and Nov 28 finales were listed as TBD at capture time. Cal @ Virginia (Nov 14, 12:30 PM PT) was confirmed.</td>
+<td>Modeled at 12:30–1:00 PM PT and labeled <span class="badge E">ESTIMATE</span>; Saturdays are blocked regardless.</td>
+<td class="src"><a href="https://calbears.com/sports/football/schedule/2026">calbears.com</a> · <a href="https://gostanford.com/sports/football">gostanford.com</a></td></tr>
+
+<tr><td>F-9</td><td><b>Athletics' 2027 Opening Day opponent</b></td>
+<td>Not captured from an official source this session (the Giants' Mar 25, 2027 opponent — Rockies at home — was confirmed; the A's matchup wasn't).</td>
+<td>Left blank on the MLB page rather than guessed. No effect on free-time math (the whole league plays that day).</td>
+<td class="src"><a href="https://www.mlb.com/athletics/schedule">mlb.com/athletics/schedule</a></td></tr>
+
+<tr><td>F-10</td><td><b>MLB 2027 first-pitch times &amp; postseason dates</b></td>
+<td>The 2027 schedule is out, but most game <i>times</i> post over the winter and the full postseason calendar posts in August.</td>
+<td>Day windows use labeled “typical slate” estimates (weekday-based). Season boundaries — which drive the vacation answers — are official.</td>
+<td class="src"><a href="https://www.mlb.com/schedule">mlb.com/schedule</a></td></tr>
+
+<tr><td>F-11</td><td><b>Stanford/Cal 2027+ opponents &amp; bye weeks</b></td>
+<td>ACC schedules publish each late January; individual 2027+ games, official Big Game dates and double-bye Saturdays don't exist yet.</td>
+<td>Modeled as Saturday blocks (late Aug–late Nov) labeled <span class="badge E">ESTIMATE</span>. ~2 Saturdays per season will turn out free when byes align — but NFL Sundays still block those weeks.</td>
+<td class="src"><a href="https://theacc.com">theacc.com</a></td></tr>
+
+<tr><td>F-12</td><td><b>Sharks radio affiliate list currency</b></td>
+<td>KUFX 98.5 is the long-standing Sharks flagship, but the detailed NHL network page found in search results was old (2005). The flagship role is corroborated by current station listings; the wider affiliate list isn't re-verified.</td>
+<td>Only the flagship is asserted on the Radio page. Sharks are other-tier anyway — no vacation impact.</td>
+<td class="src"><a href="https://www.nhl.com/sharks">nhl.com/sharks</a></td></tr>
+
+<tr><td>F-13</td><td><b>Westwood One 2027+ broadcast windows</b></td>
+<td>Rightsholder packages (Thursday Night Football/SNF/MNF weekly, international games) are shown for 2027+ as pattern windows; exact teams/times come with each NFL schedule.</td>
+<td>Labeled <span class="badge E">ESTIMATE</span>. The fully-captured 2026 list is on the Westwood page.</td>
+<td class="src"><a href="https://www.westwoodonesports.com/nfl-schedule/">Westwood One NFL schedule</a></td></tr>
+
+<tr><td>F-15</td><td><b>College all-star bowls in the January corridors</b></td>
+<td>Events like the Senior Bowl (late Jan/early Feb) can air on national radio (ESPN Radio / Westwood One affiliates) inside the Tier-1 vacation corridors. They are not Stanford or Cal <i>team</i> games, so they don't count under your stated rules and are not modeled — but a Stanford/Cal senior could be playing in one.</td>
+<td>Noted here and on the <a href="vacation.html">Vacation page</a>. If you want all-star bowls treated as busy, say the word and we'll add them (dates are announced each season).</td>
+<td class="src"><a href="https://www.seniorbowl.com">seniorbowl.com</a> (official)</td></tr>
+
+<tr><td>F-14</td><td><b>gostanford.com deep link 404s</b></td>
+<td><code>gostanford.com/sports/football/schedule/2026</code> returned a 404 page during capture (the site's sport landing page works). Stanford's remaining 2026 dates were instead cross-verified against Stanford's scoreboard output and two schedule listings that agree.</td>
+<td>Linked to the working <code>gostanford.com/sports/football</code> landing. Dates marked verified only where sources agreed.</td>
+<td class="src"><a href="https://gostanford.com/sports/football">gostanford.com/sports/football</a></td></tr>
+
+</tbody>
+</table>
+
+<div class="card">
+<h3>✅ Verification standard used on this site</h3>
+<ul>
+  <li>Every <span class="badge V">VERIFIED</span> row traces to an official source (league/team/station) linked in its row, or to 2+ independent listings that agree with the official calendar.</li>
+  <li>Anything that exists only as league <b>patterns</b> is modeled and labeled <span class="badge E">ESTIMATE</span>; anything we couldn't confirm at all is <span class="badge U">UNVERIFIED</span> or blank — never filled in.</li>
+  <li>Full method, source list, and the vacation-window math are in <code>research-notes.md</code>; session-by-session status is in <code>COORDINATION.md</code> (repo root).</li>
+</ul>
+</div>
+
+<footer class="site">Want a flagged item resolved? Name the F-number in a follow-up and a session will chase the official source.</footer>
+</main>
+</body>
+</html>

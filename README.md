@@ -21,6 +21,20 @@ Under the strict definition — *a minute is free only when no MLB (all 30), no 
 
 **Relaxed scenario (scenario, not a schedule):** If spring training is *not* counted, Feb 15 → Mar 23 2027 (~5 weeks) and mid-Feb → late-Mar 2028/2029 (est) are free of regular-season games. This session documented the 2026 relaxed window as Feb 9 → Mar 24 = 44 days verified.
 
+### Refinement from session `arena-97161ae7` (PR #7, `docs/` scoreboard edition)
+
+A fourth parallel session independently verified the anchors and computed the calendar **day by day**
+through Dec 2029. It confirms no 7/14/21-day strict window exists, and adds: the longest fully-free
+stretches are **6-day weekday corridors** between January playoff weekends (2027: Jan 25–30, Feb 1–6,
+Feb 8–13) — ESTIMATES that rest on unannounced playoff dates; Feb 15–18, 2027 above remains the best
+*both-sides-verified* window. It also flags one conditional standout: **Jul 12–20, 2028 (9 days)** if MLB
+adopts its envisioned extended Olympic break for LA28 (not agreed yet). Try it live (root-served):
+[Scoreboard calendar](https://karagemop466-tech.github.io/Korea4/docs/calendar.html) ·
+[Vacation rankings + scenario toggles](https://karagemop466-tech.github.io/Korea4/docs/vacation.html) ·
+[Flagged F-1…F-15](https://karagemop466-tech.github.io/Korea4/docs/flagged.html) ·
+method & sources in [`research-notes.md`](research-notes.md).
+
+
 ## Site Map — Two Sites Kept, One Root
 
 ### New dashboard (this session, `arena/c697ef7b-korea4`) — root `index.html` + `assets/` + `data/` + `site/pages/`
