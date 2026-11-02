@@ -6,11 +6,12 @@ on:
       - arena/72e6d3f7-korea4
     paths:
       - scripts/probe_sources.py
+      - scripts/compact_probe.py
       - .github/workflows/probe-sources.yml
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: official-source-probe
@@ -31,6 +32,8 @@ jobs:
           python-version: '3.12'
       - name: Fetch official source responses
         run: python scripts/probe_sources.py
+      - name: Compress responses for offline verification
+        run: python scripts/compact_probe.py
       - name: Upload raw official responses for offline verification
         uses: actions/upload-artifact@v4
         with:
@@ -38,3 +41,17 @@ jobs:
           path: probe_out/
           retention-days: 3
           if-no-files-found: error
+      - name: Publish compressed probe snapshot to fixed branch
+        env:
+          BRANCH: arena/72e6d3f7-korea4
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin "$BRANCH"
+          git add research/probe
+          if git diff --cached --quiet; then
+            echo "No probe snapshot changes to commit"
+          else
+            git commit -m "Publish official-source probe snapshot [skip ci]"
+            git push origin "HEAD:$BRANCH"
+          fi
