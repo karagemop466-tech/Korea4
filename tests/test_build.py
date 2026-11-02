@@ -53,7 +53,9 @@ class BuiltSiteTest(unittest.TestCase):
         self.assertTrue((SITE / 'site/planner/core.js').is_file())
 
     def test_legacy_urls_are_redirected_not_published_as_verified(self):
-        for path in ('calendar.html', 'vacation.html', 'site/vacation.html', 'site/pages/vacation-windows.html', 'docs/index.html', 'docs/vacation.html'):
+        tracked = subprocess.check_output(['git', 'ls-files', '*.html'], cwd=ROOT, text=True).splitlines()
+        paths = [p for p in tracked if p != 'index.html' and not p.startswith(('site/planner/', 'redirects/'))]
+        for path in paths:
             text = (SITE / path).read_text()
             self.assertIn('superseded', text)
             self.assertIn('http-equiv="refresh"', text)

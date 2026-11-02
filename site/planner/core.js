@@ -61,7 +61,7 @@ export function buildIndex(data) {
       let day = first;
       for (let i = 0; i < 3 && day <= last; i++, day = addDays(day, 1)) put(day, event);
     } else if (event.date) {
-      for (const offset of event.possibleOffsetDays || [0]) put(addDays(event.date, offset), event);
+      for (const offset of event.possibleOffsetDays || [0, 1]) put(addDays(event.date, offset), event);
     }
   }
   for (const restriction of data.restrictions || []) {

@@ -59,7 +59,8 @@
       "dateBasis": "Venue-local date; kickoff and Pacific date TBD",
       "possibleOffsetDays": [
         -1,
-        0
+        0,
+        1
       ],
       "source": "https://gostanford.com/news/2026/05/20/two-dates-added-to-notre-dame-rivalry",
       "priority": true,

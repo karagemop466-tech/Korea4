@@ -17,13 +17,16 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Restore the last available published snapshot
+        uses: actions/cache/restore@v4
+        with:
+          path: site/data/events.json
+          key: official-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: official-snapshot-v1-
       - name: Refresh source-linked schedules
         run: python3 scripts/refresh.py
       - name: Validate snapshot, parsers and local links
@@ -31,12 +34,25 @@ jobs:
           python3 -m unittest discover -s tests -v
           node tests/test_core.mjs
           python3 scripts/build_site.py
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+      - name: Preserve the refreshed snapshot for future fallback
+        uses: actions/cache/save@v4
+        with:
+          path: site/data/events.json
+          key: official-snapshot-v1-${{ github.run_id }}-${{ github.run_attempt }}
       - name: Upload isolated site
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

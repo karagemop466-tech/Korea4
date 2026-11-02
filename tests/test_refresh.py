@@ -47,7 +47,7 @@ class SourcesTest(unittest.TestCase):
         row = refresh.parse_westwood({"events": [event]})[0]
         self.assertIsNone(row["start"])
         self.assertIsNone(row["end"])
-        self.assertEqual(row["possibleOffsetDays"], [-1, 0])
+        self.assertEqual(row["possibleOffsetDays"], [-1, 0, 1])
 
     def test_network_real_times_are_utc(self):
         event = {"id": 1, "formatted_date": "NOVEMBER 02, 2026", "start_time": 1793664000, "end_time": 1793681940, "title": "Bears at Seahawks", "description": "7:00 PM ET", "url": "https://www.westwoodonesports.com/events/1"}
@@ -70,11 +70,12 @@ class SourcesTest(unittest.TestCase):
         self.assertEqual(row["title"], "California at Virginia")
 
     def test_cal_text_schedule_retains_known_start_and_tbd(self):
-        page = """<h1>2026 Football Schedule</h1><table><tr><td>Nov 14 (Sat)</td><td>12:30 PM</td><td>Away</td><td>Virginia</td></tr><tr><td>Nov 21 (Sat)</td><td></td><td>Home</td><td>Stanford</td></tr></table>"""
+        page = """<h1>2026 Football Schedule</h1><table><tr><td>Nov 14 (Sat)</td><td>12:30 PM</td><td>Away</td><td>Virginia</td></tr><tr><td>Nov 21 (Sat)</td><td></td><td>Home</td><td>Stanford</td></tr><tr><td>Nov 28 (Sat)</td><td></td><td>Away</td><td>Boston College</td></tr></table>"""
         rows = refresh.parse_cal_text(page)
         self.assertEqual(rows[0]["start"], "2026-11-14T20:30:00Z")
         self.assertIsNone(rows[1]["start"])
         self.assertEqual(rows[0]["source"], refresh.CAL_TEXT)
+        self.assertEqual(rows[2]["possibleOffsetDays"], [-1, 0, 1])
 
     def test_postponed_mlb_does_not_reuse_old_date(self):
         game = {"gamePk": 88, "gameType": "R", "officialDate": "2026-04-01", "gameDate": "2026-04-01T20:00:00Z", "status": {"startTimeTBD": False, "detailedState": "Postponed"}, "teams": {"away": {"team": {"name": "A"}}, "home": {"team": {"name": "B"}}}}

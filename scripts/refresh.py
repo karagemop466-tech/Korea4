@@ -225,7 +225,7 @@ def parse_westwood(payload):
         result.append({"id": f"wwo-{g['id']}", "group": "westwood", "sport": "RADIO", "title": title,
                        "date": date_et, "start": start, "end": end, "priority": True, "category": "Westwood One",
                        "source": source, "dateBasis": "Network airtime; scheduled end can change" if start else "Network date in ET; airtime TBD",
-                       "possibleOffsetDays": [-1, 0] if not start else [0], "description": desc, "radio": "affiliate-unconfirmed"})
+                       "possibleOffsetDays": [-1, 0, 1] if not start else [0], "description": desc, "radio": "affiliate-unconfirmed"})
     return result
 
 
@@ -317,10 +317,13 @@ def parse_cal_text(source):
                 pass
         opp = cells[3]
         title = f"California at {opp}" if cells[2].lower() == "away" else f"{opp} at California"
-        rows.append({"id": f"cal-{day}", "group": "cal", "sport": "NCAAF", "title": title,
-                     "date": day, "start": start, "priority": True, "category": "California",
-                     "durationMinutes": 210, "source": CAL_TEXT,
-                     "dateBasis": "Official kickoff" if start else "Kickoff not shown / TBD", "radio": "unverified"})
+        row = {"id": f"cal-{day}", "group": "cal", "sport": "NCAAF", "title": title,
+               "date": day, "start": start, "priority": True, "category": "California",
+               "durationMinutes": 210, "source": CAL_TEXT,
+               "dateBasis": "Official kickoff" if start else "Kickoff not shown / TBD", "radio": "unverified"}
+        if not start and cells[2].lower() == "away":
+            row["possibleOffsetDays"] = [-1, 0, 1]
+        rows.append(row)
     return rows
 
 
