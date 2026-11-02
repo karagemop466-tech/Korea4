@@ -5,8 +5,8 @@ Generated: 2026-11-02T18:00:25+00:00
 - JSON files checked: 9
 - Primary generated pages: 15
 - Static primary table rows with source URL: 9350
-- HTML pages link-checked (including legacy trees): 42
-- Internal links checked: 652
+- HTML pages link-checked (including legacy trees): 87
+- Internal links checked: 674
 - Broken internal links: 0
 - JavaScript syntax: PASS
 - Errors: 0

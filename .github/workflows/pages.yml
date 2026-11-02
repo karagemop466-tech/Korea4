@@ -1,34 +1,29 @@
-name: Deploy to GitHub Pages
+name: Verify static Pages source
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
+    branches: [main, arena/72e6d3f7-korea4]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages-verify-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          python-version: '3.11'
+      - name: Install verification dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Verify official data and internal links
+        run: python scripts/verify.py
+      - name: Check browser JavaScript syntax
+        run: node --check js/app.js

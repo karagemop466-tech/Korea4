@@ -1,0 +1,16 @@
+# Final integration publishes the clean root dashboard and all legacy trees.
+# Superseded PR #10 redirect pages are kept in Git for audit but excluded from Pages.
+exclude:
+  - .git
+  - .github
+  - .venv-packages
+  - _legacy
+  - _site
+  - node_modules
+  - research/legacy
+  - research/official/raw
+  - research/probe/raw
+  - redirects
+  - scripts
+  - tests
+  - tools

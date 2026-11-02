@@ -15,6 +15,8 @@ Arena fixes each session to its assigned branch and forbids switching to, creati
 | #3 / #4 `arena/cab47657-korea4` | MERGED | Flat root dashboard, `data/schedules.js`, Pages workflow attempt. |
 | #5 `arena/c697ef7b-korea4` | MERGED at `edcea17` | Unified prior sessions, reconciled 4-day Feb 15–18 2027 finding, Pages built. |
 | #6 `arena/4c938fb2-korea4` | OPEN | Provisional planner branch; not merged into this verification pass because it deletes shared site pages. To be closed/superseded by final integration. |
+| #10 `arena/9d83abee-korea4` | MERGED | Source-aware `site/planner/` edition, redirects, refresh/reconcile scripts, tests and raw inspection snapshots; retained. |
+| #11 `arena/9d83abee-korea4` | OPEN | Pages publisher follow-up; to be closed/superseded after final integration. |
 | `arena/9d83abee-korea4` | branch-local | Official source-inspection snapshots, `scripts/refresh.py`, Pacific-time interval tests; used as a cross-check, not bulk-merged. |
 | `arena/97161ae7-korea4` | PRs #7/#8/#9 MERGED | `docs/` HTML scoreboard edition, `EXECUTIVE-SUMMARY.md`, `research-notes.md`, `tools/`; retained and linked. |
 | `arena/72e6d3f7-korea4` | this session | `research/probe/` official runner snapshots, compressed collector, deeper line-by-line official-source verification, final generated site/data, PR + merge + Pages confirmation. |
@@ -32,6 +34,10 @@ Arena fixes each session to its assigned branch and forbids switching to, creati
 | C5 — Dashboard, category subpages, scoreboard calendar, tables, flags | done | integration | root HTML, `css/style.css`, `js/app.js`, `data/official/*`, `site/**`, `docs/**`, `EXECUTIVE-SUMMARY.md`, `README.md` | Clean 15-page primary dashboard with every entry in readable tables; legacy trees preserved and linked. | Shared outputs edited only in this final verification pass. |
 | C6 — Line-by-line verification, internal-link checker, build/deploy check | done | integration | `scripts/verify.py`, `research/verification-report.md`, `research/line_by_line.json` | 1,689 prior generated-data lines audited; 9,350 primary static table rows source-link checked; 652 internal links across 42 HTML pages checked with 0 broken; 9 JSON files valid; `node --check js/app.js` PASS; merge-marker scan clean. | PASS report written before PR. |
 | C7 — PR, merge, Pages deployment confirmation, record result | in progress | integration | board | PR from fixed branch to `main`, merge, then GitHub Pages build status. | Flagged items do not block merge; broken build does. |
+
+**Final merge conflict resolution 2026-11-02:** merging `origin/main` through `1f02131` (PR #10) produced add/add conflicts in `.gitignore`, `README.md`, `index.html` and `scripts/build_site.py`. The primary dashboard/generator/README from this final integration were kept; the complete `main` versions of `README.md`, `index.html` and `scripts/build_site.py` were preserved verbatim under `research/legacy/`. All `site/planner/`, `redirects/`, `scripts/refresh.py`, `scripts/reconcile_snapshot.py`, tests, workflow and Jekyll config files from PR #10 were retained. `.gitignore` was unioned; no session content was discarded.
+
+**Pages publisher conflict resolution 2026-11-02:** PR #10 had changed the legacy Jekyll config to exclude the root dashboard and redirect every non-planner URL to `site/planner/`. Its complete generator, workflows, config and redirects are preserved in `research/legacy/`; the final integration restores a clean root Pages source, keeps `site/planner/` as an archived sibling edition, and replaces the PR #10 deploy/check workflows with final `scripts/verify.py` gates. No session work was discarded.
 
 ## Official verification rules
 1. Official/league/team/network sources only for `VERIFIED` values.
@@ -68,7 +74,9 @@ Arena fixes each session to its assigned branch and forbids switching to, creati
 | Verification performed | `scripts/verify.py`: 9 JSON files, 9,350 primary static table rows, 652 internal links across 42 HTML pages, dynamic source-link renderer, merge-marker scan, `node --check js/app.js`. PASS with 0 errors/0 warnings. |
 | Line-by-line review | `research/line_by_line.json` and `review.html`: 1,689 prior generated-data/documentation lines with official replacement links and flags. |
 | Irregularities | 17 IR rows on `flagged.html` (dead reference sites, NFL 2027 unavailable, WWO affiliate caveat, JSON-LD mismatch, discontinued Pro Bowl, secondary-source corrections, TBD values, unreleased schedules, radio call-sign correction, duration flags, 2028 Olympic-break scenario). |
-| Site build | Static root dashboard + category pages; legacy `docs/`, `site/`, `site/pages/`, `site/alt/` trees retained and linked; `site/alt` relative links corrected. |
+| Site build | Static root dashboard + category pages; legacy `docs/`, `site/`, `site/pages/`, `site/alt/`, and PR #10 `site/planner/` trees retained and linked; `site/alt` and redirect relative links corrected. |
+| Verification after PR #10 merge | 9,350 primary table rows, 87 HTML pages, 674 internal links, 0 broken, all JSON valid, JS syntax PASS, no merge markers. |
+| Pages publisher reconciliation | PR #10 `_config.yml`, `pages.yml`, `check.yml`, `build_site.py` and redirect generator preserved under `research/legacy/`; final workflows run `scripts/verify.py`; final `_config.yml` publishes the root dashboard and excludes only superseded redirect/raw/tool trees. |
 | PR / merge / deploy | Pending — recorded after `gh pr create`, `gh pr merge`, and GitHub Pages API confirmation. |
 
 
@@ -109,6 +117,10 @@ Arena fixes each session to its assigned branch and forbids switching to, creati
 | C5 — Dashboard, category subpages, scoreboard calendar, tables, flags | claimed | integration | `index.html`, `site/**`, `data/**`, `css/**`, `js/**`, `assets/**` | Final integration will unify merged pages, fix navigation, and remove fabricated/unsupported rows. | Shared outputs are edited only in this final integration pass. Older site directories are retained for traceability but linked consistently. |
 | C6 — Line-by-line verification, internal-link checker, build/deploy check | unclaimed pending C5 | integration | `scripts/verify.py`, all site files | Every table row: official source link; blank official value + `UNVERIFIED`/`ESTIMATED` flag where needed. | Must run before merge. |
 | C7 — PR, merge, Pages deployment confirmation, record result | unclaimed pending C6 | integration | `COORDINATION.md` | PR from fixed branch to `main`, merge, then GitHub Pages build status. | Flagged items do not block merge; broken build does. |
+
+**Final merge conflict resolution 2026-11-02:** merging `origin/main` through `1f02131` (PR #10) produced add/add conflicts in `.gitignore`, `README.md`, `index.html` and `scripts/build_site.py`. The primary dashboard/generator/README from this final integration were kept; the complete `main` versions of `README.md`, `index.html` and `scripts/build_site.py` were preserved verbatim under `research/legacy/`. All `site/planner/`, `redirects/`, `scripts/refresh.py`, `scripts/reconcile_snapshot.py`, tests, workflow and Jekyll config files from PR #10 were retained. `.gitignore` was unioned; no session content was discarded.
+
+**Pages publisher conflict resolution 2026-11-02:** PR #10 had changed the legacy Jekyll config to exclude the root dashboard and redirect every non-planner URL to `site/planner/`. Its complete generator, workflows, config and redirects are preserved in `research/legacy/`; the final integration restores a clean root Pages source, keeps `site/planner/` as an archived sibling edition, and replaces the PR #10 deploy/check workflows with final `scripts/verify.py` gates. No session work was discarded.
 
 ## Official verification rules
 1. Official/league/team/network sources only for `VERIFIED` values.
@@ -250,6 +262,41 @@ Branch: `arena/cab47657-korea4`
 
 ---
 
+## Current integration: arena/9d83abee-korea4
+
+# Shared task board
+
+All times are UTC. A task marked **needs review** is published on the Flagged for Review page and does not block integration.
+
+| Task | Status | Owner / session | File scope | Claimed (UTC) |
+| --- | --- | --- | --- | --- |
+| Official-source research, schedule ingestion, dashboard, verification, and final integration | in progress | arena/9d83abee-korea4 | `COORDINATION.md`, `README.md`, `site/**`, `scripts/**`, `tests/**`, `.github/**`, and project configuration | 2026-11-02 |
+
+## Coordination log
+
+- Initial inspection: no existing task board or other claimed work was present. This session is acting as the final integration session; other sessions should claim non-overlapping scopes here before editing.
+- The Arena session branch is fixed to `arena/9d83abee-korea4`; all work, commits, and pushes for this session stay on that branch.
+- Research, source verification, flagged items, tests, PR, and deployment results will be recorded here as they are completed.
+- 2026-11-02: Verified that MLB has released 2027 regular-season and spring-training schedules ([regular season](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals), [spring training](https://www.mlb.com/press-release/padres-2027-spring-training-schedule)). 2027 NFL / Stanford / Cal schedules are not complete; do not manufacture missing fixtures. Identified potential station conflicts and reception uncertainty for review.
+- Root `index.html` is also included in this integration session's claimed scope; it is the shared Pages landing page.
+- 2026-11-02: Implemented source-linked ingestion of MLB/NFL/Stanford/Cal/Warriors/Westwood feeds with null TBD times, source-failure retention and parser tests. National schedule and network airtime do not establish a particular AM/FM affiliate. NCAA, NBA, and NFL durations are planning assumptions; MLB's 158 minutes reflects MLB's published 2025 nine-inning average and is not an actual game end.
+- Review: the 2027 Stanford–TCU game in an old announcement was canceled in a later [TCU announcement](https://gofrogs.com/news/2026/4/17/football-horned-frogs-to-host-north-texas-in-2027). Stanford–Notre Dame dates and Cal's 2027 announced games remain time TBD. The 2028 All-Star Game has [only a July month and venue](https://www.mlb.com/giants/fans/all-star-game), not a confirmed date. Conservative calculation excludes the uncertain month.
+- Conflict resolution: `main` advanced while this branch was active; merged its completed sessions and preserved both coordination histories. The earlier conclusion that February 15–18, 2027 is verified free is superseded: [the official Warriors schedule](https://cdn.nba.com/teams/uploads/sites/1610612744/2026/08/Warriors-2026-27-Schedule_list.pdf) has games on February 15 and 17. Unreleased schedules and uncertain starts preclude a verified-free claim. The published sites must be reconciled.
+- Further 2026 terrestrial-radio research: the [Earthquakes' official 2026 table](https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season) names KSFO 810 AM / KZSF 1370 AM for its matches (the Feb 21 opener names KNBR 680 instead). An [Oct 31 team recap](https://www.sjearthquakes.com/news/match-recap-earthquakes-2-real-salt-lake-1) reconfirms the Nov 7, 4 p.m. PT match. The [current Sharks audio page](https://www.nhl.com/sharks/team/broadcast) describes app/web audio rather than confirming standard FM; old KFOX sources are not sufficient to classify 2026–27 games as terrestrial.
+- NFL's [official dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) identify 2027 Week 18 and playoff windows but not individual matchups or kickoff times; those dates are conservatively marked uncertain rather than assigned fabricated fixtures.
+- Source correction: the NFL's [August 2026 announcement](https://www.nfl.com/news/nfl-elevates-pro-bowl-selection-game-s-will-cease-being-contested) says it will no longer stage an AFC–NFC Pro Bowl game beginning with the 2026 season. A 2027 celebration is mentioned, but no specific game, time or terrestrial broadcast is invented. Flexible Week 16/17 and 2027 Week 18/postseason windows are conservatively reserved.
+- Source verification found a suspended/resumed Giants–Braves game appearing twice under one MLB gamePk on separate official dates; each segment now retains a unique date-qualified ID and links to the same official game. All local display times use the Pacific IANA zone, including DST transition days.
+- Additional verified but undated 2027 college opponents are retained as date/time TBD using the teams' September 2026 ACC announcements ([Cal](https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents), [Stanford](https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents)). Vanderbilt at Stanford on Sept. 11, 2027 is retained from an [older Vanderbilt announcement](https://vucommodores.com/news/2015/03/25/vanderbilt-stanford-to-play-four-game-football-series), explicitly flagged for rechecking; a more recent independent schedule still lists it. Published team schedules supersede these manual announcements when available.
+- Final-integration scope also includes the newly added `docs/archive/**` historical README copy. The prior README's unsupported claims are labeled superseded; legacy source trees are preserved in the repository, while the isolated Pages build redirects their old HTML URLs to the corrected planner.
+
+### Current integration verification (2026-11-02)
+- Latest official-source fetch run [41493913757](https://github.com/karagemop466-tech/Korea4/actions/runs/41493913757) succeeded: 6,681 records; all seven feeds reported success. Stanford's November 14 TBD away kickoff has adjacent-Pacific-day protection. Temporary fetched HTML/JSON inspection artifacts and the snapshot-committing diagnostic workflow have been removed after testing; official source links and compact snapshots remain.
+- Tests: 18 Python checks plus Node DST/interval checks pass. Chromium exercised February 15/17 Warriors games, November 7 Earthquakes, November 14 Cal and Stanford, a 23-hour DST date, the uncertain 2028 All-Star month, 7/14/21-day controls, the 2029 coverage guard, undated opponents, and the mobile menu with no JS/HTTP errors.
+- A second parallel edition was merged to main in PRs #7–#9. Its work will be retained in the repository, but its repeated February 15–18 “verified free” headline is **superseded and incorrect**: Warriors games occur February 15 and 17, 2027. The combined final build redirects old HTML pages to the corrected, cautious planner.
+- GitHub Pages reports `build_type: legacy` from `main:/`. Attempting to change it to workflow builds via the GitHub API returned HTTP 403 `Resource not accessible by integration`. The existing custom Pages workflow has deployed successfully alongside the legacy build; both publication paths must be made safe, rather than assuming the setting changed.
+
+> Historical note: the next parallel-session section is preserved as written. Its free-window and Pro Bowl claims are superseded by the current corrections above.
+
 ## Additional Parallel Session: arena-97161ae7 (merged via this merge, PR #7)
 
 > **Branch:** `arena/97161ae7-korea4` · **Started:** 2026-11-02 from the same initial commit `a6e22c4`.
@@ -313,3 +360,20 @@ documents as the base and appending/inserting this session's sections — nothin
 **Live URLs for this edition:** https://karagemop466-tech.github.io/Korea4/docs/ (dashboard) ·
 …/docs/calendar.html · …/docs/vacation.html · …/docs/mlb.html · …/docs/football.html ·
 …/docs/westwood.html · …/docs/radio.html · …/docs/flagged.html
+
+- 2026-11-02: Merged `origin/main` after PRs #7–#9. Conflicts were limited to `README.md` and `COORDINATION.md`: kept the corrected root README, archived the parallel README with a warning, and retained both coordination histories with an explicit supersession note. No parallel files were deleted.
+- Both existing Pages publishers are now accommodated without changing another session’s original files: the custom Actions artifact contains 34 safe redirects, and the `main:/` Jekyll build excludes the historical trees and generates equivalent redirects from `redirects/`. CI builds and checks both outputs. The scheduling workflow refreshes sources for the artifact; a parallel legacy deploy can briefly expose the committed snapshot, whose timestamp and staleness are shown.
+- Branch CI [41494477326](https://github.com/karagemop466-tech/Korea4/actions/runs/41494477326) built the GitHub Pages Jekyll image and verified the legacy redirects successfully, as well as the curated build. An ordinary pull rebase tried replaying the merged parallel branch and hit a `COORDINATION.md` add/add conflict; it was aborted without discarding changes, then `git pull --rebase=merges` preserved the full merge graph and completed cleanly.
+- Date-only local games now conservatively mark the next Pacific day as uncertain too, and away games/network TBD listings retain adjacent-day protection. Source refreshes use a cached prior snapshot for failure fallback when available, otherwise the committed snapshot.
+- Manual workflow dispatch through the Arena GitHub integration returned HTTP 403, so the deploy workflow also runs its non-deploying build job on the current session branch. The actual deploy job remains restricted to `main`; this permits an end-to-end refresh/cache/artifact check before merging without changing GitHub settings or publishing branch work.
+
+### Additional terrestrial broadcasts found during integration
+- Cal’s [2026–27 men’s basketball schedule](https://calbears.com/sports/mens-basketball/schedule) lists KSFO 810 AM. Thirty-two regular-season dates and PT tipoffs were transcribed from the official [text schedule](https://calbears.com/sports/mens-basketball/schedule/text), with a refresh parser and rollover/time-zone tests. In particular, Adams State at Cal on Nov. 2, 2026 is at 5 p.m. PT and must not be overlooked.
+- The Valkyries’ [2026 team radio announcement](https://valkyries.wnba.com/news/golden-state-valkyries-announce-local-television-and-radio-broadcast-schedule-20260425) distinguishes select 95.7 FM games from app-only games; 28 FM-listed preseason/regular games were included, not the app-only rows. Thirteen played postseason games have game-specific official FM sources in `radio-confirmed.json`. A later [Aug. 7 game preview](https://valkyries.wnba.com/news/gameday-preview-20260807) lists 95.7 FM despite the older season table saying app only; the later listing is flagged and used. The [Oct. 29 Finals preview](https://valkyries.wnba.com/news/gameday-preview-20261029) says 9:30 a.m. PT, superseding a 5 p.m. conditional listing in an earlier preview.
+- Added 11 individually sourced 2026 San José State men’s basketball games on KTRB 860 AM, including the [Jan. 6 Fresno State game](https://sjsuspartans.com/news/2026/01/05/spartans-to-host-fresno-state-on-nbc-sports-bay-area). This is partial historical coverage, not a claim that every Spartan game is recorded. Likewise, the current NBA feed misses the 2025–26 Warriors season, and older 2026 Cal basketball is not complete; these gaps are flagged.
+- Branch production-pipeline run [41494793838](https://github.com/karagemop466-tech/Korea4/actions/runs/41494793838) successfully refreshed, tested, cached and uploaded the site; its deploy job was intentionally skipped off `main`. The committed baseline now contains 6,766 source-linked records; the newly added live feed parsers still need their branch-run verification.
+- The expanded live-source pipeline [41495762799](https://github.com/karagemop466-tech/Korea4/actions/runs/41495762799) successfully fetched both new feeds, restored/reconciled cache data, validated the snapshot and uploaded its artifact; deployment was correctly skipped on the session branch. Chromium also confirmed the Cal Nov. 2 game, the corrected Valkyries Aug. 7 broadcast, the Oct. 29 Finals game, San José State Jan. 6, and Cal–Stanford Jan. 23. Current tests: 23 Python checks plus Node interval tests.
+- An event with a known start but unknown end now also makes the following Pacific day uncertain; the end is never guessed for a network listing without a scheduled end.
+
+### Final integration pull request
+- Opened [PR #10 — Build source-aware Pacific vacation planner](https://github.com/karagemop466-tech/Korea4/pull/10), from `arena/9d83abee-korea4` to `main`. It includes all parallel-session commits through PR #9, retains their sources, and publishes the corrected planner instead of superseded free-window claims. Checks and merge/deployment verification are pending at this entry.
