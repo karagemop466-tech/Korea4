@@ -36,7 +36,8 @@ const footer = () => `<footer class="footer"><div class="wrap footer-inner"><div
 let data, index, selectedDay, filter = initialFilter;
 const today = pacificDay(Date.now());
 const initialDate = new URLSearchParams(location.search).get('date');
-selectedDay = /^202[6-9]-\d{2}-\d{2}$/.test(initialDate || '') ? initialDate : (today >= '2026-01-01' && today <= '2029-12-31' ? today : '2026-11-02');
+const validDate = value => /^202[6-9]-\d{2}-\d{2}$/.test(value || '') && !Number.isNaN(Date.parse(`${value}T12:00:00Z`)) && addDays(value, 0) === value;
+selectedDay = validDate(initialDate) ? initialDate : (today >= '2026-01-01' && today <= '2029-12-31' ? today : '2026-11-02');
 
 function sourceFreshness() {
   const failed = Object.entries(data.sources || {}).filter(([, s]) => !s.ok);
@@ -61,6 +62,7 @@ function eventMatches(e, selected) {
 function sportLabel(e) {
   return ({MLB:'MLB', NFL:'NFL', NCAAF:'COLLEGE', RADIO:'WESTWOOD', NBA:'NBA', MLS:'SOCCER', REVIEW:'REVIEW'})[e.sport] || esc(e.sport || 'EVENT');
 }
+const clockWithZone = ms => `${timeLabel(ms)} ${zoneLabel(ms)}`;
 function eventDetail(e, day) {
   if (e.group === 'restriction') return e.note || 'The official date or time has not been assigned.';
   if (!e.start) {
@@ -68,7 +70,7 @@ function eventDetail(e, day) {
     return `${displaced} · local radio ${e.radio === 'affiliate-unconfirmed' ? 'affiliate unconfirmed' : 'carriage unconfirmed'}`;
   }
   const t = intervalFor(e);
-  const end = t?.end ? timeLabel(t.end) + (pacificDay(t.end) !== day ? ' next day' : '') : '';
+  const end = t?.end ? clockWithZone(t.end) + (pacificDay(t.end) !== day ? ' next day' : '') : '';
   const endNote = e.group === 'westwood' ? (end ? `network slot to ${end}` : 'network end TBD') : (end ? `estimated end ${end}` : 'end TBD');
   let radio = 'local carriage unconfirmed';
   if (e.radio === 'team-network') radio = 'team radio network; check game';
@@ -79,7 +81,7 @@ function eventDetail(e, day) {
 function eventRows(events, day, max = Infinity) {
   const sorted = [...events].sort((a,b) => (a.start ? Date.parse(a.start) : -1) - (b.start ? Date.parse(b.start) : -1) || a.title.localeCompare(b.title));
   return sorted.slice(0, max).map(e => `<div class="event-row">
-    <div class="event-time">${e.start ? esc(timeLabel(Date.parse(e.start))) : '<span class="tbd">TIME TBD</span>'}</div>
+    <div class="event-time">${e.start ? esc(clockWithZone(Date.parse(e.start))) : '<span class="tbd">TIME TBD</span>'}</div>
     <div class="event-main"><div class="event-title">${esc(e.title)} ${e.priority && e.group !== 'restriction' ? '<span class="priority-star" title="Priority team or network">✦</span>' : ''}</div><div class="event-sub">${esc(eventDetail(e, day))}</div></div>
     <div class="event-aside"><span class="sport-chip ${esc((e.sport || '').toLowerCase())}">${sportLabel(e)}</span>${external(e.source, 'Source')}</div>
   </div>`).join('');
@@ -97,7 +99,7 @@ function durationText(ms) {
 function gapsMarkup(summary, day) {
   if (summary.uncertain) return `<div class="uncertain-block"><span class="uncertain-icon">!</span><div><strong>At least one time or date is unconfirmed.</strong><p>We can’t calculate reliable gaps for this day. Date-only events and schedule windows are treated as uncertain for the whole day.</p></div></div>`;
   if (!summary.gaps.length) return `<div class="empty-inline">Tracked events cover this day using the stated estimates. Actual end times can differ.</div>`;
-  return `<div class="gap-list">${summary.gaps.map(g => `<div class="gap"><span class="gap-dot"></span><div><strong>${esc(timeLabel(g.start))} – ${esc(timeLabel(g.end))}${g.end === summary.end ? ' <small>next day</small>' : ''}</strong><small>Potential gap · ${durationText(g.end-g.start)}</small></div></div>`).join('')}</div>`;
+  return `<div class="gap-list">${summary.gaps.map(g => `<div class="gap"><span class="gap-dot"></span><div><strong>${esc(clockWithZone(g.start))} – ${esc(clockWithZone(g.end))}${g.end === summary.end ? ' <small>next day</small>' : ''}</strong><small>Potential gap · ${durationText(g.end-g.start)}</small></div></div>`).join('')}</div>`;
 }
 function timelineMarkup(summary) {
   if (summary.uncertain) return `<div class="day-timeline is-uncertain"><span>UNCERTAIN TIME</span></div>`;
@@ -108,11 +110,11 @@ function calendarPanel(day, compact = false) {
   const summary = summarizeDay(index, day);
   const visible = summary.events.filter(e => eventMatches(e, filter));
   return `<div class="calendar-card card" id="calendar-card">
-    <div class="calendar-top"><div><div class="section-kicker">DAY BY DAY <span> / </span> ${zoneLabel(summary.start)}</div><h3>${esc(dayLabel(day))}</h3><p>Browse the schedule and see the space in between.</p></div>
+    <div class="calendar-top"><div><div class="section-kicker">DAY BY DAY <span> / </span> PACIFIC TIME</div><h3>${esc(dayLabel(day))}</h3><p>Browse the schedule and see the space in between.</p></div>
       <div class="calendar-controls"><button class="icon-btn" data-shift="-1" aria-label="Previous day">${icon('left')}</button><button class="today-btn" data-today>Today</button><button class="icon-btn" data-shift="1" aria-label="Next day">${icon('right')}</button><label class="date-picker-label"><span class="sr-only">Choose a date</span><input type="date" id="date-picker" min="2026-01-01" max="2029-12-31" value="${day}"></label></div></div>
     ${dateStrip(day)}
-    <div class="day-body"><div class="day-section-title"><div><span class="section-kicker">THE DAILY PICTURE</span><h4>Potential gaps</h4></div><span class="tiny-note">ALL TRACKED CATEGORIES · ${zoneLabel(summary.start)}</span></div>
-      <div class="timeline-labels"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>12 AM</span></div>${timelineMarkup(summary)}
+    <div class="day-body"><div class="day-section-title"><div><span class="section-kicker">THE DAILY PICTURE</span><h4>Potential gaps</h4></div><span class="tiny-note">ALL TRACKED CATEGORIES · PT</span></div>
+      <div class="timeline-labels">${summary.end - summary.start === 86_400_000 ? "<span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span><span>12 AM</span>" : `<span>12 AM</span><span>DST CHANGE · ${(summary.end-summary.start)/3_600_000} HOURS</span><span>12 AM</span>`}</div>${timelineMarkup(summary)}
       ${gapsMarkup(summary, day)}
       <p class="micro-note">Not verified free: these calculations use published records and estimated durations only. Missing schedules, pre/postgame, delays and radio conflicts can change them.</p>
     </div>
@@ -209,6 +211,7 @@ function reviewPage() {
     ['2028 All-Star Game','MLB has named Oracle Park and July 2028, but not a day. July is held uncertain instead of inventing a date.','https://www.mlb.com/giants/fans/all-star-game'],
     ['Stanford time ambiguity','A visible “4 or 4:30 p.m.” or TBA is not a confirmed kickoff, even if a hidden page timestamp looks precise.','https://gostanford.com/sports/football/schedule'],
     ['Superseded 2027 Stanford–TCU game','TCU later announced a different opponent, canceling the earlier Stanford game. The old fixture is excluded.','https://gofrogs.com/news/2026/4/17/football-horned-frogs-to-host-north-texas-in-2027'],
+    ['2027 Pro Bowl game discontinued','The NFL says it will no longer stage the AFC–NFC Pro Bowl game beginning with the 2026 season. A 2027 celebration is mentioned, but no game or radio airtime should be invented.','https://www.nfl.com/news/nfl-elevates-pro-bowl-selection-game-s-will-cease-being-contested'],
     ['Westwood One local affiliate','Network airtime is not proof that a station in the Outer Sunset will air the event. Affiliate conflicts and blackouts remain possible.','https://www.westwoodonesports.com/station-finder/'],
     ['Game end and broadcast duration','The MLB 2h38m duration is an average, not a guaranteed end. Other durations are explicit planning assumptions; overtime and pre/postgame may extend coverage.','https://www.mlb.com/news/mlb-average-game-time-under-three-hours-third-straight-year'],
     ['Earthquakes 2026 table','The team’s radio schedule was announced in February 2026. Dates, times and station assignments are subject to change; later seasons and playoff broadcasts need checking.','https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season'],

@@ -33,10 +33,13 @@ UTC = timezone.utc
 MLB = "https://statsapi.mlb.com/api/v1/schedule"
 NFL = "https://www.nfl.com/schedules"
 CAL = "https://calbears.com/sports/football/schedule"
+CAL_TEXT = CAL + "/text"
 STANFORD = "https://gostanford.com/sports/football/schedule"
 WWO = "https://www.westwoodonesports.com/ajax/eventCalendar"
 NBA = "https://nba-prod-us-east-1-mediaops-stats.s3.amazonaws.com/NBA/staticData/scheduleLeagueV2.json"
 QUAKES = "https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season"
+def quakes_url(year):
+    return QUAKES.replace("2026-mls-season", f"{year}-mls-season")
 GROUPS = ("mlb", "nfl", "cal", "stanford", "westwood", "warriors", "earthquakes")
 
 
@@ -68,8 +71,10 @@ def parse_mlb(payload):
     result = []
     for bucket in payload.get("dates", []):
         for g in bucket.get("games", []):
-            if g.get("status", {}).get("detailedState", "").lower() in {"cancelled", "canceled", "postponed"}:
+            status = g.get("status", {}).get("detailedState", "").lower()
+            if status in {"cancelled", "canceled"}:
                 continue
+            postponed = status == "postponed"
             # MLB lists S spring, E exhibition, R regular, A all-star and postseason.
             typ = g.get("gameType", "")
             if typ not in {"S", "E", "R", "A", "F", "D", "L", "W", "C"}:
@@ -83,20 +88,21 @@ def parse_mlb(payload):
             else:
                 title = f"{away['name']} at {home['name']}"
             priority = bool({away.get("id"), home.get("id")} & {133, 137})
-            tbd = bool(g.get("status", {}).get("startTimeTBD", True))
+            tbd = postponed or bool(g.get("status", {}).get("startTimeTBD", True))
             start = None if tbd else g.get("gameDate")
-            day = bucket.get("date") or g.get("officialDate")
-            if not day:
+            bucket_day = bucket.get("date") or g.get("officialDate")
+            day = None if postponed else bucket_day
+            if not bucket_day:
                 continue
             row = {
-                "id": f"mlb-{g['gamePk']}-{day}", "group": "mlb", "sport": "MLB", "title": title,
+                "id": f"mlb-{g['gamePk']}-{bucket_day}", "group": "mlb", "sport": "MLB", "title": title,
                 "date": day, "start": start, "priority": priority,
                 "category": {"S": "Spring training", "E": "Exhibition", "R": "Regular season", "A": "All-Star", "F": "Postseason", "D": "Postseason", "L": "Postseason", "W": "World Series", "C": "Postseason"}.get(typ, "MLB"),
                 "durationMinutes": 158, "source": event_source_mlb(g["gamePk"]),
-                "dateBasis": "Venue-local date; first pitch TBD" if tbd else ("Official resumed game start" if g.get("resumedFrom") else "Official first pitch"),
+                "dateBasis": "Postponed; new date TBD" if postponed else ("Venue-local date; first pitch TBD" if tbd else ("Official resumed game start" if g.get("resumedFrom") else "Official first pitch")),
                 "radio": "unverified",
             }
-            if tbd:
+            if tbd and day:
                 # Venue date may differ from Pacific date when no time is known.
                 row["possibleOffsetDays"] = [-1, 0, 1]
             result.append(row)
@@ -281,7 +287,42 @@ class TableRows(HTMLParser):
             self.in_row = False
 
 
-def parse_earthquakes(source):
+
+def parse_cal_text(source):
+    heading = re.search(r"(20\d{2}) Football Schedule", source, re.I)
+    if not heading:
+        raise ValueError("Cal text schedule season not found")
+    year = int(heading.group(1))
+    if year not in range(2026, 2030):
+        return []
+    parser = TableRows()
+    parser.feed(source)
+    rows = []
+    for cells in parser.rows:
+        if len(cells) < 4 or cells[2].lower() not in {"home", "away", "neutral"}:
+            continue
+        raw_date = re.sub(r"\s*\([A-Za-z]+\)", "", cells[0]).strip()
+        try:
+            day = datetime.strptime(f"{raw_date} {year}", "%b %d %Y").date().isoformat()
+        except ValueError:
+            continue
+        start = None
+        for fmt in ("%Y-%m-%d %I:%M %p", "%Y-%m-%d %I %p"):
+            try:
+                start = stamp(datetime.strptime(day + " " + cells[1].upper(), fmt).replace(tzinfo=PACIFIC))
+                break
+            except ValueError:
+                pass
+        opp = cells[3]
+        title = f"California at {opp}" if cells[2].lower() == "away" else f"{opp} at California"
+        rows.append({"id": f"cal-{day}", "group": "cal", "sport": "NCAAF", "title": title,
+                     "date": day, "start": start, "priority": True, "category": "California",
+                     "durationMinutes": 210, "source": CAL_TEXT,
+                     "dateBasis": "Official kickoff" if start else "Kickoff not shown / TBD", "radio": "unverified"})
+    return rows
+
+
+def parse_earthquakes(source, season=2026, url=QUAKES):
     parser = TableRows()
     parser.feed(source)
     rows = []
@@ -297,14 +338,14 @@ def parse_earthquakes(source):
                 break
             except ValueError:
                 pass
-        if not parsed or parsed.year != 2026:
+        if not parsed or parsed.year != season:
             continue
         opponent, away = cells[1], cells[2].lower() == "away"
         title = f"San Jose Earthquakes at {opponent}" if away else f"{opponent} at San Jose Earthquakes"
         station = {"810 / 1370": "KSFO 810 AM / KZSF 1370 AM", "680 / 1370": "KNBR 680 AM / KZSF 1370 AM"}.get(cells[4])
         rows.append({"id": "mls-quakes-" + parsed.date().isoformat(), "group": "earthquakes", "sport": "MLS",
                      "title": title, "date": parsed.date().isoformat(), "start": stamp(parsed), "priority": True,
-                     "category": "Earthquakes", "durationMinutes": 120, "source": QUAKES,
+                     "category": "Earthquakes", "durationMinutes": 120, "source": url,
                      "dateBasis": "Team's announced kickoff; check for changes", "radio": "announced-station" if station else "unverified",
                      "station": station})
     return rows
@@ -339,7 +380,7 @@ def build_snapshot(offline=False, previous=None):
         rows = [e for p in payloads for e in parse_mlb(p)]
         if not rows:
             raise ValueError("MLB returned no events for all requested years")
-        success("mlb", rows, {"years": sorted({int(e['date'][:4]) for e in rows})})
+        success("mlb", rows, {"years": sorted({int(e['date'][:4]) for e in rows if e.get('date')})})
     except Exception as exc:
         preserve("mlb", exc)
 
@@ -388,7 +429,14 @@ def build_snapshot(offline=False, previous=None):
     for group, parse, url, fixture in [("cal", parse_cal, CAL, "cal.html.gz"), ("stanford", parse_stanford, STANFORD, "stanford.html.gz")]:
         try:
             text = gzip.decompress((INSPECT / fixture).read_bytes()).decode() if offline else request(url)
-            rows = parse(text, today)
+            if group == "cal" and not offline:
+                rows = parse_cal_text(request(CAL_TEXT))
+            else:
+                rows = parse(text, "2026-01-01")
+            # Team pages roll forward to a new season. Preserve historical rows
+            # captured on an earlier refresh, without overwriting current rows.
+            ids = {r["id"] for r in rows}
+            rows.extend(e for e in old_events if e.get("group") == group and e.get("date") and e["date"] < today and e["id"] not in ids)
             if not rows:
                 raise ValueError("No upcoming team schedule cards parsed")
             success(group, rows)
@@ -397,17 +445,43 @@ def build_snapshot(offline=False, previous=None):
 
     if not offline:
         try:
-            url = WWO + "?" + urlencode({"id": "all", "range": "current", "offset": 0, "limit": 100, "timezone": "America/New_York", "accountID": 3757, "artistID": 0})
-            rows = parse_westwood(json.loads(request(url)))
+            rows = []
+            for offset in range(0, 1000, 100):
+                url = WWO + "?" + urlencode({"id": "all", "range": "current", "offset": offset, "limit": 100, "timezone": "America/New_York", "accountID": 3757, "artistID": 0})
+                payload = json.loads(request(url))
+                page = parse_westwood(payload)
+                existing = {r["id"] for r in rows}
+                if offset and page and all(r["id"] in existing for r in page):
+                    raise ValueError("Westwood pagination repeated a page")
+                rows.extend(r for r in page if r["id"] not in existing)
+                if len(payload.get("events", [])) < 100:
+                    break
+            else:
+                raise ValueError("Westwood calendar exceeds the 1,000-event safety limit")
+            ids = {r["id"] for r in rows}
+            rows.extend(e for e in old_events if e.get("group") == "westwood" and e.get("date") and e["date"] < today and e["id"] not in ids)
             # An empty response is allowed but remains an incomplete network schedule.
             success("westwood", rows)
         except Exception as exc:
             preserve("westwood", exc)
         try:
-            rows = parse_earthquakes(request(QUAKES))
-            if len(rows) < 30:
-                raise ValueError("Earthquakes radio table could not be parsed completely")
-            success("earthquakes", rows, {"season": "2026", "note": "February 2026 team announcement; check for changes"})
+            rows, seasons = [], []
+            for year in range(2026, 2030):
+                url = quakes_url(year)
+                try:
+                    season_rows = parse_earthquakes(request(url, attempts=1), year, url)
+                except HTTPError as exc:
+                    if exc.code == 404 and year > 2026:
+                        continue
+                    raise
+                if season_rows:
+                    if len(season_rows) < 20:
+                        raise ValueError(f"Earthquakes {year} radio table appears incomplete")
+                    rows.extend(season_rows)
+                    seasons.append(year)
+            if 2026 not in seasons:
+                raise ValueError("Earthquakes 2026 radio table could not be parsed completely")
+            success("earthquakes", rows, {"seasons": seasons, "note": "Team announcements are subject to changes; check each match"})
         except Exception as exc:
             preserve("earthquakes", exc)
         try:

@@ -68,6 +68,22 @@
   ],
   "restrictions": [
     {
+      "id": "nfl-flex-week17-2026",
+      "startDate": "2026-12-31",
+      "endDate": "2027-01-05",
+      "title": "NFL Week 17 flexible games \u00b7 individual dates TBD",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-17",
+      "note": "Some games may move among the published Thursday, Saturday, Sunday and Monday windows; the whole range is conservative, not a claim that every day has a game."
+    },
+    {
+      "id": "nfl-flex-week16-2026",
+      "startDate": "2026-12-24",
+      "endDate": "2026-12-29",
+      "title": "NFL Week 16 flexible games \u00b7 individual dates TBD",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-16",
+      "note": "Some games may move among the published Thursday, Saturday, Sunday and Monday windows; the whole range is conservative, not a claim that every day has a game."
+    },
+    {
       "id": "nfl-week18-2027",
       "startDate": "2027-01-09",
       "endDate": "2027-01-11",

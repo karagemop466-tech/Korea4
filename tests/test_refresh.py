@@ -57,6 +57,20 @@ class SourcesTest(unittest.TestCase):
         self.assertEqual(row["start"], "2026-11-14T20:30:00Z")
         self.assertEqual(row["title"], "California at Virginia")
 
+    def test_cal_text_schedule_retains_known_start_and_tbd(self):
+        page = """<h1>2026 Football Schedule</h1><table><tr><td>Nov 14 (Sat)</td><td>12:30 PM</td><td>Away</td><td>Virginia</td></tr><tr><td>Nov 21 (Sat)</td><td></td><td>Home</td><td>Stanford</td></tr></table>"""
+        rows = refresh.parse_cal_text(page)
+        self.assertEqual(rows[0]["start"], "2026-11-14T20:30:00Z")
+        self.assertIsNone(rows[1]["start"])
+        self.assertEqual(rows[0]["source"], refresh.CAL_TEXT)
+
+    def test_postponed_mlb_does_not_reuse_old_date(self):
+        game = {"gamePk": 88, "gameType": "R", "officialDate": "2026-04-01", "gameDate": "2026-04-01T20:00:00Z", "status": {"startTimeTBD": False, "detailedState": "Postponed"}, "teams": {"away": {"team": {"name": "A"}}, "home": {"team": {"name": "B"}}}}
+        row = refresh.parse_mlb({"dates": [{"date": "2026-04-01", "games": [game]}]})[0]
+        self.assertIsNone(row["date"])
+        self.assertIsNone(row["start"])
+        self.assertIn("Postponed", row["dateBasis"])
+
     def test_earthquakes_team_table_is_pacific_and_source_linked(self):
         page = """<table><tr><td>Saturday, Nov. 7, 2026</td><td>Minnesota United FC</td><td>Away</td><td>4:00 PM</td><td>810 / 1370</td></tr></table>"""
         row = refresh.parse_earthquakes(page)[0]
