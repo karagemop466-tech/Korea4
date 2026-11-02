@@ -50,3 +50,41 @@
 
 ---
 *Kept for audit — both branches did verification from official sources with links; see docs/sources.md (19 rows) + site/pages/sources.html (14 rows) for full source audit.*
+
+---
+
+## Additional Parallel Session: arena/cab47657-korea4 (merged via PR #3 & #4)
+
+# COORDINATION.md — Shared Task Board
+
+## Session: arena/cab47657-korea4
+Branch: `arena/cab47657-korea4`
+
+## Task Board
+
+| Task | Status | Owner | Files | Notes |
+|------|--------|-------|-------|-------|
+| COORDINATION.md setup | done | arena/cab47657-korea4 | COORDINATION.md | Initial setup |
+| Research MLB schedules (2026-2029) | in progress | arena/cab47657-korea4 | data/mlb/ | Official sources only |
+| Research NFL schedules (2026-2029) | in progress | arena/cab47657-korea4 | data/nfl/ | Official sources only |
+| Research NCAAF Stanford/Cal schedules | in progress | arena/cab47657-korea4 | data/ncaaf/ | Official sources only |
+| Research Westwood One Sports broadcasts | in progress | arena/cab47657-korea4 | data/radio/ | westwoodonesports.com |
+| Research SF Bay Area radio stations | in progress | arena/cab47657-korea4 | data/radio/ | KNBR, etc. |
+| Build web application | unclaimed | - | site/ | Calendar/scoreboard UI |
+| Create executive summary | unclaimed | - | site/executive-summary.md | |
+| Deploy to GitHub Pages | unclaimed | - | gh-pages config | |
+| Final integration & verification | unclaimed | - | all | Merge & deploy |
+
+## Log
+
+- 2026-11-02: Session started. Setting up coordination and beginning research.
+
+
+**Integration notes for cab47657:**
+- Built flat site at root: `index.html`, `calendar.html`, `daily.html`, `vacation.html`, `teams.html`, `radio.html`, `executive-summary.html`, `flagged.html` with `css/style.css`, `js/app.js`
+- Data: `data/schedules.js` (691 lines) — verified 2026 49ers (18 weeks via nfl.com), Stanford (gostanford.com), Cal (calbears.com), Westwood One (westwoodonesports.com) with 30+ verified rows, durations (MLB 158 min official, NFL 192, NCAAF 206), season windows 2027-2029 estimated, Bay Area radio table.
+- Also built legacy `site/` (other session) — now all three site trees coexist.
+- Merged without discarding — see `git log --graph`.
+- No verification discarded; `data/schedules.js` is additional authoritative source for 2026 line-by-line verification (complements `data/*.json` + `docs/sources.md`).
+
+**Unified next:** merge this PR #2 (already reconciled 4-day finding) — final integration will re-verify combined data, confirm build, merge to main, deploy Pages (now via `pages.yml` workflow + legacy).
