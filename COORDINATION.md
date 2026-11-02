@@ -14,9 +14,11 @@ Arena fixes each session to its assigned branch and forbids switching to, creati
 | #2 `arena/c697ef7b-korea4` | CLOSED, superseded | Root dashboard, `assets/`, `data/*.json`, `site/pages/`, `site/alt/`; later integrated via #5. |
 | #3 / #4 `arena/cab47657-korea4` | MERGED | Flat root dashboard, `data/schedules.js`, Pages workflow attempt. |
 | #5 `arena/c697ef7b-korea4` | MERGED at `edcea17` | Unified prior sessions, reconciled 4-day Feb 15–18 2027 finding, Pages built. |
-| #6 `arena/4c938fb2-korea4` | OPEN | Provisional planner branch; not merged into this verification pass because it deletes shared site pages. To be closed/superseded by final integration. |
+| #6 `arena/4c938fb2-korea4` | CLOSED, superseded by #13 | Provisional planner branch; not merged because it deletes shared site pages. Closed after final integration. |
 | #10 `arena/9d83abee-korea4` | MERGED | Source-aware `site/planner/` edition, redirects, refresh/reconcile scripts, tests and raw inspection snapshots; retained. |
-| #11 `arena/9d83abee-korea4` | MERGED at `b158cf9` | Pages publisher follow-up (`scripts/wait_for_legacy.py`, `tests/test_deploy.py`); retained, but final integration deliberately uses the clean legacy root publisher. |
+| #11 `arena/9d83abee-korea4` | MERGED at `b158cf9` | Pages publisher follow-up retained; final integration deliberately uses the clean legacy root publisher. |
+| #12 `arena/9d83abee-korea4` | CLOSED, superseded by #13 | Late 2026 NFL postseason/all-star branch; its source-aware planner files were already retained in `site/planner/`. |
+| #13 `arena/72e6d3f7-korea4` | MERGED at `849839f` | Final official-source dashboard, verification, and Pages publisher reconciliation. |
 | `arena/9d83abee-korea4` | branch-local | Official source-inspection snapshots, `scripts/refresh.py`, Pacific-time interval tests; used as a cross-check, not bulk-merged. |
 | `arena/97161ae7-korea4` | PRs #7/#8/#9 MERGED | `docs/` HTML scoreboard edition, `EXECUTIVE-SUMMARY.md`, `research-notes.md`, `tools/`; retained and linked. |
 | `arena/72e6d3f7-korea4` | this session | `research/probe/` official runner snapshots, compressed collector, deeper line-by-line official-source verification, final generated site/data, PR + merge + Pages confirmation. |
@@ -33,7 +35,7 @@ Arena fixes each session to its assigned branch and forbids switching to, creati
 | C4 — Free-time/vacation-window analysis 2027–2029 | done | integration | `research/analysis/*`, `vacation.html`, `calendar.html`, `daily.html` | 14,364 merged busy intervals, 1,461 daily scoreboards, exact Pacific free windows, best 7/14/21-day candidates for 2027/2028/2029, official-anchor gaps and relaxed scenario. | Strict definition: any MLB/NFL/Stanford/Cal/WWO/live Bay Area radio sports game makes the minute busy. No strict 7/14/21-day fully free window; all long candidates are ESTIMATED/UNVERIFIED. |
 | C5 — Dashboard, category subpages, scoreboard calendar, tables, flags | done | integration | root HTML, `css/style.css`, `js/app.js`, `data/official/*`, `site/**`, `docs/**`, `EXECUTIVE-SUMMARY.md`, `README.md` | Clean 15-page primary dashboard with every entry in readable tables; legacy trees preserved and linked. | Shared outputs edited only in this final verification pass. |
 | C6 — Line-by-line verification, internal-link checker, build/deploy check | done | integration | `scripts/verify.py`, `research/verification-report.md`, `research/line_by_line.json` | 1,689 prior generated-data lines audited; 9,350 primary static table rows source-link checked; 652 internal links across 42 HTML pages checked with 0 broken; 9 JSON files valid; `node --check js/app.js` PASS; merge-marker scan clean. | PASS report written before PR. |
-| C7 — PR, merge, Pages deployment confirmation, record result | in progress | integration | board | PR from fixed branch to `main`, merge, then GitHub Pages build status. | Flagged items do not block merge; broken build does. |
+| C7 — PR, merge, Pages deployment confirmation, record result | done | integration | board, `research/verification-report.md` | PR #13 merged at `849839f`; PR checks PASS; Pages build run `41497635594` succeeded; Pages API status `built`; live root/cache-busted pages fetched successfully. | Flagged items did not block merge; broken build would have. |
 
 **Final merge conflict resolution 2026-11-02:** merging `origin/main` through `1f02131` (PR #10) produced add/add conflicts in `.gitignore`, `README.md`, `index.html` and `scripts/build_site.py`. The primary dashboard/generator/README from this final integration were kept; the complete `main` versions of `README.md`, `index.html` and `scripts/build_site.py` were preserved verbatim under `research/legacy/`. All `site/planner/`, `redirects/`, `scripts/refresh.py`, `scripts/reconcile_snapshot.py`, tests, workflow and Jekyll config files from PR #10 were retained. `.gitignore` was unioned; no session content was discarded.
 
@@ -79,7 +81,24 @@ Arena fixes each session to its assigned branch and forbids switching to, creati
 | Site build | Static root dashboard + category pages; legacy `docs/`, `site/`, `site/pages/`, `site/alt/`, and PR #10 `site/planner/` trees retained and linked; `site/alt` and redirect relative links corrected. |
 | Verification after PR #10 merge | 9,350 primary table rows, 87 HTML pages, 674 internal links, 0 broken, all JSON valid, JS syntax PASS, no merge markers. |
 | Pages publisher reconciliation | PR #10 `_config.yml`, `pages.yml`, `check.yml`, `build_site.py` and redirect generator preserved under `research/legacy/`; final workflows run `scripts/verify.py`; final `_config.yml` publishes the root dashboard and excludes only superseded redirect/raw/tool trees. |
-| PR / merge / deploy | Pending — recorded after `gh pr create`, `gh pr merge`, and GitHub Pages API confirmation. |
+| PR / merge / deploy | [#13](https://github.com/karagemop466-tech/Korea4/pull/13) MERGED at `849839f` 2026-11-02T18:07:55Z; Pages build run `41497635594` succeeded; Pages API `status=built`, legacy `main:/`; live URL https://karagemop466-tech.github.io/Korea4/ . PR #6 and #12 closed as superseded. |
+| Live-site check | `daily.html`, `mlb.html`, `flagged.html`, and cache-busted `index.html` returned the final dashboard; root URL without a cache-busting query showed a prior CDN cache immediately after deploy. |
+
+
+## Final PR / merge / deploy result
+
+| Item | Result |
+|---|---|
+| Final PR | [#13 — Final integration: official-source FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/13) |
+| State | MERGED |
+| Merge commit | `849839ffcd2082a4ced041d3a116f609b17e8933` (`Merge pull request #13 from karagemop466-tech/arena/72e6d3f7-korea4`) |
+| Merged at | 2026-11-02T18:07:55Z |
+| PR checks | `Verify final integration` PASS; `Verify static Pages source` PASS |
+| GitHub Pages build | Run `41497635594` (`pages build and deployment`) succeeded: Jekyll build, upload, deploy and status-report jobs all green. |
+| Pages API | `build_type=legacy`, `source=main:/`, `status=built`, `html_url=https://karagemop466-tech.github.io/Korea4/`, `https_enforced=true` |
+| Live verification | Root dashboard confirmed with cache-busting query; `/daily.html`, `/mlb.html`, `/flagged.html` fetched live with final official-source tables. |
+| Superseded PRs | #6 and #12 closed with comments after final integration. |
+| Follow-up | This board update is merged from the same fixed branch so `main` records the final PR/merge/deploy result. |
 
 
 ## Appendix A — this session's board before the `47bfbeb` merge (verbatim)
