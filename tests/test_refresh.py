@@ -84,6 +84,23 @@ class SourcesTest(unittest.TestCase):
         self.assertIsNone(row["start"])
         self.assertIn("Postponed", row["dateBasis"])
 
+    def test_cal_basketball_rolls_season_year_and_uses_only_pt(self):
+        source = """<h1>2026-27 Men's Basketball Schedule</h1><table><tr><td>Nov 2 (Mon)</td><td>5 p.m. PT</td><td>Home</td><td>Adams State</td></tr><tr><td>Jan 2 (Sat)</td><td>11:15 a.m. PT / 2:15 p.m. ET</td><td>Away</td><td>Duke</td></tr><tr><td>Jan 5 (Tue)</td><td>7 p.m. ET</td><td>Away</td><td>Virginia</td></tr><tr><td>Oct 16 (Fri)</td><td>6 p.m. PT</td><td>Away</td><td>LMU (exhib.)</td></tr></table>"""
+        rows = refresh.parse_cal_basketball(source)
+        self.assertEqual(len(rows), 3)
+        self.assertEqual(rows[0]['start'], '2026-11-03T01:00:00Z')
+        self.assertEqual(rows[1]['date'], '2027-01-02')
+        self.assertEqual(rows[1]['start'], '2027-01-02T19:15:00Z')
+        self.assertIsNone(rows[2]['start'])
+        self.assertEqual(rows[2]['possibleOffsetDays'], [-1, 0, 1])
+
+    def test_valkyries_omits_app_only_rows_and_keeps_fm(self):
+        source = """<table><tr><td>Friday, May 8</td><td>at Seattle</td><td>7:00 p.m.</td><td>ION</td><td>95.7 The Game, The Audacy App</td></tr><tr><td>Saturday, July 4</td><td>at Atlanta</td><td>10:00 a.m.</td><td>CBS</td><td>The Audacy App</td></tr></table>"""
+        rows = refresh.parse_valkyries(source)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]['start'], '2026-05-09T02:00:00Z')
+        self.assertEqual(rows[0]['station'], 'KGMZ 95.7 FM')
+
     def test_earthquakes_team_table_is_pacific_and_source_linked(self):
         page = """<table><tr><td>Saturday, Nov. 7, 2026</td><td>Minnesota United FC</td><td>Away</td><td>4:00 PM</td><td>810 / 1370</td></tr></table>"""
         row = refresh.parse_earthquakes(page)[0]

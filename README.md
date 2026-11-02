@@ -2,7 +2,7 @@
 
 **Site:** https://karagemop466-tech.github.io/Korea4/
 
-A source-linked, static GitHub Pages planner for Pacific-time sports schedules and possible free-time intervals in 2026–2029. It tracks all available MLB and NFL games; Stanford, Cal, Warriors and Earthquakes games; and Westwood One network events. The radio guide distinguishes published team flagships from confirmation that a specific game is actually carried on ordinary AM/FM at a particular address.
+A source-linked, static GitHub Pages planner for Pacific-time sports schedules and possible free-time intervals in 2026–2029. It tracks all available MLB and NFL games; Stanford and Cal football; Warriors, selected Valkyries, Cal men’s basketball and selected San José State basketball broadcasts; Earthquakes matches; and Westwood One network events. The radio guide distinguishes published team flagships from confirmation that a specific game is actually carried on ordinary AM/FM at a particular address.
 
 > **No vacation window is verified conflict-free.** Future schedules, precise game ends, local carriage, pre/postgame coverage and reception remain incomplete. “Potential gaps” and vacation leads are calculations from the records currently available, not booking recommendations.
 
@@ -17,7 +17,7 @@ The prior integration's claim that **February 15–18, 2027 is verified free** i
 - **Flagged for Review:** stale/failed feeds, undated and time-TBD records, canceled or changed announcements, local radio uncertainty and other caveats.
 - **Methodology:** sources, assumptions and the difference between game time and network airtime.
 
-All civil times use `America/Los_Angeles`, including daylight-saving transitions. A game with no confirmed start marks all possible Pacific dates as uncertain, including the next day when an unknown start could run past midnight. Intervals are merged, not split at halftime. Game ends use clearly labeled planning assumptions (MLB 158 minutes; NFL 192; college football 210; NBA 150; soccer 120), or a published Westwood One network slot. These are **not** verified game ends; overtime, delays and pre/postgame programming can extend coverage.
+All civil times use `America/Los_Angeles`, including daylight-saving transitions. A game with no confirmed start marks all possible Pacific dates as uncertain, including the next day when an unknown start could run past midnight. Intervals are merged, not split at halftime. Game ends use clearly labeled planning assumptions (MLB 158 minutes; NFL 192; college football 210; NBA 150; WNBA/college basketball 135; soccer 120), or a published Westwood One network slot. These are **not** verified game ends; overtime, delays and pre/postgame programming can extend coverage.
 
 ## Sources and coverage
 
@@ -27,6 +27,8 @@ All civil times use `America/Los_Angeles`, including daylight-saving transitions
 | NFL | [NFL schedule](https://www.nfl.com/schedules/) and [important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) | Flexible weeks and playoff matchups may have no date or kickoff; published windows are reserved as uncertain. |
 | College football | [Stanford](https://gostanford.com/sports/football/schedule), [Cal](https://calbears.com/sports/football/schedule/text) | Some future opponents are known but undated. Old announcements need rechecking. |
 | Warriors | [NBA schedule](https://www.nba.com/warriors/schedule), [team radio network](https://www.nba.com/warriors/news/warriors-audacys-95-7-the-game-announce-multi-year-contract-extension-20251023) | The current NBA feed does not establish future seasons or every possible playoff game. |
+| Cal men’s basketball | [Cal schedule](https://calbears.com/sports/mens-basketball/schedule) | The 2026–27 regular-season schedule lists KSFO 810 AM; station conflicts and historical coverage need checking. |
+| Valkyries | [Team 2026 radio announcement](https://valkyries.wnba.com/news/golden-state-valkyries-announce-local-television-and-radio-broadcast-schedule-20260425) | Only games listing 95.7 FM or a later game-specific FM announcement are included; app-only listings are not terrestrial. |
 | Earthquakes | [2026 team radio schedule](https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season) | Dates, times, and station assignments may change; future seasons may not be published. |
 | Westwood One | [Network schedule](https://www.westwoodonesports.com/nfl-schedule/) and [station finder](https://www.westwoodonesports.com/station-finder/) | Network airtime is not necessarily kickoff, the scheduled slot is not the actual end, and local affiliates can preempt games. |
 
@@ -52,6 +54,7 @@ Open `http://localhost:8000/`. The build copies only the current planner and dat
 - `index.html`, `site/planner/` — current dashboard, pages, styling and Pacific-time calculation engine.
 - `site/data/events.json` — current committed source-linked snapshot.
 - `site/data/announced-events.json` — individually sourced future announcements and uncertain date ranges.
+- `site/data/radio-confirmed.json` — manually reviewed, source-linked game-specific local radio records; historical coverage is incomplete.
 - `scripts/refresh.py` — source ingestion and explicit failure retention.
 - `scripts/build_site.py` — isolated Pages artifact and safe legacy redirects.
 - `tests/` — parser, source-link, DST, interval and local-link checks.

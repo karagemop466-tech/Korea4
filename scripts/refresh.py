@@ -25,19 +25,23 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "site/data/events.json"
 ANNOUNCED = ROOT / "site/data/announced-events.json"
+CONFIRMED_RADIO = ROOT / "site/data/radio-confirmed.json"
 PACIFIC = ZoneInfo("America/Los_Angeles")
 UTC = timezone.utc
 MLB = "https://statsapi.mlb.com/api/v1/schedule"
 NFL = "https://www.nfl.com/schedules"
 CAL = "https://calbears.com/sports/football/schedule"
 CAL_TEXT = CAL + "/text"
+CAL_MBB = "https://calbears.com/sports/mens-basketball/schedule"
+CAL_MBB_TEXT = CAL_MBB + "/text"
+VALKYRIES = "https://valkyries.wnba.com/news/golden-state-valkyries-announce-local-television-and-radio-broadcast-schedule-20260425"
 STANFORD = "https://gostanford.com/sports/football/schedule"
 WWO = "https://www.westwoodonesports.com/ajax/eventCalendar"
 NBA = "https://nba-prod-us-east-1-mediaops-stats.s3.amazonaws.com/NBA/staticData/scheduleLeagueV2.json"
 QUAKES = "https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season"
 def quakes_url(year):
     return QUAKES.replace("2026-mls-season", f"{year}-mls-season")
-GROUPS = ("mlb", "nfl", "cal", "stanford", "westwood", "warriors", "earthquakes")
+GROUPS = ("mlb", "nfl", "cal", "stanford", "westwood", "warriors", "earthquakes", "cal_mbb", "valkyries")
 
 
 def stamp(dt=None):
@@ -327,6 +331,81 @@ def parse_cal_text(source):
     return rows
 
 
+def parse_pacific_clock(day, value):
+    """Read an explicitly Pacific team-table time; never infer an unmarked zone."""
+    match = re.search(r"\b(\d{1,2}(?::\d{2})?)\s*([ap])\.?m\.?\s*(?:PT)?", value, re.I)
+    if not match:
+        return None
+    clock = match.group(1) + (":00" if ":" not in match.group(1) else "") + " " + match.group(2).upper() + "M"
+    try:
+        return stamp(datetime.strptime(day + " " + clock, "%Y-%m-%d %I:%M %p").replace(tzinfo=PACIFIC))
+    except ValueError:
+        return None
+
+
+def parse_cal_basketball(source):
+    heading = re.search(r"(20\d{2})\s*[-–]\s*(\d{2})\s+Men(?:'|’|&#39;)s Basketball Schedule", html.unescape(source), re.I)
+    if not heading:
+        raise ValueError("Cal men's basketball season heading not found")
+    first_year = int(heading.group(1))
+    if int(heading.group(2)) != (first_year + 1) % 100:
+        raise ValueError("Unexpected Cal men's basketball season")
+    parser = TableRows()
+    parser.feed(source)
+    rows = []
+    for cells in parser.rows:
+        if len(cells) < 4 or cells[2].lower() not in {"home", "away", "neutral"} or "exhib" in cells[3].lower():
+            continue
+        raw_date = re.sub(r"\s*\([A-Za-z]+\)", "", cells[0]).strip()
+        try:
+            # College seasons begin in the fall and finish in the next calendar year.
+            tentative = datetime.strptime(f"{raw_date} {first_year}", "%b %d %Y")
+            year = first_year + (tentative.month < 7)
+            day = tentative.replace(year=year).date().isoformat()
+        except ValueError:
+            continue
+        if not "2026-01-01" <= day <= "2029-12-31":
+            continue
+        # The text schedule explicitly labels Pacific times; don't silently use ET/CT.
+        start = parse_pacific_clock(day, cells[1]) if re.search(r"\bPT\b", cells[1], re.I) else None
+        opp, venue = cells[3], cells[2].lower()
+        title = f"California at {opp}" if venue == "away" else (f"California vs {opp}" if venue == "neutral" else f"{opp} at California")
+        row = {"id": f"cal-mbb-{day}", "group": "cal_mbb", "sport": "NCAAM", "title": title,
+               "date": day, "start": start, "priority": True, "category": "Cal men's basketball", "durationMinutes": 135,
+               "source": CAL_MBB, "dateBasis": "Team's scheduled tipoff; subject to change" if start else "Tipoff TBD",
+               "radio": "announced-station", "station": "KSFO 810 AM"}
+        if not start and venue == "away":
+            row["possibleOffsetDays"] = [-1, 0, 1]
+        rows.append(row)
+    return rows
+
+
+def parse_valkyries(source):
+    parser = TableRows()
+    parser.feed(source)
+    rows = []
+    for cells in parser.rows:
+        if len(cells) < 5 or "95.7" not in cells[4]:
+            continue  # An Audacy-app-only row is not terrestrial FM.
+        raw_date = re.sub(r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s*,?\s+", "", cells[0], flags=re.I)
+        try:
+            day = datetime.strptime(raw_date.strip() + " 2026", "%B %d %Y").date().isoformat()
+        except ValueError:
+            continue
+        start = parse_pacific_clock(day, cells[2])  # Announcement's table heading is Time (PT).
+        if not start:
+            continue
+        away = cells[1].lower().startswith("at ")
+        opp = re.sub(r"\s*\((?:CC|preseason)\)", "", cells[1], flags=re.I)
+        opp = re.sub(r"^at\s+", "", opp, flags=re.I)
+        title = f"Golden State Valkyries at {opp}" if away else f"{opp} at Golden State Valkyries"
+        rows.append({"id": f"wnba-valkyries-{day}", "group": "valkyries", "sport": "WNBA", "title": title,
+                     "date": day, "start": start, "priority": True, "category": "Valkyries · preseason" if "preseason" in cells[1].lower() else "Valkyries",
+                     "durationMinutes": 135, "source": VALKYRIES, "dateBasis": "Team's 2026 radio table; subject to change",
+                     "radio": "announced-station", "station": "KGMZ 95.7 FM"})
+    return rows
+
+
 def parse_earthquakes(source, season=2026, url=QUAKES):
     parser = TableRows()
     parser.feed(source)
@@ -492,6 +571,35 @@ def build_snapshot(previous=None):
         success("warriors", rows, {"season": payload.get("leagueSchedule", {}).get("seasonYear")})
     except Exception as exc:
         preserve("warriors", exc)
+
+    try:
+        rows = parse_cal_basketball(request(CAL_MBB_TEXT))
+        visible = html.unescape(re.sub(r"<[^>]+>", " ", request(CAL_MBB)))
+        # The text table lacks a radio column. Require at least one explicit
+        # 810-AM listing per included game on the full official schedule.
+        if len(rows) < 20 or len(re.findall(r"Radio\s*:\s*KSFO\s*810\s*AM", visible, re.I)) < len(rows):
+            raise ValueError("Cal men's basketball schedule/radio listings appear incomplete")
+        ids = {r["id"] for r in rows}
+        rows.extend(e for e in old_events if e.get("group") == "cal_mbb" and e.get("date") and e["date"] < today and e["id"] not in ids)
+        success("cal_mbb", rows, {"note": "Team's per-game 810 AM listings; verify conflicts"})
+    except Exception as exc:
+        preserve("cal_mbb", exc)
+
+    try:
+        rows = parse_valkyries(request(VALKYRIES))
+        if len(rows) < 20:
+            raise ValueError("Valkyries 2026 FM radio table appears incomplete")
+        success("valkyries", rows, {"note": "2026 announcement only; app-only rows excluded"})
+    except Exception as exc:
+        preserve("valkyries", exc)
+
+    manual_radio = json.loads(CONFIRMED_RADIO.read_text())
+    manual_ids = {e["id"] for e in manual_radio["events"]}
+    # A later game-specific announcement wins over an older season table.
+    results = [e for e in results if e["id"] not in manual_ids]
+    results.extend(manual_radio["events"])
+    states["historical_radio"] = {"ok": True, "checkedAt": None, "lastSuccess": manual_radio["reviewedAt"] + "T00:00:00Z",
+                                  "count": len(manual_radio["events"]), "note": "Manually reviewed; not refreshed automatically"}
 
     handbook = json.loads(ANNOUNCED.read_text())
     for row in handbook["events"]:

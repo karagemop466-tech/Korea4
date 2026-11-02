@@ -14,7 +14,7 @@ class SnapshotTest(unittest.TestCase):
 
     def test_every_event_has_unique_id_and_official_https_source(self):
         ids = set()
-        domains = {'statsapi.mlb.com', 'www.nfl.com', 'gostanford.com', 'calbears.com', 'www.westwoodonesports.com', 'www.nba.com', 'www.sjearthquakes.com', 'vucommodores.com'}
+        domains = {'statsapi.mlb.com', 'www.nfl.com', 'gostanford.com', 'calbears.com', 'www.westwoodonesports.com', 'www.nba.com', 'www.sjearthquakes.com', 'vucommodores.com', 'valkyries.wnba.com', 'sjsuspartans.com'}
         for row in self.data['events']:
             self.assertFalse(row['id'] in ids, f"Duplicate event ID: {row['id']}")
             ids.add(row['id'])
@@ -35,6 +35,14 @@ class SnapshotTest(unittest.TestCase):
         self.assertIsNone(sb['start'])
         self.assertEqual(sb['date'], '2027-02-14')
         self.assertFalse(any('stanford' in x['title'].lower() and 'tcu' in x['title'].lower() and x.get('date', '').startswith('2027') for x in games if x.get('date')))
+
+    def test_terrestrial_basketball_is_not_omitted_or_confused_with_streaming(self):
+        games = {e['id']: e for e in self.data['events']}
+        self.assertEqual(games['cal-mbb-2026-11-02']['station'], 'KSFO 810 AM')
+        self.assertEqual(games['wnba-valkyries-2026-08-07']['station'], 'KGMZ 95.7 FM')
+        self.assertIn('gameday-preview-20260807', games['wnba-valkyries-2026-08-07']['source'])
+        self.assertEqual(games['wnba-valkyries-2026-10-29']['start'], '2026-10-29T16:30:00Z')
+        self.assertNotIn('wnba-valkyries-2026-07-04', games, 'app-only match is not a terrestrial broadcast')
 
     def test_restrictions_are_source_linked(self):
         for r in self.data['restrictions']:
