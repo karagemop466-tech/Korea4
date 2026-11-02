@@ -14,3 +14,8 @@ The Arena-assigned branch is fixed; it cannot be renamed to the requested sessio
 - MLB end estimate uses the [2025 nine-inning average](https://www.mlb.com/news/mlb-average-game-time-under-three-hours-third-straight-year); other ends are explicitly planning assumptions, not verified game averages.
 - `node tests/test.mjs` and `node tests/ui.mjs`: pass. Checked local page and asset links and HTTP 200 responses from a static server. Tests cover DST, midnight, unknown starts, overlap, empty feed, and failed feed. External pages were researched but not exhaustively rechecked by an automated link crawler; MLB browser/CORS availability varies by client and is flagged.
 - Irregularities: not all NFL games or non-MLB radio schedules are ingested; future seasons and postseasons are incomplete; Westwood One carriage and exact 94122 reception are unverified; actual end and pre/postgame times are unknown. No 1-, 2-, or 3-week vacation window is certified. [Stanford's 2027 conference grid](https://gostanford.com/news/2026/09/16/acc-announces-2027-conference-opponents) supersedes the old model, and [TCU 2027 was canceled](https://gostanford.com/news/2026/04/17/tcu-series-update).
+
+## Pull request / publication
+
+- Preliminary integration PR: https://github.com/karagemop466-tech/Korea4/pull/6
+- Merge result: **not merged**. The requested complete non-MLB schedule coverage and exhaustive external-link verification were not achieved, so the final-integration conditions have not been met. GitHub Pages has not been updated with this branch. The live preview serves the provisional site directly from this branch.
