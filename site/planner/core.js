@@ -57,9 +57,9 @@ export function buildIndex(data) {
     const interval = intervalFor(event);
     if (interval) {
       const first = pacificDay(interval.start);
-      const last = interval.end ? pacificDay(interval.end - 1) : first;
+      const last = interval.end ? pacificDay(interval.end - 1) : addDays(first, 1);
       let day = first;
-      for (let i = 0; i < 3 && day <= last; i++, day = addDays(day, 1)) put(day, event);
+      for (let i = 0; i < 1462 && day <= last; i++, day = addDays(day, 1)) put(day, event);
     } else if (event.date) {
       for (const offset of event.possibleOffsetDays || [0, 1]) put(addDays(event.date, offset), event);
     }

@@ -16,6 +16,7 @@ const idx = buildIndex({events: [
 assert.equal(summarizeDay(idx, '2027-03-01').uncertain, true);
 assert.equal(summarizeDay(idx, '2027-03-03').gaps.length, 0);
 assert.equal(summarizeDay(idx, '2027-03-05').uncertain, true, 'unknown end is not invented');
+assert.equal(summarizeDay(idx, '2027-03-06').uncertain, true, 'an unknown end can extend overnight');
 assert.equal(summarizeDay(idx, '2027-03-10').uncertain, true, 'a date-only game could extend into the next Pacific day');
 assert.equal(summarizeDay(idx, '2028-07-31').uncertain, true);
 assert.equal(summarizeDay(idx, '2028-08-01').uncertain, false);
