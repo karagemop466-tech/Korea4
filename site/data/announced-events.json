@@ -1,0 +1,79 @@
+{
+  "reviewedAt": "2026-11-02",
+  "events": [
+    {
+      "id": "nfl-super-bowl-lxi",
+      "sport": "NFL",
+      "title": "Super Bowl LXI \u00b7 teams TBD",
+      "date": "2027-02-14",
+      "dateBasis": "Pacific date at the announced California venue; kickoff TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "priority": true,
+      "category": "Postseason"
+    },
+    {
+      "id": "cal-sac-state-2027",
+      "sport": "NCAAF",
+      "title": "Sacramento State at California",
+      "date": "2027-08-28",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://calbears.com/news/2026/6/25/football-cal-announces-matchups-against-odu-sac-state.aspx",
+      "priority": true,
+      "category": "California"
+    },
+    {
+      "id": "cal-ucla-2027",
+      "sport": "NCAAF",
+      "title": "California at UCLA",
+      "date": "2027-09-04",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents",
+      "priority": true,
+      "category": "California"
+    },
+    {
+      "id": "cal-odu-2027",
+      "sport": "NCAAF",
+      "title": "Old Dominion at California",
+      "date": "2027-09-11",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://calbears.com/news/2026/6/25/football-cal-announces-matchups-against-odu-sac-state.aspx",
+      "priority": true,
+      "category": "California"
+    },
+    {
+      "id": "stanford-notre-dame-2027",
+      "sport": "NCAAF",
+      "title": "Notre Dame at Stanford",
+      "date": "2027-11-27",
+      "dateBasis": "Date announced; kickoff TBD",
+      "source": "https://gostanford.com/news/2026/05/20/two-dates-added-to-notre-dame-rivalry",
+      "priority": true,
+      "category": "Stanford"
+    },
+    {
+      "id": "stanford-notre-dame-2028",
+      "sport": "NCAAF",
+      "title": "Stanford at Notre Dame",
+      "date": "2028-10-14",
+      "dateBasis": "Venue-local date; kickoff and Pacific date TBD",
+      "possibleOffsetDays": [
+        -1,
+        0
+      ],
+      "source": "https://gostanford.com/news/2026/05/20/two-dates-added-to-notre-dame-rivalry",
+      "priority": true,
+      "category": "Stanford"
+    }
+  ],
+  "restrictions": [
+    {
+      "id": "all-star-2028-month",
+      "startDate": "2028-07-01",
+      "endDate": "2028-08-01",
+      "title": "2028 MLB All-Star Game \u00b7 exact July date TBD",
+      "source": "https://www.mlb.com/giants/fans/all-star-game",
+      "note": "MLB specifies July, not a day; the entire month remains uncertain rather than assigning a guessed date."
+    }
+  ]
+}
