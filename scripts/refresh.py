@@ -504,6 +504,11 @@ def build_snapshot(offline=False, previous=None):
 
     handbook = json.loads(ANNOUNCED.read_text())
     for row in handbook["events"]:
+        replacement = row.get("replaceIfScheduled")
+        if replacement and any(e.get("group") == replacement["group"] and (e.get("date") or "").startswith(str(replacement["season"])) and replacement["opponent"].casefold() in e.get("title", "").casefold() for e in results):
+            # Prefer the subsequently published team schedule over an older
+            # undated or historically announced opponent record.
+            continue
         row = dict(row, group="announced", start=None, radio="unverified")
         if row["sport"] == "NCAAF":
             row["durationMinutes"] = 210

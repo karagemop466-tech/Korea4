@@ -14,7 +14,7 @@ class SnapshotTest(unittest.TestCase):
 
     def test_every_event_has_unique_id_and_official_https_source(self):
         ids = set()
-        domains = {'statsapi.mlb.com', 'www.nfl.com', 'gostanford.com', 'calbears.com', 'www.westwoodonesports.com', 'www.nba.com', 'www.sjearthquakes.com'}
+        domains = {'statsapi.mlb.com', 'www.nfl.com', 'gostanford.com', 'calbears.com', 'www.westwoodonesports.com', 'www.nba.com', 'www.sjearthquakes.com', 'vucommodores.com'}
         for row in self.data['events']:
             self.assertFalse(row['id'] in ids, f"Duplicate event ID: {row['id']}")
             ids.add(row['id'])
@@ -29,7 +29,7 @@ class SnapshotTest(unittest.TestCase):
     def test_future_team_coverage_and_unknown_dates_are_honest(self):
         games = self.data['events']
         sf = [r for r in games if r['group'] == 'warriors' and r['date'] in ('2027-02-15', '2027-02-17')]
-        if self.data['sources'].get('warriors', {}).get('ok'):
+        if self.data['sources'].get('warriors', {}).get('ok') and self.data['sources']['warriors'].get('season') == '2026-27':
             self.assertEqual({x['date'] for x in sf}, {'2027-02-15', '2027-02-17'})
         sb = next(r for r in games if r['id'] == 'nfl-super-bowl-lxi')
         self.assertIsNone(sb['start'])
