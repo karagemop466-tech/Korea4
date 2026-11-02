@@ -32,7 +32,7 @@ All civil times use `America/Los_Angeles`, including daylight-saving transitions
 | Earthquakes | [2026 team radio schedule](https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season) | Dates, times, and station assignments may change; future seasons may not be published. |
 | Westwood One | [Network schedule](https://www.westwoodonesports.com/nfl-schedule/) and [station finder](https://www.westwoodonesports.com/station-finder/) | Network airtime is not necessarily kickoff, the scheduled slot is not the actual end, and local affiliates can preempt games. |
 
-The NFL [no longer stages an AFC–NFC Pro Bowl game beginning with the 2026 season](https://www.nfl.com/news/nfl-elevates-pro-bowl-selection-game-s-will-cease-being-contested); its 2027 celebration is not invented as a game. Current [Sharks audio information](https://www.nhl.com/sharks/team/broadcast) does not establish ordinary-FM carriage, so internet audio or historical affiliate lists are not counted as terrestrial broadcasts.
+The 2026 calendar also includes the prior NFL season’s Week 18, postseason and Feb. 3 AFC–NFC flag game, transcribed from NFL announcements. Conflicting NFL kickoff reports for Texans–Steelers on Jan. 12 are flagged and the time is left blank. The NFL [no longer stages an AFC–NFC Pro Bowl game beginning with the 2026 season](https://www.nfl.com/news/nfl-elevates-pro-bowl-selection-game-s-will-cease-being-contested); its 2027 celebration is not invented as a game. Current [Sharks audio information](https://www.nhl.com/sharks/team/broadcast) does not establish ordinary-FM carriage, so internet audio or historical affiliate lists are not counted as terrestrial broadcasts.
 
 ## Build and test
 
@@ -54,6 +54,7 @@ Open `http://localhost:8000/`. The build copies only the current planner and dat
 - `index.html`, `site/planner/` — current dashboard, pages, styling and Pacific-time calculation engine.
 - `site/data/events.json` — current committed source-linked snapshot.
 - `site/data/announced-events.json` — individually sourced future announcements and uncertain date ranges.
+- `site/data/nfl-2026-history.json` — manually reviewed 2026 games from the prior NFL season; the conflicting kickoff remains blank.
 - `site/data/radio-confirmed.json` — manually reviewed, source-linked game-specific local radio records; historical coverage is incomplete.
 - `scripts/refresh.py` — source ingestion and explicit failure retention.
 - `scripts/build_site.py` — isolated Pages artifact and safe legacy redirects.

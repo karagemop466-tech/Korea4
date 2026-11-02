@@ -14,7 +14,7 @@ class SnapshotTest(unittest.TestCase):
 
     def test_every_event_has_unique_id_and_official_https_source(self):
         ids = set()
-        domains = {'statsapi.mlb.com', 'www.nfl.com', 'gostanford.com', 'calbears.com', 'www.westwoodonesports.com', 'www.nba.com', 'www.sjearthquakes.com', 'vucommodores.com', 'valkyries.wnba.com', 'sjsuspartans.com'}
+        domains = {'statsapi.mlb.com', 'www.nfl.com', 'media.nfl.com', 'gostanford.com', 'calbears.com', 'www.westwoodonesports.com', 'www.nba.com', 'www.sjearthquakes.com', 'vucommodores.com', 'valkyries.wnba.com', 'sjsuspartans.com'}
         for row in self.data['events']:
             self.assertFalse(row['id'] in ids, f"Duplicate event ID: {row['id']}")
             ids.add(row['id'])
@@ -43,6 +43,19 @@ class SnapshotTest(unittest.TestCase):
         self.assertIn('gameday-preview-20260807', games['wnba-valkyries-2026-08-07']['source'])
         self.assertEqual(games['wnba-valkyries-2026-10-29']['start'], '2026-10-29T16:30:00Z')
         self.assertNotIn('wnba-valkyries-2026-07-04', games, 'app-only match is not a terrestrial broadcast')
+
+    def test_prior_nfl_season_games_played_in_2026_are_included(self):
+        history = [e for e in self.data['events'] if e.get('group') == 'nfl_history']
+        self.assertEqual(len(history), 30)
+        self.assertEqual(sum(e['category'] == 'Regular season' for e in history), 16)
+        self.assertEqual(sum(e['category'] == 'Postseason' for e in history), 13)
+        pro = next(e for e in history if e['id'] == 'nfl-history-pro-bowl-flag')
+        self.assertEqual(pro['start'], '2026-02-04T01:00:00Z')
+        self.assertIsNone(pro['durationMinutes'])
+        disagreement = next(e for e in history if e['id'] == 'nfl-history-wild-texans-steelers')
+        self.assertIsNone(disagreement['start'])
+        self.assertIn('conflict', disagreement['dateBasis'])
+        self.assertTrue(any('49ers' in e['title'] and e['date'] == '2026-01-11' for e in history))
 
     def test_restrictions_are_source_linked(self):
         for r in self.data['restrictions']:

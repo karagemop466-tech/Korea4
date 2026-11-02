@@ -25,6 +25,7 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "site/data/events.json"
 ANNOUNCED = ROOT / "site/data/announced-events.json"
+CONFIRMED_NFL_HISTORY = ROOT / "site/data/nfl-2026-history.json"
 CONFIRMED_RADIO = ROOT / "site/data/radio-confirmed.json"
 PACIFIC = ZoneInfo("America/Los_Angeles")
 UTC = timezone.utc
@@ -592,6 +593,14 @@ def build_snapshot(previous=None):
         success("valkyries", rows, {"note": "2026 announcement only; app-only rows excluded"})
     except Exception as exc:
         preserve("valkyries", exc)
+
+    # The 2025 NFL season finished in 2026. These historical week-18,
+    # postseason and Pro Bowl records were individually transcribed from NFL
+    # announcements; they are not replaced by the current-season feed.
+    history = json.loads(CONFIRMED_NFL_HISTORY.read_text())
+    results.extend(history["events"])
+    states["nfl_history"] = {"ok": True, "checkedAt": None, "lastSuccess": history["reviewedAt"] + "T00:00:00Z",
+                             "count": len(history["events"]), "note": "Manually reviewed 2025-season games played in 2026"}
 
     manual_radio = json.loads(CONFIRMED_RADIO.read_text())
     manual_ids = {e["id"] for e in manual_radio["events"]}
