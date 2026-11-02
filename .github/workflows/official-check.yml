@@ -1,0 +1,42 @@
+name: Official source connectivity
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect official source formats
+        run: |
+          mkdir -p diagnostics
+          python - <<'PY'
+          from urllib.request import Request, urlopen
+          from pathlib import Path
+          sources = {
+              'mlb.json': 'https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2027-02-19&endDate=2027-02-20',
+              'nfl.html': 'https://www.nfl.com/schedules/2026/by-week/week-9',
+              '49ers.html': 'https://www.49ers.com/schedule/',
+              'cal.html': 'https://calbears.com/sports/football/schedule',
+              'stanford.html': 'https://gostanford.com/sports/football/schedule',
+              'westwood.html': 'https://www.westwoodonesports.com/nfl-schedule/',
+              'westwood-event.html': 'https://www.westwoodonesports.com/events/548540/',
+              'nba.json': 'https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json',
+          }
+          for name, url in sources.items():
+              try:
+                  req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; FreeTimeVacation/1.0)'})
+                  with urlopen(req, timeout=30) as response:
+                      data = response.read()
+                      Path('diagnostics', name).write_bytes(data)
+                      print(name, response.status, len(data))
+              except Exception as exc:
+                  print(name, type(exc).__name__, str(exc))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: source-formats
+          path: diagnostics/
