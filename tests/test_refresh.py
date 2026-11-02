@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -7,6 +8,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import refresh
 
 class SourcesTest(unittest.TestCase):
+    def test_fetch_failure_keeps_last_stored_events_and_marks_stale(self):
+        old = {"events": [{"id": "mlb-old", "group": "mlb", "date": "2027-04-01", "start": None, "title": "Stored game", "source": "https://statsapi.mlb.com/api/v1/schedule?gamePk=1"}], "sources": {"mlb": {"lastSuccess": "2026-11-01T00:00:00Z"}}}
+        with patch.object(refresh, "request", side_effect=OSError("source unavailable")):
+            snapshot = refresh.build_snapshot(old)
+        self.assertFalse(snapshot["sources"]["mlb"]["ok"])
+        self.assertEqual(snapshot["sources"]["mlb"]["lastSuccess"], "2026-11-01T00:00:00Z")
+        self.assertTrue(any(e["id"] == "mlb-old" for e in snapshot["events"]))
+
     def test_mlb_tbd_never_uses_placeholder(self):
         game = {"gamePk": 123, "gameType": "R", "officialDate": "2027-04-01", "gameDate": "2027-04-01T08:33:00Z", "status": {"startTimeTBD": True}, "teams": {"away": {"team": {"id": 137, "name": "San Francisco Giants"}}, "home": {"team": {"id": 133, "name": "Athletics"}}}}
         row = refresh.parse_mlb({"dates": [{"date": "2027-04-01", "games": [game]}]})[0]

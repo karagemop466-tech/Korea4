@@ -1,8 +1,10 @@
-name: Deploy to GitHub Pages
+name: Refresh and deploy planner
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
+  schedule:
+    - cron: '17 11 * * *'
   workflow_dispatch:
 
 permissions:
@@ -11,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: pages
   cancel-in-progress: false
 
 jobs:
@@ -21,14 +23,20 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
+      - uses: actions/checkout@v4
+      - name: Refresh source-linked schedules
+        run: python3 scripts/refresh.py
+      - name: Validate snapshot, parsers and local links
+        run: |
+          python3 -m unittest discover -s tests -v
+          node tests/test_core.mjs
+          python3 scripts/build_site.py
+      - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+      - name: Upload isolated site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: _site
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

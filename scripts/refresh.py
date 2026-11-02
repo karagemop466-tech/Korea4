@@ -9,13 +9,11 @@ from __future__ import annotations
 
 import argparse
 import concurrent.futures
-import gzip
 import html
 import json
 import re
 import sys
 import time
-from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 from html.parser import HTMLParser
@@ -27,7 +25,6 @@ from zoneinfo import ZoneInfo
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "site/data/events.json"
 ANNOUNCED = ROOT / "site/data/announced-events.json"
-INSPECT = ROOT / "site/data/_source-inspection"
 PACIFIC = ZoneInfo("America/Los_Angeles")
 UTC = timezone.utc
 MLB = "https://statsapi.mlb.com/api/v1/schedule"
@@ -249,6 +246,8 @@ def parse_warriors(payload):
             try:
                 start_dt = datetime.fromisoformat(raw_start.replace("Z", "+00:00"))
                 day = start_dt.astimezone(PACIFIC).date().isoformat()
+                if not "2026-01-01" <= day <= "2029-12-31":
+                    continue
                 start = stamp(start_dt)
             except (AttributeError, ValueError):
                 continue
@@ -354,7 +353,7 @@ def parse_earthquakes(source, season=2026, url=QUAKES):
     return rows
 
 
-def build_snapshot(offline=False, previous=None):
+def build_snapshot(previous=None):
     previous = previous or {}
     old_events = previous.get("events", [])
     old_status = previous.get("sources", {})
@@ -375,11 +374,8 @@ def build_snapshot(offline=False, previous=None):
     # MLB supports a complete calendar-year query. A partial failure is treated
     # as stale rather than silently replacing a previously successful year.
     try:
-        if offline:
-            payloads = [json.loads(gzip.decompress((INSPECT / "mlb.json.gz").read_bytes()))]
-        else:
-            with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
-                payloads = list(pool.map(lambda y: json.loads(request(season_url(y))), range(2026, 2030)))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+            payloads = list(pool.map(lambda y: json.loads(request(season_url(y))), range(2026, 2030)))
         rows = [e for p in payloads for e in parse_mlb(p)]
         if not rows:
             raise ValueError("MLB returned no events for all requested years")
@@ -388,38 +384,35 @@ def build_snapshot(offline=False, previous=None):
         preserve("mlb", exc)
 
     try:
-        if offline:
-            pages = [(2026, gzip.decompress((INSPECT / "nfl.html.gz").read_bytes()).decode())]
-        else:
-            # Probe first: unsupported future-year URLs may redirect to this year.
-            def get_page(pair):
-                y, week = pair
-                return y, request(f"{NFL}/{y}/by-week/{week}")
-            with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
-                first = list(pool.map(get_page, [(y, "week-1") for y in range(2026, 2030)]))
-            available = [y for y, text in first if parse_nfl(text, y)]
-            # Follow the actual official navigation instead of guessing postseason
-            # slugs. It also discovers Hall of Fame and playoff rounds when added.
-            pairs = []
-            for y, text in first:
-                if y not in available:
-                    continue
-                paths = set(re.findall(rf"/schedules/{y}/by-week/([a-z0-9-]+)", text, re.I))
-                paths.discard("week-1")
-                pairs.extend((y, w) for w in sorted(paths))
-            pages = first[:]
-            # Failed weeks are reported, not treated as evidence of no games.
-            def safe_page(pair):
-                try:
-                    return get_page(pair), None
-                except Exception as exc:
-                    return None, f"{pair}: {type(exc).__name__}"
-            with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
-                fetched = list(pool.map(safe_page, pairs))
-            pages += [p for p, err in fetched if p]
-            errors = [err for _, err in fetched if err]
-            if errors:
-                raise ValueError("NFL week fetch incomplete: " + "; ".join(errors[:5]))
+        # Probe first: unsupported future-year URLs may redirect to this year.
+        def get_page(pair):
+            y, week = pair
+            return y, request(f"{NFL}/{y}/by-week/{week}")
+        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+            first = list(pool.map(get_page, [(y, "week-1") for y in range(2026, 2030)]))
+        available = [y for y, text in first if parse_nfl(text, y)]
+        # Follow the actual official navigation instead of guessing postseason
+        # slugs. It also discovers Hall of Fame and playoff rounds when added.
+        pairs = []
+        for y, text in first:
+            if y not in available:
+                continue
+            paths = set(re.findall(rf"/schedules/{y}/by-week/([a-z0-9-]+)", text, re.I))
+            paths.discard("week-1")
+            pairs.extend((y, w) for w in sorted(paths))
+        pages = first[:]
+        # Failed weeks are reported, not treated as evidence of no games.
+        def safe_page(pair):
+            try:
+                return get_page(pair), None
+            except Exception as exc:
+                return None, f"{pair}: {type(exc).__name__}"
+        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+            fetched = list(pool.map(safe_page, pairs))
+        pages += [p for p, err in fetched if p]
+        errors = [err for _, err in fetched if err]
+        if errors:
+            raise ValueError("NFL week fetch incomplete: " + "; ".join(errors[:5]))
         by_id = {}
         for year, page in pages:
             by_id.update({e["id"]: e for e in parse_nfl(page, year)})
@@ -429,13 +422,9 @@ def build_snapshot(offline=False, previous=None):
     except Exception as exc:
         preserve("nfl", exc)
 
-    for group, parse, url, fixture in [("cal", parse_cal, CAL, "cal.html.gz"), ("stanford", parse_stanford, STANFORD, "stanford.html.gz")]:
+    for group in ("cal", "stanford"):
         try:
-            text = gzip.decompress((INSPECT / fixture).read_bytes()).decode() if offline else request(url)
-            if group == "cal" and not offline:
-                rows = parse_cal_text(request(CAL_TEXT))
-            else:
-                rows = parse(text, "2026-01-01")
+            rows = parse_cal_text(request(CAL_TEXT)) if group == "cal" else parse_stanford(request(STANFORD), "2026-01-01")
             # Team pages roll forward to a new season. Preserve historical rows
             # captured on an earlier refresh, without overwriting current rows.
             ids = {r["id"] for r in rows}
@@ -446,64 +435,60 @@ def build_snapshot(offline=False, previous=None):
         except Exception as exc:
             preserve(group, exc)
 
-    if not offline:
-        try:
-            rows = []
-            # Include past 2026 broadcasts as well as future entries. The past
-            # endpoint is reverse chronological, so stop when it reaches 2025.
-            for range_name in ("current", "past"):
-                previous_page = set()
-                for offset in range(0, 3000, 100):
-                    url = WWO + "?" + urlencode({"id": "all", "range": range_name, "offset": offset, "limit": 100, "timezone": "America/New_York", "accountID": 3757, "artistID": 0})
-                    payload = json.loads(request(url))
-                    page = parse_westwood(payload)
-                    page_ids = {r["id"] for r in page}
-                    if offset and page_ids and page_ids == previous_page:
-                        raise ValueError("Westwood pagination repeated a page")
-                    previous_page = page_ids
-                    existing = {r["id"] for r in rows}
-                    rows.extend(r for r in page if r["id"] not in existing and "2026-01-01" <= r["date"] <= "2029-12-31")
-                    if len(payload.get("events", [])) < 100 or (range_name == "past" and page and min(r["date"] for r in page) < "2026-01-01"):
-                        break
-                else:
-                    raise ValueError("Westwood calendar exceeds the 3,000-event safety limit")
-            ids = {r["id"] for r in rows}
-            rows.extend(e for e in old_events if e.get("group") == "westwood" and e.get("date") and e["date"] < today and e["id"] not in ids)
-            # An empty response is allowed but remains an incomplete network schedule.
-            success("westwood", rows)
-        except Exception as exc:
-            preserve("westwood", exc)
-        try:
-            rows, seasons = [], []
-            for year in range(2026, 2030):
-                url = quakes_url(year)
-                try:
-                    season_rows = parse_earthquakes(request(url, attempts=1), year, url)
-                except HTTPError as exc:
-                    if exc.code == 404 and year > 2026:
-                        continue
-                    raise
-                if season_rows:
-                    if len(season_rows) < 20:
-                        raise ValueError(f"Earthquakes {year} radio table appears incomplete")
-                    rows.extend(season_rows)
-                    seasons.append(year)
-            if 2026 not in seasons:
-                raise ValueError("Earthquakes 2026 radio table could not be parsed completely")
-            success("earthquakes", rows, {"seasons": seasons, "note": "Team announcements are subject to changes; check each match"})
-        except Exception as exc:
-            preserve("earthquakes", exc)
-        try:
-            payload = json.loads(request(NBA))
-            rows = parse_warriors(payload)
-            if len(rows) < 20:
-                raise ValueError("Warriors feed has too few regular-season games")
-            success("warriors", rows, {"season": payload.get("leagueSchedule", {}).get("seasonYear")})
-        except Exception as exc:
-            preserve("warriors", exc)
-    else:
-        for group in ("westwood", "warriors", "earthquakes"):
-            preserve(group, ValueError("not included in offline fixture"))
+    try:
+        rows = []
+        # Include past 2026 broadcasts as well as future entries. The past
+        # endpoint is reverse chronological, so stop when it reaches 2025.
+        for range_name in ("current", "past"):
+            previous_page = set()
+            for offset in range(0, 3000, 100):
+                url = WWO + "?" + urlencode({"id": "all", "range": range_name, "offset": offset, "limit": 100, "timezone": "America/New_York", "accountID": 3757, "artistID": 0})
+                payload = json.loads(request(url))
+                page = parse_westwood(payload)
+                page_ids = {r["id"] for r in page}
+                if offset and page_ids and page_ids == previous_page:
+                    raise ValueError("Westwood pagination repeated a page")
+                previous_page = page_ids
+                existing = {r["id"] for r in rows}
+                rows.extend(r for r in page if r["id"] not in existing and "2026-01-01" <= r["date"] <= "2029-12-31")
+                if len(payload.get("events", [])) < 100 or (range_name == "past" and page and min(r["date"] for r in page) < "2026-01-01"):
+                    break
+            else:
+                raise ValueError("Westwood calendar exceeds the 3,000-event safety limit")
+        ids = {r["id"] for r in rows}
+        rows.extend(e for e in old_events if e.get("group") == "westwood" and e.get("date") and e["date"] < today and e["id"] not in ids)
+        # An empty response is allowed but remains an incomplete network schedule.
+        success("westwood", rows)
+    except Exception as exc:
+        preserve("westwood", exc)
+    try:
+        rows, seasons = [], []
+        for year in range(2026, 2030):
+            url = quakes_url(year)
+            try:
+                season_rows = parse_earthquakes(request(url, attempts=1), year, url)
+            except HTTPError as exc:
+                if exc.code == 404 and year > 2026:
+                    continue
+                raise
+            if season_rows:
+                if len(season_rows) < 20:
+                    raise ValueError(f"Earthquakes {year} radio table appears incomplete")
+                rows.extend(season_rows)
+                seasons.append(year)
+        if 2026 not in seasons:
+            raise ValueError("Earthquakes 2026 radio table could not be parsed completely")
+        success("earthquakes", rows, {"seasons": seasons, "note": "Team announcements are subject to changes; check each match"})
+    except Exception as exc:
+        preserve("earthquakes", exc)
+    try:
+        payload = json.loads(request(NBA))
+        rows = parse_warriors(payload)
+        if len(rows) < 20:
+            raise ValueError("Warriors feed has too few regular-season games")
+        success("warriors", rows, {"season": payload.get("leagueSchedule", {}).get("seasonYear")})
+    except Exception as exc:
+        preserve("warriors", exc)
 
     handbook = json.loads(ANNOUNCED.read_text())
     for row in handbook["events"]:
@@ -525,11 +510,10 @@ def build_snapshot(offline=False, previous=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--offline", action="store_true", help="Use saved source inspection fixtures")
     ap.add_argument("--output", type=Path, default=OUT)
     args = ap.parse_args()
     previous = json.loads(args.output.read_text()) if args.output.exists() else {}
-    payload = build_snapshot(args.offline, previous)
+    payload = build_snapshot(previous)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, separators=(",", ":"), ensure_ascii=False) + "\n")
     print(json.dumps({k: {"ok": v["ok"], "count": v["count"], "error": v.get("error")} for k, v in payload["sources"].items()}, indent=2))

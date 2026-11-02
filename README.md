@@ -1,81 +1,60 @@
-# FREE TIME VACATION — Bay Area Radio Free-Time Dashboard
+# Free Time — Outer Sunset vacation planner
 
-**Live site:** https://karagemop466-tech.github.io/Korea4/ — also at `/site/` (legacy redirect from other parallel session)
+**Site:** https://karagemop466-tech.github.io/Korea4/
 
-> Find when you're *actually* free to leave town and miss nothing on Bay Area AM/FM radio. Outer Sunset SF 94122 • PST • Only AM/FM counts.
+A source-linked, static GitHub Pages planner for Pacific-time sports schedules and possible free-time intervals in 2026–2029. It tracks all available MLB and NFL games; Stanford, Cal, Warriors and Earthquakes games; and Westwood One network events. The radio guide distinguishes published team flagships from confirmation that a specific game is actually carried on ordinary AM/FM at a particular address.
 
-This project is a merge of two parallel sessions (both from empty repo `a6e22c4`) that both verified from official sources — see **Coordination** below. Their sites are *both kept*; findings were reconciled.
+> **No vacation window is verified conflict-free.** Future schedules, precise game ends, local carriage, pre/postgame coverage and reception remain incomplete. “Potential gaps” and vacation leads are calculations from the records currently available, not booking recommendations.
 
-## Reconciled Headline Finding (both sessions agree after merge)
+The prior integration's claim that **February 15–18, 2027 is verified free** is superseded: the official Warriors schedule lists games on [February 15](https://www.nba.com/warriors/schedule) and February 17. The earlier sites and research are retained in the repository for audit; their published URLs redirect to the corrected planner rather than presenting old conclusions as fact.
 
-Under the strict definition — *a minute is free only when no MLB (all 30), no NFL (any + Westwood One), no Stanford/Cal game is on air* — **no 7-, 14- or 21-day fully-free window exists in 2027–2029**. The longest gaps are the February post-Super Bowl → first spring training gaps:
+## Use the site
 
-| Year | Best window | Length | Status | Anchors |
-|------|-------------|--------|--------|---------|
-| **2026** | **Feb 9–22** | **14 days** | ✅ **Verified** | SB LX Feb 8 (Levi's) → spring training Feb 24 (this session verified via MLB Aug 26 2025 release) |
-| **2027** | **Feb 15–18** | **4 days** | ✅ **Verified anchors** | SB LXI Feb 14 (SoFi) → spring Feb 19 (other session verified via MLB press releases Jul 16 2026) — this session's earlier 14-day est was corrected |
-| 2028 | Feb 14 → first spring games | ~4–5 days | 🔶 Estimated | SB LXII Feb 13 2028 (Mercedes-Benz) — 2028 MLB unreleased |
-| 2029 | Day after SB LXIII → first spring games | ~4–5 days | 🔶 Estimated | SB LXIII 2029 Las Vegas — date not released yet |
-| Any 2027–2029 | 7/14/21-day | **None found** | Conclusion | Both sessions independently found this — now reconciled |
-| All-Star | Jul 14, 2027 (Wed) | 1 day | ✅ Verified | Off-day after ASG Jul 13 Wrigley — only mid-year free day |
+- **Overview:** snapshot status, a selected day, and priority teams.
+- **Calendar:** choose a Pacific date, browse MLB, NFL, Stanford/Cal, Warriors, Earthquakes or Westwood One, and open each official event source. Filters affect the list, not the all-category gap calculation.
+- **Vacation windows:** examine unverified 7-, 14-, and 21-day leads. Years with too little published MLB coverage are withheld instead of filled with invented fixtures.
+- **Radio guide:** source-linked team and network information; station assignments and reception are not guaranteed.
+- **Flagged for Review:** stale/failed feeds, undated and time-TBD records, canceled or changed announcements, local radio uncertainty and other caveats.
+- **Methodology:** sources, assumptions and the difference between game time and network airtime.
 
-**Relaxed scenario (scenario, not a schedule):** If spring training is *not* counted, Feb 15 → Mar 23 2027 (~5 weeks) and mid-Feb → late-Mar 2028/2029 (est) are free of regular-season games. This session documented the 2026 relaxed window as Feb 9 → Mar 24 = 44 days verified.
+All civil times use `America/Los_Angeles`, including daylight-saving transitions. A game with no confirmed start marks all possible Pacific dates as uncertain. Intervals are merged, not split at halftime. Game ends use clearly labeled planning assumptions (MLB 158 minutes; NFL 192; college football 210; NBA 150; soccer 120), or a published Westwood One network slot. These are **not** verified game ends; overtime, delays and pre/postgame programming can extend coverage.
 
-## Site Map — Two Sites Kept, One Root
+## Sources and coverage
 
-### New dashboard (this session, `arena/c697ef7b-korea4`) — root `index.html` + `assets/` + `data/` + `site/pages/`
+| Feed | Official source | Important limit |
+| --- | --- | --- |
+| MLB | [MLB Stats API](https://statsapi.mlb.com/api/v1/schedule?sportId=1&startDate=2027-01-01&endDate=2027-12-31) | Future first pitches, postseason games and individual local radio carriage may be TBD. |
+| NFL | [NFL schedule](https://www.nfl.com/schedules/) and [important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) | Flexible weeks and playoff matchups may have no date or kickoff; published windows are reserved as uncertain. |
+| College football | [Stanford](https://gostanford.com/sports/football/schedule), [Cal](https://calbears.com/sports/football/schedule/text) | Some future opponents are known but undated. Old announcements need rechecking. |
+| Warriors | [NBA schedule](https://www.nba.com/warriors/schedule), [team radio network](https://www.nba.com/warriors/news/warriors-audacys-95-7-the-game-announce-multi-year-contract-extension-20251023) | The current NBA feed does not establish future seasons or every possible playoff game. |
+| Earthquakes | [2026 team radio schedule](https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season) | Dates, times, and station assignments may change; future seasons may not be published. |
+| Westwood One | [Network schedule](https://www.westwoodonesports.com/nfl-schedule/) and [station finder](https://www.westwoodonesports.com/station-finder/) | Network airtime is not necessarily kickoff, the scheduled slot is not the actual end, and local affiliates can preempt games. |
 
-- [Dashboard (root)](https://karagemop466-tech.github.io/Korea4/) — hero, 14/7/4-day heatmap, live PST calendar, radio dial teaser
-- [Executive Summary](https://karagemop466-tech.github.io/Korea4/site/pages/executive-summary.html)
-- [Methodology](https://karagemop466-tech.github.io/Korea4/site/pages/methodology.html) — PST/PDT, durations (MLB 2:38–3:10, NFL 3:12, NCAAF 3:24–3:27), estimation method
-- [Vacation Windows 2026–2029](https://karagemop466-tech.github.io/Korea4/site/pages/vacation-windows.html) — corrected to reconciled 4-day finding
-- [Calendar Scoreboard](https://karagemop466-tech.github.io/Korea4/site/pages/calendar.html) — day + month grid, intraday slices
-- [Radio Guide 94122](https://karagemop466-tech.github.io/Korea4/site/pages/radio-guide.html) — KNBR 680/104.5, KGO 810, KNEW 960, KSTE 650 + FM
-- [MLB — all 30](https://karagemop466-tech.github.io/Korea4/site/pages/mlb.html) — 2026 verified
-- [NFL + 49ers](https://karagemop466-tech.github.io/Korea4/site/pages/nfl.html) — 2026 verified
-- [NCAAF Stanford/Cal](https://karagemop466-tech.github.io/Korea4/site/pages/ncaaf.html) — 2026 verified
-- [Westwood One](https://karagemop466-tech.github.io/Korea4/site/pages/westwood-one.html) — TNF/SNF/MNF + playoffs
-- [Sources & Verification](https://karagemop466-tech.github.io/Korea4/site/pages/sources.html) — 14 rows, every row links to official site
-- [Flagged for Review](https://karagemop466-tech.github.io/Korea4/site/pages/flagged.html) — 5 flagged items
+The NFL [no longer stages an AFC–NFC Pro Bowl game beginning with the 2026 season](https://www.nfl.com/news/nfl-elevates-pro-bowl-selection-game-s-will-cease-being-contested); its 2027 celebration is not invented as a game. Current [Sharks audio information](https://www.nhl.com/sharks/team/broadcast) does not establish ordinary-FM carriage, so internet audio or historical affiliate lists are not counted as terrestrial broadcasts.
 
-### Legacy site (other session `ccb3febc`, already on main) — `site/` + `docs/`
+## Build and test
 
-- [Legacy site home](https://karagemop466-tech.github.io/Korea4/site/) — same findings, different layout
-- [Legacy vacation](https://karagemop466-tech.github.io/Korea4/site/vacation.html)
-- [Legacy calendar](https://karagemop466-tech.github.io/Korea4/site/calendar.html)
-- [Legacy radio](https://karagemop466-tech.github.io/Korea4/site/radio.html)
-- [Legacy sources](https://karagemop466-tech.github.io/Korea4/site/sources.html) — 19 rows (includes 2027 MLB press releases)
-- [Legacy flagged](https://karagemop466-tech.github.io/Korea4/site/flagged.html) — 12 flags (F1–F12)
-- Docs: [`docs/sources.md`](docs/sources.md), [`docs/vacation-windows.md`](docs/vacation-windows.md), [`docs/radio.md`](docs/radio.md), [`docs/durations.md`](docs/durations.md), [`docs/flagged.md`](docs/flagged.md)
+Requirements: Python 3.11+ (standard library only) and Node 20+; no install step.
 
-*Both sites are honest about estimates — nothing invented. Game-by-game 2027–2029 cannot be fully verified yet because 2027 MLB times are largely TBA and 2028/2029 schedules are unreleased — see flagged pages.*
+```sh
+python3 -m unittest discover -s tests -v
+node tests/test_core.mjs
+python3 scripts/build_site.py
+python3 -m http.server 8000 --bind 0.0.0.0 --directory _site
+```
 
-## Verification — line by line
+Open `http://localhost:8000/`. The build copies only the current planner and data into `_site/`, and makes safe redirects for previous HTML URLs. Historical files under `docs/`, `data/`, and older site trees remain in the repository, but are not deployed as the current planner.
 
-- **Every table row has a source link.** If a value can't be confirmed, it's blank + flagged. Never inferred.
-- **2026 = verified** — both sessions verified via official sources (MLB Aug 26 2025, 49ers schedules, Cal/Stanford ACC, Westwood One schedule, SB LX Feb 8). This session's searches confirmed these.
-- **2027 = verified anchors** — other session verified via MLB press releases **Jul 16 2026** (Mar 25 opening, ASG Jul 13 Wrigley, spring Feb 19, Sep 26 end) + SoFi SB Feb 14 + KSTE/KNBR. Those are newer and take precedence — this session's 2027 14-day est was updated accordingly.
-- **2028/2029 = estimated** — flagged everywhere, never shown as verified.
+`python3 scripts/refresh.py` fetches the official feeds and updates `site/data/events.json`; it needs network access to the source hosts. On a fetch or parsing failure it keeps the last successful **committed snapshot** for that source and reports the failure instead of treating missing data as empty. Manually reviewed future announcements live in `site/data/announced-events.json` and include a review date. GitHub Actions rebuilds and publishes an updated Pages artifact daily, on pushes to `main`, and on manual dispatch. The source-health page reports stale snapshots as well as failed fetches.
 
-## Data
+## Project layout
 
-- `data/*.json` (this session) — machine-readable 2026 schedules + vacation windows + durations + radio guide
-- `assets/css/style.css` + `assets/js/app.js` — dashboard UI + calendar logic
-- `docs/*.md` (other session) — markdown sources/durations/flags
-- `site/` (other session) + `site/pages/` (this session) — two site trees, both live
+- `index.html`, `site/planner/` — current dashboard, pages, styling and Pacific-time calculation engine.
+- `site/data/events.json` — current committed source-linked snapshot.
+- `site/data/announced-events.json` — individually sourced future announcements and uncertain date ranges.
+- `scripts/refresh.py` — source ingestion and explicit failure retention.
+- `scripts/build_site.py` — isolated Pages artifact and safe legacy redirects.
+- `tests/` — parser, source-link, DST, interval and local-link checks.
+- `COORDINATION.md` — shared session, conflict, source and integration history.
 
-## Radio in 94122
-
-Preset: **680 AM**, **810 AM**, **960 AM**, **104.5 FM**. If any is live, you're busy. See radio pages.
-
-## Coordination — Parallel Sessions
-
-- `COORDINATION.md` — shared task board, now merged — logs both sessions + handoff + reconciled finding.
-- This repo had **two parallel agent sessions** from the same empty parent `a6e22c4`:
-  - `arena/ccb3febc-korea4` → PR #1 merged (530af53) — built `site/` + `docs/`
-  - `arena/c697ef7b-korea4` (this branch) → PR #2 (this) — built root dashboard + `assets/` + `data/` + `site/pages/`
-- On conflict, no work was discarded — both trees kept, vacation window corrected from newer verified anchors.
-
----
-
-*Not affiliated with MLB, NFL, NCAA, Westwood One, KNBR, KGO, KNEW. Marks are property of owners. Times are America/Los_Angeles (PST/PDT).*
+Not affiliated with the leagues, teams, stations or networks named here.
