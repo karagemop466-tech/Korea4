@@ -122,6 +122,7 @@ GRID_NAME = {
 
 _lock = threading.Lock()
 _manifest_entries: dict[str, dict] = {}
+_force_keys: set[str] = set()
 
 
 def utc_now() -> str:
@@ -171,7 +172,7 @@ def save_raw(key: str, url: str, data: bytes, status: int | None, error: str | N
 
 def fetch_and_save(key: str, url: str, refresh: bool = False) -> bytes:
     out = RAW / f"{key}.gz"
-    if out.exists() and not refresh:
+    if out.exists() and not refresh and key not in _force_keys:
         data = gzip.decompress(out.read_bytes())
         with _lock:
             prev = _manifest_entries.get(key)
@@ -199,8 +200,18 @@ def grid_url(grid_id: str, offset: int) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--refresh", action="store_true", help="refetch all cached raw responses")
-    parser.add_argument("--max-events", type=int, default=500)
+    parser.add_argument("--refresh-errors", action="store_true", help="retry cached error/empty responses")
+    parser.add_argument("--max-events", type=int, default=1000)
     args = parser.parse_args()
+
+    if MANIFEST.exists():
+        old = json.loads(MANIFEST.read_text())
+        _manifest_entries.update({entry["key"]: entry for entry in old.get("files", [])})
+        if args.refresh_errors:
+            _force_keys.update(
+                entry["key"] for entry in old.get("files", [])
+                if entry.get("error") or not entry.get("http_status") or entry.get("http_status", 0) >= 400 or entry.get("bytes", 0) == 0
+            )
 
     # Static official pages and MLB APIs.
     jobs = [(key, url) for key, url in STATIC_SOURCES.items()]
@@ -235,7 +246,7 @@ def main() -> None:
         (f"wwo_event_{event_id}", f"https://www.westwoodonesports.com/events/{event_id}/")
         for event_id in ids
     ]
-    with ThreadPoolExecutor(max_workers=8) as pool:
+    with ThreadPoolExecutor(max_workers=4) as pool:
         futures = [pool.submit(fetch_and_save, key, url, args.refresh) for key, url in event_jobs]
         for fut in as_completed(futures):
             fut.result()
