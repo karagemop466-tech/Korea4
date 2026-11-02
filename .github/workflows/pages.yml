@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -55,9 +56,20 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
-  deploy:
+  wait_for_legacy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait until the legacy publisher finishes this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/wait_for_legacy.py
+  deploy:
+    needs: [build, wait_for_legacy]
+    if: ${{ always() && github.ref == 'refs/heads/main' && needs.build.result == 'success' && (needs.wait_for_legacy.result == 'success' || needs.wait_for_legacy.result == 'skipped') }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
