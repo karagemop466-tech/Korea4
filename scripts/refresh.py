@@ -446,18 +446,24 @@ def build_snapshot(offline=False, previous=None):
     if not offline:
         try:
             rows = []
-            for offset in range(0, 1000, 100):
-                url = WWO + "?" + urlencode({"id": "all", "range": "current", "offset": offset, "limit": 100, "timezone": "America/New_York", "accountID": 3757, "artistID": 0})
-                payload = json.loads(request(url))
-                page = parse_westwood(payload)
-                existing = {r["id"] for r in rows}
-                if offset and page and all(r["id"] in existing for r in page):
-                    raise ValueError("Westwood pagination repeated a page")
-                rows.extend(r for r in page if r["id"] not in existing)
-                if len(payload.get("events", [])) < 100:
-                    break
-            else:
-                raise ValueError("Westwood calendar exceeds the 1,000-event safety limit")
+            # Include past 2026 broadcasts as well as future entries. The past
+            # endpoint is reverse chronological, so stop when it reaches 2025.
+            for range_name in ("current", "past"):
+                previous_page = set()
+                for offset in range(0, 3000, 100):
+                    url = WWO + "?" + urlencode({"id": "all", "range": range_name, "offset": offset, "limit": 100, "timezone": "America/New_York", "accountID": 3757, "artistID": 0})
+                    payload = json.loads(request(url))
+                    page = parse_westwood(payload)
+                    page_ids = {r["id"] for r in page}
+                    if offset and page_ids and page_ids == previous_page:
+                        raise ValueError("Westwood pagination repeated a page")
+                    previous_page = page_ids
+                    existing = {r["id"] for r in rows}
+                    rows.extend(r for r in page if r["id"] not in existing and "2026-01-01" <= r["date"] <= "2029-12-31")
+                    if len(payload.get("events", [])) < 100 or (range_name == "past" and page and min(r["date"] for r in page) < "2026-01-01"):
+                        break
+                else:
+                    raise ValueError("Westwood calendar exceeds the 3,000-event safety limit")
             ids = {r["id"] for r in rows}
             rows.extend(e for e in old_events if e.get("group") == "westwood" and e.get("date") and e["date"] < today and e["id"] not in ids)
             # An empty response is allowed but remains an incomplete network schedule.
