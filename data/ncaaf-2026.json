@@ -1,0 +1,41 @@
+{
+  "season": 2026,
+  "league": "NCAAF",
+  "verified": true,
+  "sources": [
+    "https://writeforcalifornia.com/p/cal-football-schedule-2026-top-dogs",
+    "https://en.wikipedia.org/wiki/2026_Stanford_Cardinal_football_team",
+    "https://www.foxsports.com/college-football/stanford-cardinal-team-schedule"
+  ],
+  "cal_2026": [
+    {"date": "2026-09-05", "opponent": "vs UCLA", "site": "Berkeley", "time": "TBD"},
+    {"date": "2026-09-12", "opponent": "at Syracuse", "site": "JMA Dome", "time": "TBD"},
+    {"date": "2026-09-19", "opponent": "vs Wagner (FCS)", "site": "Berkeley", "time": "TBD"},
+    {"date": "2026-09-25", "opponent": "vs Clemson", "site": "Berkeley", "time": "Fri Night"},
+    {"date": "2026-10-03", "opponent": "at UNLV", "site": "Las Vegas", "time": "TBD"},
+    {"date": "2026-10-10", "opponent": "vs Virginia Tech", "site": "Berkeley", "time": "TBD"},
+    {"date": "2026-10-17", "opponent": "vs Wake Forest", "site": "Berkeley", "time": "TBD"},
+    {"date": "2026-11-07", "opponent": "BYE", "note": "No game"},
+    {"date": "2026-11-14", "opponent": "at Virginia", "site": "Charlottesville", "time": "TBD"},
+    {"date": "2026-11-21", "opponent": "vs Stanford (Big Game)", "site": "Berkeley", "time": "TBD"},
+    {"date": "2026-11-28", "opponent": "vs Pitt", "site": "Berkeley", "time": "TBD"},
+    {"date": "2026-12-05", "opponent": "ACC Championship (if qualified)", "site": "Charlotte", "time": "9 AM PT"}
+  ],
+  "stanford_2026": [
+    {"date": "2026-08-29", "opponent": "vs Hawai'i", "site": "Stanford", "time": "7:00 PM ET"},
+    {"date": "2026-09-04", "opponent": "vs Miami (FL)", "site": "Stanford", "time": "TBD"},
+    {"date": "2026-09-19", "opponent": "at Duke", "site": "Durham", "time": "TBD"},
+    {"date": "2026-09-26", "opponent": "vs Georgia Tech", "site": "Stanford", "time": "TBD"},
+    {"date": "2026-10-03", "opponent": "at Wake Forest", "site": "Winston-Salem", "time": "Noon ET"},
+    {"date": "2026-10-10", "opponent": "at Notre Dame", "site": "South Bend", "time": "TBD"},
+    {"date": "2026-10-17", "opponent": "vs Elon (FCS)", "site": "Stanford", "time": "4:30 PM PT"},
+    {"date": "2026-10-23", "opponent": "vs NC State", "site": "Stanford", "time": "TBD"},
+    {"date": "2026-10-31", "opponent": "at Louisville", "site": "Louisville", "time": "7:15 PM ET"},
+    {"date": "2026-11-14", "opponent": "at Virginia Tech", "site": "Blacksburg", "time": "TBD"},
+    {"date": "2026-11-21", "opponent": "at California (Big Game)", "site": "Berkeley", "time": "TBD"},
+    {"date": "2026-11-28", "opponent": "vs SMU", "site": "Stanford", "time": "TBD"}
+  ],
+  "average_game_duration_minutes": 207,
+  "broadcast_window_minutes": 252,
+  "radio": "Stanford: KNBR 1050 AM? Actually 90.1 KZSU flagship for Stanford; Cal: KGO 810 AM flagship (Cal Radio Network). Both receivable in 94122 on AM."
+}

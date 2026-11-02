@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio Stations - Free Time Vacation Planner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="brand">⚾🏈 Free Time Planner</a>
+    <div class="nav-links">
+      <a href="index.html">Dashboard</a>
+      <a href="daily.html">Daily Schedule</a>
+      <a href="calendar.html">Calendar</a>
+      <a href="vacation.html">Vacation Windows</a>
+      <a href="teams.html">Teams & Games</a>
+      <a href="radio.html" class="active">Radio Stations</a>
+      <a href="executive-summary.html">Executive Summary</a>
+      <a href="flagged.html">Flagged for Review</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>📻 SF Bay Area Radio Stations</h1>
+      <p>AM/FM radio stations receivable in Outer Sunset SF 94122 that broadcast live sports. These are the stations that determine your "busy" time.</p>
+    </div>
+
+    <!-- Main Sports Stations -->
+    <div class="card">
+      <h2>🏟️ Primary Sports Radio Stations</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Frequency</th><th>Callsign</th><th>Name</th><th>Sports Coverage</th><th>Source</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>680 AM</strong></td>
+              <td>KNBR</td>
+              <td>The Sports Leader</td>
+              <td>
+                <span class="badge badge-mlb">SF Giants</span>
+                <span class="badge badge-nfl">SF 49ers</span>
+                <span class="badge badge-ncaaf">Stanford Football</span>
+                <span class="badge badge-nfl">Westwood One NFL</span>
+              </td>
+              <td><a href="https://www.knbr.com/shows/" target="_blank">knbr.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>104.5 FM</strong></td>
+              <td>KNBR-FM</td>
+              <td>The Sports Leader (FM Simulcast)</td>
+              <td>
+                <span class="badge badge-mlb">SF Giants</span>
+                <span class="badge badge-nfl">SF 49ers</span>
+                <span class="badge badge-ncaaf">Stanford Football</span>
+              </td>
+              <td><a href="https://www.knbr.com/shows/" target="_blank">knbr.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>1050 AM</strong></td>
+              <td>KTCT</td>
+              <td>KNBR 1050 (ESPN Radio / Overflow)</td>
+              <td>
+                <span class="badge badge-mlb">Athletics (MLB)</span>
+                <span class="badge badge-nfl">ESPN NFL</span>
+              </td>
+              <td><a href="https://www.thesportsleader.com/knbr1050shows/" target="_blank">thesportsleader.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>1510 AM</strong></td>
+              <td>KSFN</td>
+              <td>Giants/A's Simulcast</td>
+              <td>
+                <span class="badge badge-mlb">Athletics (MLB)</span>
+              </td>
+              <td><a href="https://sportsbrackets.net/wp-content/uploads/2026/04/Printable-2026-San-Francisco-Giants-Schedule.pdf" target="_blank">Giants Schedule PDF</a></td>
+            </tr>
+            <tr>
+              <td><strong>95.7 FM</strong></td>
+              <td>KGMZ-FM</td>
+              <td>95.7 The Game</td>
+              <td>
+                Sports Talk (49ers, Warriors, Giants, A's commentary)
+              </td>
+              <td><a href="https://en.wikipedia.org/wiki/List_of_radio_stations_in_the_San_Francisco_Bay_Area" target="_blank">Wikipedia</a></td>
+            </tr>
+            <tr>
+              <td><strong>860 AM</strong></td>
+              <td>KTRB</td>
+              <td>Xtra Sports 860</td>
+              <td>
+                ESPN Deportes / Sports
+              </td>
+              <td><a href="https://radiostation.info/am/san-francisco-ca/" target="_blank">radiostation.info</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Westwood One -->
+    <div class="card">
+      <h2>🌐 Westwood One Sports - National NFL Radio</h2>
+      <p>Westwood One is the official audio partner of the NFL, broadcasting all primetime games nationally. In the SF Bay Area, these are carried on KNBR 680 AM and affiliates.</p>
+      <p class="source-link">Source: <a href="https://www.westwoodonesports.com/nfl-schedule/" target="_blank">westwoodonesports.com/nfl-schedule</a></p>
+      
+      <h3 style="margin-top:1rem;">2026 Westwood One NFL Broadcasts (Upcoming)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Date</th><th>Time (PST)</th><th>Matchup</th><th>Type</th><th>Source</th></tr>
+          </thead>
+          <tbody id="westwoodTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- KNBR Weekly Schedule Sample -->
+    <div class="card">
+      <h2>📋 KNBR 680 AM - Sample Weekly Schedule</h2>
+      <p class="source-link">Source: <a href="https://www.thesportsleader.com/shows/" target="_blank">thesportsleader.com/shows</a></p>
+      <p style="color:var(--text-dim);margin-top:0.5rem;">KNBR airs live games in the evenings and carries Westwood One Sports overnight programming.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Time Block</th><th>Programming</th><th>Sports Content</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>12:00 AM - 6:00 AM</td><td>Westwood One Sports</td><td>National sports / replays</td></tr>
+            <tr><td>6:00 AM - 10:00 AM</td><td>Murph & Markus</td><td>Sports talk (local)</td></tr>
+            <tr><td>10:00 AM - 2:00 PM</td><td>Fair & Biased</td><td>Sports talk</td></tr>
+            <tr><td>2:00 PM - 5:15 PM</td><td>Dirty Work</td><td>Sports talk</td></tr>
+            <tr><td>5:15 PM - 10:00 PM</td><td><strong>LIVE GAMES</strong></td><td>Giants, 49ers, Stanford, or Westwood One NFL</td></tr>
+            <tr><td>10:00 PM - 12:00 AM</td><td>Westwood One Sports / SportsPhone</td><td>National sports</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Free Time Vacation Planner | All times PST | Outer Sunset SF 94122</p>
+  </footer>
+
+  <script src="data/schedules.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderWestwoodTable();
+    });
+
+    function renderWestwoodTable() {
+      const tbody = document.getElementById('westwoodTable');
+      const today = '2026-11-02';
+      const upcoming = WESTWOOD_ONE_2026
+        .filter(g => g.date >= today)
+        .sort((a, b) => a.date.localeCompare(b.date));
+      
+      let html = '';
+      upcoming.forEach(g => {
+        html += `<tr>
+          <td>${g.date}</td>
+          <td>${g.time}</td>
+          <td>${g.matchup}</td>
+          <td>${g.type}</td>
+          <td><a href="${g.source}" target="_blank">WW1</a></td>
+        </tr>`;
+      });
+      tbody.innerHTML = html;
+    }
+  </script>
+</body>
+</html>

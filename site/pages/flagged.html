@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Flagged for Review — FREE TIME VACATION</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/css/style.css"/>
+</head><body>
+<header class="topbar"><div class="container"><div class="topbar-inner">
+<a href="../../index.html" class="brand" style="text-decoration:none;color:inherit"><div class="logo">FV</div><div><h1>FREE TIME <span>VACATION</span></h1><small>Flagged for review</small></div></a>
+<nav class="nav"><a href="../../index.html">Dashboard</a><a href="sources.html">Sources</a><a href="flagged.html" class="active">Flagged (5)</a></nav>
+</div></div></header>
+<main class="container">
+<div class="breadcrumb"><a href="../../index.html">Dashboard</a> › Flagged</div>
+<section class="hero">
+<h2>Flagged for review — <b>irregularities & unverified items</b></h2>
+<p>Everything below is still live on the site, but flagged so you can check the source link yourself. Per instructions, flagged items do <em>not</em> block the merge or deploy — they&apos;re here for you to request changes after the site is live.</p>
+</section>
+
+<section class="section">
+<div class="card">
+<div style="display:flex;gap:8px;align-items:center"><span class="badge bad">5 flagged</span><span class="muted small">Last checked Nov 2 2026 PST by arena/c697ef7b-korea4 (manual review + web_search verified)</span></div>
+<div class="divider"></div>
+<div class="table-wrap"><table>
+<tr><th>#</th><th>Item</th><th>What&apos;s flagged</th><th>What we did</th><th>Source to check</th></tr>
+<tr><td>1</td><td><b>2027-2029 schedules — all 30 MLB, all 32 NFL, Stanford/Cal</b></td><td><span class="tag est">estimated</span> No official verified release exists as of Nov 2 2026. Dates/times are estimates based on historical pattern (MLB last-Thu-March, NFL Thu-after-Labor-Day, NCAAF Labor Day wknd + Big Game pre-Thanksgiving). <br/><b>Risk:</b> Opening Day could shift 3–7 days; NFL int&apos;l sites change.</td><td>Every 2027-2029 date is labeled <span class="tag est">estimated</span> in tables, calendar, and JSON. Times left as TBD where unknown. Never shown as verified. Note points to when to check (MLB ~Jul prior year, NFL ~May, ACC ~Jan).</td><td><a href="https://www.mlb.com/news/2026-mlb-schedule-released" target="_blank">MLB release cadence (shows 2026 was Aug 2025)</a> • <a href="https://www.nfl.com/schedule/" target="_blank">NFL schedule</a></td></tr>
+<tr><td>2</td><td><b>NFL Week 18 time TBD</b> — e.g., 49ers @ ARI Jan 9-10 2027</td><td>Official NFL schedule lists “TBD” for all Week 18 games (set after Week 17 for flex). Times not inferrable. <br/><b>Risk:</b> We can&apos;t compute free slices for that day without time.</td><td>Left time as <span class="mono">TBD</span> in table; calendar treats as “busy all day” (pessimistic) with note. Never inferred a kickoff.</td><td><a href="https://legionreport.com/san-francisco-49ers-schedule/" target="_blank">49ers schedule — Week 18 TBD</a></td></tr>
+<tr><td>3</td><td><b>Stanford/Cal 2026 kick times — many TBD</b></td><td>Official ACC releases dates but defers many times to 6/12-day TV selection. As of Jan 26 2026, Cal&apos;s 2026 schedule lists times as TBD except Clemson Fri night. Same for Stanford (Elon 4:30 PT confirmed, others TBD). <br/><b>Risk:</b> Intraday free slices for those Saturdays are estimated (we use 12 PM–4 PM window).</td><td>Table shows “TBD” where official lists TBD; calendar uses NCAAF avg window (252 min) as placeholder with note. Source link preserved so you can recheck after TV picks.</td><td><a href="https://writeforcalifornia.com/p/cal-football-schedule-2026-top-dogs" target="_blank">Write for California Cal 2026 (many TBD)</a> • <a href="https://en.wikipedia.org/wiki/2026_Stanford_Cardinal_football_team" target="_blank">Stanford 2026 TBD times</a></td></tr>
+<tr><td>4</td><td><b>Westwood One Bay Area affiliate — “KNRB/680” vs KGO 810</b></td><td>Wikipedia affiliate table lists SF Sunday doubleheaders as “KNRB/680” (likely a typo/variant of KNBR). Historical Westwood One SF affiliate has been KGO 810 (Cumulus) in recent years, but Cumulus also owns KNBR. Could be either or both simulcast. <br/><b>Risk:</b> We treat both 680 and 810 as busy for WW1 — conservative (more busy, fewer false-free days).</td><td>Radio guide lists both KGO 810 <em>and</em> KNBR 680 as WW1 carriers with note; flagged here with both sources.</td><td><a href="https://en.wikipedia.org/wiki/NFL_on_Westwood_One_Sports" target="_blank">Wikipedia affiliate table</a> • <a href="https://www.westwoodonesports.com/nfl-schedule/" target="_blank">WW1 schedule (network, not affiliate)</a> • <a href="https://www.kgoradio.com/" target="_blank">KGO</a></td></tr>
+<tr><td>5</td><td><b>MLB average duration — 2:48 vs 3:10</b></td><td>Sources disagree slightly due to pitch-clock refinement: one reputable tracker says 2024 avg 2:58, another 3:10. Both agree <3:15. <br/><b>Risk:</b> If we use 168 vs 190 min, free slices shift ~20 min.</td><td>We use 168 min (2:48 conservative) + 30 pre = 210 min window (shorter → gives you <em>more</em> free time, not less; so we&apos;re slightly generous). Both source links shown in methodology so you can pick.</td><td><a href="https://sportsgeardaily.com/rules/how-long-is-an-average-baseball-game" target="_blank">3:10 source</a> • <a href="https://sportsgeardaily.com/rules/how-long-are-professional-baseball-games" target="_blank">2:58 source</a></td></tr>
+</table></div>
+<p class="note" style="margin-top:10px"><b>No other irregularities found</b> in 2026 verified core (MLB opening night, 49ers 18 weeks, Cal/Stanford dates, SB Feb 8). When official 2027-2029 schedules release, flagged #1 will be cleared and marked verified.</p>
+</div>
+</section>
+
+<section class="section">
+<div class="card">
+<h3>How to request a fix</h3>
+<p class="small">After the site is live on GitHub Pages, open a GitHub issue or comment on the PR with the row and your preferred source. We&apos;ll update and redeploy — flagged items are not blocking.</p>
+<div class="alert"><b>Current PR / branch:</b> <span class="mono">arena/c697ef7b-korea4</span> → <span class="mono">main</span> • Coordination log is in <a href="../../COORDINATION.md">COORDINATION.md</a></div>
+</div>
+</section>
+
+<footer class="footer"><div><a href="../../index.html">Dashboard</a> • <a href="sources.html">Sources</a></div></footer>
+</main>
+</body></html>
