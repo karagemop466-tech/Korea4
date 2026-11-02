@@ -68,6 +68,38 @@
   ],
   "restrictions": [
     {
+      "id": "nfl-week18-2027",
+      "startDate": "2027-01-09",
+      "endDate": "2027-01-11",
+      "title": "NFL Week 18 \u00b7 individual dates and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league gives the Jan 9\u201310 weekend, not each matchup date; both dates remain uncertain."
+    },
+    {
+      "id": "nfl-wildcard-2027",
+      "startDate": "2027-01-16",
+      "endDate": "2027-01-19",
+      "title": "NFL Wild Card Weekend \u00b7 matchups and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league lists Jan 16\u201318 as the playoff window; do not assign unannounced games to specific days."
+    },
+    {
+      "id": "nfl-divisional-2027",
+      "startDate": "2027-01-23",
+      "endDate": "2027-01-25",
+      "title": "NFL Divisional Playoffs \u00b7 matchups and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league lists Jan 23\u201324; the matchups and kickoffs are not yet known."
+    },
+    {
+      "id": "nfl-conference-2027",
+      "startDate": "2027-01-31",
+      "endDate": "2027-02-01",
+      "title": "NFL Conference Championships \u00b7 teams and times TBD",
+      "source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "note": "The league lists Jan 31, without matchups or kickoffs."
+    },
+    {
       "id": "all-star-2028-month",
       "startDate": "2028-07-01",
       "endDate": "2028-08-01",
