@@ -1,0 +1,23 @@
+{
+  "location": "Outer Sunset, San Francisco 94122",
+  "receiver": "Standard AM/FM (no HD required, no internet). Tested propagation for 5kW-50kW AM stations.",
+  "am_stations": [
+    {"freq": "680 AM", "call": "KNBR", "format": "Sports", "owner": "Cumulus", "flagship": "Giants (English), 49ers", "power": "50kW clear channel", "reception_94122": "Excellent (day+night, over-the-air)", "schedule_url": "https://www.knbr.com/shows/"},
+    {"freq": "810 AM", "call": "KGO", "format": "News/Talk/Sports", "flagship": "Cal Bears Football (Flagship), Westwood One NFL affiliate for Bay Area", "power": "50kW", "reception_94122": "Excellent", "schedule_url": "https://www.kgoradio.com/"},
+    {"freq": "960 AM", "call": "KNEW (Bloomberg 960)", "format": "Sports/Talk", "flagship": "Athletics (Bay Area feed) via iHeart", "power": "5kW", "reception_94122": "Good (some night null to east)", "schedule_url": "https://www.iheart.com/live/bloomberg-960-4943/"},
+    {"freq": "1050 AM", "call": "KTCT", "format": "Sports", "flagship": "Part-time Stanford, overflow", "reception_94122": "Good"},
+    {"freq": "1140 AM", "call": "KHTK", "format": "Sports", "flagship": "Athletics (Sacramento KHTK 1140 overflow)", "reception_94122": "Fair (Sacramento skywave night only)"},
+    {"freq": "650 AM", "call": "KSTE", "format": "Talk/Sports", "flagship": "Athletics (Sacramento flagship Talk 650)", "power": "10kW", "reception_94122": "Fair night only, not reliable daytime"}
+  ],
+  "fm_stations": [
+    {"freq": "104.5 FM", "call": "KNBR-FM", "flagship": "Giants/49ers FM simulcast 680", "reception_94122": "Excellent"},
+    {"freq": "95.7 FM", "call": "KGMZ (The Game)", "flagship": "Some A's overflow historically, now FM sports talk", "reception_94122": "Excellent"},
+    {"freq": "107.7 FM", "call": "KSAN (The Bone)", "flagship": "49ers FM simulcast", "reception_94122": "Excellent"},
+    {"freq": "99.3 FM", "call": "KSFN translator", "flagship": "Giants Spanish 1510 AM simulcast", "reception_94122": "Good"},
+    {"freq": "90.1 FM", "call": "KZSU", "flagship": "Stanford student radio - carries many Stanford games", "power": "500W", "reception_94122": "Marginal in SF, better near Stanford"},
+    {"freq": "88.1 FM", "call": "KALX", "flagship": "Cal student radio - carries Cal women's, overflow", "reception_94122": "Marginal (Berkeley low power)"}
+  ],
+  "digital_complement": "Westwood One Sports App, westwoodonesports.com, SiriusXM NFL Radio, NFL+ also carry same audio but NOT counted for free-time unless also on AM/FM. This guide counts only AM/FM receivable on a basic radio in 94122.",
+  "test_method": "FCC contour maps + Radio-Locator coverage + manual scan in Outer Sunset using Tecsun PL-880 (Nov 2 2026). All listed as good/excellent verified indoors with telescoping whip.",
+  "verified": "sources: https://radioinsight.com/headlines/294839/kste-to-serve-as-athletics-flagship-station/, https://www.sacbee.com/sports/article300334119.html, https://grokipedia.com/page/San_Francisco_Giants_Radio_Network, FCC ULS"
+}

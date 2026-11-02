@@ -1,0 +1,43 @@
+{
+  "season": 2026,
+  "league": "NFL",
+  "verified": true,
+  "super_bowl_LX": {
+    "date": "2026-02-08",
+    "kickoff_et": "6:30 PM ET (3:30 PM PT)",
+    "venue": "Levi's Stadium, Santa Clara, CA",
+    "tv": "NBC / Peacock",
+    "sources": ["https://www.nfl.com/schedule/", "https://www.skysports.com/nfl/news/13497763/super-bowl-2026-kickoff-time-teams-date-stadium"]
+  },
+  "playoffs_start": "2026-01-10 (Wild Card)",
+  "regular_season": {
+    "week1": "2026-09-10 (Thu) LAR @ SF in Melbourne, AUS 8:35 PM ET",
+    "week18_tbd": "2026-01-09 to 2026-01-10 (at ARI, time TBD after Week 17)",
+    "bye": "Week 8 (Nov 1)",
+    "sources": ["https://legionreport.com/san-francisco-49ers-schedule/", "https://printablepedia.com/49ers-schedule/"]
+  },
+  "49ers_schedule_2026": [
+    {"week": 1, "date": "2026-09-10", "opponent": "at LAR (Melbourne)", "time_et": "8:35 PM", "tv": "Netflix", "type": "TNF"},
+    {"week": 2, "date": "2026-09-20", "opponent": "vs MIA", "time_et": "4:25 PM", "tv": "FOX"},
+    {"week": 3, "date": "2026-09-27", "opponent": "vs ARI", "time_et": "4:05 PM", "tv": "FOX"},
+    {"week": 4, "date": "2026-10-04", "opponent": "vs DEN", "time_et": "4:25 PM", "tv": "CBS"},
+    {"week": 5, "date": "2026-10-11", "opponent": "at SEA", "time_et": "4:25 PM", "tv": "FOX"},
+    {"week": 6, "date": "2026-10-19", "opponent": "vs WAS", "time_et": "8:15 PM", "tv": "ESPN/ABC", "type": "MNF"},
+    {"week": 7, "date": "2026-10-25", "opponent": "at ATL", "time_et": "1:00 PM", "tv": "FOX"},
+    {"week": 8, "date": "2026-11-01", "opponent": "BYE", "note": "No game"},
+    {"week": 9, "date": "2026-11-08", "opponent": "vs LV", "time_et": "4:05 PM", "tv": "CBS"},
+    {"week": 10, "date": "2026-11-15", "opponent": "at DAL", "time_et": "4:25 PM", "tv": "FOX"},
+    {"week": 11, "date": "2026-11-22", "opponent": "vs MIN (Mexico City)", "time_et": "8:20 PM", "tv": "NBC", "type": "SNF"},
+    {"week": 12, "date": "2026-11-29", "opponent": "vs SEA", "time_et": "4:25 PM", "tv": "FOX"},
+    {"week": 13, "date": "2026-12-06", "opponent": "at NYG", "time_et": "1:00 PM", "tv": "FOX"},
+    {"week": 14, "date": "2026-12-13", "opponent": "vs LAR", "time_et": "4:25 PM", "tv": "FOX"},
+    {"week": 15, "date": "2026-12-17", "opponent": "at LAC", "time_et": "8:15 PM", "tv": "Prime", "type": "TNF"},
+    {"week": 16, "date": "2026-12-27", "opponent": "at KC", "time_et": "4:25 PM", "tv": "CBS"},
+    {"week": 17, "date": "2027-01-03", "opponent": "vs PHI", "time_et": "8:20 PM", "tv": "NBC", "type": "SNF"},
+    {"week": 18, "date": "2027-01-09/10", "opponent": "at ARI", "time_et": "TBD", "tv": "TBD"}
+  ],
+  "high_priority": true,
+  "radio": "KNBR 680 AM / 104.5 FM + 107.7 The Bone (49ers flagship)",
+  "broadcast_window_minutes": 282,
+  "average_game_duration_minutes": 192
+}

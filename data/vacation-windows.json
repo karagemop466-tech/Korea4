@@ -1,0 +1,37 @@
+{
+  "methodology": "A calendar day is FREE only if ZERO games from all monitored leagues are on AM/FM radio that day (including Westwood One national). Reconciled with parallel session's verified 2027 anchors (MLB press releases Jul 16 2026: spring Feb 19, SB Feb 14). See docs/sources.md for official rows.",
+  "sources": [
+    "https://www.mlb.com/news/2026-mlb-schedule-released",
+    "https://www.mlb.com/press-release/press-release-brewers-announce-2027-regular-season-schedule",
+    "https://www.mlb.com/phillies/spring-training",
+    "https://legionreport.com/san-francisco-49ers-schedule/",
+    "https://www.westwoodonesports.com/nfl-schedule/",
+    "https://news.radio-online.com/articles/n49383/Westwood-One-Sets-40th-Season-of-NFL-Coverage",
+    "docs/sources.md (19 verified rows, other session)"
+  ],
+  "windows": {
+    "2026_verified": [
+      {"type": "7-day", "start": "2026-02-09", "end": "2026-02-15", "days": 7, "label": "Post-Super Bowl LXI window #1", "note": "Super Bowl LX Feb 8. Next busy is MLB spring training Feb 24. 7 days free. Verified.", "confidence": "high"},
+      {"type": "14-day", "start": "2026-02-09", "end": "2026-02-22", "days": 14, "label": "BEST 2-week vacation 2026 ★", "note": "Only 14+ consecutive free days in 2026. SB Feb 8 → spring Feb 24. Verified. See other session docs/vacation-windows.md for strict-def nuance: 2027 not 14.", "confidence": "high", "recommended": true},
+      {"type": "21-day", "start": null, "end": null, "days": 0, "label": "No 21-day window in 2026", "note": "Longest free is 14 days; 21 impossible due to spring Feb 24.", "confidence": "high"},
+      {"type": "3-day", "start": "2026-07-13", "end": "2026-07-16", "days": 4, "label": "MLB All-Star break 2026 (Mon-Thu 4 days incl. game Jul 14 but off-day Jul 13/14/16 pattern)", "note": "Only gap in summer. See 2027 Jul 14 single free day.", "confidence": "high"}
+    ],
+    "2027_reconciled_verified_anchors": [
+      {"type": "4-day", "start": "2027-02-15", "end": "2027-02-18", "days": 4, "label": "BEST 2027: Mon Feb 15 – Thu Feb 18 ★", "note": "VERIFIED ANCHORS: Super Bowl LXI Feb 14 SoFi → first spring training Feb 19 (Phillies at Tigers). Only 4 full free days under strict definition (all 30 MLB incl. spring). Verified via MLB press releases Jul 16 2026 (see docs/sources.md #1, #5, #7). This corrects earlier 14-day est (Feb 8-21) which assumed later spring.", "confidence": "high", "est": false, "corrected_from": "Feb 8-21 14-day est in previous commit"},
+      {"type": "1-day", "start": "2027-07-14", "end": "2027-07-14", "days": 1, "label": "All-Star off-day Wed Jul 14", "note": "VERIFIED: ASG Jul 13 Wrigley, off-day Jul 14 before clubs resume. Only mid-year free day.", "confidence": "high"},
+      {"type": "7-day", "start": null, "end": null, "days": 0, "label": "No 7-day window in 2027", "note": "Under strict definition (all 30 MLB incl. spring + all NFL + Cal/Stanford + WW1), no 7/14/21-day window exists. MLB mid-Feb–Oct + NFL Aug–mid-Feb chain covers year. Verified conclusion from other session.", "confidence": "high"},
+      {"type": "14-day", "start": null, "end": null, "days": 0, "label": "No 14-day window 2027", "note": "None found strict definition.", "confidence": "high"},
+      {"type": "21-day", "start": null, "end": null, "days": 0, "label": "No 21-day window 2027", "note": "None.", "confidence": "high"}
+    ],
+    "2028_estimated": [
+      {"type": "4-5-day", "start": "2028-02-14", "end": "2028-02-18", "days": 5, "label": "Best 2028: ~Feb 14 → first spring games est (4-5 days)", "note": "ESTIMATED END: SB LXII Feb 13 2028 Atlanta → spring games est mid-Feb 2028 (MLB 2028 unreleased). ~4-5 days.", "confidence": "estimate", "est": true},
+      {"type": "7-day", "start": null, "end": null, "days": 0, "label": "No 7-day window 2028 (strict)", "note": "ESTIMATED — none found.", "confidence": "estimate", "est": true},
+      {"type": "14-day", "start": null, "end": null, "days": 0, "label": "No 14-day window 2028", "note": "None — see 2027 logic.", "confidence": "estimate", "est": true}
+    ],
+    "2029_estimated": [
+      {"type": "4-5-day", "start": "2029-02-05", "end": "2029-02-09", "days": 5, "label": "Best 2029: day after SB LXIII → first spring games est (~4-5 days)", "note": "ESTIMATED BOTH ENDS: SB 2029 Las Vegas date not released (announced host/year only). Pattern ~Feb 11 ±.", "confidence": "estimate", "est": true},
+      {"type": "7-day", "start": null, "end": null, "days": 0, "label": "No 7-day window 2029", "note": "None.", "confidence": "estimate", "est": true}
+    ]
+  },
+  "conclusion": "RECONCILED: 2026 has 14-day window Feb 9-22 verified. 2027-2029 under strict definition (all 30 MLB incl. spring) have NO 7/14/21-day windows — best is 4 days Feb 15-18 2027 verified anchors, ~4-5 days est 2028/2029, plus Jul 14 2027 1 day. If spring training is ignored (preseason), Feb 15-Mar 23 2027 (~5 weeks) is free — see docs/vacation-windows.md. Earlier 14-day est for 2027-2029 in this file was corrected."
+}
