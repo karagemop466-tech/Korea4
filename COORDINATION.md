@@ -16,6 +16,18 @@ This session started from `4798296a` (merge of PR #14) and performed an independ
 - **No irregularities found in this pass.** Prior flags IR-001–IR-007 remain published on the Flagged for Review page and do not block merge.
 - **Result of this session:** audit entry only; PR from `arena/65a1da2b-korea4` → `main`, merged, Pages re-deploy confirmed, recorded below.
 
+## Current follow-up session — 2026-11-03
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| D1 — Audit existing dashboard for misleading free-time and source-verification claims; correct material issues and verify deployment | needs review | `arena/d474d6b2-korea4` | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, `tests/`, `.github/workflows/check.yml`, `EXECUTIVE-SUMMARY.md`, generated root HTML / `js/app.js`, `research/` (only as needed) | Final integration follow-up on the fixed Arena branch; preserve prior work and disclose unverified schedules. |
+
+### D1 follow-up audit — 2026-11-03
+- Focused official rechecks: [NFL important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) confirms Super Bowl LXI Feb. 14, 2027; [Phillies spring schedule](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced) confirms a Feb. 19 game, without confirmed Bay Area carriage; [WWO station finder](https://www.westwoodonesports.com/station-finder/) warns that affiliates may not carry every network broadcast. The intervening dates are not verified free.
+- Fixed static snapshot called “today,” Pacific today navigation, misleading verified-colored estimated badges / verified filter, and a cross-midnight duration recalculation bug. Gap labels now explicitly say estimated and unverified. Data is dated; there is no automatic refresh in the root publisher. Full row-by-row official re-verification and complete Bay Area radio coverage were **not** accomplished by this follow-up; the structural script does not perform such an audit. Flagged page discloses these limitations and archived dashboards.
+- Local checks: `python scripts/verify.py` (9,356 source-linked primary rows structurally sampled; 689 internal links, 0 broken), `node tests/test_dashboard.mjs`, `npm test`, and focused Python generator tests passed. `python -m unittest discover -s tests -v` has two errors and one failure in inherited `test_build.py`: those tests expect the superseded planner artifact and redirect configuration; no claim that this suite passed. Published as D1-04.
+- PR / merge / deploy: pending. Claim branch was initially absent on origin; rebased against main before its first push. Scope includes `.github/workflows/check.yml` and `EXECUTIVE-SUMMARY.md` for test gating and summary accuracy.
+
 ## Branch constraint
 Arena fixes each session to its assigned branch and forbids switching to, creating, or pushing another branch. The requested `session-<id>/<task>` branch/worktree convention and a separate integration branch therefore cannot be used by this session. All work, the final PR, and the merge from this session are performed on `arena/72e6d3f7-korea4`.
 

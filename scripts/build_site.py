@@ -36,9 +36,9 @@ def badge(value, kind=None) -> str:
     up = text.upper()
     cls = kind or "neutral"
     if kind is None:
-        if "VERIFIED" in up and "UNVERIFIED" not in up: cls = "verified"
+        if "UNVERIFIED" in up or "TBD" in up or "NOT RELEASED" in up: cls = "unverified"
         elif "ESTIMATED" in up or "MODEL" in up: cls = "estimated"
-        elif "UNVERIFIED" in up or "TBD" in up or "NOT RELEASED" in up: cls = "unverified"
+        elif "VERIFIED" in up: cls = "verified"
         elif "FOCUS" in up: cls = "focus"
         elif "HIGH" in up: cls = "high"
         elif "CORRECTED" in up: cls = "corrected"
@@ -155,6 +155,7 @@ def page(title, active, lead, body, extra_head=""):
 <main>
   <h1 class="page-title">{esc(title)}</h1>
   <p class="page-lead">{lead}</p>
+  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Data captured {esc(META["generated_utc"])}. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
   {body}
   <footer class="footer">
     <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
@@ -206,10 +207,10 @@ def free_rows_for_today():
         src = nearest_source(rows, f["start"])
         out.append({
             "start": fmt_hm(f["start"]), "end": fmt_hm(f["end"]),
-            "minutes": f["end"]-f["start"], "status": "EXACT FREE WINDOW — PT",
+            "minutes": f["end"]-f["start"], "status": "ESTIMATED GAP — UNVERIFIED",
             "source_url": src.get("source_url", DEFAULT_SOURCE),
             "source_label": src.get("source_label", "Bounding official game source"),
-            "verification": "VERIFIED COMPUTATION / FUTURE UNVERIFIED",
+            "verification": "ESTIMATED / UNVERIFIED",
         })
     return out
 
@@ -231,10 +232,18 @@ def preserve_legacy():
             (legacy / dst).write_text(p.read_text("utf-8", "replace"), encoding="utf-8")
 
 
+
+def safe_findings():
+    rows = [dict(row) for row in META["findings"]]
+    for row in rows:
+        if row["topic"] == "Official 2026 NFL regular season":
+            row.update(finding="272 captured regular-season matchup rows, including 24 with TBD kickoff/date; consult the individual rows and their sources.", status="UNVERIFIED — AGGREGATE NOT INDEPENDENTLY RECHECKED")
+    return rows
+
 def build_index():
     c = META["counts"]
     today_rows = free_rows_for_today()
-    findings_rows = META["findings"]
+    findings_rows = safe_findings()
     window_rows = META["vacation_windows"]
     flag_rows = META["flags"][:8]
     source_rows = SOURCES[:8]
@@ -252,9 +261,9 @@ def build_index():
   {card(c['line_by_line_audit_rows'], 'prior data lines reviewed')}
 </div>
 <div class="callout warn"><strong>Read this first.</strong> 2028/2029 MLB and NFL game-by-game schedules are not officially released. The site shows ESTIMATED planning models separately; they are not real verified released schedules. TBD official start times are blank with UNVERIFIED flags.</div>
-<section class="panel"><h2>Today: exact Pacific free windows</h2><p class="intro">{esc(META['system_today'])} · America/Los_Angeles · computed from merged official busy intervals and flagged planning estimates.</p>
+<section class="panel"><h2>Snapshot example: estimated Pacific gaps</h2><p class="intro">{esc(META['system_today'])} · America/Los_Angeles · computed from merged official busy intervals and flagged planning estimates.</p>
 {table(['Start PT','End PT','Free minutes','Status'], today_rows, ['start','end',('minutes','num'),('status','badge')], 'today-free', 20)}
-<p><a class="control-btn" href="daily.html?date={esc(META['system_today'])}">Open full daily scoreboard →</a></p></section>
+<p><a class="control-btn" href="daily.html?date={esc(META['system_today'])}">Open scoreboard for snapshot date →</a></p></section>
 <section class="panel"><h2>Executive findings</h2><p class="intro">Every finding links to the official source used. Full analysis is on the Executive Summary and Methodology pages.</p>
 {table(['Topic','Finding','Status'], findings_rows, ['topic','finding',('status','badge')], 'findings', 20)}</section>
 <section class="panel"><h2>Best 1-, 2-, and 3-week candidates</h2><p class="intro">Least-conflict windows from exact official rows plus separately labelled unreleased-season models. “Strict free” means zero busy blocks; no window is certified free until future schedules are released.</p>
@@ -264,7 +273,7 @@ def build_index():
 <section class="panel"><h2>Official sources for manual review</h2>{table(['ID','Title','Purpose','HTTP','Status'], source_rows, ['id','title','purpose',('http_status','num'),('status','badge')], 'sources-index', 20)}
 <p><a class="control-btn" href="sources.html">See all {len(SOURCES)} sources →</a></p></section>
 '''
-    write("index.html", page("Dashboard", "index.html", "Clean landing dashboard with executive summary, exact free time, and category navigation.", body))
+    write("index.html", page("Dashboard", "index.html", "Dashboard with executive summary, estimated gaps, and category navigation.", body))
 
 
 def build_daily():
@@ -272,7 +281,7 @@ def build_daily():
 <section class="panel"><h2>Date controls</h2>
   <div class="day-nav">
     <button type="button" data-day-step="-1">← Yesterday</button>
-    <button type="button" id="today-btn">Today · {esc(META['system_today'])}</button>
+    <button type="button" id="today-btn">Today</button>
     <button type="button" data-day-step="1">Tomorrow →</button>
     <label>Date <input type="date" id="selected-date" min="{esc(META['date_range'][0])}" max="{esc(META['date_range'][1])}" value="{esc(META['system_today'])}"></label>
   </div>
@@ -286,18 +295,12 @@ def build_daily():
     <label><input class="filter-toggle" type="checkbox" data-cat="WWO" checked> WWO</label>
     <label><input class="filter-toggle" type="checkbox" data-cat="MLS" checked> MLS</label>
   </div>
-  <div class="controls-grid">
-    <label>MLB minutes <input type="number" min="30" max="360" value="{META['durations']['MLB']}" data-duration="MLB"></label>
-    <label>NFL minutes <input type="number" min="30" max="360" value="{META['durations']['NFL']}" data-duration="NFL"></label>
-    <label>NCAAF minutes <input type="number" min="30" max="360" value="{META['durations']['NCAAF']}" data-duration="NCAAF"></label>
-    <label>MLS minutes <input type="number" min="30" max="360" value="{META['durations']['MLS']}" data-duration="MLS"></label>
-  </div>
-  <p class="mini">Durations default to researched averages and rule-book values; changing them recalculates the day without requiring manual schedule entry.</p>
+  <p class="mini">Durations are planning assumptions, not guaranteed broadcast end times. Filters change the scenario, not the underlying source data.</p>
 </section>
-<section class="panel"><h2 id="day-heading">Daily scoreboard</h2><div class="callout">All times are Pacific (PST in winter, PDT in summer). A green block is free; all other colors mean a game or unverified broadcast block is present.</div><div id="day-content"></div></section>
+<section class="panel"><h2 id="day-heading">Daily scoreboard</h2><div class="callout">All times are Pacific (PST in winter, PDT in summer). Green shows gaps in the selected snapshot, not confirmed free time; other colors represent modeled or captured busy blocks.</div><div id="day-content"></div></section>
 <section class="panel"><h2>Duration research</h2>{table(['Sport','Average duration','Halftime','Regulation','Status'], META['durations_table'], ['sport','average_game_duration','halftime','regulation',('status','badge')], 'duration-research', 20)}</section>
 '''
-    write("daily.html", page("Daily scoreboard", "daily.html", "Yesterday / today / tomorrow scoreboard with exact intraday free windows, game presence, and editable researched durations.", body))
+    write("daily.html", page("Daily scoreboard", "daily.html", "Yesterday / today / tomorrow scoreboard with estimated intraday gaps and captured or modeled game presence.", body))
 
 
 def build_calendar():
@@ -315,7 +318,7 @@ def build_calendar():
 <section class="panel"><h2>Month grid</h2><div id="calendar-content"></div></section>
 <section class="panel"><h2>Unreleased-season planning models</h2>{table(['Year','Model intervals','Method','Status'], META['model_seasons'], ['year',('model_intervals','num'),'method',('status','badge')], 'model-seasons', 20)}</section>
 '''
-    write("calendar.html", page("Calendar", "calendar.html", "Everyday month scoreboard with exact free minutes and links to each day’s intraday free windows.", body))
+    write("calendar.html", page("Calendar", "calendar.html", "Everyday month scoreboard with estimated gap minutes and links to each day’s scoreboard.", body))
 
 
 def build_vacation():
@@ -324,6 +327,9 @@ def build_vacation():
 <div class="callout danger"><strong>Strict conclusion:</strong> {esc(conclusion['conclusion'])} {badge('ESTIMATED / UNVERIFIED','unverified')} <a href="{esc(conclusion['source_url'])}" target="_blank" rel="noopener">Official NFL date anchor</a></div>
 <section class="panel"><h2>Best 1-, 2-, and 3-week windows (least conflict)</h2><p class="intro">Computed from exact official rows plus separately labelled 2026-pattern estimates. Busy days include official dates with TBD times and unverified conservative blocks.</p>
 {table(['Year','Length','Start','End','Busy days','Busy minutes','Model days','Strict free','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('busy_minutes','num'),('model_days','num'),('strict_free','text'),('status','badge')], 'vacation-windows', 20)}</section>
+<section class="panel"><h2>2027 anchors for manual review</h2><p class="intro">These dates do not establish an empty week or confirm local radio coverage. Other broadcasts may occur between the anchors.</p>{table(['Event','Official date','Status'], [
+ {'event':'NFL Super Bowl LXI','date':'2027-02-14','status':'VERIFIED DATE — KICKOFF / RADIO COVERAGE NOT CHECKED','source_url':'https://www.nfl.com/news/2026-27-national-football-league-important-dates','source_label':'NFL important dates'},
+ {'event':'Phillies at Tigers spring training','date':'2027-02-19','status':'VERIFIED DATE — START / SF AM/FM CARRIAGE UNVERIFIED','source_url':'https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced','source_label':'Phillies official release'}], ['event','date',('status','badge')], 'manual-anchors', 20)}</section>
 <section class="panel"><h2>Officially anchored short gaps and scenarios</h2>{table(['Year','Window','Days','Label','Status','Notes'], META['anchor_windows'], ['year',('window','blank'),('length_days','num'),'label',('status','badge'),'notes'], 'anchor-windows', 20)}</section>
 <section class="panel"><h2>Schedule availability 2026–2029</h2>{table(['Season','League','Official rows','TBD times','Status','Verification'], META['season_availability'], ['season','league',('official_rows','num'),('tbd_times','num'),'status',('verification','badge')], 'season-availability', 50)}</section>
 <section class="panel"><h2>Model provenance</h2>{table(['Year','Intervals','Method','Status','Notes'], META['model_seasons'], ['year',('model_intervals','num'),'method',('status','badge'),'notes'], 'model-provenance', 20)}</section>
@@ -400,7 +406,12 @@ def build_sources():
 
 def build_flagged():
     body = f'''
-<div class="callout danger"><strong>Flagged for Review does not block merge.</strong> These are published here with official source links. Unverified values remain blank in the main tables.</div>
+<div class="callout danger"><strong>Review warning:</strong> Snapshot gaps cannot prove all broadcasts were captured; the older parallel dashboards may have conflicting claims. A source link is not proof that every cell was independently checked. These are published here with official source links. Unverified values remain blank in the main tables.</div>
+<section class="panel"><h2>Follow-up audit flags</h2>{table(['ID','Issue','Status','Action'], [
+        {'id':'D1-01','issue':'Warriors, Sharks, Valkyries and other terrestrial radio game-by-game coverage is incomplete; local carriage and reception are not confirmed for each event.','status':'UNVERIFIED','action':'Do not treat displayed gaps as verified free time. Consult station and team schedules.','source_url':'https://www.nba.com/warriors/schedule'},
+        {'id':'D1-02','issue':'The dashboard uses a static 2026-11-02 snapshot; future schedules and broadcast details may have changed. The automated structural checker does not independently verify each source value.','status':'UNVERIFIED','action':'Refresh and independently compare individual rows before relying on them.','source_url':'https://www.nfl.com/schedules/'},
+        {'id':'D1-03','issue':'Archived parallel dashboards and the primary snapshot may differ in coverage and conclusions.','status':'FLAGGED','action':'Use them as historical research only; independently review official sources.','source_url':'https://www.westwoodonesports.com/nfl-schedule/'},
+        {'id':'D1-04','issue':'Legacy planner build tests expect a superseded redirect artifact and fail against the root-dashboard configuration.','status':'FLAGGED','action':'Tests are not evidence of a successful legacy build; root static checks and focused dashboard tests are run separately.','source_url':'https://www.westwoodonesports.com/station-finder/'}], ['id','issue',('status','badge'),'action'], 'follow-up-flags', 20)}</section>
 <section class="panel"><h2>Irregularities and corrections</h2>{table(['ID','Issue','Status','Action'], META['flags'], ['id','issue',('status','badge'),'action'], 'all-flags', 100)}</section>
 <section class="panel"><h2>Unverified official anchors</h2>{table(['ID','Event','Official date','Status','Verification'], [a for a in META['anchors'] if a['verification']=='UNVERIFIED'], ['id','event',('official_date','blank'),'status',('verification','badge')], 'unverified-anchors', 100)}</section>
 '''
@@ -419,7 +430,7 @@ def build_methodology():
 <li>2028/2029 and unreleased 2027 NFL/WWO rows are ESTIMATED models, not real verified released schedules.</li>
 <li>Every table row carries a source link; internal links and static assets are checked before merge.</li>
 </ol></section>
-<section class="panel"><h2>Analysis findings</h2>{table(['Topic','Finding','Status'], META['findings'], ['topic','finding',('status','badge')], 'method-findings', 50)}</section>
+<section class="panel"><h2>Analysis findings</h2>{table(['Topic','Finding','Status'], safe_findings(), ['topic','finding',('status','badge')], 'method-findings', 50)}</section>
 '''
     write("methodology.html", page("Methodology & durations", "methodology.html", "Official verification rules, average game durations, halftime research, estimation model, and analysis findings.", body))
 
@@ -436,7 +447,7 @@ def build_executive():
     body = f'''
 <section class="hero"><div class="kicker">Executive summary</div><h1>Verified rows, blank unknowns, clearly labelled estimates.</h1><p>{esc(META['executive_summary'])}</p></section>
 <div class="grid cards">{card(META['counts']['official_event_rows'],'official rows')}{card(META['counts']['official_sources'],'official sources')}{card(META['counts']['days'],'daily scoreboards')}{card(META['counts']['line_by_line_audit_rows'],'prior lines reviewed')}</div>
-<section class="panel"><h2>Key findings</h2>{table(['Topic','Finding','Status'], META['findings'], ['topic','finding',('status','badge')], 'exec-findings', 50)}</section>
+<section class="panel"><h2>Key findings</h2>{table(['Topic','Finding','Status'], safe_findings(), ['topic','finding',('status','badge')], 'exec-findings', 50)}</section>
 <section class="panel"><h2>Vacation conclusion</h2><div class="callout danger">{esc(META['analysis_conclusion']['conclusion'])}</div>{table(['Year','Length','Start','End','Busy days','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('status','badge')], 'exec-windows', 50)}</section>
 <section class="panel"><h2>Irregularities</h2>{table(['ID','Issue','Status'], META['flags'], ['id','issue',('status','badge')], 'exec-flags', 100)}</section>
 '''
@@ -451,7 +462,7 @@ Generated {META['generated_utc']} from {len(SOURCES)} official-source records.
 - Stanford and Cal 2026 NCAAF games and official 2027–2029 future anchors.
 - All captured official Westwood One Sports event windows across nine categories.
 - Other confirmed Bay Area AM/FM radio sports, including the full official 2026 Earthquakes radio schedule.
-- Exact Pacific-time free windows every day from {META['date_range'][0]} through {META['date_range'][1]}.
+- Estimated Pacific-time gaps, not verified free time, for each day from {META['date_range'][0]} through {META['date_range'][1]}.
 
 ## Verification rules
 1. Official/league/team/network sources only for VERIFIED values.
@@ -462,6 +473,9 @@ Generated {META['generated_utc']} from {len(SOURCES)} official-source records.
 
 ## Headline conclusion
 {META['analysis_conclusion']['conclusion']}
+
+No 7-, 14- or 21-day trip can be certified free from all requested radio sports from this incomplete snapshot. In 2027, the [NFL lists Super Bowl LXI on February 14](https://www.nfl.com/news/2026-27-national-football-league-important-dates), and the [Phillies list a spring-training game on February 19](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced). The intervening dates are only a review candidate, not a verified radio-free interval: other broadcasts, future changes and local carriage remain unknown. [Westwood One warns not every affiliate carries every network broadcast](https://www.westwoodonesports.com/station-finder/). The 2028 and 2029 candidates are model-based and unverified.
+
 
 ## Counts
 - Official event / anchor rows: {META['counts']['official_event_rows']}

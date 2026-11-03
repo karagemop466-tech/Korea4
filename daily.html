@@ -15,12 +15,13 @@
 </div></header>
 <main>
   <h1 class="page-title">Daily scoreboard</h1>
-  <p class="page-lead">Yesterday / today / tomorrow scoreboard with exact intraday free windows, game presence, and editable researched durations.</p>
+  <p class="page-lead">Yesterday / today / tomorrow scoreboard with estimated intraday gaps and captured or modeled game presence.</p>
+  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Data captured 2026-11-02T18:00:25+00:00. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
   
 <section class="panel"><h2>Date controls</h2>
   <div class="day-nav">
     <button type="button" data-day-step="-1">← Yesterday</button>
-    <button type="button" id="today-btn">Today · 2026-11-02</button>
+    <button type="button" id="today-btn">Today</button>
     <button type="button" data-day-step="1">Tomorrow →</button>
     <label>Date <input type="date" id="selected-date" min="2026-11-01" max="2029-12-31" value="2026-11-02"></label>
   </div>
@@ -34,15 +35,9 @@
     <label><input class="filter-toggle" type="checkbox" data-cat="WWO" checked> WWO</label>
     <label><input class="filter-toggle" type="checkbox" data-cat="MLS" checked> MLS</label>
   </div>
-  <div class="controls-grid">
-    <label>MLB minutes <input type="number" min="30" max="360" value="158" data-duration="MLB"></label>
-    <label>NFL minutes <input type="number" min="30" max="360" value="192" data-duration="NFL"></label>
-    <label>NCAAF minutes <input type="number" min="30" max="360" value="204" data-duration="NCAAF"></label>
-    <label>MLS minutes <input type="number" min="30" max="360" value="120" data-duration="MLS"></label>
-  </div>
-  <p class="mini">Durations default to researched averages and rule-book values; changing them recalculates the day without requiring manual schedule entry.</p>
+  <p class="mini">Durations are planning assumptions, not guaranteed broadcast end times. Filters change the scenario, not the underlying source data.</p>
 </section>
-<section class="panel"><h2 id="day-heading">Daily scoreboard</h2><div class="callout">All times are Pacific (PST in winter, PDT in summer). A green block is free; all other colors mean a game or unverified broadcast block is present.</div><div id="day-content"></div></section>
+<section class="panel"><h2 id="day-heading">Daily scoreboard</h2><div class="callout">All times are Pacific (PST in winter, PDT in summer). Green shows gaps in the selected snapshot, not confirmed free time; other colors represent modeled or captured busy blocks.</div><div id="day-content"></div></section>
 <section class="panel"><h2>Duration research</h2><div class="table-wrap" data-table="duration-research" data-page-size="20">
       
       <div class="table-controls">
