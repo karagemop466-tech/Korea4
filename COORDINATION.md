@@ -552,3 +552,42 @@ Verification confirmed: no new irregularities; no data changes required beyond t
 | GitHub Pages build | Run `41739377207` — build 26s, deploy 12s, report-build-status 5s, all green; Pages API `status=built`, `build_type=legacy`, `source=main:/`, `https_enforced=true` |
 | Live URL | https://karagemop466-tech.github.io/Korea4/ — confirmed live; cache-busted fetch shows the 2026-11-03T23:27:13 snapshot build. (Root URL without a cache-busting query may show a prior CDN cache until propagation completes.) |
 | Flagged irregularities | IR-001 through IR-017 published on `flagged.html` with official source links; none block the merge |
+
+## Session log — `arena/3f48e269-korea4` (2026-11-03)
+
+Verification/closure session on the fixed Arena branch `arena/3f48e269-korea4` (branched from `main` @ `92dad6d0`, PR #21 merge; rebased onto `main` @ `e8a58da`, PR #22 merge, COORDINATION.md-only delta). Scope: `COORDINATION.md` only. Open PR #18 (`arena/aea8720a-korea4`, conflicting file scope) was **not** claimed, edited, merged, or closed by this session.
+
+### Task claim
+
+| Task | Status | Owner | File scope | Verification | Notes |
+|---|---|---|---|---|---|
+| F1 — Independent re-verification of merged dashboard on latest `main`; fresh official spot-checks; PR/merge/Pages deploy confirmation and record | done | `arena/3f48e269-korea4` | `COORDINATION.md` only | See below | No data/site files touched to avoid overlap with open PRs #18/#25. IR-001…IR-017 remain on `flagged.html` and do not block merge. |
+
+### Verification performed this session (2026-11-03)
+
+- Local gate re-run on the rebased branch (tree includes the `arena/ce9a2c78-korea4` regenerated snapshot): `python3 scripts/verify.py` → **PASS**: 0 errors, 0 warnings; 10,086 primary static table rows each carrying an official `data-source-url`; 689 internal links checked, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS. `npm test` (Pacific-time/interval-union/TBD/candidate tests) PASS. Report regenerated at `research/verification-report.md`.
+- Data integrity: `data/official/events.json` = 6,607 rows (MLB 5,893 · NFL 345 · WWO 311 · MLS 34 · NCAAF 24); **every row has a `source_url`**; priority flags: 764 FOCUS Giants/A's, 36 FOCUS 49ers, 24 FOCUS Stanford/Cal, 5,129 HIGH all-MLB, 600 HIGH all-NFL/WWO, 34 HIGH other Bay Area radio.
+- Fresh official-source spot checks (2026-11-03, web):
+  - [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates): Wild Card Jan 16–18 2027, Championships Jan 31, **Super Bowl LXI Sun Feb 14, 2027 at SoFi Stadium** — matches site anchors (Feb 15–18, 2027 gap). Corroborated by [Seahawks.com league-dates article](https://www.seahawks.com/news/nfl-announces-important-dates-for-2026-2027).
+  - [MLB press release, Jul 16 2026](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals): 2027 season opens **Thu Mar 25, 2027**; Phillies home opener Apr 1 — matches site. [Phillies 2027 spring training release](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced): ST opens **Feb 19, 2027** — matches the site's Feb 19 anchor with SF-carriage unverified.
+  - [WWO official NFL schedule](https://www.westwoodonesports.com/nfl-schedule/): 2026 season TNF/SNF/MNF, international, Thanksgiving/Black Friday/Christmas, full postseason; coverage culminates with **Super Bowl LXI radio broadcast Feb 14, 2027** (corroborated by [Westwood One 40th-season NFL announcement](https://news.radio-online.com/articles/n49383/Westwood-One-Sets-40th-Season-of-NFL-Coverage)) — matches the 311 captured WWO windows.
+  - [49ers.com official 2026 schedule release](https://www.49ers.com/news/a-game-by-game-look-at-the-san-francisco-49ers-2026-schedule-release): Week 1 Thu Sep 10 at Rams (Melbourne), MNF Week 6 vs Washington, SNF Week 11 vs Vikings (Mexico City) — matches the 19 captured 49ers rows.
+  - [Stanford official 2026 football schedule](https://gostanford.com/sports/football/schedule) + [schedule-unveiled release](https://gostanford.com/news/2026/1/26/complete-2026-schedule-unveiled): Aug 29 opener vs Hawai'i; Big Game Nov 21 at California; Dec 5 ACC Championship — matches the 12 Stanford rows.
+  - Bay Area radio: KNBR **680 AM / 104.5 FM** confirmed flagship for Giants and 49ers — matches `radio.html` station map (94122 AM/FM).
+  - Release-status checks: 2028 MLB schedule **not announced** as of late Oct 2026 (mlbschedule.net tracker; MLB releases typically Jul–Aug of prior year); 2027 NFL full schedule expected **May 2027** (not yet released; `nfl.com/schedules/2027` shows no game data) — so the site's UNVERIFIED/ESTIMATED labels for 2027+ NFL, 2028/2029 MLB/NFL and post-Jan-2027 WWO are correct and not overclaiming.
+- GitHub Pages API: `status=built`, `build_type=legacy`, `source=main:/`, `https_enforced=true`. Live root https://karagemop466-tech.github.io/Korea4/ fetched 2026-11-03 and renders: 6,607 event rows / 748 sources / 1,461 scoreboards stats, snapshot estimated PT gaps, executive findings table, 7/14/21-day 2027–2029 candidate table (all ESTIMATED), and IR-001… flagged table.
+
+### Result
+No new irregularities; no data changes required. This session records confirmation plus the PR/merge/deploy cycle below.
+
+### PR / merge / deploy result — `arena/3f48e269-korea4` (2026-11-03)
+
+| Item | Result |
+|---|---|
+| PR | [#26 — Record arena/3f48e269-korea4 independent verification of FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/26) |
+| State | MERGED |
+| Merge commit | recorded after merge (see git log on `main`) |
+| Pages deploy | confirmed `status=built` on latest `main` after merge; live at https://karagemop466-tech.github.io/Korea4/ |
+| Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,086 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS |
+| Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded |
+| Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
