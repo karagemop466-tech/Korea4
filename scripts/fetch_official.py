@@ -96,6 +96,8 @@ STATIC_SOURCES = {
     # two remaining Bay Area AM/FM radio flagships (Warriors 95.7 The Game,
     # Sharks 98.5 KFOX), closing coverage gap D1-01 / IR-014.
     "nba_schedule_league_v2": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+    "nba_schedule_by_date_pdf": "https://pr.nba.com/wp-content/uploads/sites/46/2026/08/2026-27-NBA-Regular-Season-Schedule-By-Date.pdf",
+    "nba_schedule_by_team_pdf": "https://pr.nba.com/wp-content/uploads/sites/46/2026/08/2026-27-NBA-Regular-Season-Schedule-By-Team.pdf",
     "warriors_schedule": "https://www.nba.com/warriors/schedule",
     "nba_all_star_2027": "https://www.nba.com/news/phoenix-suns-nba-all-star-2027-official-release",
     "nba_rulebook": "https://official.nba.com/rulebook/",
