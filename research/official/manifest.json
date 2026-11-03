@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-02T17:41:45+00:00",
-  "source_count": 675,
+  "generated_utc": "2026-11-03T23:35:54+00:00",
+  "source_count": 683,
   "wwo_event_count": 580,
   "wwo_categories": {
     "NFL": "47029",
@@ -76,11 +76,11 @@
       "url": "https://calbears.com/sports/football/schedule/2026",
       "http_status": 200,
       "error": null,
-      "bytes": 971961,
-      "sha256": "cc0b56dcce25cb48d7120ff8fb5d29f213d4d01ed157a224a77657747b95f31f",
-      "compressed_bytes": 94711,
+      "bytes": 971680,
+      "sha256": "202432c98458293a813a813377708501e2eef55b1a2e04e1ddbbffa6aa59b79c",
+      "compressed_bytes": 94736,
       "raw_file": "research/official/raw/cal_schedule_current.gz",
-      "retrieved_utc": "2026-11-02T17:39:36+00:00"
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "cfp_2027_broadcast",
@@ -197,11 +197,11 @@
       "url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027&fields=copyright,totalGames,dates,date,totalGames,games,gamePk,gameDate,officialDate,gameType,season,teams,away,team,id,name,home,team,id,name,venue,id,name,status,startTimeTBD,detailedState,seriesDescription,doubleHeader,dayNight,description,ifNecessary,gameNumber",
       "http_status": 200,
       "error": null,
-      "bytes": 1282218,
-      "sha256": "493248f10288c557bea44d29c9e5c4f83f16b41de558990697a7216bac873516",
-      "compressed_bytes": 39761,
+      "bytes": 1282470,
+      "sha256": "6bc2584f76b2d56e48ec54d40ee96d3cc36964c955dc7699c97d55ed7da6e6d4",
+      "compressed_bytes": 39979,
       "raw_file": "research/official/raw/mlb_2027_all.gz",
-      "retrieved_utc": "2026-11-02T17:39:34+00:00"
+      "retrieved_utc": "2026-11-03T23:35:45+00:00"
     },
     {
       "key": "mlb_2027_all_star",
@@ -301,6 +301,39 @@
       "compressed_bytes": 2879,
       "raw_file": "research/official/raw/mlb_teams_2027.gz",
       "retrieved_utc": "2026-11-02T17:39:33+00:00"
+    },
+    {
+      "key": "nba_all_star_2027",
+      "url": "https://www.nba.com/news/phoenix-suns-nba-all-star-2027-official-release",
+      "http_status": 200,
+      "error": null,
+      "bytes": 323216,
+      "sha256": "4a4edd4560a3644df858cdc1f413d5435fdf68fae3565fb94fce99b6c532c4a0",
+      "compressed_bytes": 48955,
+      "raw_file": "research/official/raw/nba_all_star_2027.gz",
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+    },
+    {
+      "key": "nba_rulebook",
+      "url": "https://official.nba.com/rulebook/",
+      "http_status": 200,
+      "error": null,
+      "bytes": 115640,
+      "sha256": "4639fda1c8168494efaebe83c1880b8a0ed942be1a070dfe9b1cda4cb0c5dbea",
+      "compressed_bytes": 35352,
+      "raw_file": "research/official/raw/nba_rulebook.gz",
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+    },
+    {
+      "key": "nba_schedule_league_v2",
+      "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+      "http_status": 403,
+      "error": "HTTP 403",
+      "bytes": 425,
+      "sha256": "73cfc5e38ac77b08d4066dbaa0ea0e8cbd74f6488450c406ac6f013fe2ea345c",
+      "compressed_bytes": 272,
+      "raw_file": "research/official/raw/nba_schedule_league_v2.gz",
+      "retrieved_utc": "2026-11-03T23:35:45+00:00"
     },
     {
       "key": "ncaa_football_rules",
@@ -527,33 +560,33 @@
       "url": "https://www.nfl.com/schedules/2026/by-week/week-16",
       "http_status": 200,
       "error": null,
-      "bytes": 2471183,
-      "sha256": "eefbdd8802ae1dc238f85bb3bde052824dfaf8115a0f46040fa6a121328cf8c4",
-      "compressed_bytes": 172310,
+      "bytes": 2472696,
+      "sha256": "ac6ae4dd4cf8c9dfb792214fe1d7b160d8030efad52a01e230eb64e628ad0af8",
+      "compressed_bytes": 172542,
       "raw_file": "research/official/raw/nfl_2026_week_16.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "nfl_2026_week_17",
       "url": "https://www.nfl.com/schedules/2026/by-week/week-17",
       "http_status": 200,
       "error": null,
-      "bytes": 2453231,
-      "sha256": "50ac6534ab52de291eada1eeb4bf53e570109dfae932ed2c29c05cf388b377b3",
-      "compressed_bytes": 173020,
+      "bytes": 2454613,
+      "sha256": "a6cff0a9571a269be34150b36893f64e16ddc046246ab058ee3294d5759e71d3",
+      "compressed_bytes": 172891,
       "raw_file": "research/official/raw/nfl_2026_week_17.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "nfl_2026_week_18",
       "url": "https://www.nfl.com/schedules/2026/by-week/week-18",
       "http_status": 200,
       "error": null,
-      "bytes": 2422314,
-      "sha256": "ee01b0f9feefbc133b0b82a247aceda521770faaad5ded9ee751394d954a7bc3",
-      "compressed_bytes": 169539,
+      "bytes": 2423827,
+      "sha256": "ea50f38a689bea7d6aee512eee4e6f42a07a8c380560b396f0c01ffefd6028fb",
+      "compressed_bytes": 169816,
       "raw_file": "research/official/raw/nfl_2026_week_18.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "nfl_2027_by_team",
@@ -637,11 +670,44 @@
       "url": "https://www.49ers.com/schedule/",
       "http_status": 200,
       "error": null,
-      "bytes": 390368,
-      "sha256": "bd1afd7fab2ddb4d6aa495336098ab2f54ae0d1482cabc358ecf616c1ce061b3",
-      "compressed_bytes": 66156,
+      "bytes": 370900,
+      "sha256": "3750d3f9ee53f88d00be3685e18e9d7f86d457299e9e020fe6f12efd0575bf49",
+      "compressed_bytes": 63780,
       "raw_file": "research/official/raw/nflers_schedule.gz",
-      "retrieved_utc": "2026-11-02T17:39:37+00:00"
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+    },
+    {
+      "key": "nhl_rulebook_2025_26",
+      "url": "https://media.nhl.com/site/asset/public/ext/2025-26/2025-26Rules.pdf",
+      "http_status": 200,
+      "error": null,
+      "bytes": 21633488,
+      "sha256": "5efd45a01130b95c99db9161d240e5b3903dfa7b8acb9dd81848aba4512aad79",
+      "compressed_bytes": 19471962,
+      "raw_file": "research/official/raw/nhl_rulebook_2025_26.gz",
+      "retrieved_utc": "2026-11-03T23:35:52+00:00"
+    },
+    {
+      "key": "nhl_rulebook_2026_27",
+      "url": "https://media.nhl.com/site/asset/public/ext/2026-27/2026-27Rules.pdf",
+      "http_status": 200,
+      "error": null,
+      "bytes": 19331737,
+      "sha256": "c6c1680c4aa26b53663882b21fd49fcf450e1f236fc6b09f0ea266ba34f1c69e",
+      "compressed_bytes": 17252856,
+      "raw_file": "research/official/raw/nhl_rulebook_2026_27.gz",
+      "retrieved_utc": "2026-11-03T23:35:51+00:00"
+    },
+    {
+      "key": "nhl_sharks_20262027",
+      "url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027",
+      "http_status": 200,
+      "error": null,
+      "bytes": 183095,
+      "sha256": "c0ca488f86639ce2f9abff4f91cb3eaaf295d28e24707b3595022c305537b776",
+      "compressed_bytes": 15012,
+      "raw_file": "research/official/raw/nhl_sharks_20262027.gz",
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "sharks_radio",
@@ -653,6 +719,17 @@
       "compressed_bytes": 28724,
       "raw_file": "research/official/raw/sharks_radio.gz",
       "retrieved_utc": "2026-11-02T17:39:38+00:00"
+    },
+    {
+      "key": "sharks_schedule",
+      "url": "https://www.nhl.com/sharks/schedule",
+      "http_status": 200,
+      "error": null,
+      "bytes": 97504,
+      "sha256": "2e3c85131a3b5aba2c1e8353446347f0bac1e618a9bf3ed13d3bbc0b30853df6",
+      "compressed_bytes": 22197,
+      "raw_file": "research/official/raw/sharks_schedule.gz",
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "stanford_2026_schedule_release",
@@ -726,10 +803,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 653382,
-      "sha256": "94bdbf66965813d2323dbe18ff28253a2767566ca6a95e9170ac8110f5f598d0",
-      "compressed_bytes": 76088,
+      "sha256": "53548cb5410bb30775a331c285d5715b5ae75f5bce815c2675225beda7439eb0",
+      "compressed_bytes": 76089,
       "raw_file": "research/official/raw/stanford_schedule_current.gz",
-      "retrieved_utc": "2026-11-02T17:39:35+00:00"
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "warriors_radio",
@@ -741,6 +818,17 @@
       "compressed_bytes": 25788,
       "raw_file": "research/official/raw/warriors_radio.gz",
       "retrieved_utc": "2026-11-02T17:39:38+00:00"
+    },
+    {
+      "key": "warriors_schedule",
+      "url": "https://www.nba.com/warriors/schedule",
+      "http_status": 200,
+      "error": null,
+      "bytes": 57688,
+      "sha256": "7a3c6d8eafc977c2d7ab9706180c56cb93ec0fc515dcc42be0dd69f3727e1301",
+      "compressed_bytes": 19089,
+      "raw_file": "research/official/raw/warriors_schedule.gz",
+      "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
       "key": "wwo_event_471585",
@@ -7127,11 +7215,11 @@
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47033&range=all&offset=0&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 84108,
-      "sha256": "918ba3b1b171f370c81b02e789e0021b26009f10736fc6c4889a288b32985b34",
+      "bytes": 84095,
+      "sha256": "17001357a01a983ad7199de08c40c8ace9ff295660bb1d3545b4081c68176018",
       "compressed_bytes": 18167,
       "raw_file": "research/official/raw/wwo_grid_golf_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_golf_100",
@@ -7139,10 +7227,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 61468,
-      "sha256": "a41c9e3dcae54f77a9813c16d2aaf81b96469a2325a5054f7bf4a889e83ad81c",
-      "compressed_bytes": 16168,
+      "sha256": "10760d40bc3b7f0fab1ea2585d0921c7896b7a7aa2b6265c5230de1a297f533d",
+      "compressed_bytes": 16169,
       "raw_file": "research/official/raw/wwo_grid_golf_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_golf_200",
@@ -7150,10 +7238,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 61468,
-      "sha256": "2efae4f9a40aeceb9f6eb6b79f3a7bf894b032d283c09c839c1e30a2c21d1bf2",
+      "sha256": "d1fe2d699a1d0662130207bbbb98b7aa6d7e6752eb12d097b0ea47007d5764e0",
       "compressed_bytes": 16171,
       "raw_file": "research/official/raw/wwo_grid_golf_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_hockey_0",
@@ -7161,21 +7249,21 @@
       "http_status": 200,
       "error": null,
       "bytes": 65805,
-      "sha256": "d0bd976d6fbd16d4a5ccf997f14d80770e761e6ff19620942c0ac862cf73adde",
+      "sha256": "1571f2c50079e9be287f3212cff89b916e910fc5d5fceb57956973177671cd03",
       "compressed_bytes": 16838,
       "raw_file": "research/official/raw/wwo_grid_hockey_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_hockey_100",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47044&range=all&offset=100&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 61455,
-      "sha256": "c9df1adb08a0f5ff11a6c3be4564fb4f5db27c2ee1d9a5a8cef975ca6c0a59c6",
-      "compressed_bytes": 16166,
+      "bytes": 61468,
+      "sha256": "821c02fcc88e5d38def3c76d6fca644f70a46ed3e7a561d9cc30688169faa4f1",
+      "compressed_bytes": 16168,
       "raw_file": "research/official/raw/wwo_grid_hockey_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_hockey_200",
@@ -7183,10 +7271,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 61468,
-      "sha256": "25ff25d0a98706cd6387e287d1a91d654525e5b626145b15d89ba51600979a2f",
-      "compressed_bytes": 16171,
+      "sha256": "ff0063737a997b7e8c12672eb6b38e19d19c73bec9965f2b5a0ff99767cca34a",
+      "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_hockey_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_lacrosse_0",
@@ -7194,10 +7282,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 65870,
-      "sha256": "288d657f0b310ab2a4249ad4e136e1c12e3135400b045932f5c4a55d0c4b45b5",
-      "compressed_bytes": 16848,
+      "sha256": "bd906171741569a5823409dd6c3e6718d6ae9da1310b0ad736c53fd823daa139",
+      "compressed_bytes": 16847,
       "raw_file": "research/official/raw/wwo_grid_lacrosse_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_lacrosse_100",
@@ -7205,10 +7293,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 61455,
-      "sha256": "a2462c49dea229c5d79f598dba857dd9cbd0bc913dcb0a4ef1b2957308f3ffc4",
-      "compressed_bytes": 16168,
+      "sha256": "dbe8bb1170b1f2a38a915fdae0011a7b57ca053f76a55ba39fe1bc9c87da004c",
+      "compressed_bytes": 16167,
       "raw_file": "research/official/raw/wwo_grid_lacrosse_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_lacrosse_200",
@@ -7216,65 +7304,65 @@
       "http_status": 200,
       "error": null,
       "bytes": 61455,
-      "sha256": "b57697a350ef7ad4efed675a2a2bd9fb7542dbc3b362804af76d7198585747a4",
+      "sha256": "cca6906a8855a68f4ef5f0df7c1381ca4cbc5250f101f643859dedf7aaa4a03c",
       "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_lacrosse_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_mcws_0",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47420&range=all&offset=0&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 80580,
-      "sha256": "241c8b564d1748af602fa194739afc5cb1f0b044094edb957305765e365c2639",
-      "compressed_bytes": 17655,
+      "bytes": 80567,
+      "sha256": "7cdd75c0e7502cc989b4fbf7be6823927eacc76e8b4775bbc2548d7d08508e83",
+      "compressed_bytes": 17653,
       "raw_file": "research/official/raw/wwo_grid_mcws_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_mcws_100",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47420&range=all&offset=100&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 61455,
-      "sha256": "631b4178966af7e118804770d5f4a4b661eadc126ea1b9a242231a346687e751",
-      "compressed_bytes": 16167,
+      "bytes": 61468,
+      "sha256": "96bd950409d462d1b8c4183535190fe0f2d84ba84bd2dd17c50dd23ea94fdd21",
+      "compressed_bytes": 16168,
       "raw_file": "research/official/raw/wwo_grid_mcws_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:40+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_mcws_200",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47420&range=all&offset=200&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 61468,
-      "sha256": "b7a4720cdfa154cb1448e922b3e89b890982ef7fe1bdf5f8d462ae2cf1b16f3c",
-      "compressed_bytes": 16171,
+      "bytes": 61455,
+      "sha256": "896d38d7b8dc077d0ba6a2580d8c87bdbddb5e51b5be3552198ffe108205226f",
+      "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_mcws_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:40+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_ncaab_0",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47031&range=all&offset=0&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 127435,
-      "sha256": "83b5f69af72ecf4da28515062b031eb91549c91bdc975303ee82697921eb30a5",
-      "compressed_bytes": 22424,
+      "bytes": 127448,
+      "sha256": "5e13b63143d80fc97fd95efd63accdde922cea20d5e8cd36b0afaf9f70871e8d",
+      "compressed_bytes": 22426,
       "raw_file": "research/official/raw/wwo_grid_ncaab_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_ncaab_100",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47031&range=all&offset=100&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 132213,
-      "sha256": "1d783c93fef891dcba9a4c56acee3e46e13163f55c6aefdcb40b026048838165",
-      "compressed_bytes": 23403,
+      "bytes": 132200,
+      "sha256": "0178cd5b374428d1363ce475a5b7f863f3d8cb2bfd56f1479b061116b9d8aa72",
+      "compressed_bytes": 23401,
       "raw_file": "research/official/raw/wwo_grid_ncaab_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_ncaab_200",
@@ -7282,10 +7370,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 85508,
-      "sha256": "ddff52caf79e2c6263cfe65492a8ce97f8b067ba25df5a551048f03c97eb978d",
-      "compressed_bytes": 19040,
+      "sha256": "47141948be5f5ba9a8b4c3d820f93181ed86a950e203d841cc1448e76071c667",
+      "compressed_bytes": 19041,
       "raw_file": "research/official/raw/wwo_grid_ncaab_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_ncaaf_0",
@@ -7293,21 +7381,21 @@
       "http_status": 200,
       "error": null,
       "bytes": 86808,
-      "sha256": "2e91c298bf0be52ab8d44114a5171752542915fce9c73c22f6dc51125c6326dc",
-      "compressed_bytes": 19529,
+      "sha256": "d48502abe4900ba132696efe8510ec463efe83f8a860c3f835d33aa0ddd65432",
+      "compressed_bytes": 19530,
       "raw_file": "research/official/raw/wwo_grid_ncaaf_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:52+00:00"
     },
     {
       "key": "wwo_grid_ncaaf_100",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47030&range=all&offset=100&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 61468,
-      "sha256": "2c38ebf0e2e477bc9254956db22cb7980be81efd719bdc097a4b27d96fb7ec5a",
-      "compressed_bytes": 16168,
+      "bytes": 61455,
+      "sha256": "84de27d400fff4b9a297aea4b491880bac1a8c5f35929f4c1201e2ac464c8f37",
+      "compressed_bytes": 16167,
       "raw_file": "research/official/raw/wwo_grid_ncaaf_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:52+00:00"
     },
     {
       "key": "wwo_grid_ncaaf_200",
@@ -7315,10 +7403,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 61468,
-      "sha256": "d9209fa8b552a4bb5f9e0d6ccf6f3476d3cefeaa2c33c27a5da60a21a891f679",
+      "sha256": "06705205d4897ede35fb74e22098cc181a23286705136831a356d6b4c33827a2",
       "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_ncaaf_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:52+00:00"
     },
     {
       "key": "wwo_grid_nfl_0",
@@ -7326,43 +7414,43 @@
       "http_status": 200,
       "error": null,
       "bytes": 134892,
-      "sha256": "934d84c60d7cf3d5933343fe7ade9905669bdc2f1b0840428fa68214ec812254",
-      "compressed_bytes": 23735,
+      "sha256": "48b14e4792d92932abb3b8c7f98893b74294272999fad6717682800596dd6a16",
+      "compressed_bytes": 23733,
       "raw_file": "research/official/raw/wwo_grid_nfl_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:52+00:00"
     },
     {
       "key": "wwo_grid_nfl_100",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47029&range=all&offset=100&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 107115,
-      "sha256": "86551361154a6de530f905a6bfc37f38f3a5bfeadbe76b2c99e6cd051d52f1c6",
+      "bytes": 107128,
+      "sha256": "fc565cdecec66dbe8cd22a1f048afe96a5c0a3b625b3f85840dbdc64ade21743",
       "compressed_bytes": 21215,
       "raw_file": "research/official/raw/wwo_grid_nfl_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:52+00:00"
     },
     {
       "key": "wwo_grid_nfl_200",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47029&range=all&offset=200&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 61455,
-      "sha256": "515d842dbcf301a756455bb5c3b7e93728d9a3fdfe4b90ece63791f8f5d38414",
-      "compressed_bytes": 16169,
+      "bytes": 61468,
+      "sha256": "e56728499c9ef0c1650d5b69b29804d418f86c5366717e2437586dc056b0fbae",
+      "compressed_bytes": 16171,
       "raw_file": "research/official/raw/wwo_grid_nfl_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:38+00:00"
+      "retrieved_utc": "2026-11-03T23:35:52+00:00"
     },
     {
       "key": "wwo_grid_soccer_0",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47032&range=all&offset=0&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 88760,
-      "sha256": "0d174e7e95e816f5208e2d6ae1ddb94add084a87549ce35667b5dd1f60c0042a",
-      "compressed_bytes": 19379,
+      "bytes": 88747,
+      "sha256": "910c781efd533b48ee2d703cb1eb9331a6cd55389bb7d9b28b313d0a84c717ab",
+      "compressed_bytes": 19377,
       "raw_file": "research/official/raw/wwo_grid_soccer_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_soccer_100",
@@ -7370,43 +7458,43 @@
       "http_status": 200,
       "error": null,
       "bytes": 61455,
-      "sha256": "634cdfcddc07f8113a060ea57b91e0d31c17855c30de6021c03aa7bd03a6339d",
+      "sha256": "14aa4aea279f25dd71e92727eadc5d3df3cd1921a4c5f3e8fe9864075e1ed3de",
       "compressed_bytes": 16167,
       "raw_file": "research/official/raw/wwo_grid_soccer_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_soccer_200",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47032&range=all&offset=200&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 61455,
-      "sha256": "48d67461e6d85c795daeb831a154680c0cecd46e2da7c18e9897ca07809fc0ab",
-      "compressed_bytes": 16169,
+      "bytes": 61468,
+      "sha256": "a1b186c4447f37866e8f53645b88f3a6e71fbc7021a090127e9b5cca4f65eb37",
+      "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_soccer_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:53+00:00"
     },
     {
       "key": "wwo_grid_wcws_0",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47419&range=all&offset=0&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 82723,
-      "sha256": "a3b21e9eea7851c28837e4e1f6579dae14d1971405d9d9846950f0897bfa5fcd",
-      "compressed_bytes": 18042,
+      "bytes": 82710,
+      "sha256": "890fb069d4a6cfb77c91a569f8e5f0d41440b3be2b139ed761cb674f3a45537e",
+      "compressed_bytes": 18041,
       "raw_file": "research/official/raw/wwo_grid_wcws_0.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_wcws_100",
       "url": "https://www.westwoodonesports.com/more/eventGrid/?id=47419&range=all&offset=100&limit=100&timezone=America%2FNew_York&widgetTitle=Event+Display",
       "http_status": 200,
       "error": null,
-      "bytes": 61468,
-      "sha256": "b633f1f53858c797b5e5876042834996e46b520e7a3e1f3fcd62706a8b22205b",
-      "compressed_bytes": 16169,
+      "bytes": 61455,
+      "sha256": "132401f7b6700f70ad54bdb3eef6a52679cf38effd854069cb5ff905a0be4a58",
+      "compressed_bytes": 16168,
       "raw_file": "research/official/raw/wwo_grid_wcws_100.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_grid_wcws_200",
@@ -7414,32 +7502,32 @@
       "http_status": 200,
       "error": null,
       "bytes": 61468,
-      "sha256": "a38e9e3c7a74839f59502eaf1037f30275d60c676de38de8306eb07742a2f1f7",
-      "compressed_bytes": 16170,
+      "sha256": "2be00e07b160e21f084f688f9c96a7b7c3d587e6f3178c7198bd293b84fcebdd",
+      "compressed_bytes": 16171,
       "raw_file": "research/official/raw/wwo_grid_wcws_200.gz",
-      "retrieved_utc": "2026-11-02T17:39:39+00:00"
+      "retrieved_utc": "2026-11-03T23:35:54+00:00"
     },
     {
       "key": "wwo_nfl_schedule",
       "url": "https://www.westwoodonesports.com/nfl-schedule/",
       "http_status": 200,
       "error": null,
-      "bytes": 65277,
-      "sha256": "54dadfadf0cd08081ca1cd9f54383d05ae50c0201695832b23eb1b1526a63b4b",
-      "compressed_bytes": 16609,
+      "bytes": 65447,
+      "sha256": "10c048e2fbccb5c8567918d4cb00208daec5272fe56f8db50d7b47728dc3fe3e",
+      "compressed_bytes": 16742,
       "raw_file": "research/official/raw/wwo_nfl_schedule.gz",
-      "retrieved_utc": "2026-11-02T17:39:37+00:00"
+      "retrieved_utc": "2026-11-03T23:35:45+00:00"
     },
     {
       "key": "wwo_station_finder",
       "url": "https://www.westwoodonesports.com/station-finder/",
       "http_status": 200,
       "error": null,
-      "bytes": 127869,
-      "sha256": "ec88ddb9db997e200c0cff12e3a4064b17c411b6de8b312af138f64c8fed4f82",
-      "compressed_bytes": 22766,
+      "bytes": 127944,
+      "sha256": "f8fdc3f657a358b0467a14403a1143ace26199de4dedfcdc816a6b977fed8429",
+      "compressed_bytes": 22808,
       "raw_file": "research/official/raw/wwo_station_finder.gz",
-      "retrieved_utc": "2026-11-02T17:39:37+00:00"
+      "retrieved_utc": "2026-11-03T23:35:45+00:00"
     }
   ]
 }
