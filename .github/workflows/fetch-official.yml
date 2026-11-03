@@ -2,7 +2,7 @@ name: Fetch official source snapshots
 
 on:
   push:
-    branches: [arena/72e6d3f7-korea4]
+    branches: [arena/72e6d3f7-korea4, arena/27a87a06-korea4]
     paths:
       - scripts/fetch_official.py
       - .github/workflows/fetch-official.yml
