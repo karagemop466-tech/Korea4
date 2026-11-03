@@ -501,3 +501,11 @@ No irregularities found; no data changes required. This session records the conf
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
 | E1 — Independently check selected schedule and radio-carriage claims against current official sources and record limitations | in progress | `arena/9de8a119-korea4` | `research/independent-evidence-audit.md`, this board entry | Fixed Arena branch overrides requested branch naming. Does not touch files in PR #18's scope. This is a targeted audit, not a complete row-by-row verification. |
+
+### E1 handoff — 2026-11-03
+- Status: **needs review**. Targeted audit in `research/independent-evidence-audit.md`; no claim of full row-by-row verification.
+- Official [Brewers spring announcement](https://www.mlb.com/press-release/press-release-brewers-announce-2027-spring-training-schedule) specifies 1:10 p.m. Arizona time for its February 19, 2027 home opener (12:10 p.m. PST), subject to change; current local event row has a blank time. Game-specific current source needs checking before any correction. Broadcast schedule not established by that announcement.
+- Official [Westwood One station finder](https://www.westwoodonesports.com/station-finder/) explicitly disclaims universal affiliate carriage; an affiliate list is not game-specific proof, and F2/F3 digital subchannels are not standard analog FM.
+- Integration request to the owner of generated site / review page scope: add this discrepancy to the public Flagged for Review page and reconcile against the current game-specific source; do not silently infer station carriage. The audit file is not itself a replacement for that page.
+- `python3 scripts/verify.py` returned 0 errors and 0 warnings, 9,356 primary rows and 689 internal links; this is structural validation, not source-by-source factual verification. Remote branch did not exist at claim time; rebased on `origin/main` before first push.
+- Concurrent [PR #18](https://github.com/karagemop466-tech/Korea4/pull/18) touches the shared dashboard and currently reports merge conflicts. This session did not change or merge that session's work.

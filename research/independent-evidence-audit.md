@@ -1,0 +1,16 @@
+# Independent targeted evidence audit — 2026-11-03
+
+This is a **targeted sample**, not a verification of every row or of a complete Bay Area broadcast schedule. Official schedules can change. A scheduled game is not itself proof that it will air on an analog station receivable in Outer Sunset. No 7-, 14-, or 21-day interval is certified conflict-free by this audit.
+
+| Check | Official evidence | Finding / limitation |
+|---|---|---|
+| 2027 season opening | [MLB 2027 schedule release](https://www.mlb.com/news/mlb-2027-schedule-released) | March 24 opening-night matchup is TBD; traditional opening day is March 25. The matchup and broadcast availability cannot be filled in from this source. |
+| February 19, 2027, Angels at Brewers | [Brewers 2027 spring announcement](https://www.mlb.com/press-release/press-release-brewers-announce-2027-spring-training-schedule) | The announcement says the home opener is February 19, and all home games start 1:10 p.m. Arizona time except March 19. This implies 12:10 p.m. PST on February 19. The local event row for Angels at Brewers has a blank official time. **Needs review:** confirm against the latest game-specific official source before changing the row; the announcement says dates and times are subject to change. The announcement says the spring broadcast schedule will be announced later, so it does not establish Bay Area radio carriage. |
+| Super Bowl LXI | [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) | NFL lists February 14, 2027 at SoFi Stadium; that alone does not establish the absence of other sports broadcasts on surrounding days. |
+| NFL 2028 Super Bowl | [NFL Super Bowl LXII announcement](https://www.nfl.com/news/mercedes-benz-stadium-in-atlanta-to-host-super-bowl-lxii-in-2028) | Atlanta is the host; the announcement lists the date as TBA. Do not represent a modeled date as official. |
+| Westwood One local availability | [Westwood One station finder](https://www.westwoodonesports.com/station-finder/) | The network explicitly warns that local blackouts and programming conflicts mean not every affiliate airs every broadcast. Affiliate listing is not game-specific carriage proof. The listing also includes digital subchannels, which a standard analog AM/FM receiver cannot necessarily receive. |
+| Baseball game duration | [MLB 2025 game-length report](https://www.mlb.com/news/mlb-increased-attendance-3rd-straight-season) | MLB reports a 2025 average of 2 hours 38 minutes. An average is not a guaranteed end time and does not include a verified local station's pregame/postgame coverage. |
+
+## Handoff
+
+The February 19 Brewers start-time discrepancy is an informational review item, not a verified correction to the game-specific record. Existing event snapshots and generated pages were deliberately not changed because they are in another session's claimed scope. Integration should include this finding on the Flagged for Review page, and independently check the game-specific source and refresh timestamp before adopting any time. The site-wide structural checker checks links and structure; it does not prove every value against the underlying official page or establish local analog reception.
