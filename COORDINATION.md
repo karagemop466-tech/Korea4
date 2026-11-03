@@ -585,9 +585,10 @@ No new irregularities; no data changes required. This session records confirmati
 | Item | Result |
 |---|---|
 | PR | [#26 — Record arena/3f48e269-korea4 independent verification of FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/26) |
-| State | MERGED |
-| Merge commit | recorded after merge (see git log on `main`) |
-| Pages deploy | confirmed `status=built` on latest `main` after merge; live at https://karagemop466-tech.github.io/Korea4/ |
+| State | MERGED at 2026-11-03T23:33:42Z |
+| Merge commit | `bfec9fbe2c7d76f05b63107837542b7c97ee3463` (`Merge pull request #26 from karagemop466-tech/arena/3f48e269-korea4`) |
+| Pre-merge check | "Verify final integration" workflow run `41739997463` — conclusion SUCCESS |
+| Pages deploy | `status=built` on `bfec9fb`; main-branch runs `41740126874` (pages build and deployment) and `41740127806` (Verify static Pages source) both SUCCESS; live at https://karagemop466-tech.github.io/Korea4/ — root and `vacation.html` re-fetched post-deploy and render the full 2027/2028/2029 candidate tables with VERIFIED/ESTIMATED/UNVERIFIED labels and official source links |
 | Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,086 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS |
-| Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded |
+| Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded; branch force-updated with `--force-with-lease` after rebase onto `origin/main` |
 | Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
