@@ -558,3 +558,11 @@ Verification confirmed: no new irregularities; no data changes required beyond t
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
 | E1 — Independent future-schedule evidence and coverage audit | in progress | `arena/84812e33-korea4` | `research/future-schedule-audit-84812e33.md`, `COORDINATION.md` | Non-overlapping research scope; no changes to shared dashboard while PR #18 is open. Arena requires the fixed session branch. Audit official evidence and identify limitations without inferring unavailable fixtures. |
+
+### E1 handoff request / scoped takeover
+- **Important new finding:** Cal's official [2026–27 men's basketball schedule](https://calbears.com/sports/mens-basketball/schedule/2026-27) lists Cal at Pitt, Feb 17, 2027, 4 p.m. PT, KSFO 810 AM. The published Feb 15–18 "gap" is not sports-free under the requested broader terrestrial-radio scope. The root data omits this sport; the preserved `site/planner` edition had separately captured Cal basketball. Reception in 94122 remains unverified.
+- PR #18 last committed 19:40 UTC, over 60 minutes ago and currently conflicting. I notified it of the finding. Its historical claim is eligible for the requested stale-task takeover; I am taking **only** the narrow E2 warning/integration scope below, without discarding or closing its work. `needs review` D1 does not block integration.
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| E2 — Correct misleading highlighted gap and surface missing official Cal radio game | in progress | `arena/84812e33-korea4` | `scripts/collect_official.py`, `scripts/build_site.py`, `data/official/meta.json`, generated root HTML, `EXECUTIVE-SUMMARY.md`, `tests/test_gap_warning.py`, `COORDINATION.md` | Scoped takeover of stale overlapping dashboard work; preserve all other session changes. No claim of complete coverage or full source audit. |
