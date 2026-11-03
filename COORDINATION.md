@@ -4,6 +4,12 @@ Last integration update: 2026-11-02 (UTC)
 Active final verification session: `arena/72e6d3f7-korea4`
 Fixed working branch: `arena/72e6d3f7-korea4`
 
+## Current follow-up session — 2026-11-03
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| D1 — Audit existing dashboard for misleading free-time and source-verification claims; correct material issues and verify deployment | in progress | `arena/d474d6b2-korea4` | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, `tests/`, generated root HTML / `js/app.js`, `research/` (only as needed) | Final integration follow-up on the fixed Arena branch; preserve prior work and disclose unverified schedules. |
+
 ## Branch constraint
 Arena fixes each session to its assigned branch and forbids switching to, creating, or pushing another branch. The requested `session-<id>/<task>` branch/worktree convention and a separate integration branch therefore cannot be used by this session. All work, the final PR, and the merge from this session are performed on `arena/72e6d3f7-korea4`.
 
