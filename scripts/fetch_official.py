@@ -92,6 +92,17 @@ STATIC_SOURCES = {
     "game957_schedule": "https://www.957thegame.com/",
     "warriors_radio": "https://www.nba.com/warriors/news/957-the-game-extension-20190827",
     "sharks_radio": "https://www.nhl.com/sharks/news/san-jose-sharks-announce-2018-19-broadcast-schedule-300119102",
+    # Session E (2026-11-03): official league machine-readable schedules for the
+    # two remaining Bay Area AM/FM radio flagships (Warriors 95.7 The Game,
+    # Sharks 98.5 KFOX), closing coverage gap D1-01 / IR-014.
+    "nba_schedule_league_v2": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+    "warriors_schedule": "https://www.nba.com/warriors/schedule",
+    "nba_all_star_2027": "https://www.nba.com/news/phoenix-suns-nba-all-star-2027-official-release",
+    "nba_rulebook": "https://official.nba.com/rulebook/",
+    "nhl_sharks_20262027": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027",
+    "sharks_schedule": "https://www.nhl.com/sharks/schedule",
+    "nhl_rulebook_2026_27": "https://media.nhl.com/site/asset/public/ext/2026-27/2026-27Rules.pdf",
+    "nhl_rulebook_2025_26": "https://media.nhl.com/site/asset/public/ext/2025-26/2025-26Rules.pdf",
     "earthquakes_radio_2026": "https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season",
     "ifab_laws": "https://www.theifab.com/laws/latest/the-players/",
 }
@@ -123,6 +134,25 @@ GRID_NAME = {
 _lock = threading.Lock()
 _manifest_entries: dict[str, dict] = {}
 _force_keys: set[str] = set()
+_force_prefixes: list[str] = []
+
+# Session E freshness pass (2026-11-03): pages whose official content changes
+# in-season (kickoff-time announcements, flex scheduling, TBD fills, new WWO
+# event-grid entries) are always re-fetched so the published snapshot does not
+# silently go stale. Deterministic gzip (mtime=0) keeps unchanged bodies
+# byte-identical; the manifest records the new retrieval time either way.
+FORCE_REFRESH_KEYS = {
+    "stanford_schedule_current",
+    "cal_schedule_current",
+    "nflers_schedule",
+    "nfl_2026_week_16",
+    "nfl_2026_week_17",
+    "nfl_2026_week_18",
+    "mlb_2027_all",
+    "wwo_nfl_schedule",
+    "wwo_station_finder",
+}
+FORCE_REFRESH_PREFIXES = ["wwo_grid_"]
 
 
 def utc_now() -> str:
@@ -172,7 +202,8 @@ def save_raw(key: str, url: str, data: bytes, status: int | None, error: str | N
 
 def fetch_and_save(key: str, url: str, refresh: bool = False) -> bytes:
     out = RAW / f"{key}.gz"
-    if out.exists() and not refresh and key not in _force_keys:
+    forced = key in _force_keys or any(key.startswith(p) for p in _force_prefixes)
+    if out.exists() and not refresh and not forced:
         data = gzip.decompress(out.read_bytes())
         with _lock:
             prev = _manifest_entries.get(key)
