@@ -25,6 +25,19 @@ Fixed working branch: `arena/5cc34200-korea4`
 - No new irregularities found.
 - **PR / merge / deploy:** [PR #22](https://github.com/karagemop466-tech/Korea4/pull/22) MERGED to `main` at `e8a58da` (2026-11-03T23:26:56Z); GitHub Pages returned to `status=built`; live `vacation.html` re-fetched and renders the 2027/2028/2029 least-conflict table, Feb 15–18 2027 anchored gap, and schedule-availability table with 2028/2029 MLB/NFL correctly UNVERIFIED. This record is carried by a follow-up PR from the same branch.
 
+## Current session — arena/6d417a78-korea4 (2026-11-03)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| E1 — Independent final verification of merged FREE TIME VACATION dashboard (PR #21 baseline `92dad6d`): re-run verify gate, spot-check official NFL/WWO sources and live Pages site, record PR/merge/deploy result | done | `arena/6d417a78-korea4` | `COORDINATION.md` only | See E1 record below. No data/site files touched — avoids overlap with open PR #18 (`arena/aea8720a-korea4`, CONFLICTING, not claimed here). IR-001…IR-017 stay on `flagged.html` and do not block merge. |
+
+### E1 verification record — 2026-11-03
+- `python3 scripts/verify.py` → **PASS**: 0 errors, 0 warnings; 9,356 primary static table rows each with an official source link; 689 internal links, 0 broken; 9 JSON files valid. `node --check js/app.js` PASS; `npm test` PASS (Pacific-time, interval-union, TBD and candidate tests).
+- Data: `data/official/events.json` = 6,607 rows; site covers 2026-11-01→2029-12-31 (1,461 daily scoreboards), all 30 MLB clubs (Giants/A's FOCUS), 49ers/Stanford/Cal FOCUS, WWO national broadcasts, KNBR/KSFO/95.7 The Game and other confirmed Bay Area AM/FM mappings, Earthquakes/Warriors/Sharks/Valkyries flagged where incomplete.
+- Official spot checks (live, 2026-11-03): [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) (Super Bowl LXI Feb 14, 2027 anchor; Sep 10, 2026 49ers–Rams Melbourne) and [Westwood One NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) (Nov–Dec 2026 TNF/SNF/MNF slate, e.g. Dec 17 49ers at Chargers TNF) both match published rows. Live dashboard https://karagemop466-tech.github.io/Korea4/ renders executive summary, exact Pacific gaps, and 2027/2028/2029 candidates.
+- **Headline finding (unchanged, ESTIMATED/UNVERIFIED):** no 7-, 14- or 21-day strictly-free window exists in 2027–2029; least-conflict candidates are Feb 2027 (7d: Feb 3–9; 14d: Feb 3–16; 21d: Jan 27–Feb 16), Feb 2028 and Feb 2029 windows on `vacation.html`. Best short officially anchored gap: Feb 15–18, 2027. 2028/2029 MLB & NFL game-by-game schedules are **not officially released** — those rows are ESTIMATED models, never verified schedules. WWO affiliate carriage caveat (IR-003) applies: not every affiliate carries every broadcast.
+- No new irregularities found. PR/merge/Pages result recorded below after merge.
+
 ## Session audit — arena/65a1da2b-korea4 (2026-11-03)
 
 This session started from `4798296a` (merge of PR #14) and performed an independent line-by-line re-audit of the published FREE TIME VACATION project before opening its own PR:
