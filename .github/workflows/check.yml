@@ -2,7 +2,7 @@ name: Verify final integration
 
 on:
   push:
-    branches: [arena/72e6d3f7-korea4]
+    branches: [arena/aea8720a-korea4]
   pull_request:
     branches: [main]
   workflow_dispatch: {}

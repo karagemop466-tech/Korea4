@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import json
+import gzip
+import hashlib
+from datetime import datetime, timezone
 import re
 import subprocess
 import sys
@@ -32,6 +35,8 @@ class LinkParser(HTMLParser):
         for attr in ("href", "src"):
             if d.get(attr):
                 self.links.append(d[attr])
+        if self.in_tr and tag == "a" and d.get("href"):
+            self.current_row["links"].append(d["href"])
         if tag == "tbody": self.tbody_depth += 1
         if tag == "tr" and self.tbody_depth:
             self.in_tr = True
@@ -53,18 +58,44 @@ class LinkParser(HTMLParser):
 
 
 def parse_primary_rows(path: Path):
-    # A second pass records anchors inside rows; HTMLParser rows above are enough
-    # for data-source-url, but use regex for the source anchor check because JS
-    # builds some rows at runtime and static rows are plain HTML.
-    text = path.read_text("utf-8", "replace")
-    rows = re.findall(r"<tr\b([^>]*)>(.*?)</tr>", text, re.S | re.I)
-    out = []
-    for attrs, body in rows:
-        if 'data-source-url=' not in attrs:
-            continue
-        official = re.search(r'<a[^>]+href="(https?://[^"]+)"', body, re.I)
-        out.append((attrs, bool(official), body))
-    return out
+    parser = LinkParser()
+    parser.feed(path.read_text("utf-8", "replace"))
+    return parser.rows
+
+
+OFFICIAL_HOSTS = {
+    "calbears.com", "collegefootballplayoff.com", "gostanford.com", "media.nfl.com",
+    "statsapi.mlb.com", "www.49ers.com", "www.957thegame.com", "www.knbr.com",
+    "www.ksfo.com", "www.mlb.com", "www.nba.com", "www.ncaa.com", "www.ncaa.org",
+    "www.nfl.com", "www.nhl.com", "www.sjearthquakes.com", "www.theifab.com",
+    "www.westwoodonesports.com", "static.nfl.com", "static.www.nfl.com", "fs.ncaa.org",
+}
+
+
+def official_url(url):
+    parsed = urlsplit(url or "")
+    return parsed.scheme == "https" and parsed.hostname in OFFICIAL_HOSTS and not parsed.username
+
+
+def source_row_valid(row):
+    source = row["attrs"].get("data-source-url", "")
+    return urlsplit(source).scheme in ("https", "http") and source in row["links"]
+
+
+def snapshot_errors(manifest, root=ROOT):
+    errors = []
+    for record in manifest["files"]:
+        try:
+            path = (root / record["raw_file"]).resolve()
+            path.relative_to(root.resolve())
+            raw = gzip.decompress(path.read_bytes())
+            if hashlib.sha256(raw).hexdigest() != record["sha256"] or len(raw) != record["bytes"]:
+                errors.append(f"Snapshot integrity mismatch: {record['key']}")
+            if not official_url(record["url"]):
+                errors.append(f"Non-official snapshot URL: {record['key']}")
+        except Exception as exc:
+            errors.append(f"Snapshot unreadable: {record.get('key')}: {exc}")
+    return errors
 
 
 def local_target(base: Path, href: str) -> Path | None:
@@ -104,11 +135,18 @@ def main():
             continue
         rows = parse_primary_rows(p)
         primary_row_count += len(rows)
-        missing = [r for r in rows if not r[1] or not re.search(r'data-source-url="https?://', r[0], re.I)]
+        missing = [r for r in rows if not source_row_valid(r)]
         if missing:
             errors.append(f"{rel}: {len(missing)} table rows without official source URL/link")
         if "<thead>" not in p.read_text("utf-8", "replace") and "table" in p.read_text("utf-8", "replace").lower():
             warnings.append(f"{rel}: table markup without <thead>")
+    # Stored evidence integrity is not live source verification.
+    manifest = json.loads((ROOT / "research/official/manifest.json").read_text())
+    errors.extend(snapshot_errors(manifest))
+    events = json.loads((ROOT / "data/official/events.json").read_text())
+    for event in events:
+        if not official_url(event.get("source_url")):
+            errors.append(f"Event lacks approved official source: {event.get('id')}")
     # 3. Internal links across every HTML page, preserving legacy dashboards.
     html_files = sorted(p for p in ROOT.rglob("*.html") if ".git" not in p.parts and "node_modules" not in p.parts)
     checked_links = 0
@@ -149,7 +187,10 @@ def main():
     meta = json.loads((ROOT / "data/official/meta.json").read_text())
     lines = [
         "# Final verification report", "",
-        f"Generated: {meta['generated_utc']}", "",
+        f"Audit run: {datetime.now(timezone.utc).isoformat()}",
+        f"Data snapshot: {meta['generated_utc']}",
+        f"- Compressed official snapshots integrity-checked: {len(manifest['files'])}",
+        f"- Event source domains checked: {len(events)}", "",
         f"- JSON files checked: {len(json_files)}",
         f"- Primary generated pages: {len(PRIMARY_PAGES)}",
         f"- Static primary table rows with source URL: {primary_row_count}",
@@ -159,13 +200,14 @@ def main():
         f"- JavaScript syntax: {'PASS' if js_ok else 'NOT CHECKED / FAIL'}",
         f"- Errors: {len(errors)}",
         f"- Warnings: {len(warnings)}", "",
-        "## Rules verified", "",
-        "1. Every static primary `<tbody>` data row has `data-source-url` and an external official link.",
+        "## Automated checks and limits", "",
+        "These checks validate stored file integrity, source-link structure and syntax. They do NOT re-fetch official pages, verify each fact against page content, establish complete radio carriage, or certify vacation availability.", "",
+        "1. Every static primary `<tbody>` row has a source attribute matching a visible external link. Historical review rows can link to explicitly flagged nonofficial evidence.",
         "2. Dynamic daily/calendar table rows are constructed with an official source link in `js/app.js`.",
-        "3. Blank official values render as UNVERIFIED badges in generated tables.",
-        "4. ESTIMATED and UNVERIFIED labels are distinct from VERIFIED.",
+        "3. Snapshot decompressed SHA-256 hashes and byte lengths match the stored manifest.",
+        "4. Event source URLs use explicitly approved official domains.",
         "5. Internal links include root, `site/`, `site/pages/`, `docs/`, and data assets.",
-        "6. Unreleased 2028/2029 schedules are labelled ESTIMATED in meta, vacation, and methodology tables.", "",
+        "6. Labels and substantive schedule completeness still require human/source-content review; no completeness certification is produced.", "",
     ]
     if broken:
         lines += ["## Broken internal links", ""] + [f"- `{page}`: `{href}` → `{target}`" for page, href, target in broken[:200]] + [""]

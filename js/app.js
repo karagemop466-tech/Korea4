@@ -16,6 +16,7 @@
     m = Math.max(0, Math.min(1440, Math.round(m)));
     return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
   }
+  function todayPacific() { return new Intl.DateTimeFormat('en-CA', {timeZone:'America/Los_Angeles', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date()); }
   function parseDate(s) { return new Date(String(s) + 'T12:00:00Z'); }
   function dateISO(d) { return d.toISOString().slice(0, 10); }
   function addDays(s, n) { const d = parseDate(s); d.setUTCDate(d.getUTCDate() + n); return dateISO(d); }
@@ -69,17 +70,11 @@
   }
   function durationOverride(category) { return Number(DURATIONS[category] || 0); }
   function adjustedIntervals(rows) {
-    const inputs = document.querySelectorAll('[data-duration]');
-    inputs.forEach(i => { DURATIONS[i.dataset.duration] = Number(i.value) || DURATIONS[i.dataset.duration]; });
-    return rows.map(r => {
-      const copy = Object.assign({}, r);
-      const override = durationOverride(copy.category);
-      if (override && ['OFFICIAL_START_ESTIMATED_DURATION','ESTIMATED_TBD_START','ESTIMATED_UNRELEASED_SEASON_MODEL'].includes(copy.status)) {
-        copy.end = Math.min(1440, copy.start + override);
-      }
-      return copy;
-    });
+    // Keep pre-split overnight fragments intact. Changing a duration per day
+    // cannot correctly recompute cross-midnight events; use the source model.
+    return rows.map(r => Object.assign({}, r));
   }
+
   function selectedIntervals(rows) {
     const showTbd = document.getElementById('show-tbd')?.checked !== false;
     const showModels = document.getElementById('show-models')?.checked !== false;
@@ -144,17 +139,17 @@
       document.getElementById('selected-date').value = dateStr;
       document.getElementById('day-heading').textContent = new Intl.DateTimeFormat('en-US', { timeZone:'America/Los_Angeles', weekday:'long', year:'numeric', month:'long', day:'numeric' }).format(parseDate(dateStr));
       let html = '<div class="status-strip">';
-      html += '<span class="pill">FREE ' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm PT</span>';
+      html += '<span class="pill">Estimated gap ' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm PT</span>';
       html += '<span class="pill">' + official + ' official-start windows</span>';
       html += '<span class="pill">' + tbd + ' TBD planning estimates</span>';
       html += '<span class="pill">' + models + ' unreleased-season models</span>';
       html += '<span class="pill">' + unverified + ' unverified blocks</span>';
       html += '</div>';
-      if (!rows.length) html += '<div class="callout success"><strong>FREE ALL DAY — OFFICIAL PUBLISHED ROWS.</strong> No captured official game or network window is scheduled. This is still UNVERIFIED for unreleased future schedules; review the flags page.</div>';
+      if (!rows.length) html += '<div class="callout warn"><strong>UNKNOWN — no captured conflicts.</strong> Empty or filtered data does not confirm a free day. Future schedules and local carriage are incomplete; review the flags page.</div>';
       html += '<div id="day-timeline" class="timeline"></div>';
       html += '<div class="legend"><span><i style="background:#1d63c7"></i>MLB</span><span><i style="background:#b42332"></i>NFL</span><span><i style="background:#6941c6"></i>NCAAF</span><span><i style="background:#a76500"></i>WWO</span><span><i style="background:#087261"></i>MLS</span><span><i style="background:#7a271e"></i>UNVERIFIED</span><span><i style="background:#7c8798"></i>ESTIMATED MODEL</span><span><i style="background:#157a54"></i>FREE</span></div>';
-      const freeRows = free.map(f => ({ cells: [fmtHM(f.start), fmtHM(f.end), String(f.end-f.start), statusBadge(f.end-f.start === 1440 ? 'FREE ALL DAY — UNVERIFIED FUTURE' : 'EXACT FREE WINDOW')], sourceRow: nearestSource(merged, f.start) }));
-      html += '<section class="panel"><h2>Exact intraday free windows</h2><p class="intro">Pacific Time (PST/PDT). Bounding official source links are shown for manual review.</p>' + dynamicTable(['Start PT','End PT','Minutes','Status'], freeRows) + '</section>';
+      const freeRows = free.map(f => ({ cells: [fmtHM(f.start), fmtHM(f.end), String(f.end-f.start), statusBadge(f.end-f.start === 1440 ? 'UNVERIFIED ALL-DAY GAP' : 'ESTIMATED PLANNING GAP')], sourceRow: nearestSource(merged, f.start) }));
+      html += '<section class="panel"><h2>Estimated intraday planning gaps</h2><p class="intro">Pacific Time (PST/PDT). Links identify nearby schedule evidence, not proof of absence. Coverage may extend beyond estimated end times.</p>' + dynamicTable(['Start PT','End PT','Minutes','Status'], freeRows) + '</section>';
       const eventRows = rows.map(r => ({ cells: [fmtHM(r.start), fmtHM(r.end), esc(r.category || ''), esc(r.label || r.matchup || 'Busy block'), statusBadge(r.verification || r.status), r.focus ? '<span class="badge badge-focus">FOCUS</span>' : '<span class="badge badge-high">HIGH</span>'], sourceRow: r }));
       html += '<section class="panel"><h2>Game / broadcast presence</h2><p class="intro">Every row is a busy-time candidate. Blank official values appear on the main tables as UNVERIFIED.</p>' + dynamicTable(['Start PT','End PT','Category','Event / source basis','Verification','Priority'], eventRows) + '</section>';
       holder.innerHTML = html;
@@ -167,10 +162,10 @@
     const dateInput = document.getElementById('selected-date');
     if (!dateInput) return;
     const params = new URLSearchParams(location.search);
-    let dateStr = clampDate(params.get('date') || M.system_today || '2026-11-02');
+    let dateStr = clampDate(params.get('date') || todayPacific());
     function go(n) { dateStr = addDays(dateStr, n); dateStr = clampDate(dateStr); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); }
     document.querySelectorAll('[data-day-step]').forEach(b => b.addEventListener('click', () => go(Number(b.dataset.dayStep))));
-    document.getElementById('today-btn').addEventListener('click', () => { dateStr = clampDate(M.system_today || '2026-11-02'); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); });
+    document.getElementById('today-btn').addEventListener('click', () => { dateStr = clampDate(todayPacific()); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); });
     dateInput.addEventListener('change', () => { dateStr = clampDate(dateInput.value); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); });
     document.querySelectorAll('.filter-toggle, [data-duration]').forEach(el => el.addEventListener('change', () => renderDay(dateStr)));
     renderDay(dateStr);
@@ -195,13 +190,13 @@
         const free = freeWindows(merged);
         const freeMinutes = free.reduce((a,b)=>a+(b.end-b.start),0);
         const unverified = rows.filter(r=>r.status==='UNVERIFIED_BLOCK').length;
-        const cls = unverified ? 'unverified' : merged.length ? 'busy' : 'free';
+        const cls = unverified || !merged.length ? 'unverified' : 'busy';
         const sourceRow = merged[0] || { source_url: DEFAULT_SOURCE, source_label: 'Official source catalogue' };
-        html += '<div class="calendar-day' + (key === M.system_today ? ' today' : '') + '"><a href="daily.html?date=' + key + '">' + dnum + '</a><span class="dot ' + cls + '"></span><span class="mini">' + merged.length + ' busy</span><div class="free-minutes">' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm free</div></div>';
+        html += '<div class="calendar-day' + (key === todayPacific() ? ' today' : '') + '"><a href="daily.html?date=' + key + '">' + dnum + '</a><span class="dot ' + cls + '"></span><span class="mini">' + merged.length + ' busy</span><div class="free-minutes">' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm gap*</div></div>';
         monthRows.push({ cells: [key, fmtHM(freeMinutes), String(merged.length), String(unverified), statusBadge(unverified ? 'UNVERIFIED BLOCK' : merged.length ? 'GAME DAY' : 'FREE DAY — UNVERIFIED FUTURE')], sourceRow });
       }
       html += '</div>';
-      html += '<section class="panel"><h2>Month analysis</h2><p class="intro">Free minutes are exact complements of merged busy intervals. All times Pacific.</p>' + dynamicTable(['Date','Free minutes','Merged busy blocks','Unverified blocks','Status'], monthRows) + '</section>';
+      html += '<section class="panel"><h2>Month analysis</h2><p class="intro">Gap minutes are complements of modeled intervals, not confirmed availability. Pacific wall-clock minutes; DST days have 23 or 25 elapsed hours.</p>' + dynamicTable(['Date','Free minutes','Merged busy blocks','Unverified blocks','Status'], monthRows) + '</section>';
       holder.innerHTML = html;
     } catch (err) {
       holder.innerHTML = '<div class="callout danger"><strong>Data load failed.</strong> ' + esc(err.message) + '</div>';
@@ -210,7 +205,7 @@
   function initCalendar() {
     const yearSel = document.getElementById('calendar-year'), monthSel = document.getElementById('calendar-month');
     if (!yearSel || !monthSel) return;
-    const today = M.system_today || '2026-11-02';
+    const today = todayPacific();
     yearSel.value = today.slice(0,4); monthSel.value = String(Number(today.slice(5,7))-1);
     function reload() { renderCalendar(Number(yearSel.value), Number(monthSel.value)); }
     yearSel.addEventListener('change', reload); monthSel.addEventListener('change', reload);

@@ -155,6 +155,11 @@ def page(title, active, lead, body, extra_head=""):
 <main>
   <h1 class="page-title">{esc(title)}</h1>
   <p class="page-lead">{lead}</p>
+  <div class="callout warn"><strong>Planning gaps are not confirmed vacation availability.</strong>
+  Snapshot: {esc(META['generated_utc'])}. Future schedules and game-specific AM/FM carriage are incomplete.
+  Game lengths are estimates; delays, extra innings, overtime and pre/postgame shows can extend coverage.
+  All MLB/NFL games are a conservative conflict policy, not proof they air locally.
+  <a href="flagged.html#audit-2026-11-03">Read the audit limitations</a>.</div>
   {body}
   <footer class="footer">
     <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
@@ -252,7 +257,7 @@ def build_index():
   {card(c['line_by_line_audit_rows'], 'prior data lines reviewed')}
 </div>
 <div class="callout warn"><strong>Read this first.</strong> 2028/2029 MLB and NFL game-by-game schedules are not officially released. The site shows ESTIMATED planning models separately; they are not real verified released schedules. TBD official start times are blank with UNVERIFIED flags.</div>
-<section class="panel"><h2>Today: exact Pacific free windows</h2><p class="intro">{esc(META['system_today'])} · America/Los_Angeles · computed from merged official busy intervals and flagged planning estimates.</p>
+<section class="panel"><h2>Snapshot day: estimated Pacific planning gaps</h2><p class="intro">{esc(META['system_today'])} · America/Los_Angeles · computed from merged official busy intervals and flagged planning estimates.</p>
 {table(['Start PT','End PT','Free minutes','Status'], today_rows, ['start','end',('minutes','num'),('status','badge')], 'today-free', 20)}
 <p><a class="control-btn" href="daily.html?date={esc(META['system_today'])}">Open full daily scoreboard →</a></p></section>
 <section class="panel"><h2>Executive findings</h2><p class="intro">Every finding links to the official source used. Full analysis is on the Executive Summary and Methodology pages.</p>
@@ -264,7 +269,7 @@ def build_index():
 <section class="panel"><h2>Official sources for manual review</h2>{table(['ID','Title','Purpose','HTTP','Status'], source_rows, ['id','title','purpose',('http_status','num'),('status','badge')], 'sources-index', 20)}
 <p><a class="control-btn" href="sources.html">See all {len(SOURCES)} sources →</a></p></section>
 '''
-    write("index.html", page("Dashboard", "index.html", "Clean landing dashboard with executive summary, exact free time, and category navigation.", body))
+    write("index.html", page("Dashboard", "index.html", "Clean landing dashboard with executive summary, estimated planning gaps, and category navigation.", body))
 
 
 def build_daily():
@@ -287,17 +292,17 @@ def build_daily():
     <label><input class="filter-toggle" type="checkbox" data-cat="MLS" checked> MLS</label>
   </div>
   <div class="controls-grid">
-    <label>MLB minutes <input type="number" min="30" max="360" value="{META['durations']['MLB']}" data-duration="MLB"></label>
-    <label>NFL minutes <input type="number" min="30" max="360" value="{META['durations']['NFL']}" data-duration="NFL"></label>
-    <label>NCAAF minutes <input type="number" min="30" max="360" value="{META['durations']['NCAAF']}" data-duration="NCAAF"></label>
-    <label>MLS minutes <input type="number" min="30" max="360" value="{META['durations']['MLS']}" data-duration="MLS"></label>
+    <span>MLB duration: {META['durations']['MLB']} minutes (estimate)</span>
+    <span>NFL duration: {META['durations']['NFL']} minutes (estimate)</span>
+    <span>NCAAF duration: {META['durations']['NCAAF']} minutes (estimate)</span>
+    <span>MLS duration: {META['durations']['MLS']} minutes (estimate)</span>
   </div>
-  <p class="mini">Durations default to researched averages and rule-book values; changing them recalculates the day without requiring manual schedule entry.</p>
+  <p class="mini">Durations use the documented planning model, not confirmed broadcast end times. Overnight fragments are retained without per-day recalculation.</p>
 </section>
 <section class="panel"><h2 id="day-heading">Daily scoreboard</h2><div class="callout">All times are Pacific (PST in winter, PDT in summer). A green block is free; all other colors mean a game or unverified broadcast block is present.</div><div id="day-content"></div></section>
 <section class="panel"><h2>Duration research</h2>{table(['Sport','Average duration','Halftime','Regulation','Status'], META['durations_table'], ['sport','average_game_duration','halftime','regulation',('status','badge')], 'duration-research', 20)}</section>
 '''
-    write("daily.html", page("Daily scoreboard", "daily.html", "Yesterday / today / tomorrow scoreboard with exact intraday free windows, game presence, and editable researched durations.", body))
+    write("daily.html", page("Daily scoreboard", "daily.html", "Yesterday / today / tomorrow scoreboard with estimated intraday gaps and game presence.", body))
 
 
 def build_calendar():
@@ -315,7 +320,7 @@ def build_calendar():
 <section class="panel"><h2>Month grid</h2><div id="calendar-content"></div></section>
 <section class="panel"><h2>Unreleased-season planning models</h2>{table(['Year','Model intervals','Method','Status'], META['model_seasons'], ['year',('model_intervals','num'),'method',('status','badge')], 'model-seasons', 20)}</section>
 '''
-    write("calendar.html", page("Calendar", "calendar.html", "Everyday month scoreboard with exact free minutes and links to each day’s intraday free windows.", body))
+    write("calendar.html", page("Calendar", "calendar.html", "Everyday month scoreboard with estimated gap minutes and links to each day’s intraday free windows.", body))
 
 
 def build_vacation():
@@ -401,6 +406,13 @@ def build_sources():
 def build_flagged():
     body = f'''
 <div class="callout danger"><strong>Flagged for Review does not block merge.</strong> These are published here with official source links. Unverified values remain blank in the main tables.</div>
+<section class="panel" id="audit-2026-11-03"><h2>November 3 safety audit — needs review</h2>
+<p>No 7-, 14-, or 21-day window is certified sports-free in 2027–2029. The model ranking is not evidence that no such window could exist.</p>
+<ul><li>Prior VERIFIED labels describe captured fields, not a fresh November 3 verification or complete local carriage.</li>
+<li>WWO network events and affiliate listings do not confirm game-specific broadcasts in San Francisco. See the <a href="https://www.westwoodonesports.com/stations/">official affiliate finder</a> and <a href="https://www.westwoodonesports.com/nfl-schedule/">NFL network schedule</a>.</li>
+<li>Unpublished future games, radio basketball/hockey and other incomplete sports coverage prevent a complete all-sports absence claim. Review <a href="sources.html">the source catalogue</a>.</li>
+<li>Start times are distinct from estimated ends. Pacific wall-clock minutes on DST change days are not elapsed minutes. Reception in 94122 is not field-tested.</li>
+<li>Official-source access from this audit sandbox is restricted. This audit checks stored evidence integrity and presentation, not a new live line-by-line revalidation. See <a href="research/audit-2026-11-03.md">audit report</a>.</li></ul></section>
 <section class="panel"><h2>Irregularities and corrections</h2>{table(['ID','Issue','Status','Action'], META['flags'], ['id','issue',('status','badge'),'action'], 'all-flags', 100)}</section>
 <section class="panel"><h2>Unverified official anchors</h2>{table(['ID','Event','Official date','Status','Verification'], [a for a in META['anchors'] if a['verification']=='UNVERIFIED'], ['id','event',('official_date','blank'),'status',('verification','badge')], 'unverified-anchors', 100)}</section>
 '''
@@ -451,7 +463,7 @@ Generated {META['generated_utc']} from {len(SOURCES)} official-source records.
 - Stanford and Cal 2026 NCAAF games and official 2027–2029 future anchors.
 - All captured official Westwood One Sports event windows across nine categories.
 - Other confirmed Bay Area AM/FM radio sports, including the full official 2026 Earthquakes radio schedule.
-- Exact Pacific-time free windows every day from {META['date_range'][0]} through {META['date_range'][1]}.
+- Estimated Pacific-time planning gaps every day from {META['date_range'][0]} through {META['date_range'][1]}.
 
 ## Verification rules
 1. Official/league/team/network sources only for VERIFIED values.
