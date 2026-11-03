@@ -565,7 +565,7 @@ Verification/closure session on the fixed Arena branch `arena/3f48e269-korea4` (
 
 ### Verification performed this session (2026-11-03)
 
-- Local gate re-run on rebased branch: `python3 scripts/verify.py` → **PASS**: 0 errors, 0 warnings; 9,356 primary static table rows each carrying an official `data-source-url`; 689 internal links checked, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS. `npm test` (Pacific-time/interval-union/TBD/candidate tests) PASS. Report regenerated at `research/verification-report.md`.
+- Local gate re-run on the rebased branch (tree includes the `arena/ce9a2c78-korea4` regenerated snapshot): `python3 scripts/verify.py` → **PASS**: 0 errors, 0 warnings; 10,086 primary static table rows each carrying an official `data-source-url`; 689 internal links checked, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS. `npm test` (Pacific-time/interval-union/TBD/candidate tests) PASS. Report regenerated at `research/verification-report.md`.
 - Data integrity: `data/official/events.json` = 6,607 rows (MLB 5,893 · NFL 345 · WWO 311 · MLS 34 · NCAAF 24); **every row has a `source_url`**; priority flags: 764 FOCUS Giants/A's, 36 FOCUS 49ers, 24 FOCUS Stanford/Cal, 5,129 HIGH all-MLB, 600 HIGH all-NFL/WWO, 34 HIGH other Bay Area radio.
 - Fresh official-source spot checks (2026-11-03, web):
   - [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates): Wild Card Jan 16–18 2027, Championships Jan 31, **Super Bowl LXI Sun Feb 14, 2027 at SoFi Stadium** — matches site anchors (Feb 15–18, 2027 gap). Corroborated by [Seahawks.com league-dates article](https://www.seahawks.com/news/nfl-announces-important-dates-for-2026-2027).
@@ -579,3 +579,15 @@ Verification/closure session on the fixed Arena branch `arena/3f48e269-korea4` (
 
 ### Result
 No new irregularities; no data changes required. This session records confirmation plus the PR/merge/deploy cycle below.
+
+### PR / merge / deploy result — `arena/3f48e269-korea4` (2026-11-03)
+
+| Item | Result |
+|---|---|
+| PR | [#26 — Record arena/3f48e269-korea4 independent verification of FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/26) |
+| State | MERGED |
+| Merge commit | recorded after merge (see git log on `main`) |
+| Pages deploy | confirmed `status=built` on latest `main` after merge; live at https://karagemop466-tech.github.io/Korea4/ |
+| Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,086 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS |
+| Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded |
+| Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
