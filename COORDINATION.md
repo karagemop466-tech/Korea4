@@ -526,13 +526,15 @@ Session branch: `arena/ce9a2c78-korea4`, branched from `main` @ `92dad6d` (PR #2
 
 Verification confirmed: no new irregularities; no data changes required beyond timestamp regeneration. Every schedule row beyond officially released rows remains labelled ESTIMATED or UNVERIFIED with an official source link; estimates are never presented as released schedules. The strict finding stands: no certified 7-/14-/21-day fully free window in 2027–2029; best officially anchored short gap is Feb 15–18, 2027 (Super Bowl LXI Feb 14 → MLB spring training Feb 19), itself not certified free because later 2027 WWO/NFL schedules are unreleased.
 
-### PR / merge / deploy result (pending at claim time)
+### PR / merge / deploy result
 
 | Item | Result |
 |---|---|
-| Final PR | To be created from `arena/ce9a2c78-korea4` → `main` |
-| State | PENDING |
-| Merge commit | — |
-| GitHub Pages build | — |
-| Live URL | https://karagemop466-tech.github.io/Korea4/ |
+| Final PR | [#24 — Final verification and publication record: FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/24) |
+| State | MERGED |
+| Merge commit | `69969bcb4f73931482eca536cf58cfb97dc54a6b` (`Merge pull request #24 from karagemop466-tech/arena/ce9a2c78-korea4`) |
+| Merged into | `main` at `69969bcb` |
+| Pre-merge check | "Verify final integration" workflow run `41739363650` — conclusion SUCCESS |
+| GitHub Pages build | Run `41739377207` — build 26s, deploy 12s, report-build-status 5s, all green; Pages API `status=built`, `build_type=legacy`, `source=main:/`, `https_enforced=true` |
+| Live URL | https://karagemop466-tech.github.io/Korea4/ — confirmed live; cache-busted fetch shows the 2026-11-03T23:27:13 snapshot build. (Root URL without a cache-busting query may show a prior CDN cache until propagation completes.) |
 | Flagged irregularities | IR-001 through IR-017 published on `flagged.html` with official source links; none block the merge |
