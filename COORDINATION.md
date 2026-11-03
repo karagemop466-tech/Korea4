@@ -442,7 +442,7 @@ documents as the base and appending/inserting this session's sections — nothin
 
 | Task | Status | Owner | File scope | Verification |
 |---|---|---|---|---|
-| C7 — PR, merge, Pages deployment confirmation, record result | in progress | `arena/34cbf65f-korea4` | `COORDINATION.md`, root dashboard | `scripts/verify.py`, GitHub Pages API, live fetch |
+| C7 — PR, merge, Pages deployment confirmation, record result | done | `arena/34cbf65f-korea4` | `COORDINATION.md`, root dashboard | PR #20 merged into `main`; `scripts/verify.py` PASS; Pages status `built`; live at https://karagemop466-tech.github.io/Korea4/ |
 
 ### Verification performed (2026-11-03)
 
@@ -466,6 +466,19 @@ IR-001 dead reference sites; IR-002 NFL 2027 unavailable (2027–2029 NFL rows E
 - Official WWO schedule: https://www.westwoodonesports.com/nfl-schedule/
 - Official WWO station finder: https://www.westwoodonesports.com/station-finder/
 - Official Earthquakes radio: https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season
+
+### Final PR / merge / deploy result
+
+| Item | Result |
+|---|---|
+| Final PR | [#20 — Final integration: verify and publish FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/20) |
+| State | MERGED |
+| Merge commit | `8486dc068e2e2ccd081ebe78fe1ce8e00ca947eb` (`Merge pull request #20 from karagemop466-tech/arena/34cbf65f-korea4`) |
+| Merged into | `main` at `201b87a` |
+| Pre-merge check | "Verify final integration" workflow run `41706158968` — conclusion SUCCESS |
+| GitHub Pages build | `status=built`, `build_type=legacy`, `source=main:/`, `https_enforced=true` |
+| Live URL | https://karagemop466-tech.github.io/Korea4/ |
+| Flagged irregularities | IR-001 through IR-017 published on `flagged.html` with official source links; none block the merge |
 
 ---
 
