@@ -19,6 +19,12 @@ Fixed working branch: `arena/65a1da2b-korea4`
 - No new irregularities found.
 - **PR / merge / deploy:** [PR #22](https://github.com/karagemop466-tech/Korea4/pull/22) MERGED to `main` at `e8a58da` (2026-11-03T23:26:56Z); GitHub Pages returned to `status=built`; live `vacation.html` re-fetched and renders the 2027/2028/2029 least-conflict table, Feb 15–18 2027 anchored gap, and schedule-availability table with 2028/2029 MLB/NFL correctly UNVERIFIED. This record is carried by a follow-up PR from the same branch.
 
+## Session `arena/46c69197-korea4` — independent safety audit
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| E1 — Independently audit dashboard vacation calculations and official-source evidence; report reproducible issues | in progress | `arena/46c69197-korea4` | `COORDINATION.md`, `research/vacation-safety-audit-46.md` | Fixed Arena branch used instead of a session-named branch. Existing site/source files are outside this claim; integration requests will be logged here. |
+
 ## Session audit — arena/65a1da2b-korea4 (2026-11-03)
 
 This session started from `4798296a` (merge of PR #14) and performed an independent line-by-line re-audit of the published FREE TIME VACATION project before opening its own PR:
