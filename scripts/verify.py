@@ -159,13 +159,13 @@ def main():
         f"- JavaScript syntax: {'PASS' if js_ok else 'NOT CHECKED / FAIL'}",
         f"- Errors: {len(errors)}",
         f"- Warnings: {len(warnings)}", "",
-        "## Rules verified", "",
-        "1. Every static primary `<tbody>` data row has `data-source-url` and an external official link.",
-        "2. Dynamic daily/calendar table rows are constructed with an official source link in `js/app.js`.",
-        "3. Blank official values render as UNVERIFIED badges in generated tables.",
-        "4. ESTIMATED and UNVERIFIED labels are distinct from VERIFIED.",
+        "## Structural checks (not a source-value audit)", "",
+        "1. Static primary data rows with `data-source-url` have an HTTP link; this check does not validate the domain, the source content, or every table row.",
+        "2. Dynamic daily/calendar table renderer contains source-link code.",
+        "3. Blank-value and status-label behavior is exercised separately by dashboard tests, not exhaustively proven here.",
+        "4. A link to a source does not establish the accuracy or completeness of its row.",
         "5. Internal links include root, `site/`, `site/pages/`, `docs/`, and data assets.",
-        "6. Unreleased 2028/2029 schedules are labelled ESTIMATED in meta, vacation, and methodology tables.", "",
+        "6. Future schedule and radio coverage gaps remain unverified; this checker does not fetch official sources.", "",
     ]
     if broken:
         lines += ["## Broken internal links", ""] + [f"- `{page}`: `{href}` → `{target}`" for page, href, target in broken[:200]] + [""]
@@ -174,7 +174,8 @@ def main():
     if errors:
         lines += ["## Errors", ""] + [f"- {e}" for e in errors] + [""]
     else:
-        lines += ["## Result", "", "PASS — no broken internal links, source-row failures, JSON errors, merge markers, or JS syntax errors.", ""]
+        lines += ["## Result", "", "PASS — structural checks only: no detected broken internal links, missing sampled source links, JSON errors, merge markers, or JS syntax errors. This does not certify the schedule data.", ""]
+    lines += ["## Previous deployment (historical)", "", "- PR [#13](https://github.com/karagemop466-tech/Korea4/pull/13) merged at `849839f`; Pages build run `41497635594` succeeded.", "- PR [#14](https://github.com/karagemop466-tech/Korea4/pull/14) recorded the earlier result. These facts do not certify the current deployment.", ""]
     REPORT.write_text("\n".join(lines))
     print(json.dumps({"errors": len(errors), "warnings": len(warnings), "primary_rows": primary_row_count, "internal_links": checked_links, "broken": len(broken), "js_ok": js_ok, "report": str(REPORT.relative_to(ROOT))}, indent=2))
     if errors:
