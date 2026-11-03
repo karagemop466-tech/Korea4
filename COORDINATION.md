@@ -419,3 +419,11 @@ Continuation/verification session on branch `arena/27a3305d-korea4` (branched fr
 
 ### Result
 No irregularities found; no data changes required. This session records the confirmation only. PR from `arena/27a3305d-korea4` to `main` carries this board entry; merge result recorded below after merge.
+
+### Merge result — `arena/27a3305d-korea4` (2026-11-03)
+| Item | Result |
+|------|--------|
+| **PR** | [#16 — Record arena/27a3305d-korea4 verification session (site live, all checks PASS)](https://github.com/karagemop466-tech/Korea4/pull/16) |
+| **Merged to** | `main` at `59e4e5708de9db07c02d592a5c9a607ec6c0b5af` — 2026-11-03T19:39:21Z |
+| **Pages deploy** | Pages build for `59e4e57` completed `built` (2026-11-03 ~19:41 UTC); Pages API `status=built`; live root, `vacation.html`, and `executive-summary.html` fetched and rendering correctly with all source-linked tables and flags |
+| **Scope** | COORDINATION.md session log only; no data or site changes. Flagged/unverified items (IR-001–IR-013+) remain published on the Flagged for Review page and did not block merge |
