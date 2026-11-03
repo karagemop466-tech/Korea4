@@ -561,7 +561,7 @@ Verification/closure session on the fixed Arena branch `arena/3f48e269-korea4` (
 
 | Task | Status | Owner | File scope | Verification | Notes |
 |---|---|---|---|---|---|
-| F1 — Independent re-verification of merged dashboard on latest `main`; fresh official spot-checks; PR/merge/Pages deploy confirmation and record | in progress | `arena/3f48e269-korea4` | `COORDINATION.md` only | See below | No data/site files touched to avoid overlap with open PR #18. IR-001…IR-017 remain on `flagged.html` and do not block merge. |
+| F1 — Independent re-verification of merged dashboard on latest `main`; fresh official spot-checks; PR/merge/Pages deploy confirmation and record | done | `arena/3f48e269-korea4` | `COORDINATION.md` only | See below | No data/site files touched to avoid overlap with open PRs #18/#25. IR-001…IR-017 remain on `flagged.html` and do not block merge. |
 
 ### Verification performed this session (2026-11-03)
 
