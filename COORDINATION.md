@@ -1,6 +1,6 @@
 # COORDINATION.md — unified shared task board
 
-Last integration update: 2026-11-03 (UTC)
+Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
 Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
 Fixed working branch: `arena/65a1da2b-korea4`
