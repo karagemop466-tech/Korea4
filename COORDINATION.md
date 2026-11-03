@@ -19,6 +19,21 @@ Fixed working branch: `arena/65a1da2b-korea4`
 - No new irregularities found.
 - **PR / merge / deploy:** [PR #22](https://github.com/karagemop466-tech/Korea4/pull/22) MERGED to `main` at `e8a58da` (2026-11-03T23:26:56Z); GitHub Pages returned to `status=built`; live `vacation.html` re-fetched and renders the 2027/2028/2029 least-conflict table, Feb 15–18 2027 anchored gap, and schedule-availability table with 2028/2029 MLB/NFL correctly UNVERIFIED. This record is carried by a follow-up PR from the same branch.
 
+## Session `arena/46c69197-korea4` — independent safety audit
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| E2 — Independently audit dashboard vacation calculations and official-source evidence; report reproducible issues | needs review | `arena/46c69197-korea4` | `COORDINATION.md`, `research/vacation-safety-audit-46.md` | Fixed Arena branch used instead of a session-named branch. Existing site/source files are outside this claim; integration requests are logged below. |
+
+
+### E2 findings / integration request — 2026-11-03
+
+Rebase against `main` through PR #22 conflicted only in this board because both sessions inserted a top-level claim at the same location. Both entries were preserved; the conflict was resolved without discarding the other session’s work.
+
+Audit PR: [#25](https://github.com/karagemop466-tech/Korea4/pull/25), open and not merged: the requested flagged-page publication and arithmetic fixes are still outstanding. [PR #18 comment](https://github.com/karagemop466-tech/Korea4/pull/18#issuecomment-6618133160) requests integration by the overlapping session. Existing Pages deployment is live; the main-branch Pages workflow [41739377207](https://github.com/karagemop466-tech/Korea4/actions/runs/41739377207) succeeded for `69969bc`. This PR has not been merged or deployed; the live site still contains the identified defects.
+
+[Focused audit](research/vacation-safety-audit-46.md) identifies reproducible arithmetic errors and game-level radio-label issues in baseline `92dad6d`. Busy minutes sum overlapping intervals (e.g. 2027 14-day row 3,944 vs 2,504 union minutes), and `model_days` / `unverified_days` count intervals rather than distinct days. Giants station detection tests `Giants` against the full team name and fails; A's Cast (streaming) and KNEW are combined without game-level evidence. DST wall-clock arithmetic also needs a warning or correction. **Request to owners/final integration:** publish these flags in `flagged.html`, correct generator/data, and add regressions before representing these values as reliable; do not assign game-specific carriage from team affiliation alone. Sources: [Giants network](https://www.mlb.com/giants/schedule/broadcast-partners), [Giants spring training FAQ](https://www.mlb.com/giants/news/giants-spring-training-2025-faq), [A's affiliates](https://www.mlb.com/athletics/schedule/affiliates), [A's Cast FAQ](https://www.mlb.com/athletics/fans/podcasts/faq), [WWO station finder](https://www.westwoodonesports.com/station-finder/), [NFL dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates). Structural verifier and targeted JS/generator checks passed; full Python discovery failed with two errors and one failure in the inherited build-layout tests (no `_site` built). No claim of full official line-by-line verification. PR #18 remains open and has overlapping changes; do not overwrite it.
+
 ## Session audit — arena/65a1da2b-korea4 (2026-11-03)
 
 This session started from `4798296a` (merge of PR #14) and performed an independent line-by-line re-audit of the published FREE TIME VACATION project before opening its own PR:
