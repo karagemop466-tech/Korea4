@@ -25,8 +25,20 @@ Fixed working branch: `arena/5cc34200-korea4`
   - KNBR 680 AM / 104.5 FM flagship for Giants & 49ers per official team pages, consistent with radio.html matrix.
 - **Live Pages site (2026-11-03):** Pages API `status=built`, latest main build green (Actions `pages build and deployment` + `Verify static Pages source` success on `main` @ 23:30Z). Live fetches: `/` renders dashboard (6,607 rows, 748 sources, 1,461 scoreboards, 30 MLB clubs, 1,689 reviewed lines, ESTIMATED/UNVERIFIED labels, 2027–2029 least-conflict candidate table with `Strict free = False`, IR-001…IR-017 table); `/vacation.html` renders the strict conclusion, Feb 15–18 2027 officially anchored gap, anchors table (SB LXI 2027-02-14 VERIFIED DATE; Phillies spring training 2027-02-19), and the schedule-availability table (2028/2029 MLB API=0 rows UNVERIFIED; 2027 NFL game-by-game unavailable UNVERIFIED; WWO 2027 only through Jan 11 UNVERIFIED); `/daily.html?date=2026-11-03` renders today's scoreboard honestly as `NO CAPTURED BLOCKS — UNVERIFIED` / `ESTIMATED GAP 24h — UNVERIFIED` with the duration-research table (MLB 2:38 official 2025 average; NFL/NCAAF averages FLAGGED secondary/dated; NBA/NHL/WNBA UNVERIFIED).
 - **Line-by-line repo review notes:** legacy `data/vacation-windows.json` / `data/schedules.js` / `data/radio-guide.json` contain prior-session values incl. secondary sources (legionreport.com, news.radio-online.com) and a mislabelled "Post-Super Bowl LXI" 2026 window (actually LX); these files are referenced **only** by `review.html`, where every such line is already marked `REVIEWED — OFFICIAL REPLACEMENT` or `FLAGGED — SECONDARY SOURCE` with official links; the primary pages load only `data/official/events.json`. No primary page presents them as verified. No new irregularity; no data/site change required.
-- **Irregularities:** none new. IR-001…IR-017 remain published on `flagged.html` with official source links and do not block merge. Open PRs #18/#25/#26 belong to other active sessions and were not touched.
-- **PR / merge / deploy:** pending at time of this record — result recorded in the table below after the merge.
+- **Irregularities:** none new. IR-001…IR-017 remain published on `flagged.html` with official source links and do not block merge. Open PRs #18/#25 belong to other active sessions and were not touched.
+- **PR / merge / deploy result:**
+
+| Item | Result |
+|---|---|
+| PR | [#29 — F1: independent line-by-line re-verification of FREE TIME VACATION dashboard (arena/5cc34200-korea4)](https://github.com/karagemop466-tech/Korea4/pull/29) |
+| State | MERGED |
+| Merge commit | `14c2024f73f3fe8f4bb8ccf7635425fddd830755` — 2026-11-03T23:34:57Z |
+| Pre-merge check | "verify" workflow on PR #29 — SUCCESS; PR mergeable after rebase onto `main` @ `bfec9fb` (conflict with parallel-session board updates resolved by rebase; no other session's content discarded — net diff vs main is this board entry only, `COORDINATION.md` +37/−1) |
+| GitHub Pages | build on `14c2024` → `status=built` (2026-11-03T23:35Z); Actions "pages build and deployment" + "Verify static Pages source" on `main` @ `14c2024` both SUCCESS |
+| Live check | https://karagemop466-tech.github.io/Korea4/ (cache-busted `?v=14c2024`) renders the dashboard: 6,607 official event/anchor rows, 748 official sources, 1,461 daily scoreboards, 30 MLB clubs, ESTIMATED/UNVERIFIED labels, 2027/2028/2029 least-conflict candidate table (`Strict free = False`), IR-001…IR-017 flagged table |
+| Flagged irregularities | None new from this session; IR-001…IR-017 remain on `flagged.html` and did not block the merge |
+
+This follow-up record (PR/merge/deploy result) is carried by a second docs-only PR from the same fixed branch, per the established pattern.
 
 ## Current session — arena/6d417a78-korea4 (2026-11-03)
 
