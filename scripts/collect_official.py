@@ -720,8 +720,12 @@ def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
         week_node = card.select_one(".nfl-o-matchup-cards__date-info--week")
         week = week_node.get_text(" ", strip=True) if week_node else ""
         venue = card.select_one(".nfl-o-matchup-cards__venue--location")
-        link = card.select_one(".nfl-o-matchup-cards__btn-game-day")
-        source_url = link.get("href", "") if link and link.get("href", "").startswith("http") else "https://www.49ers.com/schedule/"
+        # The game-day CTA can point to a ticket reseller (session E audit
+        # confirmed nine vividseats.com citations in published data; fix
+        # salvaged from PR #18 by arena/aea8720a-korea4). Cite the captured
+        # official schedule page, which is the actual evidence for these
+        # fields, never the CTA href.
+        source_url = "https://www.49ers.com/schedule/"
         day = dt.date()
         start_min = minute_of_day(dt)
         radio = radio_line or "KSAN 107.7 FM / KNBR 104.5 FM / 680 AM"
@@ -814,9 +818,47 @@ def parse_cal_events(intervals: dict[str, list]) -> list[dict]:
         date_text = date_node.get_text(" ", strip=True) if date_node else ""
         time_text = time_node.get_text(" ", strip=True) if time_node else ""
         m = re.search(r"([A-Z][a-z]{2})\s+(\d{1,2})", date_text)
-        tm = re.search(r"(\d{1,2}:\d{2}\s*[AP]M)", time_text, re.I)
+        if not m:
+            # Session E fix: late-season Sidearm cards (sponsor/promo layout)
+            # render the date outside the data-test-id date node. Fall back to
+            # the visible "Nov 14 (Sat)" card text; the same dates are also in
+            # the cards' link aria-labels ("on November 14").
+            m = re.search(r"\b([A-Z][a-z]{2})\s+(\d{1,2})\s+\((?:Sun|Mon|Tue|Wed|Thu|Fri|Sat)\)", text)
+        # Session E fix: the official page also prints whole-hour kickoffs
+        # without minutes ("9 AM"); the old regex required ":MM" and dropped
+        # the SMU / NC State games to dateless UNVERIFIED rows.
+        tm = re.search(r"(\d{1,2}(?::\d{2})?\s*[AP]M)", time_text, re.I)
         radio_match = re.search(r"Radio:\s*([^|]+?)(?:\s+[A-Z]|$)", text)
         radio = " ".join(radio_match.group(1).split()) if radio_match else "KSFO 810 AM"
+        if m and not tm:
+            # Official date is published; kickoff time is TBA. Keep the date,
+            # leave the time blank, and conservatively block the day (same
+            # treatment as official anchors), instead of losing the date.
+            month_tbd = datetime.strptime(m.group(1), "%b").month
+            day_tbd = date(2026, month_tbd, int(m.group(2)))
+            stamp_text = stamp.get_text(" ", strip=True).lower() if stamp else ""
+            ev = event_base(
+                id=f"cal-{day_tbd.isoformat()}-{re.sub(r'[^a-z0-9]+','-',opponent.lower())}-tbd",
+                category="NCAAF", subcategory="California Golden Bears football",
+                season=2026, date=day_tbd.isoformat(), time_status="OFFICIAL DATE / OFFICIAL TIME TBD",
+                matchup=f"Cal {'vs' if 'vs' in stamp_text else 'at'} {opponent}",
+                home="Cal" if "vs" in stamp_text else opponent,
+                away="Cal" if "at" in stamp_text else opponent,
+                stations=[radio], priority="FOCUS — Cal", focus=True,
+                source_url="https://calbears.com/sports/football/schedule/2026",
+                source_label="California Golden Bears official schedule",
+                duration_min=NCAAF_DURATION, duration_source_url=NCAA_DURATION_URL,
+                duration_status="OFFICIAL NCAA 2016 FBS AVERAGE (3:24) — DATED, FLAGGED",
+                planning_status="UNVERIFIED OFFICIAL TIME",
+                notes="Official schedule publishes this date; kickoff time is TBA and left blank. The day is conservatively blocked as UNVERIFIED until an official time is released.",
+                verification="OFFICIAL DATE / OFFICIAL TIME TBD",
+            )
+            events.append(ev)
+            add_unverified_block(intervals, day_tbd, event_id=ev["id"], category="NCAAF",
+                                 matchup=ev["matchup"], priority=ev["priority"], focus=True,
+                                 source_url=ev["source_url"], source_label=ev["source_label"],
+                                 label=ev["matchup"], duration_source_url=NCAA_DURATION_URL)
+            continue
         if not (m and tm):
             ev = event_base(
                 id=f"cal-2026-{i}", category="NCAAF", subcategory="California Golden Bears football",
@@ -835,7 +877,8 @@ def parse_cal_events(intervals: dict[str, list]) -> list[dict]:
             continue
         month = datetime.strptime(m.group(1), "%b").month
         day_num = int(m.group(2))
-        dt = datetime.strptime(f"2026-{month:02d}-{day_num:02d} {tm.group(1).upper()}", "%Y-%m-%d %I:%M %p").replace(tzinfo=PT)
+        time_str = re.sub(r"^(\d{1,2})\s*([AP]M)$", r"\1:00 \2", tm.group(1).upper())
+        dt = datetime.strptime(f"2026-{month:02d}-{day_num:02d} {time_str}", "%Y-%m-%d %I:%M %p").replace(tzinfo=PT)
         day = dt.date()
         start_min = minute_of_day(dt)
         home_away = stamp.get_text(" ", strip=True).lower() if stamp else ""
