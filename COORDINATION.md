@@ -415,3 +415,19 @@ documents as the base and appending/inserting this session's sections — nothin
 - **Merged:** [PR #10](https://github.com/karagemop466-tech/Korea4/pull/10) merged into `main` at `1f0213164be81a7cc810a9470adf4ee142e96524` on Nov. 2, 2026. Pre-merge branch CI [41496007682](https://github.com/karagemop466-tech/Korea4/actions/runs/41496007682), PR verification [41496016400](https://github.com/karagemop466-tech/Korea4/actions/runs/41496016400), and refresh build [41496007767](https://github.com/karagemop466-tech/Korea4/actions/runs/41496007767) passed.
 - **Deployment:** legacy Pages run [41496197972](https://github.com/karagemop466-tech/Korea4/actions/runs/41496197972) and custom refresh/deploy [41496200307](https://github.com/karagemop466-tech/Korea4/actions/runs/41496200307) both succeeded. The live root, planner calendar/vacation/review, and legacy `/vacation.html`, `/docs/index.html`, and `/site/pages/executive-summary.html` loaded with the corrected content and redirects. The live snapshot initially showed the older 17:44 UTC committed baseline after the two successful publishers raced; it remained explicitly timestamped and safe, but was not the freshly fetched artifact.
 - **Follow-up:** adding a main-push gate outside the Pages environment: the custom workflow waits for the same-commit legacy Pages run to complete before deploying its fresh artifact. A failed/unverifiable legacy build stops the custom deploy; a future switch to workflow-only Pages is recognized. The matching logic was tested against the real successful legacy run and in five unit tests. Scheduled runs do not wait for a nonexistent legacy run.
+
+---
+
+## Session log — `arena/27a3305d-korea4` (2026-11-03)
+
+Continuation/verification session on branch `arena/27a3305d-korea4` (branched from `main` @ `4798296a`, the PR #14 merge). No new data tasks were outstanding: the unified task board C0–C7 is complete and PRs #1–#14 are all merged or intentionally closed.
+
+### Verification performed this session (2026-11-03)
+- Git state: working tree clean on `arena/27a3305d-korea4`, identical to `origin/main` @ `4798296a`; no open pull requests (`gh pr list --state open` empty).
+- CI: latest Actions runs all `success`, including "Verify static Pages source" [41498404824](https://github.com/karagemop466-tech/Korea4/actions/runs/41498404824), "pages build and deployment" [41498402639](https://github.com/karagemop466-tech/Korea4/actions/runs/41498402639), and "Verify final integration" [41498322693](https://github.com/karagemop466-tech/Korea4/actions/runs/41498322693).
+- GitHub Pages API: `status=built`, latest build commit `4798296a...` (2026-11-02T18:12:48Z) at <https://karagemop466-tech.github.io/Korea4/>.
+- Live content spot-checks via fetch: root dashboard renders with 6,607 official event/anchor rows, 748 official sources, 1,461 daily scoreboards, today's exact PT free windows, and the 7/14/21-day least-conflict candidate table; `vacation.html` renders the 2027–2029 candidates with strict VERIFIED/ESTIMATED/UNVERIFIED labels, the Feb 15–18, 2027 officially anchored gap, and the schedule-availability table (2028/2029 MLB/NFL and 2027+ WWO correctly UNVERIFIED).
+- Local verification gate re-run: `python3 scripts/verify.py` → 0 errors, 0 warnings, 9,350 primary table rows source-link checked, 674 internal links across the site with 0 broken, `js/app.js` syntax PASS.
+
+### Result
+No irregularities found; no data changes required. This session records the confirmation only. PR from `arena/27a3305d-korea4` to `main` carries this board entry; merge result recorded below after merge.
