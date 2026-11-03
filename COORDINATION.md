@@ -552,3 +552,9 @@ Verification confirmed: no new irregularities; no data changes required beyond t
 | GitHub Pages build | Run `41739377207` — build 26s, deploy 12s, report-build-status 5s, all green; Pages API `status=built`, `build_type=legacy`, `source=main:/`, `https_enforced=true` |
 | Live URL | https://karagemop466-tech.github.io/Korea4/ — confirmed live; cache-busted fetch shows the 2026-11-03T23:27:13 snapshot build. (Root URL without a cache-busting query may show a prior CDN cache until propagation completes.) |
 | Flagged irregularities | IR-001 through IR-017 published on `flagged.html` with official source links; none block the merge |
+
+## Session `arena/84812e33-korea4` — 2026-11-03
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| E1 — Independent future-schedule evidence and coverage audit | in progress | `arena/84812e33-korea4` | `research/future-schedule-audit-84812e33.md`, `COORDINATION.md` | Non-overlapping research scope; no changes to shared dashboard while PR #18 is open. Arena requires the fixed session branch. Audit official evidence and identify limitations without inferring unavailable fixtures. |
