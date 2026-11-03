@@ -436,6 +436,37 @@ documents as the base and appending/inserting this session's sections — nothin
 - **Deployment:** legacy Pages run [41496197972](https://github.com/karagemop466-tech/Korea4/actions/runs/41496197972) and custom refresh/deploy [41496200307](https://github.com/karagemop466-tech/Korea4/actions/runs/41496200307) both succeeded. The live root, planner calendar/vacation/review, and legacy `/vacation.html`, `/docs/index.html`, and `/site/pages/executive-summary.html` loaded with the corrected content and redirects. The live snapshot initially showed the older 17:44 UTC committed baseline after the two successful publishers raced; it remained explicitly timestamped and safe, but was not the freshly fetched artifact.
 - **Follow-up:** adding a main-push gate outside the Pages environment: the custom workflow waits for the same-commit legacy Pages run to complete before deploying its fresh artifact. A failed/unverifiable legacy build stops the custom deploy; a future switch to workflow-only Pages is recognized. The matching logic was tested against the real successful legacy run and in five unit tests. Scheduled runs do not wait for a nonexistent legacy run.
 
+## Session arena/34cbf65f-korea4 — final integration record (2026-11-03)
+
+### Task claim
+
+| Task | Status | Owner | File scope | Verification |
+|---|---|---|---|---|
+| C7 — PR, merge, Pages deployment confirmation, record result | in progress | `arena/34cbf65f-korea4` | `COORDINATION.md`, root dashboard | `scripts/verify.py`, GitHub Pages API, live fetch |
+
+### Verification performed (2026-11-03)
+
+- `python3 scripts/verify.py`: **PASS** — 0 errors, 0 warnings; 9 JSON files valid; 15 primary pages present; 9,350 static primary table rows each carry `data-source-url` plus an external official link; 87 HTML pages link-checked; 674 internal links, 0 broken; `node --check js/app.js` PASS; no unresolved merge markers.
+- GitHub Pages API: `status=built`, `build_type=legacy`, `source=main:/`, `https_enforced=true`, live at https://karagemop466-tech.github.io/Korea4/. Root dashboard fetched live and renders official tables (MLB, NFL, Westwood One, vacation windows, flagged irregularities).
+- Scope confirmed complete against the user's request: all 30 MLB clubs (Giants/A's flagged FOCUS); released 2026 NFL preseason/regular/postseason plus 49ers; Stanford and Cal NCAAF; Westwood One Sports national NFL broadcasts across nine monitored categories; other Bay Area AM/FM radio sports treated as high priority (Earthquakes, Warriors, Sharks, Valkyries); exact Pacific-time free windows; daily scoreboard 2026-11-01 → 2029-12-31; best 7/14/21-day least-conflict candidates for 2027/2028/2029, labelled ESTIMATED where schedules are unreleased.
+- No data changes are made to the merged baseline; this session records verification and runs the PR/merge/deploy cycle.
+
+### Irregularities carried forward (published on `flagged.html`, none block merge)
+
+IR-001 dead reference sites; IR-002 NFL 2027 unavailable (2027–2029 NFL rows ESTIMATED); IR-003 WWO affiliate carriage caveat; IR-004 WWO JSON-LD/+00:00 and 11:59 PM placeholder ends; IR-005 discontinued AFC–NFC Pro Bowl game; IR-006 prior secondary-source rows replaced/flagged; IR-007 zero official MLB 2028/2029 rows (UNVERIFIED, labelled ESTIMATED); IR-008 MLB 2027 TBD start times blank; IR-009 NFL 2026 Week 16–18 TBD kickoffs; IR-010 WWO 2027 grid ends Jan 11; IR-011 Stanford/Cal 2027–2029 dates/times unreleased; IR-012 KSFO 810 AM call-sign correction; IR-013 duration averages flagged; IR-014 Warriors/Sharks/Valkyries radio windows incomplete; IR-015 Super Bowl LXII date TBA / LXIII not found; IR-016 strict-window conclusion superseded by exact official dates; IR-017 2028 Olympic-break scenario not an official released schedule.
+
+### Official sources for manual review
+
+- MLB Stats API 2026/2027: https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026 (2028/2029 return zero rows → UNVERIFIED)
+- Official NFL 2026 by-week: https://www.nfl.com/schedules/2026/by-week/week-1
+- Official NFL 2026–27 important dates: https://www.nfl.com/news/2026-27-national-football-league-important-dates
+- Official 49ers schedule: https://www.49ers.com/schedule/
+- Official Stanford schedule: https://gostanford.com/sports/football/schedule
+- Official Cal schedule: https://calbears.com/sports/football/schedule/2026
+- Official WWO schedule: https://www.westwoodonesports.com/nfl-schedule/
+- Official WWO station finder: https://www.westwoodonesports.com/station-finder/
+- Official Earthquakes radio: https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season
+
 ---
 
 ## Session log — `arena/27a3305d-korea4` (2026-11-03)
