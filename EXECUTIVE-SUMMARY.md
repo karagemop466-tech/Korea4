@@ -8,7 +8,7 @@ Generated 2026-11-02T18:00:25+00:00 from 748 official-source records.
 - Stanford and Cal 2026 NCAAF games and official 2027–2029 future anchors.
 - All captured official Westwood One Sports event windows across nine categories.
 - Other confirmed Bay Area AM/FM radio sports, including the full official 2026 Earthquakes radio schedule.
-- Exact Pacific-time free windows every day from 2026-11-01 through 2029-12-31.
+- Estimated Pacific-time planning gaps every day from 2026-11-01 through 2029-12-31.
 
 ## Verification rules
 1. Official/league/team/network sources only for VERIFIED values.

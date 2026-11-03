@@ -721,7 +721,9 @@ def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
         week = week_node.get_text(" ", strip=True) if week_node else ""
         venue = card.select_one(".nfl-o-matchup-cards__venue--location")
         link = card.select_one(".nfl-o-matchup-cards__btn-game-day")
-        source_url = link.get("href", "") if link and link.get("href", "").startswith("http") else "https://www.49ers.com/schedule/"
+        # The CTA can be a ticket reseller. Cite the captured schedule,
+        # which is the actual evidence for these fields, not that CTA.
+        source_url = "https://www.49ers.com/schedule/"
         day = dt.date()
         start_min = minute_of_day(dt)
         radio = radio_line or "KSAN 107.7 FM / KNBR 104.5 FM / 680 AM"

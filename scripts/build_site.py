@@ -277,7 +277,7 @@ def build_daily():
 <section class="panel"><h2>Date controls</h2>
   <div class="day-nav">
     <button type="button" data-day-step="-1">← Yesterday</button>
-    <button type="button" id="today-btn">Today · {esc(META['system_today'])}</button>
+    <button type="button" id="today-btn">Today</button>
     <button type="button" data-day-step="1">Tomorrow →</button>
     <label>Date <input type="date" id="selected-date" min="{esc(META['date_range'][0])}" max="{esc(META['date_range'][1])}" value="{esc(META['system_today'])}"></label>
   </div>
@@ -409,7 +409,7 @@ def build_flagged():
 <section class="panel" id="audit-2026-11-03"><h2>November 3 safety audit — needs review</h2>
 <p>No 7-, 14-, or 21-day window is certified sports-free in 2027–2029. The model ranking is not evidence that no such window could exist.</p>
 <ul><li>Prior VERIFIED labels describe captured fields, not a fresh November 3 verification or complete local carriage.</li>
-<li>WWO network events and affiliate listings do not confirm game-specific broadcasts in San Francisco. See the <a href="https://www.westwoodonesports.com/stations/">official affiliate finder</a> and <a href="https://www.westwoodonesports.com/nfl-schedule/">NFL network schedule</a>.</li>
+<li>WWO network events and affiliate listings do not confirm game-specific broadcasts in San Francisco. See the <a href="https://www.westwoodonesports.com/station-finder/">official affiliate finder</a> and <a href="https://www.westwoodonesports.com/nfl-schedule/">NFL network schedule</a>.</li>
 <li>Unpublished future games, radio basketball/hockey and other incomplete sports coverage prevent a complete all-sports absence claim. Review <a href="sources.html">the source catalogue</a>.</li>
 <li>Start times are distinct from estimated ends. Pacific wall-clock minutes on DST change days are not elapsed minutes. Reception in 94122 is not field-tested.</li>
 <li>Official-source access from this audit sandbox is restricted. This audit checks stored evidence integrity and presentation, not a new live line-by-line revalidation. See <a href="research/audit-2026-11-03.md">audit report</a>.</li></ul></section>

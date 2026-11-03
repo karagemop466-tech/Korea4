@@ -74,7 +74,7 @@ OFFICIAL_HOSTS = {
 
 def official_url(url):
     parsed = urlsplit(url or "")
-    return parsed.scheme == "https" and parsed.hostname in OFFICIAL_HOSTS and not parsed.username
+    return parsed.scheme in ("https", "http") and parsed.hostname in OFFICIAL_HOSTS and not parsed.username
 
 
 def source_row_valid(row):
