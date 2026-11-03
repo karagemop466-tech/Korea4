@@ -27,6 +27,14 @@ This session started from `4798296a` (merge of PR #14) and performed an independ
 - Fixed static snapshot called “today,” Pacific today navigation, misleading verified-colored estimated badges / verified filter, and a cross-midnight duration recalculation bug. Gap labels now explicitly say estimated and unverified. Data is dated; there is no automatic refresh in the root publisher. Full row-by-row official re-verification and complete Bay Area radio coverage were **not** accomplished by this follow-up; the structural script does not perform such an audit. Flagged page discloses these limitations and archived dashboards.
 - Local checks: `python scripts/verify.py` (9,356 source-linked primary rows structurally sampled; 689 internal links, 0 broken), `node tests/test_dashboard.mjs`, `npm test`, and focused Python generator tests passed. `python -m unittest discover -s tests -v` has two errors and one failure in inherited `test_build.py`: those tests expect the superseded planner artifact and redirect configuration; no claim that this suite passed. Published as D1-04.
 - PR / merge / deploy: pending. Claim branch was initially absent on origin; rebased against main before its first push. Scope includes `.github/workflows/check.yml` and `EXECUTIVE-SUMMARY.md` for test gating and summary accuracy.
+### Merge result (arena/65a1da2b-korea4) — 2026-11-03
+| Item | Result |
+|---|---|
+| **PR** | [#15 — Audit record: independent re-verification of FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/15) |
+| **Merged to** | `main` at `1a9a2a2` — 2026-11-03T19:39:02Z; PR merge workflow run succeeded |
+| **Pages deploy** | Pages API returned to `status=built` on latest `main` (`cf832878`, which includes this merge plus parallel PR #16); the transient `errored` reading on `1a9a2a2` was a cancelled legacy build superseded by the concurrent PR #16 merge, not a content failure — final build succeeded |
+| **Live check** | https://karagemop466-tech.github.io/Korea4/ fetched 2026-11-03: dashboard renders with 6,607 official event rows, exact Pacific free windows, 2027/2028/2029 vacation candidates, and the IR-001–IR-007 flagged table |
+| **Irregularities** | None new; IR-001–IR-007 remain on the Flagged for Review page and did not block merge |
 
 ## Branch constraint
 Arena fixes each session to its assigned branch and forbids switching to, creating, or pushing another branch. The requested `session-<id>/<task>` branch/worktree convention and a separate integration branch therefore cannot be used by this session. All work, the final PR, and the merge from this session are performed on `arena/72e6d3f7-korea4`.
