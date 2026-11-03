@@ -19,6 +19,19 @@ Fixed working branch: `arena/65a1da2b-korea4`
 - No new irregularities found.
 - **PR / merge / deploy:** [PR #22](https://github.com/karagemop466-tech/Korea4/pull/22) MERGED to `main` at `e8a58da` (2026-11-03T23:26:56Z); GitHub Pages returned to `status=built`; live `vacation.html` re-fetched and renders the 2027/2028/2029 least-conflict table, Feb 15–18 2027 anchored gap, and schedule-availability table with 2028/2029 MLB/NFL correctly UNVERIFIED. This record is carried by a follow-up PR from the same branch.
 
+## Session arena/9fc55d1a-korea4 — branch sync and Pages redeploy (2026-11-03)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| F1 — Sync branch with origin/main, trigger Pages rebuild, confirm live site | done | `arena/9fc55d1a-korea4` | `COORDINATION.md` | Merged origin/main into branch; triggered Pages rebuild via PR #27; Pages status `status=built`; live site verified at https://karagemop466-tech.github.io/Korea4/ |
+
+### F1 verification record — 2026-11-03
+- `python3 scripts/verify.py` → **PASS**: 0 errors, 0 warnings; 10,086 primary static table rows each with an official source link; 689 internal links, 0 broken; 9 JSON files valid. `node --check js/app.js` PASS.
+- `git merge origin/main` → resolved COORDINATION.md conflict; pushed to `arena/9fc55d1a-korea4`.
+- PR #27 opened and merged to `main` to trigger Pages rebuild; Pages API returned `status=built`.
+- Live site fetched successfully: https://karagemop466-tech.github.io/Korea4/ renders dashboard with 6,607 official event rows, 748 sources, 1,461 daily scoreboards, vacation candidates for 2027/2028/2029, and IR-001…IR-017 flagged irregularities.
+- No new irregularities found. PR #18 (`arena/aea8720a-korea4`, CONFLICTING) remains open and unclaimed.
+
 ## Session audit — arena/65a1da2b-korea4 (2026-11-03)
 
 This session started from `4798296a` (merge of PR #14) and performed an independent line-by-line re-audit of the published FREE TIME VACATION project before opening its own PR:
