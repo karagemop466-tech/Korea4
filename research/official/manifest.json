@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-11-03T23:35:54+00:00",
-  "source_count": 683,
+  "generated_utc": "2026-11-03T23:38:12+00:00",
+  "source_count": 685,
   "wwo_event_count": 580,
   "wwo_categories": {
     "NFL": "47029",
@@ -76,11 +76,11 @@
       "url": "https://calbears.com/sports/football/schedule/2026",
       "http_status": 200,
       "error": null,
-      "bytes": 971680,
-      "sha256": "202432c98458293a813a813377708501e2eef55b1a2e04e1ddbbffa6aa59b79c",
-      "compressed_bytes": 94736,
+      "bytes": 971681,
+      "sha256": "e35b99d8396a7b61a2e982245d2088ee101d6dd2e727a15be9a2c17861ed60c7",
+      "compressed_bytes": 94739,
       "raw_file": "research/official/raw/cal_schedule_current.gz",
-      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     },
     {
       "key": "cfp_2027_broadcast",
@@ -201,7 +201,7 @@
       "sha256": "6bc2584f76b2d56e48ec54d40ee96d3cc36964c955dc7699c97d55ed7da6e6d4",
       "compressed_bytes": 39979,
       "raw_file": "research/official/raw/mlb_2027_all.gz",
-      "retrieved_utc": "2026-11-03T23:35:45+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     },
     {
       "key": "mlb_2027_all_star",
@@ -325,15 +325,37 @@
       "retrieved_utc": "2026-11-03T23:35:46+00:00"
     },
     {
+      "key": "nba_schedule_by_date_pdf",
+      "url": "https://pr.nba.com/wp-content/uploads/sites/46/2026/08/2026-27-NBA-Regular-Season-Schedule-By-Date.pdf",
+      "http_status": 200,
+      "error": null,
+      "bytes": 541060,
+      "sha256": "5e82e37ef1b19e226dee57be69958b95b5694516280d3034aa7c1d64292b3570",
+      "compressed_bytes": 464741,
+      "raw_file": "research/official/raw/nba_schedule_by_date_pdf.gz",
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
+    },
+    {
+      "key": "nba_schedule_by_team_pdf",
+      "url": "https://pr.nba.com/wp-content/uploads/sites/46/2026/08/2026-27-NBA-Regular-Season-Schedule-By-Team.pdf",
+      "http_status": 200,
+      "error": null,
+      "bytes": 1274542,
+      "sha256": "10a2b81388dcf79011b5405c43966446f5c3e4c35a0034f115c4cf124379bec3",
+      "compressed_bytes": 1171012,
+      "raw_file": "research/official/raw/nba_schedule_by_team_pdf.gz",
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
+    },
+    {
       "key": "nba_schedule_league_v2",
       "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
       "http_status": 403,
       "error": "HTTP 403",
       "bytes": 425,
-      "sha256": "73cfc5e38ac77b08d4066dbaa0ea0e8cbd74f6488450c406ac6f013fe2ea345c",
-      "compressed_bytes": 272,
+      "sha256": "61a8208216ffe233fa5f9f0fcf10175181909671cba3e9cbc195098526b23cd2",
+      "compressed_bytes": 271,
       "raw_file": "research/official/raw/nba_schedule_league_v2.gz",
-      "retrieved_utc": "2026-11-03T23:35:45+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     },
     {
       "key": "ncaa_football_rules",
@@ -561,10 +583,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 2472696,
-      "sha256": "ac6ae4dd4cf8c9dfb792214fe1d7b160d8030efad52a01e230eb64e628ad0af8",
-      "compressed_bytes": 172542,
+      "sha256": "0d765249b23e7ae98209c635f8d932e0ec1b6977a2410ae968ce00f86d5a1f54",
+      "compressed_bytes": 172545,
       "raw_file": "research/official/raw/nfl_2026_week_16.gz",
-      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     },
     {
       "key": "nfl_2026_week_17",
@@ -572,10 +594,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 2454613,
-      "sha256": "a6cff0a9571a269be34150b36893f64e16ddc046246ab058ee3294d5759e71d3",
+      "sha256": "a2144dbbae33e6164bf33c28b743ebd8f6b3cafeeb6796fe3b1ff3795f77b779",
       "compressed_bytes": 172891,
       "raw_file": "research/official/raw/nfl_2026_week_17.gz",
-      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     },
     {
       "key": "nfl_2026_week_18",
@@ -583,10 +605,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 2423827,
-      "sha256": "ea50f38a689bea7d6aee512eee4e6f42a07a8c380560b396f0c01ffefd6028fb",
-      "compressed_bytes": 169816,
+      "sha256": "0343bd79d45321c77ca32e2ef2cd1f5c4c439b2926ce6167f94262b40fa4cf2a",
+      "compressed_bytes": 169820,
       "raw_file": "research/official/raw/nfl_2026_week_18.gz",
-      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "nfl_2027_by_team",
@@ -674,7 +696,7 @@
       "sha256": "3750d3f9ee53f88d00be3685e18e9d7f86d457299e9e020fe6f12efd0575bf49",
       "compressed_bytes": 63780,
       "raw_file": "research/official/raw/nflers_schedule.gz",
-      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     },
     {
       "key": "nhl_rulebook_2025_26",
@@ -803,10 +825,10 @@
       "http_status": 200,
       "error": null,
       "bytes": 653382,
-      "sha256": "53548cb5410bb30775a331c285d5715b5ae75f5bce815c2675225beda7439eb0",
-      "compressed_bytes": 76089,
+      "sha256": "c361e0c919cb2a32779b4656e05047f5d86162c890f1fdfdd924f490f416d75f",
+      "compressed_bytes": 76087,
       "raw_file": "research/official/raw/stanford_schedule_current.gz",
-      "retrieved_utc": "2026-11-03T23:35:46+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "warriors_radio",
@@ -7219,7 +7241,7 @@
       "sha256": "17001357a01a983ad7199de08c40c8ace9ff295660bb1d3545b4081c68176018",
       "compressed_bytes": 18167,
       "raw_file": "research/official/raw/wwo_grid_golf_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_golf_100",
@@ -7230,7 +7252,7 @@
       "sha256": "10760d40bc3b7f0fab1ea2585d0921c7896b7a7aa2b6265c5230de1a297f533d",
       "compressed_bytes": 16169,
       "raw_file": "research/official/raw/wwo_grid_golf_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_golf_200",
@@ -7241,7 +7263,7 @@
       "sha256": "d1fe2d699a1d0662130207bbbb98b7aa6d7e6752eb12d097b0ea47007d5764e0",
       "compressed_bytes": 16171,
       "raw_file": "research/official/raw/wwo_grid_golf_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_hockey_0",
@@ -7252,7 +7274,7 @@
       "sha256": "1571f2c50079e9be287f3212cff89b916e910fc5d5fceb57956973177671cd03",
       "compressed_bytes": 16838,
       "raw_file": "research/official/raw/wwo_grid_hockey_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_hockey_100",
@@ -7263,7 +7285,7 @@
       "sha256": "821c02fcc88e5d38def3c76d6fca644f70a46ed3e7a561d9cc30688169faa4f1",
       "compressed_bytes": 16168,
       "raw_file": "research/official/raw/wwo_grid_hockey_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_hockey_200",
@@ -7274,7 +7296,7 @@
       "sha256": "ff0063737a997b7e8c12672eb6b38e19d19c73bec9965f2b5a0ff99767cca34a",
       "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_hockey_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_lacrosse_0",
@@ -7285,7 +7307,7 @@
       "sha256": "bd906171741569a5823409dd6c3e6718d6ae9da1310b0ad736c53fd823daa139",
       "compressed_bytes": 16847,
       "raw_file": "research/official/raw/wwo_grid_lacrosse_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_lacrosse_100",
@@ -7296,7 +7318,7 @@
       "sha256": "dbe8bb1170b1f2a38a915fdae0011a7b57ca053f76a55ba39fe1bc9c87da004c",
       "compressed_bytes": 16167,
       "raw_file": "research/official/raw/wwo_grid_lacrosse_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_lacrosse_200",
@@ -7307,7 +7329,7 @@
       "sha256": "cca6906a8855a68f4ef5f0df7c1381ca4cbc5250f101f643859dedf7aaa4a03c",
       "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_lacrosse_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_mcws_0",
@@ -7318,7 +7340,7 @@
       "sha256": "7cdd75c0e7502cc989b4fbf7be6823927eacc76e8b4775bbc2548d7d08508e83",
       "compressed_bytes": 17653,
       "raw_file": "research/official/raw/wwo_grid_mcws_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_mcws_100",
@@ -7329,7 +7351,7 @@
       "sha256": "96bd950409d462d1b8c4183535190fe0f2d84ba84bd2dd17c50dd23ea94fdd21",
       "compressed_bytes": 16168,
       "raw_file": "research/official/raw/wwo_grid_mcws_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_mcws_200",
@@ -7340,7 +7362,7 @@
       "sha256": "896d38d7b8dc077d0ba6a2580d8c87bdbddb5e51b5be3552198ffe108205226f",
       "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_mcws_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_ncaab_0",
@@ -7351,7 +7373,7 @@
       "sha256": "5e13b63143d80fc97fd95efd63accdde922cea20d5e8cd36b0afaf9f70871e8d",
       "compressed_bytes": 22426,
       "raw_file": "research/official/raw/wwo_grid_ncaab_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_ncaab_100",
@@ -7362,7 +7384,7 @@
       "sha256": "0178cd5b374428d1363ce475a5b7f863f3d8cb2bfd56f1479b061116b9d8aa72",
       "compressed_bytes": 23401,
       "raw_file": "research/official/raw/wwo_grid_ncaab_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_ncaab_200",
@@ -7373,7 +7395,7 @@
       "sha256": "47141948be5f5ba9a8b4c3d820f93181ed86a950e203d841cc1448e76071c667",
       "compressed_bytes": 19041,
       "raw_file": "research/official/raw/wwo_grid_ncaab_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_ncaaf_0",
@@ -7384,7 +7406,7 @@
       "sha256": "d48502abe4900ba132696efe8510ec463efe83f8a860c3f835d33aa0ddd65432",
       "compressed_bytes": 19530,
       "raw_file": "research/official/raw/wwo_grid_ncaaf_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:52+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "wwo_grid_ncaaf_100",
@@ -7395,7 +7417,7 @@
       "sha256": "84de27d400fff4b9a297aea4b491880bac1a8c5f35929f4c1201e2ac464c8f37",
       "compressed_bytes": 16167,
       "raw_file": "research/official/raw/wwo_grid_ncaaf_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:52+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "wwo_grid_ncaaf_200",
@@ -7406,7 +7428,7 @@
       "sha256": "06705205d4897ede35fb74e22098cc181a23286705136831a356d6b4c33827a2",
       "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_ncaaf_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:52+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "wwo_grid_nfl_0",
@@ -7417,7 +7439,7 @@
       "sha256": "48b14e4792d92932abb3b8c7f98893b74294272999fad6717682800596dd6a16",
       "compressed_bytes": 23733,
       "raw_file": "research/official/raw/wwo_grid_nfl_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:52+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "wwo_grid_nfl_100",
@@ -7428,7 +7450,7 @@
       "sha256": "fc565cdecec66dbe8cd22a1f048afe96a5c0a3b625b3f85840dbdc64ade21743",
       "compressed_bytes": 21215,
       "raw_file": "research/official/raw/wwo_grid_nfl_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:52+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "wwo_grid_nfl_200",
@@ -7439,7 +7461,7 @@
       "sha256": "e56728499c9ef0c1650d5b69b29804d418f86c5366717e2437586dc056b0fbae",
       "compressed_bytes": 16171,
       "raw_file": "research/official/raw/wwo_grid_nfl_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:52+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "wwo_grid_soccer_0",
@@ -7450,7 +7472,7 @@
       "sha256": "910c781efd533b48ee2d703cb1eb9331a6cd55389bb7d9b28b313d0a84c717ab",
       "compressed_bytes": 19377,
       "raw_file": "research/official/raw/wwo_grid_soccer_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_soccer_100",
@@ -7461,7 +7483,7 @@
       "sha256": "14aa4aea279f25dd71e92727eadc5d3df3cd1921a4c5f3e8fe9864075e1ed3de",
       "compressed_bytes": 16167,
       "raw_file": "research/official/raw/wwo_grid_soccer_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:11+00:00"
     },
     {
       "key": "wwo_grid_soccer_200",
@@ -7472,7 +7494,7 @@
       "sha256": "a1b186c4447f37866e8f53645b88f3a6e71fbc7021a090127e9b5cca4f65eb37",
       "compressed_bytes": 16170,
       "raw_file": "research/official/raw/wwo_grid_soccer_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:53+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_wcws_0",
@@ -7483,7 +7505,7 @@
       "sha256": "890fb069d4a6cfb77c91a569f8e5f0d41440b3be2b139ed761cb674f3a45537e",
       "compressed_bytes": 18041,
       "raw_file": "research/official/raw/wwo_grid_wcws_0.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_wcws_100",
@@ -7494,7 +7516,7 @@
       "sha256": "132401f7b6700f70ad54bdb3eef6a52679cf38effd854069cb5ff905a0be4a58",
       "compressed_bytes": 16168,
       "raw_file": "research/official/raw/wwo_grid_wcws_100.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_grid_wcws_200",
@@ -7505,18 +7527,18 @@
       "sha256": "2be00e07b160e21f084f688f9c96a7b7c3d587e6f3178c7198bd293b84fcebdd",
       "compressed_bytes": 16171,
       "raw_file": "research/official/raw/wwo_grid_wcws_200.gz",
-      "retrieved_utc": "2026-11-03T23:35:54+00:00"
+      "retrieved_utc": "2026-11-03T23:38:12+00:00"
     },
     {
       "key": "wwo_nfl_schedule",
       "url": "https://www.westwoodonesports.com/nfl-schedule/",
       "http_status": 200,
       "error": null,
-      "bytes": 65447,
-      "sha256": "10c048e2fbccb5c8567918d4cb00208daec5272fe56f8db50d7b47728dc3fe3e",
-      "compressed_bytes": 16742,
+      "bytes": 65402,
+      "sha256": "bdd6aa4a1f22ff5777f72c86139addc91c48bff437251c6e3a3ebd4354ed3229",
+      "compressed_bytes": 16706,
       "raw_file": "research/official/raw/wwo_nfl_schedule.gz",
-      "retrieved_utc": "2026-11-03T23:35:45+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     },
     {
       "key": "wwo_station_finder",
@@ -7527,7 +7549,7 @@
       "sha256": "f8fdc3f657a358b0467a14403a1143ace26199de4dedfcdc816a6b977fed8429",
       "compressed_bytes": 22808,
       "raw_file": "research/official/raw/wwo_station_finder.gz",
-      "retrieved_utc": "2026-11-03T23:35:45+00:00"
+      "retrieved_utc": "2026-11-03T23:38:10+00:00"
     }
   ]
 }
