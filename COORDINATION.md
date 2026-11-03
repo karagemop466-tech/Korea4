@@ -1,8 +1,20 @@
 # COORDINATION.md — unified shared task board
 
-Last integration update: 2026-11-02 (UTC)
+Last integration update: 2026-11-03 (UTC)
+Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
-Fixed working branch: `arena/72e6d3f7-korea4`
+Fixed working branch: `arena/65a1da2b-korea4`
+
+## Session audit — arena/65a1da2b-korea4 (2026-11-03)
+
+This session started from `4798296a` (merge of PR #14) and performed an independent line-by-line re-audit of the published FREE TIME VACATION project before opening its own PR:
+
+- **Build/verification re-run:** `python3 scripts/verify.py` → 0 errors, 0 warnings; 9,350 primary static table rows each carrying an official source link; 674 internal links checked across the site, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS. Report regenerated at `research/verification-report.md`.
+- **Data integrity:** `data/official/events.json` holds 6,607 event/anchor rows (MLB 5,893 · NFL 345 · WWO 311 · MLS 34 · NCAAF 24); every row carries a source URL; 5,783 rows flagged high-priority (Giants, A's, 49ers, Stanford, Cal, all MLB/NFL/WWO).
+- **Official-source spot checks (2026-11-03):** MLB's official [2027 schedule release of Jul 16, 2026](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals) confirmed (season opens Mar 25, 2027; Phillies home opener Apr 1) — matches site anchors. Super Bowl LXI confirmed for **Sunday, Feb 14, 2027 at SoFi Stadium** per NFL's official [2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) — consistent with the published best-window finding (Feb 15–18, 2027). Westwood One Sports [official NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) remains the WWO source of record; 2026 TNF/MNF slate cross-checked against league listings (e.g., 49ers–Rams Melbourne opener, 49ers MNF Week 6).
+- **Live site:** GitHub Pages API `status=built`, latest build commit `4798296a` (2026-11-02T18:12:48Z); live dashboard at https://karagemop466-tech.github.io/Korea4/ fetched successfully and renders the executive summary, exact Pacific free windows, vacation candidates for 2027/2028/2029, and the IR-001…IR-007 flagged-irregularities table.
+- **No irregularities found in this pass.** Prior flags IR-001–IR-007 remain published on the Flagged for Review page and do not block merge.
+- **Result of this session:** audit entry only; PR from `arena/65a1da2b-korea4` → `main`, merged, Pages re-deploy confirmed, recorded below.
 
 ## Branch constraint
 Arena fixes each session to its assigned branch and forbids switching to, creating, or pushing another branch. The requested `session-<id>/<task>` branch/worktree convention and a separate integration branch therefore cannot be used by this session. All work, the final PR, and the merge from this session are performed on `arena/72e6d3f7-korea4`.
