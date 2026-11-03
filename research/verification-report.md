@@ -4,9 +4,9 @@ Generated: 2026-11-03T23:27:13+00:00
 
 - JSON files checked: 9
 - Primary generated pages: 15
-- Static primary table rows with source URL: 10086
+- Static primary table rows with source URL: 10087
 - HTML pages link-checked (including legacy trees): 87
-- Internal links checked: 689
+- Internal links checked: 704
 - Broken internal links: 0
 - JavaScript syntax: PASS
 - Errors: 0

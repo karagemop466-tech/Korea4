@@ -1370,16 +1370,16 @@ def main() -> None:
     review = build_line_by_line_audit()
 
     anchor_windows = [
-        {"year": 2027, "window": "2027-02-15 to 2027-02-18", "length_days": 4, "label": "Best officially anchored gap", "status": "OFFICIAL ANCHORS / LATER WWO SCHEDULE UNVERIFIED", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates", "notes": "Super Bowl LXI Feb 14 and MLB Spring Training Feb 19 are official anchors; no officially published game rows fall on Feb 15–18. WWO later-season schedule is not released, so this is not certified free."},
-        {"year": 2027, "window": "2027-02-15 to 2027-03-23", "length_days": 37, "label": "Relaxed scenario ignoring Spring Training", "status": "SCENARIO — EXCLUDES OFFICIAL SPRING TRAINING GAMES", "source_url": "https://www.mlb.com/press-release/press-release-mlb-announces-2027-spring-training-schedule", "source_label": "Official MLB 2027 Spring Training release", "notes": "Useful only if Spring Training broadcasts are excluded from the user's strict free-time definition; the strict model counts them."},
+        {"year": 2027, "window": "2027-02-15 to 2027-02-18", "length_days": 4, "label": "Withdrawn: contains known radio conflict", "status": "SCHEDULED RADIO CONFLICT — RECEPTION UNVERIFIED", "source_url": "https://calbears.com/sports/mens-basketball/schedule/2026-27", "source_label": "Official Cal basketball schedule", "notes": "Cal at Pitt, February 17 at 4 p.m. PT, listed on KSFO 810 AM. Local reception and actual broadcast end remain unverified; this game is not included in the snapshot calculations."},
+        {"year": 2027, "window": "2027-02-15 to 2027-03-23", "length_days": 37, "label": "Withdrawn: omits known radio games", "status": "UNVERIFIED — KNOWN BROADCASTS OMITTED", "source_url": "https://calbears.com/sports/mens-basketball/schedule/2026-27", "source_label": "Official Cal basketball schedule", "notes": "Excludes spring training and also omits other terrestrial broadcasts including Cal basketball; not a free-time recommendation."},
         {"year": 2028, "window": "", "length_days": "", "label": "Mid-February estimated gap", "status": "ESTIMATED — NOT A RELEASED SCHEDULE", "source_url": "https://collegefootballplayoff.com/news/2025/10/29/tampabay-29", "source_label": "Official CFP future dates", "notes": "Exact dates blank because 2028 MLB/NFL/WWO schedules and Super Bowl LXII date are not officially released."},
         {"year": 2029, "window": "", "length_days": "", "label": "Mid-February estimated gap", "status": "ESTIMATED — NOT A RELEASED SCHEDULE", "source_url": "https://collegefootballplayoff.com/news/2025/10/29/tampabay-29", "source_label": "Official CFP future dates", "notes": "Exact dates blank because 2029 MLB/NFL/WWO schedules are not officially released."},
     ]
     analysis_conclusion = {
         "strict_7_14_21_day_windows": sum(1 for w in windows if w["strict_free"]),
-        "conclusion": "Using official rows plus separately labelled 2026-pattern estimates, no 7-, 14-, or 21-day fully free strict window appears in 2027–2029. The best short officially anchored gap is Feb 15–18, 2027; all longer vacation recommendations are least-conflict ESTIMATED candidates and must be rechecked when schedules are released.",
-        "source_url": NFL_IMPORTANT_DATES_URL,
-        "source_label": "Official NFL 2026–27 important dates",
+        "conclusion": "No 7-, 14-, or 21-day trip can be certified free from the incomplete snapshot. The previously highlighted February 15–18, 2027 gap contains a scheduled Cal basketball broadcast on February 17. Candidate rankings omit known games and must not be relied on for booking.",
+        "source_url": "https://calbears.com/sports/mens-basketball/schedule/2026-27",
+        "source_label": "Official Cal basketball schedule",
     }
     findings = [
         {"topic": "Official 2026 NFL regular season", "finding": f"{len(nfl_regular)} official game rows parsed from 18 NFL by-week pages; 272 have exact kickoff islands and 24 are official TBD matchups.", "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1", "source_label": "Official NFL by-week schedule", "status": "VERIFIED"},

@@ -124,7 +124,7 @@ def table(headers, rows, columns, name, page_size=100, intro=None):
         <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
       </div>'''
     return f'''<div class="table-wrap" data-table="{esc(name)}" data-page-size="{page_size}">
-      {f'<p class="intro">{esc(intro)}</p>' if intro else ''}{controls}
+{f'      <p class="intro">{esc(intro)}</p>' if intro else ''}{controls}
       <div class="scroll"><table><thead><tr>{''.join(f'<th>{esc(h)}</th>' for h in headers)}<th>Official source</th></tr></thead><tbody>{''.join(body)}</tbody></table></div>
     </div>'''
 
@@ -155,7 +155,8 @@ def page(title, active, lead, body, extra_head=""):
 <main>
   <h1 class="page-title">{esc(title)}</h1>
   <p class="page-lead">{lead}</p>
-  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Data captured {esc(META["generated_utc"])}. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
+  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Snapshot generated {esc(META["generated_utc"])} from earlier captured sources; this is not a live refresh. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
+  <div class="callout danger"><strong>Known missing broadcast:</strong> Cal at Pitt men's basketball, Feb 17, 2027, 4 p.m. PT, is listed on KSFO 810 AM by <a href="https://calbears.com/sports/mens-basketball/schedule/2026-27">Cal's official schedule</a>. It is not included in this snapshot's calculations. The previous Feb 15–18 gap is withdrawn; rankings and gaps omit other known games too. End time and reception in 94122 are unverified. <a href="flagged.html#cal-radio-gap">Details</a>.</div>
   {body}
   <footer class="footer">
     <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
@@ -249,7 +250,7 @@ def build_index():
     source_rows = SOURCES[:8]
     body = f'''
 <section class="hero">
-  <div class="kicker">Official-source verified dashboard · 2026–2029</div>
+  <div class="kicker">Official-source snapshot · 2026–2029</div>
   <h1>Find a minute with no live sports radio.</h1>
   <p>Strict free-time planning for standard AM/FM radio in Outer Sunset, San Francisco 94122. All MLB clubs, all released NFL games, 49ers, Stanford, Cal, Westwood One Sports, and other confirmed Bay Area radio games are tracked. Every table row carries an official link; unverified values stay blank and flagged.</p>
 </section>
@@ -266,7 +267,7 @@ def build_index():
 <p><a class="control-btn" href="daily.html?date={esc(META['system_today'])}">Open scoreboard for snapshot date →</a></p></section>
 <section class="panel"><h2>Executive findings</h2><p class="intro">Every finding links to the official source used. Full analysis is on the Executive Summary and Methodology pages.</p>
 {table(['Topic','Finding','Status'], findings_rows, ['topic','finding',('status','badge')], 'findings', 20)}</section>
-<section class="panel"><h2>Best 1-, 2-, and 3-week candidates</h2><p class="intro">Least-conflict windows from exact official rows plus separately labelled unreleased-season models. “Strict free” means zero busy blocks; no window is certified free until future schedules are released.</p>
+<section class="panel"><h2>Snapshot-only 1-, 2-, and 3-week candidates</h2><p class="intro">Historical model output only: known Cal basketball and other broadcasts are missing, so ranks, busy counts and free gaps are unreliable. Do not use for booking.</p>
 {table(['Year','Length','Start','End','Busy days','Strict free','Status'], window_rows, ['year',('length_days','num'),'start','end',('busy_days','num'),('strict_free','text'),('status','badge')], 'best-windows', 20)}</section>
 <section class="panel"><h2>Flagged irregularities</h2>{table(['ID','Issue','Status','Action'], flag_rows, ['id','issue',('status','badge'),'action'], 'flags-index', 20)}
 <p><a class="control-btn" href="flagged.html">See all {len(META['flags'])} flags →</a></p></section>
@@ -324,8 +325,8 @@ def build_calendar():
 def build_vacation():
     conclusion = META["analysis_conclusion"]
     body = f'''
-<div class="callout danger"><strong>Strict conclusion:</strong> {esc(conclusion['conclusion'])} {badge('ESTIMATED / UNVERIFIED','unverified')} <a href="{esc(conclusion['source_url'])}" target="_blank" rel="noopener">Official NFL date anchor</a></div>
-<section class="panel"><h2>Best 1-, 2-, and 3-week windows (least conflict)</h2><p class="intro">Computed from exact official rows plus separately labelled 2026-pattern estimates. Busy days include official dates with TBD times and unverified conservative blocks.</p>
+<div class="callout danger"><strong>Strict conclusion:</strong> {esc(conclusion['conclusion'])} {badge('ESTIMATED / UNVERIFIED','unverified')} <a href="{esc(conclusion['source_url'])}" target="_blank" rel="noopener">Official Cal basketball schedule</a></div>
+<section class="panel"><h2>Snapshot-only 1-, 2-, and 3-week candidates (incomplete)</h2><p class="intro">Historical model output only: known Cal basketball and other broadcasts are missing, so ranks and busy counts are unreliable. Do not use for booking.</p>
 {table(['Year','Length','Start','End','Busy days','Busy minutes','Model days','Strict free','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('busy_minutes','num'),('model_days','num'),('strict_free','text'),('status','badge')], 'vacation-windows', 20)}</section>
 <section class="panel"><h2>2027 anchors for manual review</h2><p class="intro">These dates do not establish an empty week or confirm local radio coverage. Other broadcasts may occur between the anchors.</p>{table(['Event','Official date','Status'], [
  {'event':'NFL Super Bowl LXI','date':'2027-02-14','status':'VERIFIED DATE — KICKOFF / RADIO COVERAGE NOT CHECKED','source_url':'https://www.nfl.com/news/2026-27-national-football-league-important-dates','source_label':'NFL important dates'},
@@ -407,6 +408,7 @@ def build_sources():
 def build_flagged():
     body = f'''
 <div class="callout danger"><strong>Review warning:</strong> Snapshot gaps cannot prove all broadcasts were captured; the older parallel dashboards may have conflicting claims. A source link is not proof that every cell was independently checked. These are published here with official source links. Unverified values remain blank in the main tables.</div>
+<section class="panel" id="cal-radio-gap"><h2>Known missing terrestrial broadcast</h2><p>The official start and scheduled station below are not yet included in the primary daily or vacation calculations. Broadcast end and reception at 94122 are unverified. Other games from this schedule are missing too.</p>{table(['Date PT','Scheduled start PT','Game','Station','End / reception','Priority'], [{'date':'2027-02-17','start':'4:00 PM PST','game':'California at Pittsburgh — men’s basketball','station':'KSFO 810 AM','uncertainty':'UNVERIFIED','priority':'HIGH','source_url':'https://calbears.com/sports/mens-basketball/schedule/2026-27','source_label':'Cal official basketball schedule'}], ['date','start','game','station',('uncertainty','badge'),('priority','badge')], 'cal-missing-game', 20)}</section>
 <section class="panel"><h2>Follow-up audit flags</h2>{table(['ID','Issue','Status','Action'], [
         {'id':'D1-01','issue':'Warriors, Sharks, Valkyries and other terrestrial radio game-by-game coverage is incomplete; local carriage and reception are not confirmed for each event.','status':'UNVERIFIED','action':'Do not treat displayed gaps as verified free time. Consult station and team schedules.','source_url':'https://www.nba.com/warriors/schedule'},
         {'id':'D1-02','issue':'The dashboard uses a static 2026-11-02 snapshot; future schedules and broadcast details may have changed. The automated structural checker does not independently verify each source value.','status':'UNVERIFIED','action':'Refresh and independently compare individual rows before relying on them.','source_url':'https://www.nfl.com/schedules/'},
@@ -474,7 +476,7 @@ Generated {META['generated_utc']} from {len(SOURCES)} official-source records.
 ## Headline conclusion
 {META['analysis_conclusion']['conclusion']}
 
-No 7-, 14- or 21-day trip can be certified free from all requested radio sports from this incomplete snapshot. In 2027, the [NFL lists Super Bowl LXI on February 14](https://www.nfl.com/news/2026-27-national-football-league-important-dates), and the [Phillies list a spring-training game on February 19](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced). The intervening dates are only a review candidate, not a verified radio-free interval: other broadcasts, future changes and local carriage remain unknown. [Westwood One warns not every affiliate carries every network broadcast](https://www.westwoodonesports.com/station-finder/). The 2028 and 2029 candidates are model-based and unverified.
+No 7-, 14- or 21-day trip can be certified free from all requested radio sports from this incomplete snapshot. In 2027, the [NFL lists Super Bowl LXI on February 14](https://www.nfl.com/news/2026-27-national-football-league-important-dates), and the [Phillies list a spring-training game on February 19](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced). The previously suggested February 15–18 interval is withdrawn: [Cal lists men’s basketball at Pitt on February 17 at 4 p.m. PT on KSFO 810 AM](https://calbears.com/sports/mens-basketball/schedule/2026-27). The game and other known broadcasts are missing from the snapshot calculations; the candidate rankings are unreliable. Reception at 94122 remains unverified. [Westwood One warns not every affiliate carries every network broadcast](https://www.westwoodonesports.com/station-finder/). The 2028 and 2029 candidates are model-based and unverified.
 
 
 ## Counts
