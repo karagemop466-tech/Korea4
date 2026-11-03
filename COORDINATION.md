@@ -495,3 +495,9 @@ Continuation/verification session on branch `arena/27a3305d-korea4` (branched fr
 
 ### Result
 No irregularities found; no data changes required. This session records the confirmation only. PR from `arena/27a3305d-korea4` to `main` carries this board entry; merge result recorded below after merge.
+
+## Session `arena/9de8a119-korea4` — independent evidence audit
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| E1 — Independently check selected schedule and radio-carriage claims against current official sources and record limitations | in progress | `arena/9de8a119-korea4` | `research/independent-evidence-audit.md`, this board entry | Fixed Arena branch overrides requested branch naming. Does not touch files in PR #18's scope. This is a targeted audit, not a complete row-by-row verification. |
