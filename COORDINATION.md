@@ -403,3 +403,13 @@ documents as the base and appending/inserting this session's sections — nothin
 - **Merged:** [PR #10](https://github.com/karagemop466-tech/Korea4/pull/10) merged into `main` at `1f0213164be81a7cc810a9470adf4ee142e96524` on Nov. 2, 2026. Pre-merge branch CI [41496007682](https://github.com/karagemop466-tech/Korea4/actions/runs/41496007682), PR verification [41496016400](https://github.com/karagemop466-tech/Korea4/actions/runs/41496016400), and refresh build [41496007767](https://github.com/karagemop466-tech/Korea4/actions/runs/41496007767) passed.
 - **Deployment:** legacy Pages run [41496197972](https://github.com/karagemop466-tech/Korea4/actions/runs/41496197972) and custom refresh/deploy [41496200307](https://github.com/karagemop466-tech/Korea4/actions/runs/41496200307) both succeeded. The live root, planner calendar/vacation/review, and legacy `/vacation.html`, `/docs/index.html`, and `/site/pages/executive-summary.html` loaded with the corrected content and redirects. The live snapshot initially showed the older 17:44 UTC committed baseline after the two successful publishers raced; it remained explicitly timestamped and safe, but was not the freshly fetched artifact.
 - **Follow-up:** adding a main-push gate outside the Pages environment: the custom workflow waits for the same-commit legacy Pages run to complete before deploying its fresh artifact. A failed/unverifiable legacy build stops the custom deploy; a future switch to workflow-only Pages is recognized. The matching logic was tested against the real successful legacy run and in five unit tests. Scheduled runs do not wait for a nonexistent legacy run.
+
+## 2026-11-03 audit — arena/aea8720a-korea4
+
+Fixed branch: `arena/aea8720a-korea4` (platform constraint; no alternate task branches).
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| A1 independent safety / provenance audit and integration | in progress | arena/aea8720a-korea4 | scripts/verify.py, tests/test_verification.py, scripts/build_site.py, js/app.js, .github/workflows/check.yml, .github/workflows/pages.yml, research/audit-2026-11-03.md; generated root HTML if needed |
+
+Prior task claims are completed; prior snapshots and historical editions will be preserved. Official-source network access from this sandbox is restricted; do not represent local snapshot validation as a fresh official website check. Any newly discovered limitations will be published on Flagged for Review. Claim published before work.
