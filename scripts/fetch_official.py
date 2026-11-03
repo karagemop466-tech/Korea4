@@ -202,7 +202,14 @@ def main() -> None:
     parser.add_argument("--refresh", action="store_true", help="refetch all cached raw responses")
     parser.add_argument("--refresh-errors", action="store_true", help="retry cached error/empty responses")
     parser.add_argument("--max-events", type=int, default=1000)
+    parser.add_argument("--force-keys", default="", help="comma-separated raw keys to refetch even if cached")
+    parser.add_argument("--force-prefix", default="", help="comma-separated raw-key prefixes to refetch even if cached")
     args = parser.parse_args()
+
+    _force_keys.update(FORCE_REFRESH_KEYS)
+    _force_keys.update(k.strip() for k in args.force_keys.split(",") if k.strip())
+    _force_prefixes.extend(FORCE_REFRESH_PREFIXES)
+    _force_prefixes.extend(p.strip() for p in args.force_prefix.split(",") if p.strip())
 
     if MANIFEST.exists():
         old = json.loads(MANIFEST.read_text())
