@@ -3,7 +3,13 @@
 Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
 Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
-Fixed working branch: `arena/65a1da2b-korea4`
+Fixed working branch: `arena/5cc34200-korea4`
+
+## Current session — arena/5cc34200-korea4 (2026-11-03) — CLAIM
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| F1 — Independent line-by-line re-verification of the merged FREE TIME VACATION project on the fixed Arena branch: re-run the verify gate, spot-check official sources (MLB/NFL/WWO/49ers/Stanford/Cal/radio) against published rows, check live Pages site, flag irregularities, then run the PR → merge → Pages-deploy cycle and record results | in progress | `arena/5cc34200-korea4` | `COORDINATION.md` only (audit record); no data/site files unless a material irregularity is found — avoids overlap with open PR #18 (`arena/aea8720a-korea4`, owned by that session, not claimed here) | Baseline: `main` @ `6d5a663` (PR #23 merged). Branch rebased onto it 2026-11-03; working tree clean. IR-001…IR-017 remain published on `flagged.html` and do not block merge. |
 
 ## Current session — arena/6d417a78-korea4 (2026-11-03)
 
