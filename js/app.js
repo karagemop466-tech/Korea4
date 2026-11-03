@@ -16,6 +16,11 @@
     m = Math.max(0, Math.min(1440, Math.round(m)));
     return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
   }
+  function pacificToday(now = new Date()) {
+    const parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(now);
+    const values = Object.fromEntries(parts.map(p => [p.type, p.value]));
+    return values.year + '-' + values.month + '-' + values.day;
+  }
   function parseDate(s) { return new Date(String(s) + 'T12:00:00Z'); }
   function dateISO(d) { return d.toISOString().slice(0, 10); }
   function addDays(s, n) { const d = parseDate(s); d.setUTCDate(d.getUTCDate() + n); return dateISO(d); }
@@ -31,9 +36,9 @@
   function statusBadge(status) {
     const s = String(status || '').toUpperCase();
     let cls = 'neutral';
-    if (s.includes('VERIFIED') && !s.includes('UNVERIFIED')) cls = 'verified';
-    if (s.includes('ESTIMATED') || s.includes('MODEL')) cls = 'estimated';
     if (s.includes('UNVERIFIED') || s.includes('TBD') || s.includes('NOT RELEASED')) cls = 'unverified';
+    else if (s.includes('ESTIMATED') || s.includes('MODEL')) cls = 'estimated';
+    else if (s.includes('VERIFIED')) cls = 'verified';
     if (s.includes('CORRECTED')) cls = 'corrected';
     if (s.includes('FLAGGED') || s.includes('REPLACED')) cls = 'flagged';
     if (s.includes('REVIEWED')) cls = 'reviewed';
@@ -67,19 +72,9 @@
     if (cursor < 1440) free.push({ start: cursor, end: 1440 });
     return free;
   }
-  function durationOverride(category) { return Number(DURATIONS[category] || 0); }
-  function adjustedIntervals(rows) {
-    const inputs = document.querySelectorAll('[data-duration]');
-    inputs.forEach(i => { DURATIONS[i.dataset.duration] = Number(i.value) || DURATIONS[i.dataset.duration]; });
-    return rows.map(r => {
-      const copy = Object.assign({}, r);
-      const override = durationOverride(copy.category);
-      if (override && ['OFFICIAL_START_ESTIMATED_DURATION','ESTIMATED_TBD_START','ESTIMATED_UNRELEASED_SEASON_MODEL'].includes(copy.status)) {
-        copy.end = Math.min(1440, copy.start + override);
-      }
-      return copy;
-    });
-  }
+  // Day data already contains clipped cross-midnight intervals. Reapplying a
+  // duration to each clipped piece would incorrectly extend the next-day piece.
+  function adjustedIntervals(rows) { return rows.map(r => Object.assign({}, r)); }
   function selectedIntervals(rows) {
     const showTbd = document.getElementById('show-tbd')?.checked !== false;
     const showModels = document.getElementById('show-models')?.checked !== false;
@@ -111,7 +106,7 @@
       const label = (b.labels || []).filter(Boolean).slice(0, 2).join(' + ') || b.label || 'Busy';
       blocks.push('<div class="timeline-block ' + intervalClass(b) + '" style="--s:' + b.start + ';--w:' + Math.max(2,b.end-b.start) + '" title="' + esc(label) + '"><a href="' + esc(sourceUrl(b)) + '" target="_blank" rel="noopener" style="color:white">' + esc(fmtHM(b.start) + '–' + fmtHM(b.end) + ' ' + label) + '</a></div>');
     });
-    free.slice(0, 10).forEach(f => blocks.push('<div class="timeline-block free" style="--s:' + f.start + ';--w:' + Math.max(2,f.end-f.start) + '">FREE ' + fmtHM(f.start) + '–' + fmtHM(f.end) + '</div>'));
+    free.slice(0, 10).forEach(f => blocks.push('<div class="timeline-block free" style="--s:' + f.start + ';--w:' + Math.max(2,f.end-f.start) + '">GAP ' + fmtHM(f.start) + '–' + fmtHM(f.end) + '</div>'));
     holder.innerHTML = '<div class="timeline-axis"><span>00:00</span><span>03:00</span><span>06:00</span><span>09:00</span><span>12:00</span><span>15:00</span><span>18:00</span><span>21:00</span></div>' + blocks.join('');
   }
   function dynamicTable(headers, rows) {
@@ -127,12 +122,15 @@
     rows.forEach(r => { const d = Math.min(Math.abs(r.start-position), Math.abs(r.end-position)); if (d < dist) { dist=d; best=r; } });
     return best || { source_url: DEFAULT_SOURCE, source_label: 'Official source catalogue' };
   }
+  let dayRenderVersion = 0;
   async function renderDay(dateStr) {
+    const version = ++dayRenderVersion;
     const holder = document.getElementById('day-content');
     if (!holder) return;
     holder.innerHTML = '<div class="callout">Loading official day intervals…</div>';
     try {
       const days = await loadDays(dateStr.slice(0,4));
+      if (version !== dayRenderVersion) return;
       const rows = selectedIntervals(days[dateStr] || []);
       const merged = mergeIntervals(rows);
       const free = freeWindows(merged);
@@ -144,33 +142,33 @@
       document.getElementById('selected-date').value = dateStr;
       document.getElementById('day-heading').textContent = new Intl.DateTimeFormat('en-US', { timeZone:'America/Los_Angeles', weekday:'long', year:'numeric', month:'long', day:'numeric' }).format(parseDate(dateStr));
       let html = '<div class="status-strip">';
-      html += '<span class="pill">FREE ' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm PT</span>';
+      html += '<span class="pill">ESTIMATED GAP ' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm PT</span>';
       html += '<span class="pill">' + official + ' official-start windows</span>';
       html += '<span class="pill">' + tbd + ' TBD planning estimates</span>';
       html += '<span class="pill">' + models + ' unreleased-season models</span>';
       html += '<span class="pill">' + unverified + ' unverified blocks</span>';
       html += '</div>';
-      if (!rows.length) html += '<div class="callout success"><strong>FREE ALL DAY — OFFICIAL PUBLISHED ROWS.</strong> No captured official game or network window is scheduled. This is still UNVERIFIED for unreleased future schedules; review the flags page.</div>';
+      if (!rows.length) html += '<div class="callout success"><strong>NO CAPTURED BLOCKS — UNVERIFIED.</strong> No selected captured block is shown. Missing schedules, broadcasts and filters can leave this day incomplete; review the flags page.</div>';
       html += '<div id="day-timeline" class="timeline"></div>';
-      html += '<div class="legend"><span><i style="background:#1d63c7"></i>MLB</span><span><i style="background:#b42332"></i>NFL</span><span><i style="background:#6941c6"></i>NCAAF</span><span><i style="background:#a76500"></i>WWO</span><span><i style="background:#087261"></i>MLS</span><span><i style="background:#7a271e"></i>UNVERIFIED</span><span><i style="background:#7c8798"></i>ESTIMATED MODEL</span><span><i style="background:#157a54"></i>FREE</span></div>';
-      const freeRows = free.map(f => ({ cells: [fmtHM(f.start), fmtHM(f.end), String(f.end-f.start), statusBadge(f.end-f.start === 1440 ? 'FREE ALL DAY — UNVERIFIED FUTURE' : 'EXACT FREE WINDOW')], sourceRow: nearestSource(merged, f.start) }));
-      html += '<section class="panel"><h2>Exact intraday free windows</h2><p class="intro">Pacific Time (PST/PDT). Bounding official source links are shown for manual review.</p>' + dynamicTable(['Start PT','End PT','Minutes','Status'], freeRows) + '</section>';
-      const eventRows = rows.map(r => ({ cells: [fmtHM(r.start), fmtHM(r.end), esc(r.category || ''), esc(r.label || r.matchup || 'Busy block'), statusBadge(r.verification || r.status), r.focus ? '<span class="badge badge-focus">FOCUS</span>' : '<span class="badge badge-high">HIGH</span>'], sourceRow: r }));
+      html += '<div class="legend"><span><i style="background:#1d63c7"></i>MLB</span><span><i style="background:#b42332"></i>NFL</span><span><i style="background:#6941c6"></i>NCAAF</span><span><i style="background:#a76500"></i>WWO</span><span><i style="background:#087261"></i>MLS</span><span><i style="background:#7a271e"></i>UNVERIFIED</span><span><i style="background:#7c8798"></i>ESTIMATED MODEL</span><span><i style="background:#157a54"></i>ESTIMATED GAP</span></div>';
+      const freeRows = free.map(f => ({ cells: [fmtHM(f.start), fmtHM(f.end), String(f.end-f.start), statusBadge('ESTIMATED GAP — UNVERIFIED')], sourceRow: nearestSource(merged, f.start) }));
+      html += '<section class="panel"><h2>Estimated intraday gaps</h2><p class="intro">Pacific Time (PST/PDT). Links point to nearby captured events, not proof that the gap is free. Actual broadcasts and game lengths may differ.</p>' + dynamicTable(['Start PT','End PT','Minutes','Status'], freeRows) + '</section>';
+      const eventRows = rows.map(r => ({ cells: [fmtHM(r.start), fmtHM(r.end), esc(r.category || ''), esc(r.label || r.matchup || 'Busy block'), statusBadge((r.status || 'UNVERIFIED') + ' · ' + (r.verification || 'UNVERIFIED')), r.focus ? '<span class="badge badge-focus">FOCUS</span>' : '<span class="badge badge-high">HIGH</span>'], sourceRow: r }));
       html += '<section class="panel"><h2>Game / broadcast presence</h2><p class="intro">Every row is a busy-time candidate. Blank official values appear on the main tables as UNVERIFIED.</p>' + dynamicTable(['Start PT','End PT','Category','Event / source basis','Verification','Priority'], eventRows) + '</section>';
       holder.innerHTML = html;
       renderTimeline(merged, free, document.getElementById('day-timeline'));
     } catch (err) {
-      holder.innerHTML = '<div class="callout danger"><strong>Data load failed.</strong> ' + esc(err.message) + '</div>';
+      if (version === dayRenderVersion) holder.innerHTML = '<div class="callout danger"><strong>Data load failed.</strong> ' + esc(err.message) + '</div>';
     }
   }
   function initDaily() {
     const dateInput = document.getElementById('selected-date');
     if (!dateInput) return;
     const params = new URLSearchParams(location.search);
-    let dateStr = clampDate(params.get('date') || M.system_today || '2026-11-02');
+    let dateStr = clampDate(params.get('date') || pacificToday());
     function go(n) { dateStr = addDays(dateStr, n); dateStr = clampDate(dateStr); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); }
     document.querySelectorAll('[data-day-step]').forEach(b => b.addEventListener('click', () => go(Number(b.dataset.dayStep))));
-    document.getElementById('today-btn').addEventListener('click', () => { dateStr = clampDate(M.system_today || '2026-11-02'); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); });
+    document.getElementById('today-btn').addEventListener('click', () => { dateStr = clampDate(pacificToday()); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); });
     dateInput.addEventListener('change', () => { dateStr = clampDate(dateInput.value); history.replaceState(null, '', '?date=' + dateStr); renderDay(dateStr); });
     document.querySelectorAll('.filter-toggle, [data-duration]').forEach(el => el.addEventListener('change', () => renderDay(dateStr)));
     renderDay(dateStr);
@@ -197,11 +195,11 @@
         const unverified = rows.filter(r=>r.status==='UNVERIFIED_BLOCK').length;
         const cls = unverified ? 'unverified' : merged.length ? 'busy' : 'free';
         const sourceRow = merged[0] || { source_url: DEFAULT_SOURCE, source_label: 'Official source catalogue' };
-        html += '<div class="calendar-day' + (key === M.system_today ? ' today' : '') + '"><a href="daily.html?date=' + key + '">' + dnum + '</a><span class="dot ' + cls + '"></span><span class="mini">' + merged.length + ' busy</span><div class="free-minutes">' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm free</div></div>';
-        monthRows.push({ cells: [key, fmtHM(freeMinutes), String(merged.length), String(unverified), statusBadge(unverified ? 'UNVERIFIED BLOCK' : merged.length ? 'GAME DAY' : 'FREE DAY — UNVERIFIED FUTURE')], sourceRow });
+        html += '<div class="calendar-day' + (key === pacificToday() ? ' today' : '') + '"><a href="daily.html?date=' + key + '">' + dnum + '</a><span class="dot ' + cls + '"></span><span class="mini">' + merged.length + ' busy</span><div class="free-minutes">' + Math.floor(freeMinutes/60) + 'h ' + (freeMinutes%60) + 'm estimated gap</div></div>';
+        monthRows.push({ cells: [key, fmtHM(freeMinutes), String(merged.length), String(unverified), statusBadge(unverified ? 'UNVERIFIED BLOCK' : merged.length ? 'CAPTURED OR MODELED BLOCKS' : 'NO CAPTURED BLOCKS — UNVERIFIED')], sourceRow });
       }
       html += '</div>';
-      html += '<section class="panel"><h2>Month analysis</h2><p class="intro">Free minutes are exact complements of merged busy intervals. All times Pacific.</p>' + dynamicTable(['Date','Free minutes','Merged busy blocks','Unverified blocks','Status'], monthRows) + '</section>';
+      html += '<section class="panel"><h2>Month analysis</h2><p class="intro">Gap minutes are calculated from captured and modeled blocks, not confirmed free time. All times Pacific.</p>' + dynamicTable(['Date','Estimated gap (hh:mm)','Merged busy blocks','Unverified blocks','Status'], monthRows) + '</section>';
       holder.innerHTML = html;
     } catch (err) {
       holder.innerHTML = '<div class="callout danger"><strong>Data load failed.</strong> ' + esc(err.message) + '</div>';
@@ -210,12 +208,12 @@
   function initCalendar() {
     const yearSel = document.getElementById('calendar-year'), monthSel = document.getElementById('calendar-month');
     if (!yearSel || !monthSel) return;
-    const today = M.system_today || '2026-11-02';
+    const today = clampDate(pacificToday());
     yearSel.value = today.slice(0,4); monthSel.value = String(Number(today.slice(5,7))-1);
     function reload() { renderCalendar(Number(yearSel.value), Number(monthSel.value)); }
     yearSel.addEventListener('change', reload); monthSel.addEventListener('change', reload);
-    document.getElementById('calendar-prev').addEventListener('click', () => { let y=Number(yearSel.value), m=Number(monthSel.value)-1; if(m<0){m=11;y--;} yearSel.value=y; monthSel.value=m; reload(); });
-    document.getElementById('calendar-next').addEventListener('click', () => { let y=Number(yearSel.value), m=Number(monthSel.value)+1; if(m>11){m=0;y++;} yearSel.value=y; monthSel.value=m; reload(); });
+    document.getElementById('calendar-prev').addEventListener('click', () => { let y=Number(yearSel.value), m=Number(monthSel.value)-1; if(m<0){m=11;y--;} if (y < 2026 || y > 2029) return; yearSel.value=y; monthSel.value=m; reload(); });
+    document.getElementById('calendar-next').addEventListener('click', () => { let y=Number(yearSel.value), m=Number(monthSel.value)+1; if(m>11){m=0;y++;} if (y < 2026 || y > 2029) return; yearSel.value=y; monthSel.value=m; reload(); });
     reload();
   }
   function initTables() {
@@ -232,7 +230,7 @@
         return rows.filter(r => {
           const text = (r.dataset.rowText || r.textContent || '').toLowerCase();
           const status = (r.dataset.rowStatus || '').toLowerCase();
-          return (!query || text.includes(query)) && (!statusFilter || status.includes(statusFilter));
+          return (!query || text.includes(query)) && (!statusFilter || (statusFilter === 'verified' ? status.includes('verified') && !status.includes('unverified') && !status.includes('estimated') && !status.includes('not a real') : status.includes(statusFilter)));
         });
       }
       function draw() {

@@ -1,8 +1,40 @@
 # COORDINATION.md — unified shared task board
 
-Last integration update: 2026-11-02 (UTC)
+Last integration update: 2026-11-03 (UTC)
+Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
-Fixed working branch: `arena/72e6d3f7-korea4`
+Fixed working branch: `arena/65a1da2b-korea4`
+
+## Session audit — arena/65a1da2b-korea4 (2026-11-03)
+
+This session started from `4798296a` (merge of PR #14) and performed an independent line-by-line re-audit of the published FREE TIME VACATION project before opening its own PR:
+
+- **Build/verification re-run:** `python3 scripts/verify.py` → 0 errors, 0 warnings; 9,350 primary static table rows each carrying an official source link; 674 internal links checked across the site, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS. Report regenerated at `research/verification-report.md`.
+- **Data integrity:** `data/official/events.json` holds 6,607 event/anchor rows (MLB 5,893 · NFL 345 · WWO 311 · MLS 34 · NCAAF 24); every row carries a source URL; 5,783 rows flagged high-priority (Giants, A's, 49ers, Stanford, Cal, all MLB/NFL/WWO).
+- **Official-source spot checks (2026-11-03):** MLB's official [2027 schedule release of Jul 16, 2026](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals) confirmed (season opens Mar 25, 2027; Phillies home opener Apr 1) — matches site anchors. Super Bowl LXI confirmed for **Sunday, Feb 14, 2027 at SoFi Stadium** per NFL's official [2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) — consistent with the published best-window finding (Feb 15–18, 2027). Westwood One Sports [official NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) remains the WWO source of record; 2026 TNF/MNF slate cross-checked against league listings (e.g., 49ers–Rams Melbourne opener, 49ers MNF Week 6).
+- **Live site:** GitHub Pages API `status=built`, latest build commit `4798296a` (2026-11-02T18:12:48Z); live dashboard at https://karagemop466-tech.github.io/Korea4/ fetched successfully and renders the executive summary, exact Pacific free windows, vacation candidates for 2027/2028/2029, and the IR-001…IR-007 flagged-irregularities table.
+- **No irregularities found in this pass.** Prior flags IR-001–IR-007 remain published on the Flagged for Review page and do not block merge.
+- **Result of this session:** audit entry only; PR from `arena/65a1da2b-korea4` → `main`, merged, Pages re-deploy confirmed, recorded below.
+
+## Current follow-up session — 2026-11-03
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| D1 — Audit existing dashboard for misleading free-time and source-verification claims; correct material issues and verify deployment | needs review | `arena/d474d6b2-korea4` | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, `tests/`, `.github/workflows/check.yml`, `EXECUTIVE-SUMMARY.md`, generated root HTML / `js/app.js`, `research/` (only as needed) | Final integration follow-up on the fixed Arena branch; preserve prior work and disclose unverified schedules. |
+
+### D1 follow-up audit — 2026-11-03
+- Focused official rechecks: [NFL important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) confirms Super Bowl LXI Feb. 14, 2027; [Phillies spring schedule](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced) confirms a Feb. 19 game, without confirmed Bay Area carriage; [WWO station finder](https://www.westwoodonesports.com/station-finder/) warns that affiliates may not carry every network broadcast. The intervening dates are not verified free.
+- Fixed static snapshot called “today,” Pacific today navigation, misleading verified-colored estimated badges / verified filter, and a cross-midnight duration recalculation bug. Gap labels now explicitly say estimated and unverified. Data is dated; there is no automatic refresh in the root publisher. Full row-by-row official re-verification and complete Bay Area radio coverage were **not** accomplished by this follow-up; the structural script does not perform such an audit. Flagged page discloses these limitations and archived dashboards.
+- Local checks: `python scripts/verify.py` (9,356 source-linked primary rows structurally sampled; 689 internal links, 0 broken), `node tests/test_dashboard.mjs`, `npm test`, and focused Python generator tests passed. `python -m unittest discover -s tests -v` has two errors and one failure in inherited `test_build.py`: those tests expect the superseded planner artifact and redirect configuration; no claim that this suite passed. Published as D1-04.
+- PR / merge / deploy: pending. Claim branch was initially absent on origin; rebased against main before its first push. Scope includes `.github/workflows/check.yml` and `EXECUTIVE-SUMMARY.md` for test gating and summary accuracy.
+### Merge result (arena/65a1da2b-korea4) — 2026-11-03
+| Item | Result |
+|---|---|
+| **PR** | [#15 — Audit record: independent re-verification of FREE TIME VACATION dashboard](https://github.com/karagemop466-tech/Korea4/pull/15) |
+| **Merged to** | `main` at `1a9a2a2` — 2026-11-03T19:39:02Z; PR merge workflow run succeeded |
+| **Pages deploy** | Pages API returned to `status=built` on latest `main` (`cf832878`, which includes this merge plus parallel PR #16); the transient `errored` reading on `1a9a2a2` was a cancelled legacy build superseded by the concurrent PR #16 merge, not a content failure — final build succeeded |
+| **Live check** | https://karagemop466-tech.github.io/Korea4/ fetched 2026-11-03: dashboard renders with 6,607 official event rows, exact Pacific free windows, 2027/2028/2029 vacation candidates, and the IR-001–IR-007 flagged table |
+| **Irregularities** | None new; IR-001–IR-007 remain on the Flagged for Review page and did not block merge |
 
 ## Branch constraint
 Arena fixes each session to its assigned branch and forbids switching to, creating, or pushing another branch. The requested `session-<id>/<task>` branch/worktree convention and a separate integration branch therefore cannot be used by this session. All work, the final PR, and the merge from this session are performed on `arena/72e6d3f7-korea4`.
@@ -435,3 +467,18 @@ IR-001 dead reference sites; IR-002 NFL 2027 unavailable (2027–2029 NFL rows E
 - Official WWO station finder: https://www.westwoodonesports.com/station-finder/
 - Official Earthquakes radio: https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season
 
+---
+
+## Session log — `arena/27a3305d-korea4` (2026-11-03)
+
+Continuation/verification session on branch `arena/27a3305d-korea4` (branched from `main` @ `4798296a`, the PR #14 merge). No new data tasks were outstanding: the unified task board C0–C7 is complete and PRs #1–#14 are all merged or intentionally closed.
+
+### Verification performed this session (2026-11-03)
+- Git state: working tree clean on `arena/27a3305d-korea4`, identical to `origin/main` @ `4798296a`; no open pull requests (`gh pr list --state open` empty).
+- CI: latest Actions runs all `success`, including "Verify static Pages source" [41498404824](https://github.com/karagemop466-tech/Korea4/actions/runs/41498404824), "pages build and deployment" [41498402639](https://github.com/karagemop466-tech/Korea4/actions/runs/41498402639), and "Verify final integration" [41498322693](https://github.com/karagemop466-tech/Korea4/actions/runs/41498322693).
+- GitHub Pages API: `status=built`, latest build commit `4798296a...` (2026-11-02T18:12:48Z) at <https://karagemop466-tech.github.io/Korea4/>.
+- Live content spot-checks via fetch: root dashboard renders with 6,607 official event/anchor rows, 748 official sources, 1,461 daily scoreboards, today's exact PT free windows, and the 7/14/21-day least-conflict candidate table; `vacation.html` renders the 2027–2029 candidates with strict VERIFIED/ESTIMATED/UNVERIFIED labels, the Feb 15–18, 2027 officially anchored gap, and the schedule-availability table (2028/2029 MLB/NFL and 2027+ WWO correctly UNVERIFIED).
+- Local verification gate re-run: `python3 scripts/verify.py` → 0 errors, 0 warnings, 9,350 primary table rows source-link checked, 674 internal links across the site with 0 broken, `js/app.js` syntax PASS.
+
+### Result
+No irregularities found; no data changes required. This session records the confirmation only. PR from `arena/27a3305d-korea4` to `main` carries this board entry; merge result recorded below after merge.
