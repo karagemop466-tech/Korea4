@@ -16,7 +16,8 @@ Fixed working branch: `arena/65a1da2b-korea4`
 - Data: `data/official/events.json` = 6,607 rows; site covers 2026-11-01→2029-12-31 (1,461 daily scoreboards), all 30 MLB clubs (Giants/A's FOCUS), 49ers/Stanford/Cal FOCUS, WWO national broadcasts, KNBR/KSFO/95.7 The Game and other confirmed Bay Area AM/FM mappings, Earthquakes/Warriors/Sharks/Valkyries flagged where incomplete.
 - Official spot checks (live, 2026-11-03): [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) (Super Bowl LXI Feb 14, 2027 anchor; Sep 10, 2026 49ers–Rams Melbourne) and [Westwood One NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) (Nov–Dec 2026 TNF/SNF/MNF slate, e.g. Dec 17 49ers at Chargers TNF) both match published rows. Live dashboard https://karagemop466-tech.github.io/Korea4/ renders executive summary, exact Pacific gaps, and 2027/2028/2029 candidates.
 - **Headline finding (unchanged, ESTIMATED/UNVERIFIED):** no 7-, 14- or 21-day strictly-free window exists in 2027–2029; least-conflict candidates are Feb 2027 (7d: Feb 3–9; 14d: Feb 3–16; 21d: Jan 27–Feb 16), Feb 2028 and Feb 2029 windows on `vacation.html`. Best short officially anchored gap: Feb 15–18, 2027. 2028/2029 MLB & NFL game-by-game schedules are **not officially released** — those rows are ESTIMATED models, never verified schedules. WWO affiliate carriage caveat (IR-003) applies: not every affiliate carries every broadcast.
-- No new irregularities found. PR/merge/Pages result recorded below after merge.
+- No new irregularities found.
+- **PR / merge / deploy:** [PR #22](https://github.com/karagemop466-tech/Korea4/pull/22) MERGED to `main` at `e8a58da` (2026-11-03T23:26:56Z); GitHub Pages returned to `status=built`; live `vacation.html` re-fetched and renders the 2027/2028/2029 least-conflict table, Feb 15–18 2027 anchored gap, and schedule-availability table with 2028/2029 MLB/NFL correctly UNVERIFIED. This record is carried by a follow-up PR from the same branch.
 
 ## Session audit — arena/65a1da2b-korea4 (2026-11-03)
 
@@ -508,3 +509,44 @@ Continuation/verification session on branch `arena/27a3305d-korea4` (branched fr
 
 ### Result
 No irregularities found; no data changes required. This session records the confirmation only. PR from `arena/27a3305d-korea4` to `main` carries this board entry; merge result recorded below after merge.
+
+---
+
+## Session log — `arena/ce9a2c78-korea4` (2026-11-03)
+
+Session branch: `arena/ce9a2c78-korea4`, branched from `main` @ `92dad6d` (PR #21 merge). Working tree was clean at start. All unified task-board tasks C0–C7 are complete and the site is live at https://karagemop466-tech.github.io/Korea4/ (GitHub Pages `status=built`, `source=main:/`, `https_enforced=true`).
+
+### Task claim
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| D2 — Independent re-verification, site regeneration, publication record | done | `arena/ce9a2c78-korea4` | `COORDINATION.md`, `data/official/*`, root HTML (`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`, `teams.html`), `js/app.js`, `scripts/verify.py` | Regenerated outputs are timestamp-only; underlying data unchanged. |
+
+### Verification performed this session (2026-11-03)
+
+- Full official-only pipeline re-run offline from captured raw snapshots: `scripts/collect_official.py` → 748 sources, 6,607 event/anchor rows (MLB 5,893 · NFL 345 · WWO 311 · MLS 34 · NCAAF 24; 49ers 19, Stanford 12, Cal 12), 1,461 days, 14,364 merged intervals; `scripts/build_site.py` → 15 primary pages; `python3 scripts/verify.py` → **0 errors, 0 warnings; 10,086 primary static table rows each carrying `data-source-url` plus an official HTTP link; 689 internal links across 87 HTML pages, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS.** Report at `research/verification-report.md`.
+- Official-source spot checks (2026-11-03): [NFL official 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) live (2026 kickoff weekend Sept 9–12; 49ers–Rams NFL International Game at Melbourne, Sept 10); [MLB official 2027 schedule release](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals) live (season opens Thursday, Mar 25, 2027); [WWO official NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) live with per-event ET times (e.g., 49ers at Chargers Thursday Night Football, Dec 17, 7:30 PM ET). All consistent with published anchors.
+- Irregularities carried forward, none new: IR-001 dead reference sites; IR-002 NFL 2027 unavailable (2027–2029 NFL rows ESTIMATED); IR-003 WWO affiliate carriage caveat; IR-004 WWO JSON-LD/+00:00 and 11:59 PM placeholder ends; IR-005 discontinued AFC–NFC Pro Bowl game; IR-006 prior secondary-source rows replaced/flagged; IR-007 zero official MLB 2028/2029 rows (UNVERIFIED, labelled ESTIMATED); IR-008 MLB 2027 TBD start times blank; IR-009 NFL 2026 Week 16–18 TBD kickoffs; IR-010 WWO 2027 grid ends Jan 11; IR-011 Stanford/Cal 2027–2029 dates/times unreleased; IR-012 KSFO 810 AM call-sign correction; IR-013 duration averages flagged; IR-014 Warriors/Sharks/Valkyries radio windows incomplete; IR-015 Super Bowl LXII date TBA / LXIII not found; IR-016 strict-window conclusion superseded by exact official dates; IR-017 2028 Olympic-break scenario not an official released schedule.
+- Open PR #18 (`arena/aea8720a-korea4`) belongs to another session and was not touched.
+
+### Publication record (this session)
+
+1. Commit this board entry and regenerated site files to `arena/ce9a2c78-korea4` and push.
+2. Create PR from `arena/ce9a2c78-korea4` → `main`; merge without waiting for review (`gh pr merge <number> --merge`).
+3. Confirm GitHub Pages `status=built` after the merge and re-fetch live pages.
+4. Record PR number, merge commit, and Pages result in this section.
+
+### Result
+
+Verification confirmed: no new irregularities; no data changes required beyond timestamp regeneration. Every schedule row beyond officially released rows remains labelled ESTIMATED or UNVERIFIED with an official source link; estimates are never presented as released schedules. The strict finding stands: no certified 7-/14-/21-day fully free window in 2027–2029; best officially anchored short gap is Feb 15–18, 2027 (Super Bowl LXI Feb 14 → MLB spring training Feb 19), itself not certified free because later 2027 WWO/NFL schedules are unreleased.
+
+### PR / merge / deploy result (pending at claim time)
+
+| Item | Result |
+|---|---|
+| Final PR | To be created from `arena/ce9a2c78-korea4` → `main` |
+| State | PENDING |
+| Merge commit | — |
+| GitHub Pages build | — |
+| Live URL | https://karagemop466-tech.github.io/Korea4/ |
+| Flagged irregularities | IR-001 through IR-017 published on `flagged.html` with official source links; none block the merge |
