@@ -30,7 +30,7 @@ Why the answer is short rather than three weeks: MLB publishes a game almost eve
 is on the radio nearly every day of the year's best weather. Winter gaps between the NFL playoffs and the start of spring training are the only
 real openings, and they are two to four days long.
 
-<function other_sports_summary at 0x7f2892c77600>
+<function other_sports_summary at 0x7f4c1b3fb600>
 
 ## Older stricter statement (kept for continuity)
 Using official rows plus separately labelled 2026-pattern estimates, no 7-, 14-, or 21-day fully free strict window appears in 2027–2029. The best short officially anchored gap is Feb 15–18, 2027; all longer vacation recommendations are least-conflict ESTIMATED candidates and must be rechecked when schedules are released.
