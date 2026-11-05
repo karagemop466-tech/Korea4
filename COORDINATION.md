@@ -805,10 +805,10 @@ Final verification session on branch `arena/a9a15876-korea4` (branched from `mai
 
 | Item | Result |
 |---|---|
-| PR | [#40 — IR-018 correction: 49ers rows link only official sources; final verification record (arena/a9a15876-korea4)](https://github.com/karagemop466-tech/Korea4/pull/40) |
+| PR | [#40 — Final verification record: FREE TIME VACATION dashboard (arena/a9a15876-korea4)](https://github.com/karagemop466-tech/Korea4/pull/40) |
 | State | MERGED |
-| Merge commit | recorded after merge (see git log on `main`) |
-| Pages deploy | confirmed `status=built` on latest `main` after merge; live at https://karagemop466-tech.github.io/Korea4/ |
+| Merge commit | `7fc8ffaed2c6b17cf8c20038cd25215cd77dc9b8` — 2026-11-05T21:25:03Z |
+| Pages deploy | confirmed `status=built` after merge; live at https://karagemop466-tech.github.io/Korea4/ (cache-busted fetch `?v=7fc8ffa` renders the dashboard: 6,591 event/anchor rows, 748 sources, 1,461 scoreboards, 2026-11-05 snapshot, snapshot-age disclosure, 7/14/21-day candidates, IR-001…IR-021 flagged table) |
 | Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,066 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS; 3 dashboard-generator unit tests PASS |
 | Conflict resolution | rebase onto `origin/main` (PR #39) superseded this session's code/data fix — G2's PR #38/#39 is the authoritative IR-018 resolution; my branch reset to `main` and carries only this COORDINATION.md record |
 | Irregularities | none new; IR-001…IR-021 remain published on `flagged.html`, non-blocking |
