@@ -1,10 +1,10 @@
 # Final verification report
 
-Generated: 2026-11-05T21:11:45+00:00
+Generated: 2026-11-05T21:14:08+00:00
 
 - JSON files checked: 9
 - Primary generated pages: 15
-- Static primary table rows with source URL: 10062
+- Static primary table rows with source URL: 10066
 - HTML pages link-checked (including legacy trees): 87
 - Internal links checked: 689
 - Broken internal links: 0

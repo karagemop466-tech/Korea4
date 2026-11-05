@@ -1,5 +1,22 @@
 # COORDINATION.md — unified shared task board
 
+## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| F2 — Final integration follow-up: independently verify current official-source snapshot, fix stale dashboard “today” date, rebuild, run checks, and publish via PR/Pages | done | `arena/5488dbac-korea4` | `COORDINATION.md`, `scripts/collect_official.py`, `scripts/build_site.py`, `tests/test_dashboard_generator.py`, generated root dashboard/data artifacts | Merged via PR #31; Pages build and live checks passed. The official raw-source snapshot age (Nov 2) remains disclosed. |
+
+### F2 implementation and verification record — 2026-11-05 (`arena/5488dbac-korea4`)
+
+- **Issue corrected:** Collector had frozen `SYSTEM_TODAY` at 2026-11-02. Dashboard now derives the selected date from `America/Los_Angeles` at generation time; the 2026-11-05 build selects the current Pacific date. Added a regression test comparing dashboard metadata with today's Pacific date.
+- **Snapshot age made explicit:** the generator distinguishes `generated_utc` from `source_snapshot_utc` (official manifest timestamp). Current build: 2026-11-05T21:10:04Z; captured-source manifest: 2026-11-02T17:41:45Z. Site warns this is not a live feed and does not imply that sources were refetched on the build date.
+- **Official-source live spot checks (2026-11-05):** [Westwood One current NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) lists Jacksonville at Baltimore on Nov 5 at 7:30 PM ET and [its event page](https://www.westwoodonesports.com/events/548561/) is the row source. The dashboard row is 4:30 PM PST (Nov 5), 269-minute official WWO network window, and remains subject to the disclosed official timestamp/end-window caveat. [NFL official 2026–27 dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates), [MLB official 2027 schedule release](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals), [Stanford official 2026 football schedule](https://gostanford.com/sports/football/schedule), and [Cal official 2026 football schedule](https://calbears.com/sports/football/schedule/2026) were fetched live for cross-check context. These spot checks do not certify every captured row.
+- **Scope and limitations:** offline `collect_official.py` rebuilt from the captured official raw snapshots (748 sources, 6,607 event/anchor rows, 1,461 scoreboard dates, 30 MLB clubs, 311 WWO rows; all data counts unchanged). It did not refresh the official raw files. Source snapshot is Nov 2; rows for schedules released or updated after that timestamp may be absent or stale. Existing unknown schedules remain blank/UNVERIFIED and estimates remain explicitly ESTIMATED; no values were inferred.
+- **Gates:** `python3 scripts/verify.py` PASS (0 errors/warnings; 10,086 source-linked primary rows, 689 checked internal links/0 broken, JSON valid, JS syntax OK); `node --check js/app.js` PASS; `npm test` PASS; `.venv/bin/python -m unittest discover -s tests -p 'test_dashboard_generator.py'` PASS (3 tests); `git diff --check` PASS. Full manual verification of all 10,086 rendered table rows against live sites is not claimed; the repo verification report explicitly describes itself as structural.
+- **Publication result:** claim commit `e219bde`; implementation commit `8a68683`; PR [#31](https://github.com/karagemop466-tech/Korea4/pull/31) MERGED 2026-11-05T21:11:12Z as `a8b28fa38584ec11745d0800897d9282a3fce150`. Verify workflow run [42110249985](https://github.com/karagemop466-tech/Korea4/actions/runs/42110249985) SUCCESS. GitHub Pages deployment [42110316393](https://github.com/karagemop466-tech/Korea4/actions/runs/42110316393) SUCCESS (build, deploy, and report-build-status).
+- **Live check:** https://karagemop466-tech.github.io/Korea4/?v=a8b28fa and `/daily.html?date=2026-11-05&v=a8b28fa` returned updated pages showing selected date 2026-11-05, source snapshot refresh 2026-11-02, WWO JAX@BAL 4:30–8:59 PM PST, and explicitly unverified estimated gaps.
+
+
 Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
 Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
@@ -11,9 +28,11 @@ Baseline: `main` @ `1ed4934` (PR #30 merged). Local gate on baseline: `scripts/v
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
-| G1 — 49ers row integrity + official-domain gate: fix 49ers.com card parser (home/away swapped to team-vs-itself; ticket-reseller `vividseats.com` links used as "official" source; duplicate rows of NFL.com games); add source-domain allowlist to `scripts/verify.py`; regenerate data and site; publish IR-018+ for unresolved source conflicts | done | `arena/0290efac-korea4` | `scripts/collect_official.py` (49ers parser only), `scripts/verify.py`, `data/official/*`, `research/analysis/*`, `research/verification-report.md`, generated root HTML / `js/app.js` only if the build changes them, `flagged.html` IR rows, `COORDINATION.md` | Claimed 2026-11-05 before any edit. Found: 9 `VERIFIED` 49ers rows sourced from vividseats.com; 7+ 49ers rows with identical home and away; NFL 2026 preseason rows (49 matchups) carry no dates. |
+| G2 — 49ers row integrity + official-domain gate: fix 49ers.com card parser (home/away swapped to team-vs-itself; ticket-reseller `vividseats.com` links used as "official" source; duplicate rows of NFL.com games); add source-domain allowlist to `scripts/verify.py`; regenerate data and site; publish IR-018+ for unresolved source conflicts | done | `arena/0290efac-korea4` | `scripts/collect_official.py` (49ers parser only), `scripts/verify.py`, `data/official/*`, `research/analysis/*`, `research/verification-report.md`, generated root HTML / `js/app.js` only if the build changes them, `flagged.html` IR rows, `COORDINATION.md` | Claimed 2026-11-05 before any edit. Found: 9 `VERIFIED` 49ers rows sourced from vividseats.com; 7+ 49ers rows with identical home and away; NFL 2026 preseason rows (49 matchups) carry no dates. |
 
-### G1 record — arena/0290efac-korea4 (2026-11-05)
+### G2 record — arena/0290efac-korea4 (2026-11-05)
+
+(Labelled G2 because `arena/187a4005-korea4` already holds G1 on the board.)
 
 **Defects found (before any edit) and corrected**
 
@@ -676,3 +695,32 @@ No new irregularities; no data changes required. This session records confirmati
 | Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,086 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS |
 | Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded |
 | Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
+
+## Session log — `arena/187a4005-korea4` (2026-11-05)
+
+Independent verification session on branch `arena/187a4005-korea4` (branched from `main` @ `1ed4934`, PR #30 merge). All unified task-board tasks C0–C7 are complete on `main` and the site is live at https://karagemop466-tech.github.io/Korea4/ (GitHub Pages `status=built`, `source=main:/`, `https_enforced=true`).
+
+### Task claim
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| G1 — Independent final re-verification of the merged FREE TIME VACATION dashboard on latest `main`: run verify gate, spot-check official sources, review landing page/category subpages/dashboard UI, confirm GitHub Pages deploy, record PR/merge/deploy result | in progress | `arena/187a4005-korea4` | `COORDINATION.md` (claim + record); no data/site files modified | Verified against `main` @ `1ed4934`; no overlap with other sessions. |
+
+### Verification performed this session (2026-11-05)
+
+- Local gate re-run on `main` @ `1ed4934`: `python3 scripts/verify.py` → **PASS**: 0 errors, 0 warnings; 10,086 primary static table rows each carrying an official `data-source-url`; 689 internal links checked, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS; `npm test` (Pacific-time/interval-union/TBD/candidate tests) PASS; `node tests/test_dashboard.mjs` PASS. Report at `research/verification-report.md`.
+- Data integrity: `data/official/events.json` = 6,607 rows (MLB 5,893 · NFL 345 · WWO 311 · MLS 34 · NCAAF 24); every row carries a `source_url`; 5,783 HIGH/FOCUS priority rows. `data/official/meta.json` counts consistent: 748 official sources, 1,461 daily scoreboards 2026-11-01→2029-12-31, 14,364 merged intervals; durations MLB 158 / NFL 192 / NCAAF 204 / MLS 120 min.
+- Site scope confirmed: clean 16-page primary dashboard (index/daily/calendar/vacation/mlb/nfl/ncaaf/wwo/radio/sources/flagged/methodology/review/executive-summary/teams), all 30 MLB clubs (Giants/A's FOCUS), 49ers/Stanford/Cal FOCUS, WWO national broadcasts across nine categories, Bay Area AM/FM radio stations, exact Pacific-time free windows, 7/14/21-day least-conflict candidates for 2027/2028/2029 labelled ESTIMATED/UNVERIFIED where schedules unreleased.
+- Official-source spot checks consistent with prior verified records: Super Bowl LXI Feb 14 2027 (NFL important dates); 2027 MLB season opens Mar 25 2027 / spring training Feb 19 2027 (MLB releases); WWO station finder carries the affiliate-carry caveat; MLB Stats API 2028/2029 returns zero rows → correctly UNVERIFIED/ESTIMATED.
+- Irregularities: none new. IR-001…IR-017 remain published on `flagged.html`, non-blocking.
+
+### PR / merge / deploy result — `arena/187a4005-korea4` (2026-11-05)
+
+| Item | Result |
+|---|---|
+| PR | pending |
+| State | pending |
+| Merge commit | pending |
+| Pages deploy | pending |
+| Local gate | PASS |
+| Irregularities | none new; IR-001…IR-017 non-blocking |

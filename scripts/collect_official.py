@@ -40,7 +40,9 @@ PT = ZoneInfo("America/Los_Angeles")
 START_DATE = date(2026, 1, 1)
 DISPLAY_START = date(2026, 11, 1)
 END_DATE = date(2029, 12, 31)
-SYSTEM_TODAY = date(2026, 11, 5)
+# Keep the generated dashboard's snapshot date aligned to the Bay Area calendar,
+# rather than freezing it to the date of an earlier collection run.
+SYSTEM_TODAY = datetime.now(PT).date()
 
 MLB_DURATION = 158
 NFL_DURATION = 192
@@ -1437,6 +1439,7 @@ def main() -> None:
 
     meta = {
         "generated_utc": datetime.now(UTC).isoformat(timespec="seconds"),
+        "source_snapshot_utc": json.loads(OFFICIAL_MANIFEST.read_text()).get("generated_utc", ""),
         "timezone": "America/Los_Angeles (PST in winter, PDT in summer)",
         "system_today": SYSTEM_TODAY.isoformat(), "date_range": [DISPLAY_START.isoformat(), END_DATE.isoformat()],
         "data_start": START_DATE.isoformat(),
