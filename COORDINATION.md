@@ -1,5 +1,12 @@
 # COORDINATION.md — unified shared task board
 
+## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| F2 — Final integration follow-up: independently verify current official-source snapshot, fix stale dashboard “today” date, rebuild, run checks, and publish via PR/Pages | in progress | `arena/5488dbac-korea4` | `COORDINATION.md`, `scripts/collect_official.py`, `tests/`, generated root dashboard/data artifacts | Existing integration on `main` is structurally complete; captured `system_today` remained hard-coded to 2026-11-02 although current date is 2026-11-05. Preserve source-verification labels and disclose snapshot limits. |
+
+
 Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
 Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
