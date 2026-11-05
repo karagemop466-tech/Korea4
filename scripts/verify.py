@@ -18,6 +18,77 @@ PRIMARY_PAGES = [
 ]
 REPORT = ROOT / "research/verification-report.md"
 
+# Hosts a row-level source may point to. Each is an official league, team, network,
+# venue, governing body or rulebook publisher. Ticket resellers, fan sites, news
+# aggregators and dead prior-reference sites are NOT listed and fail the gate.
+OFFICIAL_SOURCE_HOSTS = {
+    "www.mlb.com", "statsapi.mlb.com",
+    "www.nfl.com", "nfl.com", "media.nfl.com", "static.nfl.com", "static.www.nfl.com",
+    "www.49ers.com",
+    "www.westwoodonesports.com",
+    "gostanford.com", "calbears.com",
+    "www.sjearthquakes.com",
+    "collegefootballplayoff.com",
+    "www.ncaa.com", "www.ncaa.org", "fs.ncaa.org",   # NCAA rules / duration references (flagged secondary where used)
+    "www.theifab.com",                                # Laws of the Game (duration reference)
+    "www.nba.com", "www.nhl.com", "www.ksfo.com", "www.knbr.com", "www.957thegame.com",  # station/team pages
+}
+EXCLUDED_SOURCE_HOSTS_NOTE = "vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected"
+
+
+# Exact URLs kept ONLY as audit evidence on flag/status rows (never as a value source):
+# IR-001 dead prior reference site, and the repo's own GitHub Pages API status check.
+FLAG_ONLY_SOURCE_URLS = {
+    "https://buffedlizard55-lab.github.io/VacationSchedule/site/",
+    "https://api.github.com/repos/karagemop466-tech/Korea4/pages",
+}
+
+
+def host_is_official(url: str) -> bool:
+    if url in FLAG_ONLY_SOURCE_URLS:
+        return True
+    host = urlsplit(url).netloc.lower().split("@")[-1].split(":")[0]
+    return host in OFFICIAL_SOURCE_HOSTS
+
+
+def check_event_rows(errors: list[str], warnings: list[str]) -> dict:
+    """Row-level integrity for data/official/events.json and days-*.json."""
+    stats = {"event_rows": 0, "rows_checked_domains": 0}
+    events = json.loads((ROOT / "data/official/events.json").read_text())
+    stats["event_rows"] = len(events)
+    seen_nfl = {}
+    for r in events:
+        rid = r.get("id", "?")
+        for field in ("source_url", "planning_source_url", "duration_source_url"):
+            url = r.get(field) or ""
+            if url:
+                stats["rows_checked_domains"] += 1
+                if not host_is_official(url):
+                    errors.append(f"events.json {rid}: {field} host not on official allowlist: {url[:120]}")
+        away, home = (r.get("away") or "").strip(), (r.get("home") or "").strip()
+        if away and home and away == home and r.get("category") in ("NFL", "MLB", "NCAAF"):
+            errors.append(f"events.json {rid}: away and home are the same team ({away})")
+        if r.get("category") == "NFL" and r.get("date") and away and home:
+            key = (r["date"], frozenset((away, home)))
+            if key in seen_nfl:
+                errors.append(f"events.json {rid}: duplicate NFL game of {seen_nfl[key]} on {r['date']}")
+            else:
+                seen_nfl[key] = rid
+    for p in sorted((ROOT / "data/official").glob("days-*.json")):
+        days = json.loads(p.read_text())
+        items = days.values() if isinstance(days, dict) else days
+        for day_rows in items:
+            rows = day_rows if isinstance(day_rows, list) else day_rows.get("rows", []) if isinstance(day_rows, dict) else []
+            for r in rows:
+                url = (r.get("source_url") if isinstance(r, dict) else "") or ""
+                if url:
+                    stats["rows_checked_domains"] += 1
+                    if not host_is_official(url):
+                        errors.append(f"{p.name}: source host not on official allowlist: {url[:120]}")
+    return stats
+
+
+
 
 class LinkParser(HTMLParser):
     def __init__(self):
@@ -95,6 +166,8 @@ def main():
     for p in json_files:
         try: json.loads(p.read_text())
         except Exception as e: errors.append(f"Invalid JSON {p.relative_to(ROOT)}: {e}")
+    # 1b. Row-level official-domain, same-team and duplicate-game checks.
+    row_stats = check_event_rows(errors, warnings)
     # 2. Primary page source-row verification.
     primary_row_count = 0
     for rel in PRIMARY_PAGES:
@@ -104,6 +177,10 @@ def main():
             continue
         rows = parse_primary_rows(p)
         primary_row_count += len(rows)
+        for attrs, _has, _body in rows:
+            m = re.search(r'data-source-url="(https?://[^"]+)"', attrs)
+            if m and not host_is_official(m.group(1)):
+                errors.append(f"{rel}: row data-source-url host not on official allowlist: {m.group(1)[:120]}")
         missing = [r for r in rows if not r[1] or not re.search(r'data-source-url="https?://', r[0], re.I)]
         if missing:
             errors.append(f"{rel}: {len(missing)} table rows without official source URL/link")
@@ -157,10 +234,12 @@ def main():
         f"- Internal links checked: {checked_links}",
         f"- Broken internal links: {len(broken)}",
         f"- JavaScript syntax: {'PASS' if js_ok else 'NOT CHECKED / FAIL'}",
+        f"- Event rows checked: {row_stats['event_rows']}; row source domains checked against the official allowlist: {row_stats['rows_checked_domains']}",
         f"- Errors: {len(errors)}",
         f"- Warnings: {len(warnings)}", "",
         "## Structural checks (not a source-value audit)", "",
-        "1. Static primary data rows with `data-source-url` have an HTTP link; this check does not validate the domain, the source content, or every table row.",
+        "1. Static primary data rows with `data-source-url` have an HTTP link and an official-domain host (allowlist in `scripts/verify.py`); this check does not validate the source content of every row.",
+        "1b. Event rows: no same-team matchups, no duplicate NFL games on a date, and every row source/duration URL on the official allowlist. " + EXCLUDED_SOURCE_HOSTS_NOTE + ".",
         "2. Dynamic daily/calendar table renderer contains source-link code.",
         "3. Blank-value and status-label behavior is exercised separately by dashboard tests, not exhaustively proven here.",
         "4. A link to a source does not establish the accuracy or completeness of its row.",

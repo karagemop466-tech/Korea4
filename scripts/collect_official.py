@@ -19,6 +19,7 @@ from collections import defaultdict
 from datetime import date, datetime, time, timedelta, timezone
 from io import BytesIO
 from pathlib import Path
+from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
@@ -39,7 +40,7 @@ PT = ZoneInfo("America/Los_Angeles")
 START_DATE = date(2026, 1, 1)
 DISPLAY_START = date(2026, 11, 1)
 END_DATE = date(2029, 12, 31)
-SYSTEM_TODAY = date(2026, 11, 2)
+SYSTEM_TODAY = date(2026, 11, 5)
 
 MLB_DURATION = 158
 NFL_DURATION = 192
@@ -700,7 +701,24 @@ def parse_radio_line(text: str, pattern: str, default: str) -> str:
     return " ".join(m.group(0).split()) if m else default
 
 
-def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
+# Official 49ers.com game-day pages are the only acceptable per-game link for this
+# parser. Ticket/fan-package links (e.g. vividseats.com) are not game sources.
+NFLERS_OFFICIAL_HOST = "www.49ers.com"
+
+
+def parse_49ers_events(intervals: dict[str, list], nfl_events: list[dict] | None = None) -> tuple[list[dict], str, list[str]]:
+    """Parse the 49ers.com schedule cards.
+
+    Home/away comes from the card prefix: "VS" = 49ers home, "AT" = 49ers away.
+    A card that repeats an NFL.com row with the same date, teams and kickoff is
+    skipped (the NFL.com row already carries the official kickoff and radio line).
+    Returns (events, radio_line, skipped_duplicate_ids).
+    """
+    nfl_index = {}
+    for ev in nfl_events or []:
+        if ev.get("date") and ev.get("away") and ev.get("home") and ev.get("official_start_utc"):
+            nfl_index[(ev["date"], frozenset((ev["away"], ev["home"])))] = ev["official_start_utc"]
+    skipped: list[str] = []
     text = read_text("nflers_schedule")
     radio_line = parse_radio_line(text, r"KSAN 107\.7 FM\s*/\s*KNBR 104\.5 FM\s*/\s*680 AM", "")
     soup = BeautifulSoup(text, "lxml")
@@ -717,30 +735,52 @@ def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
             continue
         names = [n.get_text(" ", strip=True) for n in card.select(".nfl-o-matchup-cards__team-full-name")]
         opponent = names[0] if names else ""
+        prefix_node = card.select_one(".nfl-o-matchup-cards__team-prefix, .nfl-o-matchup-cards__team-game-location")
+        prefix = prefix_node.get_text(" ", strip=True).upper() if prefix_node else ""
+        if not opponent or prefix not in ("VS", "AT"):
+            continue
+        if prefix == "VS":
+            away, home = opponent, "San Francisco 49ers"
+        else:
+            away, home = "San Francisco 49ers", opponent
         week_node = card.select_one(".nfl-o-matchup-cards__date-info--week")
         week = week_node.get_text(" ", strip=True) if week_node else ""
         venue = card.select_one(".nfl-o-matchup-cards__venue--location")
         link = card.select_one(".nfl-o-matchup-cards__btn-game-day")
-        source_url = link.get("href", "") if link and link.get("href", "").startswith("http") else "https://www.49ers.com/schedule/"
+        href = link.get("href", "") if link else ""
+        source_url = href if urlsplit(href).netloc == NFLERS_OFFICIAL_HOST else "https://www.49ers.com/schedule/"
         day = dt.date()
         start_min = minute_of_day(dt)
-        radio = radio_line or "KSAN 107.7 FM / KNBR 104.5 FM / 680 AM"
+        key = (day.isoformat(), frozenset((away, home)))
+        if key in nfl_index and nfl_index[key] == iso_z(dt):
+            skipped.append(f"49ers-{card.get('data-gameid','')}")
+            continue
+        # Radio is taken from the card itself. Preseason cards on 49ers.com carry no
+        # network line, so their radio stays an explicit UNVERIFIED gap.
+        radio_node = card.select_one(".nfl-o-matchup-cards__media-radio--networks")
+        card_radio = " ".join(radio_node.get_text(" ", strip=True).split()) if radio_node else ""
+        if card_radio:
+            stations = [card_radio, "Westwood One Sports national windows via KNBR/KTCT"]
+            verification = "VERIFIED — official 49ers kickoff/radio"
+        else:
+            stations = ["No radio network listed on the official 49ers.com card — UNVERIFIED"]
+            verification = "VERIFIED — official 49ers kickoff; radio UNVERIFIED"
         ev = event_base(
             id=f"49ers-{card.get('data-gameid','')}", category="NFL",
             subcategory=f"49ers {week or 'schedule'}", season=day.year, date=day.isoformat(),
             official_time_pt=fmt_pt(dt), official_time_zone=dt.strftime("%Z"), official_start_utc=iso_z(dt),
-            time_status="VERIFIED", matchup=f"49ers vs/at {opponent}", away="San Francisco 49ers" if "VS" in card.get_text(" ", strip=True) else opponent,
-            home="San Francisco 49ers" if "VS" in card.get_text(" ", strip=True) else opponent,
+            time_status="VERIFIED", matchup=f"49ers vs/at {opponent}", away=away,
+            home=home,
             venue=venue.get_text(" ", strip=True) if venue else "",
-            stations=[radio, "Westwood One Sports national windows via KNBR/KTCT"],
+            stations=stations,
             priority="FOCUS — 49ers", focus=True, source_url=source_url,
             source_label="49ers.com official game center / schedule", source_api="https://www.49ers.com/schedule/",
             duration_min=NFL_DURATION, duration_source_url=NFL_RULEBOOK_URL,
             duration_status="OFFICIAL RULEBOOK CLOCK + SECONDARY 3:12 AVERAGE (FLAGGED)",
             planning_start_pt=fmt_hm(start_min), planning_end_pt=fmt_hm(start_min + NFL_DURATION),
             planning_status="OFFICIAL START + ESTIMATED DURATION", planning_source_url="https://www.49ers.com/schedule/",
-            notes="Official 49ers schedule supplies kickoff and radio networks. End is estimated from researched average.",
-            verification="VERIFIED — official 49ers kickoff/radio",
+            notes="Official 49ers.com card supplies kickoff (and radio network where listed). End is estimated from researched average.",
+            verification=verification,
         )
         events.append(ev)
         add_interval(intervals, day, start_min, start_min + NFL_DURATION,
@@ -749,7 +789,7 @@ def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
                      verification=ev["verification"], source_url=source_url,
                      source_label=ev["source_label"], label=ev["matchup"],
                      duration_source_url=NFL_RULEBOOK_URL)
-    return events, radio_line
+    return events, radio_line, skipped
 
 
 def parse_stanford_events(intervals: dict[str, list]) -> list[dict]:
@@ -1140,6 +1180,10 @@ def build_flags() -> list[dict]:
         {"id": "IR-015", "issue": "2028 Super Bowl LXII host is official but exact date is TBA; 2029 Super Bowl date/host not found in official captured sources.", "status": "UNVERIFIED", "source_url": "https://www.nfl.com/news/mercedes-benz-stadium-in-atlanta-to-host-super-bowl-lxii-in-2028", "source_label": "Official NFL Super Bowl LXII announcement", "action": "Official date blank; models labelled ESTIMATED."},
         {"id": "IR-016", "issue": "Prior sessions claimed no 7-day strict window by blocking the entire Jan–Super-Bowl span; exact official playoff dates and discontinued Pro Bowl game create published 7-day seams.", "status": "CORRECTED / UNVERIFIED", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates", "action": "Recomputed candidates from exact official dates; still flagged because later WWO schedules are unreleased."},
         {"id": "IR-017", "issue": "Prior 2028 Olympic-break vacation scenario is not an official released MLB schedule/MLBPA agreement.", "status": "FLAGGED", "source_url": "https://www.mlb.com/all-star/future-locations", "source_label": "Official MLB future All-Star locations", "action": "Not treated as verified free time; exact All-Star date remains blank."},
+        {"id": "IR-018", "issue": "49ers rows in the prior build were labelled VERIFIED but 9 regular-season rows took their source from vividseats.com (a ticket page), and 16 49ers.com cards showed the same team on both sides (e.g. 'Atlanta Falcons @ Atlanta Falcons'). Duplicates of NFL.com games were counted twice.", "status": "CORRECTED", "source_url": "https://www.49ers.com/schedule/", "source_label": "Official 49ers.com 2026 schedule (corrected parser)", "action": "Corrected 2026-11-05: home/away now come from the official card prefix (VS = 49ers home, AT = 49ers away); ticket-page links are rejected; the 16 regular-season duplicates are removed because each matches an NFL.com row with the same date, teams and kickoff. Only 3 preseason 49ers rows remain as 49ers.com rows."},
+        {"id": "IR-019", "issue": "Official sources disagree on the Sep 10, 2026 49ers at Rams game (Melbourne): NFL.com lists 49ers at Rams; 49ers.com marks the Rams 'VS' (home).", "status": "FLAGGED", "source_url": "https://www.nfl.com/games/49ers-at-rams-2026-reg-1", "source_label": "Official NFL.com game center (used for this row)", "action": "Dashboard keeps NFL.com's order. The date, kickoff (5:35 PM PDT) and busy block are identical under either order, so the free-time result is not affected."},
+        {"id": "IR-020", "issue": "Westwood One windows start before kickoff (pregame coverage), e.g. Dec 17, 2026 49ers at Chargers: WWO window 4:30 PM PST vs NFL.com/49ers.com kickoff 5:15 PM PST (8:15 PM ET).", "status": "FLAGGED", "source_url": "https://www.westwoodonesports.com/events/548568/", "source_label": "Official WWO event page (Dec 17, 2026)", "action": "The dashboard uses the official WWO window as the busy block, which is the stricter reading (busy starts 45 min earlier). Pregame start is not separately confirmed by the NFL."},
+        {"id": "IR-021", "issue": "The 2026 NFL preseason PDF lists 49 matchups without exact dates; 49ers.com lists dates for its three preseason games (Aug 13 vs Titans, Aug 20 at Chargers, Aug 27 at Raiders) but no radio network on those cards.", "status": "UNVERIFIED", "source_url": NFL_PRESEASON_PDF_URL, "source_label": "Official NFL 2026 preseason schedule PDF", "action": "Undated preseason matchups stay blank and UNVERIFIED (no date is inferred). The three 49ers preseason rows show official kickoffs; their radio stations are UNVERIFIED."},
     ]
 
 
@@ -1337,7 +1381,7 @@ def main() -> None:
     nfl_regular = parse_nfl_regular_events(intervals)
     nfl_preseason = parse_nfl_preseason_events(intervals)
     nfl_postseason = build_nfl_postseason_events(intervals)
-    nflers_events, nflers_radio = parse_49ers_events(intervals)
+    nflers_events, nflers_radio, nflers_skipped = parse_49ers_events(intervals, nfl_regular + nfl_postseason)
     stanford_events = parse_stanford_events(intervals)
     cal_events = parse_cal_events(intervals)
     wwo_events, wwo_info = parse_wwo_events(intervals)

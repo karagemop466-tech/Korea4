@@ -11,7 +11,36 @@ Baseline: `main` @ `1ed4934` (PR #30 merged). Local gate on baseline: `scripts/v
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
-| G1 — 49ers row integrity + official-domain gate: fix 49ers.com card parser (home/away swapped to team-vs-itself; ticket-reseller `vividseats.com` links used as "official" source; duplicate rows of NFL.com games); add source-domain allowlist to `scripts/verify.py`; regenerate data and site; publish IR-018+ for unresolved source conflicts | in progress | `arena/0290efac-korea4` | `scripts/collect_official.py` (49ers parser only), `scripts/verify.py`, `data/official/*`, `research/analysis/*`, `research/verification-report.md`, generated root HTML / `js/app.js` only if the build changes them, `flagged.html` IR rows, `COORDINATION.md` | Claimed 2026-11-05 before any edit. Found: 9 `VERIFIED` 49ers rows sourced from vividseats.com; 7+ 49ers rows with identical home and away; NFL 2026 preseason rows (49 matchups) carry no dates. |
+| G1 — 49ers row integrity + official-domain gate: fix 49ers.com card parser (home/away swapped to team-vs-itself; ticket-reseller `vividseats.com` links used as "official" source; duplicate rows of NFL.com games); add source-domain allowlist to `scripts/verify.py`; regenerate data and site; publish IR-018+ for unresolved source conflicts | done | `arena/0290efac-korea4` | `scripts/collect_official.py` (49ers parser only), `scripts/verify.py`, `data/official/*`, `research/analysis/*`, `research/verification-report.md`, generated root HTML / `js/app.js` only if the build changes them, `flagged.html` IR rows, `COORDINATION.md` | Claimed 2026-11-05 before any edit. Found: 9 `VERIFIED` 49ers rows sourced from vividseats.com; 7+ 49ers rows with identical home and away; NFL 2026 preseason rows (49 matchups) carry no dates. |
+
+### G1 record — arena/0290efac-korea4 (2026-11-05)
+
+**Defects found (before any edit) and corrected**
+
+| # | Defect | Evidence | Fix |
+|---|---|---|---|
+| 1 | 9 regular-season 49ers rows labelled `VERIFIED — official 49ers kickoff/radio` took their source from `vividseats.com` (a ticket / fan-package page). | `data/official/events.json` before fix; 49ers.com Week 9/10/11/12/13/14/15/16/17/18 cards put the vividseats link on the "FAN EXPERIENCE PACKAGES" button. | Parser rejects any card link that is not on `www.49ers.com`; falls back to `https://www.49ers.com/schedule/`. |
+| 2 | 16 49ers.com-derived rows listed the same team on both sides (e.g. `Atlanta Falcons @ Atlanta Falcons`, `Seattle Seahawks @ Seattle Seahawks`); the parser set home and away to the opponent. | `parse_49ers_events` used `"VS" in card text` for both fields. | Home/away from the card prefix: `VS` = 49ers home, `AT` = 49ers away. Checked against 49ers.com (e.g. Week 5 `AT Seahawks`, Week 9 `VS Raiders`). |
+| 3 | Those 16 rows duplicated NFL.com rows (same date, teams and kickoff) and double-counted in the event list (6,607 rows). | Compared 49ers.com cards with `nfl-*` rows; all 16 kickoffs matched. | Skipped as duplicates of the NFL.com row (kept as the single official source). Event rows now 6,591. |
+| 4 | Preseason 49ers rows inherited the KSAN/KNBR radio line, but the official 49ers.com preseason cards list no radio network. | Raw `nflers_schedule` snapshot: radio network appears on regular-season cards only. | Card-level radio used; preseason radio shown as UNVERIFIED. |
+| 5 | Verification gate checked only that a link existed, not its domain (the report said so). | `scripts/verify.py` structural checks. | Added official-host allowlist (events, days, HTML `data-source-url`), same-team check, and duplicate NFL-game check. Against the pre-fix data the new checks report 61 errors; post-fix PASS. |
+| 6 | Dashboard snapshot date hard-coded to 2026-11-02 while the build date is 2026-11-05. | `SYSTEM_TODAY` in `collect_official.py`. | Set to 2026-11-05. The live "Today" button already uses the visitor's Pacific date. |
+
+**Result counts:** event rows 6,607 → 6,591 (16 duplicates removed); merged intervals 14,364 → 14,303; 49ers rows 19 → 3 (preseason only; regular-season 49ers games are the NFL.com rows). The 2027–2029 vacation windows, anchors and conclusion are **unchanged** (verified by comparing `meta.json` before and after).
+
+**Official sources checked (fetched 2026-11-05)**
+- 49ers.com 2026 schedule: https://www.49ers.com/schedule/ — preseason Aug 13 vs Titans, Aug 20 at Chargers, Aug 27 at Raiders; regular season Week 9 Sun 11/08 1:25 PM PST VS Raiders; Week 15 Thu 12/17 5:15 PM PST AT Chargers; radio KSAN 107.7 FM / KNBR 104.5 FM / 680 AM on regular-season cards.
+- NFL.com game center, Dec 17 at Chargers (kickoff 8:15 PM ET = 5:15 PM PT): https://www.nfl.com/games/49ers-at-chargers-2026-reg-15
+- NFL.com game center, Sep 10 at Rams (Melbourne): https://www.nfl.com/games/49ers-at-rams-2026-reg-1
+- Raw snapshot `research/official/raw/nflers_schedule.gz` (retrieved 2026-11-02 17:39 UTC, sha256 `bd1afd7f…`) parsed by the corrected parser.
+
+**Irregularities (published on `flagged.html`, none block merge)**
+- IR-018 — corrected (vividseats source and team-vs-itself rows), see defects 1–3 above.
+- IR-019 — Sep 10, 2026 Melbourne: NFL.com lists 49ers at Rams; 49ers.com marks the Rams `VS` (home). Order kept from NFL.com; free-time result unaffected.
+- IR-020 — Westwood One windows start before kickoff (e.g. Dec 17: WWO 4:30 PM PST vs kickoff 5:15 PM PST; Nov 5 Jaguars at Ravens: WWO 4:30 PM PST vs kickoff 5:15 PM PST). The dashboard uses the official WWO window; the pregame start is not separately confirmed by the NFL.
+- IR-021 — 2026 NFL preseason: 49 matchups still have no official dates in the preseason PDF (left blank; not inferred); the three 49ers preseason rows have dates from 49ers.com; their radio is UNVERIFIED.
+
+**Limitations.** Data remain a snapshot captured 2026-11-02; this session did not re-scrape the full official set (collector re-run used the saved raw responses). The 49ers.com "game-day" links for upcoming games point to the 49ers.com game-center pages, which were not re-fetched individually.
 
 ## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
