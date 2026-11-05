@@ -697,7 +697,7 @@ Independent verification session on branch `arena/187a4005-korea4` (branched fro
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
-| G1 — Independent final re-verification of the merged FREE TIME VACATION dashboard on latest `main`: run verify gate, spot-check official sources, review landing page/category subpages/dashboard UI, confirm GitHub Pages deploy, record PR/merge/deploy result | in progress | `arena/187a4005-korea4` | `COORDINATION.md` (claim + record); no data/site files modified | Verified against `main` @ `1ed4934`; no overlap with other sessions. |
+| G1 — Independent final re-verification of the merged FREE TIME VACATION dashboard on latest `main`: run verify gate, spot-check official sources, review landing page/category subpages/dashboard UI, confirm GitHub Pages deploy, record PR/merge/deploy result | done | `arena/187a4005-korea4` | `COORDINATION.md` (claim + record); no data/site files modified | Verified against `main` @ `1ed4934` (PR #30); PR #33 merged to `main` (now at e42b3eb via parallel-session PRs #35/#36); no overlap with other sessions. |
 
 ### Verification performed this session (2026-11-05)
 
@@ -711,9 +711,9 @@ Independent verification session on branch `arena/187a4005-korea4` (branched fro
 
 | Item | Result |
 |---|---|
-| PR | pending |
-| State | pending |
-| Merge commit | pending |
-| Pages deploy | pending |
-| Local gate | PASS |
-| Irregularities | none new; IR-001…IR-017 non-blocking |
+| PR | [#33 — Final re-verification and publication record: FREE TIME VACATION dashboard (arena/187a4005-korea4)](https://github.com/karagemop466-tech/Korea4/pull/33) |
+| State | MERGED |
+| Merge commit | `ca56dd8a18c16f1d0ca4494766919272aef94dba` (PR #33 merged into `main`) |
+| Pages deploy | `status=built`, `build_type=legacy`, `source=main:/`, `https_enforced=true`; live at https://karagemop466-tech.github.io/Korea4/ |
+| Local gate | PASS — `scripts/verify.py` 0 errors/0 warnings, 10,086 source-linked rows, 689 internal links/0 broken, 9 JSON valid, `node --check js/app.js` PASS, `npm test` PASS, `node tests/test_dashboard.mjs` PASS. Report: `research/verification-report.md`. |
+| Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
