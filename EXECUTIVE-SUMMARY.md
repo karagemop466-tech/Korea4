@@ -1,6 +1,6 @@
 # Executive summary — FREE TIME VACATION
 
-Generated 2026-11-03T23:27:13+00:00 from 748 official-source records.
+Dashboard rebuilt 2026-11-05T21:10:04+00:00; official source snapshots last refreshed 2026-11-02T17:41:45+00:00. Uses 748 captured official-source records.
 
 ## Scope
 - All 30 MLB clubs; Giants and Athletics FOCUS; all MLB games HIGH.

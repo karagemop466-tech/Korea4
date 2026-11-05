@@ -155,7 +155,7 @@ def page(title, active, lead, body, extra_head=""):
 <main>
   <h1 class="page-title">{esc(title)}</h1>
   <p class="page-lead">{lead}</p>
-  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Data captured {esc(META["generated_utc"])}. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
+  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Official source snapshots last refreshed {esc(META.get('source_snapshot_utc') or 'UNVERIFIED')}; dashboard rebuilt {esc(META["generated_utc"])}. The selected dashboard date is {esc(META.get('system_today'))} Pacific Time. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
   {body}
   <footer class="footer">
     <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
@@ -454,7 +454,7 @@ def build_executive():
     write("executive-summary.html", page("Executive summary", "executive-summary.html", "Concise executive summary of sources, verification, findings, vacation windows, and flagged irregularities.", body))
     md = f'''# Executive summary — FREE TIME VACATION
 
-Generated {META['generated_utc']} from {len(SOURCES)} official-source records.
+Dashboard rebuilt {META['generated_utc']}; official source snapshots last refreshed {META.get('source_snapshot_utc') or 'UNVERIFIED'}. Uses {len(SOURCES)} captured official-source records.
 
 ## Scope
 - All 30 MLB clubs; Giants and Athletics FOCUS; all MLB games HIGH.

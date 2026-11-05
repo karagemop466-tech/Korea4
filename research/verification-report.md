@@ -1,6 +1,6 @@
 # Final verification report
 
-Generated: 2026-11-03T23:27:13+00:00
+Generated: 2026-11-05T21:10:04+00:00
 
 - JSON files checked: 9
 - Primary generated pages: 15

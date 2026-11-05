@@ -1,5 +1,21 @@
 # COORDINATION.md — unified shared task board
 
+## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| F2 — Final integration follow-up: independently verify current official-source snapshot, fix stale dashboard “today” date, rebuild, run checks, and publish via PR/Pages | implementation verified; publication pending | `arena/5488dbac-korea4` | `COORDINATION.md`, `scripts/collect_official.py`, `scripts/build_site.py`, `tests/test_dashboard_generator.py`, generated root dashboard/data artifacts | Corrected hard-coded `system_today` 2026-11-02; snapshot age is now explicitly distinguished from rebuild time. See F2 record below. |
+
+### F2 implementation and verification record — 2026-11-05 (`arena/5488dbac-korea4`)
+
+- **Issue corrected:** Collector had frozen `SYSTEM_TODAY` at 2026-11-02. Dashboard now derives the selected date from `America/Los_Angeles` at generation time; the 2026-11-05 build selects the current Pacific date. Added a regression test comparing dashboard metadata with today's Pacific date.
+- **Snapshot age made explicit:** the generator distinguishes `generated_utc` from `source_snapshot_utc` (official manifest timestamp). Current build: 2026-11-05T21:10:04Z; captured-source manifest: 2026-11-02T17:41:45Z. Site warns this is not a live feed and does not imply that sources were refetched on the build date.
+- **Official-source live spot checks (2026-11-05):** [Westwood One current NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) lists Jacksonville at Baltimore on Nov 5 at 7:30 PM ET and [its event page](https://www.westwoodonesports.com/events/548561/) is the row source. The dashboard row is 4:30 PM PST (Nov 5), 269-minute official WWO network window, and remains subject to the disclosed official timestamp/end-window caveat. [NFL official 2026–27 dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates), [MLB official 2027 schedule release](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals), [Stanford official 2026 football schedule](https://gostanford.com/sports/football/schedule), and [Cal official 2026 football schedule](https://calbears.com/sports/football/schedule/2026) were fetched live for cross-check context. These spot checks do not certify every captured row.
+- **Scope and limitations:** offline `collect_official.py` rebuilt from the captured official raw snapshots (748 sources, 6,607 event/anchor rows, 1,461 scoreboard dates, 30 MLB clubs, 311 WWO rows; all data counts unchanged). It did not refresh the official raw files. Source snapshot is Nov 2; rows for schedules released or updated after that timestamp may be absent or stale. Existing unknown schedules remain blank/UNVERIFIED and estimates remain explicitly ESTIMATED; no values were inferred.
+- **Gates:** `python3 scripts/verify.py` PASS (0 errors/warnings; 10,086 source-linked primary rows, 689 checked internal links/0 broken, JSON valid, JS syntax OK); `node --check js/app.js` PASS; `npm test` PASS; `.venv/bin/python -m unittest discover -s tests -p 'test_dashboard_generator.py'` PASS (3 tests); `git diff --check` PASS. Full manual verification of all 10,086 rendered table rows against live sites is not claimed; the repo verification report explicitly describes itself as structural.
+- **Publication:** after claim commit `e219bde`, final implementation commit, PR, merge, and GitHub Pages build/live check will be recorded below.
+
+
 Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
 Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
