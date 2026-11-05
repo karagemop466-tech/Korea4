@@ -4,7 +4,7 @@ Generated: 2026-11-03T23:27:13+00:00
 
 - JSON files checked: 11
 - Primary generated pages: 16
-- Static primary table rows with source URL: 10224
+- Static primary table rows with source URL: 10235
 - HTML pages link-checked (including legacy trees): 88
 - Internal links checked: 734
 - Broken internal links: 0

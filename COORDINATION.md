@@ -662,3 +662,57 @@ Board rule respected: this is an append-only entry. No earlier session text was 
 2. A cell that cannot be confirmed from an official source stays blank and is labelled `UNVERIFIED`.
 3. Estimated values are labelled `ESTIMATED` and are never described as a released schedule.
 4. Findings below record what was fetched live, on what date, and what it showed.
+
+### C1 verification record — 2026-11-05 (`arena/c67035f7-korea4`)
+
+**Official sources re-read live this session** (fetch tool, 2026-11-05). Each line states what the source showed and what it was used for.
+
+| # | Source | What it showed | Used for |
+|---|---|---|---|
+| 1 | [MLB press release — 2027 Spring Training](https://www.mlb.com/press-release/press-release-mlb-announces-2027-spring-training-schedule) | 2027 spring training opens **Fri Feb 19, 2027** with all 30 clubs; exhibitions Mar 20–23; Opening Night **Wed Mar 24**; traditional Opening Day **Thu Mar 25**; Giants visit Sacramento Mar 21, host Boston Mar 22–23 | Confirms snapshot anchors A01–A04 and that the pre-Feb-19 window is genuinely baseball-free |
+| 2 | [MLB press release — 2027 regular season schedule](https://www.mlb.com/press-release/2027-mlb-season-schedule-announced-phillies-home-opener-set-for-thursday-april-1-against-the-washington-nationals) | 2027 season opens Thu Mar 25; Phillies end the regular season Sep 24–26, 2027 | Confirms anchor A05 (season end Sep 26) |
+| 3 | [MLB Stats API season=2027](https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027) | `totalGames: 2903`, first date 2027-02-19 | Confirms the day-scoreboard rows and the spring-training start date |
+| 4 | [MLB Stats API season=2028](https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2028) and [season=2029](https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2029) | `totalGames: 0` for both | 2028/2029 MLB is unreleased → all such days stay UNVERIFIED/ESTIMATED |
+| 5 | [MLB All-Star future locations](https://www.mlb.com/all-star/future-locations) | 2027 ASG Wrigley Field **Jul 13, 2027**; 2028 ASG Oracle Park, no date published | Anchor A07 confirmed, A08 stays blank (date TBA) |
+| 6 | [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) (all three chunks) | Week 18 Jan 9–10, 2027; Wild Card Jan 16–18; Divisional Jan 23–24; AFC/NFC Championship **Jan 31**; **Super Bowl LXI Feb 14, 2027** at SoFi; 2027 combine Mar 1–8; league year Mar 11; draft Apr 29–May 1; **no 2027 game-by-game schedule** | Confirms anchors A09–A13 and the Feb 15–18 2027 gap; confirms the 2027 NFL season is unreleased |
+| 7 | [NFL — Super Bowl LXII in Atlanta](https://www.nfl.com/news/mercedes-benz-stadium-in-atlanta-to-host-super-bowl-lxii-in-2028) | Super Bowl LXII → Mercedes-Benz Stadium, Atlanta, **2028, date TBA** (official table row: "TBA") | Anchor A18 stays blank; **irregularity F-022** logged because the snapshot advanced the 2028 candidate list past a game whose date is unpublished |
+| 8 | [CFP — Tampa Bay 2029](https://collegefootballplayoff.com/news/2025/10/29/tampabay-29) | 2027 CFP championship **Jan 25, 2027** 7:30 PM ET; 2028 CFP championship New Orleans **Jan 24, 2028**; 2029 championship Tampa Bay **Jan 22, 2029** | Anchors A15–A17 confirmed |
+| 9 | [Stanford — two dates added to Notre Dame rivalry](https://gostanford.com/news/2026/05/20/two-dates-added-to-notre-dame-rivalry) | Stanford hosts Notre Dame **Nov 27, 2027**; visits South Bend **Oct 14, 2028** | Anchors A23/A24 confirmed |
+| 10 | [Cal — 2027 nonconference](https://calbears.com/news/2026/6/25/football-cal-announces-matchups-against-odu-sac-state) | Cal vs Sacramento State **Aug 28, 2027** (Week Zero, Berkeley); vs Old Dominion **Sep 11, 2027**; UCLA completes the 2027 nonconference slate | Anchors A19/A21 confirmed |
+| 11 | [Westwood One official NFL schedule](https://www.westwoodonesports.com/nfl-schedule/) (all chunks) | Published windows run to **Jan 10, 2027** (Week 18 SNF, teams TBA). No 2027-season or later WWO windows exist | WWO coverage after 2027-01-10 stays UNVERIFIED — nothing invented |
+| 12 | [NHL official club schedule API — Sharks 2026-27](https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027) | **88 games, Sep 20, 2026 → Apr 10, 2027**, exact UTC start times | New: NHL rows captured and added as busy days (see below) |
+| 13 | [NHL API — Sharks 2027-28 / 2028-29 / 2029-30](https://api-web.nhle.com/v1/club-schedule-season/SJS/20272028) | `{"games":[]}` — season not released | 2028–2030 NHL stays UNVERIFIED |
+| 14 | [NBA league schedule feed](https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json) | **HTTP 403** from the GitHub Actions runner (all three historical paths) | Warriors rows could not be captured → **flag F-021** |
+| 15 | [NBA Warriors official schedule PDF](https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf) | 200 OK, 687 KB; calendar-grid layout, no machine-readable dates | Recorded as the fallback source; not parsed (would risk invented dates) |
+
+**What changed in the data/site**
+
+| File | Change | Verification |
+|---|---|---|
+| `scripts/build_free_runs.py` (new) | Classifies every day 2027-01-01 → 2029-12-31 into PUBLISHED_OFFICIAL / UNVERIFIED_ANCHOR / MODEL_ONLY / NO_BLOCK, finds consecutive-day runs, ranks them by evidence strength, and computes MLB season density | Deterministic from `data/official/days-*.json`; no network, no invented values |
+| `data/official/free-runs.json` (new) | 1,096 days examined; 95 strict-free runs; max run 5 days; 4 published-bounded gaps | Recomputed and re-verified on every build |
+| `free-runs.html` (new page) | Publishes the answer, the ranked runs with a bounding official source per row, the season-density table, the Sharks/Warriors rows and the season-boundary notes | `scripts/verify.py` PASS |
+| `scripts/fetch_nba_nhl_sources.py`, `scripts/collect_other_sports.py` (new) | Capture and parse official NBA/NHL schedules with SHA-256 manifest | Ran in CI run `42111460732` — success; NHL 88 rows, NBA 403 |
+| `data/official/other-sports.json` (new) | 88 verified Sharks games with official start times and flagged planning lengths | Every row links the NHL API URL |
+| `index.html`, `vacation.html`, `methodology.html`, `flagged.html`, `executive-summary.html`, `README.md` | Regenerated through `scripts/build_site.py` (no hand edits) | `verify.py` PASS, JS checks PASS |
+| `tests/test_dashboard_generator.py` | 5 new guards: one class per day, no 7-day claim, both bounding sources present, every shortlist row sourced, missing-NBA stated | 7 tests OK |
+| `.github/workflows/free-runs.yml` (new) | Repeats the capture + rebuild + verify in CI | First run success |
+
+**The answer this session publishes**
+
+- No 7-, 14- or 21-day run of consecutive days is free in 2027, 2028 or 2029.
+- Longest run with **no published game** of any monitored category: **5 days** (2027: 4, 2028: 5, 2029: 5) — every one of them exists only because the 2027 NFL/WWO, 2028 and 2029 schedules are unreleased.
+- Longest gap **bracketed by two published official games**: **4 days, 2027-01-19 → 2027-01-22** (Utah at San Jose on Jan 18 → Edmonton at San Jose on Jan 23), both links on the row.
+- Reason a long summer window cannot exist: MLB publishes a game on **216 of the 220 calendar days** of its 2027 season (98.2%); the only gaps are Opening Night eve and the All-Star break. Source rows: MLB Stats API 2027.
+
+**New irregularities (published on `flagged.html`, non-blocking)**
+
+| ID | Issue | Status |
+|---|---|---|
+| F-018 | Snapshot had station rows for the Warriors and Sharks but no game rows; days were called free while NBA/NHL games could be on air | Repaired for NHL; NBA blocked by source |
+| F-019 | No MLB row after 2027-09-26 and no 2027 NFL/WWO, 2028 or 2029 season rows; long empty stretches are absence of data | UNVERIFIED, published as candidates only |
+| F-020 | The 364-day model is built only from 2026 windows after 2026-11-01, so it carries no February–September baseball/hockey/basketball | FLAGGED (model limitation) |
+| F-021 | Official NBA schedule feed returns HTTP 403 to CI runners; Warriors rows missing | UNVERIFIED — blocked by source |
+| F-022 | Snapshot ranks 2028/2029 "least-conflict" windows in early February even though Super Bowl LXII's date is officially TBA; the ranking therefore assumes a date the NFL has not published | FLAGGED — read the 2028/2029 candidates as unverified |
+
+**Files touched vs other sessions.** This session edited `scripts/build_site.py`, `scripts/verify.py`, `tests/test_dashboard_generator.py` and the generated HTML — the same files listed in open PR #18 (`arena/aea8720a-korea4`). That PR has had no commits for ~2 days. It is **not** closed or merged here; if it is ever merged it must be rebased and its `build_site.py` changes re-applied on top of this work rather than dropped. PR #25 (`arena/46c69197-korea4`) is docs-only and untouched.

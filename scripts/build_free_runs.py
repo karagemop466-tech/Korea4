@@ -349,6 +349,47 @@ def nearest_blocks(records: list[dict], start: str, end: str) -> tuple[dict | No
     return (before[-1] if before else None), (after[0] if after else None)
 
 
+def sport_density() -> list[dict]:
+    """How many calendar days inside each released season actually have a published game.
+
+    This is the reason a long free window cannot exist in summer: if MLB plays on
+    almost every day of its season, every one of those days is busy regardless of
+    which teams are involved.
+    """
+    rows = json.loads((ROOT / "data" / "official" / "events.json").read_text())
+    out = []
+    by_key: dict[tuple[str, int], set[str]] = {}
+    for row in rows:
+        if not row.get("date"):
+            continue
+        by_key.setdefault((row["category"], int(row["season"])), set()).add(row["date"])
+    for (category, season), days in sorted(by_key.items()):
+        if category != "MLB":
+            continue  # daily-play argument only applies to a league that plays nearly every day
+        start = min(days)
+        end = max(days)
+        d0, d1 = date.fromisoformat(start), date.fromisoformat(end)
+        span = (d1 - d0).days + 1
+        if span < 20:
+            continue
+        absent = [str(d0 + timedelta(days=i)) for i in range(span) if str(d0 + timedelta(days=i)) not in days]
+        sample = [r for r in rows if r.get("category") == category and int(r["season"]) == season][:1]
+        out.append({
+            "league": category,
+            "season": season,
+            "first": start,
+            "last": end,
+            "calendar_days": span,
+            "days_with_game": len(days),
+            "share": f"{len(days) / span * 100:.1f}%",
+            "days_without_game": ", ".join(absent[:8]) + (" …" if len(absent) > 8 else ""),
+            "status": "VERIFIED — computed from published official rows",
+            "source_url": (sample[0].get("source_url") if sample else ""),
+            "source_label": "Official source of the season's rows",
+        })
+    return out
+
+
 def main() -> None:
     all_records: list[dict] = []
     per_year: dict[str, dict] = {}
@@ -378,12 +419,23 @@ def main() -> None:
     open_runs = runs_of(all_records, lambda rec: rec["class"] in (CLASS_FREE, CLASS_ANCHOR, CLASS_MODEL))
     published_runs = runs_of(all_records, lambda rec: rec["class"] == CLASS_PUBLISHED)
 
-    # Candidate shortlist: the 12 longest strict-free runs, most recent first on ties,
-    # each annotated with what officially bounds it on both sides.
+    # Candidate shortlist. Runs are ranked by evidence strength first, then length:
+    #   PUBLISHED-BOUNDED — the last game before and the first game after the run are
+    #                       both published official rows (a real gap between real games)
+    #   MIXED             — one side published, one side model/anchor only
+    #   MODEL-BOUNDED     — both sides are model rows or there is no later row at all,
+    #                       i.e. the gap exists because the schedule is unreleased
     ranked = sorted(strict_runs, key=lambda r: (-r["days"], r["start"]))
-    shortlist = []
-    for run in ranked[:12]:
+    annotated = []
+    for run in ranked:
         before, after = nearest_blocks(all_records, run["start"], run["end"])
+        published_sides = sum(1 for b in (before, after) if b and b["class"] == CLASS_PUBLISHED)
+        evidence = "PUBLISHED-BOUNDED" if published_sides == 2 else ("MIXED" if published_sides == 1 else "MODEL-BOUNDED")
+        annotated.append((run, before, after, evidence))
+    order = {"PUBLISHED-BOUNDED": 0, "MIXED": 1, "MODEL-BOUNDED": 2}
+    annotated.sort(key=lambda item: (order[item[3]], -item[0]["days"], item[0]["start"]))
+    shortlist = []
+    for run, before, after, evidence in annotated[:14]:
         start_dow = date.fromisoformat(run["start"]).strftime("%A")
         end_dow = date.fromisoformat(run["end"]).strftime("%A")
         shortlist.append({
@@ -399,12 +451,32 @@ def main() -> None:
             "block_after": (after or {}).get("label", ""),
             "block_after_date": (after or {}).get("date", ""),
             "block_after_source": (after or {}).get("source_url", ""),
-            "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
+            "evidence": evidence,
+            "status": "CANDIDATE — NO PUBLISHED GAME / UNRELEASED-SEASON CAVEAT",
             "reason": "No published game row of any monitored category falls on these dates in the snapshot. "
                       "Under the strict reading that an unreleased schedule is not evidence of free time, this is a "
                       "candidate window only; confirm when the missing schedules are released.",
             "source_url": (before or after or {}).get("source_url", ""),
         })
+
+    # Strongest evidence-backed runs only (both sides are published games).
+    published_bounded = [
+        {
+            "start": run["start"], "end": run["end"], "days": run["days"],
+            "year": int(run["start"][:4]),
+            "block_before": (before or {}).get("label", ""),
+            "block_before_date": (before or {}).get("date", ""),
+            "block_before_source": (before or {}).get("source_url", ""),
+            "block_after": (after or {}).get("label", ""),
+            "block_after_date": (after or {}).get("date", ""),
+            "block_after_source": (after or {}).get("source_url", ""),
+            "evidence": "PUBLISHED-BOUNDED",
+            "status": "CANDIDATE — GAP BETWEEN TWO PUBLISHED GAMES",
+            "source_url": (before or {}).get("source_url", ""),
+        }
+        for run, before, after, evidence in annotated
+        if evidence == "PUBLISHED-BOUNDED" and run["days"] >= 2
+    ]
 
     # Per-year top strict runs (for the year comparison table).
     year_runs = {}
@@ -447,6 +519,7 @@ def main() -> None:
         "per_year": per_year,
         "year_runs": year_runs,
         "shortlist": shortlist,
+        "published_bounded": published_bounded,
         "weekday_latest_end": {
             dow: {
                 "date": rec["date"],
@@ -457,6 +530,7 @@ def main() -> None:
             for dow, rec in sorted(weekday_end.items())
         },
         "other_sports": other_meta,
+        "sport_density": sport_density(),
         "season_notes": SEASON_NOTES,
         "strict_conclusion": (
             "No 7-, 14- or 21-day stretch of consecutive days inside 2027-2029 is free under the strict "
@@ -465,10 +539,10 @@ def main() -> None:
             "not been released, so it cannot be called free."
         ),
         "practical_reading": (
-            "If 'free' is relaxed to 'not known to contain a game', the longest stretches are the annual "
-            "late-December/January gap after the college national championship until the next published "
-            "spring-training or NFL date, and the day ranges that sit between two officially dated events. "
-            "Those are published explicitly on this page as CANDIDATES, never as verified free time."
+            "What the data supports: early winter (January to mid-February) repeatedly produces two-to-four day gaps between a published "
+            "Sharks game and the next published NFL playoff weekend, because baseball is out of season and college football has ended. "
+            "The longest such gap bracketed by two published official games is listed at the top of the ranked table. From late February to "
+            "early October, at least one MLB game is published nearly every day, so no gap longer than a day or two can exist even in the model."
         ),
     }
     meta = json.loads((ROOT / "data" / "official" / "meta.json").read_text())
@@ -519,6 +593,11 @@ def write_report(payload: dict) -> None:
             f"| {i} | {row['start']} ({row['start_weekday']}) | {row['end']} ({row['end_weekday']}) | {row['days']} | "
             f"{row['block_before'] or '—'} ({row['block_before_date'] or '—'}) | {row['block_after'] or '—'} ({row['block_after_date'] or '—'}) |"
         )
+    lines += ["", "## Season density (why long summer gaps cannot exist)", "",
+              "| League | Season | First published | Last published | Calendar days | Days with a game | Share |", "|---|---|---|---|---|---|---|"]
+    for row in payload.get("sport_density", []):
+        lines.append(f"| {row['league']} | {row['season']} | {row['first']} | {row['last']} | {row['calendar_days']} | "
+                     f"{row['days_with_game']} | {row['share']} |")
     lines += ["", "## Other Bay Area radio sports included as busy days", "",
               f"- Status: **{payload['other_sports'].get('status', 'UNKNOWN')}**"]
     counts = payload["other_sports"].get("counts") or {}

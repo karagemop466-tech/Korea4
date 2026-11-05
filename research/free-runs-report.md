@@ -34,18 +34,27 @@ A day is FREE only when the snapshot contains no block of any class for it. A da
 
 | Rank | Start | End | Days | Block before (date) | Block after (date) |
 |---|---|---|---|---|---|
-| 1 | 2028-01-17 (Monday) | 2028-01-21 (Friday) | 5 | WWO season-pattern model (2028-01-16) | WWO season-pattern model (2028-01-22) |
-| 2 | 2028-02-07 (Monday) | 2028-02-11 (Friday) | 5 | WWO season-pattern model (2028-02-06) | WWO season-pattern model (2028-02-12) |
-| 3 | 2029-01-15 (Monday) | 2029-01-19 (Friday) | 5 | WWO season-pattern model (2029-01-14) | WWO season-pattern model (2029-01-20) |
-| 4 | 2029-02-05 (Monday) | 2029-02-09 (Friday) | 5 | WWO season-pattern model (2029-02-04) | WWO season-pattern model (2029-02-10) |
-| 5 | 2027-01-19 (Tuesday) | 2027-01-22 (Friday) | 4 | Utah at San Jose (2027-01-18) | Edmonton at San Jose (2027-01-23) |
-| 6 | 2028-01-11 (Tuesday) | 2028-01-14 (Friday) | 4 | WWO season-pattern model (2028-01-10) | WWO season-pattern model (2028-01-15) |
-| 7 | 2029-01-09 (Tuesday) | 2029-01-12 (Friday) | 4 | WWO season-pattern model (2029-01-08) | WWO season-pattern model (2029-01-13) |
-| 8 | 2029-12-28 (Friday) | 2029-12-31 (Monday) | 4 | WWO season-pattern model (2029-12-27) | — (—) |
-| 9 | 2027-02-03 (Wednesday) | 2027-02-05 (Friday) | 3 | WWO season-pattern model (2027-02-02) | WWO season-pattern model (2027-02-06) |
-| 10 | 2028-01-05 (Wednesday) | 2028-01-07 (Friday) | 3 | WWO season-pattern model (2028-01-04) | WWO season-pattern model (2028-01-08) |
-| 11 | 2028-01-26 (Wednesday) | 2028-01-28 (Friday) | 3 | WWO season-pattern model (2028-01-25) | WWO season-pattern model (2028-01-29) |
-| 12 | 2028-02-02 (Wednesday) | 2028-02-04 (Friday) | 3 | WWO season-pattern model (2028-02-01) | WWO season-pattern model (2028-02-05) |
+| 1 | 2027-01-19 (Tuesday) | 2027-01-22 (Friday) | 4 | Utah at San Jose (2027-01-18) | Edmonton at San Jose (2027-01-23) |
+| 2 | 2027-01-11 (Monday) | 2027-01-12 (Tuesday) | 2 | Week 18 Sunday Night Football - Teams TBA (2027-01-10) | San Jose at Edmonton (2027-01-13) |
+| 3 | 2027-02-11 (Thursday) | 2027-02-12 (Friday) | 2 | Chicago at San Jose (2027-02-10) | Detroit at San Jose (2027-02-13) |
+| 4 | 2027-07-14 (Wednesday) | 2027-07-15 (Thursday) | 2 | American League All-Stars at National League All-Stars (2027-07-13) | Tampa Bay Rays at Miami Marlins (2027-07-16) |
+| 5 | 2027-01-05 (Tuesday) | 2027-01-05 (Tuesday) | 1 | Houston Texans at Green Bay Packers (2027-01-04) | Dallas at San Jose (2027-01-06) |
+| 6 | 2027-01-07 (Thursday) | 2027-01-07 (Thursday) | 1 | Dallas at San Jose (2027-01-06) | Washington at San Jose (2027-01-08) |
+| 7 | 2027-01-15 (Friday) | 2027-01-15 (Friday) | 1 | San Jose at Calgary (2027-01-14) | San Jose at Seattle (2027-01-16) |
+| 8 | 2027-01-29 (Friday) | 2027-01-29 (Friday) | 1 | Nashville at San Jose (2027-01-28) | Chicago at San Jose (2027-01-30) |
+| 9 | 2027-02-08 (Monday) | 2027-02-09 (Tuesday) | 2 | WWO season-pattern model (2027-02-07) | Chicago at San Jose (2027-02-10) |
+| 10 | 2027-01-27 (Wednesday) | 2027-01-27 (Wednesday) | 1 | WWO season-pattern model (2027-01-26) | Nashville at San Jose (2027-01-28) |
+| 11 | 2027-02-16 (Tuesday) | 2027-02-16 (Tuesday) | 1 | Winnipeg at San Jose (2027-02-15) | WWO season-pattern model (2027-02-17) |
+| 12 | 2027-02-18 (Thursday) | 2027-02-18 (Thursday) | 1 | WWO season-pattern model (2027-02-17) | Atlanta Braves at Baltimore Orioles (2027-02-19) |
+| 13 | 2028-01-17 (Monday) | 2028-01-21 (Friday) | 5 | WWO season-pattern model (2028-01-16) | WWO season-pattern model (2028-01-22) |
+| 14 | 2028-02-07 (Monday) | 2028-02-11 (Friday) | 5 | WWO season-pattern model (2028-02-06) | WWO season-pattern model (2028-02-12) |
+
+## Season density (why long summer gaps cannot exist)
+
+| League | Season | First published | Last published | Calendar days | Days with a game | Share |
+|---|---|---|---|---|---|---|
+| MLB | 2026 | 2026-02-20 | 2026-10-28 | 251 | 242 | 96.4% |
+| MLB | 2027 | 2027-02-19 | 2027-09-26 | 220 | 216 | 98.2% |
 
 ## Other Bay Area radio sports included as busy days
 
@@ -72,7 +81,7 @@ A day is FREE only when the snapshot contains no block of any class for it. A da
 
 No 7-, 14- or 21-day stretch of consecutive days inside 2027-2029 is free under the strict reading. The longest runs with no published game are short early-winter gaps (see shortlist); every longer empty stretch is empty only because the 2027 NFL/WWO, 2028 and 2029 schedules have not been released, so it cannot be called free.
 
-If 'free' is relaxed to 'not known to contain a game', the longest stretches are the annual late-December/January gap after the college national championship until the next published spring-training or NFL date, and the day ranges that sit between two officially dated events. Those are published explicitly on this page as CANDIDATES, never as verified free time.
+What the data supports: early winter (January to mid-February) repeatedly produces two-to-four day gaps between a published Sharks game and the next published NFL playoff weekend, because baseball is out of season and college football has ended. The longest such gap bracketed by two published official games is listed at the top of the ranked table. From late February to early October, at least one MLB game is published nearly every day, so no gap longer than a day or two can exist even in the model.
 
 ## Known limitation (flagged, not hidden)
 

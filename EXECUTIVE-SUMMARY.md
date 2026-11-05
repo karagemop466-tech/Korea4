@@ -17,7 +17,22 @@ Generated 2026-11-03T23:27:13+00:00 from 748 official-source records.
 4. 2028/2029 (and unreleased 2027 NFL/WWO) rows are ESTIMATED models, not real verified released schedules.
 5. Every table row carries an official source link.
 
-## Headline conclusion
+## Headline conclusion — vacation
+
+**No 7-, 14- or 21-day window in 2027, 2028 or 2029 is free.** The longest run of consecutive days with no published game of any monitored
+category is 5 days, but every such run exists because the 2027 NFL/Westwood One, 2028 and 2029
+schedules have not been released. The longest gap bracketed by two *published* official games is
+4 days (2027-01-19 to 2027-01-22,
+between Utah at San Jose on 2027-01-18 and
+Edmonton at San Jose on 2027-01-23).
+
+Why the answer is short rather than three weeks: MLB publishes a game almost every day from late February to early October, so a baseball game
+is on the radio nearly every day of the year's best weather. Winter gaps between the NFL playoffs and the start of spring training are the only
+real openings, and they are two to four days long.
+
+<function other_sports_summary at 0x7f2892c77600>
+
+## Older stricter statement (kept for continuity)
 Using official rows plus separately labelled 2026-pattern estimates, no 7-, 14-, or 21-day fully free strict window appears in 2027–2029. The best short officially anchored gap is Feb 15–18, 2027; all longer vacation recommendations are least-conflict ESTIMATED candidates and must be rechecked when schedules are released.
 
 No 7-, 14- or 21-day trip can be certified free from all requested radio sports from this incomplete snapshot. In 2027, the [NFL lists Super Bowl LXI on February 14](https://www.nfl.com/news/2026-27-national-football-league-important-dates), and the [Phillies list a spring-training game on February 19](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced). The intervening dates are only a review candidate, not a verified radio-free interval: other broadcasts, future changes and local carriage remain unknown. [Westwood One warns not every affiliate carries every network broadcast](https://www.westwoodonesports.com/station-finder/). The 2028 and 2029 candidates are model-based and unverified.
