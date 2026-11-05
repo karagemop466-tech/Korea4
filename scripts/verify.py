@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PRIMARY_PAGES = [
     "index.html", "daily.html", "calendar.html", "vacation.html", "mlb.html", "nfl.html",
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
-    "methodology.html", "review.html", "executive-summary.html", "teams.html",
+    "methodology.html", "review.html", "executive-summary.html", "teams.html", "free-runs.html",
 ]
 REPORT = ROOT / "research/verification-report.md"
 

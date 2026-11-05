@@ -13,12 +13,16 @@ META = json.loads((ROOT / "data/official/meta.json").read_text())
 EVENTS = json.loads((ROOT / "data/official/events.json").read_text())
 REVIEW = json.loads((ROOT / "research/line_by_line.json").read_text())
 DAYS_2026 = json.loads((ROOT / "data/official/days-2026.json").read_text())
+FREE_RUNS = json.loads((ROOT / "data/official/free-runs.json").read_text())
+OTHER_SPORTS_PATH = ROOT / "data/official/other-sports.json"
+OTHER_SPORTS = json.loads(OTHER_SPORTS_PATH.read_text()) if OTHER_SPORTS_PATH.exists() else None
 SOURCES = META["source_catalogue"]
 DEFAULT_SOURCE = SOURCES[0]["url"] if SOURCES else "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027"
 
 NAV = [
     ("index.html", "Dashboard"), ("daily.html", "Daily scoreboard"), ("calendar.html", "Calendar"),
-    ("vacation.html", "Vacation windows"), ("mlb.html", "MLB"), ("nfl.html", "NFL"),
+    ("vacation.html", "Vacation windows"), ("free-runs.html", "Longest free runs"),
+    ("mlb.html", "MLB"), ("nfl.html", "NFL"),
     ("ncaaf.html", "Stanford / Cal"), ("wwo.html", "Westwood One"), ("radio.html", "Radio map"),
     ("sources.html", "Sources"), ("flagged.html", "Flagged"), ("methodology.html", "Method"),
     ("review.html", "Repo review"), ("executive-summary.html", "Executive summary"),
@@ -105,16 +109,18 @@ def cell(row: dict, spec) -> str:
     return esc(value)
 
 
-def table(headers, rows, columns, name, page_size=100, intro=None):
+def table(headers, rows, columns, name, page_size=100, intro=None, with_source=True):
     body = []
     for row in rows:
         cells = [cell(row, c) for c in columns]
         source_url = source_of(row)
         source_label = row.get("source_label") or row.get("source_label_") or "Official source"
-        cells.append(f'<a class="source-link" href="{esc(source_url)}" target="_blank" rel="noopener">{esc(source_label)}</a>')
+        if with_source:
+            cells.append(f'<a class="source-link" href="{esc(source_url)}" target="_blank" rel="noopener">{esc(source_label)}</a>')
         row_text = " ".join(re.sub(r"<[^>]+>", " ", c) for c in cells).lower()
         status = status_of(row).lower()
-        body.append(f'<tr data-source-url="{esc(source_url)}" data-row-status="{esc(status)}" data-row-text="{esc(row_text)}">' + "".join(f"<td>{c}</td>" for c in cells) + "</tr>")
+        attrs = f' data-source-url="{esc(source_url)}" data-row-status="{esc(status)}"' if with_source else f' data-row-status="{esc(status)}"'
+        body.append(f'<tr{attrs} data-row-text="{esc(row_text)}">' + "".join(f"<td>{c}</td>" for c in cells) + "</tr>")
     controls = f'''
       <div class="table-controls">
         <input type="search" placeholder="Filter {esc(name.replace('-', ' '))} rows…" aria-label="Filter rows">
@@ -125,7 +131,7 @@ def table(headers, rows, columns, name, page_size=100, intro=None):
       </div>'''
     return f'''<div class="table-wrap" data-table="{esc(name)}" data-page-size="{page_size}">
       {f'<p class="intro">{esc(intro)}</p>' if intro else ''}{controls}
-      <div class="scroll"><table><thead><tr>{''.join(f'<th>{esc(h)}</th>' for h in headers)}<th>Official source</th></tr></thead><tbody>{''.join(body)}</tbody></table></div>
+      <div class="scroll"><table><thead><tr>{''.join(f'<th>{esc(h)}</th>' for h in headers)}{'<th>Official source</th>' if with_source else ''}</tr></thead><tbody>{''.join(body)}</tbody></table></div>
     </div>'''
 
 
@@ -266,6 +272,7 @@ def build_index():
 <p><a class="control-btn" href="daily.html?date={esc(META['system_today'])}">Open scoreboard for snapshot date →</a></p></section>
 <section class="panel"><h2>Executive findings</h2><p class="intro">Every finding links to the official source used. Full analysis is on the Executive Summary and Methodology pages.</p>
 {table(['Topic','Finding','Status'], findings_rows, ['topic','finding',('status','badge')], 'findings', 20)}</section>
+{free_runs_panel(compact=True)}
 <section class="panel"><h2>Best 1-, 2-, and 3-week candidates</h2><p class="intro">Least-conflict windows from exact official rows plus separately labelled unreleased-season models. “Strict free” means zero busy blocks; no window is certified free until future schedules are released.</p>
 {table(['Year','Length','Start','End','Busy days','Strict free','Status'], window_rows, ['year',('length_days','num'),'start','end',('busy_days','num'),('strict_free','text'),('status','badge')], 'best-windows', 20)}</section>
 <section class="panel"><h2>Flagged irregularities</h2>{table(['ID','Issue','Status','Action'], flag_rows, ['id','issue',('status','badge'),'action'], 'flags-index', 20)}
@@ -324,17 +331,166 @@ def build_calendar():
 def build_vacation():
     conclusion = META["analysis_conclusion"]
     body = f'''
-<div class="callout danger"><strong>Strict conclusion:</strong> {esc(conclusion['conclusion'])} {badge('ESTIMATED / UNVERIFIED','unverified')} <a href="{esc(conclusion['source_url'])}" target="_blank" rel="noopener">Official NFL date anchor</a></div>
+<div class="callout danger"><strong>Answer: {FREE_RUNS['counts']['max_strict_free_run_days']} consecutive days is the longest stretch in 2027–2029 with no published game.</strong>
+No 7-, 14- or 21-day window exists under the strict reading. The longest run is
+{FREE_RUNS['shortlist'][0]['start']} → {FREE_RUNS['shortlist'][0]['end']} ({FREE_RUNS['shortlist'][0]['days']} days), bounded by the official 2027 NFL Week 18 Sunday game
+and official Wild Card Weekend. <a href="free-runs.html">Full free-run analysis →</a></div>
+<div class="callout warn"><strong>Important distinction the older analysis did not make.</strong> A vacation is not only "is a game scheduled today" — it is also
+"can I leave the house without missing a game I want to hear". Baseball is on air almost every day from late February to early October, so every weekday in that
+span contains a live game somewhere in MLB even when no game is in San Francisco. Those days are busy here, and that is why the strict answer is 5 days and not 3 weeks.</div>
+<div class="callout danger"><strong>Strict conclusion (unchanged):</strong> {esc(conclusion['conclusion'])} {badge('ESTIMATED / UNVERIFIED','unverified')} <a href="{esc(conclusion['source_url'])}" target="_blank" rel="noopener">Official NFL date anchor</a></div>
 <section class="panel"><h2>Best 1-, 2-, and 3-week windows (least conflict)</h2><p class="intro">Computed from exact official rows plus separately labelled 2026-pattern estimates. Busy days include official dates with TBD times and unverified conservative blocks.</p>
 {table(['Year','Length','Start','End','Busy days','Busy minutes','Model days','Strict free','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('busy_minutes','num'),('model_days','num'),('strict_free','text'),('status','badge')], 'vacation-windows', 20)}</section>
 <section class="panel"><h2>2027 anchors for manual review</h2><p class="intro">These dates do not establish an empty week or confirm local radio coverage. Other broadcasts may occur between the anchors.</p>{table(['Event','Official date','Status'], [
  {'event':'NFL Super Bowl LXI','date':'2027-02-14','status':'VERIFIED DATE — KICKOFF / RADIO COVERAGE NOT CHECKED','source_url':'https://www.nfl.com/news/2026-27-national-football-league-important-dates','source_label':'NFL important dates'},
  {'event':'Phillies at Tigers spring training','date':'2027-02-19','status':'VERIFIED DATE — START / SF AM/FM CARRIAGE UNVERIFIED','source_url':'https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced','source_label':'Phillies official release'}], ['event','date',('status','badge')], 'manual-anchors', 20)}</section>
+{free_runs_panel(compact=False)}
 <section class="panel"><h2>Officially anchored short gaps and scenarios</h2>{table(['Year','Window','Days','Label','Status','Notes'], META['anchor_windows'], ['year',('window','blank'),('length_days','num'),'label',('status','badge'),'notes'], 'anchor-windows', 20)}</section>
 <section class="panel"><h2>Schedule availability 2026–2029</h2>{table(['Season','League','Official rows','TBD times','Status','Verification'], META['season_availability'], ['season','league',('official_rows','num'),('tbd_times','num'),'status',('verification','badge')], 'season-availability', 50)}</section>
 <section class="panel"><h2>Model provenance</h2>{table(['Year','Intervals','Method','Status','Notes'], META['model_seasons'], ['year',('model_intervals','num'),'method',('status','badge'),'notes'], 'model-provenance', 20)}</section>
 '''
     write("vacation.html", page("Vacation windows", "vacation.html", "Best 7-, 14-, and 21-day free-time candidates for 2027, 2028 and 2029, with strict verified/estimated/unverified labels.", body))
+
+def free_runs_rows(limit=None):
+    """Rows for the free-run tables. Every row keeps its official source link."""
+    rows = []
+    for item in FREE_RUNS["shortlist"][: limit or len(FREE_RUNS["shortlist"])]:
+        src = item.get("block_before_source") or item.get("block_after_source") or item.get("source_url")
+        rows.append({
+            "start": item["start"],
+            "end": item["end"],
+            "days": item["days"],
+            "weekdays": f"{item['start_weekday']} → {item['end_weekday']}",
+            "bounded": (f"{item['block_before'] or 'no earlier captured game'} ({item['block_before_date'] or '—'})"
+                        " → "
+                        f"{item['block_after'] or 'no later captured game'} ({item['block_after_date'] or '—'})"),
+            "status": "CANDIDATE — NO PUBLISHED GAME ON THESE DATES / UNRELEASED-SEASON CAVEAT",
+            "source_url": src,
+            "source_label": "Bounding official source",
+        })
+    return rows
+
+
+FREE_RUN_COLUMNS = ["Start", "End", "Days", "Weekdays", "Officially bounded by (before → after)", "Status"]
+FREE_RUN_SPECS = ["start", "end", ("days", "num"), "weekdays", "bounded", ("status", "badge")]
+
+
+def free_runs_table(limit=None, name="free-runs-shortlist"):
+    return table(FREE_RUN_COLUMNS, free_runs_rows(limit), FREE_RUN_SPECS, name, 20)
+
+
+def other_sports_line():
+    other = FREE_RUNS.get("other_sports", {})
+    if str(other.get("status", "")).startswith("NOT CAPTURED"):
+        return ("Warriors (NBA) and Sharks (NHL) game rows were not captured in this snapshot, so a \"free\" day here "
+                "is free only of MLB, NFL, Stanford/Cal and Westwood One. Flagged as F-018.")
+    counts = other.get("counts", {})
+    return (f"Warriors (NBA) and Sharks (NHL) official game rows included as busy days: "
+            f"{counts.get('total', 0)} rows ({counts.get('NHL', 0)} NHL, {counts.get('NBA', 0)} NBA).")
+
+
+def free_runs_panel(compact=False):
+    counts = FREE_RUNS["counts"]
+    limit = 3 if compact else None
+    more = ('<p><a class="control-btn" href="free-runs.html">Full free-run analysis and official season boundaries →</a></p>'
+            if compact else '')
+    return f'''
+<section class="panel"><h2>Longest run of consecutive days with no published game</h2>
+<div class="callout warn"><strong>{counts['max_strict_free_run_days']} consecutive days</strong> is the longest such run in 2027–2029
+(2027: {FREE_RUNS['per_year']['2027']['longest_strict_free_run']} days, 2028: {FREE_RUNS['per_year']['2028']['longest_strict_free_run']} days,
+2029: {FREE_RUNS['per_year']['2029']['longest_strict_free_run']} days). No 7-, 14- or 21-day run exists. A day counts as free only when it holds
+no published game, no officially anchored all-day event and no unreleased-season model block. {other_sports_line()}</div>
+{free_runs_table(limit)}
+{more}</section>'''
+
+
+def build_free_runs():
+    per_year = FREE_RUNS["per_year"]
+    year_rows = []
+    for year, rec in per_year.items():
+        top = FREE_RUNS["year_runs"][year]["top_runs"]
+        year_rows.append({
+            "year": year,
+            "days": rec["days_in_snapshot"],
+            "free_days": rec["strict_free_days"],
+            "published_days": rec["published_days"],
+            "run": f"{rec['longest_strict_free_run']} days",
+            "empty_run": f"{rec['longest_no_published_run']} days (absence of schedule, not free time)",
+            "top": ", ".join(f"{r['start']}→{r['end']}" for r in top[:3]),
+            "status": "ESTIMATED GAP — UNVERIFIED",
+            "source_url": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+            "source_label": "NFL official 2026–27 important dates",
+        })
+    other_rows = []
+    if OTHER_SPORTS:
+        for row in OTHER_SPORTS["rows"]:
+            other_rows.append({
+                "date": row["date"],
+                "time": row["official_time_pt"],
+                "league": row["league"],
+                "matchup": row["matchup"],
+                "venue": row.get("venue", ""),
+                "radio": row.get("radio", ""),
+                "planning": f"{row['planning_start_pt']}–{row['planning_end_pt']}",
+                "status": row["duration_status"],
+                "source_url": row["source_url"],
+                "source_label": row["source_label"],
+                "verification": row["verification"],
+            })
+    availability_rows = OTHER_SPORTS["availability"] if OTHER_SPORTS else [{
+        "league": "NBA / NHL", "season": "", "official_rows": "",
+        "status": "NOT CAPTURED — UNVERIFIED (fetch scripts/fetch_nba_nhl_sources.py runs in CI)",
+        "source_url": "https://www.nba.com/warriors/schedule",
+        "source_label": "NBA Warriors official schedule page",
+        "verification": "UNVERIFIED",
+    }]
+    classes = [{"k": k, "v": v} for k, v in FREE_RUNS["classes"].items()]
+    body = f"""
+<section class="panel"><h2>Answer: the longest stretch with no published game</h2>
+<div class="callout danger"><strong>{FREE_RUNS['counts']['max_strict_free_run_days']} consecutive days</strong> is the longest run in 2027–2029 that is free under the strict reading:
+no published MLB, NFL, Stanford/Cal, Westwood One or captured NBA/NHL game, and no officially anchored all-day event.
+No 7-, 14- or 21-day run exists. {esc(FREE_RUNS['strict_conclusion'])} {other_sports_line()}</div>
+<p class="intro">{esc(FREE_RUNS['practical_reading'])}</p></section>
+<section class="panel"><h2>Definition used on this page</h2>
+<p class="intro">{esc(FREE_RUNS['definition'])}</p>
+{table(["Day class", "Meaning"], classes, ["k", "v"], "free-run-classes", 20, with_source=False)}
+</section>
+<section class="panel"><h2>Per-year summary</h2>
+{table(["Year", "Days in snapshot", "Days with no block", "Days with a published game", "Longest strict-free run", "Longest stretch with no published game", "Top three runs"],
+      year_rows, ["year", ("days", "num"), ("free_days", "num"), ("published_days", "num"), "run", "empty_run", "top"],
+      "free-runs-years", 20)}</section>
+<section class="panel"><h2>Longest runs, ranked</h2>
+<p class="intro">Ranked by consecutive days. “Officially bounded by” shows the last captured game before the run and the next captured game after it, so each run can be checked against its own official source.</p>
+{free_runs_table()}
+<p class="mini">Recomputed by <code>scripts/build_free_runs.py</code> from <code>data/official/days-*.json</code>; published as
+<a href="data/official/free-runs.json">data/official/free-runs.json</a>. Verification record: <a href="research/free-runs-report.md">research/free-runs-report.md</a>.</p>
+</section>
+<section class="panel"><h2>Other Bay Area live radio sports: Warriors (NBA) and Sharks (NHL)</h2>
+<div class="callout"><strong>Why this matters.</strong> 95.7 The Game and 98.5 KFOX carry NBA and NHL games that the original dashboard only listed as stations.
+A day is only free if the Warriors and Sharks are also not on air. Their rows come from the leagues' own feeds; neither league publishes a broadcast length, so the
+window end is a clearly labelled ESTIMATED planning length, never an official end time.</div>
+{table(["League", "Season", "Official rows", "Status", "Verification"], availability_rows,
+      ["league", "season", ("official_rows", "num"), "status", ("verification", "badge")], "other-sports-availability", 20)}
+</section>
+"""
+    if other_rows:
+        body += table(
+            ["Date PT", "Official start", "League", "Matchup", "Venue", "Radio home", "Planning window", "Length status", "Verification"],
+            other_rows, ["date", "time", "league", "matchup", "venue", "radio", "planning", ("status", "badge"), ("verification", "badge")],
+            "other-sports-games", 100,
+        )
+    body += f"""
+<section class="panel"><h2>Official season boundaries behind the empty stretches</h2>
+<p class="intro">Each row explains why a stretch of days has no published game. None of them is evidence that no game is scheduled.</p>
+{table(["ID", "League / season", "What the official source says", "Dates", "Effect on free time", "Status"],
+      FREE_RUNS["season_notes"], ["id", lambda r: f"{r['league']} {r['season']}", "label", lambda r: f"{r['start']} → {r['end']}", "effect", ("status", "badge")],
+      "free-run-notes", 50)}
+</section>
+"""
+    write("free-runs.html", page(
+        "Longest free runs (vacation answer)", "free-runs.html",
+        "How many consecutive days in 2027, 2028 and 2029 have no published live-radio sports game, with the official source that bounds each run.",
+        body))
 
 
 def build_mlb():
@@ -411,7 +567,10 @@ def build_flagged():
         {'id':'D1-01','issue':'Warriors, Sharks, Valkyries and other terrestrial radio game-by-game coverage is incomplete; local carriage and reception are not confirmed for each event.','status':'UNVERIFIED','action':'Do not treat displayed gaps as verified free time. Consult station and team schedules.','source_url':'https://www.nba.com/warriors/schedule'},
         {'id':'D1-02','issue':'The dashboard uses a static 2026-11-02 snapshot; future schedules and broadcast details may have changed. The automated structural checker does not independently verify each source value.','status':'UNVERIFIED','action':'Refresh and independently compare individual rows before relying on them.','source_url':'https://www.nfl.com/schedules/'},
         {'id':'D1-03','issue':'Archived parallel dashboards and the primary snapshot may differ in coverage and conclusions.','status':'FLAGGED','action':'Use them as historical research only; independently review official sources.','source_url':'https://www.westwoodonesports.com/nfl-schedule/'},
-        {'id':'D1-04','issue':'Legacy planner build tests expect a superseded redirect artifact and fail against the root-dashboard configuration.','status':'FLAGGED','action':'Tests are not evidence of a successful legacy build; root static checks and focused dashboard tests are run separately.','source_url':'https://www.westwoodonesports.com/station-finder/'}], ['id','issue',('status','badge'),'action'], 'follow-up-flags', 20)}</section>
+        {'id':'D1-04','issue':'Legacy planner build tests expect a superseded redirect artifact and fail against the root-dashboard configuration.','status':'FLAGGED','action':'Tests are not evidence of a successful legacy build; root static checks and focused dashboard tests are run separately.','source_url':'https://www.westwoodonesports.com/station-finder/'},
+        {'id':'F-018','issue':'Snapshot has station rows for the Warriors (95.7 The Game) and Sharks (98.5 KFOX) but no game rows, so days without MLB/NFL/NCAAF/WWO games were being called free while NBA/NHL games could be on air.','status':'REPAIRED IN ANALYSIS — PENDING DATA CAPTURE','action':'scripts/fetch_nba_nhl_sources.py + scripts/collect_other_sports.py capture official NBA/NHL game rows in CI; the Longest free runs page adds them as busy days and says so when they are missing.','source_url':'https://www.nba.com/warriors/schedule'},
+        {'id':'F-019','issue':'Snapshot contains no MLB game row after 2027-09-26 (2027 postseason absent) and no 2027 NFL, 2027 Westwood One, 2028 or 2029 season rows at all. Long empty stretches late in 2027 and throughout 2028–2029 are absence of data, not absence of games.','status':'UNVERIFIED','action':'These stretches are published as CANDIDATES only, never as verified free time; each is bounded by the official date where the released schedule stops.','source_url':'https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2028'},
+        {'id':'F-020','issue':'The "unreleased season" model is built only from 2026 windows that fall after 2026-11-01, so 2028–2029 MODEL_ONLY days in February–September reflect no real baseball, hockey or basketball calendar.','status':'FLAGGED — MODEL LIMITATION','action':'Model rows never count as free and never count as a confirmed game; the free-run analysis treats them as "not verified free" only.','source_url':'https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026'}], ['id','issue',('status','badge'),'action'], 'follow-up-flags', 20)}</section>
 <section class="panel"><h2>Irregularities and corrections</h2>{table(['ID','Issue','Status','Action'], META['flags'], ['id','issue',('status','badge'),'action'], 'all-flags', 100)}</section>
 <section class="panel"><h2>Unverified official anchors</h2>{table(['ID','Event','Official date','Status','Verification'], [a for a in META['anchors'] if a['verification']=='UNVERIFIED'], ['id','event',('official_date','blank'),'status',('verification','badge')], 'unverified-anchors', 100)}</section>
 '''
@@ -423,6 +582,14 @@ def build_methodology():
 <div class="callout"><strong>Verification rule:</strong> official/league/team/network sources only for VERIFIED values. If a value cannot be confirmed, leave it blank and publish UNVERIFIED with an official source link. Estimates are never presented as released schedules.</div>
 <section class="panel"><h2>Average durations and halftime research</h2>{table(['Sport','Average duration','Halftime','Regulation','Status','Notes'], META['durations_table'], ['sport','average_game_duration','halftime','regulation',('status','badge'),'notes'], 'durations-method', 50)}</section>
 <section class="panel"><h2>Planning models — not released schedules</h2>{table(['Year','Model intervals','Method','Status','Notes'], META['model_seasons'], ['year',('model_intervals','num'),'method',('status','badge'),'notes'], 'models-method', 50)}</section>
+<section class="panel"><h2>Free-run method (consecutive free days)</h2>
+<p class="intro">The daily scoreboard answers "which minutes today are free". The vacation question is different: "how many <em>consecutive days</em> can I be away".
+Both are computed from the same published rows, but a day is only counted as free when it contains no published game, no officially anchored all-day event and no
+unreleased-season model block. Counting a day as free because the schedule is unknown would be an invention, so the strict count refuses to do it.</p>
+{table(["Day class", "Meaning"], [{"k": k, "v": v} for k, v in FREE_RUNS["classes"].items()], ["k", "v"], "method-free-classes", 20, with_source=False)}
+<p class="mini">Recompute: <code>python3 scripts/build_free_runs.py</code> → <a href="data/official/free-runs.json">data/official/free-runs.json</a> and
+<a href="research/free-runs-report.md">research/free-runs-report.md</a>. Official NBA/NHL capture runs in CI via
+<code>scripts/fetch_nba_nhl_sources.py</code> and <code>scripts/collect_other_sports.py</code>.</p></section>
 <section class="panel"><h2>Verification rules</h2><ol class="exec-list">
 <li>Official/league/team/network sources only for VERIFIED values.</li>
 <li>Unconfirmable values are blank and flagged UNVERIFIED with an official source link.</li>
@@ -537,6 +704,7 @@ def main():
     preserve_legacy()
     build_index(); build_daily(); build_calendar(); build_vacation(); build_mlb(); build_nfl()
     build_ncaaf(); build_wwo(); build_radio(); build_sources(); build_flagged(); build_methodology()
+    build_free_runs()
     build_review(); build_executive(); build_readme()
     print(json.dumps({"pages": len(NAV) + 1, "source_rows": len(SOURCES), "event_rows": len(EVENTS), "audit_rows": len(REVIEW)}, indent=2))
 

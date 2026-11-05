@@ -1,0 +1,59 @@
+name: Free-run analysis (official NBA/NHL capture + rebuild)
+
+on:
+  push:
+    branches: [main, arena/c67035f7-korea4]
+    paths:
+      - scripts/fetch_nba_nhl_sources.py
+      - scripts/collect_other_sports.py
+      - scripts/build_free_runs.py
+      - scripts/build_site.py
+      - .github/workflows/free-runs.yml
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: free-runs-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Fetch official NBA / NHL schedule snapshots
+        run: python3 scripts/fetch_nba_nhl_sources.py --refresh
+      - name: Parse official rows (Warriors, Sharks)
+        run: python3 scripts/collect_other_sports.py
+      - name: Recompute consecutive-free-day analysis
+        run: python3 scripts/build_free_runs.py
+      - name: Rebuild the static dashboard from the same data
+        run: python3 scripts/build_site.py
+      - name: Verify the rebuilt site (links, source rows, JSON, JS)
+        run: |
+          python3 scripts/verify.py
+          node --check js/app.js
+      - name: Publish captured rows and rebuilt pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/free_runs data/official/other-sports.json data/official/free-runs.json research/free-runs-report.md
+          git add -A -- '*.html' EXECUTIVE-SUMMARY.md README.md research/verification-report.md
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+            exit 0
+          fi
+          git commit -m "Capture official NBA/NHL rows and rebuild free-run analysis [skip ci]"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"

@@ -2,11 +2,11 @@
 
 Generated: 2026-11-03T23:27:13+00:00
 
-- JSON files checked: 9
-- Primary generated pages: 15
-- Static primary table rows with source URL: 10086
-- HTML pages link-checked (including legacy trees): 87
-- Internal links checked: 689
+- JSON files checked: 10
+- Primary generated pages: 16
+- Static primary table rows with source URL: 10131
+- HTML pages link-checked (including legacy trees): 88
+- Internal links checked: 734
 - Broken internal links: 0
 - JavaScript syntax: PASS
 - Errors: 0
