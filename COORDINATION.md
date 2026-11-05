@@ -639,3 +639,15 @@ No new irregularities; no data changes required. This session records confirmati
 | Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,086 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS |
 | Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded |
 | Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
+
+## Session — `arena/e6fa97a8-korea4` (2026-11-05) — final integration + verification pass
+
+GitHub API is unreachable from this sandbox's shell (all outbound HTTPS except `github.com`, `codeload`, `api.github.com`, `registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org`), so `scripts/fetch_official.py` cannot re-pull raw snapshots here. Official web sources are read through the agent's page-fetch tool instead, and each check is recorded with its URL below. Site/data regeneration uses the committed snapshot.
+
+### Task claim (written before any work, per protocol)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| G1 — Final integration: independent line-by-line verification against official sources, fix confirmed defects, add the requested "Games of interest" section, regenerate site, run verify gate, PR → merge → Pages deploy, record results | in progress | `arena/e6fa97a8-korea4` | `COORDINATION.md`, `scripts/build_site.py`, `scripts/verify.py`, new `games.html`, `index.html` + nav in generated pages, `flagged.html`, `explanations`, `README.md`, `EXECUTIVE-SUMMARY.md` | Non-overlapping with open PR #18 (`arena/aea8720a-korea4`) and PR #25 (`arena/46c69197-korea4`), both last committed 2026-11-03 (>60 min stale, no new commits). Those branches rewrite the whole generated site and are left untouched — not merged, not rebased, not edited. This session works only on its own fixed branch `arena/e6fa97a8-korea4`. |
+
+Stale-claim handoff note: PR #18 and PR #25 have had no commits for >60 minutes and neither has ever reached `needs review`. Per the board protocol their subjects (uncertainty-safe gaps / provenance audit) are **not** re-claimed here; this session does its own independent verification and records separate results.
