@@ -141,8 +141,9 @@ and NO Stanford/Cal game is on. Binding constraints each year:
 - MLB spring training games begin 5 days after the Super Bowl; regular season late Mar–end Sep; postseason Oct.
 - NCAAF takes most Saturdays late Aug–late Nov.
 Computed top strictly-free streaks (engine = docs/data.js; Node test run, all assertions passed):
-- 2027: Jan 25–30, Feb 1–6, Feb 8–13 (6 days each; boundaries est. except SB) + Feb 15–18 (4 days;
-  BOTH boundaries verified: SB LXI Feb 14 ← NFL; spring games Feb 19 ← official 2027 MLB schedule).
+- 2027 (WITHDRAWN, 2026-11-05 correction): the earlier streaks Jan 25–30, Feb 1–6, Feb 8–13 and Feb 15–18 are not free.
+  Warriors games (official PDF, nba.com) fall on Feb 1, 3, 5, 7, 9, 10, 13, 15 and 17, and the Earthquakes Sprint Season starts Feb 20.
+  Officially released rows only (scripts/official_gaps.py): longest Jan–Mar 2027 run is 2 days. See flagged IR-019 and IR-022.
 - 2028: est. Jan 24–29, Jan 31–Feb 5, Feb 7–12 (6d) + Feb 14–17 (4d). CONDITIONAL: Jul 12–20, 2028 (9d)
   if MLB's envisioned extended Olympic break is adopted (scenario toggle; not agreed as of Jul-2026 reporting).
 - 2029: est. Jan 22–27, Jan 29–Feb 3, Feb 5–10 (6d) + Feb 12–15 (4d).

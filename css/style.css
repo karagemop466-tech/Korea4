@@ -94,6 +94,7 @@ td.blank { color: var(--muted); font-style: italic; }
 .timeline-block.ncaaf { background: #6941c6; }
 .timeline-block.wwo { background: #a76500; }
 .timeline-block.mls { background: #087261; }
+.timeline-block.nba { background: #c2410c; }
 .timeline-block.unverified { background: #7a271e; }
 .timeline-block.model { background: #7c8798; }
 .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px; margin-top: 14px; }

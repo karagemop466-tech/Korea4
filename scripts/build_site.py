@@ -294,6 +294,7 @@ def build_daily():
     <label><input class="filter-toggle" type="checkbox" data-cat="NCAAF" checked> NCAAF</label>
     <label><input class="filter-toggle" type="checkbox" data-cat="WWO" checked> WWO</label>
     <label><input class="filter-toggle" type="checkbox" data-cat="MLS" checked> MLS</label>
+    <label><input class="filter-toggle" type="checkbox" data-cat="NBA" checked> NBA (Warriors, 95.7 The Game)</label>
   </div>
   <p class="mini">Durations are planning assumptions, not guaranteed broadcast end times. Filters change the scenario, not the underlying source data.</p>
 </section>
@@ -323,9 +324,27 @@ def build_calendar():
 
 def build_vacation():
     conclusion = META["analysis_conclusion"]
+    gaps = json.loads((ROOT / "research/analysis/official_gaps.json").read_text(encoding="utf-8"))
+    gap_rows = []
+    for key, label in (("strict_no_rows", "Strict — no row of any kind (estimates and UNVERIFIED blocks count as busy)"),
+                       ("released_only", "Released official rows only (models and UNVERIFIED blocks ignored)")):
+        longest = gaps["longest_run"][key] or {"start": "", "end": "", "length_days": 0}
+        gap_rows.append({"definition": label, "window": f"{longest['start']} to {longest['end']}" if longest["start"] else "none",
+                         "days": longest["length_days"], "status": "OFFICIAL-ONLY — NOT CERTIFIED FREE",
+                         "source_url": (longest.get("bounding_source_urls") or ["https://www.nfl.com/news/2026-27-national-football-league-important-dates"])[0],
+                         "source_label": "Official bounding source"})
+    gap_section = (
+        '<section class="panel"><h2>Officially-released-only gaps, Jan–Mar 2027</h2>'
+        '<p class="intro">Computed by scripts/official_gaps.py from data/official/days-2027.json (research/analysis/official_gaps.json). '
+        'A gap is only free in the captured snapshot. Official Warriors, Earthquakes and MLB rows are busy; ESTIMATED WWO/NFL/NCAAF models are reported separately.</p>'
+        + table(["Definition", "Longest run", "Days", "Status"], gap_rows,
+                ["definition", "window", ("days", "num"), ("status", "badge")], "official-gaps", 20)
+        + '<p class="mini">Full run list with bounding source links: <a href="https://github.com/karagemop466-tech/Korea4/blob/main/research/analysis/official_gaps.json">research/analysis/official_gaps.json</a>. '
+        + esc(gaps["conclusion"]) + '</p></section>\n'
+    )
     body = f'''
 <div class="callout danger"><strong>Strict conclusion:</strong> {esc(conclusion['conclusion'])} {badge('ESTIMATED / UNVERIFIED','unverified')} <a href="{esc(conclusion['source_url'])}" target="_blank" rel="noopener">Official NFL date anchor</a></div>
-<section class="panel"><h2>Best 1-, 2-, and 3-week windows (least conflict)</h2><p class="intro">Computed from exact official rows plus separately labelled 2026-pattern estimates. Busy days include official dates with TBD times and unverified conservative blocks.</p>
+{gap_section}<section class="panel"><h2>Best 1-, 2-, and 3-week windows (least conflict)</h2><p class="intro">Computed from exact official rows plus separately labelled 2026-pattern estimates. Busy days include official dates with TBD times and unverified conservative blocks.</p>
 {table(['Year','Length','Start','End','Busy days','Busy minutes','Model days','Strict free','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('busy_minutes','num'),('model_days','num'),('strict_free','text'),('status','badge')], 'vacation-windows', 20)}</section>
 <section class="panel"><h2>2027 anchors for manual review</h2><p class="intro">These dates do not establish an empty week or confirm local radio coverage. Other broadcasts may occur between the anchors.</p>{table(['Event','Official date','Status'], [
  {'event':'NFL Super Bowl LXI','date':'2027-02-14','status':'VERIFIED DATE — KICKOFF / RADIO COVERAGE NOT CHECKED','source_url':'https://www.nfl.com/news/2026-27-national-football-league-important-dates','source_label':'NFL important dates'},

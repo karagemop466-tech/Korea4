@@ -9,7 +9,7 @@ Fixed working branch: `arena/5cc34200-korea4`
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
-| G1 — Official-only gap audit for Jan–Mar 2027 (strict free-time definition): (a) separate officially released NFL/MLB/NCAAF rows from ESTIMATED WWO season-pattern blocks; (b) publish the officially-unscheduled windows (e.g. Feb 1–13, 2027) with official anchors; (c) check 2026–27 Warriors (NBA) and Sharks (NHL) Bay Area radio carriage and flag stale 2018/2019 radio sources (`research/official/raw/warriors_radio.gz`, `sharks_radio.gz`); (d) publish results on the Flagged for Review page | in progress | `arena/e9c48864-korea4` | `COORDINATION.md`, `research/analysis/official_gaps.json`, `scripts/official_gaps.py`, `vacation.html` (gap section only), `flagged.html` (new IR rows only) | Claimed 2026-11-05. Does not touch open PR #18 (`arena/aea8720a-korea4`) or PR #25 (`arena/46c69197-korea4`) scopes. Data rows in `data/official/events.json` are not edited by this task unless a row is verified against an official page. |
+| G1 — Official-only gap audit for Jan–Mar 2027 (strict free-time definition): (a) separate officially released NFL/MLB/NCAAF rows from ESTIMATED WWO season-pattern blocks; (b) publish the officially-unscheduled windows (e.g. Feb 1–13, 2027) with official anchors; (c) check 2026–27 Warriors (NBA) and Sharks (NHL) Bay Area radio carriage and flag stale 2018/2019 radio sources (`research/official/raw/warriors_radio.gz`, `sharks_radio.gz`); (d) publish results on the Flagged for Review page | done — results and PR/merge record below | `arena/e9c48864-korea4` | `COORDINATION.md`, `research/analysis/official_gaps.json`, `scripts/official_gaps.py`, `vacation.html` (gap section only), `flagged.html` (new IR rows only). Scope extension (logged): pipeline files `scripts/collect_official.py`, `scripts/build_site.py`, `js/app.js`, `css/style.css`, plus `research/official/transcribed/*.json` and the 14 Earthquakes 2027 rows and 61 Warriors rows added to `data/official/events.json` after verification against official pages | Claimed 2026-11-05. Does not touch open PR #18 (`arena/aea8720a-korea4`) or PR #25 (`arena/46c69197-korea4`) scopes. Data rows in `data/official/events.json` are not edited by this task unless a row is verified against an official page. |
 
 ## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
@@ -645,3 +645,23 @@ No new irregularities; no data changes required. This session records confirmati
 | Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,086 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS |
 | Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded |
 | Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
+
+### G1 result — arena/e9c48864-korea4 (2026-11-05)
+
+**Sources verified this session (official unless marked):**
+- Warriors 2026–27 printable schedule PDF (cdn.nba.com) and nba.com/warriors/schedule: 61 games Oct 21, 2026 to Mar 7, 2027 with PT start times in `research/official/transcribed/warriors_2026_27.json`; 25 further dates (incl. Mar 3 and Mar 9 onward, NBA Cup Dec dates) UNVERIFIED. nba.com listings through Jan 2, 2027 show KGMZ-FM 95.7 per game; later per-game radio not captured. nbacalendar.com used for corroboration only.
+- Sharks 2026–27 official broadcast page (nhl.com/sharks/team/broadcast) and official broadcast schedule PDF: all games carried on the Sharks Audio Network; the terrestrial affiliate list has **no SF Bay Area AM/FM station** (Chico, Eureka-Arcata, Fresno, Lakeport, Modesto, Sacramento, SiriusXM). Sharks games are therefore **not counted as radio-busy**. The stale 98.5 KFOX row is withdrawn (IR-020).
+- San Jose Earthquakes 2027 MLS Sprint Season (sjearthquakes.com, Oct 29, 2026): 14 official games, Feb 20 (at Portland, 2 PM PT) through May 8 (vs Vancouver, 5 PM PT); radio carriage not published (IR-021).
+
+**Audit results (`research/analysis/official_gaps.json` via `scripts/official_gaps.py`):**
+- Strict definition (no row of any kind, estimates and UNVERIFIED blocks counted as busy): longest free run Jan 1–Mar 31, 2027 = **2 days (Feb 11–12)**.
+- Released-only (models and UNVERIFIED blocks ignored): longest run = **2 days (Jan 25–26)**.
+- No run of 3+ consecutive free days under any definition. Nothing is certified free: WWO, NCAAF and NFL February 2027 schedules are unreleased.
+- **Correction:** the earlier "Feb 15–18, 2027 best officially anchored gap" and "Feb 1–13 officially unscheduled" claims are withdrawn. Warriors games on Feb 1, 3, 5, 7, 9, 10, 13, 15 and 17 fall in them, and Earthquakes games start Feb 20 (IR-019, IR-022).
+- Least-conflict 7/14/21-day rankings were recomputed. The 2027 14-day candidate is now Nov 28–Dec 11, 2027 (8 busy days, ESTIMATED from 2026 patterns). These are not recommendations.
+
+**Publication:** Flagged page IR-014 (revised), IR-018, IR-019, IR-020, IR-021, IR-022 (new). Vacation page gap section added. Executive summary, research notes and analysis conclusion corrected. Verification gate: `verify.py` PASS (0 errors, 0 warnings, 0 broken links; 10,122 source-linked primary rows); `node --check js/app.js`, `node tests/test_dashboard.mjs`, `npm test`, and `unittest` (CI set) PASS.
+
+**Conflicts:** none. No files claimed by other sessions were edited. Open PRs #18 and #25 were not touched.
+
+**Still open (flagged, non-blocking):** Earthquakes 2027 radio carriage; per-game Warriors radio after Jan 2, 2027; Sharks TV/NTN games not added to the busy calendar; 2028–2029 model blocks use the 2026 base only, so 2027 Warriors and Earthquakes games are not carried forward.

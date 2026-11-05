@@ -5,9 +5,9 @@
   'use strict';
   const M = window.K4_META || {};
   const DEFAULT_SOURCE = M.default_source_url || 'https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027';
-  const DURATIONS = Object.assign({ MLB: 158, NFL: 192, NCAAF: 204, MLS: 120 }, M.durations || {});
+  const DURATIONS = Object.assign({ MLB: 158, NFL: 192, NCAAF: 204, MLS: 120, NBA: 150 }, M.durations || {});
   const DAY_CACHE = {};
-  const CATS = ['MLB', 'NFL', 'NCAAF', 'WWO', 'MLS'];
+  const CATS = ['MLB', 'NFL', 'NCAAF', 'WWO', 'MLS', 'NBA'];
 
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -150,7 +150,7 @@
       html += '</div>';
       if (!rows.length) html += '<div class="callout success"><strong>NO CAPTURED BLOCKS — UNVERIFIED.</strong> No selected captured block is shown. Missing schedules, broadcasts and filters can leave this day incomplete; review the flags page.</div>';
       html += '<div id="day-timeline" class="timeline"></div>';
-      html += '<div class="legend"><span><i style="background:#1d63c7"></i>MLB</span><span><i style="background:#b42332"></i>NFL</span><span><i style="background:#6941c6"></i>NCAAF</span><span><i style="background:#a76500"></i>WWO</span><span><i style="background:#087261"></i>MLS</span><span><i style="background:#7a271e"></i>UNVERIFIED</span><span><i style="background:#7c8798"></i>ESTIMATED MODEL</span><span><i style="background:#157a54"></i>ESTIMATED GAP</span></div>';
+      html += '<div class="legend"><span><i style="background:#1d63c7"></i>MLB</span><span><i style="background:#b42332"></i>NFL</span><span><i style="background:#6941c6"></i>NCAAF</span><span><i style="background:#a76500"></i>WWO</span><span><i style="background:#087261"></i>MLS</span><span><i style="background:#c2410c"></i>NBA</span><span><i style="background:#7a271e"></i>UNVERIFIED</span><span><i style="background:#7c8798"></i>ESTIMATED MODEL</span><span><i style="background:#157a54"></i>ESTIMATED GAP</span></div>';
       const freeRows = free.map(f => ({ cells: [fmtHM(f.start), fmtHM(f.end), String(f.end-f.start), statusBadge('ESTIMATED GAP — UNVERIFIED')], sourceRow: nearestSource(merged, f.start) }));
       html += '<section class="panel"><h2>Estimated intraday gaps</h2><p class="intro">Pacific Time (PST/PDT). Links point to nearby captured events, not proof that the gap is free. Actual broadcasts and game lengths may differ.</p>' + dynamicTable(['Start PT','End PT','Minutes','Status'], freeRows) + '</section>';
       const eventRows = rows.map(r => ({ cells: [fmtHM(r.start), fmtHM(r.end), esc(r.category || ''), esc(r.label || r.matchup || 'Busy block'), statusBadge((r.status || 'UNVERIFIED') + ' · ' + (r.verification || 'UNVERIFIED')), r.focus ? '<span class="badge badge-focus">FOCUS</span>' : '<span class="badge badge-high">HIGH</span>'], sourceRow: r }));

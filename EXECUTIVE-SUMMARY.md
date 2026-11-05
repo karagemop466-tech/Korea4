@@ -1,6 +1,6 @@
 # Executive summary — FREE TIME VACATION
 
-Generated 2026-11-03T23:27:13+00:00 from 748 official-source records.
+Generated 2026-11-05T21:19:49+00:00 from 753 official-source records.
 
 ## Scope
 - All 30 MLB clubs; Giants and Athletics FOCUS; all MLB games HIGH.
@@ -18,16 +18,16 @@ Generated 2026-11-03T23:27:13+00:00 from 748 official-source records.
 5. Every table row carries an official source link.
 
 ## Headline conclusion
-Using official rows plus separately labelled 2026-pattern estimates, no 7-, 14-, or 21-day fully free strict window appears in 2027–2029. The best short officially anchored gap is Feb 15–18, 2027; all longer vacation recommendations are least-conflict ESTIMATED candidates and must be rechecked when schedules are released.
+Using released official rows, the longest Jan 1–Mar 31, 2027 run with no game row is 2 day(s) (2027-01-25 to 2027-01-26); the longest run with no row of any kind (including estimates and UNVERIFIED blocks) is 2 day(s) (2027-02-11 to 2027-02-12). The earlier Feb 15–18, 2027 gap is withdrawn because Golden State Warriors games on Feb 15 and Feb 17 fall inside it. No 7-, 14-, or 21-day window is strictly free in 2027–2029. Least-conflict windows are ESTIMATED from 2026 patterns, are not recommendations, and must be rechecked when schedules are released. The 2028–2029 models use only the 2026 base, so 2027 Warriors games are not carried forward and February busy days there are understated.
 
 No 7-, 14- or 21-day trip can be certified free from all requested radio sports from this incomplete snapshot. In 2027, the [NFL lists Super Bowl LXI on February 14](https://www.nfl.com/news/2026-27-national-football-league-important-dates), and the [Phillies list a spring-training game on February 19](https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced). The intervening dates are only a review candidate, not a verified radio-free interval: other broadcasts, future changes and local carriage remain unknown. [Westwood One warns not every affiliate carries every network broadcast](https://www.westwoodonesports.com/station-finder/). The 2028 and 2029 candidates are model-based and unverified.
 
 
 ## Counts
-- Official event / anchor rows: 6607
-- Official sources: 748
+- Official event / anchor rows: 6682
+- Official sources: 753
 - Daily scoreboards: 1461
-- Merged busy/free intervals: 14364
+- Merged busy/free intervals: 14449
 - Prior generated-data lines reviewed: 2419
 
 ## Manual review

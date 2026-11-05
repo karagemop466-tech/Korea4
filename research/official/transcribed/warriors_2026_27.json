@@ -1,0 +1,847 @@
+{
+ "schema": "warriors_2026_27_transcribed_v1",
+ "description": "Golden State Warriors 2026–27 regular-season and NBA Cup group games transcribed from the official Warriors/NBA printable schedule PDF and nba.com Warriors schedule listings, cross-checked against a third-party NBA calendar (corroboration only). Times are Pacific. Rows where the official PDF grid is ambiguous are excluded and listed as UNVERIFIED candidate dates.",
+ "official_pdf_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+ "official_schedule_url": "https://www.nba.com/warriors/schedule",
+ "third_party_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+ "radio": {
+  "station": "95.7 The Game (KGMZ-FM)",
+  "status": "nba.com game listings for Nov 5 2026–Jan 2 2027 show KGMZ-FM on every listed game; per-game radio for later dates not captured"
+ },
+ "games": [
+  {
+   "date": "2026-10-21",
+   "weekday": "Wed",
+   "opponent": "Los Angeles Lakers",
+   "home_away": "A",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-10-23",
+   "weekday": "Fri",
+   "opponent": "Memphis Grizzlies",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-10-24",
+   "weekday": "Sat",
+   "opponent": "Phoenix Suns",
+   "home_away": "A",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-10-26",
+   "weekday": "Mon",
+   "opponent": "Denver Nuggets",
+   "home_away": "A",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-10-28",
+   "weekday": "Wed",
+   "opponent": "Minnesota Timberwolves",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-10-30",
+   "weekday": "Fri",
+   "opponent": "Los Angeles Lakers",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-01",
+   "weekday": "Sun",
+   "opponent": "LA Clippers",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-02",
+   "weekday": "Mon",
+   "opponent": "Phoenix Suns",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-05",
+   "weekday": "Thu",
+   "opponent": "Miami Heat",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-07",
+   "weekday": "Sat",
+   "opponent": "Orlando Magic",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-09",
+   "weekday": "Mon",
+   "opponent": "New Orleans Pelicans",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-11",
+   "weekday": "Wed",
+   "opponent": "Houston Rockets",
+   "home_away": "A",
+   "time_pt": "6:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-13",
+   "weekday": "Fri",
+   "opponent": "San Antonio Spurs",
+   "home_away": "A",
+   "time_pt": "6:30 PM",
+   "season_type": "NBA Cup group",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-16",
+   "weekday": "Mon",
+   "opponent": "New Orleans Pelicans",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-18",
+   "weekday": "Wed",
+   "opponent": "Dallas Mavericks",
+   "home_away": "A",
+   "time_pt": "6:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-19",
+   "weekday": "Thu",
+   "opponent": "Memphis Grizzlies",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-22",
+   "weekday": "Sun",
+   "opponent": "Boston Celtics",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-25",
+   "weekday": "Wed",
+   "opponent": "Sacramento Kings",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "NBA Cup group",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-27",
+   "weekday": "Fri",
+   "opponent": "Portland Trail Blazers",
+   "home_away": "A",
+   "time_pt": "6:30 PM",
+   "season_type": "NBA Cup group",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-11-29",
+   "weekday": "Sun",
+   "opponent": "LA Clippers",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-01",
+   "weekday": "Tue",
+   "opponent": "Utah Jazz",
+   "home_away": "H",
+   "time_pt": "8:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-12",
+   "weekday": "Sat",
+   "opponent": "Cleveland Cavaliers",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-14",
+   "weekday": "Mon",
+   "opponent": "Memphis Grizzlies",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-16",
+   "weekday": "Wed",
+   "opponent": "Indiana Pacers",
+   "home_away": "A",
+   "time_pt": "4:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-18",
+   "weekday": "Fri",
+   "opponent": "Toronto Raptors",
+   "home_away": "A",
+   "time_pt": "4:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-20",
+   "weekday": "Sun",
+   "opponent": "Milwaukee Bucks",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-22",
+   "weekday": "Tue",
+   "opponent": "Dallas Mavericks",
+   "home_away": "H",
+   "time_pt": "7:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-23",
+   "weekday": "Wed",
+   "opponent": "LA Clippers",
+   "home_away": "A",
+   "time_pt": "7:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-25",
+   "weekday": "Fri",
+   "opponent": "Denver Nuggets",
+   "home_away": "H",
+   "time_pt": "7:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-27",
+   "weekday": "Sun",
+   "opponent": "Minnesota Timberwolves",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-28",
+   "weekday": "Mon",
+   "opponent": "Phoenix Suns",
+   "home_away": "A",
+   "time_pt": "6:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2026-12-30",
+   "weekday": "Wed",
+   "opponent": "Houston Rockets",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-02",
+   "weekday": "Sat",
+   "opponent": "Brooklyn Nets",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "NBA_LISTING",
+   "official_source_url": "https://www.nba.com/warriors/schedule",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-06",
+   "weekday": "Wed",
+   "opponent": "New York Knicks",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-07",
+   "weekday": "Thu",
+   "opponent": "Detroit Pistons",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-09",
+   "weekday": "Sat",
+   "opponent": "Chicago Bulls",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-12",
+   "weekday": "Tue",
+   "opponent": "Sacramento Kings",
+   "home_away": "H",
+   "time_pt": "8:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-13",
+   "weekday": "Wed",
+   "opponent": "Charlotte Hornets",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-15",
+   "weekday": "Fri",
+   "opponent": "Atlanta Hawks",
+   "home_away": "A",
+   "time_pt": "4:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-17",
+   "weekday": "Sun",
+   "opponent": "Miami Heat",
+   "home_away": "A",
+   "time_pt": "3:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-19",
+   "weekday": "Tue",
+   "opponent": "Orlando Magic",
+   "home_away": "A",
+   "time_pt": "4:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-21",
+   "weekday": "Thu",
+   "opponent": "Los Angeles Lakers",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-22",
+   "weekday": "Fri",
+   "opponent": "Milwaukee Bucks",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-24",
+   "weekday": "Sun",
+   "opponent": "Oklahoma City Thunder",
+   "home_away": "H",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-27",
+   "weekday": "Wed",
+   "opponent": "Portland Trail Blazers",
+   "home_away": "A",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-28",
+   "weekday": "Thu",
+   "opponent": "Utah Jazz",
+   "home_away": "A",
+   "time_pt": "6:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-01-30",
+   "weekday": "Sat",
+   "opponent": "San Antonio Spurs",
+   "home_away": "H",
+   "time_pt": "2:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-01",
+   "weekday": "Mon",
+   "opponent": "San Antonio Spurs",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-03",
+   "weekday": "Wed",
+   "opponent": "LA Clippers",
+   "home_away": "A",
+   "time_pt": "7:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-05",
+   "weekday": "Fri",
+   "opponent": "Charlotte Hornets",
+   "home_away": "A",
+   "time_pt": "4:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-07",
+   "weekday": "Sun",
+   "opponent": "Detroit Pistons",
+   "home_away": "A",
+   "time_pt": "12:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-09",
+   "weekday": "Tue",
+   "opponent": "Chicago Bulls",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-10",
+   "weekday": "Wed",
+   "opponent": "Boston Celtics",
+   "home_away": "A",
+   "time_pt": "4:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-13",
+   "weekday": "Sat",
+   "opponent": "New York Knicks",
+   "home_away": "A",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-15",
+   "weekday": "Mon",
+   "opponent": "Indiana Pacers",
+   "home_away": "H",
+   "time_pt": "4:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-17",
+   "weekday": "Wed",
+   "opponent": "New Orleans Pelicans",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-02-25",
+   "weekday": "Thu",
+   "opponent": "Dallas Mavericks",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP_LAYOUT",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-03-01",
+   "weekday": "Mon",
+   "opponent": "Houston Rockets",
+   "home_away": "A",
+   "time_pt": "5:30 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-03-02",
+   "weekday": "Tue",
+   "opponent": "Dallas Mavericks",
+   "home_away": "A",
+   "time_pt": "5:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-03-04",
+   "weekday": "Thu",
+   "opponent": "Washington Wizards",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  },
+  {
+   "date": "2027-03-07",
+   "weekday": "Sun",
+   "opponent": "Houston Rockets",
+   "home_away": "H",
+   "time_pt": "7:00 PM",
+   "season_type": "Regular season",
+   "basis": "PDF+TP",
+   "official_source_url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "third_party_source_url": "https://nbacalendar.com/teams/golden-state-warriors/",
+   "station": "KGMZ-FM 95.7 The Game"
+  }
+ ],
+ "unverified_dates": [
+  {
+   "date": "2027-03-03",
+   "label": "PDF grid text shows 'WAS 7:00P' on Mar 3; third-party calendar lists no Warriors game that day — conflicting, unverified"
+  },
+  {
+   "date": "2027-03-09",
+   "label": "Third-party calendar: Portland home 8:00 PM PT; official PDF grid places POR on Mar 8 — date conflict"
+  },
+  {
+   "date": "2027-03-10",
+   "label": "Third-party calendar: at Sacramento 7:00 PM PT; official PDF grid places SAC on Mar 9 — date conflict"
+  },
+  {
+   "date": "2027-03-12",
+   "label": "Third-party calendar: at Denver 7:00 PM PT; official PDF grid places DEN on Mar 11/12 — date conflict"
+  },
+  {
+   "date": "2027-03-14",
+   "label": "Third-party calendar: at LA Lakers 7:00 PM PT; official PDF grid places LAL on Mar 14 — date/time unverified in PDF layout"
+  },
+  {
+   "date": "2027-03-16",
+   "label": "Third-party calendar: Cleveland home 7:00 PM PT; official PDF grid places CLE on Mar 15 — date conflict"
+  },
+  {
+   "date": "2027-03-17",
+   "label": "Third-party calendar: Memphis home 7:00 PM PT; official PDF grid places MEM on Mar 16 — date conflict"
+  },
+  {
+   "date": "2027-03-19",
+   "label": "Third-party calendar: Portland home 7:00 PM PT; official PDF grid places POR on Mar 17 — date conflict"
+  },
+  {
+   "date": "2027-03-22",
+   "label": "Third-party calendar: Atlanta home 7:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-03-24",
+   "label": "Third-party calendar: Philadelphia home 7:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-03-25",
+   "label": "Third-party calendar: Toronto home 7:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-03-27",
+   "label": "Third-party calendar: at Washington 4:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-03-29",
+   "label": "Third-party calendar: at Brooklyn 4:30 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-03-31",
+   "label": "Third-party calendar: at Philadelphia 4:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-04-02",
+   "label": "Third-party calendar: at Minnesota 4:30 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-04-04",
+   "label": "Third-party calendar: at Sacramento 3:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-04-06",
+   "label": "Third-party calendar: Phoenix home 8:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-04-08",
+   "label": "Third-party calendar: at Oklahoma City 6:30 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-04-09",
+   "label": "Third-party calendar: at Oklahoma City 5:00 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2027-04-11",
+   "label": "Third-party calendar: Utah home 5:30 PM PT; not captured in official PDF text — unverified"
+  },
+  {
+   "date": "2026-12-04",
+   "label": "NBA Cup quarterfinal window per official PDF calendar; Warriors participation not confirmed — unverified"
+  },
+  {
+   "date": "2026-12-05",
+   "label": "NBA Cup quarterfinal window per official PDF calendar; Warriors participation not confirmed — unverified"
+  },
+  {
+   "date": "2026-12-08",
+   "label": "NBA Cup semifinal window per official PDF calendar; Warriors participation not confirmed — unverified"
+  },
+  {
+   "date": "2026-12-09",
+   "label": "NBA Cup semifinal window per official PDF calendar; Warriors participation not confirmed — unverified"
+  },
+  {
+   "date": "2026-12-11",
+   "label": "NBA Cup championship window per official PDF calendar; Warriors participation not confirmed — unverified"
+  }
+ ]
+}

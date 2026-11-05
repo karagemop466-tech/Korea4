@@ -64,6 +64,15 @@ WWO_STATION_FINDER_URL = "https://www.westwoodonesports.com/station-finder/"
 WWO_NFL_SCHEDULE_URL = "https://www.westwoodonesports.com/nfl-schedule/"
 IFAB_URL = "https://www.theifab.com/laws/latest/the-players/"
 EARTHQUAKES_URL = "https://www.sjearthquakes.com/news/news-earthquakes-announce-radio-stations-for-2026-mls-season"
+WARRIORS_PDF_URL = "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+WARRIORS_NBA_URL = "https://www.nba.com/warriors/schedule"
+WARRIORS_TP_URL = "https://nbacalendar.com/teams/golden-state-warriors/"
+NBA_DURATION = 150
+NBA_DURATION_URL = "https://www.upintherafters.com/nba/how-long-is-a-basketball-game"
+WARRIORS_JSON = ROOT / "research" / "official" / "transcribed" / "warriors_2026_27.json"
+EARTHQUAKES_2027_URL = "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+EARTHQUAKES_2027_JSON = ROOT / "research" / "official" / "transcribed" / "earthquakes_2027_sprint.json"
+SHARKS_BROADCAST_URL = "https://www.nhl.com/sharks/team/broadcast"
 
 GAME_TYPE_LABELS = {
     "S": "Spring Training", "E": "Exhibition", "R": "Regular Season",
@@ -269,7 +278,12 @@ def build_sources() -> list[dict]:
         ("KSFO show schedule", "https://www.ksfo.com/shows/", "Official station show grid"),
         ("95.7 The Game station", "https://www.957thegame.com/", "Official station schedule / sports categories"),
         ("Warriors radio agreement", "https://www.nba.com/warriors/news/957-the-game-extension-20190827", "Official team radio source"),
-        ("Warriors schedule", "https://www.nba.com/warriors/schedule", "Official team schedule for manual review"),
+        ("Warriors schedule", "https://www.nba.com/warriors/schedule", "Official team schedule (game listings with KGMZ-FM radio logo)"),
+        ("San Jose Earthquakes 2027 Sprint Season schedule (official)", EARTHQUAKES_2027_URL, "Official club schedule announced Oct 29, 2026 — 14 games; radio carriage not captured"),
+        ("Sharks 2026–27 official broadcast information", SHARKS_BROADCAST_URL, "Official NHL/Sharks broadcast page — Sharks Audio Network; no Bay Area AM/FM affiliate listed"),
+        ("Warriors 2026–27 official schedule PDF", WARRIORS_PDF_URL, "Official Warriors/NBA printable schedule — dates and PT times"),
+        ("NBA Calendar Warriors 2026–27 (third-party)", WARRIORS_TP_URL, "Third-party calendar — corroboration only, not an official source"),
+        ("NBA game length research (third-party)", NBA_DURATION_URL, "Third-party timing analysis of 2025–26 games — secondary, flagged"),
         ("Sharks radio network", "https://www.nhl.com/sharks/news/san-jose-sharks-announce-2018-19-broadcast-schedule-300119102", "Official NHL radio source"),
         ("Sharks schedule", "https://www.nhl.com/sharks/schedule", "Official team schedule for manual review"),
         ("Earthquakes 2026 radio schedule", EARTHQUAKES_URL, "All officially announced terrestrial radio matches"),
@@ -1030,6 +1044,112 @@ def parse_earthquakes_events(intervals: dict[str, list]) -> list[dict]:
     return events
 
 
+def parse_earthquakes_2027(intervals: dict[str, list]) -> list[dict]:
+    """San Jose Earthquakes 2027 MLS Sprint Season (14 official games, Pacific kickoffs).
+
+    Source: official club announcement dated Oct 29, 2026. Bay Area radio carriage for
+    2027 is not captured, so the station list is blank and the row is flagged.
+    """
+    data = json.loads(EARTHQUAKES_2027_JSON.read_text(encoding="utf-8"))
+    events: list[dict] = []
+    for g in data["games"]:
+        day = date.fromisoformat(g["date"])
+        dt = datetime.strptime(f"{g['date']} {g['time_pt']}", "%Y-%m-%d %I:%M %p").replace(tzinfo=PT)
+        start_min = minute_of_day(dt)
+        opp_slug = re.sub(r"[^a-z0-9]+", "-", g["opponent"].lower()).strip("-")
+        if g["home_away"] == "A":
+            matchup = f"San Jose Earthquakes at {g['opponent']}"
+            away, home = "San Jose Earthquakes", g["opponent"]
+        else:
+            matchup = f"{g['opponent']} at San Jose Earthquakes"
+            away, home = g["opponent"], "San Jose Earthquakes"
+        ev = event_base(
+            id=f"mls-2027-{g['date']}-{opp_slug}",
+            category="MLS", subcategory="San Jose Earthquakes — 2027 MLS Sprint Season", season=2027,
+            date=day.isoformat(), official_time_pt=fmt_pt(dt), official_time_zone=dt.strftime("%Z"),
+            official_start_utc=iso_z(dt), time_status="VERIFIED — official club kickoff time (Oct 29, 2026 announcement)",
+            matchup=matchup, away=away, home=home,
+            stations=[], priority="HIGH — Bay Area sport; radio carriage UNVERIFIED", focus=False,
+            source_url=EARTHQUAKES_2027_URL, source_label="Official San Jose Earthquakes 2027 Sprint Season schedule", source_api="",
+            duration_min=SOCCER_DURATION, duration_source_url=IFAB_URL,
+            duration_status="OFFICIAL LAWS: 90 MIN + 15 MIN HALFTIME (PLANNING MODEL)",
+            planning_start_pt=fmt_hm(start_min), planning_end_pt=fmt_hm(start_min + SOCCER_DURATION),
+            planning_status="OFFICIAL START + RULE-BASED DURATION ESTIMATE",
+            planning_source_url=EARTHQUAKES_2027_URL,
+            notes="Official club schedule supplies date and PT kickoff. Radio carriage for 2027 is not captured, so no station is listed. Busy block kept conservatively. End uses the official IFAB 90+15 model.",
+            verification="VERIFIED — official kickoff; radio UNVERIFIED; duration ESTIMATED",
+        )
+        events.append(ev)
+        add_interval(intervals, day, start_min, start_min + SOCCER_DURATION,
+                     event_id=ev["id"], category="MLS", matchup=matchup, priority=ev["priority"],
+                     focus=False, status="OFFICIAL_START_ESTIMATED_DURATION",
+                     verification=ev["verification"], source_url=EARTHQUAKES_2027_URL,
+                     source_label=ev["source_label"], label=matchup, duration_source_url=IFAB_URL)
+    return events
+
+
+def parse_warriors_events(intervals: dict[str, list]) -> tuple[list[dict], dict]:
+    """Golden State Warriors 2026-27 rows (95.7 The Game KGMZ-FM).
+
+    Rows come from research/official/transcribed/warriors_2026_27.json, which holds
+    official Warriors/NBA PDF and nba.com listing values, cross-checked against a
+    third-party calendar used only as corroboration. Dates that cannot be confirmed
+    are added as full-day UNVERIFIED blocks, never as free time.
+    """
+    data = json.loads(WARRIORS_JSON.read_text(encoding="utf-8"))
+    events: list[dict] = []
+    for g in data["games"]:
+        day = date.fromisoformat(g["date"])
+        dt = datetime.strptime(f"{g['date']} {g['time_pt']}", "%Y-%m-%d %I:%M %p").replace(tzinfo=PT)
+        start_min = minute_of_day(dt)
+        opp_slug = re.sub(r"[^a-z0-9]+", "-", g["opponent"].lower()).strip("-")
+        if g["home_away"] == "A":
+            matchup = f"Golden State Warriors at {g['opponent']}"
+            away, home = "Golden State Warriors", g["opponent"]
+        else:
+            matchup = f"{g['opponent']} at Golden State Warriors"
+            away, home = g["opponent"], "Golden State Warriors"
+        basis_text = ("official nba.com game listing" if g["basis"] == "NBA_LISTING"
+                      else "official Warriors/NBA PDF time and opponent; date corroborated by third-party calendar")
+        src = g["official_source_url"]
+        ev = event_base(
+            id=f"nba-{g['date']}-{opp_slug}",
+            category="NBA", subcategory=f"Golden State Warriors — {g['season_type']}",
+            season=2026,
+            date=day.isoformat(), official_time_pt=fmt_pt(dt), official_time_zone=dt.strftime("%Z"),
+            official_start_utc=iso_z(dt), time_status=f"VERIFIED — {basis_text}",
+            matchup=matchup, away=away, home=home,
+            stations=[g["station"]] if g["basis"] == "NBA_LISTING" else [], priority="HIGH — other live Bay Area radio sports", focus=False,
+            source_url=src, source_label="Official Warriors / NBA schedule", source_api="",
+            duration_min=NBA_DURATION, duration_source_url=NBA_DURATION_URL,
+            duration_status="PLANNING ESTIMATE — third-party 2:19 average (2025–26) rounded up; no official NBA game-length statistic captured",
+            planning_start_pt=fmt_hm(start_min), planning_end_pt=fmt_hm(start_min + NBA_DURATION),
+            planning_status="OFFICIAL START + ESTIMATED DURATION",
+            planning_source_url=src,
+            notes=("Station per nba.com game listing (KGMZ-FM logo) for games Nov 5 2026–Jan 2 2027. Later per-game radio carriage is not captured. Third-party calendar used only as corroboration."
+                   if g["basis"] == "NBA_LISTING" else
+                   "Start time from official Warriors/NBA PDF. Third-party calendar used only as corroboration. Per-game radio carriage not captured."),
+            verification="VERIFIED — official start time; duration ESTIMATED",
+        )
+        events.append(ev)
+        add_interval(intervals, day, start_min, start_min + NBA_DURATION,
+                     event_id=ev["id"], category="NBA", matchup=matchup, priority=ev["priority"],
+                     focus=False, status="OFFICIAL_START_ESTIMATED_DURATION",
+                     verification=ev["verification"], source_url=src,
+                     source_label=ev["source_label"], label=matchup, duration_source_url=NBA_DURATION_URL)
+    for u in data["unverified_dates"]:
+        day = date.fromisoformat(u["date"])
+        add_unverified_block(intervals, day, event_id=f"nba-unverified-{u['date']}", category="NBA",
+                             matchup=f"Golden State Warriors — unverified date ({u['date']})",
+                             priority="HIGH — Warriors radio candidate (UNVERIFIED)", focus=False,
+                             source_url=WARRIORS_PDF_URL,
+                             source_label="Official Warriors/NBA PDF (ambiguous) + third-party calendar",
+                             label=u["label"], duration_source_url=WARRIORS_TP_URL)
+    info = {"games": len(events), "unverified_dates": len(data["unverified_dates"]),
+            "official_pdf_url": WARRIORS_PDF_URL, "official_schedule_url": WARRIORS_NBA_URL}
+    return events, info
+
+
 # ---------------------------------------------------------------------------
 # Official anchors, stations, durations, flags, season availability
 # ---------------------------------------------------------------------------
@@ -1092,8 +1212,8 @@ def build_radio_stations(sf_rows: list[dict]) -> list[dict]:
         {"sport": "Stanford NCAAF", "station": "KNBR/KTCT 1050 AM", "call_sign": "KTCT", "frequency": "1050 AM", "priority": "FOCUS — Stanford", "status": "VERIFIED", "source_url": "https://gostanford.com/news/2026/07/30/2026-football-radio-broadcast-team-announced", "source_label": "Official Stanford radio announcement", "notes": "2026 football radio broadcast team announcement."},
         {"sport": "Cal NCAAF", "station": "KSFO 810 AM", "call_sign": "KSFO", "frequency": "810 AM", "priority": "FOCUS — Cal", "status": "VERIFIED", "source_url": "https://calbears.com/sports/football/schedule/2026", "source_label": "Official Cal schedule", "notes": "Official Cal schedule radio line; Big Game KNBR 104.5/680 noted in official material."},
         {"sport": "MLS Earthquakes", "station": "KSFO 810 AM / KZSF 1370 AM / KNBR 680 AM", "call_sign": "KSFO / KZSF / KNBR", "frequency": "810 AM / 1370 AM / 680 AM", "priority": "HIGH — other Bay Area radio sport", "status": "VERIFIED", "source_url": EARTHQUAKES_URL, "source_label": "Official Earthquakes 2026 radio release", "notes": "Official 2026 terrestrial radio schedule; all times PT."},
-        {"sport": "NBA Warriors", "station": "95.7 The Game KGMZ-FM", "call_sign": "KGMZ-FM", "frequency": "95.7 FM", "priority": "HIGH — other Bay Area radio sport", "status": "STATION VERIFIED / GAME ROWS UNVERIFIED", "source_url": "https://www.nba.com/warriors/news/957-the-game-extension-20190827", "source_label": "Official Warriors radio announcement", "notes": "Official team source confirms flagship; 94122 reception and complete game rows are not verified from an official radio schedule."},
-        {"sport": "NHL Sharks", "station": "98.5 KFOX (KUFX-FM)", "call_sign": "KUFX-FM", "frequency": "98.5 FM", "priority": "HIGH — other Bay Area radio sport", "status": "STATION VERIFIED / 94122 RECEPTION UNVERIFIED", "source_url": "https://www.nhl.com/sharks/news/san-jose-sharks-announce-2018-19-broadcast-schedule-300119102", "source_label": "Official Sharks broadcast announcement", "notes": "Official NHL article lists 98.5 KFOX; current 94122 reception and complete rows are unverified."},
+        {"sport": "NBA Warriors", "station": "95.7 The Game KGMZ-FM", "call_sign": "KGMZ-FM", "frequency": "95.7 FM", "priority": "HIGH — other Bay Area radio sport", "status": "STATION VERIFIED / 2026–27 GAME ROWS PARTIALLY CAPTURED", "source_url": WARRIORS_NBA_URL, "source_label": "Official Warriors/NBA schedule (KGMZ-FM on listed games)", "notes": "nba.com 2026–27 game listings (Nov 5 2026–Jan 2 2027) show 95.7 The Game KGMZ-FM on each listed game. Later per-game radio carriage and 94122 reception are not captured; 25 dates are UNVERIFIED blocks."},
+        {"sport": "NHL Sharks", "station": "None on official 2026–27 Bay Area AM/FM list", "call_sign": "", "frequency": "", "priority": "NOT COUNTED AS RADIO-BUSY — no Bay Area AM/FM affiliate", "status": "OFFICIAL 2026–27 BROADCAST PAGE — NO BAY AREA AM/FM AFFILIATE LISTED", "source_url": SHARKS_BROADCAST_URL, "source_label": "Official Sharks broadcast information (nhl.com)", "notes": "All Sharks games are carried on the Sharks Audio Network (app and sjsharks.com/listen; SiriusXM and TuneIn listed). The official affiliate list has Chico, Eureka-Arcata, Fresno, Lakeport, Modesto and Sacramento stations, none in the Bay Area. The earlier 98.5 KFOX entry is stale and withdrawn (IR-020)."},
         {"sport": "KNBR weekly program grid", "station": "KNBR 680 / 104.5 / 1050", "call_sign": "KNBR / KTCT", "frequency": "680 AM / 104.5 FM / 1050 AM", "priority": "HIGH — station schedule", "status": "VERIFIED", "source_url": "https://www.knbr.com/shows/", "source_label": "Official KNBR weekly programming schedule", "notes": "Official station grid includes Westwood One Sports and live game blocks; use for manual review."},
         {"sport": "KSFO show grid", "station": "KSFO 810 AM", "call_sign": "KSFO", "frequency": "810 AM", "priority": "HIGH — station schedule", "status": "VERIFIED", "source_url": "https://www.ksfo.com/shows/", "source_label": "Official KSFO show schedule", "notes": "Official show grid includes Quakes Soccer and The Soccer Hour."},
         {"sport": "95.7 The Game station schedule", "station": "95.7 The Game", "call_sign": "KGMZ-FM", "frequency": "95.7 FM", "priority": "HIGH — station schedule", "status": "VERIFIED", "source_url": "https://www.957thegame.com/", "source_label": "Official 95.7 The Game station", "notes": "Official station schedule shows Warriors/Valkyries blocks; 94122 reception is unverified."},
@@ -1117,7 +1237,8 @@ def build_durations() -> list[dict]:
         {"sport": "NCAAF FBS", "average_game_duration": "3:24 (204 min) — 2016 official NCAA article, dated/FLAGGED", "halftime": "20 minutes", "regulation": "60 minutes (4 × 15)", "status": "OFFICIAL RULE / DATED OFFICIAL AVERAGE", "source_url": NCAA_DURATION_URL, "source_label": "NCAA.com official duration article", "notes": "20-minute halftime is in the official NCAA championship handbook; current average is not officially published."},
         {"sport": "MLS / soccer", "average_game_duration": "2:00 (120 min) — rule-based planning estimate", "halftime": "15 minutes", "regulation": "90 minutes (2 × 45)", "status": "OFFICIAL LAWS / ESTIMATED BROADCAST", "source_url": IFAB_URL, "source_label": "Official IFAB Laws of the Game", "notes": "Used for Earthquakes radio rows; official WWO event windows use their own end timestamps."},
         {"sport": "WWO network events", "average_game_duration": "Official event start–end window", "halftime": "Varies by sport", "regulation": "Varies by sport", "status": "OFFICIAL NETWORK WINDOW / END PLACEHOLDER FLAGGED", "source_url": "https://www.westwoodonesports.com/events/548540/", "source_label": "Official WWO event detail", "notes": "Unix data-time attributes are used; many official end values are 11:59 PM placeholders."},
-        {"sport": "NBA / NHL / WNBA other sports", "average_game_duration": "", "halftime": "", "regulation": "", "status": "UNVERIFIED — OFFICIAL GAME-BY-GAME RADIO ROWS NOT CAPTURED", "source_url": "https://www.nba.com/warriors/schedule", "source_label": "Official Warriors schedule", "notes": "Station rows are high priority but exact radio windows are blank; see Flagged for Review."},
+        {"sport": "NBA Warriors", "average_game_duration": "2:30 (150 min) — planning estimate", "halftime": "15 minutes (official NBA rule)", "regulation": "4 × 12 minutes", "status": "ESTIMATED DURATION / OFFICIAL START", "source_url": NBA_DURATION_URL, "source_label": "Third-party 2025–26 timing analysis (secondary, FLAGGED)", "notes": "No official NBA average game-length statistic was captured. Third-party 2025–26 regular-season average of 2:19 is rounded up to 2:30 for planning. Start times are official."},
+        {"sport": "NHL Sharks / WNBA other sports", "average_game_duration": "", "halftime": "", "regulation": "", "status": "UNVERIFIED — OFFICIAL GAME-BY-GAME RADIO ROWS NOT CAPTURED", "source_url": "https://www.nhl.com/sharks/schedule", "source_label": "Official Sharks schedule", "notes": "Station rows are high priority but exact radio windows are blank; see Flagged for Review."},
     ]
 
 
@@ -1136,9 +1257,14 @@ def build_flags() -> list[dict]:
         {"id": "IR-011", "issue": "Stanford/Cal 2027–2029 ACC dates/times are not released; only opponents and a few nonconference dates are official.", "status": "UNVERIFIED", "source_url": "https://calbears.com/news/2026/9/16/california-football-announces-2027-conference-opponents", "source_label": "Official Cal 2027 opponents", "action": "Blank dates/times plus official opponent-grid links."},
         {"id": "IR-012", "issue": "Prior radio guide called 810 AM 'KGO'; official station and Earthquakes sources identify KSFO 810 AM.", "status": "CORRECTED", "source_url": "https://www.ksfo.com/station-information/", "source_label": "Official KSFO station information", "action": "Radio table uses KSFO 810 AM; KGO call sign flagged."},
         {"id": "IR-013", "issue": "NFL 3:12 total duration and NCAAF 2016 3:24 average are not current official broadcast averages.", "status": "FLAGGED", "source_url": NFL_RULEBOOK_URL, "source_label": "Official 2026 NFL rulebook", "action": "Official rulebook clock/halftime shown; secondary/dated averages flagged."},
-        {"id": "IR-014", "issue": "Warriors/Valkyries/Sharks station rows are high priority, but complete official game-by-game radio windows were not captured.", "status": "UNVERIFIED", "source_url": "https://www.nba.com/warriors/schedule", "source_label": "Official Warriors schedule", "action": "Station and schedule links published for manual review; exact game windows blank."},
+        {"id": "IR-014", "issue": "Sharks (NHL) game rows are not captured. The captured Sharks and Warriors radio pages are stale (Sharks 2018–19 article; Warriors 2019 article). Warriors 2026–27 game rows are now captured for 61 dates (see IR-018).", "status": "UNVERIFIED", "source_url": "https://www.nhl.com/sharks/schedule", "source_label": "Official Sharks schedule", "action": "Sharks games and 2026–27 Sharks radio carriage remain blank and unverified. Do not treat the 2018–19 station page as current."},
         {"id": "IR-015", "issue": "2028 Super Bowl LXII host is official but exact date is TBA; 2029 Super Bowl date/host not found in official captured sources.", "status": "UNVERIFIED", "source_url": "https://www.nfl.com/news/mercedes-benz-stadium-in-atlanta-to-host-super-bowl-lxii-in-2028", "source_label": "Official NFL Super Bowl LXII announcement", "action": "Official date blank; models labelled ESTIMATED."},
         {"id": "IR-016", "issue": "Prior sessions claimed no 7-day strict window by blocking the entire Jan–Super-Bowl span; exact official playoff dates and discontinued Pro Bowl game create published 7-day seams.", "status": "CORRECTED / UNVERIFIED", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates", "action": "Recomputed candidates from exact official dates; still flagged because later WWO schedules are unreleased."},
+        {"id": "IR-018", "issue": "Golden State Warriors (NBA, 95.7 The Game KGMZ-FM) games were missing from the official event set. 61 Warriors 2026–27 games (Oct 21 2026 to Mar 7 2027) are now transcribed from the official Warriors/NBA PDF and nba.com listings, with a third-party calendar as corroboration. 25 dates are UNVERIFIED: Mar 3 and Mar 9–Apr 11 2027 (the official PDF and third-party calendar disagree on dates, or the PDF omits games) and NBA Cup knockout dates Dec 4–11 2026.", "status": "UNVERIFIED", "source_url": WARRIORS_PDF_URL, "source_label": "Official Warriors/NBA schedule PDF", "action": "Corroborated games are busy blocks. UNVERIFIED dates are full-day busy/unknown blocks, never free. Re-check each against nba.com before booking. Warriors duration is a 150-minute planning estimate."},
+        {"id": "IR-020", "issue": "The Sharks 2026–27 station row listed 98.5 KFOX (KUFX-FM) as the Bay Area flagship. That is stale: the official 2026–27 NHL/Sharks broadcast page lists no Bay Area AM/FM affiliate (only Chico, Eureka-Arcata, Fresno, Lakeport, Modesto, Sacramento and SiriusXM). Sharks games are carried on the Sharks Audio Network (app, sjsharks.com/listen). Sharks games are therefore not counted as Bay Area radio-busy blocks.", "status": "CORRECTED — STALE STATION WITHDRAWN", "source_url": SHARKS_BROADCAST_URL, "source_label": "Official Sharks broadcast information (nhl.com)", "action": "Sharks station row replaced. Official 2026–27 Sharks schedule PDF (media.d3.nhle.com) reviewed; Sharks game rows are not added as radio busy blocks."},
+        {"id": "IR-021", "issue": "The 2027 San Jose Earthquakes MLS Sprint Season (14 games, Feb 20 – May 8, 2027) is officially announced, but the captured 2027 radio carriage is not published. The earlier 2026-pattern MLS model for Feb–May 2027 has been replaced by official rows. Radio carriage for these games is UNVERIFIED; the busy blocks are kept conservatively.", "status": "NEW OFFICIAL ROWS — RADIO UNVERIFIED", "source_url": EARTHQUAKES_2027_URL, "source_label": "Official San Jose Earthquakes 2027 Sprint Season schedule", "action": "14 official 2027 MLS rows added; 2027 MLS models inside Feb 1 – May 31 suppressed."},
+        {"id": "IR-022", "issue": "G1 audit, officially released rows only, Jan 1 – Mar 31, 2027: no run of 3 or more consecutive free days under any definition. Longest strict run is 2 days (Feb 11–12, 2027, no rows of any kind); longest released-only run is 2 days (Jan 25–26). WWO, NCAAF and NFL 2027 February schedules are unreleased, so these runs are not certified free. Sharks games are not radio-busy; Earthquakes Sprint Season games are official rows with radio carriage UNVERIFIED.", "status": "AUDIT PUBLISHED — NOT CERTIFIED FREE", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates (plus Warriors PDF, Earthquakes and Sharks official pages)", "action": "research/analysis/official_gaps.json generated by scripts/official_gaps.py; summary shown on the vacation page gap section."},
+        {"id": "IR-019", "issue": "The prior headline that Feb 15–18, 2027 is the best officially anchored gap is contradicted: Warriors home games are on Feb 15 (4:30 PM PT) and Feb 17 (7:00 PM PT) on 95.7 The Game. The earlier implication that Feb 1–13, 2027 had no official games is also withdrawn: Warriors games fall on Feb 1, 3, 5, 7, 9, 10 and 13.", "status": "CORRECTED", "source_url": WARRIORS_PDF_URL, "source_label": "Official Warriors/NBA schedule PDF", "action": "Anchor row, conclusion and vacation windows recomputed with Warriors busy blocks."},
         {"id": "IR-017", "issue": "Prior 2028 Olympic-break vacation scenario is not an official released MLB schedule/MLBPA agreement.", "status": "FLAGGED", "source_url": "https://www.mlb.com/all-star/future-locations", "source_label": "Official MLB future All-Star locations", "action": "Not treated as verified free time; exact All-Star date remains blank."},
     ]
 
@@ -1187,6 +1313,9 @@ def add_shifted_models(intervals: dict[str, list], official_intervals: dict[str,
             # 2027 MLB is officially released; do not duplicate MLB with a 2026 model.
             if year == 2027 and row.get("category") == "MLB":
                 continue
+            # 2027 MLS Sprint Season (Feb 20 – May 8) is officially released; no 2026 model there.
+            if year == 2027 and row.get("category") == "MLS" and date(2027, 2, 1) <= target <= date(2027, 5, 31):
+                continue
             # 2027 WWO NFL postseason is already official through Jan 11; allow later-season model only.
             if year == 2027 and row.get("category") == "WWO" and target <= date(2027, 1, 11):
                 continue
@@ -1206,6 +1335,38 @@ def add_shifted_models(intervals: dict[str, list], official_intervals: dict[str,
             "notes": "Exact teams, dates and official times are blank. The model exists only to surface plausible busy days for 2027–2029 planning.",
         })
     return model_rows
+
+
+def official_only_scan(days: dict[str, list], start: date, end: date) -> dict[str, list]:
+    """Runs of consecutive free days between start and end under three definitions.
+
+    strict_no_rows  : no row of any kind (official, estimate, or UNVERIFIED block).
+    ignore_models   : model rows ignored; UNVERIFIED blocks still count as busy.
+    released_only   : model rows and UNVERIFIED blocks ignored (released rows only).
+    """
+    def runs(ignore) -> list[dict]:
+        out, cur, d = [], None, start
+        while d <= end:
+            busy = [r for r in days.get(d.isoformat(), []) if not ignore(r)]
+            if not busy:
+                cur = [d, d] if cur is None else [cur[0], d]
+            elif cur is not None:
+                out.append(cur)
+                cur = None
+            d += timedelta(days=1)
+        if cur is not None:
+            out.append(cur)
+        return [{"start": a.isoformat(), "end": b.isoformat(), "length_days": (b - a).days + 1} for a, b in out]
+
+    return {
+        "strict_no_rows": runs(lambda r: False),
+        "ignore_models": runs(lambda r: r.get("status") == "ESTIMATED_UNRELEASED_SEASON_MODEL"),
+        "released_only": runs(lambda r: r.get("status") in ("ESTIMATED_UNRELEASED_SEASON_MODEL", "UNVERIFIED_BLOCK")),
+    }
+
+
+def longest_run(runs: list[dict]) -> dict:
+    return max(runs, key=lambda r: r["length_days"]) if runs else {"start": "", "end": "", "length_days": 0}
 
 
 def compute_vacation_windows(days: dict[str, list]) -> list[dict]:
@@ -1342,6 +1503,8 @@ def main() -> None:
     cal_events = parse_cal_events(intervals)
     wwo_events, wwo_info = parse_wwo_events(intervals)
     earthquakes_events = parse_earthquakes_events(intervals)
+    warriors_events, warriors_info = parse_warriors_events(intervals)
+    eq2027_events = parse_earthquakes_2027(intervals)
     anchors = build_anchors(intervals)
 
     # Snapshot official-only intervals before adding unreleased-season models.
@@ -1350,7 +1513,7 @@ def main() -> None:
     model_rows = add_shifted_models(intervals, official_intervals)
 
     events = (mlb_events + nfl_regular + nfl_preseason + nfl_postseason +
-              nflers_events + stanford_events + cal_events + wwo_events + earthquakes_events)
+              nflers_events + stanford_events + cal_events + wwo_events + earthquakes_events + warriors_events + eq2027_events)
     events.sort(key=lambda e: (e.get("date") or e.get("date_range") or "9999", e["category"], e["id"]))
 
     # Ensure every calendar day in range has a key, then sort intervals.
@@ -1369,15 +1532,23 @@ def main() -> None:
     season_availability = build_season_availability(mlb_seasons, wwo_info["counts"])
     review = build_line_by_line_audit()
 
+    scan_2027 = official_only_scan(days, date(2027, 1, 1), date(2027, 3, 31))
+    longest_released = longest_run(scan_2027["released_only"])
+    longest_strict = longest_run(scan_2027["strict_no_rows"])
     anchor_windows = [
-        {"year": 2027, "window": "2027-02-15 to 2027-02-18", "length_days": 4, "label": "Best officially anchored gap", "status": "OFFICIAL ANCHORS / LATER WWO SCHEDULE UNVERIFIED", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates", "notes": "Super Bowl LXI Feb 14 and MLB Spring Training Feb 19 are official anchors; no officially published game rows fall on Feb 15–18. WWO later-season schedule is not released, so this is not certified free."},
-        {"year": 2027, "window": "2027-02-15 to 2027-03-23", "length_days": 37, "label": "Relaxed scenario ignoring Spring Training", "status": "SCENARIO — EXCLUDES OFFICIAL SPRING TRAINING GAMES", "source_url": "https://www.mlb.com/press-release/press-release-mlb-announces-2027-spring-training-schedule", "source_label": "Official MLB 2027 Spring Training release", "notes": "Useful only if Spring Training broadcasts are excluded from the user's strict free-time definition; the strict model counts them."},
+        {"year": 2027, "window": "2027-02-15 to 2027-02-18", "length_days": 4, "label": "WITHDRAWN — former best officially anchored gap", "status": "CONTRADICTED — WARRIORS GAMES ON FEB 15 AND FEB 17 (95.7 THE GAME)", "source_url": WARRIORS_PDF_URL, "source_label": "Official Warriors 2026–27 printable schedule", "notes": "Warriors home games: Mon Feb 15 (4:30 PM PT) and Wed Feb 17 (7:00 PM PT). Do not cite as a free window."},
+        {"year": 2027, "window": f"{longest_released['start']} to {longest_released['end']}", "length_days": longest_released["length_days"], "label": "Longest released-only free run, Jan–Mar 2027 (computed)", "status": "OFFICIAL ROWS ONLY — NOT CERTIFIED FREE (WWO, NCAAF AND NFL SCHEDULES UNRELEASED)", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates", "notes": f"Computed from released rows only (model rows and UNVERIFIED blocks ignored). Longest run with no row of any kind: {longest_strict['length_days']} day(s), {longest_strict['start']} to {longest_strict['end']}. Super Bowl LXI is Feb 14 and MLB Spring Training starts Feb 19."},
+        {"year": 2027, "window": "", "length_days": "", "label": "WITHDRAWN — relaxed scenario starting Feb 15, 2027", "status": "CONTRADICTED — WARRIORS GAMES ON FEB 15 AND FEB 17 (95.7 THE GAME); MLB SPRING TRAINING FROM FEB 19", "source_url": "https://www.mlb.com/press-release/press-release-mlb-announces-2027-spring-training-schedule", "source_label": "Official MLB 2027 Spring Training release", "notes": "The earlier 37-day scenario started Feb 15 and is no longer valid. Spring Training games begin Fri Feb 19, 2027 per the official MLB release."},
         {"year": 2028, "window": "", "length_days": "", "label": "Mid-February estimated gap", "status": "ESTIMATED — NOT A RELEASED SCHEDULE", "source_url": "https://collegefootballplayoff.com/news/2025/10/29/tampabay-29", "source_label": "Official CFP future dates", "notes": "Exact dates blank because 2028 MLB/NFL/WWO schedules and Super Bowl LXII date are not officially released."},
         {"year": 2029, "window": "", "length_days": "", "label": "Mid-February estimated gap", "status": "ESTIMATED — NOT A RELEASED SCHEDULE", "source_url": "https://collegefootballplayoff.com/news/2025/10/29/tampabay-29", "source_label": "Official CFP future dates", "notes": "Exact dates blank because 2029 MLB/NFL/WWO schedules are not officially released."},
     ]
     analysis_conclusion = {
         "strict_7_14_21_day_windows": sum(1 for w in windows if w["strict_free"]),
-        "conclusion": "Using official rows plus separately labelled 2026-pattern estimates, no 7-, 14-, or 21-day fully free strict window appears in 2027–2029. The best short officially anchored gap is Feb 15–18, 2027; all longer vacation recommendations are least-conflict ESTIMATED candidates and must be rechecked when schedules are released.",
+        "conclusion": (f"Using released official rows, the longest Jan 1–Mar 31, 2027 run with no game row is {longest_released['length_days']} day(s) ({longest_released['start']} to {longest_released['end']}); "
+                       f"the longest run with no row of any kind (including estimates and UNVERIFIED blocks) is {longest_strict['length_days']} day(s) ({longest_strict['start']} to {longest_strict['end']}). "
+                       "The earlier Feb 15–18, 2027 gap is withdrawn because Golden State Warriors games on Feb 15 and Feb 17 fall inside it. "
+                       "No 7-, 14-, or 21-day window is strictly free in 2027–2029. Least-conflict windows are ESTIMATED from 2026 patterns, are not recommendations, and must be rechecked when schedules are released. "
+                       "The 2028–2029 models use only the 2026 base, so 2027 Warriors games are not carried forward and February busy days there are understated."),
         "source_url": NFL_IMPORTANT_DATES_URL,
         "source_label": "Official NFL 2026–27 important dates",
     }
@@ -1386,7 +1557,7 @@ def main() -> None:
         {"topic": "Official MLB 2026/2027", "finding": f"{len([e for e in mlb_events if e['category']=='MLB' and e['date']])} official MLB game rows from Stats API, including all 30 clubs and TBD start times left blank.", "source_url": MLB_API_2027, "source_label": "Official MLB Stats API", "status": "VERIFIED"},
         {"topic": "Westwood One Sports", "finding": f"{len(wwo_events)} official 2026–2027 WWO event windows across all nine monitored categories; exact Unix start/end timestamps converted to Pacific.", "source_url": WWO_NFL_SCHEDULE_URL, "source_label": "Official WWO schedule", "status": "VERIFIED"},
         {"topic": "Stanford/Cal/49ers", "finding": f"{len(stanford_events)} Stanford, {len(cal_events)} Cal and {len(nflers_events)} 49ers official schedule rows with exact kickoffs/radio where published.", "source_url": "https://www.49ers.com/schedule/", "source_label": "Official 49ers schedule", "status": "VERIFIED"},
-        {"topic": "Other Bay Area radio sports", "finding": f"{len(earthquakes_events)} official Earthquakes terrestrial radio matches plus high-priority station rows for Warriors, Sharks and Valkyries coverage; incomplete game windows are flagged.", "source_url": EARTHQUAKES_URL, "source_label": "Official Earthquakes radio release", "status": "VERIFIED / FLAGGED"},
+        {"topic": "Other Bay Area radio sports", "finding": f"{len(earthquakes_events)} official 2026 Earthquakes terrestrial radio matches; {len(eq2027_events)} official 2027 Earthquakes Sprint Season games (Feb 20 – May 8) with radio carriage UNVERIFIED. Golden State Warriors: {len(warriors_events)} games from Oct 21, 2026 to Mar 7, 2027 with official start times; {warriors_info['unverified_dates']} further dates UNVERIFIED. KGMZ-FM 95.7 is shown per game only on nba.com listings through Jan 2, 2027. Sharks 2026–27: all games on the Sharks Audio Network; no Bay Area AM/FM affiliate on the official list, so not counted as radio-busy.", "source_url": WARRIORS_NBA_URL, "source_label": "Official Warriors schedule (nba.com)", "status": "VERIFIED / FLAGGED"},
         {"topic": "Vacation analysis", "finding": "Best 7/14/21-day candidates recomputed from exact official rows plus separately labelled unreleased-season models. No candidate is called certified free.", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL important dates", "status": "ESTIMATED / UNVERIFIED"},
         {"topic": "Line-by-line repo audit", "finding": f"{len(review)} prior generated-data/documentation lines reviewed; secondary sources and estimates are replaced or flagged with official links.", "source_url": MLB_API_2027, "source_label": "Official MLB Stats API", "status": "VERIFIED AUDIT"},
     ]
@@ -1404,7 +1575,7 @@ def main() -> None:
             "wwo_sf_affiliate_rows": len(wwo_info["station_rows"]),
             "line_by_line_audit_rows": len(review),
         },
-        "durations": {"MLB": MLB_DURATION, "NFL": NFL_DURATION, "NCAAF": NCAAF_DURATION, "MLS": SOCCER_DURATION},
+        "durations": {"MLB": MLB_DURATION, "NFL": NFL_DURATION, "NCAAF": NCAAF_DURATION, "MLS": SOCCER_DURATION, "NBA": NBA_DURATION},
         "teams": teams, "stations": stations, "durations_table": durations,
         "anchors": anchors, "flags": flags, "season_availability": season_availability,
         "wwo_sf_affiliates": wwo_info["sf_map"], "wwo_event_counts": wwo_info["counts"],

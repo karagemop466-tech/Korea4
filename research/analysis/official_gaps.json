@@ -1,0 +1,1515 @@
+{
+  "generated_by": "scripts/official_gaps.py",
+  "scope": "2027-01-01 to 2027-03-31",
+  "input": "data/official/days-2027.json",
+  "definitions": {
+    "strict_no_rows": "No row of any kind, including ESTIMATED models and UNVERIFIED blocks.",
+    "ignore_models": "ESTIMATED season-pattern models ignored; UNVERIFIED blocks still count as busy.",
+    "released_only": "Released official rows only; models and UNVERIFIED blocks ignored."
+  },
+  "longest_run": {
+    "strict_no_rows": {
+      "start": "2027-02-11",
+      "end": "2027-02-12",
+      "length_days": 2,
+      "bounding_source_urls": [
+        "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+        "https://www.westwoodonesports.com/events/525955/"
+      ]
+    },
+    "ignore_models": {
+      "start": "2027-01-25",
+      "end": "2027-01-26",
+      "length_days": 2,
+      "bounding_source_urls": [
+        "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+        "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+      ]
+    },
+    "released_only": {
+      "start": "2027-01-25",
+      "end": "2027-01-26",
+      "length_days": 2,
+      "bounding_source_urls": [
+        "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+      ]
+    }
+  },
+  "runs_3_days_or_longer": {
+    "strict_no_rows": [],
+    "ignore_models": [],
+    "released_only": []
+  },
+  "runs": {
+    "strict_no_rows": [
+      {
+        "start": "2027-01-01",
+        "end": "2027-01-01",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-17",
+          "https://www.westwoodonesports.com/events/548521/",
+          "https://www.westwoodonesports.com/events/548522/",
+          "https://www.nba.com/warriors/schedule"
+        ]
+      },
+      {
+        "start": "2027-01-05",
+        "end": "2027-01-05",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-17",
+          "https://www.westwoodonesports.com/events/548552/",
+          "https://www.nfl.com/games/texans-at-packers-2026-reg-17",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-08",
+        "end": "2027-01-08",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.nfl.com/schedules/2026/by-week/week-18",
+          "https://www.westwoodonesports.com/events/548523/",
+          "https://www.westwoodonesports.com/events/548524/",
+          "https://www.westwoodonesports.com/events/548526/"
+        ]
+      },
+      {
+        "start": "2027-01-11",
+        "end": "2027-01-11",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-18",
+          "https://www.westwoodonesports.com/events/548510/",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-14",
+        "end": "2027-01-14",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-20",
+        "end": "2027-01-20",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-25",
+        "end": "2027-01-25",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+          "https://www.westwoodonesports.com/events/527080/",
+          "https://www.westwoodonesports.com/events/527081/",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.westwoodonesports.com/events/527210/"
+        ]
+      },
+      {
+        "start": "2027-01-29",
+        "end": "2027-01-29",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.westwoodonesports.com/events/521123/"
+        ]
+      },
+      {
+        "start": "2027-02-04",
+        "end": "2027-02-04",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-08",
+        "end": "2027-02-08",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.westwoodonesports.com/events/527273/",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-11",
+        "end": "2027-02-12",
+        "length_days": 2,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.westwoodonesports.com/events/525955/"
+        ]
+      },
+      {
+        "start": "2027-02-16",
+        "end": "2027-02-16",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.westwoodonesports.com/events/525960/"
+        ]
+      },
+      {
+        "start": "2027-02-18",
+        "end": "2027-02-18",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.westwoodonesports.com/events/525960/",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.mlb.com/press-release/press-release-mlb-announces-2027-spring-training-schedule",
+          "https://www.mlb.com/gameday/868576",
+          "https://www.mlb.com/gameday/868571",
+          "https://www.mlb.com/gameday/868573"
+        ]
+      }
+    ],
+    "ignore_models": [
+      {
+        "start": "2027-01-01",
+        "end": "2027-01-01",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-17",
+          "https://www.westwoodonesports.com/events/548521/",
+          "https://www.westwoodonesports.com/events/548522/",
+          "https://www.nba.com/warriors/schedule"
+        ]
+      },
+      {
+        "start": "2027-01-05",
+        "end": "2027-01-05",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-17",
+          "https://www.westwoodonesports.com/events/548552/",
+          "https://www.nfl.com/games/texans-at-packers-2026-reg-17",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-08",
+        "end": "2027-01-08",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.nfl.com/schedules/2026/by-week/week-18",
+          "https://www.westwoodonesports.com/events/548523/",
+          "https://www.westwoodonesports.com/events/548524/",
+          "https://www.westwoodonesports.com/events/548526/"
+        ]
+      },
+      {
+        "start": "2027-01-11",
+        "end": "2027-01-11",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.nfl.com/schedules/2026/by-week/week-18",
+          "https://www.westwoodonesports.com/events/548510/",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-14",
+        "end": "2027-01-14",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-20",
+        "end": "2027-01-20",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-25",
+        "end": "2027-01-26",
+        "length_days": 2,
+        "bounding_source_urls": [
+          "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-29",
+        "end": "2027-01-29",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-02",
+        "end": "2027-02-02",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-04",
+        "end": "2027-02-04",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-06",
+        "end": "2027-02-06",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-08",
+        "end": "2027-02-08",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-11",
+        "end": "2027-02-12",
+        "length_days": 2,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-16",
+        "end": "2027-02-16",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-18",
+        "end": "2027-02-18",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.mlb.com/press-release/press-release-mlb-announces-2027-spring-training-schedule",
+          "https://www.mlb.com/gameday/868576",
+          "https://www.mlb.com/gameday/868571",
+          "https://www.mlb.com/gameday/868573",
+          "https://www.mlb.com/gameday/868569"
+        ]
+      }
+    ],
+    "released_only": [
+      {
+        "start": "2027-01-01",
+        "end": "2027-01-01",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.westwoodonesports.com/events/548521/",
+          "https://www.westwoodonesports.com/events/548522/",
+          "https://www.nba.com/warriors/schedule"
+        ]
+      },
+      {
+        "start": "2027-01-05",
+        "end": "2027-01-05",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.westwoodonesports.com/events/548552/",
+          "https://www.nfl.com/games/texans-at-packers-2026-reg-17",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-08",
+        "end": "2027-01-08",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.westwoodonesports.com/events/548523/",
+          "https://www.westwoodonesports.com/events/548524/",
+          "https://www.westwoodonesports.com/events/548526/"
+        ]
+      },
+      {
+        "start": "2027-01-11",
+        "end": "2027-01-11",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.westwoodonesports.com/events/548510/",
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-14",
+        "end": "2027-01-14",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-16",
+        "end": "2027-01-16",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-18",
+        "end": "2027-01-18",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-20",
+        "end": "2027-01-20",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-23",
+        "end": "2027-01-23",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-25",
+        "end": "2027-01-26",
+        "length_days": 2,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-29",
+        "end": "2027-01-29",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-01-31",
+        "end": "2027-01-31",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-02",
+        "end": "2027-02-02",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-04",
+        "end": "2027-02-04",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-06",
+        "end": "2027-02-06",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-08",
+        "end": "2027-02-08",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-11",
+        "end": "2027-02-12",
+        "length_days": 2,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-14",
+        "end": "2027-02-14",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-16",
+        "end": "2027-02-16",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf"
+        ]
+      },
+      {
+        "start": "2027-02-18",
+        "end": "2027-02-18",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+          "https://www.mlb.com/gameday/868576",
+          "https://www.mlb.com/gameday/868571",
+          "https://www.mlb.com/gameday/868573",
+          "https://www.mlb.com/gameday/868569",
+          "https://www.mlb.com/gameday/868575"
+        ]
+      },
+      {
+        "start": "2027-03-24",
+        "end": "2027-03-24",
+        "length_days": 1,
+        "bounding_source_urls": [
+          "https://www.mlb.com/gameday/868349",
+          "https://www.mlb.com/gameday/868347",
+          "https://www.mlb.com/gameday/868117",
+          "https://www.mlb.com/gameday/868115",
+          "https://www.mlb.com/gameday/868119",
+          "https://www.mlb.com/gameday/853719"
+        ]
+      }
+    ]
+  },
+  "days": [
+    {
+      "date": "2027-01-01",
+      "weekday": "Fri",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-02",
+      "weekday": "Sat",
+      "released_categories": [
+        "NBA",
+        "WWO"
+      ],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-03",
+      "weekday": "Sun",
+      "released_categories": [
+        "NFL",
+        "WWO"
+      ],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-04",
+      "weekday": "Mon",
+      "released_categories": [
+        "NFL",
+        "WWO"
+      ],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-05",
+      "weekday": "Tue",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-06",
+      "weekday": "Wed",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-07",
+      "weekday": "Thu",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-08",
+      "weekday": "Fri",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-09",
+      "weekday": "Sat",
+      "released_categories": [
+        "NBA",
+        "WWO"
+      ],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-10",
+      "weekday": "Sun",
+      "released_categories": [
+        "WWO"
+      ],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-11",
+      "weekday": "Mon",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-12",
+      "weekday": "Tue",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-13",
+      "weekday": "Wed",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-14",
+      "weekday": "Thu",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-15",
+      "weekday": "Fri",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-16",
+      "weekday": "Sat",
+      "released_categories": [],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "UNVERIFIED BUSY"
+    },
+    {
+      "date": "2027-01-17",
+      "weekday": "Sun",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-18",
+      "weekday": "Mon",
+      "released_categories": [],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [],
+      "status": "UNVERIFIED BUSY"
+    },
+    {
+      "date": "2027-01-19",
+      "weekday": "Tue",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-20",
+      "weekday": "Wed",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-21",
+      "weekday": "Thu",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-22",
+      "weekday": "Fri",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-23",
+      "weekday": "Sat",
+      "released_categories": [],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "UNVERIFIED BUSY"
+    },
+    {
+      "date": "2027-01-24",
+      "weekday": "Sun",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-25",
+      "weekday": "Mon",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-26",
+      "weekday": "Tue",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "MODEL ONLY"
+    },
+    {
+      "date": "2027-01-27",
+      "weekday": "Wed",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-28",
+      "weekday": "Thu",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-29",
+      "weekday": "Fri",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-01-30",
+      "weekday": "Sat",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-01-31",
+      "weekday": "Sun",
+      "released_categories": [],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "UNVERIFIED BUSY"
+    },
+    {
+      "date": "2027-02-01",
+      "weekday": "Mon",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-02",
+      "weekday": "Tue",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "MODEL ONLY"
+    },
+    {
+      "date": "2027-02-03",
+      "weekday": "Wed",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-04",
+      "weekday": "Thu",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-02-05",
+      "weekday": "Fri",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-06",
+      "weekday": "Sat",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "MODEL ONLY"
+    },
+    {
+      "date": "2027-02-07",
+      "weekday": "Sun",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-08",
+      "weekday": "Mon",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-02-09",
+      "weekday": "Tue",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-10",
+      "weekday": "Wed",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-11",
+      "weekday": "Thu",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-02-12",
+      "weekday": "Fri",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-02-13",
+      "weekday": "Sat",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-14",
+      "weekday": "Sun",
+      "released_categories": [],
+      "unverified_categories": [
+        "NFL"
+      ],
+      "model_categories": [],
+      "status": "UNVERIFIED BUSY"
+    },
+    {
+      "date": "2027-02-15",
+      "weekday": "Mon",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-16",
+      "weekday": "Tue",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-02-17",
+      "weekday": "Wed",
+      "released_categories": [
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-18",
+      "weekday": "Thu",
+      "released_categories": [],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "NO ROWS"
+    },
+    {
+      "date": "2027-02-19",
+      "weekday": "Fri",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "MLB"
+      ],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-20",
+      "weekday": "Sat",
+      "released_categories": [
+        "MLB",
+        "MLS"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-21",
+      "weekday": "Sun",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-22",
+      "weekday": "Mon",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-23",
+      "weekday": "Tue",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-24",
+      "weekday": "Wed",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-25",
+      "weekday": "Thu",
+      "released_categories": [
+        "MLB",
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-26",
+      "weekday": "Fri",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-27",
+      "weekday": "Sat",
+      "released_categories": [
+        "MLB",
+        "MLS"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-02-28",
+      "weekday": "Sun",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-01",
+      "weekday": "Mon",
+      "released_categories": [
+        "MLB",
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-02",
+      "weekday": "Tue",
+      "released_categories": [
+        "MLB",
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-03",
+      "weekday": "Wed",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-04",
+      "weekday": "Thu",
+      "released_categories": [
+        "MLB",
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-05",
+      "weekday": "Fri",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-06",
+      "weekday": "Sat",
+      "released_categories": [
+        "MLB",
+        "MLS"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-07",
+      "weekday": "Sun",
+      "released_categories": [
+        "MLB",
+        "NBA"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-08",
+      "weekday": "Mon",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-09",
+      "weekday": "Tue",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-10",
+      "weekday": "Wed",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-11",
+      "weekday": "Thu",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-12",
+      "weekday": "Fri",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-13",
+      "weekday": "Sat",
+      "released_categories": [
+        "MLB",
+        "MLS"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-14",
+      "weekday": "Sun",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-15",
+      "weekday": "Mon",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-16",
+      "weekday": "Tue",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-17",
+      "weekday": "Wed",
+      "released_categories": [
+        "MLB",
+        "MLS"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-18",
+      "weekday": "Thu",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-19",
+      "weekday": "Fri",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-20",
+      "weekday": "Sat",
+      "released_categories": [
+        "MLB",
+        "MLS"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-21",
+      "weekday": "Sun",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-22",
+      "weekday": "Mon",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-23",
+      "weekday": "Tue",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-24",
+      "weekday": "Wed",
+      "released_categories": [],
+      "unverified_categories": [
+        "MLB",
+        "NBA"
+      ],
+      "model_categories": [],
+      "status": "UNVERIFIED BUSY"
+    },
+    {
+      "date": "2027-03-25",
+      "weekday": "Thu",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "MLB",
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-26",
+      "weekday": "Fri",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-27",
+      "weekday": "Sat",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-28",
+      "weekday": "Sun",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-29",
+      "weekday": "Mon",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-30",
+      "weekday": "Tue",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    },
+    {
+      "date": "2027-03-31",
+      "weekday": "Wed",
+      "released_categories": [
+        "MLB"
+      ],
+      "unverified_categories": [
+        "NBA"
+      ],
+      "model_categories": [
+        "WWO"
+      ],
+      "status": "RELEASED BUSY"
+    }
+  ],
+  "conclusion": "Longest free run under the strict definition: 2 day(s) (2027-02-11 to 2027-02-12). Longest under released-only: 2 day(s). Warriors home games on Feb 15 and Feb 17 (95.7 The Game) rule out the earlier Feb 15–18 gap. Sharks (NHL) games have no Bay Area AM/FM carriage on the official list and are not radio-busy. Earthquakes 2027 Sprint Season games are official rows (radio carriage UNVERIFIED). These runs are not certified free.",
+  "not_covered": [
+    "Sharks 2026–27 games: all carried on the Sharks Audio Network; no Bay Area AM/FM affiliate on the official list, so they are not counted as radio-busy. Sharks TV/NTN games are not added to the busy calendar.",
+    "San Jose Earthquakes 2027 Sprint Season (14 official games, Feb 20 – May 8): busy blocks kept conservatively; Bay Area radio carriage is UNVERIFIED.",
+    "25 Warriors dates (including Mar 3 and Mar 9 onward) are UNVERIFIED and count as busy only as UNVERIFIED blocks.",
+    "WWO 2027 February schedule and NCAAF 2027 schedule are unreleased; their Feb blocks are ESTIMATED models."
+  ],
+  "note": "Free time is never inferred. A run is free only in the captured official snapshot."
+}

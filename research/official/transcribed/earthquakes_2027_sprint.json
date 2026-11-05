@@ -1,0 +1,137 @@
+{
+  "schema": "earthquakes_2027_sprint_v1",
+  "description": "San Jose Earthquakes 2027 MLS Sprint Season (14 games) transcribed from the official club announcement dated Oct 29, 2026. Start times are Pacific. Bay Area radio carriage for 2027 is NOT captured and is left blank (UNVERIFIED).",
+  "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law",
+  "radio": {
+    "station": "",
+    "status": "NOT CAPTURED — 2027 Earthquakes radio carriage not yet published in sources reviewed"
+  },
+  "games": [
+    {
+      "date": "2027-02-20",
+      "opponent": "Portland Timbers",
+      "home_away": "A",
+      "time_pt": "2:00 PM",
+      "venue": "Providence Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-02-27",
+      "opponent": "Houston Dynamo FC",
+      "home_away": "H",
+      "time_pt": "5:00 PM",
+      "venue": "PayPal Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-03-06",
+      "opponent": "LA Galaxy",
+      "home_away": "A",
+      "time_pt": "7:00 PM",
+      "venue": "Dignity Health Sports Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-03-13",
+      "opponent": "Real Salt Lake",
+      "home_away": "H",
+      "time_pt": "7:00 PM",
+      "venue": "PayPal Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-03-17",
+      "opponent": "Minnesota United FC",
+      "home_away": "H",
+      "time_pt": "7:00 PM",
+      "venue": "PayPal Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-03-20",
+      "opponent": "Sporting Kansas City",
+      "home_away": "A",
+      "time_pt": "5:00 PM",
+      "venue": "Sporting Goods Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-04-03",
+      "opponent": "Colorado Rapids",
+      "home_away": "H",
+      "time_pt": "7:00 PM",
+      "venue": "PayPal Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-04-07",
+      "opponent": "Austin FC",
+      "home_away": "A",
+      "time_pt": "5:00 PM",
+      "venue": "Q2 Stadium",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-04-10",
+      "opponent": "FC Dallas",
+      "home_away": "A",
+      "time_pt": "5:00 PM",
+      "venue": "Toyota Stadium",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-04-17",
+      "opponent": "San Diego FC",
+      "home_away": "H",
+      "time_pt": "7:00 PM",
+      "venue": "PayPal Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-04-21",
+      "opponent": "St. Louis CITY SC",
+      "home_away": "A",
+      "time_pt": "5:00 PM",
+      "venue": "Energizer Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-04-24",
+      "opponent": "LAFC",
+      "home_away": "H",
+      "time_pt": "7:00 PM",
+      "venue": "PayPal Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-05-01",
+      "opponent": "Seattle Sounders FC",
+      "home_away": "A",
+      "time_pt": "2:00 PM",
+      "venue": "Lumen Field",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    },
+    {
+      "date": "2027-05-08",
+      "opponent": "Vancouver Whitecaps FC",
+      "home_away": "H",
+      "time_pt": "5:00 PM",
+      "venue": "PayPal Park",
+      "season_type": "MLS Sprint Season 2027",
+      "official_source_url": "https://www.sjearthquakes.com/news/san-jose-earthquakes-announce-2027-major-league-soccer-sprint-season-schedule-presented-by-habbas-law"
+    }
+  ]
+}
