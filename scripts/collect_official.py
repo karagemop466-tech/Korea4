@@ -13,6 +13,7 @@ import hashlib
 import html
 import json
 import math
+import os
 import re
 import statistics
 from collections import defaultdict
@@ -39,7 +40,29 @@ PT = ZoneInfo("America/Los_Angeles")
 START_DATE = date(2026, 1, 1)
 DISPLAY_START = date(2026, 11, 1)
 END_DATE = date(2029, 12, 31)
-SYSTEM_TODAY = date(2026, 11, 2)
+
+
+def _as_of_date() -> date:
+    """Snapshot day stamped into meta.json and used by the 'Today' scoreboard.
+
+    Priority: explicit `K4_AS_OF_DATE` (YYYY-MM-DD) → the capture date recorded
+    in `research/official/manifest.json` → the current UTC date. Tying the
+    default to the manifest keeps the published 'today' view consistent with
+    the day the official responses were actually fetched, never later.
+    """
+    env = os.environ.get("K4_AS_OF_DATE", "").strip()
+    if env:
+        return date.fromisoformat(env)
+    try:
+        captured = json.loads(OFFICIAL_MANIFEST.read_text()).get("generated_utc")
+        if captured:
+            return date.fromisoformat(str(captured)[:10])
+    except (OSError, ValueError, json.JSONDecodeError):
+        pass
+    return datetime.now(UTC).date()
+
+
+SYSTEM_TODAY = _as_of_date()
 
 MLB_DURATION = 158
 NFL_DURATION = 192

@@ -6,7 +6,20 @@ on:
     paths:
       - scripts/fetch_official.py
       - .github/workflows/fetch-official.yml
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      full_refresh:
+        description: "Refetch every official response (uncheck to retry only cached errors)"
+        type: boolean
+        default: true
+      as_of_date:
+        description: "Snapshot date stamped into meta.json (YYYY-MM-DD, empty = run date)"
+        type: string
+        default: ""
+      max_events:
+        description: "Maximum Westwood One event detail pages to capture"
+        type: string
+        default: "1000"
 
 permissions:
   contents: write
@@ -30,16 +43,30 @@ jobs:
         with:
           python-version: '3.11'
       - name: Fetch compressed official responses
-        run: python scripts/fetch_official.py --refresh-errors
+        env:
+          FULL_REFRESH: ${{ github.event.inputs.full_refresh }}
+          AS_OF_DATE: ${{ github.event.inputs.as_of_date }}
+          MAX_EVENTS: ${{ github.event.inputs.max_events }}
+        run: |
+          ARGS="--max-events ${MAX_EVENTS:-1000}"
+          if [ "${FULL_REFRESH}" != "false" ]; then
+            ARGS="--refresh ${ARGS}"
+          else
+            ARGS="--refresh-errors ${ARGS}"
+          fi
+          python scripts/fetch_official.py ${ARGS}
       - name: Publish snapshot to branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "SNAPSHOT_DATE=$(date -u +%F)" >> "$GITHUB_ENV"
+          echo "AS_OF_DATE=${AS_OF_DATE}" >> "$GITHUB_ENV"
           git add research/official/raw research/official/manifest.json research/official/wwo_event_categories.json
           if git diff --cached --quiet; then
             echo "No snapshot changes"
             exit 0
           fi
-          git commit -m "Publish official-source response snapshot [skip ci]"
+          DATE_TAG="${AS_OF_DATE:-$SNAPSHOT_DATE}"
+          git commit -m "Publish official-source response snapshot ${DATE_TAG} [skip ci]"
           git pull --rebase origin "$GITHUB_REF_NAME"
           git push origin "HEAD:$GITHUB_REF_NAME"
