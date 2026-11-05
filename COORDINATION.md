@@ -5,6 +5,12 @@ Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
 Fixed working branch: `arena/5cc34200-korea4`
 
+## Current session — arena/e9c48864-korea4 (2026-11-05) — G1 claim
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| G1 — Official-only gap audit for Jan–Mar 2027 (strict free-time definition): (a) separate officially released NFL/MLB/NCAAF rows from ESTIMATED WWO season-pattern blocks; (b) publish the officially-unscheduled windows (e.g. Feb 1–13, 2027) with official anchors; (c) check 2026–27 Warriors (NBA) and Sharks (NHL) Bay Area radio carriage and flag stale 2018/2019 radio sources (`research/official/raw/warriors_radio.gz`, `sharks_radio.gz`); (d) publish results on the Flagged for Review page | in progress | `arena/e9c48864-korea4` | `COORDINATION.md`, `research/analysis/official_gaps.json`, `scripts/official_gaps.py`, `vacation.html` (gap section only), `flagged.html` (new IR rows only) | Claimed 2026-11-05. Does not touch open PR #18 (`arena/aea8720a-korea4`) or PR #25 (`arena/46c69197-korea4`) scopes. Data rows in `data/official/events.json` are not edited by this task unless a row is verified against an official page. |
+
 ## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
 | Task | Status | Owner | File scope | Notes |
