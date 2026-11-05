@@ -5,6 +5,14 @@ Latest audit session: `arena/65a1da2b-korea4`
 Active final verification session: `arena/72e6d3f7-korea4`
 Fixed working branch: `arena/5cc34200-korea4`
 
+## Current session — arena/0290efac-korea4 (2026-11-05)
+
+Baseline: `main` @ `1ed4934` (PR #30 merged). Local gate on baseline: `scripts/verify.py` PASS (0 errors/0 warnings, 10,086 rows, 689 links, 0 broken); `node --check js/app.js`, `node tests/test_dashboard.mjs`, `npm test`, `test_dashboard_generator.py` PASS. Open PRs #18 (`arena/aea8720a-korea4`) and #25 (`arena/46c69197-korea4`) belong to other sessions and are NOT touched.
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| G1 — 49ers row integrity + official-domain gate: fix 49ers.com card parser (home/away swapped to team-vs-itself; ticket-reseller `vividseats.com` links used as "official" source; duplicate rows of NFL.com games); add source-domain allowlist to `scripts/verify.py`; regenerate data and site; publish IR-018+ for unresolved source conflicts | in progress | `arena/0290efac-korea4` | `scripts/collect_official.py` (49ers parser only), `scripts/verify.py`, `data/official/*`, `research/analysis/*`, `research/verification-report.md`, generated root HTML / `js/app.js` only if the build changes them, `flagged.html` IR rows, `COORDINATION.md` | Claimed 2026-11-05 before any edit. Found: 9 `VERIFIED` 49ers rows sourced from vividseats.com; 7+ 49ers rows with identical home and away; NFL 2026 preseason rows (49 matchups) carry no dates. |
+
 ## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
 | Task | Status | Owner | File scope | Notes |
