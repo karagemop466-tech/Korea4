@@ -1,6 +1,11 @@
 # COORDINATION.md — unified shared task board
 
-## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
+Last integration update: 2026-11-05 (UTC) — integration takeover of stale PRs #18/#25 begins
+Latest audit session: `arena/65a1da2b-korea4`
+Active final verification session: `arena/8111ceb3-korea4` (this session)
+Fixed working branch: `arena/8111ceb3-korea4`
+
+## Session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
@@ -16,13 +21,23 @@
 - **Publication result:** claim commit `e219bde`; implementation commit `8a68683`; PR [#31](https://github.com/karagemop466-tech/Korea4/pull/31) MERGED 2026-11-05T21:11:12Z as `a8b28fa38584ec11745d0800897d9282a3fce150`. Verify workflow run [42110249985](https://github.com/karagemop466-tech/Korea4/actions/runs/42110249985) SUCCESS. GitHub Pages deployment [42110316393](https://github.com/karagemop466-tech/Korea4/actions/runs/42110316393) SUCCESS (build, deploy, and report-build-status).
 - **Live check:** https://karagemop466-tech.github.io/Korea4/?v=a8b28fa and `/daily.html?date=2026-11-05&v=a8b28fa` returned updated pages showing selected date 2026-11-05, source snapshot refresh 2026-11-02, WWO JAX@BAL 4:30–8:59 PM PST, and explicitly unverified estimated gaps.
 
+## Current session — arena/8111ceb3-korea4 (2026-11-05) — T1 integration takeover
 
-Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
-Latest audit session: `arena/65a1da2b-korea4`
-Active final verification session: `arena/72e6d3f7-korea4`
-Fixed working branch: `arena/5cc34200-korea4`
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| T1 — Take over the outstanding integration request from stale PRs #18 (`arena/aea8720a-korea4`, last commit 2026-11-03T19:40Z) and #25 (`arena/46c69197-korea4`, last commit 2026-11-03T23:28Z): both sessions are >48 h stale (60-minute takeover rule), their branches have unrelated git roots (fresh Arena snapshots) so the PRs are permanently CONFLICTING and can never merge as-is. Land the PR #25 safety-audit record, fix the verified arithmetic/provenance bugs neither PR shipped (busy-minute interval-union double count, distinct-day counters, Giants station team-name test, 9 49ers vividseats.com reseller citations), publish the audit on `flagged.html`, add regression tests, harden `scripts/verify.py`, regenerate the site, then run the PR → merge → Pages-deploy cycle and record it. After landing, close PRs #18/#25 with a handoff comment. | in progress | `arena/8111ceb3-korea4` | `COORDINATION.md`, `research/vacation-safety-audit-46.md`, `research/integration-audit-2026-11-05.md`, `scripts/collect_official.py`, `scripts/build_site.py`, `scripts/verify.py`, `js/app.js`, `tests/*`, `.github/workflows/check.yml`, regenerated `data/official/*` + root HTML | Claim pushed immediately per protocol. PR #18/#25 file scopes verified against this list before starting; their sessions have made no commits since 2026-11-03. Baseline: `main` @ `1ed4934` (PR #30 merge). |
 
-## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
+### T1 pre-work verification (2026-11-05, arena/8111ceb3-korea4)
+
+- Working tree clean; branch identical to `origin/main` @ `1ed4934`.
+- Reproduced every PR #25 audit finding against the published snapshot before touching anything:
+  - `events.json` MLB Giants rows: 393 total, 377 with EMPTY `stations` (bug: `"Giants" in (away, home)` is tuple membership against full team name "San Francisco Giants", always False), 16 (Giants vs Athletics only) labelled `960 AM KNEW / A's Cast`; all 387 Athletics rows carry that combined terrestrial + streaming label with no game-level carriage evidence.
+  - 9 49ers rows (`49ers-ab581766…` through `49ers-ace0ab32…`, 2026-11-08 → 2027-01-03) cite `www.vividseats.com` — a ticket reseller, violating the official-sources-only rule. PR #18's parser fix (always cite the captured official `49ers.com/schedule` page) is correct and is adopted.
+  - `compute_vacation_windows` sums `end - start` over overlapping intervals (e.g. 2027-02-03 window displays 3,944 busy minutes where the union is 2,504) and increments `unverified_days`/`model_days` per interval rather than per distinct date.
+- PR #18 (33 files) reviewed hunk by hunk: adopted items are the 49ers provenance fix, `verify.py` hardening (visible source-link match, snapshot SHA-256/byte integrity, official-domain allowlist), and the `GAP` → `FREE` timeline label; rejected items and reasons are recorded in the T1 completion record below. PR #18 does NOT contain fixes for the busy-minute union, distinct-day counters, or Giants station bug — those are new in T1.
+- The 60-minute takeover rule applies to both stale sessions; this entry is the handoff note required by the board.
+
+## Session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
