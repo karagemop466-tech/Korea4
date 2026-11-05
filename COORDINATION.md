@@ -46,12 +46,14 @@ Active final verification session: `arena/72e6d3f7-korea4`
 
 | Item | Result |
 |---|---|
-| PR | PENDING — filled in after merge (follow-up docs-only commit, established pattern) |
-| State | PENDING |
-| Merge commit | PENDING |
-| Pre-merge check | "Verify final integration" workflow on the PR — to be confirmed before merge |
-| GitHub Pages | to be confirmed after merge (`status=built`) |
-| Live check | to be re-fetched after deploy |
+| PR | [#36 — V2: independent re-verification at main @ 1ed4934 + IR-018 (arena/41977cb2-korea4)](https://github.com/karagemop466-tech/Korea4/pull/36) |
+| State | MERGED (2026-11-05T21:13:56Z) |
+| Merge commit | `e42b3eb156b4a3c64218bc36149838af9481b03b` |
+| Pre-merge check | "Verify final integration" workflow run `42110654826` on PR #36 — SUCCESS |
+| GitHub Pages | build on `e42b3eb` → Pages API `status=built`; "pages build and deployment" run `42110739689` SUCCESS; "Verify static Pages source" on main SUCCESS |
+| Live check | root re-fetched post-deploy with cache-buster: renders 6,607 rows / 748 sources / 1,461 scoreboards; snapshot date rolled to 2026-11-05 and shows tonight's WWO TNF window (gap ends 16:30 PT), matching the WWO row `wwo-548561` verified directly against the official schedule page |
+| Conflict note | Concurrent parallel-session PR #35 (another session's COORDINATION.md-only record) merged into main just before #36; this branch was rebased onto `e42b3eb` before this follow-up commit — no content discarded, no conflicts |
+| This record | Carried by a second docs-only PR from the same fixed branch, per the established pattern (PR number added below after merge) |
 | Flagged irregularities | IR-018 logged above for the provenance-owning session (PR #18); non-blocking, consistent with IR-001…IR-017 |
 
 ## Prior session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
