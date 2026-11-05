@@ -28,7 +28,7 @@ Baseline: `main` @ `1ed4934` (PR #30 merged). Local gate on baseline: `scripts/v
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
-| G2 — 49ers row integrity + official-domain gate: fix 49ers.com card parser (home/away swapped to team-vs-itself; ticket-reseller `vividseats.com` links used as "official" source; duplicate rows of NFL.com games); add source-domain allowlist to `scripts/verify.py`; regenerate data and site; publish IR-018+ for unresolved source conflicts | done | `arena/0290efac-korea4` | `scripts/collect_official.py` (49ers parser only), `scripts/verify.py`, `data/official/*`, `research/analysis/*`, `research/verification-report.md`, generated root HTML / `js/app.js` only if the build changes them, `flagged.html` IR rows, `COORDINATION.md` | Claimed 2026-11-05 before any edit. Found: 9 `VERIFIED` 49ers rows sourced from vividseats.com; 7+ 49ers rows with identical home and away; NFL 2026 preseason rows (49 matchups) carry no dates. |
+| G2 — 49ers row integrity + official-domain gate: fix 49ers.com card parser (home/away swapped to team-vs-itself; ticket-reseller `vividseats.com` links used as "official" source; duplicate rows of NFL.com games); add source-domain allowlist to `scripts/verify.py`; regenerate data and site; publish IR-018+ for unresolved source conflicts | done (PR #34 merged `b72361b`; Pages `built`) | `arena/0290efac-korea4` | `scripts/collect_official.py` (49ers parser only), `scripts/verify.py`, `data/official/*`, `research/analysis/*`, `research/verification-report.md`, generated root HTML / `js/app.js` only if the build changes them, `flagged.html` IR rows, `COORDINATION.md` | Claimed 2026-11-05 before any edit. Found: 9 `VERIFIED` 49ers rows sourced from vividseats.com; 7+ 49ers rows with identical home and away; NFL 2026 preseason rows (49 matchups) carry no dates. |
 
 ### G2 record — arena/0290efac-korea4 (2026-11-05)
 
@@ -60,6 +60,19 @@ Baseline: `main` @ `1ed4934` (PR #30 merged). Local gate on baseline: `scripts/v
 - IR-021 — 2026 NFL preseason: 49 matchups still have no official dates in the preseason PDF (left blank; not inferred); the three 49ers preseason rows have dates from 49ers.com; their radio is UNVERIFIED.
 
 **Limitations.** Data remain a snapshot captured 2026-11-02; this session did not re-scrape the full official set (collector re-run used the saved raw responses). The 49ers.com "game-day" links for upcoming games point to the 49ers.com game-center pages, which were not re-fetched individually.
+
+### G2 PR / merge / deploy result — `arena/0290efac-korea4` (2026-11-05)
+
+| Item | Result |
+|---|---|
+| PR | [#34 — G1/G2: 49ers row integrity fix + official-domain verification gate](https://github.com/karagemop466-tech/Korea4/pull/34) |
+| State | MERGED 2026-11-05T21:16:49Z, merge commit `b72361ba523509fb9939c59cf105a5c4fd08869f` (merge commit, not squash) |
+| Conflicts resolved before merge | `main` advanced twice during review (PR #31/#33/#35 and PR #36). `scripts/collect_official.py`: kept main's live `SYSTEM_TODAY = datetime.now(PT).date()` and `source_snapshot_utc`, and kept this session's parser and IR-018…IR-021 changes. Generated HTML/JSON regenerated from the merged scripts. `COORDINATION.md`: both boards kept verbatim. No other session's work was discarded. |
+| Checks | PR check `Verify final integration` (`verify.py`, `js/app.js` syntax, dashboard/core tests, generator unittest) PASS on PR head `97f8a90`; `Verify static Pages source` PASS on `main` after merge. |
+| Local gate (final) | `scripts/verify.py` → 0 errors, 0 warnings, 10,066 primary rows with source links, 689 internal links, 0 broken; `node --check js/app.js` PASS; `npm test` PASS; `tests/test_dashboard.mjs` PASS; generator unittest PASS. |
+| GitHub Pages | `pages build and deployment` run `42111184984` success; Pages API `status=built`, `source=main`. |
+| Live check | https://karagemop466-tech.github.io/Korea4/flagged.html shows IR-018…IR-021 with official links; `nfl.html` contains 0 `vividseats` links; snapshot banner shows rebuilt 2026-11-05 and selected date 2026-11-05 PT. |
+| Irregularities | IR-018 (corrected), IR-019, IR-020, IR-021 published on `flagged.html`; non-blocking. Open PR #18 (`arena/aea8720a-korea4`) still carries the old vividseats-derived 49ers rows in its own branch; its owner should rebase onto `main` (rows are now corrected on `main`). |
 
 ## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
