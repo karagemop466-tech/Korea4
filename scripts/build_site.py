@@ -21,10 +21,18 @@ NAV = [
     ("vacation.html", "Vacation windows"), ("mlb.html", "MLB"), ("nfl.html", "NFL"),
     ("ncaaf.html", "Stanford / Cal"), ("wwo.html", "Westwood One"), ("radio.html", "Radio map"),
     ("sources.html", "Sources"), ("flagged.html", "Flagged"), ("methodology.html", "Method"),
+    ("verification.html", "Verification"),
     ("review.html", "Repo review"), ("executive-summary.html", "Executive summary"),
 ]
 
 PAGES_WITH_ARIA = {p for p, _ in NAV}
+
+# Only league-, team- or network-operated domains may be cited as a row source.
+OFFICIAL_HOSTS = (
+    "nfl.com", "49ers.com", "mlb.com", "gostanford.com", "calbears.com",
+    "westwoodonesports.com", "ncaa.org", "ncaa.com", "collegefootballplayoff.com",
+    "earthquakes.com", "sjearthquakes.com", "mlssoccer.com", "ksfo.com", "theifab.com", "media.nfl.com",
+)
 
 
 def esc(v) -> str:
@@ -111,7 +119,15 @@ def table(headers, rows, columns, name, page_size=100, intro=None):
         cells = [cell(row, c) for c in columns]
         source_url = source_of(row)
         source_label = row.get("source_label") or row.get("source_label_") or "Official source"
-        cells.append(f'<a class="source-link" href="{esc(source_url)}" target="_blank" rel="noopener">{esc(source_label)}</a>')
+        source_html = f'<a class="source-link" href="{esc(source_url)}" target="_blank" rel="noopener">{esc(source_label)}</a>'
+        secondary = row.get("secondary_source_url") or ""
+        if secondary.startswith("http") and any(
+            host in secondary for host in OFFICIAL_HOSTS
+        ):
+            secondary_label = row.get("secondary_source_label") or "Second official source"
+            source_html += (f'<br><a class="source-link" href="{esc(secondary)}" target="_blank" '
+                            f'rel="noopener">{esc(secondary_label)}</a>')
+        cells.append(source_html)
         row_text = " ".join(re.sub(r"<[^>]+>", " ", c) for c in cells).lower()
         status = status_of(row).lower()
         body.append(f'<tr data-source-url="{esc(source_url)}" data-row-status="{esc(status)}" data-row-text="{esc(row_text)}">' + "".join(f"<td>{c}</td>" for c in cells) + "</tr>")
@@ -326,7 +342,7 @@ def build_vacation():
     body = f'''
 <div class="callout danger"><strong>Strict conclusion:</strong> {esc(conclusion['conclusion'])} {badge('ESTIMATED / UNVERIFIED','unverified')} <a href="{esc(conclusion['source_url'])}" target="_blank" rel="noopener">Official NFL date anchor</a></div>
 <section class="panel"><h2>Best 1-, 2-, and 3-week windows (least conflict)</h2><p class="intro">Computed from exact official rows plus separately labelled 2026-pattern estimates. Busy days include official dates with TBD times and unverified conservative blocks.</p>
-{table(['Year','Length','Start','End','Busy days','Busy minutes','Model days','Strict free','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('busy_minutes','num'),('model_days','num'),('strict_free','text'),('status','badge')], 'vacation-windows', 20)}</section>
+{table(['Year','Length','Start','End','Busy days','Busy minutes (overlap merged)','Model days','Strict free','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('busy_minutes','num'),('model_days','num'),('strict_free','text'),('status','badge')], 'vacation-windows', 20)}</section>
 <section class="panel"><h2>2027 anchors for manual review</h2><p class="intro">These dates do not establish an empty week or confirm local radio coverage. Other broadcasts may occur between the anchors.</p>{table(['Event','Official date','Status'], [
  {'event':'NFL Super Bowl LXI','date':'2027-02-14','status':'VERIFIED DATE — KICKOFF / RADIO COVERAGE NOT CHECKED','source_url':'https://www.nfl.com/news/2026-27-national-football-league-important-dates','source_label':'NFL important dates'},
  {'event':'Phillies at Tigers spring training','date':'2027-02-19','status':'VERIFIED DATE — START / SF AM/FM CARRIAGE UNVERIFIED','source_url':'https://www.mlb.com/press-release/press-release-2027-phillies-spring-training-schedule-announced','source_label':'Phillies official release'}], ['event','date',('status','badge')], 'manual-anchors', 20)}</section>
@@ -494,6 +510,47 @@ No 7-, 14- or 21-day trip can be certified free from all requested radio sports 
     write("EXECUTIVE-SUMMARY.md", md)
 
 
+def build_verification():
+    audit_path = ROOT / "research" / "verification" / "audit-log.json"
+    audit = json.loads(audit_path.read_text()) if audit_path.exists() else {"checks": [], "totals": {}}
+    checks = audit.get("checks", [])
+    rows = []
+    for check in checks:
+        rows.append({
+            "id": check["id"], "scope": check["scope"], "method": check["method"],
+            "rows_checked": check["rows_checked"], "mismatches": check["mismatches"],
+            "status": check["status"], "source_url": check["source_url"],
+            "source_label": check["source_label"], "notes": check.get("notes", ""),
+        })
+    detail_sections = ""
+    for check in checks:
+        details = check.get("details") or []
+        if not details:
+            continue
+        detail_rows = [{"detail": d} if isinstance(d, str) else
+                       {"detail": f"{d.get('checked','')} — {d.get('result','')}",
+                        "source_url": d.get("source_url", ""), "source_label": d.get("source_label", "Official source")}
+                       for d in details]
+        detail_sections += (f'<section class="panel"><h2>{esc(check["id"])} · {esc(check["scope"])} — findings</h2>'
+                            + table(["Finding"], detail_rows, [("detail", "text")], f"audit-{check['id']}", 50)
+                            + "</section>")
+    totals = audit.get("totals", {})
+    body = f'''
+<div class="callout {'ok' if totals.get('mismatches', 0) == 0 else 'danger'}"><strong>Line-by-line audit:</strong> {esc(totals.get('rows_checked', 0))} published values recomputed from the captured raw official responses; {esc(totals.get('mismatches', 0))} mismatches. Generated {esc(audit.get('generated_utc',''))}.</div>
+<section class="panel"><h2>What this audit proves</h2><p class="intro">{esc(audit.get('snapshot_note',''))}</p>
+<p class="intro">A PASS below means every published value matches the official capture it was parsed from. It does not certify that the capture is still the league's latest publication; live pages were re-checked by hand and are recorded in A8.</p></section>
+<section class="panel"><h2>Audit checks</h2>{table(['Check','Scope','Method','Values checked','Mismatches','Status','Notes'], rows, ['id','scope','method',('rows_checked','num'),('mismatches','num'),('status','badge'),'notes'], 'audit-checks', 50)}</section>
+{detail_sections}
+<section class="panel"><h2>Reproduce</h2><pre class="code">python scripts/audit_line_by_line.py
+python scripts/collect_official.py
+python scripts/build_site.py
+python scripts/verify.py</pre>
+<p class="intro">The audit log is written to <a href="research/verification/audit-log.json">research/verification/audit-log.json</a>.</p></section>
+'''
+    write("verification.html", page("Verification log", "verification.html",
+          "Recomputed, row-by-row comparison of every published value against the raw official source captures.", body))
+
+
 def build_readme():
     readme = f'''# Korea4 — FREE TIME VACATION
 
@@ -515,7 +572,7 @@ Live site: <https://karagemop466-tech.github.io/Korea4/>
 - **ESTIMATED** — documented planning model from official 2026 rows; never a released schedule.
 
 ## Pages
-`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
+`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `verification.html`, `executive-summary.html`.
 
 Parallel-session dashboards are preserved at `docs/`, `site/`, and `site/pages/` and linked from every page footer.
 
@@ -537,7 +594,7 @@ def main():
     preserve_legacy()
     build_index(); build_daily(); build_calendar(); build_vacation(); build_mlb(); build_nfl()
     build_ncaaf(); build_wwo(); build_radio(); build_sources(); build_flagged(); build_methodology()
-    build_review(); build_executive(); build_readme()
+    build_review(); build_verification(); build_executive(); build_readme()
     print(json.dumps({"pages": len(NAV) + 1, "source_rows": len(SOURCES), "event_rows": len(EVENTS), "audit_rows": len(REVIEW)}, indent=2))
 
 

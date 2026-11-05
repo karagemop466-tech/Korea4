@@ -15,6 +15,7 @@ PRIMARY_PAGES = [
     "index.html", "daily.html", "calendar.html", "vacation.html", "mlb.html", "nfl.html",
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
     "methodology.html", "review.html", "executive-summary.html", "teams.html",
+    "verification.html",
 ]
 REPORT = ROOT / "research/verification-report.md"
 

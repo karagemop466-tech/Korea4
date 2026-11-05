@@ -1,0 +1,124 @@
+{
+  "generated_utc": "2026-11-05T21:26:59+00:00",
+  "snapshot_note": "Checks A1-A7 recompute published values from the compressed raw official responses captured on 2026-11-02; they prove the published rows match those captures, not that the captures are current.",
+  "checks": [
+    {
+      "id": "A1",
+      "scope": "MLB rows with an official start time",
+      "method": "Pacific date and kickoff recomputed from the official MLB Stats API game rows captured under research/official/raw.",
+      "rows_checked": 3768,
+      "mismatches": 0,
+      "status": "PASS \u2014 every checked row matches the official source",
+      "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026",
+      "source_label": "Official MLB Stats API 2026",
+      "notes": "Rows whose official time is TBD are excluded here and stay blank in the tables."
+    },
+    {
+      "id": "A2",
+      "scope": "NFL 2026 regular-season rows",
+      "method": "The 18 official NFL by-week pages re-parsed independently; kickoff, Pacific date and matchup compared row by row.",
+      "rows_checked": 248,
+      "mismatches": 0,
+      "status": "PASS \u2014 every checked row matches the official source",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "source_label": "Official NFL by-week schedule",
+      "notes": "24 further official games publish TBD date/kickoff and are blank in the tables."
+    },
+    {
+      "id": "A3",
+      "scope": "Westwood One network event rows",
+      "method": "Every official WWO event page re-parsed from its Unix data-time attribute and converted to Pacific time.",
+      "rows_checked": 311,
+      "mismatches": 0,
+      "status": "PASS \u2014 every checked row matches the official source",
+      "source_url": "https://www.westwoodonesports.com/nfl-schedule/",
+      "source_label": "Official Westwood One NFL schedule",
+      "notes": "Some official WWO end times are 11:59 PM placeholders; only start times are verified here."
+    },
+    {
+      "id": "A4",
+      "scope": "San Francisco 49ers rows",
+      "method": "Official 49ers schedule matchup cards (data-gametime) converted to Pacific and matched against published 49ers rows.",
+      "rows_checked": 19,
+      "mismatches": 0,
+      "status": "PASS \u2014 every checked row matches the official source",
+      "source_url": "https://www.49ers.com/schedule/",
+      "source_label": "Official 49ers schedule",
+      "notes": "Week 18 is officially TBD and is intentionally absent from the timed rows."
+    },
+    {
+      "id": "A5",
+      "scope": "Stanford and California rows",
+      "method": "Official team schedule pages (Stanford schedule table, Cal game cards and scoreboard carousel) re-parsed and compared, including TBA kickoffs.",
+      "rows_checked": 31,
+      "mismatches": 0,
+      "status": "PASS \u2014 every checked row matches the official source",
+      "source_url": "https://gostanford.com/sports/football/schedule",
+      "source_label": "Official Stanford football schedule",
+      "notes": "Cal's official page is the second source link on Cal rows."
+    },
+    {
+      "id": "A6",
+      "scope": "Every published row's source URL",
+      "method": "Each row's source URL (and secondary source, where present) must resolve to an official league, team, network or governing-body domain.",
+      "rows_checked": 6562,
+      "mismatches": 0,
+      "status": "PASS \u2014 every checked row matches the official source",
+      "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027",
+      "source_label": "Official MLB Stats API 2027",
+      "notes": "Ticket resellers, aggregators and wikis are rejected."
+    },
+    {
+      "id": "A7",
+      "scope": "Daily scoreboard intervals",
+      "method": "Every dated event row must appear as a busy interval on its Pacific day scoreboard.",
+      "rows_checked": 6482,
+      "mismatches": 0,
+      "status": "PASS \u2014 every checked row matches the official source",
+      "source_url": "https://calbears.com/sports/football/schedule/2026",
+      "source_label": "Official Cal schedule (representative day source)",
+      "notes": "Rows outside the published 2026-01-01 to 2029-12-31 window are skipped."
+    },
+    {
+      "id": "A8",
+      "scope": "Live official re-checks, 2026-11-05",
+      "method": "Official pages re-fetched on 2026-11-05 and compared line by line with the published rows.",
+      "rows_checked": 4,
+      "mismatches": 0,
+      "status": "PASS \u2014 every live-checked page matches the published rows",
+      "source_url": "https://www.49ers.com/schedule/",
+      "source_label": "Official 49ers schedule",
+      "notes": "Live checks are recorded manually because the build environment has no outbound access to league sites.",
+      "details": [
+        {
+          "checked": "San Francisco 49ers 2026 schedule: Weeks 9-17 kickoffs, venues, TV and radio line (KSAN 107.7 FM / KNBR 104.5 FM / 680 AM)",
+          "result": "MATCH \u2014 Week 9 Sun 11/08 1:25 PM PST vs Raiders (Levi's Stadium), Week 10 Sun 11/15 1:25 PM PST at Cowboys, Week 11 Sun 11/22 5:20 PM PST vs Vikings (Estadio Banorte, Mexico City), Week 12 Sun 11/29 1:25 PM PST vs Seahawks, Week 13 Sun 12/06 10:00 AM PST at Giants, Week 14 Sun 12/13 1:25 PM PST vs Rams, Week 15 Thu 12/17 5:15 PM PST at Chargers (Prime Video), Week 16 Sun 12/27 1:25 PM PST at Chiefs, Week 17 Sun 01/03 5:20 PM PST vs Eagles; Week 18 TBD at Cardinals; Week 8 bye.",
+          "source_url": "https://www.49ers.com/schedule/",
+          "source_label": "Official 49ers schedule"
+        },
+        {
+          "checked": "Westwood One NFL schedule, upcoming broadcasts 2026-11-05 through 2026-12-26",
+          "result": "MATCH \u2014 18 of 18 published WWO rows (event ids 548561, 548500, 548562, 548501, 548564, 548543, 548512, 548514, 548502, 548566, 548545, 548505, 548568, 548518, 548548, 548528, 548534, 548520) carry the same official date and Pacific start time as the live page.",
+          "source_url": "https://www.westwoodonesports.com/nfl-schedule/",
+          "source_label": "Official Westwood One NFL schedule"
+        },
+        {
+          "checked": "California 2026 football schedule, full season",
+          "result": "MATCH \u2014 official page lists Oct 24 at SMU, Oct 31 at NC State, Nov 14 at Virginia 12:30 PM, Nov 21 vs Stanford (kickoff TBA) and Nov 28 vs Pittsburgh (kickoff TBA). All five now appear as dated rows; the two TBA kickoffs are blank and block the whole day.",
+          "source_url": "https://calbears.com/sports/football/schedule/2026",
+          "source_label": "California Golden Bears official schedule"
+        },
+        {
+          "checked": "Stanford 2026 football schedule, remaining games",
+          "result": "MATCH \u2014 official page lists Sat Nov 14 at Virginia Tech as a flexible '4 OR 4:30 P.M.' window, and Sat Nov 21 at California and Sat Nov 28 vs SMU as TBA. The earlier 12:00 PM placeholder values were corrected to blank.",
+          "source_url": "https://gostanford.com/sports/football/schedule",
+          "source_label": "Stanford Cardinal official football schedule"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "rows_checked": 17425,
+    "mismatches": 0
+  }
+}

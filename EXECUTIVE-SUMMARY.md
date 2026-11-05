@@ -1,6 +1,6 @@
 # Executive summary — FREE TIME VACATION
 
-Generated 2026-11-03T23:27:13+00:00 from 748 official-source records.
+Generated 2026-11-05T21:22:04+00:00 from 748 official-source records.
 
 ## Scope
 - All 30 MLB clubs; Giants and Athletics FOCUS; all MLB games HIGH.
@@ -24,10 +24,10 @@ No 7-, 14- or 21-day trip can be certified free from all requested radio sports 
 
 
 ## Counts
-- Official event / anchor rows: 6607
+- Official event / anchor rows: 6562
 - Official sources: 748
 - Daily scoreboards: 1461
-- Merged busy/free intervals: 14364
+- Merged busy/free intervals: 14224
 - Prior generated-data lines reviewed: 2419
 
 ## Manual review

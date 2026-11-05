@@ -18,7 +18,7 @@ Live site: <https://karagemop466-tech.github.io/Korea4/>
 - **ESTIMATED** — documented planning model from official 2026 rows; never a released schedule.
 
 ## Pages
-`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
+`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `verification.html`, `executive-summary.html`.
 
 Parallel-session dashboards are preserved at `docs/`, `site/`, and `site/pages/` and linked from every page footer.
 

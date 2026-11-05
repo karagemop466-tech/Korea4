@@ -1,9 +1,56 @@
 # COORDINATION.md — unified shared task board
 
-Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
-Latest audit session: `arena/65a1da2b-korea4`
-Active final verification session: `arena/72e6d3f7-korea4`
-Fixed working branch: `arena/5cc34200-korea4`
+Last integration update: 2026-11-05 (UTC) — data-integrity audit and correction, Pages redeploy pending merge
+Latest audit session: `arena/c454b5b6-korea4`
+Fixed working branch: `arena/c454b5b6-korea4`
+
+## Current session — arena/c454b5b6-korea4 (2026-11-05) — data-integrity audit and correction
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| D1 — Line-by-line re-verification of every published row against the captured raw official sources, correction of the defects found, regeneration of the site, then the PR → merge → Pages-deploy cycle | in progress | `arena/c454b5b6-korea4` | `scripts/collect_official.py`, `scripts/build_site.py`, `scripts/verify.py`, `scripts/audit_line_by_line.py` (new), `data/official/*`, `research/verification/*` (new), regenerated root pages (`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `verification.html` (new), `executive-summary.html`, `teams.html`), `EXECUTIVE-SUMMARY.md`, `README.md`, `COORDINATION.md` | Baseline `main` @ `1ed49341`. Open PRs #18 (`arena/aea8720a-korea4`) and #25 (`arena/46c69197-korea4`) are stale (no commits since 2026-11-03T23:28/23:30Z) and CONFLICTING; they are **not** claimed, merged or closed by this session. |
+
+### What this session verified (2026-11-05)
+
+New reproducible audit: `python3 scripts/audit_line_by_line.py` → `research/verification/audit-log.json`. **17,425 published values recomputed, 0 mismatches.**
+
+| Check | Scope | Values checked | Mismatches |
+|---|---|---|---|
+| A1 | MLB rows with an official start time — Pacific date/time recomputed from the official MLB Stats API captures | 3,768 | 0 |
+| A2 | NFL 2026 regular season — the 18 official by-week pages re-parsed independently (kickoff, Pacific date, matchup); 24 further official TBD games stay blank | 248 | 0 |
+| A3 | Westwood One — every official event page re-parsed from its Unix `data-time` attribute | 311 | 0 |
+| A4 | 49ers — official schedule `data-gametime` cards vs published kickoffs (Week 18 officially TBD, correctly absent) | 19 | 0 |
+| A5 | Stanford/Cal — official team schedule pages re-parsed including TBA kickoffs | 31 | 0 |
+| A6 | Source allowlist — every row's source URL (and secondary source) must be an official league/team/network/governing-body domain | 6,562 | 0 |
+| A7 | Daily scoreboards — every dated row appears as a busy interval on its Pacific day | 6,482 | 0 |
+| A8 | Live official pages re-fetched 2026-11-05 and compared by hand (49ers, Westwood One, Cal, Stanford) | 4 pages | 0 |
+
+Live checks are written up with links in `research/verification/2026-11-05-live-source-checks.md` and published on the new `verification.html` page.
+
+### Defects found and corrected (new IR-018 … IR-025, published on `flagged.html`)
+
+1. **IR-018 — ticket-reseller citations.** Nine 49ers rows cited `vividseats.com` (the schedule card's "FAN EXPERIENCE PACKAGES" button) while the row label claimed 49ers.com. The collector now accepts only official league/team/network domains and prefers the 49ers.com game-center link. Zero non-official source URLs remain (check A6).
+2. **IR-019 — duplicated 49ers games.** 16 regular-season 49ers kickoffs were published twice (once from NFL.com, once from 49ers.com). Duplicates are now merged into the official NFL.com row, which carries the 49ers.com game-center link and the venue as a second official source. Event rows: 6,607 → 6,591.
+3. **IR-020 — missing California games (material for free-time accuracy).** The Cal parser required an `HH:MM` kickoff and read a header date node that upcoming games omit, so five Cal games were published as TBA with no date: Oct 24 at SMU, Oct 31 at NC State, **Nov 14 at Virginia (12:30 PM PST)**, Nov 21 vs Stanford, Nov 28 vs Pittsburgh. Both live FOCUS games would have been shown as free time. The parser now merges the game cards with the official scoreboard carousel.
+4. **IR-021 — Stanford placeholder times published as verified.** Nov 21 (129th Big Game at California) and Nov 28 (vs SMU) are officially TBA; the collector had copied the page's 12:00 PM placeholder and labelled it VERIFIED. Both are now blank and block the whole day as an unverified busy candidate.
+5. **IR-022 — postponed MLB rows.** The MLB Stats API keeps a "Postponed" entry next to the re-scheduled entry for the same `gamePk`; 30 postponed rows were published as VERIFIED broadcasts on days with no radio game. Only the played/scheduled entry is published now; a suspended-and-resumed game that legitimately spans two dates keeps both rows with unique ids and an explicit note.
+6. **IR-023 — busy-minute double counting.** Vacation-window busy minutes summed every interval, so simultaneous MLB games were counted more than once; "unverified days" and "model days" counted rows, not days. Busy minutes now merge overlapping intervals per day and the two counters count days.
+7. **IR-024 / IR-025 — flagged, not corrected.** Stanford and Cal official pages print Pacific kickoff times for away games too (assumption disclosed); Stanford's Nov 14 game at Virginia Tech is officially a flexible "4 OR 4:30 P.M." PT window, recorded in the row notes.
+
+### Site changes
+
+- New page **`verification.html`** ("Verification log") renders the audit log: check, scope, method, values checked, mismatches, status and an official source link per row, plus the 2026-11-05 live findings and the reproduction commands.
+- NFL rows now show a second official source link (49ers.com game center) where one exists.
+- Vacation table column renamed to "Busy minutes (overlap merged)".
+- Event rows now 6,562 (was 6,607); official NFL regular-season coverage unchanged at 272 rows; daily scoreboards 1,461 (2026-11-01 → 2029-12-31).
+
+### Gates
+
+`python3 scripts/verify.py` → 0 errors, 0 warnings, 10,053 source-linked primary rows, 729 internal links, 0 broken, JS syntax PASS. `node --check js/app.js` PASS. `npm test` PASS. `node tests/test_dashboard.mjs` PASS. `python -m unittest discover -s tests -p test_dashboard_generator.py` → 2 tests OK; `test_refresh.py` → 14 OK; `test_snapshot.py` → 4 OK.
+
+### Handoff note for any later session
+
+Raw captures are from 2026-11-02. Re-run `scripts/fetch_official.py --refresh-errors` on a runner with outbound access, then `collect_official.py`, `audit_line_by_line.py`, `build_site.py`, `verify.py`. Unreleased seasons (2028/2029 MLB, 2027–2029 NFL, post-Jan-2027 WWO) stay blank and ESTIMATED — never present them as released schedules.
 
 ## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 

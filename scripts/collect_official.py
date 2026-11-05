@@ -15,10 +15,11 @@ import json
 import math
 import re
 import statistics
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import date, datetime, time, timedelta, timezone
 from io import BytesIO
 from pathlib import Path
+from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
 from bs4 import BeautifulSoup
@@ -70,6 +71,40 @@ GAME_TYPE_LABELS = {
     "A": "All-Star / Futures", "F": "Wild Card / First Round", "D": "Division Series",
     "L": "League Championship Series", "W": "World Series", "C": "Special Event",
 }
+
+# Only league-, team- or network-operated domains may be cited as a row source.
+# Ticket resellers, aggregators and wikis are never accepted as official sources.
+PIPELINE_STATS: dict[str, int] = defaultdict(int)
+
+OFFICIAL_HOST_SUFFIXES = (
+    "nfl.com", "49ers.com", "mlb.com", "gostanford.com", "calbears.com",
+    "westwoodonesports.com", "ncaa.org", "ncaa.com", "collegefootballplayoff.com",
+    "earthquakes.com", "sjearthquakes.com", "mlssoccer.com", "ksfo.com", "theifab.com",
+)
+
+
+def is_official_url(url: str) -> bool:
+    host = urlsplit(url or "").netloc.lower().split("@")[-1].split(":")[0]
+    if not host:
+        return False
+    return any(host == s or host.endswith("." + s) for s in OFFICIAL_HOST_SUFFIXES)
+
+
+def merge_minutes(spans: list[tuple[int, int]]) -> int:
+    """Total minutes covered by spans, counting overlaps once."""
+    ordered = sorted((max(0, int(s)), min(1440, int(e))) for s, e in spans if int(e) > int(s))
+    total = 0
+    cur_start = cur_end = None
+    for start, end in ordered:
+        if cur_end is None or start > cur_end:
+            if cur_end is not None:
+                total += cur_end - cur_start
+            cur_start, cur_end = start, end
+        else:
+            cur_end = max(cur_end, end)
+    if cur_end is not None:
+        total += cur_end - cur_start
+    return total
 
 SOURCE_PURPOSE = {
     "mlb": "Official MLB schedule, clubs, releases or duration research",
@@ -200,8 +235,8 @@ def add_interval(intervals: dict[str, list], day: date, start: int, end: int, **
 
 
 def add_unverified_block(intervals: dict[str, list], day: date, **meta):
-    add_interval(intervals, day, 0, 1440, status="UNVERIFIED_BLOCK",
-                 verification="UNVERIFIED", **meta)
+    meta.setdefault("verification", "UNVERIFIED")
+    add_interval(intervals, day, 0, 1440, status="UNVERIFIED_BLOCK", **meta)
 
 
 # ---------------------------------------------------------------------------
@@ -353,6 +388,27 @@ def build_mlb_events(intervals: dict[str, list]) -> tuple[list[dict], list[dict]
     events = []
     season_rows = []
     for season, games in all_games.items():
+        # The MLB Stats API keeps a "Postponed" entry on the original date alongside
+        # the re-scheduled entry for the same gamePk. Only the entry that was actually
+        # played (or is still scheduled) may be published as a broadcast row.
+        by_pk: dict[int, list] = defaultdict(list)
+        for g in games:
+            by_pk[g["gamePk"]].append(g)
+        cleaned = []
+        postponed_removed = 0
+        for group in by_pk.values():
+            playable = [g for g in group
+                        if (g.get("status", {}).get("detailedState") or "").lower()
+                        not in ("postponed", "canceled", "cancelled")]
+            kept = playable if playable else group
+            postponed_removed += len(group) - len(kept)
+            cleaned.extend(kept)
+        cleaned.sort(key=lambda g: g.get("gameDate", ""))
+        PIPELINE_STATS["mlb_postponed_rows_removed"] += postponed_removed
+        games = cleaned
+        # A suspended game that resumes later keeps one gamePk for two broadcast
+        # dates; those rows stay but get unique ids and an explicit note.
+        multi_pk = {pk for pk, count in Counter(g["gamePk"] for g in games).items() if count > 1}
         season_rows.append({
             "season": season, "league": "MLB", "official_rows": len(games),
             "tbd_times": sum(1 for g in games if g.get("status", {}).get("startTimeTBD") or g.get("startTimeTBD")),
@@ -394,8 +450,14 @@ def build_mlb_events(intervals: dict[str, list]) -> tuple[list[dict], list[dict]
                 start_dt = datetime.combine(pt_date, time(0, 0), tzinfo=PT) + timedelta(minutes=minute)
             date_pt = start_dt.astimezone(PT).date() if not tbd else pt_date
             planning_end = planning_start + MLB_DURATION
+            ev_id = f"mlb-{g['gamePk']}"
+            extra_note = ""
+            if g["gamePk"] in multi_pk:
+                ev_id = f"mlb-{g['gamePk']}-{date_pt.isoformat()}"
+                extra_note = (" The official MLB Stats API publishes this gamePk on two dates "
+                              "(suspended and resumed), so both broadcast dates are shown.")
             ev = event_base(
-                id=f"mlb-{g['gamePk']}", category="MLB", subcategory=subcat, season=season,
+                id=ev_id, category="MLB", subcategory=subcat, season=season,
                 date=date_pt.isoformat(), official_time_pt=official_time,
                 official_time_zone=start_dt.strftime("%Z"), official_start_utc=official_utc,
                 time_status=time_status, matchup=f"{away} at {home}", away=away, home=home,
@@ -407,7 +469,7 @@ def build_mlb_events(intervals: dict[str, list]) -> tuple[list[dict], list[dict]
                 duration_status="OFFICIAL MLB 2025 AVERAGE (2:38)",
                 planning_start_pt=fmt_hm(planning_start), planning_end_pt=fmt_hm(planning_end),
                 planning_status=planning_status, planning_source_url=planning_source,
-                notes="No official end time is published; end is start plus the researched average." if not tbd else "Official start time is TBD. The official placeholder timestamp was not copied; this is a clearly labelled planning estimate from 2026 official MLB start-time medians.",
+                notes=("No official end time is published; end is start plus the researched average." if not tbd else "Official start time is TBD. The official placeholder timestamp was not copied; this is a clearly labelled planning estimate from 2026 official MLB start-time medians.") + extra_note,
                 verification=verification,
             )
             events.append(ev)
@@ -700,11 +762,21 @@ def parse_radio_line(text: str, pattern: str, default: str) -> str:
     return " ".join(m.group(0).split()) if m else default
 
 
-def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
+def parse_49ers_events(intervals: dict[str, list],
+                       nfl_index: dict[tuple[str, int], dict] | None = None) -> tuple[list[dict], str, list[dict]]:
+    """Parse the official 49ers schedule.
+
+    `nfl_index` maps (date, start minute) to already-parsed official NFL.com rows.
+    A 49ers.com row that describes the same kickoff is not published a second
+    time; instead the official NFL.com row is enriched with the 49ers game-center
+    link and venue. This prevents one game being counted twice.
+    """
     text = read_text("nflers_schedule")
     radio_line = parse_radio_line(text, r"KSAN 107\.7 FM\s*/\s*KNBR 104\.5 FM\s*/\s*680 AM", "")
     soup = BeautifulSoup(text, "lxml")
     events = []
+    merged = []
+    nfl_index = nfl_index or {}
     for card in soup.select(".nfl-o-matchup-cards"):
         gametime = card.get("data-gametime", "")
         if not gametime:
@@ -720,18 +792,70 @@ def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
         week_node = card.select_one(".nfl-o-matchup-cards__date-info--week")
         week = week_node.get_text(" ", strip=True) if week_node else ""
         venue = card.select_one(".nfl-o-matchup-cards__venue--location")
-        link = card.select_one(".nfl-o-matchup-cards__btn-game-day")
-        source_url = link.get("href", "") if link and link.get("href", "").startswith("http") else "https://www.49ers.com/schedule/"
+        venue_text = venue.get_text(" ", strip=True) if venue else ""
+
+        # Only official team/league links may be cited. The schedule card exposes
+        # several buttons; the first is sometimes a ticket-reseller link, which is
+        # never accepted as a source.
+        source_url = ""
+        candidates = [a.get("href", "") for a in card.select(".nfl-o-matchup-cards__btn-game-day")]
+        for href in candidates:
+            if is_official_url(href) and "/game-day/" in href:
+                source_url = href
+                break
+        if not source_url:
+            for href in candidates:
+                if is_official_url(href):
+                    source_url = href
+                    break
+        if not source_url:
+            source_url = "https://www.49ers.com/schedule/"
+
         day = dt.date()
         start_min = minute_of_day(dt)
+        slug = source_url.rstrip("/").split("/")[-1] if source_url.startswith("http") else ""
+        if slug in ("", "index"):
+            parts = [p for p in source_url.split("/") if p]
+            slug = parts[-2] if len(parts) >= 2 else ""
+        if slug.endswith("-at-49ers"):
+            niners_home = True
+        elif slug.startswith("49ers-at-"):
+            niners_home = False
+        else:
+            niners_home = "VS" in card.get_text(" ", strip=True)
+        matchup = (f"{opponent} at San Francisco 49ers" if niners_home
+                   else f"San Francisco 49ers at {opponent}") if opponent else "San Francisco 49ers"
         radio = radio_line or "KSAN 107.7 FM / KNBR 104.5 FM / 680 AM"
+
+        existing = nfl_index.get((day.isoformat(), start_min))
+        if existing is not None:
+            # Same official kickoff already published from NFL.com: enrich, do not duplicate.
+            if venue_text and not existing.get("venue"):
+                existing["venue"] = venue_text
+            existing["secondary_source_url"] = source_url
+            existing["secondary_source_label"] = "49ers.com official game center"
+            existing["notes"] = (existing.get("notes", "") +
+                                 " 49ers.com official game center confirms the same kickoff, venue and radio network.").strip()
+            for row in intervals.get(day.isoformat(), []):
+                if row.get("event_id") == existing.get("id"):
+                    row["secondary_source_url"] = source_url
+                    row["secondary_source_label"] = "49ers.com official game center"
+            merged.append({
+                "date": day.isoformat(), "official_time_pt": fmt_pt(dt), "matchup": matchup,
+                "kept_event_id": existing.get("id", ""), "kept_source_url": existing.get("source_url", ""),
+                "duplicate_event_id": f"49ers-{card.get('data-gameid','')}",
+                "secondary_source_url": source_url,
+            })
+            continue
+
         ev = event_base(
             id=f"49ers-{card.get('data-gameid','')}", category="NFL",
             subcategory=f"49ers {week or 'schedule'}", season=day.year, date=day.isoformat(),
             official_time_pt=fmt_pt(dt), official_time_zone=dt.strftime("%Z"), official_start_utc=iso_z(dt),
-            time_status="VERIFIED", matchup=f"49ers vs/at {opponent}", away="San Francisco 49ers" if "VS" in card.get_text(" ", strip=True) else opponent,
-            home="San Francisco 49ers" if "VS" in card.get_text(" ", strip=True) else opponent,
-            venue=venue.get_text(" ", strip=True) if venue else "",
+            time_status="VERIFIED", matchup=matchup,
+            away=opponent if niners_home else "San Francisco 49ers",
+            home="San Francisco 49ers" if niners_home else opponent,
+            venue=venue_text,
             stations=[radio, "Westwood One Sports national windows via KNBR/KTCT"],
             priority="FOCUS — 49ers", focus=True, source_url=source_url,
             source_label="49ers.com official game center / schedule", source_api="https://www.49ers.com/schedule/",
@@ -749,7 +873,7 @@ def parse_49ers_events(intervals: dict[str, list]) -> tuple[list[dict], str]:
                      verification=ev["verification"], source_url=source_url,
                      source_label=ev["source_label"], label=ev["matchup"],
                      duration_source_url=NFL_RULEBOOK_URL)
-    return events, radio_line
+    return events, radio_line, merged
 
 
 def parse_stanford_events(intervals: dict[str, list]) -> list[dict]:
@@ -770,12 +894,55 @@ def parse_stanford_events(intervals: dict[str, list]) -> list[dict]:
         home_away = divider.get_text(" ", strip=True) if divider else ""
         day = dt.date()
         start_min = minute_of_day(dt)
+        row_text = row.get_text(" ", strip=True)
+        # The official page prints TBA for kickoffs that have not been announced and
+        # prints a flexible window such as "4 OR 4:30 P.M." for flex games. The
+        # <time datetime> attribute then carries a placeholder, which must never be
+        # published as a verified kickoff time.
+        tba = bool(re.search(r"\bTBA\b", row_text, re.I))
+        flex = re.search(r"(\d{1,2}(?::\d{2})?)\s*OR\s*(\d{1,2}(?::\d{2})?)\s*([AP])\.?M", row_text, re.I)
+        matchup = f"Stanford {'vs' if home_away.lower().startswith('vs') else 'at'} {opponent}"
+        if tba:
+            ev = event_base(
+                id=f"stanford-{day.isoformat()}-{re.sub(r'[^a-z0-9]+','-',opponent.lower())}",
+                category="NCAAF", subcategory="Stanford Cardinal football", season=day.year,
+                date=day.isoformat(), official_time_pt="", official_time_zone="",
+                official_start_utc="", time_status="OFFICIAL DATE / TIME TBA — UNVERIFIED",
+                matchup=matchup,
+                away="Stanford" if "at" in home_away.lower() else opponent,
+                home="Stanford" if "vs" in home_away.lower() else opponent,
+                venue=location_node.get_text(" ", strip=True) if location_node else "",
+                stations=["KNBR/KTCT 1050 AM"], priority="FOCUS — Stanford", focus=True,
+                source_url="https://gostanford.com/sports/football/schedule",
+                source_label="Stanford Cardinal official football schedule",
+                source_api="https://gostanford.com/news/2026/07/30/2026-football-radio-broadcast-team-announced",
+                duration_min=NCAAF_DURATION, duration_source_url=NCAA_DURATION_URL,
+                duration_status="OFFICIAL NCAA 2016 FBS AVERAGE (3:24) — DATED, FLAGGED",
+                planning_status="OFFICIAL DATE / OFFICIAL TIME TBA",
+                planning_source_url="https://gostanford.com/sports/football/schedule",
+                notes="Official Stanford schedule publishes the date with kickoff TBA; the official placeholder timestamp is not copied. The whole day is treated as a busy candidate.",
+                verification="OFFICIAL DATE / OFFICIAL TIME TBA — UNVERIFIED",
+            )
+            events.append(ev)
+            add_unverified_block(intervals, day,
+                                 event_id=ev["id"], category="NCAAF", matchup=matchup,
+                                 priority="FOCUS — Stanford", focus=True,
+                                 verification="OFFICIAL DATE / TIME TBA — UNVERIFIED",
+                                 source_url=ev["source_url"], source_label=ev["source_label"],
+                                 label=f"{matchup} — official date, kickoff TBA",
+                                 duration_source_url=NCAA_DURATION_URL)
+            continue
+        flex_note = ""
+        if flex:
+            flex_note = (f" Official page lists a flexible kickoff window: {flex.group(1)} or "
+                         f"{flex.group(2)} {flex.group(3).upper()}M PT.")
         ev = event_base(
             id=f"stanford-{day.isoformat()}-{re.sub(r'[^a-z0-9]+','-',opponent.lower())}",
             category="NCAAF", subcategory="Stanford Cardinal football", season=day.year,
             date=day.isoformat(), official_time_pt=fmt_pt(dt), official_time_zone=dt.strftime("%Z"),
-            official_start_utc=iso_z(dt), time_status="VERIFIED",
-            matchup=f"Stanford {'vs' if home_away.lower().startswith('vs') else 'at'} {opponent}",
+            official_start_utc=iso_z(dt),
+            time_status="VERIFIED — OFFICIAL FLEX WINDOW" if flex else "VERIFIED",
+            matchup=matchup,
             away="Stanford" if "at" in home_away.lower() else opponent,
             home="Stanford" if "vs" in home_away.lower() else opponent,
             venue=location_node.get_text(" ", strip=True) if location_node else "",
@@ -788,7 +955,8 @@ def parse_stanford_events(intervals: dict[str, list]) -> list[dict]:
             planning_start_pt=fmt_hm(start_min), planning_end_pt=fmt_hm(start_min + NCAAF_DURATION),
             planning_status="OFFICIAL START + ESTIMATED DURATION",
             planning_source_url="https://gostanford.com/sports/football/schedule",
-            notes="Official Stanford schedule supplies kickoff with Pacific offset; official radio article confirms KNBR/KTCT 1050 AM.",
+            notes=("Official Stanford schedule supplies kickoff with Pacific offset; official radio article confirms KNBR/KTCT 1050 AM."
+                   + flex_note),
             verification="VERIFIED — official Stanford kickoff",
         )
         events.append(ev)
@@ -802,7 +970,35 @@ def parse_stanford_events(intervals: dict[str, list]) -> list[dict]:
 
 
 def parse_cal_events(intervals: dict[str, list]) -> list[dict]:
+    """Parse the official Cal schedule.
+
+    The page exposes every game twice: a `.s-game-card` (opponent, home/away and,
+    for announced games, the kickoff) and a `.c-scoreboard__item` carousel entry
+    that always carries the full date. Earlier versions only read the game-card
+    header date and required an HH:MM kickoff, so away games listed as "9 AM" and
+    every game whose header date node was empty were dropped as TBA. Both sources
+    are merged here by opponent so no published date is lost.
+    """
     soup = BeautifulSoup(read_text("cal_schedule_current"), "lxml")
+    cal_url = "https://calbears.com/sports/football/schedule/2026"
+    board: dict[str, dict] = {}
+    for item in soup.select(".c-scoreboard__item"):
+        label = item.get("aria-label", "")
+        m = re.search(r"(?:versus|at)\s+(.+?)\s+on\s+([A-Z][a-z]+)\.?\s+(\d{1,2}),\s*(\d{4})", label)
+        if not m:
+            continue
+        try:
+            day_value = datetime.strptime(f"{m.group(2)} {m.group(3)} {m.group(4)}", "%B %d %Y").date()
+        except ValueError:
+            continue
+        time_node = item.select_one(".c-scoreboard__time")
+        location_node = item.select_one(".c-scoreboard__location")
+        board[m.group(1).strip().lower()] = {
+            "date": day_value,
+            "time_text": time_node.get_text(" ", strip=True) if time_node else "",
+            "location": location_node.get_text(" ", strip=True) if location_node else "",
+        }
+
     events = []
     for i, card in enumerate(soup.select(".s-game-card"), 1):
         text = card.get_text(" ", strip=True)
@@ -813,18 +1009,43 @@ def parse_cal_events(intervals: dict[str, list]) -> list[dict]:
         opponent = opponent_node.get_text(" ", strip=True) if opponent_node else ""
         date_text = date_node.get_text(" ", strip=True) if date_node else ""
         time_text = time_node.get_text(" ", strip=True) if time_node else ""
-        m = re.search(r"([A-Z][a-z]{2})\s+(\d{1,2})", date_text)
-        tm = re.search(r"(\d{1,2}:\d{2}\s*[AP]M)", time_text, re.I)
+        info = board.get(opponent.lower(), {})
         radio_match = re.search(r"Radio:\s*([^|]+?)(?:\s+[A-Z]|$)", text)
         radio = " ".join(radio_match.group(1).split()) if radio_match else "KSFO 810 AM"
-        if not (m and tm):
+        home_away = stamp.get_text(" ", strip=True).lower() if stamp else ""
+
+        day = None
+        m = re.search(r"([A-Z][a-z]{2})\.?\s+(\d{1,2})", date_text)
+        if m:
+            try:
+                day = date(2026, datetime.strptime(m.group(1), "%b").month, int(m.group(2)))
+            except ValueError:
+                day = None
+        if day is None and info.get("date"):
+            day = info["date"]
+
+        # Kickoff may be printed as "9 AM" (no minutes) or only on the carousel.
+        kickoff = None
+        for candidate in (time_text, info.get("time_text", "")):
+            tm = re.search(r"(\d{1,2})(?::(\d{2}))?\s*([AP])\.?M", candidate, re.I)
+            if tm:
+                hour = int(tm.group(1)) % 12
+                minute = int(tm.group(2) or 0)
+                if tm.group(3).upper() == "P":
+                    hour += 12
+                kickoff = hour * 60 + minute
+                break
+
+        venue = info.get("location", "")
+        matchup = f"Cal {'vs' if 'vs' in home_away else 'at'} {opponent}"
+        if day is None:
             ev = event_base(
                 id=f"cal-2026-{i}", category="NCAAF", subcategory="California Golden Bears football",
                 season=2026, date="", time_status="TBA — UNVERIFIED", matchup=f"Cal vs/at {opponent}",
-                home="Cal" if stamp and "vs" in stamp.get_text(strip=True).lower() else opponent,
-                away="Cal" if stamp and "at" in stamp.get_text(strip=True).lower() else opponent,
+                home="Cal" if "vs" in home_away else opponent,
+                away="Cal" if "at" in home_away else opponent,
                 stations=[radio], priority="FOCUS — Cal", focus=True,
-                source_url="https://calbears.com/sports/football/schedule/2026",
+                source_url=cal_url,
                 source_label="California Golden Bears official schedule",
                 duration_min=NCAAF_DURATION, duration_source_url=NCAA_DURATION_URL,
                 duration_status="OFFICIAL NCAA 2016 FBS AVERAGE (3:24) — DATED, FLAGGED",
@@ -833,26 +1054,55 @@ def parse_cal_events(intervals: dict[str, list]) -> list[dict]:
             )
             events.append(ev)
             continue
-        month = datetime.strptime(m.group(1), "%b").month
-        day_num = int(m.group(2))
-        dt = datetime.strptime(f"2026-{month:02d}-{day_num:02d} {tm.group(1).upper()}", "%Y-%m-%d %I:%M %p").replace(tzinfo=PT)
-        day = dt.date()
+
+        if kickoff is None:
+            ev = event_base(
+                id=f"cal-{day.isoformat()}-{re.sub(r'[^a-z0-9]+','-',opponent.lower())}",
+                category="NCAAF", subcategory="California Golden Bears football", season=2026,
+                date=day.isoformat(), official_time_pt="", official_time_zone="",
+                official_start_utc="", time_status="OFFICIAL DATE / TIME TBA — UNVERIFIED",
+                matchup=matchup,
+                home="Cal" if "vs" in home_away else opponent,
+                away="Cal" if "at" in home_away else opponent,
+                venue=venue, stations=[radio], priority="FOCUS — Cal", focus=True,
+                source_url=cal_url,
+                source_label="California Golden Bears official schedule",
+                duration_min=NCAAF_DURATION, duration_source_url=NCAA_DURATION_URL,
+                duration_status="OFFICIAL NCAA 2016 FBS AVERAGE (3:24) — DATED, FLAGGED",
+                planning_status="OFFICIAL DATE / OFFICIAL TIME TBA",
+                planning_source_url=cal_url,
+                notes="Official Cal schedule publishes the date with kickoff TBA; no official time is copied. The whole day is treated as a busy candidate.",
+                verification="OFFICIAL DATE / TIME TBA — UNVERIFIED",
+            )
+            events.append(ev)
+            add_unverified_block(intervals, day,
+                                 event_id=ev["id"], category="NCAAF", matchup=matchup,
+                                 priority="FOCUS — Cal", focus=True,
+                                 verification="OFFICIAL DATE / TIME TBA — UNVERIFIED",
+                                 source_url=cal_url,
+                                 source_label="California Golden Bears official schedule",
+                                 label=f"{matchup} — official date, kickoff TBA",
+                                 duration_source_url=NCAA_DURATION_URL)
+            continue
+
+        dt = datetime.combine(day, time(0, 0), tzinfo=PT) + timedelta(minutes=kickoff)
+        dt = dt.astimezone(PT)
         start_min = minute_of_day(dt)
-        home_away = stamp.get_text(" ", strip=True).lower() if stamp else ""
         ev = event_base(
             id=f"cal-{day.isoformat()}-{re.sub(r'[^a-z0-9]+','-',opponent.lower())}",
             category="NCAAF", subcategory="California Golden Bears football", season=2026,
             date=day.isoformat(), official_time_pt=fmt_pt(dt), official_time_zone=dt.strftime("%Z"),
-            official_start_utc=iso_z(dt), time_status="VERIFIED", matchup=f"Cal {'vs' if 'vs' in home_away else 'at'} {opponent}",
-            home="Cal" if "vs" in home_away else opponent, away="Cal" if "at" in home_away else opponent,
-            stations=[radio], priority="FOCUS — Cal", focus=True,
-            source_url="https://calbears.com/sports/football/schedule/2026",
+            official_start_utc=iso_z(dt), time_status="VERIFIED", matchup=matchup,
+            home="Cal" if "vs" in home_away else opponent,
+            away="Cal" if "at" in home_away else opponent,
+            venue=venue, stations=[radio], priority="FOCUS — Cal", focus=True,
+            source_url=cal_url,
             source_label="California Golden Bears official schedule",
             duration_min=NCAAF_DURATION, duration_source_url=NCAA_DURATION_URL,
             duration_status="OFFICIAL NCAA 2016 FBS AVERAGE (3:24) — DATED, FLAGGED",
             planning_start_pt=fmt_hm(start_min), planning_end_pt=fmt_hm(start_min + NCAAF_DURATION),
             planning_status="OFFICIAL START + ESTIMATED DURATION",
-            planning_source_url="https://calbears.com/sports/football/schedule/2026",
+            planning_source_url=cal_url,
             notes="Official Cal schedule displays Pacific local time and radio network; end is estimated from researched average.",
             verification="VERIFIED — official Cal kickoff/radio",
         )
@@ -865,10 +1115,6 @@ def parse_cal_events(intervals: dict[str, list]) -> list[dict]:
                      duration_source_url=NCAA_DURATION_URL)
     return events
 
-
-# ---------------------------------------------------------------------------
-# Westwood One and other Bay Area radio sports
-# ---------------------------------------------------------------------------
 
 def parse_station_finder() -> tuple[dict[str, list[str]], list[dict]]:
     soup = BeautifulSoup(read_text("wwo_station_finder"), "lxml")
@@ -1140,6 +1386,14 @@ def build_flags() -> list[dict]:
         {"id": "IR-015", "issue": "2028 Super Bowl LXII host is official but exact date is TBA; 2029 Super Bowl date/host not found in official captured sources.", "status": "UNVERIFIED", "source_url": "https://www.nfl.com/news/mercedes-benz-stadium-in-atlanta-to-host-super-bowl-lxii-in-2028", "source_label": "Official NFL Super Bowl LXII announcement", "action": "Official date blank; models labelled ESTIMATED."},
         {"id": "IR-016", "issue": "Prior sessions claimed no 7-day strict window by blocking the entire Jan–Super-Bowl span; exact official playoff dates and discontinued Pro Bowl game create published 7-day seams.", "status": "CORRECTED / UNVERIFIED", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates", "action": "Recomputed candidates from exact official dates; still flagged because later WWO schedules are unreleased."},
         {"id": "IR-017", "issue": "Prior 2028 Olympic-break vacation scenario is not an official released MLB schedule/MLBPA agreement.", "status": "FLAGGED", "source_url": "https://www.mlb.com/all-star/future-locations", "source_label": "Official MLB future All-Star locations", "action": "Not treated as verified free time; exact All-Star date remains blank."},
+        {"id": "IR-018", "issue": "Nine San Francisco 49ers rows cited a ticket reseller (vividseats.com) as their source while the row label claimed 49ers.com.", "status": "CORRECTED", "source_url": "https://www.49ers.com/schedule/", "source_label": "Official 49ers schedule", "action": "Collector now accepts only official league, team or network domains and prefers the 49ers.com game-center link; reseller links are rejected."},
+        {"id": "IR-019", "issue": f"{PIPELINE_STATS.get('49ers_duplicate_rows_removed', 0)} San Francisco 49ers regular-season games were published twice, once from NFL.com and once from 49ers.com.", "status": "CORRECTED", "source_url": "https://www.nfl.com/games/49ers-at-rams-2026-reg-1", "source_label": "Official NFL game page", "action": "Duplicate kickoffs are merged into the official NFL.com row, which keeps the 49ers.com game-center link and venue as a secondary source."},
+        {"id": "IR-020", "issue": "California games were missing from the dated rows: Oct 24 at SMU, Oct 31 at NC State, Nov 14 at Virginia, Nov 21 vs Stanford and Nov 28 vs Pittsburgh were published as TBA because the parser missed '9 AM' kickoffs and empty game-card date headers.", "status": "CORRECTED", "source_url": "https://calbears.com/sports/football/schedule/2026", "source_label": "California Golden Bears official schedule", "action": "Parser now merges the game cards with the official scoreboard carousel, accepts '9 AM' style kickoffs and publishes the official date for every game."},
+        {"id": "IR-021", "issue": "Stanford's Nov 21 (129th Big Game at California) and Nov 28 (vs SMU) kickoffs are published as TBA, but the collector copied the official page's 12:00 PM placeholder timestamp and marked both rows VERIFIED.", "status": "CORRECTED", "source_url": "https://gostanford.com/sports/football/schedule", "source_label": "Stanford Cardinal official football schedule", "action": "Time cells are blank and labelled OFFICIAL DATE / TIME TBA — UNVERIFIED; the whole day is blocked as an unverified busy candidate."},
+        {"id": "IR-022", "issue": f"MLB Stats API keeps a 'Postponed' entry on the original date next to the re-scheduled entry; {PIPELINE_STATS.get('mlb_postponed_rows_removed', 0)} postponed rows were published as VERIFIED broadcasts on days with no radio game.", "status": "CORRECTED", "source_url": MLB_API_2026, "source_label": "Official MLB Stats API 2026", "action": "Only the played or still-scheduled entry for each gamePk is published; postponed duplicates are dropped."},
+        {"id": "IR-023", "issue": "Vacation-window busy minutes summed every broadcast interval, so simultaneous MLB games were counted more than once.", "status": "CORRECTED", "source_url": NFL_IMPORTANT_DATES_URL, "source_label": "Official NFL 2026–27 important dates", "action": "Busy minutes now merge overlapping intervals per day before summing; unverified and model day counters count days, not rows."},
+        {"id": "IR-024", "issue": "Stanford and Cal official schedule pages print kickoff times in Pacific time for away games as well; the venue's local time differs.", "status": "FLAGGED", "source_url": "https://gostanford.com/sports/football/schedule", "source_label": "Stanford Cardinal official football schedule", "action": "Pacific times are published as displayed by the official site; the assumption is disclosed here for review."},
+        {"id": "IR-025", "issue": "Stanford's Nov 14 game at Virginia Tech is published by the official site as a flexible '4 OR 4:30 P.M.' PT window rather than one kickoff time.", "status": "FLAGGED", "source_url": "https://gostanford.com/sports/football/schedule", "source_label": "Stanford Cardinal official football schedule", "action": "Row uses the earlier 4:00 PM PT kickoff and records the official flex window in the row notes."},
     ]
 
 
@@ -1234,12 +1488,14 @@ def compute_vacation_windows(days: dict[str, list]) -> list[dict]:
                     day_rows = days.get(day.isoformat(), [])
                     if day_rows:
                         busy_days += 1
-                        for r in day_rows:
-                            busy_minutes += max(0, r["end"] - r["start"])
-                            if r.get("status") == "UNVERIFIED_BLOCK":
-                                unverified_days += 1
-                            if r.get("status") == "ESTIMATED_UNRELEASED_SEASON_MODEL":
-                                model_days += 1
+                        # Overlapping broadcasts (for example several MLB games at
+                        # once) must be counted once, so intervals are merged before
+                        # the busy minutes of the window are summed.
+                        busy_minutes += merge_minutes([(r["start"], r["end"]) for r in day_rows])
+                        if any(r.get("status") == "UNVERIFIED_BLOCK" for r in day_rows):
+                            unverified_days += 1
+                        if any(r.get("status") == "ESTIMATED_UNRELEASED_SEASON_MODEL" for r in day_rows):
+                            model_days += 1
                 candidate = {
                     "year": year, "length_days": days_length,
                     "start": current.isoformat(), "end": (current + timedelta(days=days_length - 1)).isoformat(),
@@ -1337,7 +1593,17 @@ def main() -> None:
     nfl_regular = parse_nfl_regular_events(intervals)
     nfl_preseason = parse_nfl_preseason_events(intervals)
     nfl_postseason = build_nfl_postseason_events(intervals)
-    nflers_events, nflers_radio = parse_49ers_events(intervals)
+    # Build an index of already-published official NFL rows so the 49ers.com
+    # schedule can enrich a row instead of duplicating the same kickoff.
+    nfl_index = {}
+    for ev in (nfl_regular + nfl_preseason + nfl_postseason):
+        day_key = ev.get("date") or ""
+        start_text = ev.get("planning_start_pt") or ""
+        if not day_key or ":" not in start_text:
+            continue
+        nfl_index[(day_key, int(start_text.split(":")[0]) * 60 + int(start_text.split(":")[1]))] = ev
+    nflers_events, nflers_radio, merged_49ers = parse_49ers_events(intervals, nfl_index)
+    PIPELINE_STATS["49ers_duplicate_rows_removed"] = len(merged_49ers)
     stanford_events = parse_stanford_events(intervals)
     cal_events = parse_cal_events(intervals)
     wwo_events, wwo_info = parse_wwo_events(intervals)

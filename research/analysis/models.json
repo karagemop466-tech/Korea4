@@ -1,7 +1,7 @@
 [
   {
     "year": 2027,
-    "model_intervals": 599,
+    "model_intervals": 585,
     "method": "Official 2026 busy windows shifted by 364-day multiples to preserve weekday",
     "status": "ESTIMATED \u2014 NOT A REAL VERIFIED RELEASED SCHEDULE",
     "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026",
@@ -10,7 +10,7 @@
   },
   {
     "year": 2028,
-    "model_intervals": 3600,
+    "model_intervals": 3557,
     "method": "Official 2026 busy windows shifted by 364-day multiples to preserve weekday",
     "status": "ESTIMATED \u2014 NOT A REAL VERIFIED RELEASED SCHEDULE",
     "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026",
@@ -19,7 +19,7 @@
   },
   {
     "year": 2029,
-    "model_intervals": 3597,
+    "model_intervals": 3554,
     "method": "Official 2026 busy windows shifted by 364-day multiples to preserve weekday",
     "status": "ESTIMATED \u2014 NOT A REAL VERIFIED RELEASED SCHEDULE",
     "source_url": "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2026",
