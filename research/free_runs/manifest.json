@@ -1,0 +1,128 @@
+{
+ "generated_utc": "2026-11-05T21:18:51+00:00",
+ "purpose": "Official NBA/NHL schedule snapshots so Warriors and Sharks radio games can block 'free' days.",
+ "nba_feed_url": "",
+ "nba_seasons": [
+  "2026-27",
+  "2027-28"
+ ],
+ "nhl_seasons": [
+  "20262027",
+  "20272028",
+  "20282029",
+  "20292030"
+ ],
+ "nhl_primary_team": "SJS",
+ "files": [
+  {
+   "key": "nba_league_schedule_attempt1",
+   "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json",
+   "http_status": 403,
+   "error": "HTTP 403",
+   "bytes": 431,
+   "sha256": "154f127b5964682423cd1d36e3b39025f076b2ba8b36867b8015404e5b60e18a",
+   "raw_file": "research/free_runs/raw/nba_league_schedule_attempt1.gz",
+   "retrieved_utc": "2026-11-05T21:18:51+00:00"
+  },
+  {
+   "key": "nba_league_schedule_attempt2",
+   "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+   "http_status": 403,
+   "error": "HTTP 403",
+   "bytes": 425,
+   "sha256": "88fb499945be4421b8992d35db569c2ec4506f955b8e7482a0011167037d3a0f",
+   "raw_file": "research/free_runs/raw/nba_league_schedule_attempt2.gz",
+   "retrieved_utc": "2026-11-05T21:18:51+00:00"
+  },
+  {
+   "key": "nba_league_schedule_attempt3",
+   "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV1_1.json",
+   "http_status": 403,
+   "error": "HTTP 403",
+   "bytes": 429,
+   "sha256": "8e86b2748b38ede3997602cd5c84b122e946e13d849dfeceb4da3c2a05a80bf2",
+   "raw_file": "research/free_runs/raw/nba_league_schedule_attempt3.gz",
+   "retrieved_utc": "2026-11-05T21:18:51+00:00"
+  },
+  {
+   "key": "nba_warriors_2026_27_pdf",
+   "url": "https://cdn.nba.com/teams/uploads/sites/1610612744/2026/09/2627Schedule_8.5x11_v2.pdf",
+   "http_status": 200,
+   "error": null,
+   "bytes": 687490,
+   "sha256": "815b4da5fe3d34389c73df4301ab535fc26e79b82cf6c1494b42399755eb6cc4",
+   "raw_file": "research/free_runs/raw/nba_warriors_2026_27_pdf.gz",
+   "retrieved_utc": "2026-11-05T21:18:48+00:00"
+  },
+  {
+   "key": "nba_warriors_schedule_page",
+   "url": "https://www.nba.com/warriors/schedule",
+   "http_status": 200,
+   "error": null,
+   "bytes": 57762,
+   "sha256": "341ef9a06a8b4b076aa202b3a5b71c121920610f57d0ecdea8323347f21734b1",
+   "raw_file": "research/free_runs/raw/nba_warriors_schedule_page.gz",
+   "retrieved_utc": "2026-11-05T21:18:49+00:00"
+  },
+  {
+   "key": "nhl_SJS_20262027",
+   "url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027",
+   "http_status": 200,
+   "error": null,
+   "bytes": 182547,
+   "sha256": "012e9e134b9d4dd64299fc78d14457bf3686110e1e8d9ec9d021a0224d829a0b",
+   "raw_file": "research/free_runs/raw/nhl_SJS_20262027.gz",
+   "retrieved_utc": "2026-11-05T21:18:49+00:00"
+  },
+  {
+   "key": "nhl_SJS_20272028",
+   "url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20272028",
+   "http_status": 200,
+   "error": null,
+   "bytes": 90,
+   "sha256": "ae6c2db6e681c02f7d0c4d76dfecd09cb734fc46b11e163bbedfda667f9a7495",
+   "raw_file": "research/free_runs/raw/nhl_SJS_20272028.gz",
+   "retrieved_utc": "2026-11-05T21:18:48+00:00"
+  },
+  {
+   "key": "nhl_SJS_20282029",
+   "url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20282029",
+   "http_status": 200,
+   "error": null,
+   "bytes": 90,
+   "sha256": "dc724b3b9089070033c18daacef17d97410855f74c30aeea367756ebe5a0ae34",
+   "raw_file": "research/free_runs/raw/nhl_SJS_20282029.gz",
+   "retrieved_utc": "2026-11-05T21:18:48+00:00"
+  },
+  {
+   "key": "nhl_SJS_20292030",
+   "url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20292030",
+   "http_status": 200,
+   "error": null,
+   "bytes": 90,
+   "sha256": "612e756be10bc759b00f34b09e98a23e56b98fcfc58295a1bbbeac71dfeda979",
+   "raw_file": "research/free_runs/raw/nhl_SJS_20292030.gz",
+   "retrieved_utc": "2026-11-05T21:18:48+00:00"
+  },
+  {
+   "key": "nhl_sharks_2026_27_club_page",
+   "url": "https://www.nhl.com/sharks/team/schedule",
+   "http_status": 200,
+   "error": null,
+   "bytes": 87312,
+   "sha256": "def8664de496e3ac13ffeb9eea6a41aa2536ae5476a15cb3614e81b6df8879ac",
+   "raw_file": "research/free_runs/raw/nhl_sharks_2026_27_club_page.gz",
+   "retrieved_utc": "2026-11-05T21:18:51+00:00"
+  },
+  {
+   "key": "nhl_sharks_schedule_page",
+   "url": "https://www.nhl.com/sharks/schedule",
+   "http_status": 200,
+   "error": null,
+   "bytes": 97504,
+   "sha256": "2b76fcbebdb615e0663d7c974097ed6345849d2a9445739a1f2819dfa2684f2a",
+   "raw_file": "research/free_runs/raw/nhl_sharks_schedule_page.gz",
+   "retrieved_utc": "2026-11-05T21:18:51+00:00"
+  }
+ ]
+}

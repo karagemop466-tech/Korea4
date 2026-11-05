@@ -9,9 +9,9 @@
  },
  "counts": {
   "days_examined": 1096,
-  "strict_free_runs": 92,
-  "no_published_runs": 7,
-  "published_runs": 6,
+  "strict_free_runs": 95,
+  "no_published_runs": 15,
+  "published_runs": 15,
   "max_strict_free_run_days": 5
  },
  "per_year": {
@@ -19,20 +19,20 @@
    "year": 2027,
    "days_in_snapshot": 365,
    "class_counts": {
-    "NO_BLOCK": 62,
-    "PUBLISHED_OFFICIAL": 221,
-    "UNVERIFIED_ANCHOR": 10,
-    "MODEL_ONLY": 72
+    "PUBLISHED_OFFICIAL": 235,
+    "NO_BLOCK": 54,
+    "UNVERIFIED_ANCHOR": 6,
+    "MODEL_ONLY": 70
    },
-   "strict_free_days": 62,
+   "strict_free_days": 54,
    "year_class_counts": {
-    "NO_BLOCK": 62,
-    "PUBLISHED_OFFICIAL": 221,
-    "UNVERIFIED_ANCHOR": 10,
-    "MODEL_ONLY": 72
+    "PUBLISHED_OFFICIAL": 235,
+    "NO_BLOCK": 54,
+    "UNVERIFIED_ANCHOR": 6,
+    "MODEL_ONLY": 70
    },
-   "published_days": 221,
-   "longest_strict_free_run": 5,
+   "published_days": 235,
+   "longest_strict_free_run": 4,
    "longest_no_published_run": 96
   },
   "2028": {
@@ -77,39 +77,39 @@
    "year": 2027,
    "top_runs": [
     {
-     "start": "2027-01-11",
-     "end": "2027-01-15",
-     "days": 5
-    },
-    {
-     "start": "2027-02-08",
-     "end": "2027-02-12",
-     "days": 5
-    },
-    {
-     "start": "2027-01-05",
-     "end": "2027-01-08",
-     "days": 4
-    },
-    {
      "start": "2027-01-19",
      "end": "2027-01-22",
      "days": 4
     },
     {
-     "start": "2027-01-27",
-     "end": "2027-01-29",
+     "start": "2027-02-03",
+     "end": "2027-02-05",
      "days": 3
+    },
+    {
+     "start": "2027-01-11",
+     "end": "2027-01-12",
+     "days": 2
+    },
+    {
+     "start": "2027-02-08",
+     "end": "2027-02-09",
+     "days": 2
+    },
+    {
+     "start": "2027-02-11",
+     "end": "2027-02-12",
+     "days": 2
     }
    ],
    "longest": {
-    "start": "2027-01-11",
-    "end": "2027-01-15",
-    "days": 5,
+    "start": "2027-01-19",
+    "end": "2027-01-22",
+    "days": 4,
     "published_busy_minutes": 0,
     "categories": {},
     "record": {
-     "date": "2027-01-11",
+     "date": "2027-01-19",
      "class": "NO_BLOCK",
      "published_rows": 0,
      "anchor_rows": 0,
@@ -328,40 +328,6 @@
  },
  "shortlist": [
   {
-   "start": "2027-01-11",
-   "end": "2027-01-15",
-   "days": 5,
-   "start_weekday": "Monday",
-   "end_weekday": "Friday",
-   "year": 2027,
-   "block_before": "Week 18 Sunday Night Football - Teams TBA",
-   "block_before_date": "2027-01-10",
-   "block_before_source": "https://www.westwoodonesports.com/events/548510/",
-   "block_after": "Wild Card Weekend — six games, teams/times TBD",
-   "block_after_date": "2027-01-16",
-   "block_after_source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
-   "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
-   "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
-   "source_url": "https://www.westwoodonesports.com/events/548510/"
-  },
-  {
-   "start": "2027-02-08",
-   "end": "2027-02-12",
-   "days": 5,
-   "start_weekday": "Monday",
-   "end_weekday": "Friday",
-   "year": 2027,
-   "block_before": "WWO season-pattern model",
-   "block_before_date": "2027-02-07",
-   "block_before_source": "https://www.westwoodonesports.com/events/527273/",
-   "block_after": "WWO season-pattern model",
-   "block_after_date": "2027-02-13",
-   "block_after_source": "https://www.westwoodonesports.com/events/525955/",
-   "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
-   "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
-   "source_url": "https://www.westwoodonesports.com/events/527273/"
-  },
-  {
    "start": "2028-01-17",
    "end": "2028-01-21",
    "days": 5,
@@ -430,38 +396,21 @@
    "source_url": "https://www.westwoodonesports.com/events/527273/"
   },
   {
-   "start": "2027-01-05",
-   "end": "2027-01-08",
-   "days": 4,
-   "start_weekday": "Tuesday",
-   "end_weekday": "Friday",
-   "year": 2027,
-   "block_before": "Houston Texans at Green Bay Packers",
-   "block_before_date": "2027-01-04",
-   "block_before_source": "https://www.westwoodonesports.com/events/548552/",
-   "block_after": "Week 18 Saturday Tripleheader TBA",
-   "block_after_date": "2027-01-09",
-   "block_after_source": "https://www.westwoodonesports.com/events/548523/",
-   "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
-   "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
-   "source_url": "https://www.westwoodonesports.com/events/548552/"
-  },
-  {
    "start": "2027-01-19",
    "end": "2027-01-22",
    "days": 4,
    "start_weekday": "Tuesday",
    "end_weekday": "Friday",
    "year": 2027,
-   "block_before": "Wild Card Weekend — six games, teams/times TBD",
+   "block_before": "Utah at San Jose",
    "block_before_date": "2027-01-18",
-   "block_before_source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
-   "block_after": "Divisional Playoffs — four games, teams/times TBD",
+   "block_before_source": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027",
+   "block_after": "Edmonton at San Jose",
    "block_after_date": "2027-01-23",
-   "block_after_source": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+   "block_after_source": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027",
    "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
    "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
-   "source_url": "https://www.nfl.com/news/2026-27-national-football-league-important-dates"
+   "source_url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027"
   },
   {
    "start": "2028-01-11",
@@ -515,71 +464,137 @@
    "source_url": "https://www.westwoodonesports.com/events/548570/"
   },
   {
-   "start": "2027-01-27",
-   "end": "2027-01-29",
+   "start": "2027-02-03",
+   "end": "2027-02-05",
    "days": 3,
    "start_weekday": "Wednesday",
    "end_weekday": "Friday",
    "year": 2027,
    "block_before": "WWO season-pattern model",
-   "block_before_date": "2027-01-26",
+   "block_before_date": "2027-02-02",
+   "block_before_source": "https://www.westwoodonesports.com/events/527138/",
+   "block_after": "WWO season-pattern model",
+   "block_after_date": "2027-02-06",
+   "block_after_source": "https://www.westwoodonesports.com/events/522480/",
+   "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
+   "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
+   "source_url": "https://www.westwoodonesports.com/events/527138/"
+  },
+  {
+   "start": "2028-01-05",
+   "end": "2028-01-07",
+   "days": 3,
+   "start_weekday": "Wednesday",
+   "end_weekday": "Friday",
+   "year": 2028,
+   "block_before": "WWO season-pattern model",
+   "block_before_date": "2028-01-04",
+   "block_before_source": "https://www.westwoodonesports.com/events/521116/",
+   "block_after": "WWO season-pattern model",
+   "block_after_date": "2028-01-08",
+   "block_after_source": "https://www.westwoodonesports.com/events/523939/",
+   "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
+   "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
+   "source_url": "https://www.westwoodonesports.com/events/521116/"
+  },
+  {
+   "start": "2028-01-26",
+   "end": "2028-01-28",
+   "days": 3,
+   "start_weekday": "Wednesday",
+   "end_weekday": "Friday",
+   "year": 2028,
+   "block_before": "WWO season-pattern model",
+   "block_before_date": "2028-01-25",
    "block_before_source": "https://www.westwoodonesports.com/events/527210/",
    "block_after": "WWO season-pattern model",
-   "block_after_date": "2027-01-30",
+   "block_after_date": "2028-01-29",
    "block_after_source": "https://www.westwoodonesports.com/events/521123/",
    "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
    "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
    "source_url": "https://www.westwoodonesports.com/events/527210/"
+  },
+  {
+   "start": "2028-02-02",
+   "end": "2028-02-04",
+   "days": 3,
+   "start_weekday": "Wednesday",
+   "end_weekday": "Friday",
+   "year": 2028,
+   "block_before": "WWO season-pattern model",
+   "block_before_date": "2028-02-01",
+   "block_before_source": "https://www.westwoodonesports.com/events/527138/",
+   "block_after": "WWO season-pattern model",
+   "block_after_date": "2028-02-05",
+   "block_after_source": "https://www.westwoodonesports.com/events/522480/",
+   "status": "VERIFIED-FREE DATES / UNRELEASED-SEASON CAVEAT",
+   "reason": "No published game row of any monitored category falls on these dates in the snapshot. Under the strict reading that an unreleased schedule is not evidence of free time, this is a candidate window only; confirm when the missing schedules are released.",
+   "source_url": "https://www.westwoodonesports.com/events/527138/"
   }
  ],
  "weekday_latest_end": {
   "Fri": {
-   "date": "2027-03-26",
-   "last_block_end_pt": "21:18",
-   "label": "Athletics at Pittsburgh Pirates",
-   "source_url": "https://www.mlb.com/gameday/852827"
+   "date": "2027-01-08",
+   "last_block_end_pt": "21:30",
+   "label": "Washington at San Jose",
+   "source_url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027"
   },
   "Mon": {
-   "date": "2027-03-29",
-   "last_block_end_pt": "21:18",
-   "label": "Cleveland Guardians at Detroit Tigers",
-   "source_url": "https://www.mlb.com/gameday/853712"
+   "date": "2027-01-04",
+   "last_block_end_pt": "21:30",
+   "label": "Houston Texans at Green Bay Packers",
+   "source_url": "https://www.westwoodonesports.com/events/548552/"
   },
   "Sat": {
-   "date": "2027-05-29",
-   "last_block_end_pt": "21:18",
-   "label": "Kansas City Royals at Detroit Tigers",
-   "source_url": "https://www.mlb.com/gameday/853691"
+   "date": "2027-03-20",
+   "last_block_end_pt": "22:00",
+   "label": "Atlanta Braves at Minnesota Twins",
+   "source_url": "https://www.mlb.com/gameday/868365"
   },
   "Sun": {
-   "date": "2027-01-03",
-   "last_block_end_pt": "20:59",
-   "label": "New Orleans Saints at Atlanta Falcons",
-   "source_url": "https://www.nfl.com/games/saints-at-falcons-2026-reg-17"
+   "date": "2027-04-04",
+   "last_block_end_pt": "21:00",
+   "label": "Detroit Tigers at Baltimore Orioles",
+   "source_url": "https://www.mlb.com/gameday/854282"
   },
   "Thu": {
-   "date": "2027-03-18",
-   "last_block_end_pt": "20:48",
-   "label": "Boston Red Sox at Minnesota Twins",
-   "source_url": "https://www.mlb.com/gameday/868368"
+   "date": "2027-01-28",
+   "last_block_end_pt": "21:30",
+   "label": "Nashville at San Jose",
+   "source_url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027"
   },
   "Tue": {
-   "date": "2027-03-30",
-   "last_block_end_pt": "21:18",
-   "label": "Cleveland Guardians at Detroit Tigers",
-   "source_url": "https://www.mlb.com/gameday/853715"
+   "date": "2027-03-09",
+   "last_block_end_pt": "22:00",
+   "label": "Boston Red Sox at New York Yankees",
+   "source_url": "https://www.mlb.com/gameday/868444"
   },
   "Wed": {
-   "date": "2027-04-14",
-   "last_block_end_pt": "21:18",
-   "label": "New York Yankees at Detroit Tigers",
-   "source_url": "https://www.mlb.com/gameday/853708"
+   "date": "2027-01-06",
+   "last_block_end_pt": "21:30",
+   "label": "Dallas at San Jose",
+   "source_url": "https://api-web.nhle.com/v1/club-schedule-season/SJS/20262027"
   }
  },
  "other_sports": {
-  "status": "NOT CAPTURED — UNVERIFIED",
-  "rows": 0,
-  "coverage": {}
+  "status": "CAPTURED FROM OFFICIAL LEAGUE FEEDS",
+  "rows": 88,
+  "counts": {
+   "NHL": 88,
+   "NBA": 0,
+   "total": 88
+  },
+  "coverage": {
+   "NHL": {
+    "first": "2026-09-20",
+    "last": "2027-04-10"
+   },
+   "NBA": {
+    "first": "",
+    "last": ""
+   }
+  },
+  "generated_utc": "2026-11-05T21:18:51+00:00"
  },
  "season_notes": [
   {
