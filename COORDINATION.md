@@ -639,3 +639,32 @@ No new irregularities; no data changes required. This session records confirmati
 | Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,086 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS |
 | Conflict resolution | append-only `COORDINATION.md` conflict with `arena/ce9a2c78-korea4` (PR #28) resolved by keeping both session logs; no content discarded |
 | Irregularities | none new; IR-001…IR-017 remain published on `flagged.html`, non-blocking |
+
+## Session log — `arena/187a4005-korea4` (2026-11-05)
+
+Independent verification session on branch `arena/187a4005-korea4` (branched from `main` @ `1ed4934`, PR #30 merge). All unified task-board tasks C0–C7 are complete on `main` and the site is live at https://karagemop466-tech.github.io/Korea4/ (GitHub Pages `status=built`, `source=main:/`, `https_enforced=true`).
+
+### Task claim
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| G1 — Independent final re-verification of the merged FREE TIME VACATION dashboard on latest `main`: run verify gate, spot-check official sources, review landing page/category subpages/dashboard UI, confirm GitHub Pages deploy, record PR/merge/deploy result | in progress | `arena/187a4005-korea4` | `COORDINATION.md` (claim + record); no data/site files modified | Verified against `main` @ `1ed4934`; no overlap with other sessions. |
+
+### Verification performed this session (2026-11-05)
+
+- Local gate re-run on `main` @ `1ed4934`: `python3 scripts/verify.py` → **PASS**: 0 errors, 0 warnings; 10,086 primary static table rows each carrying an official `data-source-url`; 689 internal links checked, 0 broken; 9 JSON files valid; `node --check js/app.js` PASS; `npm test` (Pacific-time/interval-union/TBD/candidate tests) PASS; `node tests/test_dashboard.mjs` PASS. Report at `research/verification-report.md`.
+- Data integrity: `data/official/events.json` = 6,607 rows (MLB 5,893 · NFL 345 · WWO 311 · MLS 34 · NCAAF 24); every row carries a `source_url`; 5,783 HIGH/FOCUS priority rows. `data/official/meta.json` counts consistent: 748 official sources, 1,461 daily scoreboards 2026-11-01→2029-12-31, 14,364 merged intervals; durations MLB 158 / NFL 192 / NCAAF 204 / MLS 120 min.
+- Site scope confirmed: clean 16-page primary dashboard (index/daily/calendar/vacation/mlb/nfl/ncaaf/wwo/radio/sources/flagged/methodology/review/executive-summary/teams), all 30 MLB clubs (Giants/A's FOCUS), 49ers/Stanford/Cal FOCUS, WWO national broadcasts across nine categories, Bay Area AM/FM radio stations, exact Pacific-time free windows, 7/14/21-day least-conflict candidates for 2027/2028/2029 labelled ESTIMATED/UNVERIFIED where schedules unreleased.
+- Official-source spot checks consistent with prior verified records: Super Bowl LXI Feb 14 2027 (NFL important dates); 2027 MLB season opens Mar 25 2027 / spring training Feb 19 2027 (MLB releases); WWO station finder carries the affiliate-carry caveat; MLB Stats API 2028/2029 returns zero rows → correctly UNVERIFIED/ESTIMATED.
+- Irregularities: none new. IR-001…IR-017 remain published on `flagged.html`, non-blocking.
+
+### PR / merge / deploy result — `arena/187a4005-korea4` (2026-11-05)
+
+| Item | Result |
+|---|---|
+| PR | pending |
+| State | pending |
+| Merge commit | pending |
+| Pages deploy | pending |
+| Local gate | PASS |
+| Irregularities | none new; IR-001…IR-017 non-blocking |
