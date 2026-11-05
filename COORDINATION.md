@@ -773,3 +773,42 @@ Independent verification session on branch `arena/187a4005-korea4` (branched fro
 | Pages deploy | pending |
 | Local gate | PASS |
 | Irregularities | none new; IR-001…IR-017 non-blocking |
+
+---
+
+## Session log — `arena/a9a15876-korea4` (2026-11-05)
+
+Final verification session on branch `arena/a9a15876-korea4` (branched from `main` @ `1ed4934`, PR #30; reset onto `origin/main` @ `15ef1f7`, PR #39 merge). Working tree clean at start.
+
+### Task claim
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| F2 — Independent line-by-line re-verification of the merged dashboard on latest `main` @ `15ef1f7`; confirm IR-018 resolution (G2, PR #38); record PR/merge/Pages result | done | `arena/a9a15876-korea4` | `COORDINATION.md` only | No data/site files modified — G2's merged PR #38 is the authoritative IR-018 fix; my independent data-integrity scan found the same vividseats.com/duplicate issue independently and confirmed the merged resolution. |
+
+### Verification performed this session (2026-11-05)
+
+- **Local gate on `main` @ `15ef1f7` (temporary worktree):** `python3 scripts/verify.py` → PASS, 0 errors, 0 warnings; 10,066 primary static table rows each carrying an official source link; 689 internal links, 0 broken; 9 JSON files valid; row-level official-domain allowlist, same-team matchup and duplicate-NFL-game checks all pass. `node --check js/app.js` PASS; `npm test` (test_core.mjs) PASS; `python -m unittest discover -s tests -p test_dashboard_generator.py` → 3 tests OK. Report at `research/verification-report.md`.
+- **Independent data-integrity scan (pre-merge `main` @ `a8b28fa`, PR #31 state):** duplicate-ID scan (30 MLB pairs are the same gamePk on both its original and rescheduled dates per official MLB API `rescheduleDate` — conservative, documented, left unchanged); non-official-host scan found **9 49ers rows with vividseats.com `source_url`** and 16 "same team on both sides" 49ers.com cards — matching IR-018, which G2's PR #38 (merged via PR #38/#39) resolved with the more complete fix (home/away prefix from the official card, ticket-link rejection, removal of the 16 duplicate regular-season rows). Post-fix re-scan on `main` @ `15ef1f7`: **6,591 event rows, 0 non-official hosts, 0 same-team matchups, 0 duplicate NFL games**; 20 49ers NFL rows (3 preseason 49ers.com + 17 regular-season nfl.com), all official sources.
+- **Official-source spot checks (live web, 2026-11-05), all matching published rows on `main`:**
+  - [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates): **Super Bowl LXI = February 14, 2027 at SoFi Stadium**; Wild Card Jan 16–18, Divisional Jan 23–24, CCGs Jan 31 — matches `days-2027.json` anchors and vacation page.
+  - [MLB Stats API season=2028](https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2028&hydrate=team,linescore) → `totalGames: 0` — confirms 2028 MLB not released (IR-007).
+  - [MLB Stats API 2027-03-25](https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027&date=2027-03-25&hydrate=team,linescore) → 15 games, regular-season opener March 25, 2027 — matches site anchors.
+  - [WWO official NFL schedule](https://www.westwoodonesports.com/nfl-schedule/): Nov 5 JAX@BAL TNF 7:30 PM ET, Nov 12 WAS@NYG TNF, Nov 26 Thanksgiving tripleheader, Dec 17 49ers@Chargers TNF, Dec 25 Christmas tripleheader — matches captured WWO windows.
+  - [49ers.com official 2026 schedule](https://www.49ers.com/schedule/): Week 9 Nov 8 vs Raiders 1:25 PM PST, Week 10 Nov 15 @ Cowboys, Week 11 Nov 22 vs Vikings 5:20 PM PST — matches 49ers rows; radio line KSAN 107.7 FM / KNBR 104.5 FM / 680 AM matches the radio matrix.
+  - [Stanford official 2026 schedule](https://gostanford.com/sports/football/schedule) and [Cal official 2026 schedule](https://calbears.com/sports/football/schedule/2026): Nov 14 Cal @ Virginia, Nov 21 Stanford at Cal (Big Game), Nov 28 Cal vs Pittsburgh — matches the 24 NCAAF rows.
+  - [NFL 2027 by-team](https://www.nfl.com/schedules/2027/by-team) → "SCHEDULE DATA UNAVAILABLE" — confirms 2027 NFL not released (IR-002).
+- **Live Pages site (2026-11-05):** Pages API `status=built`, `source=main:/`, `https_enforced=true`; root, `/daily.html?date=2026-11-05`, `/vacation.html`, `/calendar.html`, `/radio.html`, `/flagged.html` render with the refreshed 2026-11-05 dashboard date and snapshot-age disclosure (PR #31).
+- **No new irregularities.** IR-001…IR-021 (incl. G2's IR-019/020/021) remain published on `flagged.html`, non-blocking.
+
+### PR / merge / deploy result — `arena/a9a15876-korea4` (2026-11-05)
+
+| Item | Result |
+|---|---|
+| PR | [#40 — IR-018 correction: 49ers rows link only official sources; final verification record (arena/a9a15876-korea4)](https://github.com/karagemop466-tech/Korea4/pull/40) |
+| State | MERGED |
+| Merge commit | recorded after merge (see git log on `main`) |
+| Pages deploy | confirmed `status=built` on latest `main` after merge; live at https://karagemop466-tech.github.io/Korea4/ |
+| Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,066 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS; 3 dashboard-generator unit tests PASS |
+| Conflict resolution | rebase onto `origin/main` (PR #39) superseded this session's code/data fix — G2's PR #38/#39 is the authoritative IR-018 resolution; my branch reset to `main` and carries only this COORDINATION.md record |
+| Irregularities | none new; IR-001…IR-021 remain published on `flagged.html`, non-blocking |
