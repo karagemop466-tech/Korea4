@@ -1,11 +1,17 @@
 # COORDINATION.md — unified shared task board
 
 Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
-Latest audit session: `arena/65a1da2b-korea4`
+Latest audit session: `arena/41977cb2-korea4` (2026-11-05)
+Prior audit sessions: `arena/65a1da2b-korea4`, `arena/5cc34200-korea4` (F1), `arena/6d417a78-korea4` (E1)
 Active final verification session: `arena/72e6d3f7-korea4`
-Fixed working branch: `arena/5cc34200-korea4`
 
-## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
+## Current session — arena/41977cb2-korea4 (2026-11-05) — task claim
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| V2 — Independent line-by-line re-verification of the merged project at `main` @ `1ed4934` (post PR #29/#30 merge, latest state not yet independently audited): re-run full local verify gate, fresh live official-source spot checks dated 2026-11-05 (WWO official NFL schedule incl. current week + late-season windows, NFL 2026-27 important dates, MLB 2027 released-schedule rows, 49ers/Stanford/Cal rows, Bay Area radio mappings), live Pages site check, then the PR → merge → Pages-deploy cycle with results recorded here | in progress | `arena/41977cb2-korea4` | `COORDINATION.md` only (audit record; no data/site files touched) | Session is constrained to its fixed Arena branch `arena/41977cb2-korea4` (each Arena session owns one fixed branch), so the per-task branch convention `session-<id>/<task>` is satisfied by this dedicated branch. Open PRs #18 (`arena/aea8720a-korea4`) and #25 (`arena/46c69197-korea4`) belong to other sessions — not claimed here, not touched. |
+
+## Prior session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
