@@ -18,9 +18,9 @@
 
 
 Last integration update: 2026-11-03 (UTC) — Pages rebuild triggered via branch sync
-Latest audit session: `arena/65a1da2b-korea4`
+Latest audit session: `arena/41977cb2-korea4` (2026-11-05)
+Prior audit sessions: `arena/65a1da2b-korea4`, `arena/5cc34200-korea4` (F1), `arena/6d417a78-korea4` (E1)
 Active final verification session: `arena/72e6d3f7-korea4`
-Fixed working branch: `arena/5cc34200-korea4`
 
 ## Current session — arena/0290efac-korea4 (2026-11-05)
 
@@ -62,6 +62,40 @@ Baseline: `main` @ `1ed4934` (PR #30 merged). Local gate on baseline: `scripts/v
 **Limitations.** Data remain a snapshot captured 2026-11-02; this session did not re-scrape the full official set (collector re-run used the saved raw responses). The 49ers.com "game-day" links for upcoming games point to the 49ers.com game-center pages, which were not re-fetched individually.
 
 ## Current session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
+
+## Current session — arena/41977cb2-korea4 (2026-11-05) — task claim
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| V2 — Independent line-by-line re-verification of the merged project at `main` @ `1ed4934` (post PR #29/#30 merge, latest state not yet independently audited): re-run full local verify gate, fresh live official-source spot checks dated 2026-11-05 (WWO official NFL schedule incl. current week + late-season windows, NFL 2026-27 important dates, MLB 2027 released-schedule rows, 49ers/Stanford/Cal rows, Bay Area radio mappings), live Pages site check, then the PR → merge → Pages-deploy cycle with results recorded here | done (PR/merge/deploy result recorded below after merge) | `arena/41977cb2-korea4` | `COORDINATION.md` only (audit record; no data/site files touched) | Session is constrained to its fixed Arena branch `arena/41977cb2-korea4` (each Arena session owns one fixed branch), so the per-task branch convention `session-<id>/<task>` is satisfied by this dedicated branch. Open PRs #18 (`arena/aea8720a-korea4`) and #25 (`arena/46c69197-korea4`) belong to other sessions — not claimed here, not touched. New finding IR-018 (49ers vividseats source links) is logged below and left for the provenance-owning session (open PR #18) to publish on `flagged.html` / fix in `data/`, per the scope-conflict rule. |
+
+### V2 verification record — 2026-11-05 (arena/41977cb2-korea4)
+
+- **Local gate on `main` @ `1ed4934` (rebased tree):** `python3 scripts/verify.py` → PASS, 0 errors / 0 warnings (10,086 primary static table rows each with an official `data-source-url`; 689 internal links, 0 broken; JS OK; report regenerated at `research/verification-report.md`). `node --check js/app.js` PASS. `node tests/test_dashboard.mjs` PASS. `npm test` (test_core.mjs) PASS. `python -m unittest discover -s tests -p test_dashboard_generator.py` → 2 tests OK. This is the exact CI set from `.github/workflows/check.yml`.
+- **Data integrity:** `data/official/events.json` = 6,607 rows, 0 missing `source_url`; priority split 5,129 HIGH-all-MLB / 764 FOCUS Giants+A's / 311 HIGH-WWO / 255+49+4+1 HIGH-NFL(reg/pre/post/special) / 36 FOCUS 49ers / 24 FOCUS Stanford+Cal / 34 HIGH other Bay Area. Source-domain census: 5,891 mlb.com · 311 westwoodonesports.com · 277 nfl.com · 49 media.nfl.com · 34 sjearthquakes.com · 12 gostanford.com · 12 calbears.com · 10 49ers.com · 2 statsapi.mlb.com · **9 vividseats.com (outlier → IR-018)**. `meta.json` season-availability honest: MLB 2027 = 2,901 official rows (2,090 TBD start times, correctly left blank); MLB 2028/2029 = 0 rows labelled NO OFFICIAL RELEASED SCHEDULE; NFL 2027–2029 = 0 game rows; WWO 2027 = 8 rows through Jan 11 only; Stanford/Cal 2027 = 5 partial rows.
+- **Fresh official-source spot checks (live web, 2026-11-05):**
+  - **Westwood One full-window diff** — fetched [westwoodonesports.com/nfl-schedule](https://www.westwoodonesports.com/nfl-schedule/) end-to-end (all chunks): every listed window Nov 5 2026 → Jan 10 2027 (41 windows incl. TNF/SNF/MNF, Madrid Nov 8, Munich Nov 15, Mexico City Nov 22, Thanksgiving tripleheader Nov 26, Black Friday Nov 27, Week 15/16/17 Saturday packages, Christmas tripleheader Dec 25, Week 18 tripleheader Jan 9 + SNF Jan 10, plus NCAA Oregon@Ohio State Nov 7) matches the dataset rows exactly on event ID, matchup, ET time, venue, and Pacific conversion (e.g., 7:30 PM ET → 4:30 PM PST `wwo-548561`; Dec 17 SF@LAC `wwo-548568`; Jan 3 PHI@SF SNF `wwo-548509`). Zero mismatches.
+  - **MLB 2027 raw-source check** — [MLB Stats API team schedule](https://statsapi.mlb.com/api/v1/schedule?sportId=1&teamId=137&season=2027) fetched live for the Giants: `totalGames: 195` = exactly the 195 Giants 2027 rows in the dataset; spot-verified gamePks/dates 868338 (2027-02-19 opener of ST), 868332, 868126 (2027-03-21 exhibition), 852663 (2027-03-25 regular-season opener), 853723 (2027-09-26 finale). League-wide: dataset shows 15 games on 2027-03-25 (all 30 clubs) consistent with the Jul 16, 2026 MLB schedule release; Giants have no game 2027-04-01, consistent with the league-level count of 8 that day.
+  - **NFL important dates re-verified** — Super Bowl LXI Sun Feb 14, 2027 at SoFi Stadium; Wild Card Jan 16–18, 2027; Championships Jan 31; Week 18 Jan 9–10 (reg. season ends Jan 10, 2027); Week 1 opened Wed Sep 9, 2026 (Patriots@Seahawks) with 49ers–Rams Melbourne Thu Sep 10 — all match dataset rows and anchors A04/A13/A18 ([NFL important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates), corroborated by press coverage).
+  - **49ers FOCUS row corroboration** — official [49ers.com Ways to Watch and Listen (Week 9)](https://www.49ers.com/news/ways-to-watch-and-listen-raiders-vs-49ers-week-9) (published Nov 4, 2026): 49ers host Raiders Sun Nov 8, 2026, 1:25 PM PT kickoff; radio = KSAN 107.7 FM / KNBR 104.5 FM / 680 AM — exactly matches the dataset's date, time, matchup direction and `stations` field. The KNBR 680/104.5 49ers extension and KSFO 810 carriage also re-confirmed in coverage of the official April 2026 announcement.
+  - **Vacation-anchor window check** — `events.json` contains **zero rows between 2027-02-10 and 2027-02-18**; first resumed rows are 2027-02-19 MLB spring training (all 30 clubs). Combined with anchor A13 (SB LXI Feb 14, 2027, VERIFIED) this re-confirms the site's "Feb 15–18, 2027" officially-anchored gap; the site correctly still labels it not-certified-free (future WWO/NCAA-basketball windows for Feb 2027 not yet published by Westwood One).
+- **Live Pages site (2026-11-05):** Pages API `status=built` on latest `main`; live root renders 6,607 rows / 748 sources / 1,461 daily scoreboards / 30 MLB clubs, executive findings, 2027–2029 least-conflict candidate table (all ESTIMATED, `Strict free = False`), IR-001…IR-017 table; `daily.html?date=2026-11-05` renders with date controls, honest disclaimers ("Snapshot, not a live feed", rebuilt 2026-11-05T21:10:04Z) and the duration-research table (MLB 2:38 official; NFL 3:12 flagged secondary; NCAAF 3:24 dated official; NBA/NHL/WNBA UNVERIFIED).
+- **New irregularity — IR-018 (logged, not edited — file scope belongs to open PR #18):** 9 FOCUS 49ers rows (subcategory `NFL 49ers schedule`, 2026 Weeks 9–18: Nov 8 Raiders, Nov 15 Cowboys, Nov 22 Vikings, Nov 29 Seahawks, Dec 6 Giants, Dec 13 Rams, Dec 17 Chargers, Dec 27 Chiefs, Jan 3 Eagles) carry `https://www.vividseats.com/...` as their primary `source_url`. Vivid Seats is a secondary ticket marketplace, not an official source, so the row-level "official link" standard is not met even though the date/time values are correct (each has a parallel all-NFL row citing nfl.com with identical values; Week 9 independently re-verified against 49ers.com today). **Requested action for the provenance-owning session (open PR #18) or the next integration session:** repoint those 9 `source_url`s to the official nfl.com game pages (or 49ers.com) and publish IR-018 on `flagged.html`. Minor related note: the Nov 22 row's venue string uses "Estadio Banorte" (current sponsor name) while WWO's official page uses "Estádio Azteca" — same venue, renamed; no data change required beyond the link fix if desired.
+- **Irregularities otherwise:** none new. IR-001…IR-017 re-checked as published on `flagged.html`; none block merge.
+
+### V2 PR / merge / deploy result
+
+| Item | Result |
+|---|---|
+| PR | PENDING — filled in after merge (follow-up docs-only commit, established pattern) |
+| State | PENDING |
+| Merge commit | PENDING |
+| Pre-merge check | "Verify final integration" workflow on the PR — to be confirmed before merge |
+| GitHub Pages | to be confirmed after merge (`status=built`) |
+| Live check | to be re-fetched after deploy |
+| Flagged irregularities | IR-018 logged above for the provenance-owning session (PR #18); non-blocking, consistent with IR-001…IR-017 |
+
+## Prior session — arena/5cc34200-korea4 (2026-11-03) — F1 audit record
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
