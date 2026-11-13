@@ -193,7 +193,7 @@
       "pri": "P0",
       "status": "MET",
       "accept": "Each suggestion carries the problem it solves, 2-3 real options with cost/effort/risk, a recommendation, and an explicit 'not implemented' state until a decision is recorded.",
-      "gap": "The 20 suggestions are published as proposals. None of the ones requiring a decision has been implemented by this session.",
+      "gap": "The 21 suggestions are published as proposals. None of the ones requiring a decision has been implemented by this session.",
       "src": "repo-official-snapshot"
     },
     {

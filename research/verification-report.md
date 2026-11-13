@@ -6,7 +6,7 @@ Generated: 2026-11-13T13:09:05+00:00
 - Primary generated pages: 21
 - Static primary table rows with source URL: 10596
 - HTML pages link-checked (including legacy trees): 119
-- Internal links checked: 1760
+- Internal links checked: 1762
 - Broken internal links: 0
 - JavaScript syntax: PASS
 - NFL decision-support gate (scripts/verify_nfl_lab.py): PASS (report: research/nfl-lab-verification.md)
