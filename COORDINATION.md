@@ -12,7 +12,7 @@ Baseline: `main` @ `a8fa5e3` (PR #42 merged). Working tree clean at start. No ot
 | N2 — Official-source research & live verification for the NFL line-origination / injury / depth module (NFL.com injury report + team injury pages, NFL.com depth charts, NFL Football Operations, Next Gen Stats, NFL 2026 Week 10 schedule rows, NFLPA CBA pages), all fetched live 2026-11-13, sources recorded in `research/nfl-module/` | done | `arena/a7381587-korea4` | `research/nfl-module/**` (new), `data/nfl/**` (new) | Every table row carries an official source link; unconfirmable values stay blank + UNVERIFIED. See record below. |
 | N3 — Build the NFL module pages: `nfl-lines.html` (own-line methodology), `nfl-strategies.html` (signal research, validation gates, leaderboard competition, single/parlay/player-prop correlation framework), `nfl-injuries.html` (injury + depth/backup deficiency tracking), `nfl-suggestions.html` (dedicated Suggestions section + open questions/information needed); regenerate `index.html`, `executive-summary.html`, `EXECUTIVE-SUMMARY.md`, `README.md` via `scripts/build_site.py` | done | `arena/a7381587-korea4` | `scripts/build_site.py`, `data/nfl/**`, generated root HTML, `EXECUTIVE-SUMMARY.md`, `README.md`, `data/official/meta.json` (timestamp regeneration only via offline collector) | Shared nav/index edits logged here; no other session active to conflict. |
 | N4 — Verification gate: add the new pages to `scripts/verify.py` primary set, extend the official-host allowlist **only with hosts verified live in N2**, run the full CI gate (`verify.py`, `node --check js/app.js`, `node tests/test_dashboard.mjs`, `npm test`, dashboard-generator unittest) | done | `arena/a7381587-korea4` | `scripts/verify.py`, `research/verification-report.md` | Gate PASS: 0 errors / 0 warnings; 10,207 primary rows; 864 internal links; 0 broken; all CI tests pass. |
-| N5 — Final integration: line-by-line re-check of generated pages, PR from this fixed branch → `main`, merge without waiting, confirm GitHub Pages deploy, live-site check, record PR/merge/deploy result here | pending | `arena/a7381587-korea4` | `COORDINATION.md` (record) | Flagged/unverified items do not block merge; they are published on the Flagged page and the new Suggestions page. |
+| N5 — Final integration: line-by-line re-check of generated pages, PR from this fixed branch → `main`, merge without waiting, confirm GitHub Pages deploy, live-site check, record PR/merge/deploy result here | done | `arena/a7381587-korea4` | `COORDINATION.md` (record) | See PR/merge/deploy result below. Flagged/unverified items do not block merge; they are published on the Flagged page and the new Suggestions page. |
 
 ### N2–N4 implementation and verification record — 2026-11-13 (`arena/a7381587-korea4`)
 
@@ -31,6 +31,20 @@ Baseline: `main` @ `a8fa5e3` (PR #42 merged). Working tree clean at start. No ot
 **Gate results (before PR):** `scripts/verify.py` PASS — 0 errors, 0 warnings; **10,207 primary static rows** with official `data-source-url` + link (was 10,066); 864 internal links, 0 broken; JS OK; allowlist extended only with `nextgenstats.nfl.com`, `operations.nfl.com`, `www.nflpa.com` (verified live); repo-internal process URLs registered FLAG_ONLY (never value sources). `node --check js/app.js` PASS; `node tests/test_dashboard.mjs` PASS; `npm test` PASS; dashboard-generator unittest 3/3 PASS. Verify-report regenerated.
 
 **Irregularities opened (published on `flagged.html`, non-blocking):** IR-022 stale Week 11 rows (official Nov 9 change); IR-023 no official team depth-chart/injury URLs and no published depth order; IR-024 dead 2017 policy PDF; IR-025 no official odds/correlation source — all correlation cells blank; IR-026 verbatim Week 10 oddity (DET K. Joseph Full practice yet Game Status Out).
+
+### N5 PR / merge / deploy result — `arena/a7381587-korea4` (2026-11-13)
+
+| Item | Result |
+|---|---|
+| Final PR | [#45 — NFL decision module: own-line origination, strategy leaderboard, injury/depth tracking, suggestions + IR-022..IR-026](https://github.com/karagemop466-tech/Korea4/pull/45) |
+| Pre-merge check | "verify" workflow run [43432483598](https://github.com/karagemop466-tech/Korea4/actions/runs/43432483598) — SUCCESS on the PR head |
+| State | MERGED 2026-11-13T13:18:34Z (merge commit, not squash) |
+| Merge commit | `742575d8241dd40fd4c04dee95f806be29729e9c` |
+| GitHub Pages | "pages build and deployment" run [43432558004](https://github.com/karagemop466-tech/Korea4/actions/runs/43432558004) SUCCESS; "Verify static Pages source" run [43432557917](https://github.com/karagemop466-tech/Korea4/actions/runs/43432557917) SUCCESS on `main` @ `742575d`; Pages API `status=built`, `source=/` |
+| Live check (cache-busted `?v=742575d`) | `/nfl-lines.html`, `/nfl-strategies.html`, `/nfl-injuries.html`, `/nfl-suggestions.html`, `/flagged.html` (IR-022…IR-026 rendering with official evidence links), `/index.html` (NFL module panel) — all render with per-row official source links; dashboard banner shows rebuilt 2026-11-13T13:09:05Z, snapshot 2026-11-02T17:41:45Z, selected date 2026-11-13 |
+| Flagged irregularities | IR-022…IR-026 published on `flagged.html`; non-blocking. Prior IR-001…IR-021 unchanged. |
+| Conflict log | `git pull --rebase origin main` before each push; main had not advanced during this session (rebase replayed nothing); no other session active on the board (latest prior entries 2026-11-05); no conflicts; no other session's work touched |
+| Follow-up | This board record is carried by a second docs-only PR from the same fixed branch, per the established pattern. |
 
 **Branch constraint (unchanged):** Arena fixes this session to branch `arena/a7381587-korea4`; the requested `session-<id>/<task>` naming cannot be used, so this dedicated branch carries the whole task set. `git pull --rebase` will be run before every push; commits will be small and frequent.
 
