@@ -1,5 +1,19 @@
 # COORDINATION.md — unified shared task board
 
+## Current session — `arena/c1806a8e-korea4` (2026-11-13 UTC)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| H1 — NFL Strategy Lab: originate own NFL lines, develop/validate signal strategies (single bet, parlay, player-prop combos), correlation analysis, leaderboard with rewards, official injury + depth-chart (2nd/3rd/4th-string backup) tracker, decision-readiness Q&A page, suggestions review page, executive summary, and new site subpages | in progress | `arena/c1806a8e-korea4` | `COORDINATION.md`, `scripts/collect_nfl_lab.py`, `scripts/build_nfl_lab.py`, `.github/workflows/fetch-nfl-lab.yml`, `data/nfl-lab/*`, `research/official/raw/nfl_lab/*`, `research/official/manifest-nfl-lab.json`, new root pages `nfl-strategies.html`, `nfl-leaderboard.html`, `nfl-injuries.html`, `nfl-decisions.html`, `suggestions.html`, `scripts/build_site.py` (NAV + landing/exec-summary sections), `scripts/verify.py` (new gates), `research/verification-report.md` | Claimed 2026-11-13 before any edit. Baseline `main` @ `a8fa5e3` (PR #42). Open PRs #18/#25/#41/#43 belong to other sessions — not touched. Official data is captured on GitHub Actions (the sandbox cannot reach nfl.com) and parsed offline, exactly like the existing `scripts/fetch_official.py` + `scripts/collect_official.py` pattern. |
+
+### H1 plan (claimed 2026-11-13)
+
+1. **Capture** (GitHub Actions, official hosts only): NFL.com by-week schedules for 2026 weeks 1–11 (results), NFL.com official injury report pages `nfl.com/injuries/league/2026/reg{N}` (weeks 1–11), NFL.com official team/player stat pages, NFL.com game-center pages for completed games, NFL.com team-directory pages + official team depth-chart pages (string-backup depth).
+2. **Parse offline** into `data/nfl-lab/*.json`: games/results, team game logs, player game logs, weekly official injury designations, depth-chart rows, team strength inputs.
+3. **Strategy engine** (`scripts/build_nfl_lab.py`): originate model-implied lines; 12+ strategies across single bet / parlay / player-prop combo; walk-forward (no-lookahead) validation; 7 validation gates; pairwise correlation matrix; reward-scored leaderboard; luck controls (subperiod stability, single-game concentration, significance).
+4. **Site**: new subpages (`nfl-strategies`, `nfl-leaderboard`, `nfl-injuries`, `nfl-decisions`, `suggestions`) + landing-page and executive-summary integration; every table row carries an official source link; unconfirmable values stay blank and are flagged on the Flagged for Review page.
+5. **Verify, PR, merge, Pages deploy**; results recorded here.
+
 ## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
 | Task | Status | Owner | File scope | Notes |
