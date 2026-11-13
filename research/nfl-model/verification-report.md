@@ -3,7 +3,7 @@
 - pages checked: 15
 - table rows checked: 645 (all carrying a source: 645)
 - rows containing an explicit blank/unconfirmed cell: 224
-- internal links checked: 427, broken: 0
+- internal links checked: 429, broken: 0
 - sources in registry: 17 (13 verified by retrieval, 4 partial)
 - errors: 0
 - warnings: 0

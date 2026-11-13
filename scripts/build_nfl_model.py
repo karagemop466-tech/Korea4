@@ -402,6 +402,7 @@ def main() -> None:
     # ---------------------------------------------------------------- index
     awaiting = [s for s in SUG["suggestions"] if s["status"] == "AWAITING-DECISION"]
     blocking_q = [q for q in QUES["questions"] if q["status"] != "ANSWERED"]
+    strat_rejected = sum(1 for x in STRAT["strategies"] if x["status"] == "REJECTED-BY-GATE")
     idx_blocks = [
         callout(
             "warn",
@@ -416,8 +417,10 @@ def main() -> None:
             "<strong>How this relates to the other NFL pages on this site.</strong> Four workstreams now cover "
             "adjacent ground: the merged <a href=\"../nfl-lines.html\">line-origination</a>, "
             "<a href=\"../nfl-strategies.html\">strategies</a>, <a href=\"../nfl-injuries.html\">injuries</a> and "
-            "<a href=\"../nfl-suggestions.html\">suggestions</a> module; the "
-            "<a href=\"../nfl-decision.html\">nfl-decision</a> section with its own gate; and this section, whose job is the "
+            "<a href=\"../nfl-suggestions.html\">suggestions</a> module (PR #45); the "
+            "<a href=\"../nfl-decision.html\">nfl-decision</a> section with its own gate (PR #48); the root "
+            "<a href=\"../questions.html\">questions</a> and <a href=\"../leaderboard.html\">leaderboard</a> pages "
+            "(PR #47); and this section, whose job is the "
             "register layer — requirements with acceptance tests, the question set that gates a decision, the suggestions "
             "backlog that no one has approved yet, and the source registry behind every value. Where the same Week 10 "
             "injury report appears in more than one place, the difference is <em>coverage</em>, not contradiction: this "
@@ -464,23 +467,23 @@ def main() -> None:
                 f'<div class="card"><a href="{href}"><strong>{label}</strong></a>'
                 f'<div class="mini">{desc}</div></div>'
                 for href, label, desc in (
-                    ("requirements.html", "Requirements", "28 requirements with status, acceptance test and named gap."),
-                    ("questions.html", "Open questions", "What we know, what we do not, cheapest way to find out."),
-                    ("suggestions.html", "Suggestions", "20 proposals with options, cost, risk and a recommendation - unimplemented."),
+                    ("requirements.html", "Requirements", f"{counts['requirements']} requirements with status, acceptance test and named gap."),
+                    ("questions.html", "Open questions", f"{counts['questions']} questions: what we know, what we do not, cheapest way to find out."),
+                    ("suggestions.html", "Suggestions", f"{counts['suggestions']} proposals with options, cost, risk and a recommendation - unimplemented."),
                     ("line-origination.html", "Line origination", "The pipeline from roster and availability to a released number, plus derived market arithmetic."),
-                    ("strategies.html", "Strategies", "14 specified strategies across singles, parlays and prop combos, with 2 rejected on method."),
-                    ("gates.html", "Validation gates", "18 gates that decide promotion; the luck-removal machinery is here."),
-                    ("correlation.html", "Correlation", "Which leg pairs are exact, which need measurement, and why bounds are not a price."),
+                    ("strategies.html", "Strategies", f"{counts['strategies'] - strat_rejected} specified strategies across singles, parlays and prop combos, with {strat_rejected} rejected on method."),
+                    ("gates.html", "Validation gates", f"{counts['gates']} gates that decide promotion; the luck-removal machinery is here."),
+                    ("correlation.html", "Correlation", f"{counts['correlation_pairs']} leg pairs: which are exact, which need measurement, and why bounds are not a price."),
                     ("leaderboard.html", "Leaderboard", "Tiered competition, scoring weights, discipline rules and reward options."),
-                    ("injuries.html", "Injuries", "Official Week 10 report rows as published, with the parsing traps documented."),
-                    ("depth-deficiency.html", "Depth & backups", "A dated official depth chart with vacancy states and the five findings it produced."),
-                    ("market.html", "Market facts", "Vig, break-even, realised state revenue data, and the roster rules that gate availability."),
-                    ("sources.html", "Sources", "Every source with tier, retrieval method, date and what it actually establishes."),
-                    ("flagged.html", "Flagged", "13 irregularities found while building, with evidence and effect."),
+                    ("injuries.html", "Injuries", f"{counts['injury_rows']} official Week 10 report rows as published, with the parsing traps documented."),
+                    ("depth-deficiency.html", "Depth & backups", f"{counts['depth_rows']} dated depth-chart rows with vacancy states and the findings they produced."),
+                    ("market.html", "Market facts", f"{counts['market_facts']} market/regulatory facts: vig, break-even, realised state revenue, and the roster rules that gate availability."),
+                    ("sources.html", "Sources", f"{counts['sources']} sources, each with tier, retrieval method, date and what it actually establishes."),
+                    ("flagged.html", "Flagged", f"{counts['flags']} irregularities found while building, with evidence and effect."),
                     ("executive-summary.html", "Executive summary", "One page for the decision-maker."),
                 )
             )
-            + "</div>",
++ "</div>",
         ),
         panel(
             "Suggestion count by state",

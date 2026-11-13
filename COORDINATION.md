@@ -16,13 +16,13 @@
 |---|---|---|
 | Requirements R-01…R-28 | 28 | MET ×9, PARTIAL ×2, BLOCKED ×3 (R-02 price feed, R-06 snap/participation data, R-12 prop pricing), SPECIFIED ×14 |
 | Questions Q-01…Q-22 | 22 | 2 ANSWERED (Q-14, Q-18), 15 PARTIAL, 5 OPEN; each names what is missing and the cheapest way to find it |
-| Suggestions SG-01…SG-21 | 21 | 18 AWAITING-DECISION + 3 AUTO-DONE (documentation only); none applied to another session's file |
+| Suggestions SG-01…SG-21 | 21 | 18 AWAITING-DECISION + 3 AUTO-DONE (documentation only); none applied to another session's file. Count cards on `nfl-model/index.html` are computed from the data, never typed |
 | Strategies ST-00…ST-15 | 16 | 0 tested; ST-14/ST-15 REJECTED-BY-GATE; result columns blank by rule |
 | Gates G-01…G-18 | 18 | specified, none run |
 | Correlation C-01…C-14 | 14 | `measured` ρ blank for all; exact ρ=1 only for structurally nested legs |
 | Injury rows / depth rows | 30 / 29 | Week 10, 2026 official report + 49ers chart as published; blanks kept blank |
 | Market facts M-01…M-20 | 20 | Colorado/NJ official releases; NJ parlay-hold cell left blank |
-| Flags IR-027…IR-041 | 15 | see below |
+| Flags IR-027…IR-041 | 15 | see below; ids continue the site-wide sequence so no number is doubled |
 | Source registry | 17 | each with tier, retrieval date and **method**; snippet-only citations can never certify a row |
 
 **Gate added:** `scripts/verify_nfl_model.py` (own host allowlist; fails on a sourceless row, a `VERIFIED` row backed by a search snippet or a non-official tier, a `VERIFIED` row with an undeclared blank, a broken/relative-missing link, a missing `1-800-GAMBLER` disclosure, a strategy with results, or a flag id inside the root's `IR-001..IR-026` range) + 15 unit tests in `tests/test_nfl_model.py` + collector `scripts/fetch_nfl_model_sources.py` (`--selftest` passes) + `.github/workflows/nfl-model.yml`, which also rebuilds with the committed `built_utc` stamp and fails if the tree changes — that is the proof no page was hand-edited.
@@ -983,3 +983,9 @@ have been invented. They are published as blanks with the source link that estab
 | Local gate | `scripts/verify.py` PASS (0/0, 10,207 rows, 1,210 links, 0 broken); `scripts/verify_nfl_lab.py` PASS (0/0); `npm test`, `node --check`, dashboard-generator tests PASS |
 | Known non-blocking | FL-01…FL-06 published on `/nfl-decision-flags.html`; pre-existing `tests/test_build.py` failures (needs Jekyll `_site/`) unchanged from baseline |
 | Hand-off note for the integrator | Two parallel NFL workstreams now coexist on `main`: `nfl-lines/nfl-strategies/nfl-injuries/nfl-suggestions` (merged module) and `nfl-decision-*` (this section). They agree on the Week-10 injury data and both keep correlation/leaderboard values blank. If the owner wants one home, this section's unique contribution is the official per-club depth chart with explicit empty backup slots — the merged module's own IR-023 says that data was missing from its build. |
+### H1 post-merge notes — live check and the fourth NFL section
+
+- **Deployed:** PR #49 merged at `5cce426` (2026-11-13T13:42:31Z). `Verify final integration` (PR), `Verify static Pages source` (main) and `Verify NFL-model section` all SUCCESS; Pages `status=built` at `3e8aea1`. The Pages run for `5cce426` itself was cancelled by the next push 10 s later, which is why `pages/builds` shows one `errored` row for that sha — the following build of the same tree succeeded.
+- **Live verified** (cache-busted fetch of `https://karagemop466-tech.github.io/Korea4/nfl-model/index.html`): 15 pages reachable, per-row source links render, the filter/pager controls load `nfl-model/assets/model.js`, and the disclosure block with `1-800-GAMBLER` is present.
+- **A fourth overlapping section landed while this was merging:** PR #47 (`arena/21f65504-korea4`) added root `questions.html` + `leaderboard.html` backed by `data/official/nfl-*.json`. `IR-041` was widened from three to four workstreams and the index panel now names all of them with links; **no file in that tree was touched by this session.** Merge conflicts in `COORDINATION.md`, `index.html` (nav line) and `research/verification-report.md` were all resolved keeping both sides — the nav now carries every session's entries (`NFL lines`, `NFL strategies`, `NFL injuries`, `Suggestions`, `NFL decision`, `Leaderboard`, `Questions`, `NFL line model`).
+- **Follow-up commit on this branch** replaces the typed counts on `nfl-model/index.html` with values computed from the data files, after the live check caught two stale numbers there ("20 proposals", "13 irregularities" — both 21 and 15 by then). Lesson recorded: prose numbers are a defect source, so the section now derives them.
