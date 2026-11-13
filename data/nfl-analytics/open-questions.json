@@ -147,7 +147,7 @@
    "question": "May secondary (non-official) sources appear on primary pages at all, clearly labelled?",
    "known": "Today: primary pages carry official rows; nflverse mirror rows appear only under a narrow path-gated exception and carry MIRROR \u2014 UNVERIFIED labels; market reference columns point to the nflverse release. This session added a path-gated allowlist exception for github.com/nflverse URLs in scripts/verify.py.",
    "missing": "Whether the reviewer accepts this narrow exception as precedent or wants mirror-derived values moved off primary pages.",
-   "discovery": "Review the flagged.html IR-022 write-up and the verify.py diff.",
+   "discovery": "Review the flagged.html IR-042 write-up and the verify.py diff.",
    "blocks": [
     "Verification-policy wording on methodology page"
    ],

@@ -6,7 +6,7 @@ Generated: 2026-11-13T13:47:59+00:00
 - Primary generated pages: 23
 - Static primary table rows with source URL: 10464
 - HTML pages link-checked (including legacy trees): 127
-- Internal links checked: 2224
+- Internal links checked: 2226
 - Broken internal links: 0
 - JavaScript syntax: PASS
 - Event rows checked: 6591; row source domains checked against the official allowlist: 34069
