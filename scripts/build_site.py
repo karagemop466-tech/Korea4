@@ -420,6 +420,7 @@ def build_nfl():
     cols = [("date","blank"),("date_range","blank"),("official_time_pt","time"),("time_status","badge"),"subcategory","matchup",("priority","badge"),("verification","badge")]
     body = f'''
 <div class="callout"><strong>Official 2026 NFL coverage:</strong> 272 regular-season game rows parsed from 18 NFL by-week pages, 49 preseason matchups from the official schedule PDF, postseason date anchors, and 49ers exact radio/kickoff rows.</div>
+<section class="panel"><h2>NFL Lines decision desk</h2><p>Separate decision-support pages for model fair values, injury/depth availability, strategy validation, leaderboard, evidence, questions and review flags. Model lines are not market odds.</p><p><a class="control-btn" href="nfl-lines.html">Open NFL Lines →</a></p></section>
 <section class="panel"><h2>49ers high-priority focus</h2>{table(['Date PT','Official time','Subcategory','Matchup','Venue','Stations','Priority'], focus, [('date','blank'),('official_time_pt','time'),'subcategory','matchup',('venue','blank'),('stations','list'),('priority','badge')], 'nflers-focus', 50)}</section>
 <section class="panel"><h2>Every NFL row (preseason / regular / postseason / special)</h2><p class="intro">{len(nfl)} rows. Empty official date or time means UNVERIFIED; conservative all-day blocks are visible on the daily scoreboard.</p>{table(['Date PT','Official range','Official time','Time status','Subcategory','Matchup / anchor','Priority','Verification'], nfl, cols, 'nfl-all', 100)}</section>
 '''

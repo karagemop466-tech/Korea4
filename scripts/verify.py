@@ -16,6 +16,8 @@ PRIMARY_PAGES = [
     "nfl-lines.html", "nfl-strategies.html", "nfl-injuries.html", "nfl-suggestions.html",
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
     "methodology.html", "review.html", "executive-summary.html", "teams.html",
+    "nfl-lines-overview.html", "nfl-schedule.html", "nfl-fair-lines.html", "nfl-availability.html",
+    "nfl-analysis.html", "nfl-leaderboard.html", "nfl-questions.html", "nfl-flagged.html",
 ]
 REPORT = ROOT / "research/verification-report.md"
 
@@ -28,7 +30,7 @@ OFFICIAL_SOURCE_HOSTS = {
     "nextgenstats.nfl.com",    # official NFL Next Gen Stats (verified live 2026-11-13)
     "operations.nfl.com",      # official NFL Football Operations (verified live 2026-11-13)
     "www.nflpa.com",           # official NFLPA (2020 CBA; verified live 2026-11-13)
-    "www.49ers.com",
+    "www.49ers.com", "www.miamidolphins.com", "www.baltimoreravens.com",
     "www.westwoodonesports.com",
     "gostanford.com", "calbears.com",
     "www.sjearthquakes.com",
@@ -173,7 +175,7 @@ def local_target(base: Path, href: str) -> Path | None:
 def main():
     errors, warnings = [], []
     # 1. JSON validity.
-    json_files = sorted((ROOT / "data/official").glob("*.json")) + [ROOT / "research/line_by_line.json", ROOT / "research/official/manifest.json", ROOT / "research/probe/manifest.json"]
+    json_files = sorted((ROOT / "data/official").glob("*.json")) + sorted((ROOT / "data/nfl").glob("*.json")) + [ROOT / "research/line_by_line.json", ROOT / "research/official/manifest.json", ROOT / "research/probe/manifest.json"]
     for p in json_files:
         try: json.loads(p.read_text())
         except Exception as e: errors.append(f"Invalid JSON {p.relative_to(ROOT)}: {e}")
@@ -195,8 +197,28 @@ def main():
         missing = [r for r in rows if not r[1] or not re.search(r'data-source-url="https?://', r[0], re.I)]
         if missing:
             errors.append(f"{rel}: {len(missing)} table rows without official source URL/link")
-        if "<thead>" not in p.read_text("utf-8", "replace") and "table" in p.read_text("utf-8", "replace").lower():
+        page_text = p.read_text("utf-8", "replace")
+        if re.search(r"<table\b", page_text, re.I) and not re.search(r"<thead\b", page_text, re.I):
             warnings.append(f"{rel}: table markup without <thead>")
+    # NFL Lines tables: require an official-host link on every published data row.
+    nfl_table_pages = ["nfl-lines.html", "nfl-lines-overview.html", "nfl-schedule.html", "nfl-fair-lines.html",
+                       "nfl-availability.html", "nfl-analysis.html", "nfl-strategies.html",
+                       "nfl-suggestions.html", "nfl-leaderboard.html", "nfl-flagged.html"]
+    nfl_rows_checked = 0
+    for rel in nfl_table_pages:
+        p = ROOT / rel
+        if not p.exists():
+            continue
+        text = p.read_text("utf-8", "replace")
+        for _attrs, body in re.findall(r"<tr\b([^>]*)>(.*?)</tr>", text, re.S | re.I):
+            if not re.search(r"<td\b", body, re.I):
+                continue
+            nfl_rows_checked += 1
+            urls = re.findall(r'<a[^>]+href="(https?://[^"#]+)', body, re.I)
+            if not any(host_is_official(u) for u in urls):
+                errors.append(f"{rel}: NFL Lines table row {nfl_rows_checked} lacks an allowlisted official source URL")
+            for url in urls:
+                if not host_is_official(url): errors.append(f"{rel}: table row source host not allowlisted: {url[:120]}")
     # 3. Internal links across every HTML page, preserving legacy dashboards.
     html_files = sorted(p for p in ROOT.rglob("*.html") if ".git" not in p.parts and "node_modules" not in p.parts)
     checked_links = 0
@@ -254,6 +276,7 @@ def main():
         f"- JSON files checked: {len(json_files)}",
         f"- Primary generated pages: {len(PRIMARY_PAGES)}",
         f"- Static primary table rows with source URL: {primary_row_count}",
+        f"- NFL Lines static table rows with allowlisted official links: {nfl_rows_checked}",
         f"- HTML pages link-checked (including legacy trees): {len(html_files)}",
         f"- Internal links checked: {checked_links}",
         f"- Broken internal links: {len(broken)}",
@@ -264,6 +287,7 @@ def main():
         f"- Warnings: {len(warnings)}", "",
         "## Structural checks (not a source-value audit)", "",
         "1. Static primary data rows with `data-source-url` have an HTTP link and an official-domain host (allowlist in `scripts/verify.py`); this check does not validate the source content of every row.",
+        "1c. NFL Lines table rows have allowlisted official-host links; this is structural, not a value audit.",
         "1b. Event rows: no same-team matchups, no duplicate NFL games on a date, and every row source/duration URL on the official allowlist. " + EXCLUDED_SOURCE_HOSTS_NOTE + ".",
         "2. Dynamic daily/calendar table renderer contains source-link code.",
         "3. Blank-value and status-label behavior is exercised separately by dashboard tests, not exhaustively proven here.",

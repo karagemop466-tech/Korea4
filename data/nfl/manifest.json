@@ -1,12 +1,12 @@
 {
   "program": "NFL Lines",
-  "generated_utc": "2026-11-13T13:28:54Z",
+  "generated_utc": "2026-11-13T13:33:03Z",
   "method": "SHA-256 over current local artifacts; source URL list extracted from each artifact where present.",
   "raw_capture_limit": "Official schedule snapshots are preserved in research/official/raw and its manifest. The Week 10 injury report and three team depth pages were read through the Arena page-fetch facility, but their full response bodies are not stored locally in this branch; their row-level fidelity remains flagged rather than certified.",
   "datasets": [
     {
       "path": "data/nfl/schedule_2026.json",
-      "sha256": "b5b9889775f3d06415dd4d47c709e8346ab03682ae3b5f461af14889ec01ea7e",
+      "sha256": "b674c3a7d965eb414dbe6860e63b869411d36dd8865877d0bf7430a095ac3861",
       "bytes": 267481,
       "status": "DERIVED_FROM_OFFICIAL_SNAPSHOTS",
       "source_urls": [
@@ -453,21 +453,29 @@
     },
     {
       "path": "data/nfl/suggestions.json",
-      "sha256": "66ac375ed44b159f9d994730125432032d5a9d557f15ce6a4862a1478f40b9f0",
-      "bytes": 26923,
+      "sha256": "d38d110f2dca4c7c45765f6bf11845f37c2f67e873dc6822910a11050a02ae5e",
+      "bytes": 37242,
       "status": "PROGRAM_DECISIONS",
       "source_urls": [
+        "https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md",
+        "https://karagemop466-tech.github.io/Korea4/data/official/events.json",
+        "https://media.nfl.com/lsb/",
         "https://www.49ers.com/team/depth-chart",
         "https://www.baltimoreravens.com/team/depth-chart",
         "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.nfl.com/injuries/",
         "https://www.nfl.com/injuries/league/2026/reg10",
         "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+        "https://www.nfl.com/news/big-data-bowl-returns-powered-by-aws",
+        "https://www.nfl.com/news/week-11-schedule-change",
         "https://www.nfl.com/schedules/2026/REG1",
         "https://www.nfl.com/schedules/2026/by-week/week-8",
         "https://www.nfl.com/standings/league/2024/REG",
         "https://www.nfl.com/standings/league/2025/REG",
         "https://www.nfl.com/standings/league/2026/REG",
-        "https://www.nfl.com/stats/player-passing/"
+        "https://www.nfl.com/stats/player-passing/",
+        "https://www.nfl.com/teams/san-francisco-49ers/depth-chart",
+        "https://www.nfl.com/teams/san-francisco-49ers/roster"
       ],
       "audit_note": "Review proposals; none is automatically approved."
     },
