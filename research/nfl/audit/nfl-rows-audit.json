@@ -1,0 +1,16 @@
+{
+ "generated_utc": "2026-11-13T13:40:12Z",
+ "events_json_nfl_rows_nov_2026": 70,
+ "matched_to_nflverse_slate": 70,
+ "time_mismatches": 0,
+ "week10_nflverse_vs_live_nflcom": {
+  "checked": 14,
+  "date_time_matches": 14
+ },
+ "tnf_result_check": "WAS 24 @ NYG 21 matches NFL.com live page and NFL.com news",
+ "sources": [
+  "https://www.nfl.com/schedules/2026/REG10/",
+  "https://www.nfl.com/injuries/",
+  "https://github.com/nflverse/nflverse-data/releases/tag/schedules"
+ ]
+}

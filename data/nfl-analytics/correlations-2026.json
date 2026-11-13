@@ -1,0 +1,31 @@
+{
+ "generated_utc": "2026-11-13T13:40:12Z",
+ "method": "Pearson correlation on game-level season totals from nflverse play-by-play (mirror of official NFL feeds), weeks 1-10. Game-level correlations are NOT the correlation of specific prop legs against a line; they are a descriptive starting point and must be re-estimated against actual prop lines before any parlay use.",
+ "calculator": "nfl-correlation.html provides a Bernoulli-covariance calculator: P(A\u2229B) = P(A)P(B) + \u03c1\u00b7\u221a(P(A)(1\u2212P(A))P(B)(1\u2212P(B)))",
+ "rows": [
+  {
+   "leg_pair": "Combined game passing yards vs combined game total points",
+   "pearson_r": 0.0,
+   "n_games": 137,
+   "status": "ESTIMATED \u2014 one season, descriptive; re-estimate per use"
+  },
+  {
+   "leg_pair": "Combined game receiving yards vs combined game total points",
+   "pearson_r": 0.0,
+   "n_games": 137,
+   "status": "ESTIMATED \u2014 one season, descriptive"
+  },
+  {
+   "leg_pair": "Combined game rushing yards vs combined game total points",
+   "pearson_r": 0.0,
+   "n_games": 137,
+   "status": "ESTIMATED \u2014 one season, descriptive"
+  },
+  {
+   "leg_pair": "Combined game passing yards vs combined game rushing yards",
+   "pearson_r": -0.24,
+   "n_games": 137,
+   "status": "ESTIMATED \u2014 one season, descriptive"
+  }
+ ]
+}

@@ -1,0 +1,172 @@
+{
+ "generated_utc": "2026-11-13T13:59:00Z",
+ "purpose": "Decisions that cannot be reasonably made from the information the project already has. Each entry lists what is KNOWN (with sources), what is MISSING, the suggested DISCOVERY PATH, and what the decision BLOCKS. Nothing below is implemented until the reviewer answers.",
+ "reviewer_instruction": "The reviewer selects an answer per question; the chosen answer is recorded in the 'answer' field by the next session and the affected gates/pages are updated on a new branch per COORDINATION.md.",
+ "questions": [
+  {
+   "id": "Q1",
+   "question": "Which market-odds source (if any) may the project ingest for CLV and edge validation?",
+   "known": "The site's verification rule is official-sources-only for VERIFIED values (methodology page). Archived market lines exist in the committed nflverse schedules release but are explicitly labelled SECONDARY and used only as a comparison column, never as model input. No live odds are ingested anywhere today.",
+   "missing": "A reviewer-approved list of trusted secondary odds sources; a decision whether secondary rows may appear at all outside 'Flagged for Review'.",
+   "discovery": "List candidate feeds (e.g., official league-licensed distribution partners; NFL.com's own published lines if any; archived nflverse lines as baseline), fetch samples, and present a comparison table on the Flagged page for the reviewer to approve or reject.",
+   "blocks": [
+    "Validation gate G7 (CLV) \u2014 currently BLOCKED",
+    "Strategy tiers above Spec",
+    "SUG-01",
+    "SUG-09"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/open-questions.json",
+   "source_label": "This registry (this repo)"
+  },
+  {
+   "id": "Q2",
+   "question": "What stake-sizing policy should the leaderboard assume once prices exist?",
+   "known": "Research grading is flat 1 unit at an assumed -110 price (documented SIMULATION ONLY). Real sizing (flat vs fractional Kelly) is undefined because no real prices exist.",
+   "missing": "Reviewer's risk preference and whether leaderboard units should ever map to anything real (they do not today).",
+   "discovery": "Decide by reviewing the scoring formula in strategies.json; flat 1 unit is recommended for research comparability regardless of Q1.",
+   "blocks": [
+    "SUG-09"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry scoring (this repo)"
+  },
+  {
+   "id": "Q3",
+   "question": "What are the actual rewards for leaderboard performance?",
+   "known": "The brief says the competition 'provides rewards for top performing strategies'. The registry defines non-monetary rewards: points, tiers, champion entry, review priority.",
+   "missing": "Whether any tangible reward is intended. No monetary reward can be designed by an autonomous session without a budget decision.",
+   "discovery": "Reviewer statement; recorded here and in strategies.json reward_tiers.",
+   "blocks": [
+    "Final reward-tier wording"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Reward tiers (this repo)"
+  },
+  {
+   "id": "Q4",
+   "question": "Is the strategy-registration JSON schema acceptable as the submission format?",
+   "known": "strategies.json defines required fields (id, timestamped rule, market dependency, legs, correlation method, stake policy).",
+   "missing": "Reviewer confirmation; any additional fields the reviewer wants (e.g., owner credit, expiry).",
+   "discovery": "Approve as-is or request fields; SUG-07 then publishes the schema page.",
+   "blocks": [
+    "SUG-07",
+    "future submissions"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Registration format (this repo)"
+  },
+  {
+   "id": "Q5",
+   "question": "How fresh must injury data be \u2014 and is the Friday cron enough?",
+   "known": "The Week-10 official report is progressively published Wed\u2192Fri; the committed snapshot (Fri 02:01 EST) lagged the official page for entire clubs (Rams, Cardinals) \u2014 recorded in the audit. The nfl-refresh workflow runs Friday 21:05 UTC.",
+   "missing": "Whether Wednesday/Thursday refreshes are wanted (SUG-08 diffs), and whether a Sunday-morning inactive refresh (SUG-04) should be added.",
+   "discovery": "Run the workflow twice mid-week in a test window and measure lag; then decide cron schedule.",
+   "blocks": [
+    "SUG-04",
+    "SUG-08",
+    "grading freshness for G5"
+   ],
+   "answer": "",
+   "source_url": "https://www.nfl.com/injuries/",
+   "source_label": "Official NFL.com injury report"
+  },
+  {
+   "id": "Q6",
+   "question": "Depth-chart provenance policy: accept the nflverse mirror with a spot-check regime, or verify against all 32 official club pages weekly?",
+   "known": "The current depth charts are the nflverse mirror of official club charts; the verify gate permits nflverse hosts ONLY under a path-gated exception and every dependent row is labelled MIRROR \u2014 UNVERIFIED individually. Spot-checks this session matched the official page everywhere both sources existed (187/209 rows; 22 rows existed only on the official page).",
+   "missing": "Reviewer's tolerance for mirror lag on the deficiency tables (clubs demote injured starters, which is what the season-wide rank-1 join corrects for).",
+   "discovery": "One manual pass: open 5 club depth-chart pages and compare to the mirror; record results on the Flagged page.",
+   "blocks": [
+    "Verification labels on nfl-injuries.html deficiency table"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/depth_charts",
+   "source_label": "nflverse depth charts release"
+  },
+  {
+   "id": "Q7",
+   "question": "Which player props are in scope for the prop-combo lane?",
+   "known": "Prop baselines are computable from committed snap counts and play-by-play. Prop LINES are market data \u2014 not ingested (same dependency as Q1).",
+   "missing": "A scope list (passing yards, rush+rec yards, TD scorer, etc.) and line-source approval.",
+   "discovery": "Draft the prop list from available baselines; pair each prop with the correlation estimate needed under G6.",
+   "blocks": [
+    "Prop strategies beyond Spec tier",
+    "SUG-03"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "source_label": "nflverse snap counts release"
+  },
+  {
+   "id": "Q8",
+   "question": "Extend committed history to 1999-2025 for calibration?",
+   "known": "nflverse releases cover 1999+ schedules and play-by-play. 2026-only samples are too small for the gates (rest buckets n\u224810; holdout n\u224840).",
+   "missing": "Repo-weight budget decision (~80 MB compressed for 9 seasons of pbp).",
+   "discovery": "Fetch a single historical season, measure compressed size, and decide per-season commit policy (option: keep raw in Actions artifacts, commit only aggregates).",
+   "blocks": [
+    "G3/G4 becoming enforceable",
+    "SUG-06"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/pbp",
+   "source_label": "nflverse play-by-play releases"
+  },
+  {
+   "id": "Q9",
+   "question": "Accept the Bernoulli-covariance method as the standard correlation adjustment?",
+   "known": "nfl-correlation.html implements P(A\u2229B) = P(A)P(B) + \u03c1\u221a(P(A)(1\u2212P(A))P(B)(1\u2212P(B))) with bounds enforcement, and publishes descriptive 2026 game-level correlations (n=137 games) as a starting point \u2014 clearly labelled descriptive, not prop-leg \u03c1.",
+   "missing": "Reviewer sign-off; prop-level \u03c1 estimation plan once prop lines exist (Q7).",
+   "discovery": "Validate the calculator against hand-computed examples; review bounds logic.",
+   "blocks": [
+    "G6 enforcement details",
+    "SUG-05"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/nfl-correlation.html",
+   "source_label": "Correlation page (this repo)"
+  },
+  {
+   "id": "Q10",
+   "question": "Confirm the luck thresholds (t \u2265 2.0 provisional / t \u2265 2.5 certified, n \u2265 50/200, ROI cap +25%)?",
+   "known": "These are documented research conventions in strategies.json, chosen to be conservative; the 2026 simulation shows why (S1's 90% streak on 31 picks would otherwise top the board).",
+   "missing": "Reviewer confirmation or adjustment.",
+   "discovery": "Review the scoring math on the leaderboard page; adjust constants once, then freeze for the season.",
+   "blocks": [
+    "Season leaderboard freeze"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Scoring formula (this repo)"
+  },
+  {
+   "id": "Q11",
+   "question": "May secondary (non-official) sources appear on primary pages at all, clearly labelled?",
+   "known": "Today: primary pages carry official rows; nflverse mirror rows appear only under a narrow path-gated exception and carry MIRROR \u2014 UNVERIFIED labels; market reference columns point to the nflverse release. This session added a path-gated allowlist exception for github.com/nflverse URLs in scripts/verify.py.",
+   "missing": "Whether the reviewer accepts this narrow exception as precedent or wants mirror-derived values moved off primary pages.",
+   "discovery": "Review the flagged.html IR-022 write-up and the verify.py diff.",
+   "blocks": [
+    "Verification-policy wording on methodology page"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/scripts/verify.py",
+   "source_label": "verify.py path-gated hosts (this repo)"
+  },
+  {
+   "id": "Q12",
+   "question": "Weather inputs: request official-station feeds or leave the model weather-free?",
+   "known": "The 2026 schedule release carries roof values but temp/wind are blank for most rows; no weather adjustment is fitted (signals-2026.json says UNVERIFIED).",
+   "missing": "A trusted, verifiable weather source compatible with the official-only rule, or acceptance of a weather-free model.",
+   "discovery": "Compare historical forecasts vs outcomes from committed data first (free); only add a live feed if the historical factor proves material.",
+   "blocks": [
+    "Possible totals-signal improvement"
+   ],
+   "answer": "",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules release"
+  }
+ ]
+}

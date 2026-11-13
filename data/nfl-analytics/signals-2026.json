@@ -1,0 +1,47 @@
+{
+ "generated_utc": "2026-11-13T13:40:12Z",
+ "rows": [
+  {
+   "signal": "Home-field advantage (2026 sample)",
+   "measure": "Mean home margin -0.02 pts (n=137); model absorbs it as intercept -0.48",
+   "status": "ESTIMATED \u2014 single-season sample",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules release (mirror)"
+  },
+  {
+   "signal": "EPA-margin model held-out accuracy",
+   "measure": "Fit weeks 1-6 (n=93); predict weeks 7-10 (n=44): corr(pred, actual) = 0.728, MAE = 8.83 pts",
+   "status": "ESTIMATED \u2014 small holdout sample",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/stats_team",
+   "source_label": "nflverse team stats release (mirror)"
+  },
+  {
+   "signal": "Season-to-date EPA per play as power rating",
+   "measure": "margin = 39.712 \u00d7 (home net-EPA/play \u2212 away net-EPA/play) + -0.48; residual SD 13.23; R\u00b2 0.325; n = 137 completed 2026 games (weeks 1-10); methodology (EPA definition): NFL Next Gen Stats",
+   "status": "MODEL ESTIMATED",
+   "source_url": "https://www.nfl.com/stats/ngs/trends",
+   "source_label": "NFL.com \u2014 Next Gen Stats (official EPA definition)"
+  },
+  {
+   "signal": "Rest differential (days) vs home margin",
+   "measure": "rest diff -3: mean margin -9.2 (n=15); rest diff -1: mean margin +1.5 (n=11); rest diff +0: mean margin -1.2 (n=91); rest diff +1: mean margin +3.3 (n=3); rest diff +3: mean margin +12.8 (n=17) \u2014 descriptive only, no fitted adjustment; results within \u00b11 day dominate the sample",
+   "status": "ESTIMATED \u2014 descriptive, tiny buckets",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules release (mirror)"
+  },
+  {
+   "signal": "Weather (temp/wind) columns",
+   "measure": "2026 schedule rows carry roof values but temp/wind are blank in the release for most games; no weather adjustment is applied. Counts: UNKNOWN=23, closed=14, dome=52, open=6, outdoors=177",
+   "status": "UNVERIFIED \u2014 weather inputs missing",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+   "source_label": "nflverse schedules release (mirror)"
+  },
+  {
+   "signal": "Injury/backup adjustments",
+   "measure": "Not yet applied to the rating model: no fitted injury coefficients exist from one season of data. Injuries enter strategy selection (S2/S4/S5) as filters, not as fitted point adjustments.",
+   "status": "MODEL GAP \u2014 flagged",
+   "source_url": "https://www.nfl.com/injuries/",
+   "source_label": "NFL.com injury report"
+  }
+ ]
+}
