@@ -1,0 +1,388 @@
+{
+  "program": "NFL Lines — decision register (questions, information held, information missing)",
+  "version": "1.0",
+  "updated_utc": "2026-11-13T13:05:00Z",
+  "purpose": "Every decision the program has to make is listed with the question that must be answered, the information already held (each with its official source), the information that is missing, where the missing information can be obtained, and the current status. A decision that cannot be answered is recorded as OPEN with the missing information named, so it is never made by default.",
+  "status_values": [
+    "OPEN",
+    "ANSWERED",
+    "BLOCKED",
+    "DEFERRED"
+  ],
+  "decisions": [
+    {
+      "id": "D-01",
+      "decision": "Which bet classes the program is allowed to originate",
+      "question": "Is the program scoped to singles, parlays and player props, or to a subset?",
+      "why_it_matters": "Each class needs different official inputs, different gates and different settlement rules. The player-prop class currently has no per-player usage data.",
+      "information_held": [
+        "Ten strategy definitions covering all three classes (data/nfl/strategies.json).",
+        "Official schedule for all 272 games of the 2026 regular season, parsed from the official by-week snapshots.",
+        "Official Week 10 injury report snapshot with 298 rows across all 32 clubs, including two official no-injury rows."
+      ],
+      "information_missing": [
+        "Official per-player usage data needed for priced player props.",
+        "A decision on whether exclusion-only prop coverage is acceptable."
+      ],
+      "how_to_obtain": "Capture official NFL player statistics and game books, or accept the exclusion-only scope (suggestion SG-12).",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-02",
+      "decision": "Where prices come from",
+      "question": "Which source supplies the line and the price at the moment a line is originated, and who records it?",
+      "why_it_matters": "Without a price there is no edge, no ROI and no leaderboard points. Gates G2, G5, G9 and G12 are all blocked on this one question.",
+      "information_held": [
+        "Official sources publish schedules, results, injury reports, standings and rules.",
+        "No official source publishes an NFL betting line or price."
+      ],
+      "information_missing": [
+        "A price feed or the owner's own bet log with price and timestamp for each bet."
+      ],
+      "how_to_obtain": "Owner bet log (recommendation SG-10 option A) or a licensed feed (option B).",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-03",
+      "decision": "Whether the program scores at all in its first season",
+      "question": "If no price source is connected, should the leaderboard remain empty and the program run as a line-origination and analysis system?",
+      "why_it_matters": "Publishing a leaderboard with invented prices would be worse than publishing an empty one.",
+      "information_held": [
+        "Ten strategies with a declared gate set; the schedule-derived strategies are measurable against 120 official completed games.",
+        "Leaderboard rules with reward tiers are already written and are inert until prices exist."
+      ],
+      "information_missing": [
+        "Owner decision on D-02."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-04",
+      "decision": "Minimum evidence before a strategy may be listed as usable",
+      "question": "Is the 100 settled bet gate right, and should a strategy that is blocked on data still appear in the catalogue?",
+      "why_it_matters": "Listing an untested strategy without its state invites treating it as validated.",
+      "information_held": [
+        "Twelve gates are defined with their criteria and current states.",
+        "The measured official panel contains 120 completed games for the 2026 regular season so far."
+      ],
+      "information_missing": [
+        "A view on whether partially testable strategies should be visible."
+      ],
+      "how_to_obtain": "Owner decision; the recommended default is that they stay visible but labelled NOT TESTABLE.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-05",
+      "decision": "Availability coverage across all 32 clubs",
+      "question": "Should the program capture an official depth chart for every club before it issues any availability-adjusted line?",
+      "why_it_matters": "Today only three clubs have a captured chart, so 29 clubs receive no availability adjustment at all and their lines are systematically less informative than the three that have one.",
+      "information_held": [
+        "Official depth charts for the San Francisco 49ers, Miami Dolphins and Baltimore Ravens, with tiers up to four strings deep.",
+        "Official depth-chart URLs listed for all 32 clubs in data/nfl/teams.csv, of which 29 are marked unverified because they were not fetched this session."
+      ],
+      "information_missing": [
+        "29 official depth charts, and a second dated capture per club for the tier diff."
+      ],
+      "how_to_obtain": "Implement a dedicated official-source capture script and scheduled runner first; none is committed yet.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-06",
+      "decision": "Whether to publish player-prop lines at all",
+      "question": "Should the program publish a numeric player-prop line, or only the exclusions it can support from official data today?",
+      "why_it_matters": "Five clubs have a documented quarterback change in the captured week; publishing a number for them without official usage data would be an invented value.",
+      "information_held": [
+        "Official NFL.com reporting documents the Miami quarterback change associated with Malik Willis being placed on injured reserve.",
+        "Official depth charts captured for Miami and Baltimore list multiple quarterback tiers."
+      ],
+      "information_missing": [
+        "A complete, row-audited list of official quarterback roster changes for the captured week.",
+        "Official per-player attempts, completions, yards and carries for replacement quarterbacks."
+      ],
+      "how_to_obtain": "Capture official NFL transaction/game reports and player statistics; publish only individually sourced cases.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-07",
+      "decision": "Model parameters that are assumptions rather than measurements",
+      "question": "Are the assumed margin standard deviation, the Pythagorean exponent, the home-edge points and the availability penalty table accepted as program parameters, and who may change them?",
+      "why_it_matters": "These parameters move every published line, so they are part of the model and must be versioned and disclosed.",
+      "information_held": [
+        "Measured official values: the league home win rate and home margin from 120 official completed games, and the availability penalty table as published.",
+        "The measured year-to-year persistence of points differential (r = 0.32 on 32 complete official team-season pairs, 2024 to 2025)."
+      ],
+      "information_missing": [
+        "Owner acceptance of the assumed margin standard deviation of 12 points, which is used to convert a win probability into a point margin."
+      ],
+      "how_to_obtain": "Owner decision; the published sensitivity of each line to this parameter bounds the impact.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-08",
+      "decision": "Risk limits",
+      "question": "What bankroll fraction, weekly exposure cap and maximum parlay size are allowed?",
+      "why_it_matters": "A positive edge with uncontrolled sizing still produces ruin, and gate G10 depends on these numbers being set.",
+      "information_held": [
+        "A proposed default: quarter-Kelly or less, a weekly exposure cap, at most four legs and never two legs from the same game."
+      ],
+      "information_missing": [
+        "Owner bankroll and tolerance figures."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-09",
+      "decision": "Whether the availability penalty table is calibrated from data or fixed by assumption",
+      "question": "Should the position-group penalty weights (quarterback 4.0 points, line 1.5, and so on) be treated as priors to be fitted on the historical panel, or frozen as declared assumptions?",
+      "why_it_matters": "Fitting them on the same data used to evaluate the strategy would leak; freezing them keeps the test honest but leaves them uncalibrated.",
+      "information_held": [
+        "The published penalty table with its depth-gap multipliers.",
+        "The official depth charts and injury designations that will form the fitting panel once the history is captured."
+      ],
+      "information_missing": [
+        "Ten weeks of official injury snapshots to fit the weights on (suggestion SG-11)."
+      ],
+      "how_to_obtain": "Capture the injury history, fit on the first half of the panel and evaluate on the second half.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-10",
+      "decision": "Whether to add the travel, venue and international-context features",
+      "question": "Should the program add a travel distance feature and treat international games as a distinct context?",
+      "why_it_matters": "International venue and travel context may affect rest and preparation; these features are not included in the current fair-line model.",
+      "information_held": [
+        "Official schedule marks international fixtures, but a complete, audited venue/travel feature table is not present."
+      ],
+      "information_missing": [
+        "Official venue locations for each relevant game and a reproducible travel-distance calculation."
+      ],
+      "how_to_obtain": "Capture the official game-center pages for venue.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-11",
+      "decision": "How to treat players who are on injured reserve or physically unable to perform",
+      "question": "Should a player who is not on the weekly injury report but is on injured reserve be treated as an absence?",
+      "why_it_matters": "Players on injured reserve do not appear on the weekly injury report at all, so the absence of a row is not evidence of health. The Baltimore case shows this directly: the Ravens reported no injuries for Week 10 while their starting quarterback is on injured reserve.",
+      "information_held": [
+        "Official NFL.com reporting that Baltimore placed Lamar Jackson on injured reserve.",
+        "The official Baltimore depth chart, which lists Jacoby Brissett first at quarterback with two further names behind him.",
+        "The official Week 10 injury report, which shows 'No Injuries Reported' for Baltimore."
+      ],
+      "information_missing": [
+        "A complete official injured-reserve and roster-status feed per club."
+      ],
+      "how_to_obtain": "Capture official roster moves from the league and club announcements, or accept that the tracker is limited to weekly designations and say so on the page.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-12",
+      "decision": "Depth-chart interpretation policy",
+      "question": "Is the first name on a published depth chart the starter, and how should teams that publish multiple names at one position be read?",
+      "why_it_matters": "The tier of a player drives the penalty size, so the reading rule has to be fixed before the penalties are meaningful.",
+      "information_held": [
+        "Three official charts captured for this program list multiple depth tiers, but the row-by-row player/position transcription has not been independently audited."
+      ],
+      "information_missing": [
+        "A verified position-row interpretation policy for each club, including how duplicate position labels are handled."
+      ],
+      "how_to_obtain": "Audit each chart against the captured official page and record club-specific exceptions before computing replacement tiers.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-13",
+      "decision": "Publication timing of a line",
+      "question": "When does a line become public: at the first official injury designation, at the final official game-status report, or at the kickoff?",
+      "why_it_matters": "The official schedule of designations is itself information; publishing at the wrong time creates an informational advantage that no gate can measure.",
+      "information_held": [
+        "The official NFL filing windows for practice reports and game status reports, published in the league's important-dates release."
+      ],
+      "information_missing": [
+        "Owner policy on publication timing and on whether a line may be revised when an official designation changes."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-14",
+      "decision": "Settlement source and push handling",
+      "question": "Which official page settles a bet, and how are pushes and voided games handled?",
+      "why_it_matters": "Leaderboard points are only comparable between strategies if every strategy settles the same way.",
+      "information_held": [
+        "Official final scores for 120 completed games, read from the official by-week snapshots."
+      ],
+      "information_missing": [
+        "Owner confirmation that the official final score is the settlement source and that pushes do not count as wins."
+      ],
+      "how_to_obtain": "Owner decision; the rule is already drafted in the leaderboard rules.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-15",
+      "decision": "Whether the leaderboard rewards data work as well as betting results",
+      "question": "Should the reward tiers reward points only, or also reward a strategy for unblocking the data that the programme needs?",
+      "why_it_matters": "The binding constraint today is missing official inputs, not idea quality; a points-only reward system rewards nothing while the constraint is still in place.",
+      "information_held": [
+        "Four reward tiers drafted, from Bronze to Platinum, with data access as the Silver reward."
+      ],
+      "information_missing": [
+        "Owner confirmation of the reward vocabulary and whether cash substitutes for the programme tokens."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-16",
+      "decision": "Multi-strategy correlation policy",
+      "question": "What correlation limit applies between legs of one ticket, and what counts as a separate game?",
+      "why_it_matters": "Correlated legs multiply variance rather than edge; the measured correlation matrix is currently based on one week and is unstable.",
+      "information_held": [
+        "Measured signal correlations on the captured week and the rule that legs must have absolute correlation at or below 0.30 with at most four legs.",
+        "The effective sample size rule n_eff = n / (1 + (k-1) * mean_rho)."
+      ],
+      "information_missing": [
+        "A larger correlation sample once more weeks are captured."
+      ],
+      "how_to_obtain": "Capture more weeks and recompute (suggestion SG-11).",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-17",
+      "decision": "Whether to keep the free-time dashboard in the same site",
+      "question": "Should the NFL Lines programme remain inside the existing Korea4 site, or become a separate site?",
+      "why_it_matters": "The existing site has its own source catalogue, verification rules and audit trail; merging two programmes into one navigation raises the risk that a reader confuses a verified schedule row with a modelled fair line.",
+      "information_held": [
+        "Both sets of pages exist in one repository with separate namespaces under data/ and separate verification labels."
+      ],
+      "information_missing": [
+        "Owner preference."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-18",
+      "decision": "Refresh cadence",
+      "question": "How often should the official sources be refreshed, and should the captured history be permanent?",
+      "why_it_matters": "Depth charts and injury reports change within the week; a single capture per week can miss a designation change.",
+      "information_held": [
+        "Capture timestamps for every source in this session and the official filing windows that bound each source."
+      ],
+      "information_missing": [
+        "Owner decision on cadence and retention."
+      ],
+      "how_to_obtain": "Owner decision plus implementation of an NFL-specific scheduled capture; the capture script is not yet implemented.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-19",
+      "decision": "Whether the programme publishes losing strategies",
+      "question": "Should a strategy that failed a gate stay published with its result, or be removed?",
+      "why_it_matters": "Removing failures removes the evidence that the gates work, and makes a catalogue look healthier than it is.",
+      "information_held": [
+        "The rule already drafted in the leaderboard rules: removing a strategy does not remove its settled record from the board."
+      ],
+      "information_missing": [
+        "Owner confirmation."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-20",
+      "decision": "Whether two sessions may work on this programme at the same time",
+      "question": "Which files may a second session own, given that the site navigation and the shared data are integration outputs?",
+      "why_it_matters": "This repository already runs parallel sessions; the coordination log is the shared task board and its claim rule is the mechanism that prevents two sessions editing the same file.",
+      "information_held": [
+        "The coordination log entry for this session, claiming the eight tasks with their file scopes."
+      ],
+      "information_missing": [
+        "Confirmation from the owner of whether parallel sessions are wanted for this programme."
+      ],
+      "how_to_obtain": "Owner decision; new claims must follow the existing scope rules.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-21",
+      "decision": "Handling of the official source that cannot be reached from the build environment",
+      "question": "Should the programme accept sources that can only be captured outside the sandbox, with the capture manifest as the audit trail?",
+      "why_it_matters": "The build environment has no outbound access to league sites, so the sources used in this session were captured through the platform fetch tool rather than by the repository's own fetch script.",
+      "information_held": [
+        "Capture timestamps, source URLs and the SHA-256 of the schedule snapshots already held in the repository manifest."
+      ],
+      "information_missing": [
+        "Owner acceptance of the capture method for the new sources until the automated fetch runs in CI."
+      ],
+      "how_to_obtain": "Owner decision; an NFL-specific fetcher/workflow is a proposed next task and is not yet implemented.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-22",
+      "decision": "Whether to keep the free-time dashboard's existing seasonal estimates separate from the NFL Lines model",
+      "question": "Should the NFL Lines model ever feed the free-time dashboard, given that a modelled line is not a released schedule?",
+      "why_it_matters": "The existing dashboard's verification rule is that estimates are never presented as released schedules; mixing the two would weaken a rule the rest of the site depends on.",
+      "information_held": [
+        "The existing verification labels and the rule that an estimate is never shown as an official value."
+      ],
+      "information_missing": [
+        "Owner decision on whether any cross-programme use is wanted."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-23",
+      "decision": "Definition of a 'bet' for the leaderboard denominator",
+      "question": "Does a partially settled ticket count as one bet or as one bet per leg?",
+      "why_it_matters": "It changes the ROI and therefore the points, and it decides whether a parlay strategy is comparable with a single-bet strategy.",
+      "information_held": [
+        "The drafted rule that a ticket counts once, with pushes excluded from the denominator."
+      ],
+      "information_missing": [
+        "Owner confirmation."
+      ],
+      "how_to_obtain": "Owner decision.",
+      "status": "OPEN",
+      "answer": ""
+    },
+    {
+      "id": "D-24",
+      "decision": "Official-context publishing",
+      "question": "Should the official rule context (designation filing windows, roster rules, playoff calendar) be published on the strategy pages?",
+      "why_it_matters": "Most misreadings of the injury table come from assuming that a player who is absent from the report is healthy.",
+      "information_held": [
+        "The official NFL important-dates release with the weekly designation filing deadlines and the roster rules."
+      ],
+      "information_missing": [
+        "Owner preference on placement."
+      ],
+      "how_to_obtain": "Owner decision; the content is captured (suggestion SG-17).",
+      "status": "OPEN",
+      "answer": ""
+    }
+  ]
+}

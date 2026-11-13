@@ -1,0 +1,173 @@
+{
+  "generated_utc": "2026-11-13T13:25:29Z",
+  "season_persistence": [
+    {
+      "metric": "net_points_per_game",
+      "n_pairs": 32,
+      "correlation_r": 0.3223,
+      "r_squared": 0.1039,
+      "regression_slope": 0.3054,
+      "regression_intercept": 0.0,
+      "slope_stderr": 0.1638,
+      "slope_t_stat": 1.865,
+      "persistence_share_of_variance": 0.1039,
+      "interpretation": "Descriptive year-to-year persistence on complete seasons only; not a causal decomposition of skill and luck.",
+      "status": "MODEL - computed from official NFL standings",
+      "source_url": "https://www.nfl.com/standings/league/2025/REG",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2024/REG",
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    },
+    {
+      "metric": "points_for_per_game",
+      "n_pairs": 32,
+      "correlation_r": 0.2925,
+      "r_squared": 0.0856,
+      "regression_slope": 0.2672,
+      "regression_intercept": 16.8904,
+      "slope_stderr": 0.1595,
+      "slope_t_stat": 1.6753,
+      "persistence_share_of_variance": 0.0856,
+      "interpretation": "Descriptive year-to-year persistence on complete seasons only; not a causal decomposition of skill and luck.",
+      "status": "MODEL - computed from official NFL standings",
+      "source_url": "https://www.nfl.com/standings/league/2025/REG",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2024/REG",
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    },
+    {
+      "metric": "points_against_per_game",
+      "n_pairs": 32,
+      "correlation_r": 0.4487,
+      "r_squared": 0.2013,
+      "regression_slope": 0.5257,
+      "regression_intercept": 10.9682,
+      "slope_stderr": 0.1912,
+      "slope_t_stat": 2.7497,
+      "persistence_share_of_variance": 0.2013,
+      "interpretation": "Descriptive year-to-year persistence on complete seasons only; not a causal decomposition of skill and luck.",
+      "status": "MODEL - computed from official NFL standings",
+      "source_url": "https://www.nfl.com/standings/league/2025/REG",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2024/REG",
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    },
+    {
+      "metric": "win_pct",
+      "n_pairs": 32,
+      "correlation_r": 0.284,
+      "r_squared": 0.0807,
+      "regression_slope": 0.2653,
+      "regression_intercept": 0.3674,
+      "slope_stderr": 0.1635,
+      "slope_t_stat": 1.6226,
+      "persistence_share_of_variance": 0.0807,
+      "interpretation": "Descriptive year-to-year persistence on complete seasons only; not a causal decomposition of skill and luck.",
+      "status": "MODEL - computed from official NFL standings",
+      "source_url": "https://www.nfl.com/standings/league/2025/REG",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2024/REG",
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    },
+    {
+      "metric": "home_win_pct",
+      "n_pairs": 32,
+      "correlation_r": 0.3068,
+      "r_squared": 0.0942,
+      "regression_slope": 0.2669,
+      "regression_intercept": 0.3945,
+      "slope_stderr": 0.1511,
+      "slope_t_stat": 1.7658,
+      "persistence_share_of_variance": 0.0942,
+      "interpretation": "Descriptive year-to-year persistence on complete seasons only; not a causal decomposition of skill and luck.",
+      "status": "MODEL - computed from official NFL standings",
+      "source_url": "https://www.nfl.com/standings/league/2025/REG",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2024/REG",
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    }
+  ],
+  "signal_matrix": [
+    {
+      "signal_a": "net_rating_gap",
+      "signal_b": "net_rating_gap",
+      "n_games": 13,
+      "correlation_r": 1.0,
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "net_rating_gap",
+      "signal_b": "availability_gap",
+      "n_games": 13,
+      "correlation_r": "UNVERIFIED - insufficient variation",
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "net_rating_gap",
+      "signal_b": "rest_gap",
+      "n_games": 13,
+      "correlation_r": -0.3656,
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "net_rating_gap",
+      "signal_b": "home_advantage",
+      "n_games": 13,
+      "correlation_r": 0.0,
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "availability_gap",
+      "signal_b": "availability_gap",
+      "n_games": 13,
+      "correlation_r": "UNVERIFIED - insufficient variation",
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "availability_gap",
+      "signal_b": "rest_gap",
+      "n_games": 13,
+      "correlation_r": "UNVERIFIED - insufficient variation",
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "availability_gap",
+      "signal_b": "home_advantage",
+      "n_games": 13,
+      "correlation_r": "UNVERIFIED - insufficient variation",
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "rest_gap",
+      "signal_b": "rest_gap",
+      "n_games": 13,
+      "correlation_r": 1.0,
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "rest_gap",
+      "signal_b": "home_advantage",
+      "n_games": 13,
+      "correlation_r": 0.0,
+      "status": "MODEL - pilot sample from the captured week only"
+    },
+    {
+      "signal_a": "home_advantage",
+      "signal_b": "home_advantage",
+      "n_games": 13,
+      "correlation_r": 1.0,
+      "status": "MODEL - pilot sample from the captured week only"
+    }
+  ],
+  "parlay_rules": {
+    "max_leg_correlation_abs": 0.3,
+    "max_legs": 4,
+    "effective_sample_size": "n_eff = n / (1 + (k - 1) * mean_rho)"
+  },
+  "source_url": "https://www.nfl.com/standings/league/2026/REG"
+}

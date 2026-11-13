@@ -1,0 +1,1051 @@
+{
+  "generated_utc": "2026-11-13T13:25:29Z",
+  "gate_definitions": [
+    {
+      "id": "G1",
+      "name": "Official-source integrity",
+      "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+      "why_it_matters": "A signal built on an unsourced or mis-transcribed input cannot be audited, and every downstream statistic inherits the error.",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    },
+    {
+      "id": "G2",
+      "name": "Minimum sample size",
+      "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+      "why_it_matters": "Below this size the sampling error on any edge estimate is larger than the edge itself, so a lucky run is indistinguishable from skill.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G3",
+      "name": "Out-of-sample (walk-forward) test",
+      "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+      "why_it_matters": "NFL data is autocorrelated and small samples; in-sample fitting manufactures skill that does not exist.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    },
+    {
+      "id": "G4",
+      "name": "Multiple-testing correction",
+      "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+      "why_it_matters": "Testing many variations of the same idea guarantees that some look profitable by chance.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G5",
+      "name": "Statistical significance and confidence interval",
+      "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+      "why_it_matters": "An edge that cannot be distinguished from zero is not an edge.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G6",
+      "name": "Luck / variance control",
+      "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+      "why_it_matters": "Most year-to-year NFL movement is luck. A strategy that only wins when the coin flip goes its way is not a strategy.",
+      "source_url": "https://www.nfl.com/standings/league/2024/REG"
+    },
+    {
+      "id": "G7",
+      "name": "Correlation and effective sample size",
+      "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+      "why_it_matters": "Correlated legs do not multiply independent edges; they multiply one edge and multiply the variance.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G8",
+      "name": "Robustness across sub-periods and thresholds",
+      "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+      "why_it_matters": "A result that depends on one season or one hand-picked threshold is a fit to noise.",
+      "source_url": "https://www.nfl.com/standings/league/2025/REG"
+    },
+    {
+      "id": "G9",
+      "name": "Price availability and line-movement discipline",
+      "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+      "why_it_matters": "Without a recorded price there is no edge and no settlement; stale prices are not tradeable prices.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+    },
+    {
+      "id": "G10",
+      "name": "Risk limits",
+      "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+      "why_it_matters": "A correct signal with uncontrolled sizing still produces ruin.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G11",
+      "name": "Provenance and disclosure",
+      "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+      "why_it_matters": "Undisclosed parameters make results unreviewable.",
+      "source_url": "https://www.nfl.com/"
+    },
+    {
+      "id": "G12",
+      "name": "Settlement integrity",
+      "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+      "why_it_matters": "Leaderboard points computed from anything other than the official result are not comparable between strategies.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    }
+  ],
+  "results": [
+    {
+      "strategy_id": "S-01",
+      "strategy": "Starter-loss availability edge (spread)",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Injury designations read from the official NFL weekly injury report; depth tiers read from official team depth charts. Depth charts captured this session: San Francisco 49ers, Miami Dolphins, Baltimore Ravens."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "Only the current week has been captured; a walk-forward panel needs earlier injury weeks plus results."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "NOT TESTABLE",
+          "evidence": "Catalog size is declared (10 strategies); the Holm-Bonferroni step runs once samples exist."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled bets to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "NOT TESTABLE",
+          "evidence": "Season-to-year persistence is measured from official standings (see the correlation page) and must be used as the noise baseline before this strategy can be judged."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PARTIAL",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source is configured; see decisions register D-03."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Kelly fraction <= 0.25 and no same-game combination are configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Every deficiency row stores the official injury URL and the official depth-chart URL."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No originated line has settled yet."
+        }
+      ],
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    },
+    {
+      "strategy_id": "S-02",
+      "strategy": "Secondary replacement filter (team total)",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Depth rows carry the official team depth-chart URL."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "One captured week only."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "NOT TESTABLE",
+          "evidence": "Catalog size declared; correction runs after scoring."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled bets to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "PARTIAL",
+          "evidence": "The season-to-year persistence baseline is measured from official standings and shows how much of a points-allowed change is normally luck, but the strategy itself has not been back-tested."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PARTIAL",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Rows carry both official URLs."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled line."
+        }
+      ],
+      "source_url": "https://www.49ers.com/team/depth-chart"
+    },
+    {
+      "strategy_id": "S-03",
+      "strategy": "Net-rating mean reversion (spread)",
+      "gates_total": 12,
+      "gates_passed": 7,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "All 96 team-season rows carry the official standings URL for their season."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "PASS",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "PASS",
+          "evidence": "Persistence is measured strictly year over year (2024->2025 and 2025->2026), so the statistic never uses a season to predict itself."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PARTIAL",
+          "evidence": "The persistence statistic is a single pre-declared test per metric; a family of threshold variants has not been tested, so no correction factor has been applied yet."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "PARTIAL",
+          "evidence": "Slope standard errors and t-statistics are reported for each metric on the correlation page; the betting edge itself is not yet estimable without prices."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "PASS",
+          "evidence": "This strategy is the luck-control instrument: the measured share of year-to-year variance that persists is the noise floor every other strategy must beat."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PASS",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "PARTIAL",
+          "evidence": "Two independent year-over-year panels agree; a third season would strengthen the estimate."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "The persistence table publishes n, r, r-squared, slope, standard error and the official source URL."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No originated line has settled yet."
+        }
+      ],
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "strategy_id": "S-04",
+      "strategy": "Measured home-field edge (spread)",
+      "gates_total": 12,
+      "gates_passed": 9,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Home and road records read from the official standings tables."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "PASS",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "PASS",
+          "evidence": "Computed from the complete official panel, not from a fitted sample."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PASS",
+          "evidence": "One pre-declared statistic; no threshold search."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "PARTIAL",
+          "evidence": "Reported with sample size; a confidence interval for the rate gap is not yet published."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "PASS",
+          "evidence": "Home advantage is measured, not assumed, which removes a large assumed-noise term from every line."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PASS",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "PASS",
+          "evidence": "Consistent across all three captured seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "The measured gap and the source URL are published on the strategies page."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No originated line has settled yet."
+        }
+      ],
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "strategy_id": "S-05",
+      "strategy": "Rest differential and short week (total / spread)",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Schedule parsed from the already-captured official nfl.com by-week snapshots, each with its snapshot SHA-256 and retrieval timestamp in research/official/manifest.json."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "The 2026 schedule is captured, but historical results for the same weeks are not, so no out-of-sample test has run."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PARTIAL",
+          "evidence": "One rest feature and one short-week feature are pre-declared."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled bets to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "PARTIAL",
+          "evidence": "Rest is a schedule control, not a luck control; it must be included in the regression that removes opponent strength."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PARTIAL",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Each schedule row stores its snapshot URL, SHA-256 and retrieval timestamp."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No originated line has settled yet."
+        }
+      ],
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    },
+    {
+      "strategy_id": "S-06",
+      "strategy": "Games in 11 and bye timing (spread)",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Computed from the official schedule snapshots."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "Historical weeks not yet captured."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PARTIAL",
+          "evidence": "Feature pre-declared."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled bets to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "PARTIAL",
+          "evidence": "Schedule control only."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PARTIAL",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Row-level schedule provenance is stored."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No originated line has settled yet."
+        }
+      ],
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    },
+    {
+      "strategy_id": "S-07",
+      "strategy": "Low-correlation parlay builder",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Every leg traces to an official schedule, standings or injury source."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "One week captured."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PARTIAL",
+          "evidence": "One parlay construction rule declared; variants not tested."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled bets to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "PARTIAL",
+          "evidence": "Correlation is measured, but the underlying signal edges are not yet estimated."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PARTIAL",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Maximum 4 legs, no two legs from the same game, Kelly fraction <= 0.25."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Each ticket row lists its legs and each leg's official source."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No ticket has settled yet."
+        }
+      ],
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "strategy_id": "S-08",
+      "strategy": "Backup quarterback prop suite",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Quarterback changes are confirmed by official NFL.com reporting and the official weekly injury report."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "One captured week."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PARTIAL",
+          "evidence": "One prop family declared; the exact prop thresholds are not yet fixed."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled props to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "NOT TESTABLE",
+          "evidence": "Requires official per-player usage data, which is not captured."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "NOT TESTABLE",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Each documented quarterback change carries its official news URL."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No prop has settled yet."
+        }
+      ],
+      "source_url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+    },
+    {
+      "strategy_id": "S-09",
+      "strategy": "Depth-tier prop suppression",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Depth tiers come from official team depth charts."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "Only one depth-chart capture exists per club."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PARTIAL",
+          "evidence": "One rule declared."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled props to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "NOT TESTABLE",
+          "evidence": "Requires a two-date depth-chart history that does not exist yet."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "NOT TESTABLE",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Each depth row stores the official chart URL and its 'updated as of' date where the club publishes one."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No prop has settled yet."
+        }
+      ],
+      "source_url": "https://www.49ers.com/team/depth-chart"
+    },
+    {
+      "strategy_id": "S-10",
+      "strategy": "Offensive line string depth penalty (team total)",
+      "gates_total": 12,
+      "gates_passed": 3,
+      "gates_failed": 0,
+      "eligible_for_points": false,
+      "state": "GATED",
+      "gates": [
+        {
+          "gate_id": "G1",
+          "gate": "Official-source integrity",
+          "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+          "state": "PASS",
+          "evidence": "Line positions and tiers come from official depth charts; designations come from the official injury report."
+        },
+        {
+          "gate_id": "G2",
+          "gate": "Minimum sample size",
+          "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+          "state": "NOT TESTABLE",
+          "evidence": "13 originated games in the captured week; no settled priced bets recorded."
+        },
+        {
+          "gate_id": "G3",
+          "gate": "Out-of-sample (walk-forward) test",
+          "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+          "state": "NOT TESTABLE",
+          "evidence": "One captured week."
+        },
+        {
+          "gate_id": "G4",
+          "gate": "Multiple-testing correction",
+          "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+          "state": "PARTIAL",
+          "evidence": "One penalty rule declared."
+        },
+        {
+          "gate_id": "G5",
+          "gate": "Statistical significance and confidence interval",
+          "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+          "state": "NOT TESTABLE",
+          "evidence": "No settled bets to bootstrap."
+        },
+        {
+          "gate_id": "G6",
+          "gate": "Luck / variance control",
+          "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+          "state": "NOT TESTABLE",
+          "evidence": "Back-test pending."
+        },
+        {
+          "gate_id": "G7",
+          "gate": "Correlation and effective sample size",
+          "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+          "state": "PARTIAL",
+          "evidence": "10 measured signal correlations from the captured week."
+        },
+        {
+          "gate_id": "G8",
+          "gate": "Robustness across sub-periods and thresholds",
+          "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+          "state": "NOT TESTABLE",
+          "evidence": "Needs multiple seasons."
+        },
+        {
+          "gate_id": "G9",
+          "gate": "Price availability and line-movement discipline",
+          "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+          "state": "NOT TESTABLE",
+          "evidence": "No price source configured."
+        },
+        {
+          "gate_id": "G10",
+          "gate": "Risk limits",
+          "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+          "state": "PASS",
+          "evidence": "Configured in the leaderboard rules."
+        },
+        {
+          "gate_id": "G11",
+          "gate": "Provenance and disclosure",
+          "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+          "state": "PASS",
+          "evidence": "Rows carry the official depth-chart and injury-report URLs."
+        },
+        {
+          "gate_id": "G12",
+          "gate": "Settlement integrity",
+          "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+          "state": "NOT TESTABLE",
+          "evidence": "No originated line has settled yet."
+        }
+      ],
+      "source_url": "https://www.miamidolphins.com/team/depth-chart"
+    }
+  ]
+}

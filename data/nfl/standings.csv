@@ -1,0 +1,97 @@
+season,team,slug,w,l,t,pct,pf,pa,diff,home_w,home_l,home_t,road_w,road_l,road_t,streak,source_url,captured_utc
+2024,Detroit Lions,detroit-lions,15,2,0,0.882,564,342,222,7,2,0,8,0,0,3W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Kansas City Chiefs,kansas-city-chiefs,15,2,0,0.882,385,326,59,8,0,0,7,2,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Minnesota Vikings,minnesota-vikings,14,3,0,0.824,432,332,100,8,1,0,6,2,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Philadelphia Eagles,philadelphia-eagles,14,3,0,0.824,463,303,160,8,1,0,6,2,0,2W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Buffalo Bills,buffalo-bills,13,4,0,0.765,525,368,157,8,0,0,5,4,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Baltimore Ravens,baltimore-ravens,12,5,0,0.706,518,361,157,6,2,0,6,3,0,4W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Washington Commanders,washington-commanders,12,5,0,0.706,485,391,94,7,2,0,5,3,0,5W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Green Bay Packers,green-bay-packers,11,6,0,0.647,460,338,122,6,3,0,5,3,0,2L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Los Angeles Chargers,los-angeles-chargers,11,6,0,0.647,402,301,101,5,3,0,6,3,0,3W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Denver Broncos,denver-broncos,10,7,0,0.588,425,311,114,6,2,0,4,5,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Houston Texans,houston-texans,10,7,0,0.588,372,372,0,5,3,0,5,4,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Los Angeles Rams,los-angeles-rams,10,7,0,0.588,367,386,-19,5,4,0,5,3,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Pittsburgh Steelers,pittsburgh-steelers,10,7,0,0.588,380,347,33,5,3,0,5,4,0,4L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Seattle Seahawks,seattle-seahawks,10,7,0,0.588,375,368,7,3,6,0,7,1,0,2W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Tampa Bay Buccaneers,tampa-bay-buccaneers,10,7,0,0.588,502,385,117,5,4,0,5,3,0,2W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Cincinnati Bengals,cincinnati-bengals,9,8,0,0.529,472,434,38,3,5,0,6,3,0,5W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Arizona Cardinals,arizona-cardinals,8,9,0,0.471,400,379,21,6,3,0,2,6,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Atlanta Falcons,atlanta-falcons,8,9,0,0.471,389,423,-34,4,5,0,4,4,0,2L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Indianapolis Colts,indianapolis-colts,8,9,0,0.471,377,427,-50,5,3,0,3,6,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Miami Dolphins,miami-dolphins,8,9,0,0.471,345,364,-19,5,3,0,3,6,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Dallas Cowboys,dallas-cowboys,7,10,0,0.412,350,468,-118,2,7,0,5,3,0,2L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,San Francisco 49ers,san-francisco-49ers,6,11,0,0.353,389,436,-47,4,5,0,2,6,0,4L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Carolina Panthers,carolina-panthers,5,12,0,0.294,341,534,-193,3,6,0,2,6,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Chicago Bears,chicago-bears,5,12,0,0.294,310,370,-60,4,5,0,1,7,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,New Orleans Saints,new-orleans-saints,5,12,0,0.294,338,398,-60,3,6,0,2,6,0,4L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,New York Jets,new-york-jets,5,12,0,0.294,338,404,-66,3,5,0,2,7,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Jacksonville Jaguars,jacksonville-jaguars,4,13,0,0.235,320,435,-115,3,5,0,1,8,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Las Vegas Raiders,las-vegas-raiders,4,13,0,0.235,309,434,-125,2,6,0,2,7,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,New England Patriots,new-england-patriots,4,13,0,0.235,289,417,-128,2,6,0,2,7,0,1W,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Cleveland Browns,cleveland-browns,3,14,0,0.176,258,435,-177,2,6,0,1,8,0,6L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,New York Giants,new-york-giants,3,14,0,0.176,273,415,-142,1,8,0,2,6,0,1L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2024,Tennessee Titans,tennessee-titans,3,14,0,0.176,311,460,-149,1,7,0,2,7,0,6L,https://www.nfl.com/standings/league/2024/REG,2026-11-13T13:05:00Z
+2025,Denver Broncos,denver-broncos,14,3,0,0.824,401,311,90,8,1,0,6,2,0,2W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,New England Patriots,new-england-patriots,14,3,0,0.824,490,320,170,6,3,0,8,0,0,3W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Seattle Seahawks,seattle-seahawks,14,3,0,0.824,483,292,191,6,2,0,8,1,0,7W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Jacksonville Jaguars,jacksonville-jaguars,13,4,0,0.765,474,336,138,7,2,0,6,2,0,8W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Buffalo Bills,buffalo-bills,12,5,0,0.706,481,365,116,7,2,0,5,3,0,1W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Houston Texans,houston-texans,12,5,0,0.706,404,295,109,7,2,0,5,3,0,9W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Los Angeles Rams,los-angeles-rams,12,5,0,0.706,518,346,172,7,1,0,5,4,0,1W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,San Francisco 49ers,san-francisco-49ers,12,5,0,0.706,437,371,66,5,3,0,7,2,0,1L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Chicago Bears,chicago-bears,11,6,0,0.647,441,415,26,6,2,0,5,4,0,2L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Los Angeles Chargers,los-angeles-chargers,11,6,0,0.647,368,340,28,6,3,0,5,3,0,2L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Philadelphia Eagles,philadelphia-eagles,11,6,0,0.647,379,325,54,5,3,0,6,3,0,1L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Pittsburgh Steelers,pittsburgh-steelers,10,7,0,0.588,397,387,10,6,3,0,4,4,0,1W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Green Bay Packers,green-bay-packers,9,7,1,0.559,391,360,31,5,3,0,4,4,1,4L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Detroit Lions,detroit-lions,9,8,0,0.529,481,413,68,5,3,0,4,5,0,1W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Minnesota Vikings,minnesota-vikings,9,8,0,0.529,344,333,11,4,4,0,5,4,0,5W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Atlanta Falcons,atlanta-falcons,8,9,0,0.471,353,401,-48,4,4,0,4,5,0,4W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Baltimore Ravens,baltimore-ravens,8,9,0,0.471,424,398,26,3,6,0,5,3,0,1L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Carolina Panthers,carolina-panthers,8,9,0,0.471,311,380,-69,5,3,0,3,6,0,2L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Indianapolis Colts,indianapolis-colts,8,9,0,0.471,466,412,54,6,3,0,2,6,0,7L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Tampa Bay Buccaneers,tampa-bay-buccaneers,8,9,0,0.471,380,411,-31,4,4,0,4,5,0,1W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Dallas Cowboys,dallas-cowboys,7,9,1,0.441,471,511,-40,4,3,1,3,6,0,1L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Miami Dolphins,miami-dolphins,7,10,0,0.412,347,424,-77,5,4,0,2,6,0,1L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Cincinnati Bengals,cincinnati-bengals,6,11,0,0.353,414,492,-78,3,6,0,3,5,0,1L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Kansas City Chiefs,kansas-city-chiefs,6,11,0,0.353,362,328,34,5,4,0,1,7,0,6L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,New Orleans Saints,new-orleans-saints,6,11,0,0.353,306,383,-77,3,5,0,3,6,0,1L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Cleveland Browns,cleveland-browns,5,12,0,0.294,279,379,-100,3,6,0,2,6,0,2W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Washington Commanders,washington-commanders,5,12,0,0.294,356,451,-95,2,6,0,3,6,0,1W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,New York Giants,new-york-giants,4,13,0,0.235,381,439,-58,3,5,0,1,8,0,2W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Arizona Cardinals,arizona-cardinals,3,14,0,0.176,355,488,-133,1,7,0,2,7,0,9L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Las Vegas Raiders,las-vegas-raiders,3,14,0,0.176,241,432,-191,2,7,0,1,7,0,1W,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,New York Jets,new-york-jets,3,14,0,0.176,300,503,-203,2,7,0,1,7,0,5L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2025,Tennessee Titans,tennessee-titans,3,14,0,0.176,284,478,-194,1,8,0,2,6,0,2L,https://www.nfl.com/standings/league/2025/REG,2026-11-13T13:05:00Z
+2026,Buffalo Bills,buffalo-bills,7,1,0,0.875,256,187,69,3,1,0,4,0,0,4W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,San Francisco 49ers,san-francisco-49ers,7,1,0,0.875,235,156,79,5,0,0,2,1,0,1W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Chicago Bears,chicago-bears,7,2,0,0.778,241,184,57,4,1,0,3,1,0,4W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Denver Broncos,denver-broncos,7,2,0,0.778,198,186,12,4,0,0,3,2,0,5W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Cincinnati Bengals,cincinnati-bengals,6,2,0,0.750,240,175,65,2,1,0,4,1,0,4W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Detroit Lions,detroit-lions,6,2,0,0.750,222,189,33,4,0,0,2,2,0,4W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Jacksonville Jaguars,jacksonville-jaguars,6,2,0,0.750,229,121,108,4,1,0,2,1,0,2W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Kansas City Chiefs,kansas-city-chiefs,6,2,0,0.750,202,143,59,4,0,0,2,2,0,1W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Minnesota Vikings,minnesota-vikings,6,2,0,0.750,146,116,30,3,1,0,3,1,0,2L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Pittsburgh Steelers,pittsburgh-steelers,6,2,0,0.750,180,144,36,4,0,0,2,2,0,4W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Green Bay Packers,green-bay-packers,6,3,0,0.667,216,191,25,3,1,0,3,2,0,2W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,New York Giants,new-york-giants,5,3,1,0.611,203,196,7,3,2,0,2,1,1,1L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Cleveland Browns,cleveland-browns,5,4,0,0.556,161,196,-35,3,0,0,2,4,0,2L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Los Angeles Rams,los-angeles-rams,5,4,0,0.556,214,181,33,2,3,0,3,1,0,3W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,New England Patriots,new-england-patriots,5,4,0,0.556,211,207,4,3,1,0,2,3,0,1L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Seattle Seahawks,seattle-seahawks,5,4,0,0.556,202,162,40,4,2,0,1,2,0,1W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Baltimore Ravens,baltimore-ravens,4,5,0,0.444,189,236,-47,1,3,0,3,2,0,4L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Dallas Cowboys,dallas-cowboys,4,5,0,0.444,246,236,10,1,3,0,3,2,0,1W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Las Vegas Raiders,las-vegas-raiders,4,5,0,0.444,238,268,-30,1,3,0,3,2,0,1L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Washington Commanders,washington-commanders,3,5,1,0.389,196,223,-27,2,2,1,1,3,0,1W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Carolina Panthers,carolina-panthers,3,5,0,0.375,199,219,-20,1,3,0,2,2,0,3L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Houston Texans,houston-texans,3,5,0,0.375,209,192,17,0,4,0,3,1,0,1W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,New Orleans Saints,new-orleans-saints,3,5,0,0.375,185,216,-31,1,4,0,2,1,0,1W,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Arizona Cardinals,arizona-cardinals,3,6,0,0.333,178,255,-77,0,3,0,3,3,0,1L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Atlanta Falcons,atlanta-falcons,3,6,0,0.333,188,223,-35,1,4,0,2,2,0,2L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Tampa Bay Buccaneers,tampa-bay-buccaneers,3,6,0,0.333,202,178,24,1,4,0,2,2,0,1L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Indianapolis Colts,indianapolis-colts,2,7,0,0.222,184,249,-65,1,3,0,1,4,0,5L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,New York Jets,new-york-jets,2,7,0,0.222,182,223,-41,1,3,0,1,4,0,4L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Philadelphia Eagles,philadelphia-eagles,2,7,0,0.222,148,221,-73,1,3,0,1,4,0,7L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Miami Dolphins,miami-dolphins,1,7,0,0.125,126,200,-74,0,4,0,1,3,0,2L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Tennessee Titans,tennessee-titans,1,7,0,0.125,144,199,-55,4,2,0,1,2,0,2L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z
+2026,Los Angeles Chargers,los-angeles-chargers,0,8,0,0.000,121,219,-98,0,4,0,0,4,0,8L,https://www.nfl.com/standings/league/2026/REG,2026-11-13T13:05:00Z

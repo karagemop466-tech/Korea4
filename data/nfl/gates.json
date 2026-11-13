@@ -1,0 +1,93 @@
+{
+  "program": "NFL Lines validation gates",
+  "version": "1.0",
+  "updated_utc": "2026-11-13T13:05:00Z",
+  "principle": "A strategy earns leaderboard points only when every gate it depends on is PASS. A gate that cannot be evaluated with the data captured so far is recorded as NOT TESTABLE and keeps the strategy gated; it is never silently treated as a pass.",
+  "states": ["PASS", "FAIL", "PARTIAL", "NOT TESTABLE"],
+  "gates": [
+    {
+      "id": "G1",
+      "name": "Official-source integrity",
+      "criterion": "Every input value comes from an official league, team or network source and every row carries that source URL. No secondary aggregator, no news summary, no inferred value.",
+      "why_it_matters": "A signal built on an unsourced or mis-transcribed input cannot be audited, and every downstream statistic inherits the error.",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    },
+    {
+      "id": "G2",
+      "name": "Minimum sample size",
+      "criterion": "At least 100 settled, priced bets for the strategy before it may be scored or ranked.",
+      "why_it_matters": "Below this size the sampling error on any edge estimate is larger than the edge itself, so a lucky run is indistinguishable from skill.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G3",
+      "name": "Out-of-sample (walk-forward) test",
+      "criterion": "Performance is measured on games that were played after the signal timestamp; no random shuffle, no in-sample fitting, no feature computed from information published after the line was originated.",
+      "why_it_matters": "NFL data is autocorrelated and small samples; in-sample fitting manufactures skill that does not exist.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    },
+    {
+      "id": "G4",
+      "name": "Multiple-testing correction",
+      "criterion": "The number of strategies tested is declared and a Holm-Bonferroni correction (or deflated Sharpe ratio) is applied to the significance threshold before a strategy is called profitable.",
+      "why_it_matters": "Testing many variations of the same idea guarantees that some look profitable by chance.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G5",
+      "name": "Statistical significance and confidence interval",
+      "criterion": "The 95% bootstrap confidence interval for expected edge must exclude zero in the positive direction, and the number of bets must exceed G2.",
+      "why_it_matters": "An edge that cannot be distinguished from zero is not an edge.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G6",
+      "name": "Luck / variance control",
+      "criterion": "The signal is tested against a variance-matched null: the edge must survive controlling for opponent strength, schedule features and one-game noise, and the persistence measured from official season data must explain less variance than the signal itself.",
+      "why_it_matters": "Most year-to-year NFL movement is luck. A strategy that only wins when the coin flip goes its way is not a strategy.",
+      "source_url": "https://www.nfl.com/standings/league/2024/REG"
+    },
+    {
+      "id": "G7",
+      "name": "Correlation and effective sample size",
+      "criterion": "Legs combined in one ticket must have measured |rho| <= 0.30, the ticket is capped at 4 legs, and the reported sample size is the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+      "why_it_matters": "Correlated legs do not multiply independent edges; they multiply one edge and multiply the variance.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G8",
+      "name": "Robustness across sub-periods and thresholds",
+      "criterion": "Positive result in at least 60% of seasons tested, and the sign of the edge does not flip when the entry threshold is moved within the stated band.",
+      "why_it_matters": "A result that depends on one season or one hand-picked threshold is a fit to noise.",
+      "source_url": "https://www.nfl.com/standings/league/2025/REG"
+    },
+    {
+      "id": "G9",
+      "name": "Price availability and line-movement discipline",
+      "criterion": "A bet is only recorded when a price exists at the origination timestamp, with the bookmaker/price source and timestamp stored; the line must have been stable for the stated minimum window.",
+      "why_it_matters": "Without a recorded price there is no edge and no settlement; stale prices are not tradeable prices.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+    },
+    {
+      "id": "G10",
+      "name": "Risk limits",
+      "criterion": "Kelly fraction per bet <= 0.25, weekly exposure cap, and no parlay longer than 4 legs or combining two legs from the same game.",
+      "why_it_matters": "A correct signal with uncontrolled sizing still produces ruin.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "G11",
+      "name": "Provenance and disclosure",
+      "criterion": "Every bet record stores the input values, their official source URLs and the capture timestamps, and the site publishes the model parameters used.",
+      "why_it_matters": "Undisclosed parameters make results unreviewable.",
+      "source_url": "https://www.nfl.com/"
+    },
+    {
+      "id": "G12",
+      "name": "Settlement integrity",
+      "criterion": "Bets settle on the official final score from an official source, with pushes handled as pushes and voided games excluded.",
+      "why_it_matters": "Leaderboard points computed from anything other than the official result are not comparable between strategies.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    }
+  ]
+}

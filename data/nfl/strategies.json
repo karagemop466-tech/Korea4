@@ -1,0 +1,277 @@
+{
+  "program": "NFL Lines strategy catalog",
+  "version": "1.0",
+  "updated_utc": "2026-11-13T13:05:00Z",
+  "note": "Every strategy states the official inputs it needs and the gates it must pass before it can earn leaderboard points. Gates that cannot be evaluated with the data captured so far are NOT TESTABLE, and the strategy stays gated.",
+  "strategies": [
+    {
+      "id": "S-01",
+      "name": "Starter-loss availability edge (spread)",
+      "bet_class": "single",
+      "hypothesis": "When a club's first-string starter at a high-impact position is officially ruled out and the official team depth chart shows the replacement is a second, third or fourth string, the club's expected margin moves against it by a measurable amount.",
+      "inputs": [
+        "Official NFL weekly injury report (designations, practice status) - https://www.nfl.com/injuries/league/2026/reg10",
+        "Official team depth charts (starter tier and listed replacement) - team official sites",
+        "Official season standings (points for/against) - https://www.nfl.com/standings/league/2026/REG"
+      ],
+      "method": "Position-group penalty (QB 4.0, OL 1.5, WR 0.8, secondary 0.7, front seven 0.6 points of expected margin) multiplied by a depth-gap factor (2nd string x1.0, 3rd x1.5, 4th+ x2.0), subtracted from the team's model margin.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Injury designations read from the official NFL weekly injury report; depth tiers read from official team depth charts. Depth charts captured this session: San Francisco 49ers, Miami Dolphins, Baltimore Ravens."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled priced bets exist yet, so no sample can be scored."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "Only the current week has been captured; a walk-forward panel needs earlier injury weeks plus results."},
+        {"id": "G4", "state": "NOT TESTABLE", "evidence": "Catalog size is declared (10 strategies); the Holm-Bonferroni step runs once samples exist."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled bets to bootstrap."},
+        {"id": "G6", "state": "NOT TESTABLE", "evidence": "Season-to-year persistence is measured from official standings (see the correlation page) and must be used as the noise baseline before this strategy can be judged."},
+        {"id": "G7", "state": "PARTIAL", "evidence": "Correlation rules are defined and the availability signal is computed for every game, but the measured sample is one week (14 games), far below the 100-bet sample in G2."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source is configured; see decisions register D-03."},
+        {"id": "G10", "state": "PASS", "evidence": "Kelly fraction <= 0.25 and no same-game combination are configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "Every deficiency row stores the official injury URL and the official depth-chart URL."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No originated line has settled yet."}
+      ],
+      "current_output": "Applied to the captured week for clubs with a captured official depth chart; all other clubs are left unadjusted and flagged UNVERIFIED.",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10"
+    },
+    {
+      "id": "S-02",
+      "name": "Secondary replacement filter (team total)",
+      "bet_class": "single",
+      "hypothesis": "A club whose depth chart moves a cornerback, safety or defensive lineman up from the second, third or fourth string allows more points than the club's season baseline, so the opponent's team total is the cleaner expression than the spread.",
+      "inputs": [
+        "Official team depth charts - team official sites",
+        "Official NFL weekly injury report - https://www.nfl.com/injuries/league/2026/reg10",
+        "Official standings points allowed per game - https://www.nfl.com/standings/league/2026/REG"
+      ],
+      "method": "Same penalty table as S-01 but applied only to defensive positions; the resulting expectation is expressed on the opponent's team total instead of the spread.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Depth rows carry the official team depth-chart URL."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled priced bets exist yet."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "One captured week only."},
+        {"id": "G4", "state": "NOT TESTABLE", "evidence": "Catalog size declared; correction runs after scoring."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled bets to bootstrap."},
+        {"id": "G6", "state": "PARTIAL", "evidence": "The season-to-year persistence baseline is measured from official standings and shows how much of a points-allowed change is normally luck, but the strategy itself has not been back-tested."},
+        {"id": "G7", "state": "PARTIAL", "evidence": "Rules defined; sample too small."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "Rows carry both official URLs."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No settled line."}
+      ],
+      "current_output": "No team-total line is issued: team-total lines require a price to be comparable and the official season sample is 8-9 games per club.",
+      "source_url": "https://www.49ers.com/team/depth-chart"
+    },
+    {
+      "id": "S-03",
+      "name": "Net-rating mean reversion (spread)",
+      "bet_class": "single",
+      "hypothesis": "A club whose current-season points differential sits far above what its previous-season differential predicts will regress; the edge is the size of the measured year-to-year reversion, not a guess.",
+      "inputs": [
+        "Official standings 2024, 2025 and 2026 - https://www.nfl.com/standings/league/2024/REG, /2025/REG, /2026/REG"
+      ],
+      "method": "Regress next-season points differential per game on prior-season points differential per game over the official panel, then fade teams whose residual is more than one standard deviation from the fitted line.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "All 96 team-season rows carry the official standings URL for their season."},
+        {"id": "G2", "state": "PASS", "evidence": "96 team-season pairs (two year-over-year panels) were used to measure persistence; this satisfies the sample requirement for the persistence statistic itself, not for a betting edge."},
+        {"id": "G3", "state": "PASS", "evidence": "Persistence is measured strictly year over year (2024->2025 and 2025->2026), so the statistic never uses a season to predict itself."},
+        {"id": "G4", "state": "PARTIAL", "evidence": "The persistence statistic is a single pre-declared test per metric; a family of threshold variants has not been tested, so no correction factor has been applied yet."},
+        {"id": "G5", "state": "PARTIAL", "evidence": "Slope standard errors and t-statistics are reported for each metric on the correlation page; the betting edge itself is not yet estimable without prices."},
+        {"id": "G6", "state": "PASS", "evidence": "This strategy is the luck-control instrument: the measured share of year-to-year variance that persists is the noise floor every other strategy must beat."},
+        {"id": "G7", "state": "PASS", "evidence": "Single-leg by construction; no leg correlation applies."},
+        {"id": "G8", "state": "PARTIAL", "evidence": "Two independent year-over-year panels agree; a third season would strengthen the estimate."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "The persistence table publishes n, r, r-squared, slope, standard error and the official source URL."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No originated line has settled yet."}
+      ],
+      "current_output": "The persistence statistic is published; no bet is issued until a price source exists.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "S-04",
+      "name": "Measured home-field edge (spread)",
+      "bet_class": "single",
+      "hypothesis": "The home advantage that actually exists in the data can be measured from official standings instead of assumed, and applied consistently to every originated line.",
+      "inputs": [
+        "Official standings home and road records, 2024-2026 - https://www.nfl.com/standings/league/2024/REG"
+      ],
+      "method": "Compute the league home win rate and road win rate from the official home/road columns, convert to a logit gap, and apply a points-equivalent home adjustment; report the sensitivity of the line to the assumed margin standard deviation.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Home and road records read from the official standings tables."},
+        {"id": "G2", "state": "PASS", "evidence": "The home/road split pool is large (hundreds of team-games across three seasons); the statistic is descriptive, not a bet."},
+        {"id": "G3", "state": "PASS", "evidence": "Computed from the complete official panel, not from a fitted sample."},
+        {"id": "G4", "state": "PASS", "evidence": "One pre-declared statistic; no threshold search."},
+        {"id": "G5", "state": "PARTIAL", "evidence": "Reported with sample size; a confidence interval for the rate gap is not yet published."},
+        {"id": "G6", "state": "PASS", "evidence": "Home advantage is measured, not assumed, which removes a large assumed-noise term from every line."},
+        {"id": "G7", "state": "PASS", "evidence": "Single-leg by construction."},
+        {"id": "G8", "state": "PASS", "evidence": "Consistent across all three captured seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "The measured gap and the source URL are published on the strategies page."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No originated line has settled yet."}
+      ],
+      "current_output": "Applied to every originated line as a documented model parameter.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "S-05",
+      "name": "Rest differential and short week (total / spread)",
+      "bet_class": "single",
+      "hypothesis": "Rest differential and a three-day week move expected scoring and expected margin in a measurable direction; both features are read directly from the official schedule.",
+      "inputs": [
+        "Official 2026 NFL by-week schedule snapshots - https://www.nfl.com/schedules/2026/by-week/week-10"
+      ],
+      "method": "For each club compute days since its previous game, flag a three-day week, and apply a points adjustment of 0.25 per rest day (capped at 1.5) plus a 1.0 point short-week penalty.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Schedule parsed from the already-captured official nfl.com by-week snapshots, each with its snapshot SHA-256 and retrieval timestamp in research/official/manifest.json."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled priced bets exist yet."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "The 2026 schedule is captured, but historical results for the same weeks are not, so no out-of-sample test has run."},
+        {"id": "G4", "state": "PARTIAL", "evidence": "One rest feature and one short-week feature are pre-declared."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled bets to bootstrap."},
+        {"id": "G6", "state": "PARTIAL", "evidence": "Rest is a schedule control, not a luck control; it must be included in the regression that removes opponent strength."},
+        {"id": "G7", "state": "PARTIAL", "evidence": "Rules defined; sample too small."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "Each schedule row stores its snapshot URL, SHA-256 and retrieval timestamp."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No originated line has settled yet."}
+      ],
+      "current_output": "Applied to every originated line in the captured week; the schedule for the following week is already parsed.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    },
+    {
+      "id": "S-06",
+      "name": "Games in 11 and bye timing (spread)",
+      "bet_class": "single",
+      "hypothesis": "A club's third game inside 11 days and a bye that lands immediately before a tough opponent change expected performance more than a rest differential alone captures.",
+      "inputs": [
+        "Official 2026 NFL by-week schedule snapshots - https://www.nfl.com/schedules/2026/by-week/week-10"
+      ],
+      "method": "Count games inside an 11-day window for each club and record the length of the gap created by the club's bye week.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Computed from the official schedule snapshots."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled priced bets exist yet."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "Historical weeks not yet captured."},
+        {"id": "G4", "state": "PARTIAL", "evidence": "Feature pre-declared."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled bets to bootstrap."},
+        {"id": "G6", "state": "PARTIAL", "evidence": "Schedule control only."},
+        {"id": "G7", "state": "PARTIAL", "evidence": "Rules defined; sample too small."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "Row-level schedule provenance is stored."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No originated line has settled yet."}
+      ],
+      "current_output": "Computed for every captured game and published in the lines table.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    },
+    {
+      "id": "S-07",
+      "name": "Low-correlation parlay builder",
+      "bet_class": "parlay",
+      "hypothesis": "A parlay built only from legs whose measured signal correlation is small compounds independent edges; a parlay that stacks correlated legs multiplies variance instead of edge.",
+      "inputs": [
+        "Measured signal correlation matrix - computed from official schedule, standings and injury sources",
+        "Originated fair lines - data/nfl/lines.json"
+      ],
+      "method": "Select at most 4 legs from different games with pairwise |rho| <= 0.30, report the ticket's joint probability under independence and the effective sample size n_eff = n / (1 + (k-1) * mean_rho).",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Every leg traces to an official schedule, standings or injury source."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled parlays exist yet."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "One week captured."},
+        {"id": "G4", "state": "PARTIAL", "evidence": "One parlay construction rule declared; variants not tested."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled bets to bootstrap."},
+        {"id": "G6", "state": "PARTIAL", "evidence": "Correlation is measured, but the underlying signal edges are not yet estimated."},
+        {"id": "G7", "state": "PARTIAL", "evidence": "The correlation rule is implemented and the measured matrix is published, but the current sample is one week (14 games), so the correlation estimates themselves are unstable and are labelled as such."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Maximum 4 legs, no two legs from the same game, Kelly fraction <= 0.25."},
+        {"id": "G11", "state": "PASS", "evidence": "Each ticket row lists its legs and each leg's official source."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No ticket has settled yet."}
+      ],
+      "current_output": "Example tickets are published with the measured correlations and the correlation-adjusted sample size.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "S-08",
+      "name": "Backup quarterback prop suite",
+      "bet_class": "player-prop",
+      "hypothesis": "When the official injury report and official league coverage document that the starting quarterback is unavailable, the replacement quarterback's volume and efficiency props are mispriced more often than the spread, because the market prices the club's season average rather than the specific replacement.",
+      "inputs": [
+        "Official NFL weekly injury report - https://www.nfl.com/injuries/league/2026/reg10",
+        "Official NFL news confirming the quarterback change - https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+        "Official team depth chart showing the listed quarterback order"
+      ],
+      "method": "Confirm the quarterback change from official sources, then model the replacement's prop baseline from official per-player usage (attempts, completions, passing yards, rushing attempts) before the game. No prop line is published until the official per-player data is captured.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Quarterback changes are confirmed by official NFL.com reporting and the official weekly injury report."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled props exist yet."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "One captured week."},
+        {"id": "G4", "state": "PARTIAL", "evidence": "One prop family declared; the exact prop thresholds are not yet fixed."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled props to bootstrap."},
+        {"id": "G6", "state": "NOT TESTABLE", "evidence": "Requires official per-player usage data, which is not captured."},
+        {"id": "G7", "state": "NOT TESTABLE", "evidence": "Prop correlations are not measured because no prop panel exists."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "Each documented quarterback change carries its official news URL."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No prop has settled yet."}
+      ],
+      "current_output": "Documented quarterback changes are listed; no numeric prop line is issued because official per-player usage data is not captured. See decisions register D-06.",
+      "source_url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+    },
+    {
+      "id": "S-09",
+      "name": "Depth-tier prop suppression",
+      "bet_class": "player-prop",
+      "hypothesis": "Props on a player who has been pushed down the official depth chart by the return of a starter are systematically over-priced, because the public projection keeps the player in the lineup.",
+      "inputs": [
+        "Official team depth charts - team official sites",
+        "Official NFL weekly injury report - https://www.nfl.com/injuries/league/2026/reg10"
+      ],
+      "method": "Diff the current official depth chart against the previous published chart and the official designations, then suppress (do not take) props on any player whose tier has moved down. Requires two dated depth-chart captures per club.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Depth tiers come from official team depth charts."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled props exist yet."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "Only one depth-chart capture exists per club."},
+        {"id": "G4", "state": "PARTIAL", "evidence": "One rule declared."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled props to bootstrap."},
+        {"id": "G6", "state": "NOT TESTABLE", "evidence": "Requires a two-date depth-chart history that does not exist yet."},
+        {"id": "G7", "state": "NOT TESTABLE", "evidence": "No prop panel."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "Each depth row stores the official chart URL and its 'updated as of' date where the club publishes one."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No prop has settled yet."}
+      ],
+      "current_output": "Depth tiers are captured and dated; the diff cannot run until a second capture exists.",
+      "source_url": "https://www.49ers.com/team/depth-chart"
+    },
+    {
+      "id": "S-10",
+      "name": "Offensive line string depth penalty (team total)",
+      "bet_class": "single",
+      "hypothesis": "An offensive line starting a second, third or fourth string at any of the five line positions costs more expected scoring than the same absence on the defensive side, because it compounds across every snap.",
+      "inputs": [
+        "Official team depth charts (line positions) - team official sites",
+        "Official NFL weekly injury report - https://www.nfl.com/injuries/league/2026/reg10"
+      ],
+      "method": "Apply a 1.5 point expected-margin penalty per line position whose first string is unavailable, multiplied by the depth-gap factor, and express it on the club's team total.",
+      "gates": [
+        {"id": "G1", "state": "PASS", "evidence": "Line positions and tiers come from official depth charts; designations come from the official injury report."},
+        {"id": "G2", "state": "NOT TESTABLE", "evidence": "No settled priced bets exist yet."},
+        {"id": "G3", "state": "NOT TESTABLE", "evidence": "One captured week."},
+        {"id": "G4", "state": "PARTIAL", "evidence": "One penalty rule declared."},
+        {"id": "G5", "state": "NOT TESTABLE", "evidence": "No settled bets to bootstrap."},
+        {"id": "G6", "state": "NOT TESTABLE", "evidence": "Back-test pending."},
+        {"id": "G7", "state": "PARTIAL", "evidence": "Rules defined; sample too small."},
+        {"id": "G8", "state": "NOT TESTABLE", "evidence": "Needs multiple seasons."},
+        {"id": "G9", "state": "NOT TESTABLE", "evidence": "No price source configured."},
+        {"id": "G10", "state": "PASS", "evidence": "Configured in the leaderboard rules."},
+        {"id": "G11", "state": "PASS", "evidence": "Rows carry the official depth-chart and injury-report URLs."},
+        {"id": "G12", "state": "NOT TESTABLE", "evidence": "No originated line has settled yet."}
+      ],
+      "current_output": "Computed wherever an official depth chart has been captured; clubs without a captured chart are explicitly unadjusted.",
+      "source_url": "https://www.miamidolphins.com/team/depth-chart"
+    }
+  ]
+}

@@ -1,12 +1,694 @@
-[
-  {"id":"S-01","area":"Data freshness","suggestion":"Schedule the existing official fetch workflow weekly (and before each week's first reporting day) so schedule changes like the Nov 9 Week 11 move are caught within days, not discovered later.","decision_needed":"Enable scheduled runs against main; add a diff report of changed official rows.","benefit":"Prevents stale rows (IR-022 class) from reaching the leaderboard's grading substrate.","status":"PROPOSED — AWAITING DECISION","source_url":"https://www.nfl.com/news/week-11-schedule-change","source_label":"NFL.com Week 11 schedule change (the missed-change example)"},
-  {"id":"S-02","area":"Staleness transparency","suggestion":"Show a per-row last-verified age and a visible STALE badge when an official announcement post-dates a row's capture; link the correcting announcement on the row.","decision_needed":"Approve the badge design; decide whether stale rows stay visible with the badge or move to a quarantine table.","benefit":"Line-origination decisions stop relying on silently outdated rows.","status":"PROPOSED — AWAITING DECISION","source_url":"https://www.nfl.com/news/week-11-schedule-change","source_label":"NFL.com Week 11 schedule change"},
-  {"id":"S-03","area":"Injury integration","suggestion":"Capture the official injury report every reporting day and render per-team availability deltas (DNP/Limited/Out counts + key absences) next to each game row on the daily scoreboard.","decision_needed":"Approve weekly-capture storage layout and the delta display.","benefit":"Makes the availability signal (G-01) usable for line origination without manual reading of 32 team tables.","status":"PROPOSED — AWAITING DECISION","source_url":"https://www.nfl.com/injuries/","source_label":"NFL.com injury report"},
-  {"id":"S-04","area":"Depth data gap","suggestion":"Build a per-club depth-order collection from official club announcements/sites since NFL.com does not publish depth order (IR-023); start with FOCUS clubs, expand gradually.","decision_needed":"Confirm the depth-order authority per club and storage schema.","benefit":"Unlocks the starter-to-backup downgrade signal (G-02) and the deficiency metrics (D-01–D-03).","status":"PROPOSED — AWAITING DECISION","source_url":"https://www.nfl.com/teams/san-francisco-49ers/depth-chart","source_label":"NFL.com team depth-chart URL (404 evidence, IR-023)"},
-  {"id":"S-05","area":"Odds source (blocked dependency)","suggestion":"Select a licensed, legally accessible market-data source for opening/closing lines; store odds with provenance like every other source. Nothing in this module can grade CLV (V-03) or measure correlation (C-01–C-05) until this is decided.","decision_needed":"OWNER DECISION (Q2): provider, jurisdiction/legal review, budget.","benefit":"Unblocks the primary skill-vs-luck mechanism of the whole leaderboard.","status":"BLOCKED — OWNER DECISION REQUIRED","source_url":"https://media.nfl.com/lsb/","source_label":"NFL integrity & betting policy (no official odds source exists)"},
-  {"id":"S-06","area":"Leaderboard tracker","suggestion":"Add a live leaderboard page rendering per-division standings from a graded-selections JSON once the grading pipeline exists; every row links to the official result sources used.","decision_needed":"Approve scoring formula weights (B-03/B-04) before implementation.","benefit":"Makes the competition auditable and reward-eligible statuses visible.","status":"PROPOSED — AWAITING DECISION","source_url":"https://www.nfl.com/news/big-data-bowl-returns-powered-by-aws","source_label":"NFL Big Data Bowl (official precedent)"},
-  {"id":"S-07","area":"Risk policy","suggestion":"Publish an explicit risk policy for any real-world use: bankroll unit definition, max exposure per game/day, parlay-leg cap, and a hard rule that no strategy is 'live' until gates V1–V8 pass.","decision_needed":"OWNER DECISION (Q1/Q6): values and enforcement point.","benefit":"Removes the largest decision-risk: acting on unvalidated strategies.","status":"PROPOSED — AWAITING DECISION","source_url":"https://media.nfl.com/lsb/","source_label":"NFL integrity & betting policy"},
-  {"id":"S-08","area":"Exports","suggestion":"Add CSV/JSON export buttons to every table (data rows already carry structured source URLs).","decision_needed":"Low-risk; approve and implement in a build pass.","benefit":"Lets reviewers analyze rows offline and keeps sessions from re-scraping.","status":"PROPOSED — AWAITING DECISION","source_url":"https://karagemop466-tech.github.io/Korea4/data/official/events.json","source_label":"Repo official event JSON (existing structured data)"},
-  {"id":"S-09","area":"Per-team drill-down","suggestion":"Per-club pages: next game, availability snapshot, recent transactions, roster ACT changes, and our model's own number when one exists.","decision_needed":"Approve page template; data feeds exist or are proposed above.","benefit":"Turns the module from league-wide tables into decision-ready team views.","status":"PROPOSED — AWAITING DECISION","source_url":"https://www.nfl.com/teams/san-francisco-49ers/roster","source_label":"NFL.com roster pages"},
-  {"id":"S-10","area":"Review governance","suggestion":"Give the Suggestions page an explicit owner-review loop: each suggestion gets a decision record (decided/approved/rejected + date) appended to COORDINATION.md before any implementation begins.","decision_needed":"OWNER DECISION (Q10): who reviews and approves.","benefit":"Satisfies the requirement that suggestions are reviewed before changes, and keeps parallel sessions coordinated.","status":"PROPOSED — AWAITING DECISION","source_url":"https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md","source_label":"COORDINATION.md (shared task board)"}
-]
+{
+  "program": "NFL Lines — suggestions register",
+  "version": "1.0",
+  "updated_utc": "2026-11-13T13:05:00Z",
+  "purpose": "Improvement suggestions for the site and the underlying program, written so a reviewer can choose a path before anything is implemented. Nothing here is applied automatically: every row carries a decision to be made, the evidence behind it, the options considered and a recommendation. Status values are PROPOSED, RECOMMENDED, DEFERRED and REJECTED; only the reviewer changes a status.",
+  "status_values": [
+    "PROPOSED",
+    "RECOMMENDED",
+    "DEFERRED",
+    "REJECTED",
+    "ACCEPTED"
+  ],
+  "categories": [
+    "site",
+    "data",
+    "model",
+    "process"
+  ],
+  "suggestions": [
+    {
+      "id": "BASE-S-01",
+      "title": "Schedule the existing official fetch workflow weekly (and before each week's first reporting day) so schedule changes like the Nov 9 Week 11 move are caught within days, not discovered later.",
+      "category": "data-freshness",
+      "problem": "Prevents stale rows (IR-022 class) from reaching the leaderboard's grading substrate.",
+      "evidence": "NFL.com Week 11 schedule change (the missed-change example)",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Enable scheduled runs against main; add a diff report of changed official rows.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/news/week-11-schedule-change"
+      ]
+    },
+    {
+      "id": "BASE-S-02",
+      "title": "Show a per-row last-verified age and a visible STALE badge when an official announcement post-dates a row's capture; link the correcting announcement on the row.",
+      "category": "staleness-transparency",
+      "problem": "Line-origination decisions stop relying on silently outdated rows.",
+      "evidence": "NFL.com Week 11 schedule change",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Approve the badge design; decide whether stale rows stay visible with the badge or move to a quarantine table.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/news/week-11-schedule-change"
+      ]
+    },
+    {
+      "id": "BASE-S-03",
+      "title": "Capture the official injury report every reporting day and render per-team availability deltas (DNP/Limited/Out counts + key absences) next to each game row on the daily scoreboard.",
+      "category": "injury-integration",
+      "problem": "Makes the availability signal (G-01) usable for line origination without manual reading of 32 team tables.",
+      "evidence": "NFL.com injury report",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Approve weekly-capture storage layout and the delta display.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/injuries/"
+      ]
+    },
+    {
+      "id": "BASE-S-04",
+      "title": "Build a per-club depth-order collection from official club announcements/sites since NFL.com does not publish depth order (IR-023); start with FOCUS clubs, expand gradually.",
+      "category": "depth-data-gap",
+      "problem": "Unlocks the starter-to-backup downgrade signal (G-02) and the deficiency metrics (D-01–D-03).",
+      "evidence": "NFL.com team depth-chart URL (404 evidence, IR-023)",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Confirm the depth-order authority per club and storage schema.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/teams/san-francisco-49ers/depth-chart"
+      ]
+    },
+    {
+      "id": "BASE-S-05",
+      "title": "Select a licensed, legally accessible market-data source for opening/closing lines; store odds with provenance like every other source. Nothing in this module can grade CLV (V-03) or measure correlation (C-01–C-05) until this is decided.",
+      "category": "odds-source-(blocked-dependency)",
+      "problem": "Unblocks the primary skill-vs-luck mechanism of the whole leaderboard.",
+      "evidence": "NFL integrity & betting policy (no official odds source exists)",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "OWNER DECISION (Q2): provider, jurisdiction/legal review, budget.",
+      "status": "BLOCKED — OWNER DECISION REQUIRED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://media.nfl.com/lsb/"
+      ]
+    },
+    {
+      "id": "BASE-S-07",
+      "title": "Publish an explicit risk policy for any real-world use: bankroll unit definition, max exposure per game/day, parlay-leg cap, and a hard rule that no strategy is 'live' until gates V1–V8 pass.",
+      "category": "risk-policy",
+      "problem": "Removes the largest decision-risk: acting on unvalidated strategies.",
+      "evidence": "NFL integrity & betting policy",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "OWNER DECISION (Q1/Q6): values and enforcement point.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://media.nfl.com/lsb/"
+      ]
+    },
+    {
+      "id": "SG-01",
+      "title": "Category landing page that mirrors how decisions are actually made",
+      "category": "site",
+      "problem": "The site is organised by data source (NFL, MLB, radio) rather than by the decisions it supports, so a reviewer has to know where to look before they can decide anything.",
+      "evidence": "Current navigation lists fifteen parallel pages; the NFL Lines pages added in this session would make twenty-two with no entry point that groups them by decision type.",
+      "options": [
+        "A. Add a decision-based landing page that links to every table and states what each table can and cannot answer.",
+        "B. Leave the navigation as-is and add a single 'NFL Lines' dropdown.",
+        "C. Rebuild the whole site around decisions (rejected: it breaks the existing source-linked pages and the audit trail)."
+      ],
+      "recommendation": "Option A. Build a decision-first landing page that links every table, states the verification label of that table and names the question it answers.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [
+        "none"
+      ],
+      "decision_needed": "Confirm the decision categories to be used as the landing page headings.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/schedules/2026/REG1"
+      ]
+    },
+    {
+      "id": "SG-02",
+      "title": "Show the verification label and the capture timestamp on every table row, not only in the source column",
+      "category": "site",
+      "problem": "A reader can currently see that a row has a source link but not how fresh the source is, so a week-old injury designation looks as current as this morning's.",
+      "evidence": "The official NFL injury report page is republished each week, and the official team depth charts carry their own 'updated as of' date; the 49ers chart captured in this session is dated 11/10/26 while the Miami and Baltimore charts publish no date at all.",
+      "options": [
+        "A. Add a 'verified on' column plus the source's own as-of date to every table.",
+        "B. Add a page-level snapshot banner only (current behaviour, weaker).",
+        "C. Colour-code rows by age (rejected: colour alone fails accessibility and hides the value)."
+      ],
+      "recommendation": "Option A, with the source's own as-of date shown separately from the capture timestamp so a chart that publishes no date is visibly undated rather than falsely fresh.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [
+        "SG-01"
+      ],
+      "decision_needed": "Confirm whether rows without a source as-of date should be hidden from the default view or shown with an UNDATED badge.",
+      "status": "PROPOSED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.baltimoreravens.com/team/depth-chart"
+      ]
+    },
+    {
+      "id": "SG-05",
+      "title": "Model transparency panel on every originated line",
+      "category": "site",
+      "problem": "A fair line is only actionable if the reader can see its inputs, their official sources and the sensitivity of the number to each assumption.",
+      "evidence": "The originated lines depend on a Pythagorean exponent, an assumed margin standard deviation, a home-edge assumption, a rest coefficient and an availability penalty table; the published line moves when any of them moves.",
+      "options": [
+        "A. Expandable inputs panel per line with the sensitivity of the line to each parameter.",
+        "B. A single methodology page (current behaviour).",
+        "C. Publish only the final number (rejected: it hides the assumptions that the gates are supposed to police)."
+      ],
+      "recommendation": "Option A, including a sensitivity line such as 'line moves to X if the margin standard deviation is 10 instead of 12'.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [
+        "SG-01"
+      ],
+      "decision_needed": "Confirm which parameters must be exposed and whether the sensitivity view is a table or a chart.",
+      "status": "PROPOSED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://www.nfl.com/schedules/2026/REG1"
+      ]
+    },
+    {
+      "id": "SG-06",
+      "title": "Gate status as a visible column on every strategy and line row",
+      "category": "site",
+      "problem": "A strategy that cannot yet be judged looks identical to one that has been judged and failed, which is how unvalidated ideas quietly get treated as validated ones.",
+      "evidence": "The ten strategy records have gate results including PASS, PARTIAL and NOT TESTABLE states. The leaderboard remains gated until price and settlement evidence exists.",
+      "options": [
+        "A. Add a gate badge column with a hover explanation of the blocking gate.",
+        "B. Keep gates on a separate page only.",
+        "C. Hide strategies that are not eligible (rejected: it hides the work and the reasons)."
+      ],
+      "recommendation": "Option A, and treat NOT TESTABLE as its own badge rather than as a pass or a fail.",
+      "impact": "High",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Confirm the badge wording for a strategy that is blocked only by missing data.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "SG-08",
+      "title": "Capture all 32 official team depth charts on a schedule instead of by hand",
+      "category": "data",
+      "problem": "Depth coverage is the single largest gap in the tracker: three clubs have a captured chart, so for the other 29 clubs the tier of every injured player is unknown and no availability penalty can be computed.",
+      "evidence": "Depth captures exist for three clubs only. The other 29 are unverified. No automated depth-capture script exists in this branch.",
+      "options": [
+        "A. Run the capture on a scheduled job and publish the manifest with SHA-256 for each chart.",
+        "B. Keep manual capture (rejected: it does not scale and does not keep history).",
+        "C. Use a third-party depth aggregator (rejected: not an official source)."
+      ],
+      "recommendation": "Option A, and store two dated captures per club per week so the tier diff required by strategy S-09 becomes computable.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [
+        "SG-09"
+      ],
+      "decision_needed": "Confirm the capture frequency (weekly is the minimum that supports the tier diff).",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.baltimoreravens.com/team/depth-chart"
+      ]
+    },
+    {
+      "id": "SG-09",
+      "title": "Official automation for every NFL Lines source",
+      "category": "data",
+      "problem": "The sources used by this program are fetched with the platform fetch tool during a session, so the capture is not reproducible and cannot be re-run on a schedule.",
+      "evidence": "The existing repository already solves this for the free-time dashboard with scripts/fetch_official.py and a GitHub Actions workflow; this program needs the same pattern for injury reports, depth charts, standings and schedules.",
+      "options": [
+        "A. Add scripts/fetch_nfl_lines.py with a SHA-256 manifest and a scheduled workflow, mirroring the existing pattern.",
+        "B. Rely on manual capture.",
+        "C. Fetch from the visitor's browser (rejected)."
+      ],
+      "recommendation": "Option A. A reproducible NFL-specific fetcher and scheduled workflow do not yet exist in this branch; implement them before calling these captures automated or re-runnable.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Confirm whether a scheduled workflow may be enabled by default or only on request.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/schedules/2026/REG1",
+        "https://www.nfl.com/injuries/league/2026/reg10",
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.baltimoreravens.com/team/depth-chart"
+      ]
+    },
+    {
+      "id": "SG-10",
+      "title": "A price source, or an explicit decision to run the program without one",
+      "category": "data",
+      "problem": "Edge, ROI and leaderboard points cannot be computed without a price, and no official source publishes NFL betting lines, so the program currently originates fair values only.",
+      "evidence": "The NFL publishes schedules, results, injury reports and standings on nfl.com; none of the official pages carries a price. Every gate that scores a strategy (G2, G5, G9, G12) is blocked on this.",
+      "options": [
+        "A. Connect the program's own bet log, in which the owner records the price and timestamp of every bet taken.",
+        "B. Connect a licensed price feed.",
+        "C. Run the program as a pure line-origination and analysis system with no scoring.",
+        "D. Infer prices from third-party pages (rejected: not an official source and not reproducible)."
+      ],
+      "recommendation": "Option A or C. A is strictly better because it makes every gate testable with the owner's own records; C is the honest fallback if no bet log exists.",
+      "impact": "High",
+      "effort": "Low for A, High for B",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Choose between A, B and C. This single choice unlocks or permanently blocks the scoring half of the program.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/schedules/2026/REG1"
+      ]
+    },
+    {
+      "id": "SG-11",
+      "title": "Historical injury panel so the availability strategies can be back-tested",
+      "category": "data",
+      "problem": "Only one week of official injury data has been captured, so the availability strategies cannot be measured against any outcome.",
+      "evidence": "The NFL publishes an official injury report for every week of the season at /injuries/league/<season>/<week>, and each week can be captured as a dated snapshot.",
+      "options": [
+        "A. Capture weeks 1 to 10 of the 2026 season as dated snapshots (10 captures) and pair them with the official final scores already captured.",
+        "B. Capture two more weeks as a pilot.",
+        "C. Skip and rely on the schedule panel only."
+      ],
+      "recommendation": "Option A, but ten injury reports do not automatically provide 100 settled, priced bets; the price and settlement requirements must also be met.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [
+        "SG-09"
+      ],
+      "decision_needed": "Confirm how many weeks to capture this season and whether to keep the raw weekly snapshots permanently.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "SG-13",
+      "title": "Publish the luck baseline next to every measured statistic",
+      "category": "model",
+      "problem": "A measured effect is meaningless without its noise floor, and the available historical panel shows limited season-to-season persistence while the game-level model leaves substantial margin variance unexplained.",
+      "evidence": "On the official 2024–2025 completed-season standings panel (32 team pairs), points differential per game has year-to-year r = 0.32, r² = 0.10. Separately, the exploratory game-level model leaves 79.5% of margin variance unexplained. Neither statistic is a causal partition of betting skill versus luck.",
+      "options": [
+        "A. Publish the baseline statistic beside every effect size and require the effect to exceed it.",
+        "B. Keep the baseline on a separate analysis page.",
+        "C. Skip the baseline (rejected: it is the difference between a strategy and a coin flip)."
+      ],
+      "recommendation": "Option A. Every published effect should carry the number it has to beat, in the same row.",
+      "impact": "High",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [
+        "SG-05"
+      ],
+      "decision_needed": "Confirm whether the luck baseline should be shown as a percentage or as a required margin.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/standings/league/2024/REG",
+        "https://www.nfl.com/standings/league/2025/REG",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "SG-14",
+      "title": "Require a declared hypothesis and a registered gate set before a strategy can be listed",
+      "category": "process",
+      "problem": "A catalogue that grows by adding ideas will eventually contain strategies that were designed after seeing the results, which is how a backtest becomes a fit.",
+      "options": [
+        "A. Registration form: hypothesis, official inputs, gates and the date registered, all published with the strategy.",
+        "B. Keep the catalogue informal.",
+        "C. Allow retrospective registration with a note."
+      ],
+      "recommendation": "Option A, with the registration date visible on the leaderboard so a late registration is obvious.",
+      "impact": "High",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [
+        "SG-06"
+      ],
+      "decision_needed": "Confirm who registers a strategy and who reviews registrations.",
+      "status": "PROPOSED",
+      "suggested_priority": "P1",
+      "evidence_source_urls": [
+        "https://www.nfl.com/schedules/2026/REG1"
+      ]
+    },
+    {
+      "id": "BASE-S-06",
+      "title": "Add a live leaderboard page rendering per-division standings from a graded-selections JSON once the grading pipeline exists; every row links to the official result sources used.",
+      "category": "leaderboard-tracker",
+      "problem": "Makes the competition auditable and reward-eligible statuses visible.",
+      "evidence": "NFL Big Data Bowl (official precedent)",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "Medium",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Approve scoring formula weights (B-03/B-04) before implementation.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/news/big-data-bowl-returns-powered-by-aws"
+      ]
+    },
+    {
+      "id": "BASE-S-08",
+      "title": "Add CSV/JSON export buttons to every table (data rows already carry structured source URLs).",
+      "category": "exports",
+      "problem": "Lets reviewers analyze rows offline and keeps sessions from re-scraping.",
+      "evidence": "Repo official event JSON (existing structured data)",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "Medium",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Low-risk; approve and implement in a build pass.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://karagemop466-tech.github.io/Korea4/data/official/events.json"
+      ]
+    },
+    {
+      "id": "BASE-S-09",
+      "title": "Per-club pages: next game, availability snapshot, recent transactions, roster ACT changes, and our model's own number when one exists.",
+      "category": "per-team-drill-down",
+      "problem": "Turns the module from league-wide tables into decision-ready team views.",
+      "evidence": "NFL.com roster pages",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "Medium",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Approve page template; data feeds exist or are proposed above.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/teams/san-francisco-49ers/roster"
+      ]
+    },
+    {
+      "id": "BASE-S-10",
+      "title": "Give the Suggestions page an explicit owner-review loop: each suggestion gets a decision record (decided/approved/rejected + date) appended to COORDINATION.md before any implementation begins.",
+      "category": "review-governance",
+      "problem": "Satisfies the requirement that suggestions are reviewed before changes, and keeps parallel sessions coordinated.",
+      "evidence": "COORDINATION.md (shared task board)",
+      "options": [
+        "Review the linked official evidence and decide before implementation."
+      ],
+      "recommendation": "Proposed in the already merged NFL Lines module; this is not an approval to implement.",
+      "impact": "Medium",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "OWNER DECISION (Q10): who reviews and approves.",
+      "status": "PROPOSED — AWAITING DECISION",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md"
+      ]
+    },
+    {
+      "id": "SG-03",
+      "title": "Evidence drawer that shows the exact official excerpt behind each value",
+      "category": "site",
+      "problem": "A source link proves where a value came from but not what the official page actually said, so a reviewer still has to open the page and search for the row.",
+      "evidence": "Official team depth-chart pages are the primary sources, but source excerpts are not currently stored alongside each parsed value. The evidence-drawer proposal is therefore a new provenance feature, not a feature already supported by saved excerpts.",
+      "options": [
+        "A. Store a short quoted excerpt with each parsed row and show it inline on hover and in a detail panel.",
+        "B. Keep only the link (current behaviour).",
+        "C. Re-fetch pages live from the visitor's browser (rejected: it leaks the visitor's IP to many hosts and breaks the offline audit)."
+      ],
+      "recommendation": "Option A. Store the excerpt, its source URL and the capture timestamp together so each cell can be audited without leaving the page.",
+      "impact": "High",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [
+        "SG-01"
+      ],
+      "decision_needed": "Confirm the maximum excerpt length and whether excerpts are stored for every row or only for rows that carry a modelled value.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.baltimoreravens.com/team/depth-chart"
+      ]
+    },
+    {
+      "id": "SG-04",
+      "title": "Filter presets for the two questions people actually ask: 'what is unavailable' and 'where is the line thin'",
+      "category": "site",
+      "problem": "The tables are searchable but not preset for the two operational questions, so a reviewer must build filters by hand for every team.",
+      "evidence": "The official Week 10 report snapshot contains 298 rows across all 32 clubs, including league-reported no-injury rows; the actual designated-out count should be calculated from the designations, not guessed.",
+      "options": [
+        "A. Ship saved filters: designated-out only, defence only, starters only, unverified-depth only.",
+        "B. Add a faceted filter panel (position, unit, designation, depth tier).",
+        "C. Both (A first, B when the data set is complete)."
+      ],
+      "recommendation": "Option C. Ship A immediately because the data supports it today, and specify B so the panel can be added once all 32 clubs have a captured depth chart.",
+      "impact": "High",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Confirm which presets are wanted first.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/injuries/league/2026/reg10",
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.baltimoreravens.com/team/depth-chart"
+      ]
+    },
+    {
+      "id": "SG-07",
+      "title": "Side-by-side comparison of two clubs' availability",
+      "category": "site",
+      "problem": "A bet on one side of a game needs both clubs' depth position side by side, and the current single-table view forces the reviewer to hold two rows in their head.",
+      "evidence": "The deficiency model already produces one row per team per game, so the comparison is a presentation change rather than a data change.",
+      "options": [
+        "A. Per-game card with both clubs, the depth tiers and the resulting penalty.",
+        "B. A comparison table with one row per game and columns for each club.",
+        "C. Downloadable CSV only (rejected: it does not help review)."
+      ],
+      "recommendation": "Option B as the default view with A as the detail view for a single game.",
+      "impact": "Medium",
+      "effort": "Medium",
+      "risk": "Low",
+      "dependencies": [
+        "SG-04"
+      ],
+      "decision_needed": "Confirm whether the comparison view should include the next week's games as well as the current week.",
+      "status": "PROPOSED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.baltimoreravens.com/team/depth-chart"
+      ]
+    },
+    {
+      "id": "SG-12",
+      "title": "Official per-player usage data for the player-prop strategies",
+      "category": "data",
+      "problem": "Two of the ten strategies are player-prop strategies and neither can produce a number, because the program has no official per-player usage history.",
+      "evidence": "The two registered player-prop strategies lack a historical official player-usage panel in this repository. This proposal is about collecting that missing input; no specific replacement-quarterback cases are asserted here.",
+      "options": [
+        "A. Capture official per-player season and game logs and compute usage shares.",
+        "B. Express the prop strategies as exclusions only: refuse to take a prop on a player whose tier moved down.",
+        "C. Use projection sites (rejected: not official and not reproducible)."
+      ],
+      "recommendation": "Option B immediately, because it is computable from the depth data already captured, with A as the follow-up that allows priced props.",
+      "impact": "Medium",
+      "effort": "Medium for A, Low for B",
+      "risk": "Low",
+      "dependencies": [
+        "SG-08"
+      ],
+      "decision_needed": "Confirm whether priced props are wanted at all, or whether prop coverage should stay exclusion-only.",
+      "status": "PROPOSED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/stats/player-passing/"
+      ]
+    },
+    {
+      "id": "SG-15",
+      "title": "Weekly review workflow that closes the loop from flag to fix",
+      "category": "process",
+      "problem": "The site publishes irregularities for review, but nothing tracks whether a flagged item was reviewed, and this repository already shows that review records can be lost between sessions.",
+      "evidence": "The coordination log of this repository records past irregularities (IR-018 to IR-021) and the fact that earlier review sessions had to re-derive their corrections independently.",
+      "options": [
+        "A. Every flag carries a status (open, reviewed, corrected, accepted) and a dated review note.",
+        "B. Flags stay read-only.",
+        "C. Move flags into the suggestions register (rejected: a flag is a defect, a suggestion is an improvement)."
+      ],
+      "recommendation": "Option A, with the same status vocabulary as the suggestions register.",
+      "impact": "Medium",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [
+        "SG-06"
+      ],
+      "decision_needed": "Confirm the flag status vocabulary and who is allowed to close a flag.",
+      "status": "PROPOSED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "SG-16",
+      "title": "Publish the derived tables as downloadable data next to the pages",
+      "category": "site",
+      "problem": "A reviewer who wants to recompute a statistic has to scrape the table, which makes the published numbers hard to reproduce independently.",
+      "evidence": "Every derived table in this program is already written to a JSON file under data/nfl/, and the existing dashboard already publishes its raw event JSON.",
+      "options": [
+        "A. Publish the JSON for each new page with a link on the page.",
+        "B. Publish CSV only.",
+        "C. Keep the data private (rejected: it defeats the verification model)."
+      ],
+      "recommendation": "Option A, matching the existing dashboard convention, so a reviewer can recompute the published correlations.",
+      "impact": "Medium",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [],
+      "decision_needed": "Confirm whether CSV exports are needed in addition to JSON.",
+      "status": "RECOMMENDED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "SG-17",
+      "title": "Record the league's own rule-based context for the strategies that depend on it",
+      "category": "model",
+      "problem": "Several candidate signals are rule-driven (the injury report filing deadlines, the designation rules, the roster cutdown rules that decide who is available), and none of that context is currently on the site.",
+      "evidence": "The official NFL important-dates page states the weekly practice-report and game-status-report filing deadlines that determine when an official designation exists at all.",
+      "options": [
+        "A. Add an official-context table that links the rule to the strategies it constrains.",
+        "B. Leave the rules in the methodology text only."
+      ],
+      "recommendation": "Option A. It explains why a designation can be missing rather than being negative, which is the most common misreading of the injury table.",
+      "impact": "Medium",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [
+        "SG-03"
+      ],
+      "decision_needed": "Confirm whether the rule context belongs on the strategy pages or on a single rules page.",
+      "status": "PROPOSED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/news/2026-27-national-football-league-important-dates"
+      ]
+    },
+    {
+      "id": "SG-18",
+      "title": "Publish a per-source freshness dashboard",
+      "category": "site",
+      "problem": "The program reads from sources with very different refresh cycles (weekly injury reports, dated depth charts, season standings, and a schedule that changes on official notice) and the reader cannot see which are stale.",
+      "evidence": "In this session the official standings page was current to the day, the 49ers depth chart was dated 11/10/26, the Miami and Baltimore charts publish no date at all, and the schedule snapshots are dated 2026-11-02.",
+      "options": [
+        "A. One table listing every source, its owner, its refresh cycle and the age of the last capture.",
+        "B. Put the age next to each table (part of SG-02).",
+        "C. Rely on the capture timestamps already shown."
+      ],
+      "recommendation": "Option A as the single place to see the whole program's freshness, reusing the SG-02 row badge for detail.",
+      "impact": "Medium",
+      "effort": "Low",
+      "risk": "Low",
+      "dependencies": [
+        "SG-02",
+        "SG-09"
+      ],
+      "decision_needed": "Confirm whether the refresh cycle for each source should be declared by the program or read from the source itself.",
+      "status": "PROPOSED",
+      "suggested_priority": "P2",
+      "evidence_source_urls": [
+        "https://www.nfl.com/injuries/league/2026/reg10",
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.baltimoreravens.com/team/depth-chart"
+      ]
+    }
+  ],
+  "priority_note": "Suggested priority is a review aid only, not an accepted implementation plan. P1 means likely to unblock evidence or prevent misleading decisions; P2 means useful after the P1 evidence foundations. Reviewers may change it before implementation."
+}

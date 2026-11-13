@@ -1,0 +1,61 @@
+{
+  "program": "NFL Lines leaderboard and reward rules",
+  "version": "1.0",
+  "updated_utc": "2026-11-13T13:05:00Z",
+  "model": "leaderboard",
+  "scoring": {
+    "unit": "points",
+    "basis": "Points are earned only by strategies whose state is ELIGIBLE, meaning every gate the strategy depends on is PASS.",
+    "formula": "points = round(roi_pct * multiplier, 1), floored at 0",
+    "multipliers": {
+      "single": 10,
+      "parlay": 15,
+      "player-prop": 12
+    },
+    "multiplier_note": "Parlays score more because they settle less often and are harder to replicate, but they also carry the G7 correlation gate.",
+    "minimum_settled_bets_to_rank": 25,
+    "push_handling": "Pushes do not count as wins or losses and do not change the bet count denominator; they are excluded from ROI.",
+    "void_handling": "Voided or cancelled games are excluded from ROI and from the bet count.",
+    "tiebreakers": [
+      "1. Higher ROI points",
+      "2. More settled bets",
+      "3. More gates passed",
+      "4. Earlier registration"
+    ],
+    "season_reset": "Points reset at the start of each NFL regular season; the all-time board is kept separately.",
+    "settlement_source_rule": "A bet settles only on the official final score published by the league; a price is recorded only with its source and timestamp."
+  },
+  "reward_tiers": [
+    {
+      "tier": "Bronze",
+      "min_points": 0,
+      "reward": "Entry in the program board and inclusion in the weekly strategy digest.",
+      "notes": "Participation reward. Points start accruing only after a strategy becomes ELIGIBLE."
+    },
+    {
+      "tier": "Silver",
+      "min_points": 100,
+      "reward": "Priority official-source capture: the strategy's missing official inputs are captured first in the next refresh cycle.",
+      "notes": "Rewards data access, which is the binding constraint on validation."
+    },
+    {
+      "tier": "Gold",
+      "min_points": 250,
+      "reward": "Silver reward plus a dedicated historical backfill run for that strategy's official panel.",
+      "notes": "Turns a promising strategy into a testable one."
+    },
+    {
+      "tier": "Platinum",
+      "min_points": 500,
+      "reward": "Gold reward plus a reserved weekly capture slot and the strategy's parameters published on the executive summary page.",
+      "notes": "Highest tier; the owner may substitute cash or other incentives for these program tokens."
+    }
+  ],
+  "eligibility_rules": [
+    "A strategy enters the board only after it is registered with its hypothesis, official inputs and gates.",
+    "A strategy that fails any gate moves to GATED and earns no points until the gate passes.",
+    "A gate that cannot be evaluated is NOT TESTABLE, which is not a pass.",
+    "Removing a strategy from the catalog does not remove its settled record from the board."
+  ],
+  "source_url": "https://www.nfl.com/standings/league/2026/REG"
+}
