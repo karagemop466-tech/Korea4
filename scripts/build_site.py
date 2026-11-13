@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -49,6 +50,7 @@ NAV = [
     ("vacation.html", "Vacation windows"), ("mlb.html", "MLB"), ("nfl.html", "NFL"),
     ("nfl-lines.html", "NFL lines"), ("nfl-strategies.html", "NFL strategies"),
     ("nfl-injuries.html", "NFL injuries"), ("nfl-suggestions.html", "Suggestions"),
+    ("nfl-decision.html", "NFL decision"),
     ("ncaaf.html", "Stanford / Cal"), ("wwo.html", "Westwood One"), ("radio.html", "Radio map"),
     ("sources.html", "Sources"), ("flagged.html", "Flagged"), ("methodology.html", "Method"),
     ("review.html", "Repo review"), ("executive-summary.html", "Executive summary"),
@@ -159,7 +161,18 @@ def table(headers, rows, columns, name, page_size=100, intro=None):
     </div>'''
 
 
-def page(title, active, lead, body, extra_head=""):
+def page(title, active, lead, body, extra_head="", banner=True):
+    """Render the page shell. banner=False suppresses the vacation-dashboard
+    snapshot callout for sections that carry their own disclosure."""
+    notice = ""
+    if banner:
+        notice = (f'<div class="callout warn"><strong>Snapshot, not a live feed.</strong> '
+                  f'Official source snapshots last refreshed {esc(META.get("source_snapshot_utc") or "UNVERIFIED")}; '
+                  f'dashboard rebuilt {esc(META["generated_utc"])}. The selected dashboard date is '
+                  f'{esc(META.get("system_today"))} Pacific Time. Schedules, broadcast carriage and actual game '
+                  f'lengths can change; some sports and future schedules are missing. Gaps are planning estimates, '
+                  f'not verified free time. Check the <a href="flagged.html">review flags</a> and original sources '
+                  f'before booking.</div>')
     nav = "".join(f'<a href="{p}" class="{"active" if p == active else ""}"{" aria-current=page" if p == active else ""}>{esc(label)}</a>' for p, label in NAV)
     meta_small = {
         "system_today": META.get("system_today"), "date_range": META.get("date_range"),
@@ -185,7 +198,7 @@ def page(title, active, lead, body, extra_head=""):
 <main>
   <h1 class="page-title">{esc(title)}</h1>
   <p class="page-lead">{lead}</p>
-  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Official source snapshots last refreshed {esc(META.get('source_snapshot_utc') or 'UNVERIFIED')}; dashboard rebuilt {esc(META["generated_utc"])}. The selected dashboard date is {esc(META.get('system_today'))} Pacific Time. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
+  {notice}
   {body}
   <footer class="footer">
     <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
@@ -308,6 +321,19 @@ def build_index():
 <p><a class="control-btn" href="nfl-lines.html">NFL lines →</a> <a class="control-btn" href="nfl-strategies.html">NFL strategies →</a> <a class="control-btn" href="nfl-injuries.html">NFL injuries →</a> <a class="control-btn" href="nfl-suggestions.html">Suggestions →</a></p></section>
 <section class="panel"><h2>Flagged irregularities</h2>{table(['ID','Issue','Status','Action'], flag_rows, ['id','issue',('status','badge'),'action'], 'flags-index', 20)}
 <p><a class="control-btn" href="flagged.html">See all {len(META['flags'])} flags →</a></p></section>
+<section class="panel"><h2>NFL decision support — questions, gates and suggestions</h2>
+<p class="intro">A second, independent NFL workstream: the official injury rows joined to the official 49ers depth
+chart, ten pre-registered validation gates, twelve strategy test specifications, an intentionally unranked leaderboard,
+twelve suggestions, twenty-two open questions and ten decisions awaiting your choice. It publishes its own sources and
+does not alter the schedule values on this page.</p>
+<div class="grid cards">
+  <a class="card" href="nfl-decision.html"><div class="number">11</div><div class="label">pages in this section</div></a>
+  <a class="card" href="nfl-decision-injuries.html"><div class="number">27</div><div class="label">official injury rows transcribed</div></a>
+  <a class="card" href="nfl-decision-injuries.html"><div class="number">9</div><div class="label">depth slots with no documented backup</div></a>
+  <a class="card" href="nfl-decision-suggestions.html"><div class="number">12</div><div class="label">suggestions to review</div></a>
+  <a class="card" href="nfl-decision-questions.html"><div class="number">22</div><div class="label">open questions</div></a>
+</div>
+<p><a class="control-btn" href="nfl-decision.html">Open NFL decision support →</a></p></section>
 <section class="panel"><h2>Official sources for manual review</h2>{table(['ID','Title','Purpose','HTTP','Status'], source_rows, ['id','title','purpose',('http_status','num'),('status','badge')], 'sources-index', 20)}
 <p><a class="control-btn" href="sources.html">See all {len(SOURCES)} sources →</a></p></section>
 '''
@@ -659,6 +685,14 @@ Live site: <https://karagemop466-tech.github.io/Korea4/>
 ## Pages
 `index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
 
+### NFL decision support (added 2026-11-13)
+`nfl-decision.html` (overview) · `nfl-decision-strategies.html` · `nfl-decision-validation.html` ·
+`nfl-decision-correlation.html` · `nfl-decision-injuries.html` · `nfl-decision-suggestions.html` ·
+`nfl-decision-questions.html` · `nfl-decision-decisions.html` · `nfl-decision-audit.html` ·
+`nfl-decision-flags.html` · `nfl-decision-executive.html`.
+Built by `scripts/build_nfl_decision.py` from `scripts/nfl_lab_data.py`; gated by `scripts/verify_nfl_lab.py`, which fails
+if any factual row lacks an official or repository source. It complements, and does not replace, the NFL module pages.
+
 Parallel-session dashboards are preserved at `docs/`, `site/`, and `site/pages/` and linked from every page footer.
 
 ## Reproduce
@@ -675,10 +709,21 @@ Raw official responses, SHA-256 hashes, and source URLs are in `research/officia
     write("README.md", readme)
 
 
+def build_nfl_decision():
+    """Render the additive NFL decision-support section in a separate process.
+
+    Kept out of this process so this module is imported only once (the section's
+    builder imports it for the page shell).
+    """
+    import subprocess
+    subprocess.run([sys.executable, str(ROOT / "scripts/build_nfl_decision.py")], check=True)
+
+
 def main():
     preserve_legacy()
     build_index(); build_daily(); build_calendar(); build_vacation(); build_mlb(); build_nfl()
     build_nfl_lines(); build_nfl_strategies(); build_nfl_injuries(); build_nfl_suggestions()
+    build_nfl_decision()
     build_ncaaf(); build_wwo(); build_radio(); build_sources(); build_flagged(); build_methodology()
     build_review(); build_executive(); build_readme()
     print(json.dumps({"pages": len(NAV) + 1, "source_rows": len(SOURCES), "event_rows": len(EVENTS), "audit_rows": len(REVIEW), "nfl_module_flags": len(NFL_MODULE_FLAGS)}, indent=2))

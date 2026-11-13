@@ -5,10 +5,11 @@ Generated: 2026-11-13T13:09:05+00:00
 - JSON files checked: 9
 - Primary generated pages: 19
 - Static primary table rows with source URL: 10207
-- HTML pages link-checked (including legacy trees): 91
-- Internal links checked: 864
+- HTML pages link-checked (including legacy trees): 102
+- Internal links checked: 1210
 - Broken internal links: 0
 - JavaScript syntax: PASS
+- NFL decision-support gate (scripts/verify_nfl_lab.py): PASS (report: research/nfl-lab-verification.md)
 - Event rows checked: 6591; row source domains checked against the official allowlist: 34069
 - Errors: 0
 - Warnings: 0

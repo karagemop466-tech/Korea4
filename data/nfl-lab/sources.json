@@ -1,0 +1,182 @@
+[
+ {
+  "id": "S-01",
+  "publisher": "NFL.com",
+  "title": "Injuries — Week 10 of the 2026 season (official injury report)",
+  "url": "https://www.nfl.com/injuries/",
+  "what": "Per-club injury rows: player, position, practice status (Did Not Participate / Limited / Full), game status (Out, Doubtful, Questionable). Practice-report detail is early-week at capture.",
+  "used_for": "Injury and depth section; starting-slot availability cross-reference.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-02",
+  "publisher": "San Francisco 49ers (official club site)",
+  "title": "49ers Depth Chart — updated as of 11/10/26",
+  "url": "https://www.49ers.com/team/depth-chart",
+  "what": "Official two-deep/three-deep ordering for offense, defense and special teams, with the club's own 'Updated as of' date.",
+  "used_for": "Backup-depth model; detecting slots with no listed backup.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-03",
+  "publisher": "San Francisco 49ers (official club site)",
+  "title": "49ers Injury Report (weekly news index)",
+  "url": "https://www.49ers.com/team/injury-report/",
+  "what": "Club-published weekly inactives and ruled-out news items, week by week.",
+  "used_for": "Confirming club-level (as opposed to league-level) designation history.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-04",
+  "publisher": "San Francisco 49ers (official club site)",
+  "title": "49ers 2026 Schedule",
+  "url": "https://www.49ers.com/schedule/",
+  "what": "Fixtures, final scores for completed weeks, kickoff times, broadcast network, radio line, venue (incl. Estadio Banorte for Week 11).",
+  "used_for": "Home/away and venue checks; radio matrix; the Week 11 venue flag.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-05",
+  "publisher": "NFL.com",
+  "title": "2026 NFL schedule — Week 10 (by week)",
+  "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+  "what": "Official kickoff times (ET), networks, final scores and matchup order for the 14 Week-10 game rows.",
+  "used_for": "Line-by-line audit of the 14 Week-10 rows in data/official/events.json.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-06",
+  "publisher": "NFL.com",
+  "title": "2026-27 National Football League important dates",
+  "url": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+  "what": "League calendar plus the Personnel (Injury) Report Policy filing schedule quoted inside it (practice reports by 4:00 p.m. New York time on a set weekday pattern; 'an estimated injury report for practice status is not acceptable' on a practice day).",
+  "used_for": "Why report timing (not just content) is a usable signal; filing deadlines.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-07",
+  "publisher": "NFL.com",
+  "title": "2026 NFL player statistics — passing",
+  "url": "https://www.nfl.com/stats/player-stats/",
+  "what": "Official season-to-date player stat table (2026, regular season).",
+  "used_for": "Player-prop strategies: the only officially published player performance series available.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-08",
+  "publisher": "NFL.com",
+  "title": "NFL official 2026 schedule index",
+  "url": "https://www.nfl.com/schedules/",
+  "what": "Season schedule index; the source the dashboard's NFL rows are captured from.",
+  "used_for": "Repo audit context for the existing NFL rows.",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-09",
+  "publisher": "NFL Football Operations (media.nfl.com PDF)",
+  "title": "2026 Official Playing Rules of the NFL (PDF)",
+  "url": "https://media.nfl.com/content/dam/communications/Official%20Playing%20Rules/2026%20Official%20Playing%20Rules.pdf",
+  "what": "Rulebook used by the repo for game-clock/duration assumptions.",
+  "used_for": "Duration provenance on NFL rows (the repo's `duration_source_url`).",
+  "source_kind": "official",
+  "http_status": 200
+ },
+ {
+  "id": "S-10",
+  "publisher": "This repository",
+  "title": "data/official/events.json",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/official/events.json",
+  "what": "The captured event table the dashboard renders (6,591 rows; 329 NFL).",
+  "used_for": "Audit measurements (counts, field coverage, duplicate ids).",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-11",
+  "publisher": "This repository",
+  "title": "data/official/meta.json",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/official/meta.json",
+  "what": "Build metadata: build time, source-snapshot time, `system_today`, counts, flags.",
+  "used_for": "Stale-date finding; snapshot-age disclosure.",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-12",
+  "publisher": "This repository",
+  "title": ".github/workflows/fetch-official.yml",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/.github/workflows/fetch-official.yml",
+  "what": "The workflow that refreshes `research/official/raw` and the manifest.",
+  "used_for": "Refresh-coverage finding (branch-bound trigger, no schedule).",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-13",
+  "publisher": "This repository",
+  "title": "data/nfl-2026.json (legacy snapshot)",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-2026.json",
+  "what": "An early hand/thin-source NFL file that still asserts `\"verified\": true`.",
+  "used_for": "Irregularity FL-01 (non-official sources labelled verified).",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-14",
+  "publisher": "This repository",
+  "title": "scripts/verify.py (static gate)",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/scripts/verify.py",
+  "what": "The structural gate: official-host allowlist, source link per row, internal links, JS syntax.",
+  "used_for": "What the existing gate does and does not prove.",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-15",
+  "publisher": "This repository",
+  "title": "scripts/collect_official.py (collector)",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/scripts/collect_official.py",
+  "what": "Offline rebuild of the event table from `research/official/raw`; derives the Pacific 'today' at run time.",
+  "used_for": "Stale-date root cause and fix.",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-17",
+  "publisher": "This repository",
+  "title": "data/nfl/ (NFL decision module merged in PR #45)",
+  "url": "https://github.com/karagemop466-tech/Korea4/tree/main/data/nfl",
+  "what": "A parallel session's independently captured NFL data: injury snapshot for 2026-11-13, depth-deficiency framework, validation gates, leaderboard shell, suggestions, open questions.",
+  "used_for": "Reconciliation: checking where the two captures agree and where this section adds something the merged module lacks.",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-18",
+  "publisher": "This repository",
+  "title": "research/nfl-module/README.md (merged module's verification record)",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/research/nfl-module/README.md",
+  "what": "The merged module's own account of the official pages it fetched live on 2026-11-13, including IR-022 to IR-026.",
+  "used_for": "Cross-checking this session's reading of the same official pages; recording where the two sessions agree.",
+  "source_kind": "repo",
+  "http_status": 200
+ },
+ {
+  "id": "S-16",
+  "publisher": "This repository",
+  "title": "COORDINATION.md (parallel-session board)",
+  "url": "https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md",
+  "what": "Shared task board, claims, hand-offs and per-session records.",
+  "used_for": "Avoiding duplicate work with the four other 2026-11-13 NFL sessions.",
+  "source_kind": "repo",
+  "http_status": 200
+ }
+]
