@@ -21,7 +21,8 @@ Requests to other owners (logged, not edited): none.
 - **Deviation (shared output, reverted):** a root dashboard rebuild was tried to satisfy a date-dependent test. It changed root shared pages. Reverted in `517998a`. Root pages are unchanged by this branch.
 - **Repo test status (not in check.yml):** `tests/test_build.py` has 3 failures (R-01 missing `_site/` artefact; R-02 eight legacy pages with no redirect entry). `tests/test_dashboard_generator.py` fails on 2026-11-13 because the root dashboard was built 2026-11-05 (R-03). **For the final integration session:** rebuild the root dashboard and add the redirects. These are logged, not fixed here.
 - **Open (not done in this session):** depth-chart deficiency analysis for offense and defense (2nd/3rd/4th string replacing starters). It needs official NFL.com depth-chart pages, which were not fetched. Injury data is a single Week 10 snapshot. Suggestions and questions pages exist; the user chooses before any implementation.
-- **Pending:** PR to `main` and merge; PR link to be recorded here after creation.
+- **PR:** https://github.com/karagemop466-tech/Korea4/pull/44 (open, not merged). NL1 checks pass (`Verify NFL Lines Lab`).
+- **Blocker (NOT merged):** `Verify final integration` (`.github/workflows/check.yml`, PR → main) fails on its last step, `tests/test_dashboard_generator.py`: `system_today` 2026-11-05 vs 2026-11-13. This is the stale root dashboard (R-03). It predates this branch and needs the final integration session to rebuild root output. This session must not change root shared pages. Merge only after that rebuild, or after the integration session decides how to handle the check.
 
 ## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
