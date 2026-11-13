@@ -31,7 +31,7 @@
    "impact": "Removes all manual data input; keeps injury tracking current without human action.",
    "risk": "Cron commits to main could interleave with open PR branches; mitigation: concurrency guard + rebase pull already in the workflow.",
    "depends_on": [],
-   "status": "IMPLEMENTED (this session; verify after merge)",
+   "status": "IMPLEMENTED — verified: weekly workflow ran green on push 2026-11-13",
    "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/.github/workflows/nfl-refresh.yml",
    "source_label": "nfl-refresh workflow (this repo)"
   },

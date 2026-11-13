@@ -155,6 +155,13 @@ Open PRs #18, #25, #41, #43 and the landed PRs #45/#46/#47/#48/#49/#51 belong to
 **Limitations.** Single-season sample (n=137) — all model outputs ESTIMATED; no live market odds ingested (Q1 blocks G7 certification); depth-chart join is a MODEL JOIN, not announced lineups; injury page reflects the 2026-11-13 fetch and ages until the next cron run.
 
 
+### Post-merge live-site fix — 2026-11-13 (`arena/cb63182f-korea4`, after PR #52 merged as 129e851)
+
+Live check of the deployed Pages site caught three stale artifacts left by the rename/renumber during the rebase:
+1. The `nfl-analytics.html` hub components table still *displayed* the pre-rename page names (`nfl-injuries.html`, `nfl-lines.html`, `nfl-strategies.html`) as plain text (not links, so the broken-link gate could not catch them) — fixed to `nfl-analytics-injuries/lines/strategies.html`.
+2. Two prose references still cited the old flag ids IR-023/IR-024 — corrected to IR-043/IR-044 (main's build-time flags IR-022…IR-026 belong to the other NFL module).
+3. The three renamed pages highlighted the wrong NAV item (their `page()` active keys still used old names) — corrected; `suggestions.json` SUG-02 status updated to IMPLEMENTED — verified after the weekly snapshot workflow ran green post-merge.
+
 ### H6 completion and three-way reconciliation record — 2026-11-13 (`arena/cb63182f-korea4`)
 
 **Rebase onto advanced `origin/main` (PRs #45/#46/#47/#48/#49/#51 landed mid-session).** All conflicts resolved keeping every session's work; nothing discarded:

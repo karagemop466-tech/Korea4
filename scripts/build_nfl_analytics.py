@@ -59,13 +59,13 @@ def sha_table():
 # ------------------------------------------------------------------ hub page
 def build_hub():
     status_rows = [
-        {"component": "Injury & depth-chart tracking", "what": "Week 10 official report transcription + starter-deficiency join + QB availability", "status": "LIVE — refreshed by weekly workflow", "page": "nfl-injuries.html",
+        {"component": "Injury & depth-chart tracking", "what": "Week 10 official report transcription + starter-deficiency join + QB availability", "status": "LIVE — refreshed by weekly workflow", "page": "nfl-analytics-injuries.html",
          "source_url": "https://www.nfl.com/injuries/", "source_label": "NFL.com injury report"},
         {"component": "Signal research", "what": "EPA power rating (fitted on 137 completed 2026 games), holdout accuracy, rest/weather/QB-change evaluations", "status": "LIVE — ESTIMATED, single-season sample", "page": "nfl-signals.html",
          "source_url": "https://www.nfl.com/stats/ngs/trends", "source_label": "NFL.com Next Gen Stats (official EPA definition)"},
-        {"component": "Line origination", "what": "Documented margin/total models; Week 10 originated spreads, totals, MLs; edges vs archived market reference", "status": "LIVE — MODEL ESTIMATED (flagged IR-024)", "page": "nfl-lines.html",
+        {"component": "Line origination", "what": "Documented margin/total models; Week 10 originated spreads, totals, MLs; edges vs archived market reference", "status": "LIVE — MODEL ESTIMATED (flagged IR-044)", "page": "nfl-analytics-lines.html",
          "source_url": NFLVERSE.format("schedules"), "source_label": "nflverse schedules release (market reference)"},
-        {"component": "Strategy leaderboard", "what": "Registry, 7 validation gates, luck-adjusted scoring, reward tiers, starter strategies", "status": "LIVE — all strategies SPEC tier", "page": "nfl-strategies.html",
+        {"component": "Strategy leaderboard", "what": "Registry, 7 validation gates, luck-adjusted scoring, reward tiers, starter strategies", "status": "LIVE — all strategies SPEC tier", "page": "nfl-analytics-strategies.html",
          "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json", "source_label": "strategy registry (this repo)"},
         {"component": "Correlation framework", "what": "Bernoulli-covariance parlay math + descriptive 2026 game-level correlations (n=137)", "status": "LIVE — calculator + ESTIMATED correlations", "page": "nfl-correlation.html",
          "source_url": NFLVERSE.format("pbp"), "source_label": "nflverse play-by-play release"},
@@ -93,7 +93,7 @@ Nothing on these pages is manual input; the weekly GitHub Actions workflow refre
 {bs.table(['Check','Result','Source'], [
     dict(check="data/official/events.json NFL rows, Nov 2026 (n=70) vs fresh nflverse slate", result="70/70 matched on date+teams; 0 kickoff-time mismatches (ET)", source_url=NFLVERSE.format("schedules"), source_label="nflverse schedules release", verification="VERIFIED"),
     dict(check="Week 10 nflverse slate vs live NFL.com schedule page (14 games)", result="14/14 date+ET-time matches; TNF result WAS 24 @ NYG 21 matches", source_url="https://www.nfl.com/schedules/2026/REG10/", source_label="NFL.com Week 10 schedule", verification="VERIFIED"),
-    dict(check="Official injury-page transcription vs nflverse mirror (209 rows)", result="187 MATCH, 0 contradictions, 22 rows exist only on the official page (mirror lag — IR-023)", source_url="https://www.nfl.com/injuries/", source_label="NFL.com injury report", verification="VERIFIED"),
+    dict(check="Official injury-page transcription vs nflverse mirror (209 rows)", result="187 MATCH, 0 contradictions, 22 rows exist only on the official page (mirror lag — IR-043)", source_url="https://www.nfl.com/injuries/", source_label="NFL.com injury report", verification="VERIFIED"),
 ], ['check','result','verification'], 'nfl-audit', 20)}
 <p class="intro">Full audit records: <code>research/nfl/audit/nfl-rows-audit.json</code>, <code>research/nfl/audit/week10-spotcheck.json</code>.</p>
 </section>
@@ -135,7 +135,7 @@ so current-chart rank alone would hide them. Backup names are the current chart'
 ], ['team','note','verification'], 'qb-news', 50)}
 </section>
 '''
-    bs.write("nfl-analytics-injuries.html", bs.page("NFL injuries & depth", "nfl-injuries.html",
+    bs.write("nfl-analytics-injuries.html", bs.page("NFL injuries & depth", "nfl-analytics-injuries.html",
         "Official Week-10 injury report, starter deficiencies by unit, and QB availability — with per-row official sources.",
         body))
 
@@ -185,7 +185,7 @@ data: margin = {m['margin_formula'].split(';')[0].split('= ',1)[1].split(';')[0]
 win probability = {m['win_probability']}. Rest adjustment: {m['rest_adjustment']}. Fit data: {m['fit_data']}.
 {m['market_reference_note']}.</div>
 <section class="panel"><h2>Week 10 originated lines vs archived market reference</h2>
-<p class="intro">Model home spread / model total / model home moneyline. Edge signs: <strong>home-spread edge &gt; 0</strong> = model leans AWAY relative to market; <strong>total edge &gt; 0</strong> = model leans OVER. All rows MODEL ESTIMATED (IR-024).</p>
+<p class="intro">Model home spread / model total / model home moneyline. Edge signs: <strong>home-spread edge &gt; 0</strong> = model leans AWAY relative to market; <strong>total edge &gt; 0</strong> = model leans OVER. All rows MODEL ESTIMATED (IR-044).</p>
 {bs.table(['Game','Date','KO (ET)','Model home spread','Market home spread','Spread edge','Model total','Market total','Total edge','Model home ML','Win prob (home)'],
           lines['rows'], ['game','date','kickoff_et',('originated_home_spread','num'),('market_reference_home_spread','num'),('home_spread_edge_vs_market','num'),('originated_total','num'),('market_reference_total','num'),('total_edge_vs_market','num'),('originated_home_ml','text'),('model_win_prob_home','num')],
           'lines-w10', 50)}
@@ -204,7 +204,7 @@ key-number territory when logging edges. The distribution is refitable once mult
 no fitted key-number table is published yet because one season (n=137) is too small; publishing one would violate the
 no-inference rule.</p></section>
 '''
-    bs.write("nfl-analytics-lines.html", bs.page("NFL line origination", "nfl-lines.html",
+    bs.write("nfl-analytics-lines.html", bs.page("NFL line origination", "nfl-analytics-lines.html",
         "Own lines originated from a documented EPA model — methodology, Week 10 output, and edge discipline.",
         body))
 
@@ -246,7 +246,7 @@ barely above its own class baseline; this is exactly the small-sample illusion t
 <p class="intro">Required fields: {', '.join(strat['registration_format']['required_fields'])}. {strat['registration_format']['note']}</p>
 </section>
 '''
-    bs.write("nfl-analytics-strategies.html", bs.page("NFL strategy leaderboard", "nfl-strategies.html",
+    bs.write("nfl-analytics-strategies.html", bs.page("NFL strategy leaderboard", "nfl-analytics-strategies.html",
         "Validation gates, luck-adjusted scoring, reward tiers, the strategy registry, and the 2026 simulation.",
         body))
 
