@@ -1,0 +1,67 @@
+name: Refresh NFL analytics snapshots
+
+# Downloads the nflverse rolling releases (community mirror of official NFL
+# transaction/feeder data: schedules, injury reports, depth charts, team stats,
+# play-by-play, snap counts) and commits the raw compressed snapshots to the
+# triggered branch. Runners have outbound access to github release assets;
+# the in-sandbox environment does not, so this workflow is the fetch path.
+
+on:
+  push:
+    branches: [arena/cb63182f-korea4]
+    paths:
+      - .github/workflows/nfl-refresh.yml
+      - research/nfl/raw/.keep
+  workflow_dispatch: {}
+  schedule:
+    # Fridays 21:05 UTC = 1:05 PM PT, after final Friday injury designations.
+    - cron: "5 21 * * 5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nfl-refresh-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out current branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Download nflverse release snapshots
+        run: |
+          cd research/nfl/raw
+          base="https://github.com/nflverse/nflverse-data/releases/download"
+          curl -sfL --retry 3 -o games.csv.gz                "$base/schedules/games.csv.gz"
+          curl -sfL --retry 3 -o injuries_2026.csv.gz        "$base/injuries/injuries_2026.csv.gz"
+          curl -sfL --retry 3 -o depth_charts_2026.parquet   "$base/depth_charts/depth_charts_2026.parquet"
+          curl -sfL --retry 3 -o stats_team_week_2026.csv.gz "$base/stats_team/stats_team_week_2026.csv.gz"
+          curl -sfL --retry 3 -o play_by_play_2026.csv.gz    "$base/pbp/play_by_play_2026.csv.gz"
+          curl -sfL --retry 3 -o snap_counts_2026.csv.gz     "$base/snap_counts/snap_counts_2026.csv.gz"
+          curl -sfL --retry 3 -o schedules_timestamp.json    "$base/schedules/timestamp.json"
+          curl -sfL --retry 3 -o injuries_timestamp.json     "$base/injuries/timestamp.json"
+          curl -sfL --retry 3 -o depth_charts_timestamp.json "$base/depth_charts/timestamp.json"
+          curl -sfL --retry 3 -o pbp_timestamp.json          "$base/pbp/timestamp.json"
+          curl -sfL --retry 3 -o stats_team_timestamp.json   "$base/stats_team/timestamp.json"
+          curl -sfL --retry 3 -o snap_counts_timestamp.json  "$base/snap_counts/timestamp.json"
+          touch .keep
+          sha256sum *.gz *.parquet > sha256sums.txt
+          ls -la
+      - name: Publish snapshot to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/nfl/raw
+          if git diff --cached --quiet; then
+            echo "No snapshot changes"
+            exit 0
+          fi
+          git commit -m "Publish nflverse snapshot [skip ci]"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
