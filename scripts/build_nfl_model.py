@@ -413,7 +413,7 @@ def main() -> None:
         ),
         callout(
             "info",
-            "<strong>How this relates to the other NFL pages on this site.</strong> Three workstreams now cover "
+            "<strong>How this relates to the other NFL pages on this site.</strong> Four workstreams now cover "
             "adjacent ground: the merged <a href=\"../nfl-lines.html\">line-origination</a>, "
             "<a href=\"../nfl-strategies.html\">strategies</a>, <a href=\"../nfl-injuries.html\">injuries</a> and "
             "<a href=\"../nfl-suggestions.html\">suggestions</a> module; the "

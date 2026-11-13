@@ -1,0 +1,171 @@
+{
+  "snapshot": {
+    "note": "Strategy catalog is a documented framework. Betting-line, odds, prop and correlation values are NOT official league values; they require a model run over verified inputs and are left blank/UNVERIFIED until computed.",
+    "validation_source_url": "https://www.nfl.com/rulebook/",
+    "validation_source_label": "NFL.com official playing rules"
+  },
+  "gates": [
+    {
+      "id": "VG-1",
+      "gate": "Data integrity",
+      "requirement": "Every signal input traces to an official league/team/network source; no secondary or unverified input enters a live signal.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "id": "VG-2",
+      "gate": "Minimum sample size",
+      "requirement": "A strategy must have at least the documented minimum number of historical, settled bets before it is ranked or rewarded.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "id": "VG-3",
+      "gate": "Skill vs. luck significance",
+      "requirement": "Performance must beat a no-skill baseline (Brier score / log loss) with statistical significance; variance explained must exceed a preset threshold.",
+      "source_url": "https://www.nfl.com/rulebook/",
+      "source_label": "NFL.com official playing rules",
+      "status": "FRAMEWORK"
+    },
+    {
+      "id": "VG-4",
+      "gate": "Correlation cap",
+      "requirement": "Inter-leg correlation within any multi-leg bet must stay below the documented cap; correlated legs are re-weighted or dropped.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "id": "VG-5",
+      "gate": "Out-of-sample / walk-forward",
+      "requirement": "Results are evaluated only on out-of-sample folds; no in-sample performance is used for ranking.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "id": "VG-6",
+      "gate": "Exposure / stake cap",
+      "requirement": "Per-bet and per-strategy exposure stays within documented caps to control drawdown.",
+      "source_url": "https://www.nfl.com/rulebook/",
+      "source_label": "NFL.com official playing rules",
+      "status": "FRAMEWORK"
+    },
+    {
+      "id": "VG-7",
+      "gate": "Reproducibility",
+      "requirement": "A strategy must be fully reproducible from its documented inputs and parameters before it is accepted to the leaderboard.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    }
+  ],
+  "strategies": [
+    {
+      "id": "S1",
+      "name": "Straight Spread",
+      "bet_type": "Single bet",
+      "signal": "Model-originated point spread vs. the verified market line; bet the edge where model and market disagree.",
+      "inputs": "Team strength (official standings), injured-starter adjustments, situational factors.",
+      "correlation": "N/A (single selection).",
+      "gates": "VG-1, VG-2, VG-3, VG-5, VG-7",
+      "skill_metric": "Brier score, log loss, ROI vs. baseline",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "S2",
+      "name": "Moneyline",
+      "bet_type": "Single bet",
+      "signal": "Model win probability vs. market-implied probability; positive expected value on the straight win.",
+      "inputs": "Team strength, home/away, injury adjustments, scoring margin.",
+      "correlation": "N/A (single selection).",
+      "gates": "VG-1, VG-2, VG-3, VG-5, VG-7",
+      "skill_metric": "Brier score, log loss",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "S3",
+      "name": "Total (Over/Under)",
+      "bet_type": "Single bet",
+      "signal": "Model total points vs. market total; bet the side where model and market diverge.",
+      "inputs": "Offensive/defensive efficiency, pace, weather, injured-skill absences.",
+      "correlation": "N/A (single selection).",
+      "gates": "VG-1, VG-2, VG-3, VG-5, VG-7",
+      "skill_metric": "Brier score, log loss",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "S4",
+      "name": "Multi-Game Spread Parlay",
+      "bet_type": "Parlay",
+      "signal": "Combine 2–4 single-bet spread legs; accept only when combined edge survives the correlation cap.",
+      "inputs": "Per-leg model spreads, inter-game correlation estimates.",
+      "correlation": "Pairwise correlation capped (documented max); drop/re-weight legs above cap.",
+      "gates": "VG-1, VG-2, VG-3, VG-4, VG-5, VG-6, VG-7",
+      "skill_metric": "Log loss, ROI, hit rate (parlay)",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "S5",
+      "name": "Same-Game Parlay",
+      "bet_type": "Parlay",
+      "signal": "Combine team + player legs within one game; correlation is structurally higher and must be measured.",
+      "inputs": "Model spread/total + player prop estimates for the same game.",
+      "correlation": "Same-game correlation measured per position group; cap enforced; legs above cap removed.",
+      "gates": "VG-1, VG-2, VG-3, VG-4, VG-5, VG-6, VG-7",
+      "skill_metric": "Log loss, ROI, hit rate (parlay)",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "S6",
+      "name": "Passing Yards Prop",
+      "bet_type": "Player prop",
+      "signal": "Model passing-yardage projection for a QB vs. the market prop line.",
+      "inputs": "QB efficiency, opponent pass defense, game script, injured offensive-line absences.",
+      "correlation": "N/A (single prop).",
+      "gates": "VG-1, VG-2, VG-3, VG-5, VG-7",
+      "skill_metric": "Brier score, log loss (prop)",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "S7",
+      "name": "Rushing Yards / TD Prop",
+      "bet_type": "Player prop",
+      "signal": "Model rushing-yardage and/or touchdown projection for a RB vs. the market prop line.",
+      "inputs": "RB usage, opponent run defense, goal-line splits, offensive-line health.",
+      "correlation": "N/A (single prop).",
+      "gates": "VG-1, VG-2, VG-3, VG-5, VG-7",
+      "skill_metric": "Brier score, log loss (prop)",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "S8",
+      "name": "Player Prop Combo Parlay",
+      "bet_type": "Player prop combo",
+      "signal": "Combine 2–3 player props (e.g. QB yards + RB yards + team total) into one correlated parlay.",
+      "inputs": "Multiple player-prop projections, inter-prop correlation, game total.",
+      "correlation": "Inter-prop correlation measured (skill-position and team correlation); cap enforced.",
+      "gates": "VG-1, VG-2, VG-3, VG-4, VG-5, VG-6, VG-7",
+      "skill_metric": "Log loss, ROI, hit rate (parlay)",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    }
+  ]
+}
