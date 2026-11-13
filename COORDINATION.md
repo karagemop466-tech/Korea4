@@ -967,7 +967,7 @@ category-organized GitHub Pages site with source-linked tables. Branched from `m
 - Pages (renamed on rebase so the already-merged dashboard module keeps its own files): `nfl-lines-overview.html`, `nfl-schedule.html`, `nfl-fair-lines.html`, `nfl-availability.html`, `nfl-analysis.html`, `nfl-strategy-registry.html`, `nfl-leaderboard.html`, `nfl-data-suggestions.html`, `nfl-questions.html`, `nfl-flagged.html`, plus `NFL-LINES-EXECUTIVE-SUMMARY.md`. `nfl.html` links to the NFL Lines landing page.
 - Tests: NFL suite 6/6 pass; `npm test` pass; `node --check js/app.js` pass; `scripts/verify.py` 0 errors/0 warnings, 352 NFL table rows linked to allowlisted official hosts, 823 internal links checked and 0 broken, 21 JSON files valid. Validation checks link structure/domain, not each row's value.
 - Preview started on port 4173; all ten NFL pages responded HTTP 200.
-- Open gates: no price source or bet log; no NFL-specific fetch workflow; 29 team depth charts missing; injury/depth/standings full row audits incomplete; PR and Pages publication pending. No new conflict encountered.
+- Open gates: no price source or bet log; no NFL-specific fetch workflow; 29 team depth charts missing; injury/depth/standings full row audits incomplete. See the reconciliation entry below for the current PR/Pages state.
 
 ### Rebase onto main and page-ownership reconciliation — 2026-11-13 (later same day)
 
@@ -977,3 +977,9 @@ category-organized GitHub Pages site with source-linked tables. Branched from `m
 - `scripts/verify.py` (main's version, kept as the base) now also: lists all ten research pages in `PRIMARY_PAGES`, allows `www.miamidolphins.com`/`www.baltimoreravens.com` as official club hosts, validates `data/nfl/*.json`, and requires an allowlisted official-host link on every NFL Lines research table row. Its `<thead>` warning now triggers on a real `<table>` tag rather than the substring "table".
 - Rebased figures after the `games_in_11` date bound: exploratory model R² 0.1917, residual SD 11.682 points, residual variance share 0.8083 (n=104); the earlier log entry quoted R² 0.2052 before that correction.
 - Checks after the rebase: `python scripts/build_site.py`, `nfl_signals.py`, `build_nfl_manifest.py`, `build_nfl_site.py` all clean; `python scripts/verify.py` 0 errors / 0 warnings (10,207 primary source rows, 361 NFL research rows, 1,367 internal links, 0 broken, 35 JSON files); NFL suite 8/8 pass (two new tests pin the page-ownership split); `npm test` and `node --check js/app.js` pass.
+
+### PR and deployment state — 2026-11-13
+
+- Branch `arena/3b442c81-korea4` rebased onto `origin/main` (`43bb109`) and force-pushed at `35798f8`; four rebased commits plus the integration commit.
+- **PR #50** opened against `main`: <https://github.com/karagemop466-tech/Korea4/pull/50>. Both CI jobs pass on the PR — "Verify final integration" (run `43435820300`) and "Verify static Pages source" (run `43435820419`). The same command sequence was reproduced locally (build_site.py, nfl_signals.py, build_nfl_manifest.py, build_nfl_site.py, verify.py, NFL suite 8/8, `node --check js/app.js`, `test_dashboard.mjs`, `npm test`, `test_dashboard_generator.py`) with 0 errors / 0 warnings.
+- Pages deployment: still pending merge. The published dashboard remains <https://karagemop466-tech.github.io/Korea4/> from `main`, so `nfl-lines-overview.html` and the other nine research pages are not live until #50 merges and Pages rebuilds. Overlapping open PRs #44 (NFL Lines Lab, `/lines/` subsite) and #49 (nfl-model register) touch different filenames; whoever merges second must re-check `scripts/build_site.py`, `scripts/verify.py` and `data/nfl/` the same way this entry documents.
