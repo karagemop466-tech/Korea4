@@ -1,0 +1,42 @@
+name: Verify NFL Lines Lab
+
+on:
+  push:
+    branches: [arena/bc672c19-korea4, main]
+    paths:
+      - 'lines/**'
+      - 'scripts/nfl_lines/**'
+      - 'research/nfl-lines/**'
+      - 'tests/test_nfl_lines.py'
+      - 'requirements-nfl-lines.txt'
+      - '.github/workflows/nfl-lines-verify.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install NFL Lines dependencies
+        run: python -m pip install -r requirements-nfl-lines.txt
+      - name: Rebuild analysis and site from committed raw data
+        run: |
+          python scripts/nfl_lines/model.py
+          python scripts/nfl_lines/backtest.py
+          python scripts/nfl_lines/build_site.py
+      - name: Verify site links, hosts and row-level source links
+        run: python scripts/nfl_lines/verify_lines.py
+      - name: Unit and leakage tests
+        run: python -m unittest tests.test_nfl_lines -v
+      - name: Fail if committed site differs from rebuilt site
+        run: |
+          git diff --exit-code -- lines research/nfl-lines/analysis/predictions.csv research/nfl-lines/analysis/backtest.json || (echo "Rebuilt output differs from committed output" && exit 1)

@@ -12,3 +12,5 @@ dist/
 
 # Test output for the legacy Jekyll Pages publisher
 _legacy/
+research/nfl-lines/analysis/bets.csv
+# NFL Lines Lab derived per-bet file (reproducible via scripts/nfl_lines/backtest.py)

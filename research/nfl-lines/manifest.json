@@ -1,0 +1,119 @@
+{
+  "snapshot_date": "2026-11-13",
+  "sources": [
+    {
+      "id": "S-01",
+      "name": "NFL.com 2026 Week 9 schedule & scores",
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "used_for": "16 final scores (Week 9, all 15 games; Week 10 Thursday) checked line by line",
+      "retrieved": "2026-11-13",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "S-02",
+      "name": "NFL.com game page: Commanders at Giants, 2026 Week 10",
+      "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "used_for": "Week 10 Thursday final score (24-21)",
+      "retrieved": "2026-11-13",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "S-03",
+      "name": "NFL.com 2026 injury report (Week 10)",
+      "url": "https://www.nfl.com/injuries/",
+      "used_for": "9 game-status designations; practice statuses",
+      "retrieved": "2026-11-13",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "S-04",
+      "name": "NFL.com news listings (headlines)",
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-12",
+      "used_for": "Discrepancy headlines only (bodies not read)",
+      "retrieved": "2026-11-13",
+      "status": "FLAGGED"
+    },
+    {
+      "id": "S-05",
+      "name": "Gambling Regulatory Authority (Singapore): Unlawful Remote Gambling Activities",
+      "url": "https://www.gra.gov.sg/harm-minimisation/unlawful-remote-gambling-activities",
+      "used_for": "Legal status for Singapore residents (Q-01)",
+      "retrieved": "2026-11-13",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "S-06",
+      "name": "Singapore Statutes Online: Remote Gambling Act 2014 (Repealed)",
+      "url": "https://sso.agc.gov.sg/Act/RGA2014/Repealed/20220801?DocDate=20220404",
+      "used_for": "Shows RGA 2014 repealed 1 Aug 2022",
+      "retrieved": "2026-11-13",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "S-07",
+      "name": "nflverse data dictionary (schedules)",
+      "url": "https://nflreadr.nflverse.com/articles/dictionary_schedules.html",
+      "used_for": "Definitions of result and total (home minus away; home plus away)",
+      "retrieved": "2026-11-13",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "S-08",
+      "name": "nfldata repository (Lee Sharpe), data/games.csv, commit 7aae940",
+      "url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+      "used_for": "Game results, closing spread and total, rest days, roof; third-party",
+      "retrieved": "2026-11-13",
+      "status": "UNVERIFIED"
+    },
+    {
+      "id": "S-09",
+      "name": "nfldata repository, data/closing_lines.csv and initial_lines.csv",
+      "url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
+      "used_for": "Coverage review only (Q-13): initial_lines.csv has 1,088 rows vs 20,490 in closing_lines.csv (codeload tarball of nflverse/nfldata master, 7aae940). Blob pages not fetched directly.",
+      "retrieved": "2026-11-13",
+      "status": "VERIFIED"
+    }
+  ],
+  "files": [
+    {
+      "path": "research/nfl-lines/README.md",
+      "sha256": "58790037d95ee5c041367603564093580d3247b2bc4094c200f8d4f77b1f4d72",
+      "bytes": 2521
+    },
+    {
+      "path": "research/nfl-lines/analysis/backtest.json",
+      "sha256": "d02c3e4230c69ac8ad0117d8b0ff6295a84349cad5a495e295c3a6a6aabd3e4b",
+      "bytes": 32834
+    },
+    {
+      "path": "research/nfl-lines/analysis/bets.csv",
+      "sha256": "7c0ad5557554981d2b97bfb9dad2655f75d40d497e59675d8405ac5dc90525ff",
+      "bytes": 2423295
+    },
+    {
+      "path": "research/nfl-lines/analysis/predictions.csv",
+      "sha256": "332af676aea1dbc8195f6e500628f411164901b77bbd25b14a189d5b0e2513c9",
+      "bytes": 335993
+    },
+    {
+      "path": "research/nfl-lines/official/nfl_2026_week9_final_scores.csv",
+      "sha256": "36cc834b88d175c56b224301159bdd2d9b8e7b3d0ff3fd65c8a8cdc012ba4f58",
+      "bytes": 2307
+    },
+    {
+      "path": "research/nfl-lines/official/nfl_injury_report_2026_week10.csv",
+      "sha256": "b81ea03b0d93ce3dbe3474074f3ac9b057355d200b8035582372df5f1f42be01",
+      "bytes": 4823
+    },
+    {
+      "path": "research/nfl-lines/raw/closing_lines.csv.gz",
+      "sha256": "792953c288c394020c2aa8ffe5ad2a1bcefd2cc2a5c6ffc0279cfe95beee6290",
+      "bytes": 134352
+    },
+    {
+      "path": "research/nfl-lines/raw/games.csv.gz",
+      "sha256": "77715cf70936393c03608ae0cb5304725736b9e8ec02f2dcc284701b704feb5f",
+      "bytes": 511657
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · NFL Lines Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><a href="index.html">NFL Lines Lab</a><span class="tag">research only · not betting advice</span></div>
+  <nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive summary</a><a href="strategies.html" class="">Strategy leaderboard</a><a href="seasons.html" class="">Season results</a><a href="correlation.html" class="">Correlation &amp; parlays</a><a href="games-2026.html" class="">2026 games</a><a href="injuries.html" class="">Injuries &amp; depth</a><a href="questions.html" class="">Questions &amp; gaps</a><a href="suggestions.html" class="on">Suggestions</a><a href="repo-review.html" class="">Repo review</a><a href="flagged.html" class="">Flagged for Review</a><a href="sources.html" class="">Sources</a><a href="methodology.html" class="">Methodology</a></nav>
+</header>
+<main>
+<div class="legal">Singapore: under the GRA's published guidance, participating in unlicensed remote gambling is an offence and Singapore Pools is the only licensed remote-betting operator. This site is research, not a recommendation to place any bet. <a href="https://www.gra.gov.sg/harm-minimisation/unlawful-remote-gambling-activities">GRA source</a></div>
+
+<section class="hero small">
+  <h1>Suggestions — awaiting your decision</h1>
+  <p>Nothing on this list has been implemented. Pick an option for each item before any change is made. Status “RECOMMENDED” only means the project team suggests it.</p>
+</section>
+<div class="tablewrap"><table class="wide"><thead><tr><th>ID</th><th>Suggestion</th><th>Why</th><th>Options</th><th>Effort (est.)</th><th>Status</th></tr></thead><tbody><tr><td>S-01</td><td><strong>Decide on unverified lines (Q-03)</strong></td><td>Keeps every result traceable. Blanking would remove the strategy analysis entirely.</td><td>A) keep UNVERIFIED with flags · B) blank lines until an official source is found</td><td>Low</td><td>OPEN</td></tr><tr><td>S-02</td><td><strong>Find an official reference for betting lines</strong></td><td>Would let the project meet the &#x27;official source&#x27; rule for prices.</td><td>A) Singapore Pools published odds/results · B) none, accept third-party only</td><td>Medium</td><td>OPEN</td></tr><tr><td>S-03</td><td><strong>Adopt a locked forward test from 2026 Week 11</strong></td><td>Removes hindsight bias: strategies and gates are fixed now; only new games are graded.</td><td>A) lock now · B) keep current backtest only</td><td>Low</td><td>RECOMMENDED</td></tr><tr><td>S-04</td><td><strong>Build an injury-report archive (weekly snapshots)</strong></td><td>Injury signals cannot be tested without history. Snapshots can be taken each week.</td><td>A) manual weekly capture · B) scheduled capture if permitted by NFL.com terms</td><td>Medium</td><td>OPEN</td></tr><tr><td>S-05</td><td><strong>Measure closing-line value (CLV)</strong></td><td>CLV is a more direct skill signal than win rate over a small sample.</td><td>Needs opening-line coverage (Q-13)</td><td>Medium</td><td>OPEN</td></tr><tr><td>S-06</td><td><strong>Collect depth charts to flag starter/backup gaps</strong></td><td>Needed for the defence and offence depth requirement.</td><td>A) NFL.com team depth charts, if available · B) other official team sites</td><td>High</td><td>OPEN</td></tr><tr><td>S-07</td><td><strong>Scope player props separately</strong></td><td>Props need player-level data and their own prices; they should not be mixed into game-level results.</td><td>A) defer until data is found · B) limit to one prop type</td><td>Medium</td><td>OPEN</td></tr><tr><td>S-08</td><td><strong>Move the project to its own repository or site root</strong></td><td>Avoids mixing the vacation dashboard with the NFL research.</td><td>A) keep /lines/ · B) make /lines/ the root · C) separate repo</td><td>Low</td><td>DECISION NEEDED (Q-12)</td></tr><tr><td>S-09</td><td><strong>Clean up coordination board and failing tests</strong></td><td>See Repo review R-01 to R-06.</td><td>A) fix now · B) fix in a separate task</td><td>Low</td><td>OPEN</td></tr><tr><td>S-10</td><td><strong>Use a small stake or no stake until a strategy passes all gates</strong></td><td>The current evidence does not support any positive-expected-value strategy.</td><td>Policy decision</td><td>Low</td><td>RECOMMENDED</td></tr></tbody></table></div>
+
+</main>
+<footer>
+  <p>Generated from data snapshot 2026-11-13. Repository: <a href="https://github.com/karagemop466-tech/Korea4" rel="noopener">karagemop466-tech/Korea4</a>.</p>
+  <p>Legend: <span class="v">VERIFIED</span> = value checked against an official NFL.com page · <span class="u">UNVERIFIED</span> = no official source found for this value; shown for analysis only · <span class="d">DERIVED</span> = calculated by this project from unverified inputs.</p>
+</footer>
+</body>
+</html>

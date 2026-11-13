@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Lines Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><a href="index.html">NFL Lines Lab</a><span class="tag">research only · not betting advice</span></div>
+  <nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="on">Executive summary</a><a href="strategies.html" class="">Strategy leaderboard</a><a href="seasons.html" class="">Season results</a><a href="correlation.html" class="">Correlation &amp; parlays</a><a href="games-2026.html" class="">2026 games</a><a href="injuries.html" class="">Injuries &amp; depth</a><a href="questions.html" class="">Questions &amp; gaps</a><a href="suggestions.html" class="">Suggestions</a><a href="repo-review.html" class="">Repo review</a><a href="flagged.html" class="">Flagged for Review</a><a href="sources.html" class="">Sources</a><a href="methodology.html" class="">Methodology</a></nav>
+</header>
+<main>
+<div class="legal">Singapore: under the GRA's published guidance, participating in unlicensed remote gambling is an offence and Singapore Pools is the only licensed remote-betting operator. This site is research, not a recommendation to place any bet. <a href="https://www.gra.gov.sg/harm-minimisation/unlawful-remote-gambling-activities">GRA source</a></div>
+
+<section class="hero">
+  <h1>Executive summary</h1>
+  <p>NFL Lines Lab tests whether a model built from historical game data (third-party; see flags) can find an edge over the closing lines. As of 2026-11-13, the answer from the evidence is <strong>no edge has been found</strong>.</p>
+</section>
+<div class="cards">
+  <div class="card"><div class="k">10</div><div class="l">Single-bet strategies tested</div></div>
+  <div class="card"><div class="k">0</div><div class="l">Strategies passing all 6 gates</div></div>
+  <div class="card"><div class="k">51.5%</div><div class="l">Best hit rate (DIV_DOG) vs 52.38% breakeven</div></div>
+  <div class="card"><div class="k">10.71 vs 10.24</div><div class="l">Average error: our model vs closing spread (points)</div></div>
+</div>
+<h2>Key findings</h2>
+<ol>
+  <li><strong>Singles:</strong> the best strategies hover near 51%, below the 52.38% breakeven at −110. None clears all validation gates. Details: <a href="strategies.html">Strategy leaderboard</a>.</li>
+  <li><strong>Correlation:</strong> spread and total outcomes are essentially uncorrelated (phi ≈ 0). Cross-game correlation is also near zero. <a href="correlation.html">Correlation &amp; parlays</a>.</li>
+  <li><strong>Parlays:</strong> every constructed 2-leg parlay has negative expected value at −110 on observed frequencies.</li>
+  <li><strong>Model vs market:</strong> the closing spread is more accurate than our model (MAE 10.24 vs 10.71 points). Our model is not yet a source of new information.</li>
+  <li><strong>Player props:</strong> not testable. No prop prices or player history were collected.</li>
+  <li><strong>Injuries and depth:</strong> the official Week 10 report lists 9 game-status designations. Starter-vs-backup analysis needs depth-chart data that has not been collected.</li>
+  <li><strong>Legal (Singapore):</strong> GRA guidance states it is an offence to participate in unlicensed remote gambling; Singapore Pools is the only licensed remote-betting operator. This must be decided before any use. <a href="questions.html">Q-01</a>.</li>
+  <li><strong>Verification:</strong> 16 final scores matched NFL.com. Betting lines have no official source and are flagged UNVERIFIED.</li>
+</ol>
+<h2>What is needed to decide</h2>
+<p>See <a href="questions.html">Questions &amp; gaps</a> and <a href="suggestions.html">Suggestions</a>. Key decisions: legal path (Q-01), whether to accept third-party lines (Q-03), and whether to lock a forward test (Q-10).</p>
+
+</main>
+<footer>
+  <p>Generated from data snapshot 2026-11-13. Repository: <a href="https://github.com/karagemop466-tech/Korea4" rel="noopener">karagemop466-tech/Korea4</a>.</p>
+  <p>Legend: <span class="v">VERIFIED</span> = value checked against an official NFL.com page · <span class="u">UNVERIFIED</span> = no official source found for this value; shown for analysis only · <span class="d">DERIVED</span> = calculated by this project from unverified inputs.</p>
+</footer>
+</body>
+</html>
