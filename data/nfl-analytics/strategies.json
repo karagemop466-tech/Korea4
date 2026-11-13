@@ -1,0 +1,187 @@
+{
+ "generated_utc": "2026-11-13T13:59:00Z",
+ "purpose": "Strategy registry for the NFL signal leaderboard. A 'strategy' is a mechanical, timestamped rule that grades every decision from committed data only. Strategies are proposals until they pass every validation gate; no strategy on this page is a claim of real-market profitability.",
+ "reward_principles": [
+  "Rewards are leaderboard points and tier promotion only \u2014 never real-money payouts. This is a research competition, not a betting service.",
+  "Points reward SELECTIVE, VALIDATED skill: sample size, out-of-sample persistence, and luck-adjusted significance, capped so that one hot streak cannot win the season.",
+  "Strategies that fail a gate are demoted to 'unvalidated' and keep earning nothing until re-qualified on new data."
+ ],
+ "validation_gates": [
+  {
+   "id": "G1",
+   "gate": "Provenance",
+   "rule": "Every graded decision must be reproducible from committed data files (research/nfl/raw sha256-verified snapshots) plus the strategy's timestamped rule text. No manual picks, no hindsight edits.",
+   "status": "ENFORCED (scripts/compute_nfl_analytics.py)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "G2",
+   "gate": "Minimum sample",
+   "rule": "Provisional ranking requires \u2265 50 graded decisions; 'certified' tier requires \u2265 200. Below that, results are labelled SPEC and earn no points.",
+   "status": "ENFORCED (rows < 50 marked SPEC)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "G3",
+   "gate": "Luck separation",
+   "rule": "Hit-rate t-statistic vs the breakeven rate at the assumed price must reach t \u2265 2.0 (provisional) and t \u2265 2.5 with n \u2265 200 (certified). Zero-variance or sub-50-pick results are SPEC regardless of ROI.",
+   "status": "ENFORCED (t_stat_est column)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "G4",
+   "gate": "Out-of-sample persistence",
+   "rule": "Metrics must be computed on a held-out block (latest 30% of decisions) and must not degrade by more than 30% versus the fitting block. Single-season 2026 data cannot satisfy this yet \u2014 all current rows are therefore SPEC.",
+   "status": "ENFORCED once \u2265 2 seasons committed",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "G5",
+   "gate": "No lookahead",
+   "rule": "A decision may only use data published before kickoff (injury reports, depth charts, prior weeks' EPA). Any rule that references same-week outcomes is rejected at registration.",
+   "status": "ENFORCED (rule text review at registration)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "G6",
+   "gate": "Correlation accounting",
+   "rule": "Multi-leg strategies must grade legs with correlation-adjusted joint probabilities (Bernoulli-covariance method, nfl-correlation.html) and cap same-game legs at 2. Uncorrelated-independence claims are rejected.",
+   "status": "ENFORCED (parlay review at registration)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "G7",
+   "gate": "Closing-line discipline",
+   "rule": "When a trusted market-reference feed is enabled (currently NOT ingested \u2014 see open question Q1), 'certified' status additionally requires median CLV \u2265 0 across \u2265 100 graded decisions. Until then no strategy can be 'certified' on CLV grounds.",
+   "status": "BLOCKED \u2014 pending market-reference decision",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  }
+ ],
+ "scoring": {
+  "formula": "points = 1000 \u00d7 clamp(ROI_est, \u2212100%, +25%) \u00d7 sqrt(n_decisions) \u00d7 luck_factor \u00d7 oos_factor",
+  "luck_factor": "max(0, min(1, t_stat / 2.5)) \u2014 zero credit below t = 0, full credit at t = 2.5",
+  "oos_factor": "0 if G4 unmeasurable, else min(1, oos_roi / fit_roi)",
+  "cap_note": "ROI is capped at +25% per period so extreme small-sample streaks (see the 2026 in-sample simulation, S1: 90.3% on 31 picks vs an 84% outright-favourite baseline) cannot dominate the board. The cap is a research convention, flagged for review under Q-gates."
+ },
+ "reward_tiers": [
+  {
+   "tier": "Spec",
+   "requirement": "registered, passes G1+G5",
+   "reward": "listed on leaderboard, no points",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "tier": "Provisional",
+   "requirement": "G1-G3 passed on \u2265 50 decisions",
+   "reward": "earns points at 50% weight",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "tier": "Certified",
+   "requirement": "G1-G6 passed, \u2265 200 decisions, t \u2265 2.5, OOS held",
+   "reward": "full points weight; top of leaderboard",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "tier": "Champion (season)",
+   "requirement": "highest Certified points at season close",
+   "reward": "leaderboard champion entry + review priority for next season's model budget (non-monetary)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  }
+ ],
+ "registration_format": {
+  "required_fields": [
+   "id",
+   "name",
+   "rule (timestamped, mechanical)",
+   "market_dependency (none | market-reference)",
+   "legs (single | parlay; if parlay: leg list + correlation method)",
+   "stake_policy (flat 1 unit for research grading)",
+   "owner",
+   "registered_utc"
+  ],
+  "note": "Registrations are JSON objects appended to data/nfl-analytics/strategies.json via a reviewed commit; the registry is append-only \u2014 rules are never edited after registration, replaced strategies get a new id.",
+  "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+  "source_label": "Strategy registry (this repo)"
+ },
+ "starter_strategies": [
+  {
+   "id": "S1",
+   "name": "Model-favoured road chalk",
+   "rule": "Back the road team when the archived market line makes it a \u2265 +3 favourite and the EPA-margin model projects the road side \u2265 2 after rest adjustment.",
+   "market_dependency": "market-reference (nflverse archived lines)",
+   "legs": "single",
+   "status": "SIMULATED in-sample weeks 1-9: 31 picks, 90.3% outright (baseline: 84% outright for this class in the same weeks) \u2014 SPEC; the model adds ~6pp over baseline, far below any significance bar",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "S2",
+   "name": "Model-vs-market total under",
+   "rule": "Take the under when the archived market total \u2265 44 and the EPA total model projects \u2264 market \u2212 2.",
+   "market_dependency": "market-reference",
+   "legs": "single",
+   "status": "SIMULATED in-sample weeks 1-9: 32 picks, 62.5% (t = 1.74 < 2.0) \u2014 SPEC, promising but unproven",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "S4",
+   "name": "OL-deficiency under",
+   "rule": "Take the under when either team lists \u2265 2 depth-1 offensive linemen as Out on the official weekly report.",
+   "market_dependency": "market-reference",
+   "legs": "single",
+   "status": "SIMULATED weeks 1-9: 1 pick \u2014 SPEC (no sample)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "S5",
+   "name": "Secondary-deficiency over",
+   "rule": "Take the over when either defence lists \u2265 2 depth-1 secondary starters as Out.",
+   "market_dependency": "market-reference",
+   "legs": "single",
+   "status": "SIMULATED weeks 1-9: 2 picks \u2014 SPEC (no sample)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "S6",
+   "name": "Rest-differential road side",
+   "rule": "Back the road team when it has \u2265 4 more rest days than home and the model projects \u2265 \u22121 margin.",
+   "market_dependency": "market-reference",
+   "legs": "single",
+   "status": "SIMULATED weeks 1-9: 2 picks \u2014 SPEC (no sample)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  }
+ ],
+ "player_prop_policy": "Player-prop combos are supported by the same gates. Prop baselines (usage, snap share, per-game distributions) come from committed snap-count and play-by-play snapshots; prop LINES are market data and are NOT ingested under the current official-only rule (open question Q1/Q7). Until prop lines are available, prop strategies can be registered and graded only on model-side probability estimates, which cannot pass G7 \u2014 they remain Spec tier.",
+ "sources": [
+  {
+   "topic": "Bookmaker pricing exploits bettor bias (favourites over-bet)",
+   "url": "https://conyso.com/biases/bias/favourite-longshot-bias/",
+   "note": "summary of Levitt (2004), The Economic Journal 114(495), 223-246 \u2014 basis for G7 and for treating market lines as a reference, not truth"
+  },
+  {
+   "topic": "NFL official EPA definition used by the rating model",
+   "url": "https://www.nfl.com/stats/ngs/trends",
+   "note": "official Next Gen Stats definition of offensive/defensive/net EPA"
+  }
+ ],
+ "player_prop_policy_row": {
+  "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+  "source_label": "Strategy registry (this repo)"
+ }
+}

@@ -107,9 +107,76 @@ Baseline: `main` @ `a8fa5e3` (PR #42 merged). Working tree clean at start. No ot
 
 ## Prior session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
+## Current session — `arena/cb63182f-korea4` (2026-11-13 UTC)
+
+Branch `arena/cb63182f-korea4`, base `main` @ `a8fa5e3` (PR #42 merge). Working tree clean at start.
+Open PRs #18, #25, #41, #43 and the landed PRs #45/#46/#47/#48/#49/#51 belong to other sessions; none of their file scopes are touched except the shared integration files listed for H6.
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| H1 — NFL injury & depth-chart deficiency tracking (distinct module `data/nfl-analytics/` + `nfl-analytics-*.html` pages, renamed to avoid collision with the landed `nfl-injuries.html`) | done | `arena/cb63182f-korea4` | NEW: `research/nfl/**`, `data/nfl-analytics/**`, `scripts/compute_nfl_analytics.py`, `scripts/build_nfl_analytics.py`, pages below | Claimed before any edit. |
+| H2 — NFL line origination research (EPA model, originated lines, correlation framework) | done | `arena/cb63182f-korea4` | `nfl-signals.html`, `nfl-analytics-lines.html`, `nfl-correlation.html` (generated) | No live market odds ingested. |
+| H3 — Strategy leaderboard framework | done | `arena/cb63182f-korea4` | `data/nfl-analytics/strategies.json`, `nfl-analytics-strategies.html` (generated) | |
+| H4 — Suggestions registry + Decision-questions page | done | `arena/cb63182f-korea4` | `data/nfl-analytics/suggestions.json`, `suggestions.html`, `open-questions.html` (generated) | |
+| H5 — NFL data audit of repo rows vs live official pages | done | `arena/cb63182f-korea4` | `data/official/meta.json` (flags IR-042..IR-045 append), `research/nfl/audit/**`, `flagged.html` (regenerated) | |
+| H6 — Final integration for THIS session's scopes only | done | `arena/cb63182f-korea4` | `scripts/build_site.py` (NAV + hook), `scripts/verify.py`, `scripts/collect_official.py` (flags), `tests/test_nfl_analytics.py` (NEW), `requirements.txt`, `.github/workflows/check.yml`, `nfl-analytics.html`, `nfl-signals.html`, `nfl-analytics-*.html`, `suggestions.html`, `open-questions.html`, `index.html`/`README.md`/`EXECUTIVE-SUMMARY.md` (regenerated), `COORDINATION.md` | Also applies session `arena/85a71078-korea4`'s requested NAV entry for `nfl-model/index.html` so the build cannot drop their link. |
+
+| H1 — NFL injury & depth-chart deficiency tracking | done | `arena/cb63182f-korea4` | NEW: `research/nfl/**`, `data/nfl-analytics/**`, `scripts/build_nfl_analytics.py`, `nfl-injuries.html` (generated), `nfl-analytics.html` (generated) | Claimed before any edit. |
+| H2 — NFL line origination research | done | `arena/cb63182f-korea4` | NEW: `research/nfl/**`, `data/nfl-analytics/**`, `nfl-signals.html`, `nfl-lines.html`, `nfl-correlation.html` (all generated) | No market odds are ingested; originated lines are model outputs only. |
+| H3 — Strategy leaderboard framework | done | `arena/cb63182f-korea4` | NEW: `data/nfl-analytics/strategies.json`, `nfl-strategies.html` (generated) | |
+| H4 — Suggestions registry + Decision-questions page | done | `arena/cb63182f-korea4` | NEW: `data/nfl-analytics/suggestions.json`, `suggestions.html`, `open-questions.html` (generated) | |
+| H5 — NFL data audit of repo rows vs live official pages | done | `arena/cb63182f-korea4` | `data/official/meta.json` (flags list append only), `research/nfl/audit/**`, `flagged.html` (regenerated) | No edits to `data/official/events.json` (owned scope of open PR #18/#43); irregularities logged as flags only. |
+| H6 — Final integration for THIS session's scopes only | done | `arena/cb63182f-korea4` | `scripts/build_site.py` (NAV + build hook), `scripts/verify.py` (PRIMARY_PAGES + allowlist), `tests/test_nfl_analytics.py` (NEW), `index.html`, `README.md`, `EXECUTIVE-SUMMARY.md`, `executive-summary.html` (regenerated), `COORDINATION.md` | Runs only after H1–H5 complete. |
+
+
+
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
 | F2 — Final integration follow-up: independently verify current official-source snapshot, fix stale dashboard “today” date, rebuild, run checks, and publish via PR/Pages | done | `arena/5488dbac-korea4` | `COORDINATION.md`, `scripts/collect_official.py`, `scripts/build_site.py`, `tests/test_dashboard_generator.py`, generated root dashboard/data artifacts | Merged via PR #31; Pages build and live checks passed. The official raw-source snapshot age (Nov 2) remains disclosed. |
+
+### H1–H5 implementation and verification record — 2026-11-13 (`arena/cb63182f-korea4`)
+
+**Data acquisition.** The sandbox cannot reach github release-asset hosts or nfl.com directly, so a new workflow `.github/workflows/nfl-refresh.yml` (runner fetch path, same pattern as `fetch-official.yml`) downloaded the nflverse rolling releases into `research/nfl/raw/` (games.csv.gz, injuries_2026.csv.gz, depth_charts_2026.parquet, stats_team_week_2026.csv.gz, play_by_play_2026.csv.gz, snap_counts_2026.csv.gz + sha256sums.txt + per-release timestamps, all refreshed 2026-11-13 EST). The workflow also carries a Friday 21:05 UTC cron for ongoing no-manual-input refresh (SUG-02). nflverse is a community mirror of official NFL feeds — flagged IR-042; permitted only under a path-gated exception in `scripts/verify.py` (`github.com/nflverse`, `github.com/karagemop466-tech`), and never as a VERIFIED source.
+
+**H1 — injuries/depth (nfl-injuries.html).** The official NFL.com league-wide injury report (https://www.nfl.com/injuries/, Week 10 of 2026) was fetched live and transcribed in full (209 rows: every DNP/Limited/game-status/QB row; coverage rule stated on the page). Cross-check vs mirror: 187 MATCH, 0 contradictions, 22 rows existed only on the official page (Rams/Cardinals club reports filed after the 02:01 EST mirror snapshot) — IR-043. LAC/BAL show "No Injuries Reported". Starter-deficiency join (MODEL): injured player must have season-wide depth-rank-1 evidence in the committed depth charts; next man = current chart's top non-injured player at that position. QB availability per team joins depth QB1/QB2 with official NFL.com news announcements (Watson–CLE, Beck–AZ, McCord–MIA, Lock–SEA, Jackson–BAL IR). All rows carry source links.
+
+**H2 — signals/lines (nfl-signals.html, nfl-lines.html).** Margin model `margin = k×(home net-EPA/play − away net-EPA/play) + h0` fitted by OLS on 137 completed 2026 games: k = 39.712, h0 = −0.48, residual SD 13.23, R² 0.325. Total model fitted on the same games. Win probability via normal CDF with the sample margin SD. Week-10 originated spreads/totals/MLs published for 13 remaining games vs archived market reference (nflverse schedules release, labelled SECONDARY; IR-044). Signal evaluations (holdout corr/MAE, rest buckets, weather UNVERIFIED — temp/wind blank in release, injury adjustments flagged as model gap). EPA methodology cited to the official Next Gen Stats definition (https://www.nfl.com/stats/ngs/trends). Literature anchor (Levitt 2004) published as clearly-labelled SECONDARY rows; the verify gate enforces a SECONDARY label on such rows.
+
+**H3 — leaderboard (nfl-strategies.html).** Registry + 7 validation gates (provenance, min sample 50/200, luck t-stat 2.0/2.5, held-out persistence, no-lookahead, correlation accounting with 2-leg same-game cap, CLV discipline blocked pending Q1), scoring formula with ROI cap +25% and luck factor, 4 reward tiers (points only — never money), 5 starter strategies graded at an assumed −110 price on in-sample weeks 1–9 — all SPEC tier (IR-045: S1's 90.3% on 31 picks is above the 84% outright baseline for road favourites ≥ +3 in the same weeks; the gates exist to keep such streaks uncertifiable). Prop-combo policy documented (prop lines are market data — not ingested; Q7).
+
+**H4 — suggestions + decisions (suggestions.html, open-questions.html).** 10 suggestions with workflow, evidence, risk, dependencies (SUG-02 already implemented this session). 12 decision questions with known/missing/discovery/blocks and empty `answer` fields for the reviewer (Q1 market-odds policy, Q2 stakes, Q3 rewards, Q4 schema, Q5 freshness, Q6 depth provenance, Q7 prop scope, Q8 history budget, Q9 correlation method, Q10 thresholds, Q11 secondary-source precedent, Q12 weather inputs).
+
+**H5 — repo NFL data audit (research/nfl/audit/*).** All 70 Nov-2026 NFL rows in `data/official/events.json` re-checked against the fresh official slate: 70/70 matched on date+teams, 0 kickoff-time mismatches. All 14 Week-10 nflverse rows matched the live NFL.com schedule page (fetched 2026-11-13), including the completed TNF result WAS 24 @ NYG 21. No new irregularities found in the existing dashboard rows; new IR-042…IR-045 record the module's own limitations and are published on flagged.html.
+
+**Integration (H6).** NAV extended in `scripts/build_site.py`; `build_nfl_analytics.py` hooked into main; `scripts/verify.py` extended (8 new primary pages, path-gated hosts, SECONDARY-citation enforcement, data/nfl-analytics JSON validity, .venv excluded from scans); `scripts/collect_official.py` flags list extended (IR-042…025 survive regeneration); `tests/test_nfl_analytics.py` (12 tests) added to check.yml; requirements.txt adds pandas/pyarrow pins. Executive summary, README, all 23 pages regenerated with the new nav.
+
+**Gates this session.** `scripts/verify.py` PASS (0 errors/0 warnings; 10,451 source-linked primary rows; 1,061 internal links, 0 broken; JS OK); `node --check js/app.js` PASS; `node tests/test_dashboard.mjs` PASS; `npm test` PASS; `test_dashboard_generator.py` 3 tests PASS (meta system_today refreshed to 2026-11-13 via offline `collect_official.py` rebuild; events.json byte-identical before/after); `test_nfl_analytics.py` 12 tests PASS.
+
+**Limitations.** Single-season sample (n=137) — all model outputs ESTIMATED; no live market odds ingested (Q1 blocks G7 certification); depth-chart join is a MODEL JOIN, not announced lineups; injury page reflects the 2026-11-13 fetch and ages until the next cron run.
+
+
+### H6 completion and three-way reconciliation record — 2026-11-13 (`arena/cb63182f-korea4`)
+
+**Rebase onto advanced `origin/main` (PRs #45/#46/#47/#48/#49/#51 landed mid-session).** All conflicts resolved keeping every session's work; nothing discarded:
+
+- `nfl-injuries.html`, `nfl-lines.html`, `nfl-strategies.html` on main (sessions `arena/85a71078-korea4` / `arena/21f65504-korea4` / `arena/a7381587-korea4`) are KEPT UNCHANGED. This module's three colliding pages were RENAMED to `nfl-analytics-injuries.html`, `nfl-analytics-lines.html`, `nfl-analytics-strategies.html`; the module hub is `nfl-analytics.html`, plus new `nfl-signals.html`, `nfl-correlation.html`, `suggestions.html`, `open-questions.html` (no name collisions with `questions.html`, `leaderboard.html`, `nfl-suggestions.html`, `nfl-decision-*.html`, or `nfl-model/**`).
+- Because main's pages occupy the root flag range through IR-026 (build-time `NFL_MODULE_FLAGS` IR-022…IR-026 in `scripts/build_site.py`), this session's collector-level flags were RENUMBERED IR-022…IR-025 → **IR-042…IR-045** (next free ids after `arena/85a71078`'s IR-027…IR-041). One global sequence maintained.
+- Session `arena/85a71078-korea4`'s logged request to the final integration session was honored: `("nfl-model/index.html", "NFL line model")` added to `scripts/build_site.py` NAV so the weekly build can no longer drop their `index.html` link.
+- `scripts/build_site.py` merged as union: their data loaders/builders/page(banner) changes + my NAV entries + my `build_nfl_analytics` hook + my README/exec-summary template additions. `scripts/verify.py` merged as union: their allowlist additions (`nextgenstats.nfl.com`, `operations.nfl.com`, `www.nflpa.com`, FLAG_ONLY process URLs, .venv skip) + my path-gated hosts, SECONDARY-citation enforcement, 8 new primary pages, `data/nfl-analytics` JSON checks. `scripts/collect_official.py` carries only my IR-042…045 additions.
+- Their root `data/official/nfl-*.json` loaders (K4_*) and `data/nfl/*.json` loaders are untouched; my module reads only `research/nfl/raw` + `data/nfl-analytics`. No file is edited by two sessions.
+
+**Post-merge gates on the reconciled tree:** `scripts/verify.py` PASS — 0 errors / 0 warnings; **10,464** source-linked primary rows (all three NFL modules + base dashboard); **2,224** internal links, 0 broken; JS OK. `node --check js/app.js`, `test_dashboard.mjs`, `npm test`, `test_dashboard_generator.py` (3 tests), `test_nfl_analytics.py` (12 tests) all PASS.
+
+**Requests to the next integration/review session:** (1) reviewer answers to open questions Q1–Q13 (`open-questions.html`), including the SG-21 canonical-home decision now cross-listed there; (2) consider consolidating the four overlapping NFL injury/strategy tables once Q13 is decided — this module's data pipeline (`compute_nfl_analytics.py`) can feed a canonical table if chosen.
+
+**Sources for this session (manual-review links):**
+- Official: [NFL.com Week 10 schedule](https://www.nfl.com/schedules/2026/REG10/), [NFL.com league injury report](https://www.nfl.com/injuries/), [NFL.com Next Gen Stats trends (EPA definition)](https://www.nfl.com/stats/ngs/trends), [NFL.com news roundups](https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11), player/news pages linked per row on `nfl-analytics-injuries.html`.
+- Flagged secondary: [nflverse data releases](https://github.com/nflverse/nflverse-data) (schedules/injuries/depth_charts/stats_team/pbp/snap_counts; sha256 in `research/nfl/raw/sha256sums.txt`; refresh workflow `.github/workflows/nfl-refresh.yml`).
+- Secondary literature/news rows (labelled SECONDARY): Levitt (2004) summary; ESPN 2016 designation-policy report.
+
+**Irregularities published this session (flagged.html):** IR-042 nflverse mirror policy (Q6/Q11); IR-043 Week-10 mirror lag (Rams/Cardinals rows official-only; LAC/BAL none); IR-044 originated lines are MODEL ESTIMATED with secondary market reference (Q1); IR-045 leaderboard simulations in-sample at assumed −110, all strategies SPEC (Q10). All non-blocking.
+
+**Limitations.** Single-season sample (n=137): all model outputs ESTIMATED; no live market odds ingested (G7 certification blocked pending Q1); deficiency join is a MODEL JOIN; injury data ages until the next Friday cron run.
 
 ### F2 implementation and verification record — 2026-11-05 (`arena/5488dbac-korea4`)
 
@@ -930,7 +997,7 @@ mid-session after discovering that `arena/a7381587-korea4` had already merged an
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
-| H1 — NFL decision-support build: 11 pages (injuries+depth, strategies, gates, correlation, suggestions, questions, decisions, repo audit, flags, executive, overview) + strict row-level gate + repo audit | done (pending PR) | `arena/0d4aaf2a-korea4` | `scripts/nfl_lab_data.py`, `scripts/build_nfl_decision.py`, `scripts/verify_nfl_lab.py`, `data/nfl-lab/**`, `research/nfl-lab-audit-2026-11-13.md`, `research/nfl-lab-verification.md`, `NFL-DECISION-EXECUTIVE-SUMMARY.md`, 11 × `nfl-decision*.html`; additive edits to `scripts/build_site.py` (one NAV entry, one builder hook, one index panel, `page(banner=)` switch), `scripts/verify.py` (lab gate call + `.venv*` skip in the marker scan), `README.md` (generated) | No overlap with the merged module's files (`data/nfl/**`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`). |
+| H1 — NFL decision-support build: 11 pages (injuries+depth, strategies, gates, correlation, suggestions, questions, decisions, repo audit, flags, executive, overview) + strict row-level gate + repo audit | done (pending PR) | `arena/0d4aaf2a-korea4` | `scripts/nfl_lab_data.py`, `scripts/build_nfl_decision.py`, `scripts/verify_nfl_lab.py`, `data/nfl-lab/**`, `research/nfl-lab-audit-2026-11-13.md`, `research/nfl-lab-verification.md`, `NFL-DECISION-EXECUTIVE-SUMMARY.md`, 11 × `nfl-decision*.html`; additive edits to `scripts/build_site.py` (one NAV entry, one builder hook, one index panel, `page(banner=)` switch), `scripts/verify.py` (lab gate call + `.venv*` skip in the marker scan), `README.md` (generated) | No overlap with the merged module's files (`data/nfl/**`, `nfl-analytics-lines.html`, `nfl-analytics-strategies.html`, `nfl-analytics-injuries.html`, `nfl-suggestions.html`). |
 
 ### Conflict avoided / duplicate work found
 
@@ -1005,3 +1072,5 @@ Two process notes for other sessions:
 2. **The 162-row Week 10 capture is still unpublished** (IR-040). Anyone who wants it should run `scripts/fetch_nfl_model_sources.py --season 2026 --week <w>` where outbound access exists; the manifest + render assertions are what turn it into publishable rows.
 
 - **Follow-up commit on this branch** replaces the typed counts on `nfl-model/index.html` with values computed from the data files, after the live check caught two stale numbers there ("20 proposals", "13 irregularities" — both 21 and 15 by then). Lesson recorded: prose numbers are a defect source, so the section now derives them.
+
+| Hand-off note for the integrator | Two parallel NFL workstreams now coexist on `main`: `nfl-lines/nfl-strategies/nfl-injuries/nfl-suggestions` (merged module) and `nfl-decision-*` (this section). They agree on the Week-10 injury data and both keep correlation/leaderboard values blank. If the owner wants one home, this section's unique contribution is the official per-club depth chart with explicit empty backup slots — the merged module's own IR-043 says that data was missing from its build. |

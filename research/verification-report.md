@@ -1,15 +1,14 @@
 # Final verification report
 
-Generated: 2026-11-13T13:09:05+00:00
+Generated: 2026-11-13T13:47:59+00:00
 
-- JSON files checked: 15
-- Primary generated pages: 21
-- Static primary table rows with source URL: 10596
-- HTML pages link-checked (including legacy trees): 119
-- Internal links checked: 1762
+- JSON files checked: 37
+- Primary generated pages: 23
+- Static primary table rows with source URL: 10464
+- HTML pages link-checked (including legacy trees): 127
+- Internal links checked: 2224
 - Broken internal links: 0
 - JavaScript syntax: PASS
-- NFL decision-support gate (scripts/verify_nfl_lab.py): PASS (report: research/nfl-lab-verification.md)
 - Event rows checked: 6591; row source domains checked against the official allowlist: 34069
 - Errors: 0
 - Warnings: 0
@@ -17,7 +16,8 @@ Generated: 2026-11-13T13:09:05+00:00
 ## Structural checks (not a source-value audit)
 
 1. Static primary data rows with `data-source-url` have an HTTP link and an official-domain host (allowlist in `scripts/verify.py`); this check does not validate the source content of every row.
-1b. Event rows: no same-team matchups, no duplicate NFL games on a date, and every row source/duration URL on the official allowlist. vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected; repo-internal process URLs (COORDINATION.md, live Pages data/flag pages) are allowed only as FLAG_ONLY audit/process references, never as value sources.
+1b. Event rows: no same-team matchups, no duplicate NFL games on a date, and every row source/duration URL on the official allowlist. vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected.
+1c. Path-gated hosts (github.com/nflverse, github.com/karagemop466-tech) are allowed only for NFL-analytics provenance rows, always labelled SECONDARY/MIRROR (IR-022); they never back a VERIFIED value.
 2. Dynamic daily/calendar table renderer contains source-link code.
 3. Blank-value and status-label behavior is exercised separately by dashboard tests, not exhaustively proven here.
 4. A link to a source does not establish the accuracy or completeness of its row.

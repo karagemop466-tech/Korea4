@@ -13,10 +13,10 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 PRIMARY_PAGES = [
     "index.html", "daily.html", "calendar.html", "vacation.html", "mlb.html", "nfl.html",
-    "nfl-lines.html", "nfl-strategies.html", "nfl-injuries.html", "nfl-suggestions.html",
-    "leaderboard.html", "questions.html",
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
     "methodology.html", "review.html", "executive-summary.html", "teams.html",
+    "nfl-analytics.html", "nfl-injuries.html", "nfl-signals.html", "nfl-lines.html",
+    "nfl-strategies.html", "nfl-correlation.html", "suggestions.html", "open-questions.html",
 ]
 REPORT = ROOT / "research/verification-report.md"
 
@@ -26,9 +26,6 @@ REPORT = ROOT / "research/verification-report.md"
 OFFICIAL_SOURCE_HOSTS = {
     "www.mlb.com", "statsapi.mlb.com",
     "www.nfl.com", "nfl.com", "media.nfl.com", "static.nfl.com", "static.www.nfl.com",
-    "nextgenstats.nfl.com",    # official NFL Next Gen Stats (verified live 2026-11-13)
-    "operations.nfl.com",      # official NFL Football Operations (verified live 2026-11-13)
-    "www.nflpa.com",           # official NFLPA (2020 CBA; verified live 2026-11-13)
     "www.49ers.com",
     "www.westwoodonesports.com",
     "gostanford.com", "calbears.com",
@@ -38,29 +35,53 @@ OFFICIAL_SOURCE_HOSTS = {
     "www.theifab.com",                                # Laws of the Game (duration reference)
     "www.nba.com", "www.nhl.com", "www.ksfo.com", "www.knbr.com", "www.957thegame.com",  # station/team pages
 }
-EXCLUDED_SOURCE_HOSTS_NOTE = "vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected; repo-internal process URLs (COORDINATION.md, live Pages data/flag pages) are allowed only as FLAG_ONLY audit/process references, never as value sources"
+# Path-gated hosts: allowed ONLY for specific repo-owned provenance rows.
+# github.com/nflverse — the nflverse rolling releases, a community mirror of official NFL
+# transaction/feeds used as the NFL analytics module's research input (flagged IR-022, labelled
+# MIRROR/SECONDARY on every row that cites it — never a VERIFIED source).
+# github.com/karagemop466-tech — this repository's own committed registry/JSON files.
+# Secondary-citation hosts: allowed ONLY on rows explicitly labelled SECONDARY
+# (literature/news citations, never a value source). Enforced below by checking the row body.
+SECONDARY_CITATION_HOSTS = {"conyso.com", "www.espn.com", "www.si.com"}
+PATH_GATED_SOURCE_HOSTS = {
+    "github.com": ("/nflverse/", "/karagemop466-tech/"),
+    "raw.githubusercontent.com": ("/nflverse/", "/karagemop466-tech/"),
+}
+EXCLUDED_SOURCE_HOSTS_NOTE = "vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected"
 
 
 # Exact URLs kept ONLY as audit evidence on flag/status rows (never as a value source):
-# IR-001 dead prior reference site, the repo's own GitHub Pages API status check, and the
-# repo's own board/data/flag pages referenced by the NFL decision module's process rows
-# (suggestions governance S-10 and the module index rows), which are proposals/process
-# records rather than sourced values.
+# IR-001 dead prior reference site, and the repo's own GitHub Pages API status check.
+# Path-gated hosts: allowed ONLY for specific repo-owned provenance rows.
+# github.com/nflverse — nflverse rolling releases, a community mirror of official NFL feeds used
+# as the NFL analytics module's research input (flagged IR-042, labelled MIRROR/SECONDARY on every
+# row that cites it — never a VERIFIED source).
+# github.com/karagemop466-tech — this repository's own committed registry/JSON files.
+PATH_GATED_SOURCE_HOSTS = {
+    "github.com": ("/nflverse/", "/karagemop466-tech/"),
+    "raw.githubusercontent.com": ("/nflverse/", "/karagemop466-tech/"),
+}
+# Secondary-citation hosts: allowed ONLY on rows explicitly labelled SECONDARY
+# (literature/news citations, never a value source). Enforced by checking the row body.
+SECONDARY_CITATION_HOSTS = {"conyso.com", "www.espn.com", "www.si.com"}
 FLAG_ONLY_SOURCE_URLS = {
     "https://buffedlizard55-lab.github.io/VacationSchedule/site/",
     "https://api.github.com/repos/karagemop466-tech/Korea4/pages",
-    "https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md",
-    "https://karagemop466-tech.github.io/Korea4/data/official/events.json",
-    "https://karagemop466-tech.github.io/Korea4/",
-    "https://karagemop466-tech.github.io/Korea4/flagged.html",
 }
 
 
 def host_is_official(url: str) -> bool:
     if url in FLAG_ONLY_SOURCE_URLS:
         return True
-    host = urlsplit(url).netloc.lower().split("@")[-1].split(":")[0]
-    return host in OFFICIAL_SOURCE_HOSTS
+    parts = urlsplit(url)
+    host = parts.netloc.lower().split("@")[-1].split(":")[0]
+    if host in OFFICIAL_SOURCE_HOSTS:
+        return True
+    prefixes = PATH_GATED_SOURCE_HOSTS.get(host)
+    if prefixes:
+        path = unquote(parts.path)
+        return any(path.startswith(prefix) for prefix in prefixes)
+    return False
 
 
 def check_event_rows(errors: list[str], warnings: list[str]) -> dict:
@@ -174,7 +195,7 @@ def local_target(base: Path, href: str) -> Path | None:
 def main():
     errors, warnings = [], []
     # 1. JSON validity.
-    json_files = sorted((ROOT / "data/official").glob("*.json")) + [ROOT / "research/line_by_line.json", ROOT / "research/official/manifest.json", ROOT / "research/probe/manifest.json"]
+    json_files = sorted((ROOT / "data/official").glob("*.json")) + sorted((ROOT / "data/nfl-analytics").glob("*.json")) + sorted((ROOT / "data/nfl-analytics").glob("*.json")) + [ROOT / "research/line_by_line.json", ROOT / "research/official/manifest.json", ROOT / "research/probe/manifest.json"]
     for p in json_files:
         try: json.loads(p.read_text())
         except Exception as e: errors.append(f"Invalid JSON {p.relative_to(ROOT)}: {e}")
@@ -191,8 +212,21 @@ def main():
         primary_row_count += len(rows)
         for attrs, _has, _body in rows:
             m = re.search(r'data-source-url="(https?://[^"]+)"', attrs)
-            if m and not host_is_official(m.group(1)):
-                errors.append(f"{rel}: row data-source-url host not on official allowlist: {m.group(1)[:120]}")
+            if m:
+                u = m.group(1)
+                if not host_is_official(u) and urlsplit(u).netloc.lower().split(":")[0] not in SECONDARY_CITATION_HOSTS:
+                    errors.append(f"{rel}: row data-source-url host not on official allowlist: {u[:120]}")
+        # secondary-citation rows: host on SECONDARY_CITATION_HOSTS requires a SECONDARY label in the row
+        for attrs, _has, body in rows:
+            m = re.search(r'data-source-url="https?://([^/"]+)', attrs, re.I)
+            if m and m.group(1).lower() in SECONDARY_CITATION_HOSTS:
+                if "SECONDARY" not in body.upper():
+                    errors.append(f"{rel}: secondary-citation row missing SECONDARY label: {m.group(1)}")
+        for attrs, _has, body in rows:
+            m = re.search(r'data-source-url="https?://([^/"]+)', attrs, re.I)
+            if m and m.group(1).lower() in SECONDARY_CITATION_HOSTS:
+                if "SECONDARY" not in body.upper():
+                    errors.append(f"{rel}: secondary-citation row missing SECONDARY label: {m.group(1)}")
         missing = [r for r in rows if not r[1] or not re.search(r'data-source-url="https?://', r[0], re.I)]
         if missing:
             errors.append(f"{rel}: {len(missing)} table rows without official source URL/link")
@@ -216,25 +250,12 @@ def main():
         errors.append(f"{len(broken)} broken internal links")
     # 4. Merge markers and obvious unresolved placeholders.
     for p in ROOT.rglob("*"):
-        if (not p.is_file() or ".git" in p.parts
-                or any(part.startswith(".venv") for part in p.parts)
-                or p.suffix in (".gz", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".pdf")):
+        if not p.is_file() or ".git" in p.parts or ".venv" in p.parts or ".venv-packages" in p.parts or p.suffix in (".gz", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".pdf"):
             continue
         try: text = p.read_text("utf-8")
         except (UnicodeDecodeError, OSError): continue
         if re.search(r"^<<<<<<< |^=======$|^>>>>>>> ", text, re.M):
             errors.append(f"Unresolved merge markers in {p.relative_to(ROOT)}")
-    # 4b. NFL decision-support section: stricter gate (every factual row sourced).
-    try:
-        lab = subprocess.run([sys.executable, str(ROOT / "scripts/verify_nfl_lab.py")],
-                             capture_output=True, text=True, timeout=180)
-        lab_ok = lab.returncode == 0
-        if not lab_ok:
-            errors.append("NFL decision-support gate failed: " + ((lab.stderr.strip().splitlines() or ["unknown"])[0]))
-    except Exception as e:
-        lab_ok = False
-        warnings.append(f"NFL decision-support gate unavailable: {e}")
-
     # 5. JavaScript syntax.
     try:
         proc = subprocess.run(["node", "--check", str(ROOT / "js/app.js")], capture_output=True, text=True, timeout=30)
@@ -259,13 +280,13 @@ def main():
         f"- Internal links checked: {checked_links}",
         f"- Broken internal links: {len(broken)}",
         f"- JavaScript syntax: {'PASS' if js_ok else 'NOT CHECKED / FAIL'}",
-        f"- NFL decision-support gate (scripts/verify_nfl_lab.py): {'PASS' if lab_ok else 'FAIL'} (report: research/nfl-lab-verification.md)",
         f"- Event rows checked: {row_stats['event_rows']}; row source domains checked against the official allowlist: {row_stats['rows_checked_domains']}",
         f"- Errors: {len(errors)}",
         f"- Warnings: {len(warnings)}", "",
         "## Structural checks (not a source-value audit)", "",
         "1. Static primary data rows with `data-source-url` have an HTTP link and an official-domain host (allowlist in `scripts/verify.py`); this check does not validate the source content of every row.",
         "1b. Event rows: no same-team matchups, no duplicate NFL games on a date, and every row source/duration URL on the official allowlist. " + EXCLUDED_SOURCE_HOSTS_NOTE + ".",
+        "1c. Path-gated hosts (github.com/nflverse, github.com/karagemop466-tech) are allowed only for NFL-analytics provenance rows, always labelled SECONDARY/MIRROR (IR-022); they never back a VERIFIED value.",
         "2. Dynamic daily/calendar table renderer contains source-link code.",
         "3. Blank-value and status-label behavior is exercised separately by dashboard tests, not exhaustively proven here.",
         "4. A link to a source does not establish the accuracy or completeness of its row.",

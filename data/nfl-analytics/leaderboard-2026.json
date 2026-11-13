@@ -1,0 +1,95 @@
+{
+ "generated_utc": "2026-11-13T13:40:12Z",
+ "assumed_price": -110,
+ "assumed_price_note": "SIMULATION ONLY. No real market prices are ingested; the -110 assumption is a research convention for comparing strategy hit rates against breakeven (52.38% at -110).",
+ "market_reference": "https://github.com/nflverse/nflverse-data/releases/tag/schedules",
+ "rows": [
+  {
+   "id": "S1",
+   "name": "Model-favored road dog",
+   "picks": 31,
+   "hits": 28,
+   "hit_rate": "90.3%",
+   "units_est": "+22.45",
+   "roi_est": "+72.4%",
+   "t_stat_est": 8.04,
+   "status": "SIMULATED \u2014 in-sample (weeks 1-9), assumed -110 price; NOT evidence of edge"
+  },
+  {
+   "id": "S2",
+   "name": "Model-vs-market total under",
+   "picks": 32,
+   "hits": 20,
+   "hit_rate": "62.5%",
+   "units_est": "+6.18",
+   "roi_est": "+19.3%",
+   "t_stat_est": 1.74,
+   "status": "SIMULATED \u2014 in-sample (weeks 1-9), assumed -110 price; NOT evidence of edge"
+  },
+  {
+   "id": "S4",
+   "name": "OL deficiency under",
+   "picks": 0,
+   "hits": 0,
+   "hit_rate": "",
+   "units_est": "",
+   "roi_est": "",
+   "t_stat_est": "",
+   "status": "NO QUALIFYING PICKS in weeks 1-9 (in-sample, SIMULATED)"
+  },
+  {
+   "id": "S5",
+   "name": "Secondary deficiency over",
+   "picks": 0,
+   "hits": 0,
+   "hit_rate": "",
+   "units_est": "",
+   "roi_est": "",
+   "t_stat_est": "",
+   "status": "NO QUALIFYING PICKS in weeks 1-9 (in-sample, SIMULATED)"
+  },
+  {
+   "id": "S6",
+   "name": "Rest differential road side",
+   "picks": 2,
+   "hits": 1,
+   "hit_rate": "50.0%",
+   "units_est": "-0.09",
+   "roi_est": "-4.5%",
+   "t_stat_est": 0.07,
+   "status": "SIMULATED \u2014 in-sample (weeks 1-9), assumed -110 price; NOT evidence of edge"
+  }
+ ],
+ "strategies": [
+  {
+   "id": "S1",
+   "name": "Model-favored road dog",
+   "rule": "Back the road team when the archived market line makes it a \u2265 +3 underdog but the EPA-margin model projects the road side to win by \u2265 2 after rest adjustment.",
+   "depends_on_market": true
+  },
+  {
+   "id": "S2",
+   "name": "Model-vs-market total under",
+   "rule": "Take the under when the archived market total is \u2265 44 and the EPA total model projects \u2264 market \u2212 2.",
+   "depends_on_market": true
+  },
+  {
+   "id": "S4",
+   "name": "OL deficiency under",
+   "rule": "Take the under when either team has \u2265 2 offensive-line starters (depth rank 1) listed Out on the week's official injury report.",
+   "depends_on_market": true
+  },
+  {
+   "id": "S5",
+   "name": "Secondary deficiency over",
+   "rule": "Take the over when either defense has \u2265 2 secondary starters (depth rank 1) listed Out.",
+   "depends_on_market": true
+  },
+  {
+   "id": "S6",
+   "name": "Rest differential road side",
+   "rule": "Back the road team when it has \u2265 4 more days rest than home and the model projects \u2265 \u22121 margin (near pick-em).",
+   "depends_on_market": true
+  }
+ ]
+}

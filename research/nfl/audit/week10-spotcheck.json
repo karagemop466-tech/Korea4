@@ -1,0 +1,1054 @@
+{
+ "generated_utc": "2026-11-13T13:40:12Z",
+ "official_page": "https://www.nfl.com/injuries/",
+ "official_page_fetched": "2026-11-13 (UTC session)",
+ "rows_transcribed": 207,
+ "mirror_crosscheck": [
+  {
+   "player": "Lucas Patrick",
+   "team": "WAS",
+   "result": "MATCH"
+  },
+  {
+   "player": "Colson Yankoff",
+   "team": "WAS",
+   "result": "MATCH"
+  },
+  {
+   "player": "Treylon Burks",
+   "team": "WAS",
+   "result": "MATCH"
+  },
+  {
+   "player": "Amik Robertson",
+   "team": "WAS",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jayden Daniels",
+   "team": "WAS",
+   "result": "MATCH"
+  },
+  {
+   "player": "Malik Harrison",
+   "team": "NYG",
+   "result": "MATCH"
+  },
+  {
+   "player": "J.J. McCarthy",
+   "team": "NYG",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kerby Joseph",
+   "team": "DET",
+   "result": "MATCH"
+  },
+  {
+   "player": "Cade Mays",
+   "team": "DET",
+   "result": "MATCH"
+  },
+  {
+   "player": "D.J. Reed",
+   "team": "DET",
+   "result": "MATCH"
+  },
+  {
+   "player": "Amon-Ra St. Brown",
+   "team": "DET",
+   "result": "MATCH"
+  },
+  {
+   "player": "Sione Vaki",
+   "team": "DET",
+   "result": "MATCH"
+  },
+  {
+   "player": "Ben Brown",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "A.J. Brown",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kevin Byard",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Carlton Davis III",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Reggie Gilliam",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "TreVeyon Henderson",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Hunter Henry",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Cameron Latu",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Drake Maye",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Morgan Moses",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Walter Rouse",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Brenden Schooler",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Rhamondre Stevenson",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Greg Van Roten",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Charles Woods",
+   "team": "NE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Justin Fields",
+   "team": "KC",
+   "result": "MATCH"
+  },
+  {
+   "player": "Patrick Mahomes",
+   "team": "KC",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jaylon Moore",
+   "team": "KC",
+   "result": "MATCH"
+  },
+  {
+   "player": "Omarr Norman-Lott",
+   "team": "KC",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jaydn Ott",
+   "team": "KC",
+   "result": "MATCH"
+  },
+  {
+   "player": "Peter Woods",
+   "team": "KC",
+   "result": "MATCH"
+  },
+  {
+   "player": "Zachariah Branch",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kendal Daniels",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Divine Deablo",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Gervon Dexter Sr.",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "James Pearce Jr.",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jawaan Taylor",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Cameron Thomas",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Josh Woods",
+   "team": "ATL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Blake Cashman",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "T.J. Hockenson",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Tyrion Ingram-Dawkins",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jauan Jennings",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kyler Murray",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kyle Van Noy",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jay Ward",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Carson Wentz",
+   "team": "MIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Aaron Banks",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Chris Brooks",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Javon Bullard",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Zaire Franklin",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Travis Glover",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Ty'Ron Hopper",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Josh Jacobs",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Skyy Moore",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Micah Parsons",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Sean Rhyan",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Lukas Van Ness",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Josh Whyle",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Savion Williams",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kevin Zeitler",
+   "team": "GB",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jessie Bates",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Ezra Cleveland",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Branson Combs",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jordan Davis",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Robert Hainsey",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Antonio Johnson",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jakobi Meyers",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Chris Rodriguez Jr.",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Bhayshul Tuten",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Travon Walker",
+   "team": "JAX",
+   "result": "MATCH"
+  },
+  {
+   "player": "Cody Barton",
+   "team": "TEN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Anthony Hill Jr.",
+   "team": "TEN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Tony Pollard",
+   "team": "TEN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Peter Skoronski",
+   "team": "TEN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Tyjae Spears",
+   "team": "TEN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Carnell Tate",
+   "team": "TEN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kevin Winston Jr.",
+   "team": "TEN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Alec Anderson",
+   "team": "BUF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Christian Benford",
+   "team": "BUF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Spencer Brown",
+   "team": "BUF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Dion Dawkins",
+   "team": "BUF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Sam Franklin Jr.",
+   "team": "BUF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Dalton Kincaid",
+   "team": "BUF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Connor McGovern",
+   "team": "BUF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jarvis Brownlee Jr.",
+   "team": "NYJ",
+   "result": "MATCH"
+  },
+  {
+   "player": "Omar Cooper Jr.",
+   "team": "NYJ",
+   "result": "MATCH"
+  },
+  {
+   "player": "Joseph Ossai",
+   "team": "NYJ",
+   "result": "MATCH"
+  },
+  {
+   "player": "Harrison Phillips",
+   "team": "NYJ",
+   "result": "MATCH"
+  },
+  {
+   "player": "Trevin Wallace",
+   "team": "NYJ",
+   "result": "MATCH"
+  },
+  {
+   "player": "Garrett Wilson",
+   "team": "NYJ",
+   "result": "MATCH"
+  },
+  {
+   "player": "Nahshon Wright",
+   "team": "NYJ",
+   "result": "MATCH"
+  },
+  {
+   "player": "Tucker Addington",
+   "team": "MIA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Darrell Baker Jr.",
+   "team": "MIA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Chris Bell",
+   "team": "MIA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Aaron Brewer",
+   "team": "MIA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Malik Herring",
+   "team": "MIA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Will Kacmarek",
+   "team": "MIA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jared Wayne",
+   "team": "MIA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Mo Alie-Cox",
+   "team": "IND",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jaylon Carlies",
+   "team": "IND",
+   "result": "MATCH"
+  },
+  {
+   "player": "Akeem Davis-Gaither",
+   "team": "IND",
+   "result": "MATCH"
+  },
+  {
+   "player": "Luke Rhodes",
+   "team": "IND",
+   "result": "MATCH"
+  },
+  {
+   "player": "Grover Stewart",
+   "team": "IND",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jerry Tillery",
+   "team": "IND",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jalen Travis",
+   "team": "IND",
+   "result": "MATCH"
+  },
+  {
+   "player": "Damien Lewis",
+   "team": "CAR",
+   "result": "MATCH"
+  },
+  {
+   "player": "Bobby Okereke",
+   "team": "CAR",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jaelan Phillips",
+   "team": "CAR",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kelvin Banks Jr.",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "CJ Donaldson",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "David Edwards",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "Martin Emerson",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "Travis Etienne",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "Taliese Fuaga",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "Erik McCoy",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "Christen Miller",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "Quincy Riley",
+   "team": "NO",
+   "result": "MATCH"
+  },
+  {
+   "player": "Azeez Al-Shaair",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Reed Blankenship",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Tank Dell",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Marvin Harrison Jr.",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jake Hummel",
+   "team": "HOU",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Brevin Jordan",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Woody Marks",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "David Montgomery",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Keylan Rutledge",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jaylin Smith",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Wyatt Teller",
+   "team": "HOU",
+   "result": "MATCH"
+  },
+  {
+   "player": "Austin Barber",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Denzel Boston",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Michael Burton",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Maliek Collins",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Harold Fannin Jr.",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Ronnie Hickman Jr.",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Tytus Howard",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Elgton Jenkins",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Donovan McMillon",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Carson Schwesinger",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Denzel Ward",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Quincy Williams",
+   "team": "CLE",
+   "result": "MATCH"
+  },
+  {
+   "player": "Davis Allen",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Steve Avila",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Joe Cardona",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Kamren Curl",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Terrance Ferguson",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Myles Garrett",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Trent McDuffie",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Puka Nacua",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Colby Parkinson",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Matthew Stafford",
+   "team": "LAR",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Zachary Carter",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Hjalte Froholdt",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Jon Gaines II",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Hunter Long",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Roy Lopez",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Max Melton",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Darius Robinson",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Dante Stills",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Josh Sweat",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Jayden Williams",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Andrew Wingard",
+   "team": "AZ",
+   "result": "NOT IN MIRROR (official page ahead of mirror snapshot)"
+  },
+  {
+   "player": "Anthony Bradford",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Charles Cross",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Sam Darnold",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Derick Hall",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Drew Lock",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Quenton Nelson",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Uchenna Nwosu",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Patrick O'Connell",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Connor O'Toole",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Brandon Pili",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jarran Reed",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jaxon Smith-Njigba",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Leonard Williams",
+   "team": "SEA",
+   "result": "MATCH"
+  },
+  {
+   "player": "Thomas Booker",
+   "team": "LV",
+   "result": "MATCH"
+  },
+  {
+   "player": "Trey Zuhn III",
+   "team": "LV",
+   "result": "MATCH"
+  },
+  {
+   "player": "Mike Evans",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Renardo Green",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Dre Greenlaw",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Deommodore Lenoir",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Christian McCaffrey",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Siran Neal",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Deebo Samuel Sr.",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Upton Stout",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "C.J. West",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Trent Williams",
+   "team": "SF",
+   "result": "MATCH"
+  },
+  {
+   "player": "Alijah Clark",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Donovan Ezeiruaku",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jake Ferguson",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Tyler Goodson",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Malik Hooker",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "P.J. Locke",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Von Miller",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jonathan Mingo",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "George Pickens",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Juanyeh Thomas",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "KaVontae Turpin",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Joey Porter Jr.",
+   "team": "DAL",
+   "result": "MATCH"
+  },
+  {
+   "player": "Derrick Harmon",
+   "team": "PIT",
+   "result": "MATCH"
+  },
+  {
+   "player": "Cameron Heyward",
+   "team": "PIT",
+   "result": "MATCH"
+  },
+  {
+   "player": "T.J. Watt",
+   "team": "PIT",
+   "result": "MATCH"
+  },
+  {
+   "player": "Jonathan Allen",
+   "team": "CIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "Kyle Dugger",
+   "team": "CIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "B.J. Hill",
+   "team": "CIN",
+   "result": "MATCH"
+  },
+  {
+   "player": "(no players listed)",
+   "team": "LAC",
+   "result": "MATCH"
+  },
+  {
+   "player": "(no players listed)",
+   "team": "BAL",
+   "result": "MATCH"
+  }
+ ],
+ "note": "Rows listed here were read from the official NFL.com league injury report page on 2026-11-13 (UTC session) and independently cross-checked against the nflverse mirror. Only these rows carry the VERIFIED label; all other mirror rows stay MIRROR/UNVERIFIED."
+}

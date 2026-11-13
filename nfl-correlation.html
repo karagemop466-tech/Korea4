@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NFL parlay correlation — FREE TIME VACATION</title>
+<meta name="description" content="Official-source Bay Area sports radio free-time dashboard, 2026–2029.">
+<link rel="stylesheet" href="css/style.css">
+
+<script>window.K4_META={"system_today":"2026-11-13","date_range":["2026-11-01","2029-12-31"],"data_start":"2026-01-01","counts":{"official_sources":748,"official_event_rows":6591,"mlb_teams":30,"days":1461,"intervals":14303,"wwo_sf_affiliate_rows":13,"line_by_line_audit_rows":2434},"durations":{"MLB":158,"NFL":192,"NCAAF":204,"MLS":120},"default_source_url":"https://www.957thegame.com/","timezone":"America/Los_Angeles (PST in winter, PDT in summer)"};</script>
+<script src="js/app.js" defer></script>
+</head><body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">FREE TIME VACATION</a>
+  <span class="tz">America/Los_Angeles · PST/PDT · 94122 AM/FM</span>
+  <nav class="main-nav"><a href="index.html" class="">Dashboard</a><a href="daily.html" class="">Daily scoreboard</a><a href="calendar.html" class="">Calendar</a><a href="vacation.html" class="">Vacation windows</a><a href="mlb.html" class="">MLB</a><a href="nfl.html" class="">NFL</a><a href="nfl-model/index.html" class="">NFL line model</a><a href="nfl-analytics.html" class="">NFL analytics hub</a><a href="nfl-analytics-injuries.html" class="">Analytics: injuries</a><a href="nfl-signals.html" class="">Analytics: signals</a><a href="nfl-analytics-lines.html" class="">Analytics: lines</a><a href="nfl-analytics-strategies.html" class="">Analytics: leaderboard</a><a href="nfl-correlation.html" class="active" aria-current=page>Analytics: correlation</a><a href="suggestions.html" class="">Analytics: suggestions</a><a href="open-questions.html" class="">Analytics: decisions</a><a href="ncaaf.html" class="">Stanford / Cal</a><a href="wwo.html" class="">Westwood One</a><a href="radio.html" class="">Radio map</a><a href="nfl-analytics.html" class="">NFL analytics</a><a href="nfl-injuries.html" class="">NFL injuries</a><a href="nfl-signals.html" class="">NFL signals</a><a href="nfl-lines.html" class="">NFL lines</a><a href="nfl-strategies.html" class="">NFL leaderboard</a><a href="nfl-correlation.html" class="active" aria-current=page>Correlation</a><a href="suggestions.html" class="">Suggestions</a><a href="open-questions.html" class="">Open questions</a><a href="sources.html" class="">Sources</a><a href="flagged.html" class="">Flagged</a><a href="methodology.html" class="">Method</a><a href="review.html" class="">Repo review</a><a href="executive-summary.html" class="">Executive summary</a></nav>
+</div></header>
+<main>
+  <h1 class="page-title">NFL parlay correlation</h1>
+  <p class="page-lead">Bernoulli-covariance correlation framework, calculator, and descriptive 2026 correlations — no market prices.</p>
+  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Official source snapshots last refreshed 2026-11-02T17:41:45+00:00; dashboard rebuilt 2026-11-13T13:47:59+00:00. The selected dashboard date is 2026-11-13 Pacific Time. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
+  
+<div class="callout"><strong>Method (G6 standard).</strong> Two binary legs A and B with correlation ρ.
+Bernoulli covariance: P(A∩B) = P(A)·P(B) + ρ·√(P(A)(1−P(A))·P(B)(1−P(B))), clamped to the Fréchet bounds
+[max(0, P(A)+P(B)−1), min(P(A), P(B))]. Same-game parlays are capped at 2 legs under the current gates; a 3-leg
+approximation is provided for research only. Pearson correlation on game-level season totals from nflverse play-by-play (mirror of official NFL feeds), weeks 1-10. Game-level correlations are NOT the correlation of specific prop legs against a line; they are a descriptive starting point and must be re-estimated against actual prop lines before any parlay use.</div>
+<section class="panel"><h2>Calculator (client-side; no market prices involved)</h2>
+
+<script>
+function clamp(x, lo, hi){ return Math.max(lo, Math.min(hi, x)); }
+function bernoulliJoint(pa, pb, rho){
+  var pa_ = clamp(pa, 0.001, 0.999), pb_ = clamp(pb, 0.001, 0.999);
+  var covMax = Math.sqrt(pa_*(1-pa_)*pb_*(1-pb_));
+  var rho_ = clamp(rho, -0.99, 0.99);
+  var cov = rho_ * covMax;
+  var joint = pa_*pb_ + cov;
+  var lo = Math.max(0, pa_+pb_-1), hi = Math.min(pa_, pb_);
+  if (joint < lo) joint = lo; if (joint > hi) joint = hi;
+  return {joint: joint, bounded: (pa_*pb_+cov < lo) || (pa_*pb_+cov > hi)};
+}
+function fairOdds(p){ return p <= 0 ? '∞' : '+' + Math.round((1-p)/p*100); }
+function calc(){
+  var pa = parseFloat(document.getElementById('pa').value)/100;
+  var pb = parseFloat(document.getElementById('pb').value)/100;
+  var rho = parseFloat(document.getElementById('rho').value);
+  var legs3 = document.getElementById('three').checked;
+  var pc = legs3 ? parseFloat(document.getElementById('pc').value)/100 : null;
+  var rho2 = legs3 ? parseFloat(document.getElementById('rho2').value) : 0;
+  var rho3 = legs3 ? parseFloat(document.getElementById('rho3').value) : 0;
+  var r1 = bernoulliJoint(pa, pb, rho);
+  var pAB = r1.joint;
+  var pABC = null;
+  if (pc !== null){
+    var r2 = bernoulliJoint(pa, pc, rho2);
+    var r3 = bernoulliJoint(pb, pc, rho3);
+    pABC = clamp(pAB + pc - Math.max(0, pa + pc - 1) - r2.joint - r3.joint + pa*pb*pc*0 , 0.0001, 1);
+    // inclusion-exclusion with pairwise covariances:
+    var covAB = pAB - pa*pb, covAC = r2.joint - pa*pc, covBC = r3.joint - pb*pc;
+    pABC = clamp(pa*pb*pc + covAB*pc + covAC*pb + covBC*pa, Math.max(0,pa+pb+pc-2), Math.min(pa,pb,pc));
+  }
+  var out = document.getElementById('out');
+  var html = '<table><thead><tr><th>Quantity</th><th>Value</th></tr></thead><tbody>';
+  html += '<tr><td>P(A)</td><td>' + (pa*100).toFixed(1) + '%</td></tr>';
+  html += '<tr><td>P(B)</td><td>' + (pb*100).toFixed(1) + '%</td></tr>';
+  html += '<tr><td>Independent P(A∩B)</td><td>' + (pa*pb*100).toFixed(2) + '%</td></tr>';
+  html += '<tr><td>Correlation-adjusted P(A∩B)</td><td>' + (pAB*100).toFixed(2) + '%</td></tr>';
+  if (pABC !== null){ html += '<tr><td>3-leg P(A∩B∩C)</td><td>' + (pABC*100).toFixed(2) + '%</td></tr>'; }
+  html += '<tr><td>Fair decimal-style payout for ' + (legs3 ? '3-leg' : '2-leg') + ' parlay</td><td>' + fairOdds(legs3 ? pABC : pAB) + '</td></tr>';
+  if (r1.bounded) html += '<tr><td>Bounds note</td><td>ρ input pushed the joint past a Fréchet bound; result clamped</td></tr>';
+  html += '</tbody></table>';
+  out.innerHTML = html;
+}
+document.addEventListener('DOMContentLoaded', calc);
+</script>
+
+<div class="table-wrap"><div class="scroll"><table><thead><tr><th>Input</th><th>Value</th></tr></thead><tbody>
+<tr><td>P(A) %</td><td><input id="pa" type="number" value="60" min="1" max="99"></td></tr>
+<tr><td>P(B) %</td><td><input id="pb" type="number" value="55" min="1" max="99"></td></tr>
+<tr><td>ρ (A,B)</td><td><input id="rho" type="number" value="0.30" step="0.05" min="-0.99" max="0.99"></td></tr>
+<tr><td>3-leg research mode</td><td><input id="three" type="checkbox"> P(C) % <input id="pc" type="number" value="50" min="1" max="99" style="width:5em"> ρ(A,C) <input id="rho2" type="number" value="0.20" step="0.05" style="width:5em"> ρ(B,C) <input id="rho3" type="number" value="0.10" step="0.05" style="width:5em"></td></tr>
+</tbody></table></div><p><button type="button" onclick="calc()">Recalculate</button></p><div id="out"></div></div>
+<p class="intro">Defaults are placeholders, not estimates. ρ must come from committed data (below) or reviewer-approved research — never invented.</p>
+</section>
+<section class="panel"><h2>Descriptive 2026 game-level correlations (ESTIMATED)</h2>
+<p class="intro">Descriptive game-level correlations from committed play-by-play (n = 137 games, weeks 1-10). These are NOT prop-leg correlations against a line; re-estimate before any parlay use.</p>
+<div class="table-wrap" data-table="correlations" data-page-size="20">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter correlations rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="estimated">Estimated</button>
+        <button type="button" data-status-filter="unverified">Unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
+      </div>
+      <div class="scroll"><table><thead><tr><th>Leg pair (game-level season totals)</th><th>Pearson r</th><th>n games</th><th>Status</th><th>Official source</th></tr></thead><tbody><tr data-source-url="https://www.957thegame.com/" data-row-status="estimated — one season, descriptive; re-estimate per use" data-row-text="combined game passing yards vs combined game total points  0.0   137   estimated — one season, descriptive; re-estimate per use   official source "><td>Combined game passing yards vs combined game total points</td><td><span class="num">0.0</span></td><td><span class="num">137</span></td><td><span class="badge badge-estimated">ESTIMATED — one season, descriptive; re-estimate per use</span></td><td><a class="source-link" href="https://www.957thegame.com/" target="_blank" rel="noopener">Official source</a></td></tr><tr data-source-url="https://www.957thegame.com/" data-row-status="estimated — one season, descriptive" data-row-text="combined game receiving yards vs combined game total points  0.0   137   estimated — one season, descriptive   official source "><td>Combined game receiving yards vs combined game total points</td><td><span class="num">0.0</span></td><td><span class="num">137</span></td><td><span class="badge badge-estimated">ESTIMATED — one season, descriptive</span></td><td><a class="source-link" href="https://www.957thegame.com/" target="_blank" rel="noopener">Official source</a></td></tr><tr data-source-url="https://www.957thegame.com/" data-row-status="estimated — one season, descriptive" data-row-text="combined game rushing yards vs combined game total points  0.0   137   estimated — one season, descriptive   official source "><td>Combined game rushing yards vs combined game total points</td><td><span class="num">0.0</span></td><td><span class="num">137</span></td><td><span class="badge badge-estimated">ESTIMATED — one season, descriptive</span></td><td><a class="source-link" href="https://www.957thegame.com/" target="_blank" rel="noopener">Official source</a></td></tr><tr data-source-url="https://www.957thegame.com/" data-row-status="estimated — one season, descriptive" data-row-text="combined game passing yards vs combined game rushing yards  -0.24   137   estimated — one season, descriptive   official source "><td>Combined game passing yards vs combined game rushing yards</td><td><span class="num">-0.24</span></td><td><span class="num">137</span></td><td><span class="badge badge-estimated">ESTIMATED — one season, descriptive</span></td><td><a class="source-link" href="https://www.957thegame.com/" target="_blank" rel="noopener">Official source</a></td></tr></tbody></table></div>
+    </div>
+</section>
+<section class="panel"><h2>Why correlation decides parlay value</h2>
+<p class="intro">A 2-leg parlay of independent 60% legs pays as a 36% event. With ρ = +0.30 the joint probability is
+≈ 45% — the same ticket is worth very different amounts depending on correlation. This is why G6 forces every multi-leg
+registration to declare its correlation source, and why the same-game cap exists: positive correlation is usually
+purchased at full price in real markets, so unadjusted independence math overstates value. No odds are ingested, so this
+page never claims a ticket is +EV — it computes probabilities only.</p></section>
+
+  <footer class="footer">
+    <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
+    <a href="docs/index.html">Docs HTML edition (parallel session)</a>
+    <a href="site/index.html">Legacy anchor site</a>
+    <a href="site/pages/sources.html">Legacy category pages</a>
+    <a href="data/official/events.json">Raw official event JSON</a>
+    <a href="research/line_by_line.json">Line-by-line audit JSON</a>
+    <br><span class="mini">Built 2026-11-13T13:47:59+00:00 from 748 captured official-source records. Deployment: GitHub Pages <code>main:/</code>.</span>
+  </footer>
+</main></body></html>

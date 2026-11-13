@@ -1,0 +1,149 @@
+{
+ "generated_utc": "2026-11-13T13:59:00Z",
+ "purpose": "Dedicated suggestions registry. Anyone reviewing the site can read each suggestion, its evidence, its cost/risk, and its status. A suggestion is NEVER implemented directly from this page: the reviewer (repo owner) selects the best path, and only then does an integration session implement it on its own branch with COORDINATION.md records.",
+ "workflow": [
+  "1. PROPOSED \u2014 logged here with evidence and a discovery path.",
+  "2. UNDER REVIEW \u2014 the reviewer is evaluating; decision questions it depends on are listed.",
+  "3. APPROVED \u2014 reviewer picked a path; implementation task is created on COORDINATION.md.",
+  "4. IMPLEMENTED \u2014 live on the site, with the implementing PR linked.",
+  "5. REJECTED/DEFERRED \u2014 recorded with the reason so the same idea is not re-litigated blindly."
+ ],
+ "rows": [
+  {
+   "id": "SUG-01",
+   "title": "Ingest a trusted market-reference odds feed for CLV and edge measurement",
+   "category": "Data",
+   "evidence": "Originated lines currently compare to archived nflverse market lines (secondary, delayed). Live CLV (G7) is impossible without a price feed.",
+   "impact": "Enables validation gates G7 and real leaderboard tiers; biggest single unlock for the leaderboard's 'remove luck' goal.",
+   "risk": "Non-official source conflicts with the site's official-only row rule; needs an explicitly flagged secondary-source policy.",
+   "depends_on": [
+    "Q1"
+   ],
+   "status": "PROPOSED",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/open-questions.json",
+   "source_label": "Open questions Q1 (this repo)"
+  },
+  {
+   "id": "SUG-02",
+   "title": "Weekly automated refresh of injury/depth/EPA snapshots (Friday 21:05 UTC cron)",
+   "category": "Automation",
+   "evidence": "nfl-refresh.yml workflow already committed; cron schedules the fetch+rebuild each Friday after final injury designations.",
+   "impact": "Removes all manual data input; keeps injury tracking current without human action.",
+   "risk": "Cron commits to main could interleave with open PR branches; mitigation: concurrency guard + rebase pull already in the workflow.",
+   "depends_on": [],
+   "status": "IMPLEMENTED (this session; verify after merge)",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/.github/workflows/nfl-refresh.yml",
+   "source_label": "nfl-refresh workflow (this repo)"
+  },
+  {
+   "id": "SUG-03",
+   "title": "Player-prop baseline tables (usage, snap share, per-game distributions)",
+   "category": "Data",
+   "evidence": "snap_counts_2026.csv.gz and play-by-play are already committed; prop baselines are computable today; only prop LINES are missing (Q1/Q7).",
+   "impact": "Prepares the prop-combo leaderboard lane demanded by the project brief.",
+   "risk": "Low \u2014 read-only computations; page size manageable.",
+   "depends_on": [
+    "Q7"
+   ],
+   "status": "PROPOSED",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/snap_counts",
+   "source_label": "nflverse snap counts release"
+  },
+  {
+   "id": "SUG-04",
+   "title": "Inactive-list monitoring at the 90-minute window before kickoff",
+   "category": "Data",
+   "evidence": "Official inactives land ~90 minutes pre-kickoff (NFL.com publishes weekly inactives pages); designation changes between Friday report and inactive list are a known decision point.",
+   "impact": "Late-swap protection for any graded strategy; prevents grading on stale availability.",
+   "risk": "Requires a Sunday-morning fetch schedule and a trusted source for inactives (NFL.com news pages are official).",
+   "depends_on": [
+    "Q5"
+   ],
+   "status": "PROPOSED",
+   "source_url": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season",
+   "source_label": "NFL.com weekly inactives page"
+  },
+  {
+   "id": "SUG-05",
+   "title": "Correlation-aware parlay builder in the UI",
+   "category": "Site",
+   "evidence": "nfl-correlation.html ships a Bernoulli-covariance calculator this session; a builder that assembles multi-leg tickets with joint probability and EV would make it usable, not just explainable.",
+   "impact": "Directly serves the parlay/player-prop requirement; makes correlation visible instead of an afterthought.",
+   "risk": "UI scope; needs discipline to avoid implying available prices (none ingested).",
+   "depends_on": [
+    "Q9"
+   ],
+   "status": "PROPOSED",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/scripts/build_nfl_analytics.py",
+   "source_label": "correlation page builder (this repo)"
+  },
+  {
+   "id": "SUG-06",
+   "title": "Extend committed history to 1999-2025 seasons for signal calibration",
+   "category": "Data",
+   "evidence": "nflverse schedules/play-by-play releases cover 1999+; 2026-only samples are too small for G3/G4 (rest buckets n\u224810, holdout n\u224840).",
+   "impact": "Makes validation gates meaningful; estimated signal effects become calibratable.",
+   "risk": "~9 more seasons of pbp (~80 MB compressed) in Git \u2014 exceeds comfortable repo weight; better as an on-demand fetch task than a default commit.",
+   "depends_on": [
+    "Q8"
+   ],
+   "status": "PROPOSED",
+   "source_url": "https://github.com/nflverse/nflverse-data/releases/tag/pbp",
+   "source_label": "nflverse play-by-play releases"
+  },
+  {
+   "id": "SUG-07",
+   "title": "Publish the strategy-registration JSON schema and an example submission",
+   "category": "Process",
+   "evidence": "strategies.json defines gates but submissions need a concrete schema to be reviewable.",
+   "impact": "Lets future sessions/agents submit strategies without ambiguity; keeps the registry append-only.",
+   "risk": "None.",
+   "depends_on": [],
+   "status": "PROPOSED",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/strategies.json",
+   "source_label": "Strategy registry (this repo)"
+  },
+  {
+   "id": "SUG-08",
+   "title": "Wednesday/Friday injury-designation change alerts (diff table)",
+   "category": "Site",
+   "evidence": "The official report sharpens Wednesday\u2192Friday; the valuable signal is the CHANGE (e.g., upgrade to Full, downgrade to Out). A diff table between snapshots would expose it.",
+   "impact": "Turns the injury tracker from a snapshot into a true tracker; supports S4/S5 signals with better timing.",
+   "risk": "Needs two snapshots per week (storage fine; workflow cron change).",
+   "depends_on": [
+    "Q5"
+   ],
+   "status": "PROPOSED",
+   "source_url": "https://www.nfl.com/injuries/",
+   "source_label": "Official NFL.com injury report"
+  },
+  {
+   "id": "SUG-09",
+   "title": "Bankroll/stake policy page (flat vs fractional Kelly) once prices exist",
+   "category": "Process",
+   "evidence": "Grading is flat 1-unit today; Kelly sizing is meaningless without prices and would add variance to leaderboard comparisons.",
+   "impact": "Prevents sizing from being confused with picking skill on the leaderboard.",
+   "risk": "Deferred until Q1/Q2 resolved.",
+   "depends_on": [
+    "Q1",
+    "Q2"
+   ],
+   "status": "PROPOSED",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/open-questions.json",
+   "source_label": "Open questions Q1/Q2 (this repo)"
+  },
+  {
+   "id": "SUG-10",
+   "title": "Add a 'model performance vs market' week-by-week accuracy page",
+   "category": "Site",
+   "evidence": "The 2026 EPA model hits MAE \u2248 8-9 points on holdout weeks (signals-2026.json); a weekly accuracy table would make model drift visible.",
+   "impact": "Honest, ongoing self-evaluation; feeds G4 evidence over time.",
+   "risk": "None beyond page generation.",
+   "depends_on": [],
+   "status": "PROPOSED",
+   "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-analytics/signals-2026.json",
+   "source_label": "signals data (this repo)"
+  }
+ ],
+ "review_note": "Reviewer: repo owner. Default reviewer instruction recorded in open-questions.json. No suggestion above modifies shared dashboard data; all are scoped to the NFL analytics module unless the reviewer approves otherwise."
+}
