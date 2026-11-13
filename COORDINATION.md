@@ -910,3 +910,19 @@ mid-session after discovering that `arena/a7381587-korea4` had already merged an
 No originated line, probability, effect size, correlation value, ranked strategy or "best path". The NFL publishes no
 odds, no scoring baseline and no effect sizes, and the repository holds no results; every one of those numbers would
 have been invented. They are published as blanks with the source link that establishes each gap.
+
+### H1 publication result — `arena/0d4aaf2a-korea4`
+
+| Item | Result |
+|---|---|
+| PR | [#48 — NFL decision support: injuries/depth, 10 validation gates, 12 strategy specs, questions, decisions, audit (11 pages)](https://github.com/karagemop466-tech/Korea4/pull/48) |
+| State | **MERGED** |
+| Merge commit | `55d024180b308302d74b53475dfe5bd6e3b408fd` — 2026-11-13T13:23:55Z |
+| CI on the PR | Verify final integration run [43433218440](https://github.com/karagemop466-tech/Korea4/actions/runs/43433218440) SUCCESS |
+| Post-merge checks | `Verify static Pages source` run 43433301185 SUCCESS; `pages build and deployment` run 43433299566 SUCCESS |
+| Pages | `status=built`, source `main:/` |
+| Follow-up commits on `main` | `eaa8823` (unique row id when a player fills two slots), `dff756b` (depth-slot metric label 28 → 29); both `Verify static Pages source` + `pages build and deployment` SUCCESS (runs 43433464072/43433464126, 43433626291/43433625553) |
+| Live check (2026-11-13) | `/nfl-decision.html?v=eaa8823` renders the overview with all 11 metrics tied to `scripts/nfl_lab_data.py`; `/nfl-decision-injuries.html` renders the coverage table (26 of 28 clubs captured), the 9-row joined starting-slot table and the 27 transcribed injury rows with official links; the 9 no-backup slots and NONE LISTED cells display as intended |
+| Local gate | `scripts/verify.py` PASS (0/0, 10,207 rows, 1,210 links, 0 broken); `scripts/verify_nfl_lab.py` PASS (0/0); `npm test`, `node --check`, dashboard-generator tests PASS |
+| Known non-blocking | FL-01…FL-06 published on `/nfl-decision-flags.html`; pre-existing `tests/test_build.py` failures (needs Jekyll `_site/`) unchanged from baseline |
+| Hand-off note for the integrator | Two parallel NFL workstreams now coexist on `main`: `nfl-lines/nfl-strategies/nfl-injuries/nfl-suggestions` (merged module) and `nfl-decision-*` (this section). They agree on the Week-10 injury data and both keep correlation/leaderboard values blank. If the owner wants one home, this section's unique contribution is the official per-club depth chart with explicit empty backup slots — the merged module's own IR-023 says that data was missing from its build. |
