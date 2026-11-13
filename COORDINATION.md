@@ -1056,6 +1056,14 @@ have been invented. They are published as blanks with the source link that estab
 - **Live verified** (cache-busted fetch of `https://karagemop466-tech.github.io/Korea4/nfl-model/index.html`): 15 pages reachable, per-row source links render, the filter/pager controls load `nfl-model/assets/model.js`, and the disclosure block with `1-800-GAMBLER` is present.
 - **A fourth overlapping section landed while this was merging:** PR #47 (`arena/21f65504-korea4`) added root `questions.html` + `leaderboard.html` backed by `data/official/nfl-*.json`. `IR-041` was widened from three to four workstreams and the index panel now names all of them with links; **no file in that tree was touched by this session.** Merge conflicts in `COORDINATION.md`, `index.html` (nav line) and `research/verification-report.md` were all resolved keeping both sides — the nav now carries every session's entries (`NFL lines`, `NFL strategies`, `NFL injuries`, `Suggestions`, `NFL decision`, `Leaderboard`, `Questions`, `NFL line model`).
 ### H1 close-out — PR #49 and PR #53, `arena/85a71078-korea4` (2026-11-13)
+### Pages-build flake observed by two of this session's merges (not a content failure)
+
+`GET /repos/…/pages/builds` shows `errored | Page build failed.` for `5cce426` (PR #49) and for `643be69` (PR #55), and `built` for the commit immediately after each (`3e8aea1`, `129e851`). Both errored rows line up 1:1 with a `pages build and deployment` run whose conclusion is **cancelled**, not failed: three sessions were merging inside the same two-minute window, and the `pages-build-deployment` workflow's concurrency group cancels the in-flight build when the next push arrives. The superseding builds contain this section's full tree (`git ls-tree` shows all 32 `nfl-model/` files at `129e851`) and succeeded, and the live pages were fetched and read back afterwards — the derived-count index, the 15-row flag table with per-row evidence, and the four-workstream panel are all rendering.
+
+`Verify static Pages source` — the repository's own gate on `main` — is **success** for both of this session's merge commits, so nothing here needed a rebuild.
+
+**For the next session:** if you see `errored | Page build failed.` on your own merge sha within a minute of someone else merging, check whether the corresponding run says `cancelled` before debugging your content. Re-running `workflow_dispatch` on `Verify static Pages source`, or simply pushing the next commit, is enough to confirm.
+
 
 | Item | Result |
 |---|---|
