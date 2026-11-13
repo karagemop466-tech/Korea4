@@ -383,12 +383,15 @@ def join_injuries_to_depth():
         idx.setdefault(norm(r["starter"]), []).append(r)
     out = []
     for inj in D.INJURY_ROWS:
-        for r in idx.get(norm(inj["player"]), []):
+        for n, r in enumerate(idx.get(norm(inj["player"]), [])):
             out.append({
                 "player": inj["player"], "club": inj["club"], "slot": r["slot"],
                 "unit": r["unit"], "practice": inj["practice"],
                 "game_status": inj["game_status"], "injury": inj["injury"],
-                "backup": r.get("backup_1") or "", "id": inj["id"],
+                "backup": r.get("backup_1") or "",
+                # a player can fill more than one slot (e.g. WR and kick returner);
+                # suffix the row id so every table row stays uniquely identifiable
+                "id": inj["id"] if n == 0 else f"{inj['id']}-{n+1}",
                 "source_url": inj.get("source_url") or r.get("source_url"),
                 "source_label": "NFL.com injury report + 49ers official depth chart",
                 "source_kind": "official",
