@@ -1,0 +1,45 @@
+name: Capture NFL Strategy Lab official snapshots
+
+on:
+  push:
+    branches: [arena/c1806a8e-korea4]
+    paths:
+      - scripts/collect_nfl_lab.py
+      - .github/workflows/fetch-nfl-lab.yml
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fetch-nfl-lab-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Check out session branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Capture official NFL and team-site snapshots
+        run: python scripts/collect_nfl_lab.py --max-weeks 12 --workers 8
+      - name: Publish snapshot to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/official/raw/nfl_lab research/official/manifest-nfl-lab.json
+          if git diff --cached --quiet; then
+            echo "No snapshot changes"
+            exit 0
+          fi
+          git commit -m "Publish NFL Strategy Lab official-source snapshot [skip ci]"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
