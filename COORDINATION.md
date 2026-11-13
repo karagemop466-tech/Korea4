@@ -1,6 +1,22 @@
 # COORDINATION.md — unified shared task board
 
-## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
+## Current session — `arena/a7381587-korea4` (2026-11-13 UTC)
+
+Baseline: `main` @ `a8fa5e3` (PR #42 merged). Working tree clean at start. No other session has claimed work dated after 2026-11-05; this session therefore claims the NFL module **and acts as its own final integration session** (nav/index/exec-summary shared outputs included in scope), per the user's instruction that no manual input is to be awaited.
+
+### Task claim (published before any edit)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| N1 — Publish claim on the shared board | done | `arena/a7381587-korea4` | `COORDINATION.md` | This commit. |
+| N2 — Official-source research & live verification for the NFL line-origination / injury / depth module (NFL.com injury report + team injury pages, NFL.com depth charts, NFL Football Operations, Next Gen Stats, NFL 2026 Week 10 schedule rows, NFLPA CBA pages), all fetched live 2026-11-13, sources recorded in `research/nfl-module/` | in progress | `arena/a7381587-korea4` | `research/nfl-module/**` (new), `data/nfl/**` (new) | Every table row will carry an official source link; unconfirmable values stay blank + UNVERIFIED. |
+| N3 — Build the NFL module pages: `nfl-lines.html` (own-line methodology), `nfl-strategies.html` (signal research, validation gates, leaderboard competition, single/parlay/player-prop correlation framework), `nfl-injuries.html` (injury + depth/backup deficiency tracking), `nfl-suggestions.html` (dedicated Suggestions section + open questions/information needed); regenerate `index.html`, `executive-summary.html`, `EXECUTIVE-SUMMARY.md`, `README.md` via `scripts/build_site.py` | pending N2 | `arena/a7381587-korea4` | `scripts/build_site.py`, `data/nfl/**`, generated root HTML, `EXECUTIVE-SUMMARY.md`, `README.md`, `data/official/meta.json` (timestamp regeneration only via offline collector) | Shared nav/index edits logged here; no other session active to conflict. |
+| N4 — Verification gate: add the new pages to `scripts/verify.py` primary set, extend the official-host allowlist **only with hosts verified live in N2**, run the full CI gate (`verify.py`, `node --check js/app.js`, `node tests/test_dashboard.mjs`, `npm test`, dashboard-generator unittest) | pending N3 | `arena/a7381587-korea4` | `scripts/verify.py`, `research/verification-report.md` | Gate must pass before PR. |
+| N5 — Final integration: line-by-line re-check of generated pages, PR from this fixed branch → `main`, merge without waiting, confirm GitHub Pages deploy, live-site check, record PR/merge/deploy result here | pending N4 | `arena/a7381587-korea4` | `COORDINATION.md` (record) | Flagged/unverified items do not block merge; they are published on the Flagged page and the new Suggestions page. |
+
+**Branch constraint (unchanged):** Arena fixes this session to branch `arena/a7381587-korea4`; the requested `session-<id>/<task>` naming cannot be used, so this dedicated branch carries the whole task set. `git pull --rebase` will be run before every push; commits will be small and frequent.
+
+## Prior session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
