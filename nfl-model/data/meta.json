@@ -1,0 +1,49 @@
+{
+  "section": "nfl-model",
+  "built_utc": "2026-11-13T13:41:06Z",
+  "counts": {
+    "requirements": 28,
+    "questions": 22,
+    "suggestions": 21,
+    "strategies": 16,
+    "gates": 18,
+    "correlation_pairs": 14,
+    "injury_rows": 30,
+    "depth_rows": 29,
+    "market_facts": 20,
+    "pipeline_steps": 13,
+    "flags": 15,
+    "sources": 17,
+    "leaderboard_metrics": 6,
+    "verified_rows": 169,
+    "blank_cells": 297
+  },
+  "data_snapshots": {
+    "schedule_official_snapshot_captured": "2026-11-02T17:41:45Z",
+    "injury_report_retrieved": "2026-11-13",
+    "depth_chart_club_as_of": "11/10/26",
+    "regulator_reports": {
+      "colorado": "September 2026 (released 2026-11-05)",
+      "new_jersey": "August 2026 (released 2026-09-16)"
+    },
+    "market_price_feed": null
+  },
+  "pages": [
+    "index.html",
+    "requirements.html",
+    "questions.html",
+    "suggestions.html",
+    "line-origination.html",
+    "strategies.html",
+    "gates.html",
+    "correlation.html",
+    "leaderboard.html",
+    "injuries.html",
+    "depth-deficiency.html",
+    "market.html",
+    "sources.html",
+    "flagged.html",
+    "executive-summary.html"
+  ],
+  "disclosure_required_in_every_page": "1-800-GAMBLER"
+}

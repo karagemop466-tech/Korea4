@@ -1,5 +1,45 @@
 # COORDINATION.md — unified shared task board
 
+## Current session — `arena/85a71078-korea4` (2026-11-13 UTC) — NEW WORKSTREAM: NFL line origination
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| H1 — NFL Line Origination & Signals decision-support subsystem: requirements register, decision-readiness question set, suggestions backlog (advisory only), strategy catalogue with validation gates, correlation model, leaderboard/competition design, injury + depth/backup-deficiency tracking from official sources, executive summary, published under `nfl-model/` | in progress | `arena/85a71078-korea4` | NEW files only: `nfl-model/**` (pages, data, css), `scripts/build_nfl_model.py`, `scripts/verify_nfl_model.py`, `scripts/fetch_nfl_model_sources.py`, `research/nfl-model/**`, `.github/workflows/nfl-model.yml`; plus `COORDINATION.md` (append) and ONE nav-link hunk in `index.html` | Does not touch `data/official/**`, `scripts/collect_official.py`, `scripts/build_site.py`, or any root category page except the single `index.html` nav insertion. No overlap with open PRs #43/#41/#25/#18 file lists (verified with `gh pr view --json files` 2026-11-13). |
+
+**Non-overlap note for other sessions:** this workstream only adds a self-contained `nfl-model/` tree; it does not regenerate `data/official/*` or any root page other than the `index.html` nav line. If `index.html` conflicts, keep both nav lists.
+
+### H1 implementation record — `arena/85a71078-korea4` (2026-11-13)
+
+**Shipped.** 15 pages under `nfl-model/` (`index`, `requirements`, `questions`, `suggestions`, `line-origination`, `strategies`, `gates`, `correlation`, `leaderboard`, `injuries`, `depth-deficiency`, `market`, `sources`, `flagged`, `executive-summary`), all rendered from `nfl-model/data/*.json` by `scripts/build_nfl_model.py`; no page is hand-written. 645 table rows and 427 internal links, **every row carrying `data-source-url`, `data-row-status` and `data-src-id`**; 297 cells published as `not confirmed`; 0 broken links.
+
+| Register | Size | Honest ceiling |
+|---|---|---|
+| Requirements R-01…R-28 | 28 | MET ×9, PARTIAL ×2, BLOCKED ×3 (R-02 price feed, R-06 snap/participation data, R-12 prop pricing), SPECIFIED ×14 |
+| Questions Q-01…Q-22 | 22 | 2 ANSWERED (Q-14, Q-18), 15 PARTIAL, 5 OPEN; each names what is missing and the cheapest way to find it |
+| Suggestions SG-01…SG-21 | 21 | 18 AWAITING-DECISION + 3 AUTO-DONE (documentation only); none applied to another session's file |
+| Strategies ST-00…ST-15 | 16 | 0 tested; ST-14/ST-15 REJECTED-BY-GATE; result columns blank by rule |
+| Gates G-01…G-18 | 18 | specified, none run |
+| Correlation C-01…C-14 | 14 | `measured` ρ blank for all; exact ρ=1 only for structurally nested legs |
+| Injury rows / depth rows | 30 / 29 | Week 10, 2026 official report + 49ers chart as published; blanks kept blank |
+| Market facts M-01…M-20 | 20 | Colorado/NJ official releases; NJ parlay-hold cell left blank |
+| Flags IR-027…IR-041 | 15 | see below |
+| Source registry | 17 | each with tier, retrieval date and **method**; snippet-only citations can never certify a row |
+
+**Gate added:** `scripts/verify_nfl_model.py` (own host allowlist; fails on a sourceless row, a `VERIFIED` row backed by a search snippet or a non-official tier, a `VERIFIED` row with an undeclared blank, a broken/relative-missing link, a missing `1-800-GAMBLER` disclosure, a strategy with results, or a flag id inside the root's `IR-001..IR-026` range) + 15 unit tests in `tests/test_nfl_model.py` + collector `scripts/fetch_nfl_model_sources.py` (`--selftest` passes) + `.github/workflows/nfl-model.yml`, which also rebuilds with the committed `built_utc` stamp and fails if the tree changes — that is the proof no page was hand-edited.
+
+**Verification facts, official sources only (retrieved 2026-11-13):** injury-report label semantics from the league's own competition-committee notice (DNP/Limited/Full; Out/Doubtful/Questionable; Probable abolished; certain-to-play players are *omitted*, so a blank Game Status is a coded state — IR-038); roster rules from the league roster FAQ (4-game IR minimum, ≤8 returns/club, ≤2/player, 16-man practice squad — 2022-era wording, currency flagged IR-029); NGS latency from the NFL Pro FAQ (tracking data published T+1, so no NGS-dependent gate can run pre-kickoff); depth from 49ers.com only (`nfl.com/teams/*/depth-chart` and `/transactions` are 404 — IR-028); market costs from `sbg.colorado.gov` (Sept 2026 handle $546,819,852.87) and `nj.gov` (Aug 2026 revenue $61,445,421, −25.0% YoY); efficiency anchor from arXiv 1211.4000 (home 47% ATS; 53.5% home-dog vs 52.38% break-even). Derived and labelled DERIVED: break-even 52.381%, −110/−110 overround 4.76%, n≈19,578 to detect a 1% edge, ROI SE ±5.48 pts at n=300.
+
+**Irregularities published (non-blocking, `nfl-model/flagged.html`):** IR-027 no official Next-Gen-Stats download repo at the cited address (`api.github.com/repos/NFL/Next-Gen-Stats` → 404, verified from this sandbox); IR-028 no working per-team depth-chart/transactions path on nfl.com, so depth is club-by-club; IR-029 roster rules sourced from a 2022-era page, 2026 wording unconfirmed; IR-030 four documents several rows depend on were unretrievable here (the NJ detail table, the operator house-rules PDF, codified 68 IAC 27, the arXiv full text); IR-031 the inherited schedule snapshot is 11 days old and incomplete in known ways; IR-032 the report carries no diagnosis and only the latest practice status; IR-033 a partially rendered official page is indistinguishable from a quiet week (high); IR-034 coverage is 1 club of 32 structured, the extra blocks deliberately not transcribed; IR-035 no market-price data exists anywhere in this repository (high); IR-036 depth 'vacancy' counts are normal at some positions and must not be read as weakness; IR-037 the report and the depth chart describe different populations; IR-038 a blank game status is a meaningful state that is easy to mis-parse into signal (high); IR-039 suggestions needing an owner decision were not implemented; IR-040 repeated retrievals of the same page returned 30 / 162 / 0 rows, so the 162-row capture is recorded but NOT published (high); **IR-041 three overlapping NFL workstreams** (this section × `nfl-*` PR #45 × `nfl-decision-*` PR #48).
+
+**Merge/conflict handling:** `origin/main` advanced 11 commits mid-work (PRs #45, #46, #48 landed). No work was discarded: `git merge origin/main` was resolved keeping **both** boards entries; `research/verification-report.md` taken from main and regenerated; and because main's pages now occupy `IR-022..IR-026`, **this section's flags were renumbered from IR-022..IR-035 to IR-027..IR-041** to keep one global sequence. `nfl-model/index.html` gained a panel naming both sibling sections and explaining that the coverage difference (1 club structured here vs 26 of 28 clubs with a visible table there) is a difference of capture standard, not a contradiction.
+
+**Requests to the final integration session** (files this session must not edit):
+1. `scripts/build_site.py` — add `("nfl-model/index.html", "NFL line model")` to `NAV`. The link currently exists only as a hand hunk in `index.html` and **will be dropped by the next `build_site.py` run**.
+2. `_config.yml` — if `scripts/fetch_nfl_model_sources.py` ever runs in CI, add `research/nfl-model/raw` to `exclude` alongside the other raw trees.
+3. Decide SG-21 (canonical home for the shared injury/strategy/suggestion/flag tables) so the three sections stop drifting apart.
+
+**Local gates before PR:** `scripts/verify.py` PASS (0 errors / 0 warnings; 10,207 primary rows; 1,628 internal links, 0 broken) · `scripts/verify_nfl_model.py` PASS (0/0) · `node --check js/app.js` and `nfl-model/assets/model.js` OK · `node tests/test_dashboard.mjs` PASS · `npm test` PASS · `tests/test_dashboard_generator.py` 3/3 PASS · `tests/test_nfl_model.py` 15/15 PASS · `fetch_nfl_model_sources.py --selftest` PASS. (`test_build.py` needs a Jekyll `_site/`; pre-existing, same as main.)
+
 ## Current session — `arena/21f65504-korea4` (2026-11-13 UTC)
 
 Branched from `main` @ `a8fa5e3` (PR #42 merge). This session independently claimed the NFL Lines & Strategy workstream (originate NFL lines, leaderboard strategy competition, injury/roster-deficiency tracking, suggestions + open-questions layer). Parallel sessions `arena/a7381587-korea4` (NFL decision module, PRs #45/#46) and `arena/0d4aaf2a-korea4` (NFL decision lab, PR #48) also built overlapping NFL work and merged to `main`; this session acts as the final integration session, preserving and integrating all of it (player-level verified injury rows, strategy catalog, line-origination method, dedicated leaderboard + questions pages) without discarding any session's work.

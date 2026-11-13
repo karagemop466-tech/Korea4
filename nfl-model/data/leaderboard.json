@@ -1,0 +1,36 @@
+{
+  "concept": "A season-long internal competition in which independently specified strategies compete for limited funding. Ranking is on evidence of information advantage and discipline, not on realised profit, because at NFL sample sizes profit is mostly noise. Nothing here is a wagering service: entries are internal, free to join, and rewards are not a share of a stake pool.",
+  "tiers": [
+    {"tier": "0 - Spec review", "what": "The written hypothesis, the signal rule, the required inputs and the planned gates are judged before any bet; an entrant cannot skip to Tier 1 without a passing spec.", "scored_on": "spec completeness and the reviewer's ability to compute the signal from stored fields only", "promotes_to": "1"},
+    {"tier": "1 - Paper season", "what": "Every eligible bet is logged with the price at the registered cut-off and the closing price; no stake is placed.", "scored_on": "closing-line value, calibration, coverage, discipline", "promotes_to": "2"},
+    {"tier": "2 - Funded trial", "what": "Small capped units on the surviving strategies only, with the same logging obligations.", "scored_on": "CLV plus realised PnL with its luck budget", "promotes_to": "3"},
+    {"tier": "3 - Funded core", "what": "Full allocation for strategies that survive two seasons and every blocking gate; a strategy can be demoted at any time by a failed gate, never by a bad month.", "scored_on": "stability, regime robustness, drawdown behaviour", "promotes_to": "-"}
+  ],
+  "metrics": [
+    {"id": "L-01", "metric": "Mean closing-line value (CLV)", "formula": "mean over bets of (our probability - devigged closing probability), and separately the mean price improvement expressed in cents on the spread/total", "weight": "0.35", "min_n": 300, "why": "It is the only outcome-independent measure of whether we were better informed than the market at the moment we acted; it converges orders of magnitude faster than PnL.", "value": ""},
+    {"id": "L-02", "metric": "CLV t-statistic after Benjamini-Hochberg adjustment", "formula": "one-sided t on the CLV distribution, adjusted across all strategies evaluated in the season", "weight": "0.15", "min_n": 300, "why": "Turns a nice-looking mean into a claim with a stated error rate; the adjustment is what stops a 14-entry catalogue from crowning a fluke.", "value": ""},
+    {"id": "L-03", "metric": "Calibration (Brier versus the market)", "formula": "mean squared error of our probabilities minus the mean squared error of the devigged closing probabilities, negative is better", "weight": "0.20", "min_n": 500, "why": "A well-priced model is the actual deliverable of 'originate our own lines'; a model that only picks a few bets is a different product with different requirements.", "value": ""},
+    {"id": "L-04", "metric": "Realised ROI with luck budget", "formula": "profit / staked units, reported with the standard error of ROI, its 95% interval, and the shrinkage-adjusted hit rate", "weight": "0.10", "min_n": 500, "why": "Displayed for context; deliberately under-weighted so nobody wins a competition on variance.", "value": ""},
+    {"id": "L-05", "metric": "Coverage and ledger completeness", "formula": "1 minus (missing closes + missing settlements) / eligible slots", "weight": "0.10", "min_n": "none - it is a duty, not a skill", "why": "Selective logging is the cheapest way to fake skill; making it cost leaderboard points is the cheapest way to prevent it.", "value": ""},
+    {"id": "L-06", "metric": "Gate compliance", "formula": "count of blocking gates passed / blocking gates applicable, evaluated per submission", "weight": "0.10", "min_n": "n/a", "why": "Keeps a strategy from winning on a metric while failing its own stated conditions (for example a void-prone parlay or a look-ahead injury field).", "value": ""}
+  ],
+  "discipline_rules": [
+    "A submission is a strategy id plus a version hash; the version is frozen at entry and any change restarts its sample clock. Re-entering a strategy with a new threshold to buy another lottery ticket is prohibited and the extra entries still count in the multiple-comparison pool.",
+    "Bets must be recorded before the registered cut-off with the price at that moment; a bet recorded after kickoff is a note, never a data point, and late entries are published as violations.",
+    "No deletion of losing entries. Withdrawal removes a strategy from future contention only.",
+    "Every entrant publishes the same three numbers for every result row: n, standard error, and the share of PnL that variance could plausibly explain.",
+    "The ledger is hash-chained (each entry includes the digest of the previous one) so that history cannot be quietly rewritten; this mirrors how the repository already stores raw official responses with SHA-256 hashes."
+  ],
+  "rewards": {
+    "status": "AWAITING OWNER DECISION (Q-15, SG-14)",
+    "options": [
+      {"label": "R-A Recognition + infrastructure", "detail": "Winner gets the funding allocation, priority on compute/data spend, and a permanent place in the core; no cash prize.", "risk": "Low - nothing resembles a stake pool or a prize competition."},
+      {"label": "R-B Credits", "detail": "Non-cash credits (data subscription months, cloud compute, a season of the price feed) awarded on the weighted score.", "risk": "Low, but it is a thing of value: if third parties can enter, a legal read on prize-competition rules in the owner's jurisdiction is needed first."},
+      {"label": "R-C Cash from the operating budget", "detail": "Fixed cash amounts set before the season, paid from the owner's budget, never from entrants' stakes.", "risk": "Highest - touches prize-competition and gambling-adjacent law; requires counsel (Q-13)."}
+    ],
+    "recommended": "R-A for season one; R-B only after entries stay internal; R-C not before two seasons of gate-passing evidence exists."
+  },
+  "season_window": {"value": "2026 NFL regular season as captured in this repository's official snapshot (2026-11-02), plus the remainder of the season once the collector runs", "status": "PARTIAL", "src": "repo-official-snapshot", "note": "The snapshot predates this build by 11 days; 24 regular-season rows carry TBD kickoff times and 49 preseason matchups have no dates in it, so the denominator of 'eligible slots' must be defined in the spec, not improvised mid-season."},
+  "entry_count": {"value": 0, "status": "VERIFIED", "src": "repo-official-snapshot", "note": "No entrants have been registered. The competition design is complete; the ledger, the spec files and the reward decision are not."},
+  "standings_note": "The standings table is intentionally absent. With zero resolved bets there is no ranking, and a table of zeros would invite the reader to treat the design as a result."
+}

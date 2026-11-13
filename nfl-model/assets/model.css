@@ -1,0 +1,16 @@
+/* Extra styles for the NFL line-origination section; base theme comes from ../css/style.css. */
+.formula {
+  font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: #f3f6fb;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #354760;
+  margin: 12px 0 0;
+}
+.table-controls button.is-on { background: #e3edff; border-color: #b9cbe9; color: var(--navy); }
+.table-wrap [data-page-prev]:disabled, .table-wrap [data-page-next]:disabled { opacity: .45; cursor: default; }
+section.panel h3 { margin: 20px 0 6px; font-size: 16px; color: var(--navy); }
+.card .label:first-child { text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: var(--blue); }
+tr[hidden] { display: none; }
+.blank { color: var(--muted); font-style: italic; }
