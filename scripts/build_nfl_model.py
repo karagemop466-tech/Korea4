@@ -335,7 +335,7 @@ def page(fname: str, active: str, title: str, lead: str, blocks: list[str], ages
   <footer class="footer">
     <strong>Every table row links to the source that establishes it; blanks are unconfirmed values, never zeros.</strong><br>
     <span class="mini">{DISCLOSURE}</span><br>
-    <a href="../index.html">Main dashboard</a> <a href="../flagged.html">Dashboard flags IR-001…IR-021</a> <a href="flagged.html">Section flags</a> <a href="sources.html">Source registry</a>
+    <a href="../index.html">Main dashboard</a> <a href="../flagged.html">Site flags IR-001…IR-026</a> <a href="flagged.html">Section flags</a> <a href="sources.html">Source registry</a>
     <br><span class="mini">Built {BUILD_UTC} by scripts/build_nfl_model.py from nfl-model/data/*.json; verified by scripts/verify_nfl_model.py. Source manifest of the underlying repository snapshot: <a href="{SNAPSHOT_URL}">research/official/manifest.json</a>.</span>
   </footer>
 </main></body></html>
@@ -410,6 +410,20 @@ def main() -> None:
             "competition. It is not a results page: this repository contains no market prices and no settled bets, "
             "so every result column in this section is blank by rule (IR-035). Nothing here has been implemented "
             "from the suggestions list beyond documentation, because each such item needs an owner decision.",
+        ),
+        callout(
+            "info",
+            "<strong>How this relates to the other NFL pages on this site.</strong> Three workstreams now cover "
+            "adjacent ground: the merged <a href=\"../nfl-lines.html\">line-origination</a>, "
+            "<a href=\"../nfl-strategies.html\">strategies</a>, <a href=\"../nfl-injuries.html\">injuries</a> and "
+            "<a href=\"../nfl-suggestions.html\">suggestions</a> module; the "
+            "<a href=\"../nfl-decision.html\">nfl-decision</a> section with its own gate; and this section, whose job is the "
+            "register layer — requirements with acceptance tests, the question set that gates a decision, the suggestions "
+            "backlog that no one has approved yet, and the source registry behind every value. Where the same Week 10 "
+            "injury report appears in more than one place, the difference is <em>coverage</em>, not contradiction: this "
+            "section publishes only rows it can re-derive from a retrieval it recorded, and says so on the "
+            "<a href=\"injuries.html\">injury page</a>. Nobody has ruled which section is canonical — that is "
+            "<a href=\"suggestions.html\">SG-21</a> (flagged as IR-041).",
         ),
         '<div class="grid cards">'
         + "".join(

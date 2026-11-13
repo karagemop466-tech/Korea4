@@ -6,33 +6,285 @@
     "BLOCKED": "Cannot proceed until a named input, decision or licence exists."
   },
   "requirements": [
-    {"id": "R-01", "cat": "Data", "req": "Every NFL game in scope has an official schedule row (date, kickoff, matchup) before any line is attempted.", "pri": "P0", "status": "MET", "accept": "2026 regular-season rows with kickoff or explicit TBD, each carrying an official nfl.com source URL; count reconciles to the league's published week structure.", "gap": "Captured 2026 season schedule exists in data/official/events.json from the 2026-11-02 snapshot; 49 preseason matchups have no official dates and 24 regular-season rows carry TBD times.", "src": "repo-official-snapshot"},
-    {"id": "R-02", "cat": "Data", "req": "A market-price source: opening, mid-week and closing prices for spread, total, moneyline and the player-prop lines used by candidate strategies.", "pri": "P0", "status": "BLOCKED", "accept": ">=3 seasons of timestamped closing lines for spread/total/ML plus prop lines, with per-update timestamps and bookmaker identity; late-line snapshots no later than a stated pre-kickoff cut-off.", "gap": "No price feed exists in the repo and none is reachable from the build environment. The Odds API documents exactly the fields needed and a free tier; a licence decision is required first.", "src": "odds-api-nfl"},
-    {"id": "R-03", "cat": "Data", "req": "Injury and availability tracking for all 32 clubs, at official cadence, stored as an append-only history rather than a current-state overwrite.", "pri": "P0", "status": "SPECIFIED", "accept": "Weekly ingestion of the official per-club report with practice status and game status per player; history retained per report date so 'who was listed, at what status, on which day' is answerable retroactively; blank game status preserved as blank.", "gap": "Collector script specified in this section; not run against a schedule yet. The Week 10, 2026 schema and rows used as the reference fixture are verified.", "src": "nfl-injuries-reg10"},
-    {"id": "R-04", "cat": "Data", "req": "Depth-chart tracking that identifies when a second-, third- or fourth-string player replaces a starter on offense or defense.", "pri": "P0", "status": "SPECIFIED", "accept": "Per-club depth chart captured weekly from the club's official page with its own 'Updated as of' date; diff between consecutive charts produces a starter-change event per position group; vacancy count (positions with fewer than 3 listed players) computed and stored.", "gap": "49ers page verified as the parse target and shows both the cadence and the vacancy problem; the other 31 clubs and a league-wide endpoint are unverified.", "src": "sf-depth-chart"},
-    {"id": "R-05", "cat": "Data", "req": "Roster-movement awareness: who is unavailable by league rule, not just by injury designation (IR, PUP, NFI, suspended, commissioner exempt, practice-squad elevations).", "pri": "P1", "status": "SPECIFIED", "accept": "Transaction feed parsed into per-player availability windows, with the rule-derived minimum-miss counts recorded alongside (for example an IR designation carries a four-game minimum and consumes one of eight return designations).", "gap": "The rule set is verified from an official NFL article written around the 2022 offseason; the current-year wording and the club transaction endpoint still need confirmation (the nfl.com team transactions path 404s).", "src": "nfl-roster-faq"},
-    {"id": "R-06", "cat": "Data", "req": "Participation and snap-level data for the players whose props are being priced.", "pri": "P1", "status": "BLOCKED", "accept": "Play-level snap participation and route/target participation per player per game, available before the model's decision cut-off, with a documented latency.", "gap": "Officially, Next Gen Stats is published the day AFTER the game; box score and play-by-play update live during the game. So snap-share inputs cannot be modelled same-day from the official league source; the cut-off design must respect that.", "src": "nfl-pro-faq-ngs"},
-    {"id": "R-07", "cat": "Model", "req": "A line-origination model that produces an independent number for spread, total and moneyline for every in-scope game, before seeing any market price.", "pri": "P0", "status": "SPECIFIED", "accept": "Deterministic, versioned scoring pipeline (roster-adjusted team ratings -> venue/rest adjustment -> expected total and margin -> key-number-aware spread and total), blind to market prices at generation time, with a written pre-registration for each model version.", "gap": "No price data (R-02) and no verified player-value table, so the model can be specified and unit-tested on synthetic fixtures but not trained or tuned on real outcomes yet.", "src": "nfl-pro-faq-ngs"},
-    {"id": "R-08", "cat": "Model", "req": "The published line must be expressed with vig, and the no-vig fair probability must be recoverable for every price used as a benchmark.", "pri": "P0", "status": "SPECIFIED", "accept": "Implied probability, overround and devigged probability computed from American prices by the documented formula; a two-sided -110 market resolves to 52.38% break-even, which matches the academic break-even threshold used as a sanity check.", "gap": "Formula and unit tests can be written now; applying them to real prices requires R-02.", "src": "arxiv-nfl-lines"},
-    {"id": "R-09", "cat": "Model", "req": "Signal generation: candidate bet signals derived from the difference between our number and the market's number, not from narrative.", "pri": "P0", "status": "SPECIFIED", "accept": "Each signal is a single deterministic rule over stored fields, with the exact cut-off time, the exact threshold, and no post-hoc edits; every signal row records the price it was taken at.", "gap": "Signal rules are written in the strategy catalogue; none can be evaluated until prices land.", "src": "odds-api-nfl"},
-    {"id": "R-10", "cat": "Model", "req": "Single-bet support (spread, total, moneyline, first-half and team-total variants) with per-market cost and settlement assumptions.", "pri": "P0", "status": "SPECIFIED", "accept": "One stake per game per market; push handled as no-action; settlement from the official league box score, never from a screenshot or an aggregator.", "gap": "Settlement source is official and available; the entry prices are not.", "src": "repo-official-snapshot"},
-    {"id": "R-11", "cat": "Model", "req": "Parlay and Same-Game-Parlay construction, priced from our own joint distribution rather than from the operator's boost.", "pri": "P0", "status": "SPECIFIED", "accept": "Priced multi-leg tickets with an explicit correlation assumption per leg pair; a legality/rule check that rejects combinations the operator would void or reprice.", "gap": "Operator correlation rules are only partially verified this session; each operator's live rulebook must be read before construction.", "src": "dk-gnlc-house-rules"},
-    {"id": "R-12", "cat": "Model", "req": "Player-prop and prop-combo pricing (rush/reception/anytime-TD/fantasy-score style lines).", "pri": "P1", "status": "BLOCKED", "accept": "A per-player projection distribution for each prop stat we price, plus the line and price for the same prop at >=2 books.", "gap": "Props exist in the vendor's documented market list but only from US and AU bookmakers; prop closing lines historically have far thinner archives than main lines, so backtest length is the binding constraint.", "src": "odds-api-nfl"},
-    {"id": "R-13", "cat": "Model", "req": "Correlation values for every leg pair used in a parlay, with an honest uncertainty range and a source.", "pri": "P0", "status": "SPECIFIED", "accept": "Pairwise outcome correlation estimated on our own resolved history; where no estimate exists, the pair is priced at the Fréchet-Hoeffding bound consistent with the marginal probabilities and the ticket is flagged 'correlation unverified'.", "gap": "Requires >=1 season of our own resolved tickets; no structural rho table can be imported as fact.", "src": "arxiv-nfl-lines"},
-    {"id": "R-14", "cat": "Validation", "req": "Every strategy passes a written gate set before it can be promoted, and fails publicly if it does not.", "pri": "P0", "status": "MET", "accept": "Gates G-01..G-18 published with thresholds, applied mechanically, results stored per strategy per evaluation; a strategy that fails any blocking gate is parked, not quietly dropped.", "gap": "Gate definitions and the data each gate needs are written in this section; no strategy has a result yet because no evaluation has run.", "src": "arxiv-nfl-lines"},
-    {"id": "R-15", "cat": "Validation", "req": "Luck removed as far as arithmetic allows: results are separated from expected value, and sample size governs every claim.", "pri": "P0", "status": "SPECIFIED", "accept": "For each strategy: number of bets, hit rate, mean edge at entry, closing-line value, standard error, t-statistic, and a block-bootstrap confidence interval; no headline ROI without them, and an explicit statement of what sample size would be needed to detect the claimed edge.", "gap": "The required-n table is computed and published here from the stated assumptions; it is arithmetic, not a result.", "src": "arxiv-nfl-lines"},
-    {"id": "R-16", "cat": "Validation", "req": "No look-ahead, ever: at decision time the model may only use fields whose own timestamps precede the cut-off.", "pri": "P0", "status": "SPECIFIED", "accept": "Every input row carries as_of_utc and published_utc; the backtest enforces published_utc <= cut-off; the injury-report fixture is deliberately captured as of the Friday report, not the final lineup.", "gap": "Enforcement code specified; needs implementation in the collector's schema.", "src": "nfl-injury-policy"},
-    {"id": "R-17", "cat": "Competition", "req": "A leaderboard competition where strategies compete for rewards, scored on skill-oriented metrics rather than raw profit.", "pri": "P1", "status": "SPECIFIED", "accept": "Ranking driven by luck-adjusted value (closing-line edge), calibration, minimum-sample compliance and gate pass rate; raw ROI is displayed but is not the promotion criterion.", "gap": "Design complete; no entrants, no ledger, no reward pool decision.", "src": "arxiv-nfl-lines"},
-    {"id": "R-18", "cat": "Competition", "req": "Rewards must not turn the competition itself into unlicensed wagering or an incentive to break the rules.", "pri": "P0", "status": "SPECIFIED", "accept": "Reward pool paid from the owner's operating budget, denominated in infrastructure/credits/recognition, never a share of a stake pool; entry is free; no side bets between entrants; the rules are published and frozen for a season before it starts.", "gap": "Owner decision on budget and form of reward is open; legal review of the reward mechanism is open (Q-15).", "src": "in-68iac-27"},
-    {"id": "R-19", "cat": "Decision support", "req": "A dedicated suggestions section where improvements are proposed, costed and ranked, so a human chooses the path before anything is implemented.", "pri": "P0", "status": "MET", "accept": "Each suggestion carries the problem it solves, 2-3 real options with cost/effort/risk, a recommendation, and an explicit 'not implemented' state until a decision is recorded.", "gap": "The 20 suggestions are published as proposals. None of the ones requiring a decision has been implemented by this session.", "src": "repo-official-snapshot"},
-    {"id": "R-20", "cat": "Decision support", "req": "A closed list of the questions and information gaps that must be answered before any decision is reasonable.", "pri": "P0", "status": "MET", "accept": "Every question states what we have, what we do not have, the cheapest way to find out, and which decisions it blocks; unanswered ones stay OPEN and are named on the executive summary.", "gap": "Open questions are published; answers requiring paid feeds, an owner decision or a legal review cannot be produced by an agent.", "src": "repo-official-snapshot"},
-    {"id": "R-21", "cat": "Site", "req": "GitHub Pages site with a clean landing page and category subpages, all findings in readable tables, one source link per row.", "pri": "P0", "status": "MET", "accept": "Pages build statically, share one navigation, every table row carries data-source-url, unverified values are blank with a flag, and the build fails the gate if a row lacks a source.", "gap": "The NFL-model section satisfies this for its own pages; the pre-existing radio dashboard keeps its own gate.", "src": "repo-official-snapshot"},
-    {"id": "R-22", "cat": "Site", "req": "A Flagged for Review page listing irregularities and unverified items with source links, non-blocking for merge.", "pri": "P0", "status": "MET", "accept": "Every anomaly found while building gets an IR- id, an evidence line, the source link, and an effect statement; nothing is deleted to make the list shorter.", "gap": "IR-027..IR-037 published for this section; the radio dashboard's IR-001..IR-021 remain on the root flagged page.", "src": "repo-official-snapshot"},
-    {"id": "R-23", "cat": "Governance", "req": "No manual input from the owner is required to complete the build tasks; anything genuinely requiring a human decision is escalated as a proposal, not faked.", "pri": "P0", "status": "MET", "accept": "Agent-owned tasks (research, code, build, verify, PR, merge, Pages) completed autonomously; owner-owned items (money, licences, which strategy to fund, jurisdiction) listed in the suggestions and questions pages with no agent-supplied answer.", "gap": "Owner-owned items remain open by design.", "src": "repo-official-snapshot"},
-    {"id": "R-24", "cat": "Governance", "req": "Coordination with parallel sessions on this repository: claims, non-overlapping scope, conflict log, handover rules.", "pri": "P0", "status": "MET", "accept": "COORDINATION.md carries this session's claim with its file scope, checked against the open PR file lists before any edit; the section only adds files.", "gap": "Open PRs #18/#25/#41/#43 were inspected on 2026-11-13; this section touches none of their files except a single navigation hunk in index.html.", "src": "repo-official-snapshot"},
-    {"id": "R-25", "cat": "Compliance", "req": "Jurisdiction, age and eligibility constraints stated with official sources, and a responsible-gambling notice that is not decorative.", "pri": "P0", "status": "PARTIAL", "accept": "Each regulator statement on the page links to that regulator's own publication; the help line and state resource appear on every page of the section; nothing in the section claims a legal opinion.", "gap": "Colorado and New Jersey material is verified; state-by-state age/eligibility and non-US legality were not enumerated this session and are listed as blocking questions rather than asserted.", "src": "co-gaming-sept26"},
-    {"id": "R-26", "cat": "Compliance", "req": "No league or team content is used in a way that implies official status, and no operator's rules are quoted as if they were universal.", "pri": "P0", "status": "PARTIAL", "accept": "Every source row carries a tier and a retrieval method; secondary aggregators appear in the registry only as cross-check notes with no value rows.", "gap": "Two operator/regulator documents are only snippet-verified (PARTIAL) and are labelled as such on the sources page.", "src": "dk-gnlc-house-rules"},
-    {"id": "R-27", "cat": "Operations", "req": "A refresh path that can run without an operator at a keyboard, with provenance preserved (raw response, hash, timestamp, URL).", "pri": "P1", "status": "SPECIFIED", "accept": "A GitHub-Actions-runnable collector that writes compressed raw responses plus a manifest of URL/timestamp/SHA-256, then rebuilds the section; failures leave the previous data in place and produce a flag row instead of a silent blank.", "gap": "scripts/fetch_nfl_model_sources.py is provided and syntax-checked, but this session did not run it on a runner, so no fresh official snapshot is claimed for 2026-11-13 beyond the pages fetched interactively above.", "src": "repo-official-snapshot"},
-    {"id": "R-28", "cat": "Operations", "req": "Reproducible build and a failing CI check when the section's verification gate fails.", "pri": "P0", "status": "MET", "accept": "python3 scripts/build_nfl_model.py regenerates every page byte-identically from data; python3 scripts/verify_nfl_model.py exits non-zero on a sourceless row, a fabricated official claim, a broken internal link, or a missing disclosure.", "gap": "Both run green locally; the CI job runs them on pull requests to main.", "src": "repo-official-snapshot"}
+    {
+      "id": "R-01",
+      "cat": "Data",
+      "req": "Every NFL game in scope has an official schedule row (date, kickoff, matchup) before any line is attempted.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "2026 regular-season rows with kickoff or explicit TBD, each carrying an official nfl.com source URL; count reconciles to the league's published week structure.",
+      "gap": "Captured 2026 season schedule exists in data/official/events.json from the 2026-11-02 snapshot; 49 preseason matchups have no official dates and 24 regular-season rows carry TBD times.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-02",
+      "cat": "Data",
+      "req": "A market-price source: opening, mid-week and closing prices for spread, total, moneyline and the player-prop lines used by candidate strategies.",
+      "pri": "P0",
+      "status": "BLOCKED",
+      "accept": ">=3 seasons of timestamped closing lines for spread/total/ML plus prop lines, with per-update timestamps and bookmaker identity; late-line snapshots no later than a stated pre-kickoff cut-off.",
+      "gap": "No price feed exists in the repo and none is reachable from the build environment. The Odds API documents exactly the fields needed and a free tier; a licence decision is required first.",
+      "src": "odds-api-nfl"
+    },
+    {
+      "id": "R-03",
+      "cat": "Data",
+      "req": "Injury and availability tracking for all 32 clubs, at official cadence, stored as an append-only history rather than a current-state overwrite.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Weekly ingestion of the official per-club report with practice status and game status per player; history retained per report date so 'who was listed, at what status, on which day' is answerable retroactively; blank game status preserved as blank.",
+      "gap": "Collector script specified in this section; not run against a schedule yet. The Week 10, 2026 schema and rows used as the reference fixture are verified.",
+      "src": "nfl-injuries-reg10"
+    },
+    {
+      "id": "R-04",
+      "cat": "Data",
+      "req": "Depth-chart tracking that identifies when a second-, third- or fourth-string player replaces a starter on offense or defense.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Per-club depth chart captured weekly from the club's official page with its own 'Updated as of' date; diff between consecutive charts produces a starter-change event per position group; vacancy count (positions with fewer than 3 listed players) computed and stored.",
+      "gap": "49ers page verified as the parse target and shows both the cadence and the vacancy problem; the other 31 clubs and a league-wide endpoint are unverified.",
+      "src": "sf-depth-chart"
+    },
+    {
+      "id": "R-05",
+      "cat": "Data",
+      "req": "Roster-movement awareness: who is unavailable by league rule, not just by injury designation (IR, PUP, NFI, suspended, commissioner exempt, practice-squad elevations).",
+      "pri": "P1",
+      "status": "SPECIFIED",
+      "accept": "Transaction feed parsed into per-player availability windows, with the rule-derived minimum-miss counts recorded alongside (for example an IR designation carries a four-game minimum and consumes one of eight return designations).",
+      "gap": "The rule set is verified from an official NFL article written around the 2022 offseason; the current-year wording and the club transaction endpoint still need confirmation (the nfl.com team transactions path 404s).",
+      "src": "nfl-roster-faq"
+    },
+    {
+      "id": "R-06",
+      "cat": "Data",
+      "req": "Participation and snap-level data for the players whose props are being priced.",
+      "pri": "P1",
+      "status": "BLOCKED",
+      "accept": "Play-level snap participation and route/target participation per player per game, available before the model's decision cut-off, with a documented latency.",
+      "gap": "Officially, Next Gen Stats is published the day AFTER the game; box score and play-by-play update live during the game. So snap-share inputs cannot be modelled same-day from the official league source; the cut-off design must respect that.",
+      "src": "nfl-pro-faq-ngs"
+    },
+    {
+      "id": "R-07",
+      "cat": "Model",
+      "req": "A line-origination model that produces an independent number for spread, total and moneyline for every in-scope game, before seeing any market price.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Deterministic, versioned scoring pipeline (roster-adjusted team ratings -> venue/rest adjustment -> expected total and margin -> key-number-aware spread and total), blind to market prices at generation time, with a written pre-registration for each model version.",
+      "gap": "No price data (R-02) and no verified player-value table, so the model can be specified and unit-tested on synthetic fixtures but not trained or tuned on real outcomes yet.",
+      "src": "nfl-pro-faq-ngs"
+    },
+    {
+      "id": "R-08",
+      "cat": "Model",
+      "req": "The published line must be expressed with vig, and the no-vig fair probability must be recoverable for every price used as a benchmark.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Implied probability, overround and devigged probability computed from American prices by the documented formula; a two-sided -110 market resolves to 52.38% break-even, which matches the academic break-even threshold used as a sanity check.",
+      "gap": "Formula and unit tests can be written now; applying them to real prices requires R-02.",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "R-09",
+      "cat": "Model",
+      "req": "Signal generation: candidate bet signals derived from the difference between our number and the market's number, not from narrative.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Each signal is a single deterministic rule over stored fields, with the exact cut-off time, the exact threshold, and no post-hoc edits; every signal row records the price it was taken at.",
+      "gap": "Signal rules are written in the strategy catalogue; none can be evaluated until prices land.",
+      "src": "odds-api-nfl"
+    },
+    {
+      "id": "R-10",
+      "cat": "Model",
+      "req": "Single-bet support (spread, total, moneyline, first-half and team-total variants) with per-market cost and settlement assumptions.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "One stake per game per market; push handled as no-action; settlement from the official league box score, never from a screenshot or an aggregator.",
+      "gap": "Settlement source is official and available; the entry prices are not.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-11",
+      "cat": "Model",
+      "req": "Parlay and Same-Game-Parlay construction, priced from our own joint distribution rather than from the operator's boost.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Priced multi-leg tickets with an explicit correlation assumption per leg pair; a legality/rule check that rejects combinations the operator would void or reprice.",
+      "gap": "Operator correlation rules are only partially verified this session; each operator's live rulebook must be read before construction.",
+      "src": "dk-gnlc-house-rules"
+    },
+    {
+      "id": "R-12",
+      "cat": "Model",
+      "req": "Player-prop and prop-combo pricing (rush/reception/anytime-TD/fantasy-score style lines).",
+      "pri": "P1",
+      "status": "BLOCKED",
+      "accept": "A per-player projection distribution for each prop stat we price, plus the line and price for the same prop at >=2 books.",
+      "gap": "Props exist in the vendor's documented market list but only from US and AU bookmakers; prop closing lines historically have far thinner archives than main lines, so backtest length is the binding constraint.",
+      "src": "odds-api-nfl"
+    },
+    {
+      "id": "R-13",
+      "cat": "Model",
+      "req": "Correlation values for every leg pair used in a parlay, with an honest uncertainty range and a source.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Pairwise outcome correlation estimated on our own resolved history; where no estimate exists, the pair is priced at the Fréchet-Hoeffding bound consistent with the marginal probabilities and the ticket is flagged 'correlation unverified'.",
+      "gap": "Requires >=1 season of our own resolved tickets; no structural rho table can be imported as fact.",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "R-14",
+      "cat": "Validation",
+      "req": "Every strategy passes a written gate set before it can be promoted, and fails publicly if it does not.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "Gates G-01..G-18 published with thresholds, applied mechanically, results stored per strategy per evaluation; a strategy that fails any blocking gate is parked, not quietly dropped.",
+      "gap": "Gate definitions and the data each gate needs are written in this section; no strategy has a result yet because no evaluation has run.",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "R-15",
+      "cat": "Validation",
+      "req": "Luck removed as far as arithmetic allows: results are separated from expected value, and sample size governs every claim.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "For each strategy: number of bets, hit rate, mean edge at entry, closing-line value, standard error, t-statistic, and a block-bootstrap confidence interval; no headline ROI without them, and an explicit statement of what sample size would be needed to detect the claimed edge.",
+      "gap": "The required-n table is computed and published here from the stated assumptions; it is arithmetic, not a result.",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "R-16",
+      "cat": "Validation",
+      "req": "No look-ahead, ever: at decision time the model may only use fields whose own timestamps precede the cut-off.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Every input row carries as_of_utc and published_utc; the backtest enforces published_utc <= cut-off; the injury-report fixture is deliberately captured as of the Friday report, not the final lineup.",
+      "gap": "Enforcement code specified; needs implementation in the collector's schema.",
+      "src": "nfl-injury-policy"
+    },
+    {
+      "id": "R-17",
+      "cat": "Competition",
+      "req": "A leaderboard competition where strategies compete for rewards, scored on skill-oriented metrics rather than raw profit.",
+      "pri": "P1",
+      "status": "SPECIFIED",
+      "accept": "Ranking driven by luck-adjusted value (closing-line edge), calibration, minimum-sample compliance and gate pass rate; raw ROI is displayed but is not the promotion criterion.",
+      "gap": "Design complete; no entrants, no ledger, no reward pool decision.",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "R-18",
+      "cat": "Competition",
+      "req": "Rewards must not turn the competition itself into unlicensed wagering or an incentive to break the rules.",
+      "pri": "P0",
+      "status": "SPECIFIED",
+      "accept": "Reward pool paid from the owner's operating budget, denominated in infrastructure/credits/recognition, never a share of a stake pool; entry is free; no side bets between entrants; the rules are published and frozen for a season before it starts.",
+      "gap": "Owner decision on budget and form of reward is open; legal review of the reward mechanism is open (Q-15).",
+      "src": "in-68iac-27"
+    },
+    {
+      "id": "R-19",
+      "cat": "Decision support",
+      "req": "A dedicated suggestions section where improvements are proposed, costed and ranked, so a human chooses the path before anything is implemented.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "Each suggestion carries the problem it solves, 2-3 real options with cost/effort/risk, a recommendation, and an explicit 'not implemented' state until a decision is recorded.",
+      "gap": "The 20 suggestions are published as proposals. None of the ones requiring a decision has been implemented by this session.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-20",
+      "cat": "Decision support",
+      "req": "A closed list of the questions and information gaps that must be answered before any decision is reasonable.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "Every question states what we have, what we do not have, the cheapest way to find out, and which decisions it blocks; unanswered ones stay OPEN and are named on the executive summary.",
+      "gap": "Open questions are published; answers requiring paid feeds, an owner decision or a legal review cannot be produced by an agent.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-21",
+      "cat": "Site",
+      "req": "GitHub Pages site with a clean landing page and category subpages, all findings in readable tables, one source link per row.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "Pages build statically, share one navigation, every table row carries data-source-url, unverified values are blank with a flag, and the build fails the gate if a row lacks a source.",
+      "gap": "The NFL-model section satisfies this for its own pages; the pre-existing radio dashboard keeps its own gate.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-22",
+      "cat": "Site",
+      "req": "A Flagged for Review page listing irregularities and unverified items with source links, non-blocking for merge.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "Every anomaly found while building gets an IR- id, an evidence line, the source link, and an effect statement; nothing is deleted to make the list shorter.",
+      "gap": "IR-027..IR-040 published for this section; the dashboard's IR-001..IR-026 (including the two merged NFL modules) remain on the root flagged page and are not restated here.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-23",
+      "cat": "Governance",
+      "req": "No manual input from the owner is required to complete the build tasks; anything genuinely requiring a human decision is escalated as a proposal, not faked.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "Agent-owned tasks (research, code, build, verify, PR, merge, Pages) completed autonomously; owner-owned items (money, licences, which strategy to fund, jurisdiction) listed in the suggestions and questions pages with no agent-supplied answer.",
+      "gap": "Owner-owned items remain open by design.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-24",
+      "cat": "Governance",
+      "req": "Coordination with parallel sessions on this repository: claims, non-overlapping scope, conflict log, handover rules.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "COORDINATION.md carries this session's claim with its file scope, checked against the open PR file lists before any edit; the section only adds files.",
+      "gap": "Open PRs #18/#25/#41/#43 were inspected on 2026-11-13; this section touches none of their files except a single navigation hunk in index.html.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-25",
+      "cat": "Compliance",
+      "req": "Jurisdiction, age and eligibility constraints stated with official sources, and a responsible-gambling notice that is not decorative.",
+      "pri": "P0",
+      "status": "PARTIAL",
+      "accept": "Each regulator statement on the page links to that regulator's own publication; the help line and state resource appear on every page of the section; nothing in the section claims a legal opinion.",
+      "gap": "Colorado and New Jersey material is verified; state-by-state age/eligibility and non-US legality were not enumerated this session and are listed as blocking questions rather than asserted.",
+      "src": "co-gaming-sept26"
+    },
+    {
+      "id": "R-26",
+      "cat": "Compliance",
+      "req": "No league or team content is used in a way that implies official status, and no operator's rules are quoted as if they were universal.",
+      "pri": "P0",
+      "status": "PARTIAL",
+      "accept": "Every source row carries a tier and a retrieval method; secondary aggregators appear in the registry only as cross-check notes with no value rows.",
+      "gap": "Two operator/regulator documents are only snippet-verified (PARTIAL) and are labelled as such on the sources page.",
+      "src": "dk-gnlc-house-rules"
+    },
+    {
+      "id": "R-27",
+      "cat": "Operations",
+      "req": "A refresh path that can run without an operator at a keyboard, with provenance preserved (raw response, hash, timestamp, URL).",
+      "pri": "P1",
+      "status": "SPECIFIED",
+      "accept": "A GitHub-Actions-runnable collector that writes compressed raw responses plus a manifest of URL/timestamp/SHA-256, then rebuilds the section; failures leave the previous data in place and produce a flag row instead of a silent blank.",
+      "gap": "scripts/fetch_nfl_model_sources.py is provided and syntax-checked, but this session did not run it on a runner, so no fresh official snapshot is claimed for 2026-11-13 beyond the pages fetched interactively above.",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "R-28",
+      "cat": "Operations",
+      "req": "Reproducible build and a failing CI check when the section's verification gate fails.",
+      "pri": "P0",
+      "status": "MET",
+      "accept": "python3 scripts/build_nfl_model.py regenerates every page byte-identically from data; python3 scripts/verify_nfl_model.py exits non-zero on a sourceless row, a fabricated official claim, a broken internal link, or a missing disclosure.",
+      "gap": "Both run green locally; the CI job runs them on pull requests to main.",
+      "src": "repo-official-snapshot"
+    }
   ]
 }

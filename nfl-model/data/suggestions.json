@@ -6,25 +6,615 @@
     "NOT-RECOMMENDED": "Documented so the option is not lost, but we advise against it."
   },
   "suggestions": [
-    {"id": "SG-01", "area": "Data", "problem": "Nothing about betting can be validated without prices; every strategy table on this site has blank result columns for this reason.", "proposal": "Buy the cheapest tier of one documented NFL price feed, run it for the remaining 2026 weeks, and log every response to disk with timestamps and hashes before deciding on an archival contract.", "options": [{"label": "A - Trial one vendor, 3 weeks, log everything", "effort": "Low (1 day)", "cost": "Trial tier only", "risk": "Sample too small to learn much; teaches field semantics and latency, which is the point."}, {"label": "B - Buy multi-year historical archive now", "effort": "Medium", "cost": "Highest; multi-hundred to multi-thousand dollar range depending on depth, quote required", "risk": "Spending before the pipeline is proven; archive coverage of props is often thinner than the sales page implies."}, {"label": "C - Scrape public 'odds' pages instead", "effort": "Medium", "cost": "$0 plus maintenance", "risk": "Terms-of-service and integrity exposure, silent schema changes, and data we could never defend in the verification gate. Not recommended."}], "recommend": "A", "why": "A gives the only missing input at the lowest commitment and produces the artefact the gate needs (timestamped raw responses). B should follow A only if A shows the coverage we assume.", "decide": "Approve or refuse a paid data trial (Q-01).", "status": "AWAITING-DECISION", "touches": "scripts/fetch_nfl_model_sources.py, data feed config secret, new raw snapshot tree", "src": "odds-api-nfl"},
-    {"id": "SG-02", "area": "Site", "problem": "Two verification stacks now exist (root radio dashboard, this section) with two nav lists and two gates; readers can find one and miss the other.", "proposal": "Choose one: keep the sections separate, share navigation only, or fully integrate the NFL section into the root builder and root verify.py.", "options": [{"label": "A - Separate trees, shared nav link (today's state)", "effort": "none needed", "cost": "$0", "risk": "Long-term drift between two gates and two styles."}, {"label": "B - Shared nav + one index page listing both workstreams", "effort": "Low", "cost": "$0", "risk": "One small conflict with the four open pull requests touching index.html."}, {"label": "C - Full integration into scripts/build_site.py and scripts/verify.py", "effort": "High", "cost": "$0", "risk": "Touches files owned by open PRs #18/#41/#43; merge conflicts in generated HTML are painful."}], "recommend": "B", "why": "B costs one navigation hunk and solves the discoverability problem now; C should wait until the open PRs land, then be a dedicated integration task.", "decide": "Pick A, B or C; if C, pick the integration window.", "status": "AWAITING-DECISION", "touches": "index.html nav, root css, scripts/build_site.py (option C only)", "src": "repo-official-snapshot"},
-    {"id": "SG-03", "area": "Site", "problem": "The section is a set of static pages; a reader cannot see the decision state change, and a suggestion cannot record an answer.", "proposal": "Add a decisions log page that only appends: decision id, chosen option, date, who decided, and what unlocked as a result. Keep it a committed markdown/JSON file rather than a form, so it stays verifiable and needs no backend.", "options": [{"label": "A - Committed decisions.json + rendered page", "effort": "Low", "cost": "$0", "risk": "Owner must edit a file or ask an agent to."}, {"label": "B - GitHub Issue template per decision", "effort": "Low", "cost": "$0", "risk": "Split-brain between issue tracker and site unless one is authoritative."}, {"label": "C - Real backend with a database", "effort": "High", "cost": "Hosting + auth", "risk": "Breaks the 'static site, verifiable in git' property that makes the whole dashboard trustworthy."}], "recommend": "A", "why": "A keeps the decision trail in git, where the verification gate can require that a decision exists before a gated strategy can be promoted.", "decide": "Adopt A, then add a gate check that reads decisions.json.", "status": "AWAITING-DECISION", "touches": "nfl-model/data/decisions.json (new), builder, gates page", "src": "repo-official-snapshot"},
-    {"id": "SG-04", "area": "Decision support", "problem": "The question list can decay into a wall of open items; blocking power is what matters.", "proposal": "Add a one-screen 'decision stack' to the landing page: the questions that block the next useful action, ordered by (value unlocked / cost to answer), each with the single cheapest experiment.", "options": [{"label": "A - Computed from data/questions.json by score field", "effort": "Low", "cost": "$0", "risk": "Score is subjective unless the owner weights it."}, {"label": "B - Leave the full table only", "effort": "none needed", "cost": "$0", "risk": "Owner reads 22 rows to find the 3 that matter."}], "recommend": "A", "why": "A turns the register into a to-do list with an order; the weights are visible and arguable.", "decide": "Whether to weight the ordering by owner priorities (cost, speed, or how much money it unlocks).", "status": "AWAITING-DECISION", "touches": "nfl-model/index.html builder section", "src": "repo-official-snapshot"},
-    {"id": "SG-05", "area": "Operations", "problem": "Everything on the site is a snapshot; today's build is honest about age only in prose.", "proposal": "Put a machine-computed staleness badge on every table (max age of its source rows), with a per-dataset threshold, and fail the gate if a table exceeds its threshold while still claiming VERIFIED.", "options": [{"label": "A - Staleness badge + gate failure", "effort": "Low", "cost": "$0", "risk": "More red badges until the refresh workflow runs."}, {"label": "B - Auto-refresh on a schedule, no badge", "effort": "Medium", "cost": "$0 (Actions minutes)", "risk": "Silent upstream schema changes produce plausible-but-wrong rows; worse than a visible stale badge."}], "recommend": "A", "why": "A makes decay visible and cannot be argued with; B should be added after A, not instead of it.", "decide": "Set the threshold per dataset (for example: injury report 3 days, depth chart 7 days, price feed 1 day, regulator reports 45 days).", "status": "AWAITING-DECISION", "touches": "scripts/verify_nfl_model.py, nfl-model/data/*.json, builder", "src": "repo-official-snapshot"},
-    {"id": "SG-06", "area": "Model", "problem": "A single 'model version' hides which choice produced which number, which is how a lucky model gets mistaken for a good one.", "proposal": "Pre-register each model version: a git-committed spec (inputs, cut-off, hyper-parameters fixed in advance, primary metric, the exact gate set) created before any evaluation, with a hash of the spec embedded in every result row.", "options": [{"label": "A - Spec file per version + gate check for the hash", "effort": "Low", "cost": "$0", "risk": "Process discipline; friction when iterating."}, {"label": "B - Free-form experimentation, results table updated in place", "effort": "none needed", "cost": "$0", "risk": "Unrecoverable multiple-comparison contamination; the leaderboard becomes meaningless."}], "recommend": "A", "why": "A is the cheapest honest protection against the exact failure the brief asks to avoid, which is luck being relabelled as skill.", "decide": "Adopt pre-registration as a hard gate (it is written as G-02).", "status": "AWAITING-DECISION", "touches": "research/nfl-model/specs/*.md, scripts/verify_nfl_model.py", "src": "arxiv-nfl-lines"},
-    {"id": "SG-07", "area": "Model", "problem": "Our number versus their number is the whole edge, so the timing convention must be pinned.", "proposal": "Define the price ladder used everywhere: open, midweek snapshot, close (measured at a stated minutes-before-kickoff cut-off), and the actual price we could have taken; then score CLV only against the same cut-off close.", "options": [{"label": "A - Fix close = 15 minutes before kickoff, one cut-off for all markets", "effort": "Low", "cost": "$0", "risk": "For props, many books stop offering or move earlier; the 15-minute close may not be attainable."}, {"label": "B - Market-specific cut-offs (sides/totals 15 min, props 60 min, live excluded)", "effort": "Low", "cost": "$0", "risk": "Cross-market comparisons get harder."}, {"label": "C - Keep vendor's own 'closing' definition", "effort": "none needed", "cost": "$0", "risk": "We inherit an unexplained timestamp and cannot defend any CLV number."}], "recommend": "B", "why": "B is the only option that matches how the markets actually close; C would let a vendor's definition decide our conclusions.", "decide": "Approve the cut-off table (it changes what data must be bought).", "status": "AWAITING-DECISION", "touches": "nfl-model/data/line-model.json, collector config", "src": "odds-api-nfl"},
-    {"id": "SG-08", "area": "Model", "problem": "Key numbers (3, 7, 10 in NFL) make spread and total edges asymmetric; a model blind to them is miscalibrated by construction.", "proposal": "Model the margin distribution explicitly and evaluate half-point and key-number shifts as a priced asset (buying a half point has a known cost in vig and a known value in win probability), rather than treating the spread as continuous.", "options": [{"label": "A - Discrete margin distribution + key-number adjustment table", "effort": "Medium", "cost": "$0", "risk": "Needs many seasons of margins; the public academic sample we cite is 2002-2011 and is not current."}, {"label": "B - Normal-approx margin model", "effort": "Low", "cost": "$0", "risk": "Systematically underprices the mass at 3 and 7."}, {"label": "C - Copy a public power rating", "effort": "none needed", "cost": "$0", "risk": "We then have someone else's edge, priced against their own line; no independent origination at all."}], "recommend": "A", "why": "The whole point of originating is the discrete distribution; B and C defeat it.", "decide": "Approve building the margin-distribution estimator from official box scores (no data purchase needed for this one).", "status": "AWAITING-DECISION", "touches": "scripts/build_nfl_model.py, new scripts/model_margin.py", "src": "arxiv-nfl-lines"},
-    {"id": "SG-09", "area": "Data", "problem": "Injury and depth signals are only as good as the cadence of the official inputs; we currently parse a rendered web page.", "proposal": "Snapshot the official report per club per report-day into the existing raw-response + SHA-256 manifest pattern, and treat 'a player absent from the report' as a distinct coded state (not zero, not healthy).", "options": [{"label": "A - Snapshot HTML/JSON per report day, keep the blank-vs-certain distinction", "effort": "Low", "cost": "$0", "risk": "The official page is client-rendered; a fetch that silently returns a partial page would look like a healthy report."}, {"label": "B - Manual copy from team PDFs", "effort": "Owner time", "cost": "$0", "risk": "Violates the no-manual-input requirement and creates a coverage gap between clubs."}, {"label": "C - Buy an injury feed", "effort": "Low", "cost": "Subscription", "risk": "Imports unverifiable values into VERIFIED rows unless it is kept in a separate, gated-off table."}], "recommend": "A", "why": "A preserves provability, which is this repository's actual advantage; the partial-render risk is handled by a per-club row-count and a 'report day' assertion (see IR-034).", "decide": "Whether to add a defensive row-count assertion before relying on the scraped page (recommended: yes, cheap).", "status": "AWAITING-DECISION", "touches": "scripts/fetch_nfl_model_sources.py, verify gate", "src": "nfl-injuries-reg10"},
-    {"id": "SG-10", "area": "Data", "problem": "Depth-chart vacancies are visible only per club, and a stale chart can look like a healthy roster.", "proposal": "Collect all 32 club charts weekly, publish the per-club HTTP status, the club's own 'Updated as of' date, the chart age, and the count of positions with fewer than three listed players; treat any chart beyond the club's own cadence as unusable for that week.", "options": [{"label": "A - 32-club collector with per-club staleness rule", "effort": "Medium", "cost": "$0", "risk": "Club sites change layout without notice; parser breaks silently unless the vacancy count is asserted."}, {"label": "B - Focus club only (49ers)", "effort": "Low", "cost": "$0", "risk": "Any cross-league signal is impossible; the site's own tables would mislead about coverage."}, {"label": "C - Rely on a third-party depth chart", "effort": "Low", "cost": "Subscription", "risk": "Loses the 'official source per row' property."}], "recommend": "A", "why": "The requirement is to know when a second or third stringer replaces a starter across the league; B cannot do that and C cannot be verified per row.", "decide": "Approve the 32-club scraping task (site terms should be read for each club first).", "status": "AWAITING-DECISION", "touches": "scripts/fetch_nfl_model_sources.py, research/nfl-model/raw/", "src": "sf-depth-chart"},
-    {"id": "SG-11", "area": "Model", "problem": "Parlay edges are usually fake: multiplying correlated legs looks like edge but is mostly unpriced dependence plus vig.", "proposal": "Require every parlay candidate to beat the operator's own same-game price after our correlation assumption, and to be rejected when the correlation is unmeasured; keep a separate ticket class for uncorrelated cross-game parlays where the operator's independent-price assumption matches ours.", "options": [{"label": "A - Price from our joint model; refuse tickets with unmeasured correlation", "effort": "High", "cost": "$0", "risk": "Few tickets qualify, which is the honest outcome."}, {"label": "B - Take operator boosts as 'free edge'", "effort": "Low", "cost": "$0", "risk": "Boosts exist because the boosted price is worse than fair; we would be paying for the entertainment."}, {"label": "C - Only cross-game parlays", "effort": "Medium", "cost": "$0", "risk": "Legs from the same week still share information (weather, rest, lineup news), so 'independent' is still an approximation."}], "recommend": "A", "why": "A is the only variant where the correlation work in R-13 pays for itself; B is negative-EV by construction of the market.", "decide": "Accept that the SGP class may have zero fundable strategies in year one.", "status": "AWAITING-DECISION", "touches": "strategies page, correlation page, ticket pricing module", "src": "dk-gnlc-house-rules"},
-    {"id": "SG-12", "area": "Validation", "problem": "'Remove luck' is not achievable; the achievable thing is measuring how much luck remains.", "proposal": "Publish, for every strategy, a luck budget: the share of observed PnL attributable to variance (from the per-bet variance and n), the shrinkage applied to the raw hit rate, and a statement of what n would be needed for the claimed edge - and refuse to show any ROI without those three numbers.", "options": [{"label": "A - Luck budget mandatory on every result row", "effort": "Low", "cost": "$0", "risk": "Tables get wider and less flattering; that is the point."}, {"label": "B - Show ROI, footnote the caveat", "effort": "none needed", "cost": "$0", "risk": "Footnotes are read by nobody; the leaderboard would reward variance."}], "recommend": "A", "why": "The brief's central demand cannot be met by a footnote; it has to be a column that gates promotion.", "decide": "Adopt as gate G-05 (already specified) and confirm the shrinkage prior (recommended: Beta prior fitted across the whole entrant pool).", "status": "AWAITING-DECISION", "touches": "gates page, leaderboard scoring", "src": "arxiv-nfl-lines"},
-    {"id": "SG-13", "area": "Competition", "problem": "A leaderboard with a starting line of zero resolved bets has nothing to rank, so entrants will improvise or game it.", "proposal": "Run the competition in three tiers: Tier 0 spec review (gate design and reasoning scored by peers), Tier 1 paper season (full logging, no stake, CLV-based), Tier 2 funded (only Tier 1 survivors, capped units).", "options": [{"label": "A - Three tiers, promotion by published gates", "effort": "Medium", "cost": "$0 for tiers 0-1", "risk": "Slower to first funded strategy; fewer entrants willing to wait."}, {"label": "B - Single tier, real money immediately", "effort": "Low", "cost": "Bankroll", "risk": "Pays for the most expensive possible lesson; also makes the reward pool look like wagering."}], "recommend": "A", "why": "It is the only structure that produces a skill signal at a size NFL data can support, and it keeps the reward mechanism away from stake-pool territory.", "decide": "Confirm the tier design and who may enter (owner only, or invited analysts).", "status": "AWAITING-DECISION", "touches": "leaderboard page, competition rules document", "src": "arxiv-nfl-lines"},
-    {"id": "SG-14", "area": "Competition", "problem": "Rewards attached to a short-sample ranking reward luck, which is precisely what the brief wants removed.", "proposal": "Pay rewards on gate compliance and measured closing-line edge, not on PnL: for example 50% of the prize on mean CLV with a one-sided test, 30% on calibration (Brier against the closing line), 20% on coverage and discipline (no missing closes, no unlogged bets, no cut-off violations).", "options": [{"label": "A - CLV + calibration + discipline weighting", "effort": "Low", "cost": "$0 (recognition/credits) or owner budget", "risk": "CLV itself is imperfect: it rewards being right about the market, not about the game."}, {"label": "B - PnL ranking", "effort": "Low", "cost": "Same", "risk": "Structurally a lottery in year one; would select for high-variance strategies."}, {"label": "C - No rewards until 2 seasons of data", "effort": "none needed", "cost": "$0", "risk": "Loses the competitive pressure that makes entrants honest."}], "recommend": "A", "why": "A is the closest thing to a skill-only objective available at small n; C is a safe fallback if prize competition has legal friction in the owner's jurisdiction (Q-15).", "decide": "Budget, form of reward, and whether a legal review of a prize competition is needed.", "status": "AWAITING-DECISION", "touches": "leaderboard rules, nfl-model/data/leaderboard.json", "src": "arxiv-nfl-lines"},
-    {"id": "SG-15", "area": "Validation", "problem": "With a 14-strategy catalogue tested at 5%, at least one 'winner' appears by construction.", "proposal": "Make multiple-comparison control mandatory (Benjamini-Hochberg across all evaluated strategies per season), report both raw and adjusted p-values, and require a held-out season that was never looked at for any promotion.", "options": [{"label": "A - BH across the catalogue + untouched holdout season", "effort": "Low", "cost": "$0", "risk": "Some real edges fail; a slower promotion cycle."}, {"label": "B - Report raw p-values only", "effort": "none needed", "cost": "$0", "risk": "The catalogue self-selects noise; guaranteed future disappointment."}], "recommend": "A", "why": "Any leaderboard with more than a handful of entrants manufactures winners without it.", "decide": "Adopt as gate G-08 (already specified).", "status": "AWAITING-DECISION", "touches": "gates page, evaluation script", "src": "arxiv-nfl-lines"},
-    {"id": "SG-16", "area": "Site", "problem": "Tables without a comparison surface are reference material, not decision support.", "proposal": "Add a strategy comparison view: pick up to 4 strategies and see their gate-by-gate status, required inputs, data cost, correlation dependency, sample-size need and current blocker side by side.", "options": [{"label": "A - Static comparison matrix generated for all strategy pairs", "effort": "Low", "cost": "$0", "risk": "A 14x14 matrix is a big table; keep it filterable."}, {"label": "B - Client-side picker with a small JSON bundle", "effort": "Medium", "cost": "$0", "risk": "Needs JS state; the site is deliberately dependency-free today."}], "recommend": "A", "why": "A keeps everything inspectable in the HTML source, which matters on a site whose whole claim is verifiability.", "decide": "Approve the page and its column set.", "status": "AWAITING-DECISION", "touches": "new nfl-model/compare.html, builder", "src": "repo-official-snapshot"},
-    {"id": "SG-17", "area": "Compliance", "problem": "A page of betting strategies without jurisdiction and help resources is the kind of artefact that gets people hurt or gets the repo flagged.", "proposal": "Keep the compliance block (age/eligibility unknown until Q-06 is answered, no profit guarantee, variance warning, help line with the state resource) on every page of the section, enforced by the verification gate rather than by convention.", "options": [{"label": "A - Gate-enforced disclosure on every page", "effort": "Low", "cost": "$0", "risk": "None material."}, {"label": "B - Single disclaimer page", "effort": "none needed", "cost": "$0", "risk": "A reader of one table never sees it."}], "recommend": "A", "why": "Cheap, automatic, and it makes the omission impossible to introduce by accident.", "decide": "None required; already implemented as AUTO-DONE below.", "status": "AUTO-DONE", "touches": "scripts/build_nfl_model.py footer, scripts/verify_nfl_model.py", "src": "co-gaming-sept26"},
-    {"id": "SG-18", "area": "Data", "problem": "The repo's official snapshot is 11 days old relative to this build, and the section would otherwise inherit that staleness silently.", "proposal": "Split the age disclosure per dataset (schedule snapshot, injury report retrieval date, depth chart 'updated as of', regulator report month) instead of one global timestamp, and publish the max age in the table header.", "options": [{"label": "A - Per-dataset age stamp, computed at build", "effort": "Low", "cost": "$0", "risk": "None; more honest."}, {"label": "B - Global snapshot timestamp only", "effort": "none needed", "cost": "$0", "risk": "Implies uniform freshness that does not exist."}], "recommend": "A", "why": "The depth chart is fresh (11/10), the schedule is 11/02, the regulator data is a month old; a single timestamp misrepresents all three.", "decide": "None required; implemented in this session.", "status": "AUTO-DONE", "touches": "nfl-model/data/meta.json, builder page headers", "src": "repo-official-snapshot"},
-    {"id": "SG-19", "area": "Model", "problem": "Backup-replacement effects are confounded by opponent strength, rest, home field, and the fact that teams rest players in meaningless games.", "proposal": "Add context controls to every availability signal before it is called a signal: opponent rating, days rest, home/away, venue (for the international games), game importance (win-probability added), and whether the team was already eliminating rotations.", "options": [{"label": "A - Regression-adjusted availability delta with published residuals", "effort": "Medium", "cost": "$0", "risk": "Needs a team rating we build ourselves (SG-08 path)."}, {"label": "B - Raw 'starter out' indicator", "effort": "Low", "cost": "$0", "risk": "Confounded with everything in the list; would produce a market-following pseudo-signal."}], "recommend": "A", "why": "B is exactly the sort of plausible narrative the brief wants excluded.", "decide": "Approve building our own team rating first (it is a prerequisite and needs no purchases).", "status": "AWAITING-DECISION", "touches": "scripts/model_team_rating.py (new), injury signals", "src": "nfl-injuries-current"},
-    {"id": "SG-20", "area": "Site", "problem": "Suggestion review is a recurring job; today it is a page anyone can forget.", "proposal": "Make the suggestions page the section's front door when items are awaiting decision (landing page shows a count of items awaiting decision and the top three by decision value), and require that any agent session that implements a suggestion writes its outcome into the suggestions data.", "options": [{"label": "A - Count + top-3 surfaced on landing, implementer must update JSON", "effort": "Low", "cost": "$0", "risk": "None."}, {"label": "B - Keep it as a linked page only", "effort": "none needed", "cost": "$0", "risk": "Proposals pile up unreviewed, which is the failure mode of this kind of board."}], "recommend": "A", "why": "The brief asked for a place to choose a path; a page nobody lands on is not that place.", "decide": "Approve the landing-page change.", "status": "AUTO-DONE", "touches": "nfl-model/index.html builder", "src": "repo-official-snapshot"}
+    {
+      "id": "SG-01",
+      "area": "Data",
+      "problem": "Nothing about betting can be validated without prices; every strategy table on this site has blank result columns for this reason.",
+      "proposal": "Buy the cheapest tier of one documented NFL price feed, run it for the remaining 2026 weeks, and log every response to disk with timestamps and hashes before deciding on an archival contract.",
+      "options": [
+        {
+          "label": "A - Trial one vendor, 3 weeks, log everything",
+          "effort": "Low (1 day)",
+          "cost": "Trial tier only",
+          "risk": "Sample too small to learn much; teaches field semantics and latency, which is the point."
+        },
+        {
+          "label": "B - Buy multi-year historical archive now",
+          "effort": "Medium",
+          "cost": "Highest; multi-hundred to multi-thousand dollar range depending on depth, quote required",
+          "risk": "Spending before the pipeline is proven; archive coverage of props is often thinner than the sales page implies."
+        },
+        {
+          "label": "C - Scrape public 'odds' pages instead",
+          "effort": "Medium",
+          "cost": "$0 plus maintenance",
+          "risk": "Terms-of-service and integrity exposure, silent schema changes, and data we could never defend in the verification gate. Not recommended."
+        }
+      ],
+      "recommend": "A",
+      "why": "A gives the only missing input at the lowest commitment and produces the artefact the gate needs (timestamped raw responses). B should follow A only if A shows the coverage we assume.",
+      "decide": "Approve or refuse a paid data trial (Q-01).",
+      "status": "AWAITING-DECISION",
+      "touches": "scripts/fetch_nfl_model_sources.py, data feed config secret, new raw snapshot tree",
+      "src": "odds-api-nfl"
+    },
+    {
+      "id": "SG-02",
+      "area": "Site",
+      "problem": "Two verification stacks now exist (root radio dashboard, this section) with two nav lists and two gates; readers can find one and miss the other.",
+      "proposal": "Choose one: keep the sections separate, share navigation only, or fully integrate the NFL section into the root builder and root verify.py.",
+      "options": [
+        {
+          "label": "A - Separate trees, shared nav link (today's state)",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Long-term drift between two gates and two styles."
+        },
+        {
+          "label": "B - Shared nav + one index page listing both workstreams",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "One small conflict with the four open pull requests touching index.html."
+        },
+        {
+          "label": "C - Full integration into scripts/build_site.py and scripts/verify.py",
+          "effort": "High",
+          "cost": "$0",
+          "risk": "Touches files owned by open PRs #18/#41/#43; merge conflicts in generated HTML are painful."
+        }
+      ],
+      "recommend": "B",
+      "why": "B costs one navigation hunk and solves the discoverability problem now; C should wait until the open PRs land, then be a dedicated integration task.",
+      "decide": "Pick A, B or C; if C, pick the integration window.",
+      "status": "AWAITING-DECISION",
+      "touches": "index.html nav, root css, scripts/build_site.py (option C only)",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "SG-03",
+      "area": "Site",
+      "problem": "The section is a set of static pages; a reader cannot see the decision state change, and a suggestion cannot record an answer.",
+      "proposal": "Add a decisions log page that only appends: decision id, chosen option, date, who decided, and what unlocked as a result. Keep it a committed markdown/JSON file rather than a form, so it stays verifiable and needs no backend.",
+      "options": [
+        {
+          "label": "A - Committed decisions.json + rendered page",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Owner must edit a file or ask an agent to."
+        },
+        {
+          "label": "B - GitHub Issue template per decision",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Split-brain between issue tracker and site unless one is authoritative."
+        },
+        {
+          "label": "C - Real backend with a database",
+          "effort": "High",
+          "cost": "Hosting + auth",
+          "risk": "Breaks the 'static site, verifiable in git' property that makes the whole dashboard trustworthy."
+        }
+      ],
+      "recommend": "A",
+      "why": "A keeps the decision trail in git, where the verification gate can require that a decision exists before a gated strategy can be promoted.",
+      "decide": "Adopt A, then add a gate check that reads decisions.json.",
+      "status": "AWAITING-DECISION",
+      "touches": "nfl-model/data/decisions.json (new), builder, gates page",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "SG-04",
+      "area": "Decision support",
+      "problem": "The question list can decay into a wall of open items; blocking power is what matters.",
+      "proposal": "Add a one-screen 'decision stack' to the landing page: the questions that block the next useful action, ordered by (value unlocked / cost to answer), each with the single cheapest experiment.",
+      "options": [
+        {
+          "label": "A - Computed from data/questions.json by score field",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Score is subjective unless the owner weights it."
+        },
+        {
+          "label": "B - Leave the full table only",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Owner reads 22 rows to find the 3 that matter."
+        }
+      ],
+      "recommend": "A",
+      "why": "A turns the register into a to-do list with an order; the weights are visible and arguable.",
+      "decide": "Whether to weight the ordering by owner priorities (cost, speed, or how much money it unlocks).",
+      "status": "AWAITING-DECISION",
+      "touches": "nfl-model/index.html builder section",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "SG-05",
+      "area": "Operations",
+      "problem": "Everything on the site is a snapshot; today's build is honest about age only in prose.",
+      "proposal": "Put a machine-computed staleness badge on every table (max age of its source rows), with a per-dataset threshold, and fail the gate if a table exceeds its threshold while still claiming VERIFIED.",
+      "options": [
+        {
+          "label": "A - Staleness badge + gate failure",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "More red badges until the refresh workflow runs."
+        },
+        {
+          "label": "B - Auto-refresh on a schedule, no badge",
+          "effort": "Medium",
+          "cost": "$0 (Actions minutes)",
+          "risk": "Silent upstream schema changes produce plausible-but-wrong rows; worse than a visible stale badge."
+        }
+      ],
+      "recommend": "A",
+      "why": "A makes decay visible and cannot be argued with; B should be added after A, not instead of it.",
+      "decide": "Set the threshold per dataset (for example: injury report 3 days, depth chart 7 days, price feed 1 day, regulator reports 45 days).",
+      "status": "AWAITING-DECISION",
+      "touches": "scripts/verify_nfl_model.py, nfl-model/data/*.json, builder",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "SG-06",
+      "area": "Model",
+      "problem": "A single 'model version' hides which choice produced which number, which is how a lucky model gets mistaken for a good one.",
+      "proposal": "Pre-register each model version: a git-committed spec (inputs, cut-off, hyper-parameters fixed in advance, primary metric, the exact gate set) created before any evaluation, with a hash of the spec embedded in every result row.",
+      "options": [
+        {
+          "label": "A - Spec file per version + gate check for the hash",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Process discipline; friction when iterating."
+        },
+        {
+          "label": "B - Free-form experimentation, results table updated in place",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Unrecoverable multiple-comparison contamination; the leaderboard becomes meaningless."
+        }
+      ],
+      "recommend": "A",
+      "why": "A is the cheapest honest protection against the exact failure the brief asks to avoid, which is luck being relabelled as skill.",
+      "decide": "Adopt pre-registration as a hard gate (it is written as G-02).",
+      "status": "AWAITING-DECISION",
+      "touches": "research/nfl-model/specs/*.md, scripts/verify_nfl_model.py",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "SG-07",
+      "area": "Model",
+      "problem": "Our number versus their number is the whole edge, so the timing convention must be pinned.",
+      "proposal": "Define the price ladder used everywhere: open, midweek snapshot, close (measured at a stated minutes-before-kickoff cut-off), and the actual price we could have taken; then score CLV only against the same cut-off close.",
+      "options": [
+        {
+          "label": "A - Fix close = 15 minutes before kickoff, one cut-off for all markets",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "For props, many books stop offering or move earlier; the 15-minute close may not be attainable."
+        },
+        {
+          "label": "B - Market-specific cut-offs (sides/totals 15 min, props 60 min, live excluded)",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Cross-market comparisons get harder."
+        },
+        {
+          "label": "C - Keep vendor's own 'closing' definition",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "We inherit an unexplained timestamp and cannot defend any CLV number."
+        }
+      ],
+      "recommend": "B",
+      "why": "B is the only option that matches how the markets actually close; C would let a vendor's definition decide our conclusions.",
+      "decide": "Approve the cut-off table (it changes what data must be bought).",
+      "status": "AWAITING-DECISION",
+      "touches": "nfl-model/data/line-model.json, collector config",
+      "src": "odds-api-nfl"
+    },
+    {
+      "id": "SG-08",
+      "area": "Model",
+      "problem": "Key numbers (3, 7, 10 in NFL) make spread and total edges asymmetric; a model blind to them is miscalibrated by construction.",
+      "proposal": "Model the margin distribution explicitly and evaluate half-point and key-number shifts as a priced asset (buying a half point has a known cost in vig and a known value in win probability), rather than treating the spread as continuous.",
+      "options": [
+        {
+          "label": "A - Discrete margin distribution + key-number adjustment table",
+          "effort": "Medium",
+          "cost": "$0",
+          "risk": "Needs many seasons of margins; the public academic sample we cite is 2002-2011 and is not current."
+        },
+        {
+          "label": "B - Normal-approx margin model",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Systematically underprices the mass at 3 and 7."
+        },
+        {
+          "label": "C - Copy a public power rating",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "We then have someone else's edge, priced against their own line; no independent origination at all."
+        }
+      ],
+      "recommend": "A",
+      "why": "The whole point of originating is the discrete distribution; B and C defeat it.",
+      "decide": "Approve building the margin-distribution estimator from official box scores (no data purchase needed for this one).",
+      "status": "AWAITING-DECISION",
+      "touches": "scripts/build_nfl_model.py, new scripts/model_margin.py",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "SG-09",
+      "area": "Data",
+      "problem": "Injury and depth signals are only as good as the cadence of the official inputs; we currently parse a rendered web page.",
+      "proposal": "Snapshot the official report per club per report-day into the existing raw-response + SHA-256 manifest pattern, and treat 'a player absent from the report' as a distinct coded state (not zero, not healthy).",
+      "options": [
+        {
+          "label": "A - Snapshot HTML/JSON per report day, keep the blank-vs-certain distinction",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "The official page is client-rendered; a fetch that silently returns a partial page would look like a healthy report."
+        },
+        {
+          "label": "B - Manual copy from team PDFs",
+          "effort": "Owner time",
+          "cost": "$0",
+          "risk": "Violates the no-manual-input requirement and creates a coverage gap between clubs."
+        },
+        {
+          "label": "C - Buy an injury feed",
+          "effort": "Low",
+          "cost": "Subscription",
+          "risk": "Imports unverifiable values into VERIFIED rows unless it is kept in a separate, gated-off table."
+        }
+      ],
+      "recommend": "A",
+      "why": "A preserves provability, which is this repository's actual advantage; the partial-render risk is handled by a per-club row-count and a 'report day' assertion (see IR-034).",
+      "decide": "Whether to add a defensive row-count assertion before relying on the scraped page (recommended: yes, cheap).",
+      "status": "AWAITING-DECISION",
+      "touches": "scripts/fetch_nfl_model_sources.py, verify gate",
+      "src": "nfl-injuries-reg10"
+    },
+    {
+      "id": "SG-10",
+      "area": "Data",
+      "problem": "Depth-chart vacancies are visible only per club, and a stale chart can look like a healthy roster.",
+      "proposal": "Collect all 32 club charts weekly, publish the per-club HTTP status, the club's own 'Updated as of' date, the chart age, and the count of positions with fewer than three listed players; treat any chart beyond the club's own cadence as unusable for that week.",
+      "options": [
+        {
+          "label": "A - 32-club collector with per-club staleness rule",
+          "effort": "Medium",
+          "cost": "$0",
+          "risk": "Club sites change layout without notice; parser breaks silently unless the vacancy count is asserted."
+        },
+        {
+          "label": "B - Focus club only (49ers)",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Any cross-league signal is impossible; the site's own tables would mislead about coverage."
+        },
+        {
+          "label": "C - Rely on a third-party depth chart",
+          "effort": "Low",
+          "cost": "Subscription",
+          "risk": "Loses the 'official source per row' property."
+        }
+      ],
+      "recommend": "A",
+      "why": "The requirement is to know when a second or third stringer replaces a starter across the league; B cannot do that and C cannot be verified per row.",
+      "decide": "Approve the 32-club scraping task (site terms should be read for each club first).",
+      "status": "AWAITING-DECISION",
+      "touches": "scripts/fetch_nfl_model_sources.py, research/nfl-model/raw/",
+      "src": "sf-depth-chart"
+    },
+    {
+      "id": "SG-11",
+      "area": "Model",
+      "problem": "Parlay edges are usually fake: multiplying correlated legs looks like edge but is mostly unpriced dependence plus vig.",
+      "proposal": "Require every parlay candidate to beat the operator's own same-game price after our correlation assumption, and to be rejected when the correlation is unmeasured; keep a separate ticket class for uncorrelated cross-game parlays where the operator's independent-price assumption matches ours.",
+      "options": [
+        {
+          "label": "A - Price from our joint model; refuse tickets with unmeasured correlation",
+          "effort": "High",
+          "cost": "$0",
+          "risk": "Few tickets qualify, which is the honest outcome."
+        },
+        {
+          "label": "B - Take operator boosts as 'free edge'",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Boosts exist because the boosted price is worse than fair; we would be paying for the entertainment."
+        },
+        {
+          "label": "C - Only cross-game parlays",
+          "effort": "Medium",
+          "cost": "$0",
+          "risk": "Legs from the same week still share information (weather, rest, lineup news), so 'independent' is still an approximation."
+        }
+      ],
+      "recommend": "A",
+      "why": "A is the only variant where the correlation work in R-13 pays for itself; B is negative-EV by construction of the market.",
+      "decide": "Accept that the SGP class may have zero fundable strategies in year one.",
+      "status": "AWAITING-DECISION",
+      "touches": "strategies page, correlation page, ticket pricing module",
+      "src": "dk-gnlc-house-rules"
+    },
+    {
+      "id": "SG-12",
+      "area": "Validation",
+      "problem": "'Remove luck' is not achievable; the achievable thing is measuring how much luck remains.",
+      "proposal": "Publish, for every strategy, a luck budget: the share of observed PnL attributable to variance (from the per-bet variance and n), the shrinkage applied to the raw hit rate, and a statement of what n would be needed for the claimed edge - and refuse to show any ROI without those three numbers.",
+      "options": [
+        {
+          "label": "A - Luck budget mandatory on every result row",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Tables get wider and less flattering; that is the point."
+        },
+        {
+          "label": "B - Show ROI, footnote the caveat",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Footnotes are read by nobody; the leaderboard would reward variance."
+        }
+      ],
+      "recommend": "A",
+      "why": "The brief's central demand cannot be met by a footnote; it has to be a column that gates promotion.",
+      "decide": "Adopt as gate G-05 (already specified) and confirm the shrinkage prior (recommended: Beta prior fitted across the whole entrant pool).",
+      "status": "AWAITING-DECISION",
+      "touches": "gates page, leaderboard scoring",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "SG-13",
+      "area": "Competition",
+      "problem": "A leaderboard with a starting line of zero resolved bets has nothing to rank, so entrants will improvise or game it.",
+      "proposal": "Run the competition in three tiers: Tier 0 spec review (gate design and reasoning scored by peers), Tier 1 paper season (full logging, no stake, CLV-based), Tier 2 funded (only Tier 1 survivors, capped units).",
+      "options": [
+        {
+          "label": "A - Three tiers, promotion by published gates",
+          "effort": "Medium",
+          "cost": "$0 for tiers 0-1",
+          "risk": "Slower to first funded strategy; fewer entrants willing to wait."
+        },
+        {
+          "label": "B - Single tier, real money immediately",
+          "effort": "Low",
+          "cost": "Bankroll",
+          "risk": "Pays for the most expensive possible lesson; also makes the reward pool look like wagering."
+        }
+      ],
+      "recommend": "A",
+      "why": "It is the only structure that produces a skill signal at a size NFL data can support, and it keeps the reward mechanism away from stake-pool territory.",
+      "decide": "Confirm the tier design and who may enter (owner only, or invited analysts).",
+      "status": "AWAITING-DECISION",
+      "touches": "leaderboard page, competition rules document",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "SG-14",
+      "area": "Competition",
+      "problem": "Rewards attached to a short-sample ranking reward luck, which is precisely what the brief wants removed.",
+      "proposal": "Pay rewards on gate compliance and measured closing-line edge, not on PnL: for example 50% of the prize on mean CLV with a one-sided test, 30% on calibration (Brier against the closing line), 20% on coverage and discipline (no missing closes, no unlogged bets, no cut-off violations).",
+      "options": [
+        {
+          "label": "A - CLV + calibration + discipline weighting",
+          "effort": "Low",
+          "cost": "$0 (recognition/credits) or owner budget",
+          "risk": "CLV itself is imperfect: it rewards being right about the market, not about the game."
+        },
+        {
+          "label": "B - PnL ranking",
+          "effort": "Low",
+          "cost": "Same",
+          "risk": "Structurally a lottery in year one; would select for high-variance strategies."
+        },
+        {
+          "label": "C - No rewards until 2 seasons of data",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Loses the competitive pressure that makes entrants honest."
+        }
+      ],
+      "recommend": "A",
+      "why": "A is the closest thing to a skill-only objective available at small n; C is a safe fallback if prize competition has legal friction in the owner's jurisdiction (Q-15).",
+      "decide": "Budget, form of reward, and whether a legal review of a prize competition is needed.",
+      "status": "AWAITING-DECISION",
+      "touches": "leaderboard rules, nfl-model/data/leaderboard.json",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "SG-15",
+      "area": "Validation",
+      "problem": "With a 14-strategy catalogue tested at 5%, at least one 'winner' appears by construction.",
+      "proposal": "Make multiple-comparison control mandatory (Benjamini-Hochberg across all evaluated strategies per season), report both raw and adjusted p-values, and require a held-out season that was never looked at for any promotion.",
+      "options": [
+        {
+          "label": "A - BH across the catalogue + untouched holdout season",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Some real edges fail; a slower promotion cycle."
+        },
+        {
+          "label": "B - Report raw p-values only",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "The catalogue self-selects noise; guaranteed future disappointment."
+        }
+      ],
+      "recommend": "A",
+      "why": "Any leaderboard with more than a handful of entrants manufactures winners without it.",
+      "decide": "Adopt as gate G-08 (already specified).",
+      "status": "AWAITING-DECISION",
+      "touches": "gates page, evaluation script",
+      "src": "arxiv-nfl-lines"
+    },
+    {
+      "id": "SG-16",
+      "area": "Site",
+      "problem": "Tables without a comparison surface are reference material, not decision support.",
+      "proposal": "Add a strategy comparison view: pick up to 4 strategies and see their gate-by-gate status, required inputs, data cost, correlation dependency, sample-size need and current blocker side by side.",
+      "options": [
+        {
+          "label": "A - Static comparison matrix generated for all strategy pairs",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "A 14x14 matrix is a big table; keep it filterable."
+        },
+        {
+          "label": "B - Client-side picker with a small JSON bundle",
+          "effort": "Medium",
+          "cost": "$0",
+          "risk": "Needs JS state; the site is deliberately dependency-free today."
+        }
+      ],
+      "recommend": "A",
+      "why": "A keeps everything inspectable in the HTML source, which matters on a site whose whole claim is verifiability.",
+      "decide": "Approve the page and its column set.",
+      "status": "AWAITING-DECISION",
+      "touches": "new nfl-model/compare.html, builder",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "SG-17",
+      "area": "Compliance",
+      "problem": "A page of betting strategies without jurisdiction and help resources is the kind of artefact that gets people hurt or gets the repo flagged.",
+      "proposal": "Keep the compliance block (age/eligibility unknown until Q-06 is answered, no profit guarantee, variance warning, help line with the state resource) on every page of the section, enforced by the verification gate rather than by convention.",
+      "options": [
+        {
+          "label": "A - Gate-enforced disclosure on every page",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "None material."
+        },
+        {
+          "label": "B - Single disclaimer page",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "A reader of one table never sees it."
+        }
+      ],
+      "recommend": "A",
+      "why": "Cheap, automatic, and it makes the omission impossible to introduce by accident.",
+      "decide": "None required; already implemented as AUTO-DONE below.",
+      "status": "AUTO-DONE",
+      "touches": "scripts/build_nfl_model.py footer, scripts/verify_nfl_model.py",
+      "src": "co-gaming-sept26"
+    },
+    {
+      "id": "SG-18",
+      "area": "Data",
+      "problem": "The repo's official snapshot is 11 days old relative to this build, and the section would otherwise inherit that staleness silently.",
+      "proposal": "Split the age disclosure per dataset (schedule snapshot, injury report retrieval date, depth chart 'updated as of', regulator report month) instead of one global timestamp, and publish the max age in the table header.",
+      "options": [
+        {
+          "label": "A - Per-dataset age stamp, computed at build",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "None; more honest."
+        },
+        {
+          "label": "B - Global snapshot timestamp only",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Implies uniform freshness that does not exist."
+        }
+      ],
+      "recommend": "A",
+      "why": "The depth chart is fresh (11/10), the schedule is 11/02, the regulator data is a month old; a single timestamp misrepresents all three.",
+      "decide": "None required; implemented in this session.",
+      "status": "AUTO-DONE",
+      "touches": "nfl-model/data/meta.json, builder page headers",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "SG-19",
+      "area": "Model",
+      "problem": "Backup-replacement effects are confounded by opponent strength, rest, home field, and the fact that teams rest players in meaningless games.",
+      "proposal": "Add context controls to every availability signal before it is called a signal: opponent rating, days rest, home/away, venue (for the international games), game importance (win-probability added), and whether the team was already eliminating rotations.",
+      "options": [
+        {
+          "label": "A - Regression-adjusted availability delta with published residuals",
+          "effort": "Medium",
+          "cost": "$0",
+          "risk": "Needs a team rating we build ourselves (SG-08 path)."
+        },
+        {
+          "label": "B - Raw 'starter out' indicator",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "Confounded with everything in the list; would produce a market-following pseudo-signal."
+        }
+      ],
+      "recommend": "A",
+      "why": "B is exactly the sort of plausible narrative the brief wants excluded.",
+      "decide": "Approve building our own team rating first (it is a prerequisite and needs no purchases).",
+      "status": "AWAITING-DECISION",
+      "touches": "scripts/model_team_rating.py (new), injury signals",
+      "src": "nfl-injuries-current"
+    },
+    {
+      "id": "SG-20",
+      "area": "Site",
+      "problem": "Suggestion review is a recurring job; today it is a page anyone can forget.",
+      "proposal": "Make the suggestions page the section's front door when items are awaiting decision (landing page shows a count of items awaiting decision and the top three by decision value), and require that any agent session that implements a suggestion writes its outcome into the suggestions data.",
+      "options": [
+        {
+          "label": "A - Count + top-3 surfaced on landing, implementer must update JSON",
+          "effort": "Low",
+          "cost": "$0",
+          "risk": "None."
+        },
+        {
+          "label": "B - Keep it as a linked page only",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Proposals pile up unreviewed, which is the failure mode of this kind of board."
+        }
+      ],
+      "recommend": "A",
+      "why": "The brief asked for a place to choose a path; a page nobody lands on is not that place.",
+      "decide": "Approve the landing-page change.",
+      "status": "AUTO-DONE",
+      "touches": "nfl-model/index.html builder",
+      "src": "repo-official-snapshot"
+    },
+    {
+      "id": "SG-21",
+      "area": "Site",
+      "problem": "Three NFL workstreams now publish overlapping tables on this site: this section, the merged nfl-lines/nfl-strategies/nfl-injuries/nfl-suggestions module (PR #45), and the nfl-decision-* set (PR #48). Each has its own gate and its own coverage numbers, and no reader can tell which one the repository treats as authoritative (IR-041).",
+      "proposal": "Declare this section the register (requirements, questions, suggestions, gates, source registry) and one of the published data sections the canonical rendering of injury/depth/strategy tables, then cross-link both directions and label every table with its own coverage instead of implying a league-wide view.",
+      "options": [
+        {
+          "label": "A - Register here, data tables canonical elsewhere, cross-linked",
+          "effort": "Low (1 session of cross-linking and coverage labels)",
+          "cost": "$0",
+          "risk": "Two documents still move together; a future edit must update both or they drift."
+        },
+        {
+          "label": "B - Fold all three into one section with one verifier",
+          "effort": "Medium (2-3 sessions; edits files owned by other workstreams)",
+          "cost": "$0",
+          "risk": "Requires re-running both existing gates and re-verifying every row; high chance of silent drift during the move."
+        },
+        {
+          "label": "C - Leave the three sections as they are",
+          "effort": "none needed",
+          "cost": "$0",
+          "risk": "Readers can be shown two different coverage figures for the same official report with no explanation of why they differ."
+        }
+      ],
+      "recommend": "A",
+      "why": "Option A is the smallest change that removes the ambiguity: it keeps each session's verification gate intact (the gates are the real asset here) and makes the overlap explicit on the page instead of in a board note. B is cleaner in principle but touches files this session does not own.",
+      "decide": "Which section is canonical for the injury, strategy, suggestion and flag tables, and who owns the cross-links.",
+      "status": "AWAITING-DECISION",
+      "touches": [
+        "nfl-model/index.html",
+        "nfl-decision.html",
+        "nfl-injuries.html"
+      ],
+      "src": "repo-official-snapshot"
+    }
   ]
 }

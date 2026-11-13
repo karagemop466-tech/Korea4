@@ -70,3 +70,17 @@ tool inside the Arena sandbox. `curl` from that sandbox reaches only
    convert the `G-12` legality note from PARTIAL to a citable rule.
 4. Re-confirm the roster-rule wording against the current league bylaw; the FAQ is a 2022 document.
 5. Run the SG-01 odds-vendor trial before any `line-origination` step is claimed as implemented.
+
+## Cross-section reconciliation (added after merging `main`)
+
+`main` advanced during this work: PR #45 and PR #48 each landed an NFL decision-support section with
+their own verification gates. Two consequences were handled here rather than ignored:
+
+1. **Flag ids renumbered.** Those sections took `IR-022…IR-026`, which this section had originally
+   used for its own irregularities. Every id in this tree was shifted to `IR-027…IR-041` so the site
+   has one global sequence with no collisions, and the verifier/test now enforce a floor of 26.
+2. **Overlap disclosed on the page, not hidden.** `nfl-model/index.html` gained a panel naming the
+   sibling sections and explaining that a coverage difference (1 club structured here, 26 of 28
+   clubs with a visible table there) is a difference of capture standard, not a contradiction. The
+   question of which section is canonical is published as **SG-21** and flagged as **IR-041**, both
+   left for the owner; no file in either sibling tree was edited.

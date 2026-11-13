@@ -1,9 +1,15 @@
 # research/nfl-model — provenance for the nfl-model section
 
-Working papers for `nfl-model/`. Published at `.../Korea4/research/nfl-model/README.md`.
+Working papers for `nfl-model/`. Published at `.../Korea4/research/nfl-model/README.md` (the tree is not in `_config.yml`'s
+exclude list, unlike the raw capture directories; no `raw/*.gz` exists yet — see
+`raw/CAPTURE-STATUS.md`. If the collector starts writing captures, the integration session
+should add `research/nfl-model/raw` to the `_config.yml` exclude list so bulk responses are not
+served — request logged on `COORDINATION.md`, not applied here because that file is shared).
 
-This directory is excluded from the Pages build by `_config.yml`, like the other
-`research/*` trees; it is the audit trail, not the product.
+This directory is the audit trail, not the product. Unlike `research/official/raw` and
+`research/probe/raw`, a `research/nfl-model` tree is *not* currently listed in `_config.yml`, so
+these notes are reachable on the published site — harmless for markdown working papers, and the
+reason the raw-capture exclusion request above exists before any captures are written.
 
 ## What is here
 
@@ -41,7 +47,7 @@ the contract is fixed here rather than rediscovered per run.
    section must not publish a row it cannot re-derive from a stored artifact.
 3. **Club attribution.** Rows must be grouped under the club block that actually lists them.
    On a per-game view, verify each row's team before assigning a label: a "no designation"
-   signal attributed to the wrong club is worse than no signal (IR-032).
+   signal attributed to the wrong club is worse than no signal (IR-033 render integrity, IR-034 coverage).
 4. **Blanks are data.** `Injuries` and `Game Status` come back empty for many listed players,
    and the league's own rules explain why: a player certain to play is omitted from the game
    status report by design. Blanks are rendered as `not confirmed`; they are never inferred
@@ -65,3 +71,24 @@ the contract is fixed here rather than rediscovered per run.
 | Colorado handle/tax | monthly release | figures get revised; retrieve the revision too |
 | New Jersey monthly | monthly release | PDF; the handle/parlay table is a later chunk than the headline figures |
 | Odds feed | on demand | needs an API key; the collector never stores the key in the repo |
+
+## Flag numbering
+
+The root dashboard and the merged `nfl-*` NFL module publish `IR-001…IR-026` on
+`flagged.html`; the `nfl-decision-*` section keeps its own `FL-01…FL-06`. **This section
+continues the shared `IR` sequence at `IR-027` and runs through `IR-041`**, so no id is ever
+doubled up across the site and a reader quoted an id gets one meaning. The verifier enforces the
+floor (`flagged.json: <id> collides with the root pages' IR-001..IR-026 range`).
+
+## Relationship to the two sibling NFL workstreams on `main`
+
+| Section | Built by | Owns |
+|---|---|---|
+| `nfl-lines/nfl-strategies/nfl-injuries/nfl-suggestions` | PR #45 (`arena/a7381587-korea4`) | published renderings of the Week 10 report, own-line pipeline, gates V-01…V-08, `IR-022…IR-026` |
+| `nfl-decision-*` (11 pages) | PR #48 (`arena/0d4aaf2a-korea4`) | per-club injury capture (26 of 28 clubs with a visible table), depth-slot joins, `FL-01…FL-06`, gate `scripts/verify_nfl_lab.py` |
+| `nfl-model/*` (this section) | this branch | the register layer: requirements with acceptance tests, question set, suggestions backlog, gate definitions, source registry with retrieval methods, `IR-027…IR-041`, gate `scripts/verify_nfl_model.py` |
+
+The overlap is deliberate in one direction only: this section does not edit either sibling tree, and
+it does not copy their numbers. Where coverage differs (1 club structured here vs 26 of 28 visible
+tables there) both statements are true of different capture standards and both pages say which
+standard they used. The decision about a canonical home is **SG-21 / IR-041**, left open on purpose.

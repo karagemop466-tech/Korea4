@@ -1,9 +1,9 @@
 # nfl-model verification report
 
 - pages checked: 15
-- table rows checked: 643 (all carrying a source: 643)
-- rows containing an explicit blank/unconfirmed cell: 223
-- internal links checked: 417, broken: 0
+- table rows checked: 645 (all carrying a source: 645)
+- rows containing an explicit blank/unconfirmed cell: 224
+- internal links checked: 427, broken: 0
 - sources in registry: 17 (13 verified by retrieval, 4 partial)
 - errors: 0
 - warnings: 0

@@ -1,5 +1,5 @@
 {
-  "scope": "Irregularities found while building the NFL line-origination section. The pre-existing dashboard keeps its own list (IR-001..IR-021) on the root Flagged for Review page; this page does not restate or delete those.",
+  "scope": "Irregularities found while building the NFL line-origination section. The root dashboard and its own NFL pages publish IR-001..IR-026 on the Flagged for Review page, and the nfl-decision module keeps FL-01..FL-06 separately; this section continues the shared sequence at IR-027 so no id is ever doubled up, and does not restate or delete the others.",
   "rule": "A flag is published, never resolved by deletion. Items here do not block merge or deploy; they block the conclusions they touch, and the blocked conclusion stays blank on the page it belongs to.",
   "items": [
     {
@@ -161,6 +161,22 @@
       ],
       "src": "nfl-injuries-reg10",
       "status": "OPEN - awaiting collector capture"
+    },
+    {
+      "id": "IR-041",
+      "severity": "medium",
+      "title": "Three NFL workstreams now publish overlapping content on this site",
+      "what": "While this branch was being written, two other sessions merged NFL decision-support pages onto main: nfl-lines.html / nfl-strategies.html / nfl-injuries.html / nfl-suggestions.html (PR #45) and the nfl-decision-* set (PR #48). All three sections publish injury data for the same Week 10 report, and all three publish a strategies page, a suggestions page and a flags page.",
+      "why": "Duplicated pages drift. Two sections can state the same fact with different caveats, and a reader cannot tell which one the repository treats as authoritative. This section's own injury table and the nfl-decision section's injury table already differ in coverage claims (1 club structured here, 26 of 28 captured there), which is a coverage difference, not a contradiction, but it reads like one.",
+      "action": "No page here was edited to match the others and no other session's file was touched, per the board's non-overlap rule. Resolution is an owner decision: see SG-21 (choose one canonical home for the injury, strategy, suggestion and flag tables, keep the others as clearly labelled views). The integration session owns the shared nav and index.",
+      "affects": [
+        "R-01",
+        "R-13",
+        "R-22",
+        "SG-21"
+      ],
+      "status": "OPEN - owner decision",
+      "src": "repo-official-snapshot"
     }
   ]
 }
