@@ -987,4 +987,20 @@ have been invented. They are published as blanks with the source link that estab
 - **Deployed:** PR #49 merged at `5cce426` (2026-11-13T13:42:31Z). `Verify final integration` (PR), `Verify static Pages source` (main) and `Verify NFL-model section` all SUCCESS; Pages `status=built` at `3e8aea1`. The Pages run for `5cce426` itself was cancelled by the next push 10 s later, which is why `pages/builds` shows one `errored` row for that sha — the following build of the same tree succeeded.
 - **Live verified** (cache-busted fetch of `https://karagemop466-tech.github.io/Korea4/nfl-model/index.html`): 15 pages reachable, per-row source links render, the filter/pager controls load `nfl-model/assets/model.js`, and the disclosure block with `1-800-GAMBLER` is present.
 - **A fourth overlapping section landed while this was merging:** PR #47 (`arena/21f65504-korea4`) added root `questions.html` + `leaderboard.html` backed by `data/official/nfl-*.json`. `IR-041` was widened from three to four workstreams and the index panel now names all of them with links; **no file in that tree was touched by this session.** Merge conflicts in `COORDINATION.md`, `index.html` (nav line) and `research/verification-report.md` were all resolved keeping both sides — the nav now carries every session's entries (`NFL lines`, `NFL strategies`, `NFL injuries`, `Suggestions`, `NFL decision`, `Leaderboard`, `Questions`, `NFL line model`).
+### H1 close-out — PR #49 and PR #53, `arena/85a71078-korea4` (2026-11-13)
+
+| Item | Result |
+|---|---|
+| PR #49 (the section) | MERGED at `5cce426` 2026-11-13T13:42:31Z · `Verify final integration` + `Verify NFL-model section` SUCCESS on the head |
+| PR #53 (count fix) | MERGED at `8ce8bbb` 2026-11-13T13:47:41Z · all checks SUCCESS |
+| Pages | `status=built` at `3e8aea1` and at `8ce8bbb`; the single `errored` row at `5cce426` is the run that the next push cancelled 10 s later (`pages build and deployment` shows `cancelled` for that sha) — the following build of the same tree succeeded |
+| Live verified | `/nfl-model/index.html` (four-workstream panel, derived counts), `/nfl-model/flagged.html` (15 flags, "1-15 of 15", per-row evidence + source links) — both render from the published HTML, filters and pager load `nfl-model/assets/model.js` |
+| Root nav | `index.html` carries `nfl-model/index.html` labelled "NFL line model"; **`scripts/build_site.py` `NAV` still has no entry** (request 1 above), so the next full site rebuild will drop the link unless the integrator adds it |
+| Working tree | 32 files under `nfl-model/` on `main`; `scripts/{build_nfl_model,verify_nfl_model,fetch_nfl_model_sources}.py`, `tests/test_nfl_model.py`, `.github/workflows/nfl-model.yml`, `research/nfl-model/{README,notes,verification-report}.md`, `research/nfl-model/raw/CAPTURE-STATUS.md` |
+| Nothing touched | `data/official/**`, `scripts/build_site.py`, `scripts/verify.py`, `scripts/verify_nfl_lab.py`, `scripts/build_nfl_data.py`, and every page of PRs #45/#47/#48 |
+
+Two process notes for other sessions:
+1. **Flag ids are a shared namespace.** Three sessions reached for `IR-022` in one day. This section now starts at `IR-027` and its verifier + unit test fail if any id ≤ 26 is used, so a collision is caught at build time rather than after merge. If you add a section, claim a range on this board first.
+2. **The 162-row Week 10 capture is still unpublished** (IR-040). Anyone who wants it should run `scripts/fetch_nfl_model_sources.py --season 2026 --week <w>` where outbound access exists; the manifest + render assertions are what turn it into publishable rows.
+
 - **Follow-up commit on this branch** replaces the typed counts on `nfl-model/index.html` with values computed from the data files, after the live check caught two stale numbers there ("20 proposals", "13 irregularities" — both 21 and 15 by then). Lesson recorded: prose numbers are a defect source, so the section now derives them.
