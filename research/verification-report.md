@@ -1,12 +1,12 @@
 # Final verification report
 
-Generated: 2026-11-05T21:14:08+00:00
+Generated: 2026-11-13T13:14:32+00:00
 
 - JSON files checked: 9
 - Primary generated pages: 15
-- Static primary table rows with source URL: 10066
-- HTML pages link-checked (including legacy trees): 87
-- Internal links checked: 689
+- Static primary table rows with source URL: 10062
+- HTML pages link-checked (including legacy trees): 100
+- Internal links checked: 905
 - Broken internal links: 0
 - JavaScript syntax: PASS
 - Event rows checked: 6591; row source domains checked against the official allowlist: 34069

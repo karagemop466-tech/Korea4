@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review · NFL Lines Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><a href="index.html">NFL Lines Lab</a><span class="tag">research only · not betting advice</span></div>
+  <nav><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive summary</a><a href="strategies.html" class="">Strategy leaderboard</a><a href="seasons.html" class="">Season results</a><a href="correlation.html" class="">Correlation &amp; parlays</a><a href="games-2026.html" class="">2026 games</a><a href="injuries.html" class="">Injuries &amp; depth</a><a href="questions.html" class="">Questions &amp; gaps</a><a href="suggestions.html" class="">Suggestions</a><a href="repo-review.html" class="">Repo review</a><a href="flagged.html" class="on">Flagged for Review</a><a href="sources.html" class="">Sources</a><a href="methodology.html" class="">Methodology</a></nav>
+</header>
+<main>
+<div class="legal">Singapore: under the GRA's published guidance, participating in unlicensed remote gambling is an offence and Singapore Pools is the only licensed remote-betting operator. This site is research, not a recommendation to place any bet. <a href="https://www.gra.gov.sg/harm-minimisation/unlawful-remote-gambling-activities">GRA source</a></div>
+
+<section class="hero small">
+  <h1>Flagged for Review</h1>
+  <p>Unverified values, irregularities and open conflicts. None of these blocks publication. Please review and request changes after the site is live.</p>
+</section>
+<div class="tablewrap"><table class="wide"><thead><tr><th>ID</th><th>Item</th><th>Related</th><th>Source link</th><th>Blocks publication?</th><th>Status</th></tr></thead><tbody><tr><td>F-01</td><td>All betting lines (closing spread, total) come from nfldata, a third-party dataset. No official source was found.</td><td>Q-02, Q-03</td><td><a href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-02</td><td>Only 16 of the 2026 final scores were checked against NFL.com (Week 9 all 15 games and the Week 10 Thursday game). Other scores and all 2005–2025 scores are UNVERIFIED.</td><td>Coverage</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-9" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-03</td><td>Assumed −110 price for every bet. Real prices vary and were not used.</td><td>Q-06</td><td><a href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lines/backtest.py" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-04</td><td>Spread sign convention (positive = home favoured) confirmed from data, not from the field definition.</td><td>Q-04</td><td><a href="https://nflreadr.nflverse.com/articles/dictionary_schedules.html" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-05</td><td>Injury data: one Week 10 snapshot with 9 designations. No history, so no injury backtest exists.</td><td>Q-05</td><td><a href="https://www.nfl.com/injuries/" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-06</td><td>NFL.com news headlines conflict with the injury table for 6 players (see Injuries page). Headlines only; article bodies not read.</td><td>Injuries</td><td><a href="https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-07</td><td>Legal: secondary websites cite the Remote Gambling Act 2014 as current law. The Singapore Statutes Online record shows it was repealed on 1 Aug 2022 (Act 15 of 2022). The GRA&#x27;s current guidance is the basis used here.</td><td>Q-01</td><td><a href="https://sso.agc.gov.sg/Act/RGA2014/Repealed/20220801?DocDate=20220404" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-08</td><td>Strategy results are DERIVED from UNVERIFIED lines. Treat leaderboard ranks as provisional.</td><td>Q-03</td><td><a href="https://github.com/karagemop466-tech/Korea4/blob/main/research/nfl-lines/analysis/backtest.json" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-09</td><td>Repo: three tests in tests/test_build.py fail (missing _site/ build artefact; legacy redirect coverage). Not part of check.yml.</td><td>R-01, R-02</td><td><a href="https://github.com/karagemop466-tech/Korea4/blob/main/tests/test_build.py" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr><tr><td>F-10</td><td>Vacation dashboard was rebuilt from the same snapshot to pass a date-dependent check. Its audit row count changed 2423 -&gt; 2419 without explanation.</td><td>R-03, R-11</td><td><a href="https://github.com/karagemop466-tech/Korea4/blob/main/research/line_by_line.json" rel="noopener">source</a></td><td>No</td><td><span class="f">FLAGGED</span></td></tr></tbody></table></div>
+
+</main>
+<footer>
+  <p>Generated from data snapshot 2026-11-13. Repository: <a href="https://github.com/karagemop466-tech/Korea4" rel="noopener">karagemop466-tech/Korea4</a>.</p>
+  <p>Legend: <span class="v">VERIFIED</span> = value checked against an official NFL.com page · <span class="u">UNVERIFIED</span> = no official source found for this value; shown for analysis only · <span class="d">DERIVED</span> = calculated by this project from unverified inputs.</p>
+</footer>
+</body>
+</html>
