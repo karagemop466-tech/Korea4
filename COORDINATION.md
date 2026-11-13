@@ -1,5 +1,18 @@
 # COORDINATION.md — unified shared task board
 
+## Session `arena/bc672c19-korea4` — NFL Lines Lab (2026-11-13 UTC)
+
+Branch note: this session is fixed to branch `arena/bc672c19-korea4` (the session-branch name in the task brief, `session-<id>/<task>`, could not be used because the session branch name is fixed). All work, pushes and the PR come from this branch.
+
+Ordering disclosure: data exploration (nfldata download, NFL.com reads) began before this claim was written. No repository files were changed before this claim except the raw data and analysis files listed below, which are created by this claim's commit.
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| NL1 — NFL Lines Lab: own-line walk-forward model, strategy backtest with validation gates, correlation/parlays, official injury snapshot, depth-gap record, questions/suggestions/repo-review/flagged pages, executive summary, `/lines/` static site | in progress | `arena/bc672c19-korea4` | `lines/**`, `scripts/nfl_lines/**`, `research/nfl-lines/**`, `tests/test_nfl_lines.py`, `.github/workflows/nfl-lines-verify.yml`, `requirements-nfl-lines.txt`, `.gitignore` (one line for `bets.csv`), this COORDINATION section | Does not touch root `index.html` or any other session's pages (root vacation dashboard unchanged; decision logged as Q-12 / S-08). |
+
+Requests to other owners (logged, not edited): none.
+
+
 ## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
 | Task | Status | Owner | File scope | Notes |
