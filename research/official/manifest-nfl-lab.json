@@ -1,0 +1,3848 @@
+{
+ "generated_utc": "2026-11-13T13:08:32+00:00",
+ "generator": "scripts/collect_nfl_lab.py",
+ "note": "Raw official NFL / team-site responses captured by GitHub Actions. Each entry records the exact URL, HTTP status, byte count and SHA-256 of the payload. Rows that cannot be confirmed from these responses are left blank and flagged UNVERIFIED downstream.",
+ "source_count": 384,
+ "sources": [
+  {
+   "key": "nfl_lab_depth_www_49ers_com",
+   "url": "https://www.49ers.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 288774,
+   "sha256": "1a9bfc3da484cb1a9ddcd673ef8696b22388771b742f953d36c1f46d091e4e27",
+   "gzip_sha256": "90560a3a315934ca76f8842e33b29a6293ccb362ae9caea4e2363649d1335dcb",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_atlantafalcons_com",
+   "url": "https://www.atlantafalcons.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 319987,
+   "sha256": "b532e6bbbaddec5a3f82863fc7acdcc2995a377a95058b0e22ac507a18787efd",
+   "gzip_sha256": "be11703fceedc095686af2481e30aa0db87202a8e898117e9e4c94234166a782",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_azcardinals_com",
+   "url": "https://www.azcardinals.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 293266,
+   "sha256": "24858a00434a83f58e083c0ff9d3088c168160d5c908e114085d240f4b4509f4",
+   "gzip_sha256": "364283c4ac86b276444d00b80e93ad9ac2f1d586df1041ec3c77a53391708432",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_baltimoreravens_com",
+   "url": "https://www.baltimoreravens.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 298556,
+   "sha256": "df77d97348c3b0a7f7045321970501e50e035b9e016ecf975e33cddf5d44f200",
+   "gzip_sha256": "0f67383515bd2bd10ebe94b2eb88660b5d2d15ca169243af0d08a62d059920c3",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_bengals_com",
+   "url": "https://www.bengals.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 295813,
+   "sha256": "9abdad1b09b8184ca771cc34e9087a149925fef973ef727c2623c2195802b27d",
+   "gzip_sha256": "673b57f42a25c2d8d47573ffb0ea10b042347e5968f31952f96dc95492e9a291",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_buccaneers_com",
+   "url": "https://www.buccaneers.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 295800,
+   "sha256": "2afc0f48fb57b0603602ea4474198493bf4512b51289fc2222af1259d91aa8ec",
+   "gzip_sha256": "4450bc7718698814da25c576f920b96116feb52838022a05f94af948a06409c0",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_buffalobills_com",
+   "url": "https://www.buffalobills.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 301552,
+   "sha256": "055a9131a5d8e265b60e5fc4561d51cda687efb08aa56f3c396d8dfac32a3491",
+   "gzip_sha256": "5a60990a30d8798ce5713a682b5d1d0cc4bdaa6c4be2bada2d497c19dccdd8c5",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_chargers_com",
+   "url": "https://www.chargers.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 360011,
+   "sha256": "4d54b134319d5427795a4f57b26ece0b2ef2ccb54715838fb81cb75ad5dcf673",
+   "gzip_sha256": "d5001eeb2b6591e6a501ccb7a929495f8c6265e1a46c801be0f2120d355f8155",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_chicagobears_com",
+   "url": "https://www.chicagobears.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 291599,
+   "sha256": "eb67461b2c2246a73bc01b4917052835862cb08a7b5b6e954ea48824e7383840",
+   "gzip_sha256": "b291d5754568c907093f1e875c3199d9d32120842262c5c782c67a4223c5db98",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_chiefs_com",
+   "url": "https://www.chiefs.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 302199,
+   "sha256": "f5689c1ea3d88649affff102530ac0ae9331669659d15edca3454e8a0ab62d51",
+   "gzip_sha256": "22a698a01c2aab8b0284736dfa185b88f53126578d2c21a0393ee5ed03c31cbf",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_clevelandbrowns_com",
+   "url": "https://www.clevelandbrowns.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 297841,
+   "sha256": "f1c2b93ba1ca057cf074e2b9381ad8b418c2233840635684dbada2459e4e0872",
+   "gzip_sha256": "d0a34296b14704ff3ff043e31691744b7396cddd7a5f45f19dce33f37d636544",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_colts_com",
+   "url": "https://www.colts.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 347534,
+   "sha256": "1eb7087b11cb0815a18d86648bba3c44ecade2e61042f117e910242d0f3b96ed",
+   "gzip_sha256": "885cb23b47c4b1aad9f015e5916ec976cade8624bff5ab5bd7af194de7f39dee",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_commanders_com",
+   "url": "https://www.commanders.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 301955,
+   "sha256": "8cc839d95d064603e9c38380144a9cd7360eda5cb1f760015beef0729fc4e47f",
+   "gzip_sha256": "09df25449ffc9d62eb4beaf34ee714be3bee8dd797ef2f85f856b4e813e40eff",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_dallascowboys_com",
+   "url": "https://www.dallascowboys.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 281052,
+   "sha256": "c3c34bd0d58980b8dfc7920c762b3b8bc4279ae45f3e312d6f47d469dc9b1b94",
+   "gzip_sha256": "16ba8cb3996932a58da2f1611e5609a9fe03097651afdcf1223a782bb3c308ae",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_denverbroncos_com",
+   "url": "https://www.denverbroncos.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 295270,
+   "sha256": "58e29c479ca2624471ab2de638646fb68116982afe78acfa6086d6e35cac4f9f",
+   "gzip_sha256": "af602bb2d41b38cb10f6ad96cd94d7c3119de5cdb635309443371b9c3b5469be",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_detroitlions_com",
+   "url": "https://www.detroitlions.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 292479,
+   "sha256": "5a73ae277a8083dad01b69ab1ed6e1080b5f8d135c3c852dc81bc4d5d0bce1bf",
+   "gzip_sha256": "05f652bacc24bf50d86371a91ea22a061af7b65ce866b8787d02e8c88c4b1d28",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_giants_com",
+   "url": "https://www.giants.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 295831,
+   "sha256": "9ef860b2407d0a8cbcc3d606fd8d11e101af1531d2f00eef10cad6429c303916",
+   "gzip_sha256": "061cf95621aa77cd45c0cbbdb9b6083ada85875de1f9cf50b1c4f1a4f54a3d78",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_houstontexans_com",
+   "url": "https://www.houstontexans.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 490787,
+   "sha256": "3c5f2effee87aba50dfc3034b930a83b741120d6a42bb5a7cb225654abf6697e",
+   "gzip_sha256": "cef0f67e326053012abf8abb9ea54ef1d881c2841fdc6649482fb83f004d172a",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_jaguars_com",
+   "url": "https://www.jaguars.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 310383,
+   "sha256": "81a64abf0fee4195215122e581e86658be1cea60f56a64141fe91129dce25aa9",
+   "gzip_sha256": "561295a9c50546fd84379cfca596e0745656761ff55cd03090cae6821736ffb2",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_miamidolphins_com",
+   "url": "https://www.miamidolphins.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 285560,
+   "sha256": "065ad05a02ae9c9cb8d527b07dfef46fd3c7a85cc60a81d9eb278d9604ca3255",
+   "gzip_sha256": "334bf2c536de162d8a8933e609b3088e1a7001871d2dbaa4b4b10b1283420c9d",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_neworleanssaints_com",
+   "url": "https://www.neworleanssaints.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 509187,
+   "sha256": "c6ac2af56874ea6bb21b0fff6e70d2c8c587ca2c690eb7f8b06dafd6f2731d5d",
+   "gzip_sha256": "64cd37ea6d686d9501d8decc247f3c49a3bd055a258e9bfaef9a535d2944f542",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_newyorkjets_com",
+   "url": "https://www.newyorkjets.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 293683,
+   "sha256": "2caea2071202dc7da81b9a6b476d9c8c8763d82422448a3d42cfbffa3b97ecc1",
+   "gzip_sha256": "684e7d29f0cad378c20bab2911070538b6d90d8845dc1809bcbb546dad6d7e4a",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_packers_com",
+   "url": "https://www.packers.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 294131,
+   "sha256": "6ea6764affffb17f5532967f9400801d8688261b0a811dd87627bd1239035a7c",
+   "gzip_sha256": "ad471bf5361bc05c850143891cf6161ece45c774826f0ccc39f8dcd9a9b6d85d",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_panthers_com",
+   "url": "https://www.panthers.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 330638,
+   "sha256": "1ca0aa8b3eb24e19022b62ab05d46cfa722f9bc8bc92400e9a34f276839a613f",
+   "gzip_sha256": "575e72605c1a53c3ce2ed6795c87c24168f85201d811f25bb80417ca54b9180e",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_patriots_com",
+   "url": "https://www.patriots.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 356170,
+   "sha256": "9731f41bce94ba423d573895abbd26b1d3730bc6cbc6d75dca064b9d9fa0519e",
+   "gzip_sha256": "fb6d94881b60ffdc72529feabc8a02d662f63041c9e765178ad5d0e8564b8e30",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_philadelphiaeagles_com",
+   "url": "https://www.philadelphiaeagles.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 361198,
+   "sha256": "48088b10bc1ff483b9866fee93f940eb66d701953c25285002cc4501ae27b445",
+   "gzip_sha256": "128ada4de9a73cb4932c431108ac292067b32fe4b5ec117353a00ddc308e4b6f",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_raiders_com",
+   "url": "https://www.raiders.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 297614,
+   "sha256": "0824195a06ab73ff85db10f74b6e59b81e7fddc9c8ea6c1a6413c66fc1864667",
+   "gzip_sha256": "4cfb31086576ca5f1be75cf66d1692ffbffde204b57357b626741dc4fcc9b0b8",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_seahawks_com",
+   "url": "https://www.seahawks.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 311885,
+   "sha256": "116d9711040837336b303d83d2774a064372ac0a970e91bff87a1a3959564134",
+   "gzip_sha256": "8cef525d910e7418fb8717023d03c31fd911fee8b070834b7038ca499cc7bdac",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_steelers_com",
+   "url": "https://www.steelers.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 308994,
+   "sha256": "bc281bfd8ef97a464bcc8bbe20417f3e2afac76f3c4fda2e60b80e4ddb256378",
+   "gzip_sha256": "298e9c7c769216397d7feae4aa3aca5d956af26f79e53779c23e3c3de980c691",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_tennesseetitans_com",
+   "url": "https://www.tennesseetitans.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 303887,
+   "sha256": "b0bc998405a76a51481e38deb3b8795a011a27ec3e54d66fa410f72b3c0cd18e",
+   "gzip_sha256": "bf377396d97af4a99eeba70db58bf43c52e790b46db5aa6e7a8a2dfa02268859",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_therams_com",
+   "url": "https://www.therams.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 293120,
+   "sha256": "39bc8e30d4bb61ddb96fa0ed656f265eb4b98d6414e70f17f004cfaec0456cc6",
+   "gzip_sha256": "e3d55b6b5d71c1a0c8e93241f0263ddee2288614af3a59cf5053e6be23766c2f",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_depth_www_vikings_com",
+   "url": "https://www.vikings.com/team/depth-chart",
+   "http_status": 200,
+   "bytes": 307899,
+   "sha256": "99b0937555c9a78980cde99fde3861c00ccef3984ce40efb1c709937db36b724",
+   "gzip_sha256": "c9a8c884ffea6dc6536919fc2795124fa7cc6f7b478a0b4da3e369cb2b67f5c5",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:32+00:00"
+  },
+  {
+   "key": "nfl_lab_game_49ers-at-cowboys-2026-reg-10",
+   "url": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1173537,
+   "sha256": "578210647640298abd8aac797366d839dfe9ee68f6f779d4b21241e4d933ceac",
+   "gzip_sha256": "7b05015ca55daf827b015563234b85c139060878eb170f440381e0f467218d04",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_49ers-at-falcons-2026-reg-7",
+   "url": "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1238294,
+   "sha256": "a882aee4bc13b7831b65aff0e6f34079d8970fa74fc4c0a8108ce23a38d65243",
+   "gzip_sha256": "4f83d12e31721195c841befb045986b57c63843cea6258180a2f2dc297128d30",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_49ers-at-rams-2026-reg-1",
+   "url": "https://www.nfl.com/games/49ers-at-rams-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1141128,
+   "sha256": "bbca432ab1e4c52f5bd496362ba025788c97eb4e4eb30d469f44b1e58a60a206",
+   "gzip_sha256": "98df333bd30b11d4ac37d29bddedc48a957f44d835c492411ecd1bb62eea8b1b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_49ers-at-seahawks-2026-reg-5",
+   "url": "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1230088,
+   "sha256": "b50db73d293333eadac6ce2dafa0e4deeb3a67c6a603b5ebab9bf13f7ebe793f",
+   "gzip_sha256": "d67d37f3656738f751d99f8774fb110287fd230bd251464e52ade87ed528e607",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bears-at-falcons-2026-reg-6",
+   "url": "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1225730,
+   "sha256": "efda931da152d74209e6ed1d220a7fb53e4d62d0658258d264ea5c2bccf59235",
+   "gzip_sha256": "fd950d5baa494a84449a83b727755c0f4a6e5ac248fd8b5adeb3df3c72ff7fa4",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bears-at-lions-2026-reg-12",
+   "url": "https://www.nfl.com/games/bears-at-lions-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1072734,
+   "sha256": "69a9e5c0eb1aa62dd4aa6b833aaa648f69a319162f980b0759292d8fceffdf8f",
+   "gzip_sha256": "ccf9224020b77c122d2549e549a8914820abc03b2457a2be2a4d5d1096b65cd4",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bears-at-packers-2026-reg-5",
+   "url": "https://www.nfl.com/games/bears-at-packers-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1190763,
+   "sha256": "e11b1342afc37676ee52ea22b39f81a1b029484009333ea3f02762cbe1617a65",
+   "gzip_sha256": "6f8f9bbb72aebf9a0765321a1c3a09e02e96acfc3c87c84602dcd5930978f169",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bears-at-panthers-2026-reg-1",
+   "url": "https://www.nfl.com/games/bears-at-panthers-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1305851,
+   "sha256": "d3431b328d87286e8e1d277020f838aee835213b6f36d99e5178928afce0ee85",
+   "gzip_sha256": "4ad9de69af5b55ef85ed7bfed9e6233887d97a8b3863865d9a4e6012c59b302f",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bears-at-seahawks-2026-reg-8",
+   "url": "https://www.nfl.com/games/bears-at-seahawks-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1241538,
+   "sha256": "21dfbb3ee1b0692691c3428b34e3b8976be9280b41809013f946703605db6681",
+   "gzip_sha256": "aecfd76d9fa63c0c49ab6c46b62952775adf2c16c466eb0854c7bbf8cf3a9544",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bengals-at-commanders-2026-reg-11",
+   "url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1087263,
+   "sha256": "3392ef54d20fa0d2693c84674bd072a5ef5cd805ad2937edb3470528ee60421e",
+   "gzip_sha256": "e8b521a623c4c9ce4debb52d421b9b861963e3295900fff21df302a918ae2599",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bengals-at-dolphins-2026-reg-5",
+   "url": "https://www.nfl.com/games/bengals-at-dolphins-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1235292,
+   "sha256": "aea1595102e1675f1b3309268ad72d68423616278e30f9aa4bacc8fdffdded58",
+   "gzip_sha256": "2ccdb598b203bcd91c1600435698a463a43eda87b2a825aec820f769c7392f3c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bengals-at-falcons-2026-reg-9",
+   "url": "https://www.nfl.com/games/bengals-at-falcons-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1227628,
+   "sha256": "348157f18be617341b27d80990eac3612b727ea9a20c79356f387f603d230415",
+   "gzip_sha256": "72c2616b463a74920057ab5289ecbb2f26f89e9593613b20cfc9f665e5f0fd8e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bengals-at-ravens-2026-reg-7",
+   "url": "https://www.nfl.com/games/bengals-at-ravens-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1191462,
+   "sha256": "d44fdd3b398c981d9d1467324becbd3bbe4180ac01987a6e2be9f982da7cb57e",
+   "gzip_sha256": "b6ea974cefd6ca1cb79ecf3f1c34a50aa1c2f0c5419dd6a1404bb18911c61a1b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bengals-at-steelers-2026-reg-3",
+   "url": "https://www.nfl.com/games/bengals-at-steelers-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1225932,
+   "sha256": "eed06f81533217a1c268dd1e8b1eb62a8a6290c0135bc4945628634557d51ba5",
+   "gzip_sha256": "48f4389466f9fa0a5ba5bc773ab1f8db04c601a5748b35e737dc03aa2ea355ec",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bengals-at-texans-2026-reg-2",
+   "url": "https://www.nfl.com/games/bengals-at-texans-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1220269,
+   "sha256": "ff9fb42f8a92fd483f1f4eb76a4ea3021c04399291f10b1cf1bb262aff71ec1b",
+   "gzip_sha256": "88e5947c8c6929c3e77ccb3d8c2770465435d5d86267dc37030fa60d0c563baf",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bills-at-jets-2026-reg-10",
+   "url": "https://www.nfl.com/games/bills-at-jets-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1142745,
+   "sha256": "cc81f0c37fe45916cd5577741eb5f3f7ad2ab198f12efdee0c46c256e4736e49",
+   "gzip_sha256": "875ec6200a90996423ef2a9c90dab68c0951cefadc69b5420272959548a4a410",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bills-at-raiders-2026-reg-6",
+   "url": "https://www.nfl.com/games/bills-at-raiders-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1276450,
+   "sha256": "206db7ed04854181e18d445cadfbc627a270470a9baabbfa5f5eb27bf9e322c4",
+   "gzip_sha256": "d7a6abc027201d51b48f9f8e06031e3572bf441e329308b79e3e67122edc7309",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bills-at-rams-2026-reg-5",
+   "url": "https://www.nfl.com/games/bills-at-rams-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1281895,
+   "sha256": "6faa9e60b430045b1b25684188f98861a700087a58c88f0409a9983dfed4b48e",
+   "gzip_sha256": "94a8d3b8339af1a433aceed59d81fa61cb94aa335b0e93ed50e32a0043dffc78",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bills-at-texans-2026-reg-1",
+   "url": "https://www.nfl.com/games/bills-at-texans-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1262848,
+   "sha256": "a1d2f07abd03b53d41e092296621252ca47f4966a1cfb02552c5fda5a6f07511",
+   "gzip_sha256": "5dde38b9d678e653ae2eba17cad0dbb88e976e47ec2b2848af6e6424e2941dfc",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_bills-at-vikings-2026-reg-9",
+   "url": "https://www.nfl.com/games/bills-at-vikings-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1237748,
+   "sha256": "f60bd649d1cb9f78af183f249f71526a7a56170675caa850a6861a4ac9e73e75",
+   "gzip_sha256": "6b5acc175a39bc2193ce4aa266609d7f576cdb18b71b938a73e3affae63bfddf",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_broncos-at-49ers-2026-reg-4",
+   "url": "https://www.nfl.com/games/broncos-at-49ers-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1190849,
+   "sha256": "61546e7b19192cf7387810a903eac045ea686f20a0a59566ff3bbb06e81fb637",
+   "gzip_sha256": "a1045da70f7e4c895415883c6f3ebf23ff8e385b4ce357e104c9228101a3fa2a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_broncos-at-cardinals-2026-reg-7",
+   "url": "https://www.nfl.com/games/broncos-at-cardinals-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1246999,
+   "sha256": "89838d5649308c7a2b8b73656265cbcf21fcb57e35c52e602457a9d8ccd1a420",
+   "gzip_sha256": "5e782773109d1f48494d6576cf7d88b95a766a38f8dbdd56b9cf5a922fc234bc",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_broncos-at-chargers-2026-reg-5",
+   "url": "https://www.nfl.com/games/broncos-at-chargers-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1179674,
+   "sha256": "90e8401e5c71e801031fb16021d180551160317a0a7ce6568abd3535308eeb81",
+   "gzip_sha256": "f72ac82ab2afa3df9212e73fb88ab615ca7f7f14c99cbd59f3db14ddabf180e8",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_broncos-at-chiefs-2026-reg-1",
+   "url": "https://www.nfl.com/games/broncos-at-chiefs-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1179781,
+   "sha256": "557e3def506ec8ccf77ffc36566855c82b0005ebe6933cf0df9927bee9f3c5e7",
+   "gzip_sha256": "c26b89213fa27fa0c47e575c82dd49299bcf7bacb78493d596d8406a9589736b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_broncos-at-panthers-2026-reg-9",
+   "url": "https://www.nfl.com/games/broncos-at-panthers-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1252855,
+   "sha256": "dfddc9f559c2d44368298efa4e7004959b1d9dcb73eae537f18264ec1b4b813c",
+   "gzip_sha256": "662c970f1396b455af17479c670bf4ced940e8aadb544277ae8880d014f63b4c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_broncos-at-steelers-2026-reg-12",
+   "url": "https://www.nfl.com/games/broncos-at-steelers-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1101654,
+   "sha256": "673648342944df7d0ea1a76122692d3360f95d16e63dd3301127d6d313c2b1fd",
+   "gzip_sha256": "ca145606627a79c514f9824e03f92ee40bcbae92cb63c2a4cdfe3d76e1537d00",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_browns-at-buccaneers-2026-reg-2",
+   "url": "https://www.nfl.com/games/browns-at-buccaneers-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1248044,
+   "sha256": "fb01e4baba535c96ada67ff635e9cb45c89e33fab1923b83b1614037cc3f801e",
+   "gzip_sha256": "3010c7685782ce74fc9d245e9e037dfde54a4afd52520394d53ff219c2e4b890",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_browns-at-jaguars-2026-reg-1",
+   "url": "https://www.nfl.com/games/browns-at-jaguars-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1200645,
+   "sha256": "1a9b2d7036d0a66e1a1bc3f898f8bd06c98ef85436c07229de50a416d275d723",
+   "gzip_sha256": "24c180088fc444210e9f0bc887a1cfdd894e1bc7d65d2159d175a01fcb85db84",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_browns-at-jets-2026-reg-5",
+   "url": "https://www.nfl.com/games/browns-at-jets-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1232614,
+   "sha256": "3b001d88c24d8f6acc4b135738cee3488ad64d137119dbbff4a3555fe9a6e9a1",
+   "gzip_sha256": "0e7833835e74bc63c9083fe8ab2332f9f55ce6c2939c45f2c2a3ab9aea519589",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_browns-at-saints-2026-reg-9",
+   "url": "https://www.nfl.com/games/browns-at-saints-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1273768,
+   "sha256": "88e002d7ed2995c7f4042f118d4f21e2a1ef6f422d141f6d93f74cb262a20c3d",
+   "gzip_sha256": "14f7de8d79cde27b69e3a1eafdbaa0c18f50715abc13ecd368c2aae0b292b862",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_browns-at-steelers-2026-reg-8",
+   "url": "https://www.nfl.com/games/browns-at-steelers-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1198956,
+   "sha256": "3c49bd106a8fa3a293a64b28d7c23de9fdafcfd33ef33b29117a65ed791c35d6",
+   "gzip_sha256": "287cf6139ee0fe24ec03c83d761d3145111a7f91cc563b1dbdfa6cdb83aaeced",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_browns-at-titans-2026-reg-7",
+   "url": "https://www.nfl.com/games/browns-at-titans-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1229247,
+   "sha256": "756b98dca0025e8593f22df0245434788f1aff6f829009dc07f2e791fc7484d7",
+   "gzip_sha256": "656eeb06e32860c3c4c51af8b18b0e16bc0b751a99eb44ea5cf5dc1f7e09efcc",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_buccaneers-at-bears-2026-reg-9",
+   "url": "https://www.nfl.com/games/buccaneers-at-bears-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1254629,
+   "sha256": "20f11eb7bc09aff9c5f11f707eb08f24d8478a2d7282f29c285a0049139f99e9",
+   "gzip_sha256": "3a509e7522c3c1cb018e10f8499757292383e639119708bd26ab8876b0e7108f",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_buccaneers-at-bengals-2026-reg-1",
+   "url": "https://www.nfl.com/games/buccaneers-at-bengals-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1206716,
+   "sha256": "62d24e6ff775c15ae6e94a986cf6ad7073c4de0a19a06c33caf0b38ce9eb6b5b",
+   "gzip_sha256": "a86ff2f92b50bf1d9e51f126aea88eab50ab9ee00e0793cce0f906170abeb9db",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_game_buccaneers-at-cowboys-2026-reg-5",
+   "url": "https://www.nfl.com/games/buccaneers-at-cowboys-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1218120,
+   "sha256": "60a523efc9d2cdcbca84854d1c633b8dc9a9da6c0313eb1a6ed8af5239feaa9d",
+   "gzip_sha256": "96fb5ed248da667285b6ee5daed3a548de5f1f8d405d8659e7815562aa273267",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_buccaneers-at-lions-2026-reg-11",
+   "url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1096382,
+   "sha256": "8c5452e5e7cbedaa05c1167240d4fc5d7415f732bb295821b3815d0de206d7ad",
+   "gzip_sha256": "d31fa13022f88967a29220ab228d24d79362365c82d9d89cb3c2cb192e5e47e0",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_buccaneers-at-panthers-2026-reg-7",
+   "url": "https://www.nfl.com/games/buccaneers-at-panthers-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1202758,
+   "sha256": "1e248650cc0d6aff4103b6a6da881f3d644327e18dbc56183fa95eea62f25301",
+   "gzip_sha256": "671f9aa480b1983966f5b6ae9405077b155ca7b0506a19a1a36ec9a2b1e303e9",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cardinals-at-49ers-2026-reg-3",
+   "url": "https://www.nfl.com/games/cardinals-at-49ers-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1226919,
+   "sha256": "da9abb077ba8c8f9afb6cfc218e585885912c6ce8b3bfc492e2faef2ed0b0db2",
+   "gzip_sha256": "e9ae84a9c160c1fff50d4699659ce6d86b2b60b3876e16a9a6383121e6d2254a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cardinals-at-chargers-2026-reg-1",
+   "url": "https://www.nfl.com/games/cardinals-at-chargers-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1193430,
+   "sha256": "4cca593b1fa7686bc12a41c4278ec7be5b30d51437d46c327a7e993a82e7357e",
+   "gzip_sha256": "a77af7be4fd7b80a5da87e5772c1e6b6088894fbff4b3e005f59ba30068f644a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cardinals-at-chiefs-2026-reg-11",
+   "url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1095027,
+   "sha256": "c5d96acb0471a142b71ba420477898f032f3e910a714c3a1a1b6224f8e2c421c",
+   "gzip_sha256": "ad6bc110470fa744f01ab86539aefb2117e4de142a20114b6a3dbb3b44b10bd3",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cardinals-at-cowboys-2026-reg-8",
+   "url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1307958,
+   "sha256": "1ad1e536a8255c17a28095187cc35f7446ead7b8d2ad1f37b59aae2520b01653",
+   "gzip_sha256": "4adcc700a40c21ca30076e10a406bfdb90feaec3c6df56cc253b4705802a23e0",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cardinals-at-giants-2026-reg-4",
+   "url": "https://www.nfl.com/games/cardinals-at-giants-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1253714,
+   "sha256": "fd20d2780549f65f31eb24fd2eb1c3e9307a35004ea8ca6916fc80e398b0c00e",
+   "gzip_sha256": "e98e29b4707210fb8477fb0bc480e8ed902eab71d6c96101371e14b49f48a420",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cardinals-at-rams-2026-reg-6",
+   "url": "https://www.nfl.com/games/cardinals-at-rams-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1216807,
+   "sha256": "a81ca2d08ac540222628bd2d1594a15842bf96c389662721b2bbd87f46772f8f",
+   "gzip_sha256": "b6b479542fa9f9ace06e8624a9b92b9f830b4b87c3e1a8db23d00c0f8458dd38",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cardinals-at-seahawks-2026-reg-9",
+   "url": "https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1104962,
+   "sha256": "c22d4402e2f3f73f9b065401e2fa35c4f4bf061a5183a0268d4f43b90ec2d37c",
+   "gzip_sha256": "889860427bef7c6f8379407eda18fe06380242f611f5e80f5b7d57f316cda9a4",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chargers-at-bills-2026-reg-3",
+   "url": "https://www.nfl.com/games/chargers-at-bills-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1245689,
+   "sha256": "1d725935c5944e26de36a73aacc659c4847806dd84e4fa66a827263f20a7a7e7",
+   "gzip_sha256": "c26c2042a7f74a58fbac10596c533e0c311d6f9d65136ab2eccbca500f45b87d",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chargers-at-chiefs-2026-reg-6",
+   "url": "https://www.nfl.com/games/chargers-at-chiefs-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1180549,
+   "sha256": "c05a008c7e83449e79c60c291e80e7170a7613d4d8730975fcc33c69b8322084",
+   "gzip_sha256": "0db033fcefab61be6bd0a83d5d6008a33ebd89d57a2ea0bc2c6faf3bdda88ae7",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chargers-at-rams-2026-reg-8",
+   "url": "https://www.nfl.com/games/chargers-at-rams-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1133771,
+   "sha256": "7d270d64b54302cf1b1fcdce88947e421a13dc36175d92c1c44752244d5f493e",
+   "gzip_sha256": "a62d6a9266e671701ed92ca305bf8bf97f881d2da21ec4122880aa811839208f",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chargers-at-ravens-2026-reg-10",
+   "url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1096276,
+   "sha256": "7908f56fe695c69f6c3251b32c62ba48fb712308caeba57541a17cfa76b5f085",
+   "gzip_sha256": "110cc24d9f28b504714053e5e135a25df7ff36044358972e91fea3f4f91e0d72",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chargers-at-seahawks-2026-reg-4",
+   "url": "https://www.nfl.com/games/chargers-at-seahawks-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1264602,
+   "sha256": "36a7e0c61e98f649bcbac489470caacd66156dead1e14f694033926d12f57e69",
+   "gzip_sha256": "582dfcffa8a2653b1b8e7c25dcd0367f419eeb3867810b0ffb71b194b617fcf6",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chiefs-at-bills-2026-reg-12",
+   "url": "https://www.nfl.com/games/chiefs-at-bills-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1084168,
+   "sha256": "6ac79d7db2ad7653861b393e92c438c1c0e8b0f16f8acec89eb38bd4fc03a06c",
+   "gzip_sha256": "c5f806f74651657dd7ea1649b13248975e5eb8c4d9b09f85b609ee697e3bf6bb",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chiefs-at-broncos-2026-reg-8",
+   "url": "https://www.nfl.com/games/chiefs-at-broncos-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1221395,
+   "sha256": "2933304c6a13f83cacec4c0f4715fd37a9db3d27de7f5bf41399289947feb7a6",
+   "gzip_sha256": "64dfd5dc40b6bc644dc637f2c9250070de028bbe7ff034dfeac4b1686bc8e92a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chiefs-at-dolphins-2026-reg-3",
+   "url": "https://www.nfl.com/games/chiefs-at-dolphins-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1207729,
+   "sha256": "1f1de2026c92ed15f532207b89b4ee43078a6c1a2c70d4f21bb07d634f0d5a98",
+   "gzip_sha256": "87840ea89259d7674c15ac881ad0ef987613ed443b14a9000c24f4364d04b4d6",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chiefs-at-falcons-2026-reg-10",
+   "url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1177722,
+   "sha256": "fa8413ae801d7d1a21bf4a0d1af60014c56224b73435275fad3831e78c6e5f1e",
+   "gzip_sha256": "373e11c56b590eec5516c5da3d7e12bfbdd1b8c2e0cb6235e06d76d4052718e8",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chiefs-at-raiders-2026-reg-4",
+   "url": "https://www.nfl.com/games/chiefs-at-raiders-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1232885,
+   "sha256": "fa52f867a5743d993d0f258383437e471001b4bcad6ff4e0405b8e0a357247bb",
+   "gzip_sha256": "8fdfd051c6c775702dff264bfa6e78b474091ff06cb172440a125e5434af3f49",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_chiefs-at-seahawks-2026-reg-7",
+   "url": "https://www.nfl.com/games/chiefs-at-seahawks-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1162577,
+   "sha256": "93d569e932f018bbe89f82ac5a178eec015be540b237455db253a3695ea8695f",
+   "gzip_sha256": "0234e8b744fd7f1850e574c985c088bcc1c6940d19c92cddda709869c48eedc0",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_colts-at-chiefs-2026-reg-2",
+   "url": "https://www.nfl.com/games/colts-at-chiefs-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1296708,
+   "sha256": "b7d9de40853af566ee6b742903deeee3058bdbeb1cf5c763baa72939e38b2341",
+   "gzip_sha256": "f61b8d69c1c47dfb2cff5fc3390311f52f9464f11590474a94ff0e74695681c5",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_colts-at-commanders-2026-reg-4",
+   "url": "https://www.nfl.com/games/colts-at-commanders-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1238242,
+   "sha256": "47138645ecb18fa5d23088f855a3b7fef74d93ade465963f49d6e632e813eddf",
+   "gzip_sha256": "c28b61f30da8cbeb03141e0fb423c1659e29ffe1a5eb8821451e1fa8b46ad59d",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_colts-at-jaguars-2026-reg-8",
+   "url": "https://www.nfl.com/games/colts-at-jaguars-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1170296,
+   "sha256": "cb0116b30d63733840947c677a8c9a276b532e9ed3af7a2fedfe99179dc27ccc",
+   "gzip_sha256": "582928c79d57a403bf57ea31300d4e6a0a4268d1b3cd9c356d2ec6d173a11d0c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_colts-at-steelers-2026-reg-5",
+   "url": "https://www.nfl.com/games/colts-at-steelers-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1261789,
+   "sha256": "106b77c7eaf1580acd14d0d4bcb8c9c6c1087ae19fd53d2ac773422226059b88",
+   "gzip_sha256": "7f062e0c4766c4dcb06d68cdf4ba5a63f8b8d081e03255526f634be3c6175e49",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_colts-at-texans-2026-reg-11",
+   "url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1073660,
+   "sha256": "f9060dc799d9ae43d490f8025c58967e6df82a711ca9950ec5fadd974825b7f3",
+   "gzip_sha256": "3ed60379e9a5f214cf7aa386ebc54addf815bf0c4487acb4b76b16d2ba777142",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_colts-at-vikings-2026-reg-7",
+   "url": "https://www.nfl.com/games/colts-at-vikings-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1177307,
+   "sha256": "5e1bb02d58bd1f4054dbe1309bdd1170eb800825f3b989db15050c3759213dac",
+   "gzip_sha256": "3343d14ae302b4aaf3c00f64dd534b44a0f0de6972d5864f2edf78cf74c62730",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_commanders-at-49ers-2026-reg-6",
+   "url": "https://www.nfl.com/games/commanders-at-49ers-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1220417,
+   "sha256": "32f809f6ecfa0f320d94b939767bafb3924b64f48ee6ee6328ae5fddf7261d40",
+   "gzip_sha256": "378e605d040362d5afb1c7dfb72f2271c0e5d7429f9f1a2eaca236879c390aad",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_commanders-at-cardinals-2026-reg-12",
+   "url": "https://www.nfl.com/games/commanders-at-cardinals-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1094244,
+   "sha256": "d2716ea798e0db02bb29403417195e18547da1ca0535345be4f55a75e4f8f23d",
+   "gzip_sha256": "df27c210f3d7c62e51479c2338da25af0c2f205a2d20f28c49de9713ffb4f0d2",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_commanders-at-cowboys-2026-reg-2",
+   "url": "https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1177736,
+   "sha256": "1650c8a85af60698878702cdc057669110427c529caff075d06de56e27271639",
+   "gzip_sha256": "4e6037c1da18990e9e97b41447e5adef9f20f4430dca205324e58f143fdc58cc",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_commanders-at-eagles-2026-reg-1",
+   "url": "https://www.nfl.com/games/commanders-at-eagles-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1205110,
+   "sha256": "566212bd1166a09f88654fcdbe62a479f45e43314fd46e17980573755f684fef",
+   "gzip_sha256": "48b01f53a6869a532c5f2c05f413f590b74d4805569b9473fac90ab91a9f3107",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_commanders-at-giants-2026-reg-10",
+   "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1215283,
+   "sha256": "fe54b8320bdc00f49e0e6c39e1d851c670e80b0cc26ab86d989c965288dbb08f",
+   "gzip_sha256": "2797c7320cecde7e33edabe6b04471163b363b80a051daae33812b8e2f61251c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cowboys-at-colts-2026-reg-9",
+   "url": "https://www.nfl.com/games/cowboys-at-colts-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1263954,
+   "sha256": "f3b90a65db66d2a7f3f177e88ee830a210ff959a435e773d2849f5bf5ad76510",
+   "gzip_sha256": "4157678ca3aff785a5e26dbdeda8abc465b4637a5edf4edcd07f17830e354aa2",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cowboys-at-eagles-2026-reg-7",
+   "url": "https://www.nfl.com/games/cowboys-at-eagles-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1229384,
+   "sha256": "24b6a75cce9b976840e19c882ab73882c14077c6879f47f399eb9295c4852ca2",
+   "gzip_sha256": "3d5cd0bbf0b4b77c32cbc0c780dc1bb48b87d8d29519ef3945c6346ee98361db",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cowboys-at-giants-2026-reg-1",
+   "url": "https://www.nfl.com/games/cowboys-at-giants-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1132137,
+   "sha256": "f20b8cf887804cb101d6c63f2ad0889edb125c4396fe0d9e9e820e1bfdf32d2a",
+   "gzip_sha256": "47a64beda313b8c583a37860940d4e5b32cd46059b3bb2f607a655ab44844710",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cowboys-at-packers-2026-reg-6",
+   "url": "https://www.nfl.com/games/cowboys-at-packers-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1231065,
+   "sha256": "e2b20472110e5a34d82937736d0f2ab3cb0b8bd5684b2fea450560d9e6255f0d",
+   "gzip_sha256": "de6ab2b1f6e88aaadc675aef13f82fdc84777e06a226533f853b409a4b1e5f9b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_cowboys-at-texans-2026-reg-4",
+   "url": "https://www.nfl.com/games/cowboys-at-texans-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1264997,
+   "sha256": "1e1f705f31ea75b64adf7376ece8daf79c536ab1a09473447808319d771bf272",
+   "gzip_sha256": "b70d30bc6f3fd72cf7c2a4e699fe953684825999fec93aa105801123f74bbafb",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_dolphins-at-49ers-2026-reg-2",
+   "url": "https://www.nfl.com/games/dolphins-at-49ers-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1204954,
+   "sha256": "a8535d39712958996438c43b1724958675a333b95f5e86539124891efa53e5f2",
+   "gzip_sha256": "edbab709d71010d4ea087d99dd16ca2b2b5595487e2b70ba248e3f5f760d7732",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_dolphins-at-bills-2026-reg-11",
+   "url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1061364,
+   "sha256": "e4e87e6071da1349d933c13bc69e48a95ed8c2571d780537343392a8462be27c",
+   "gzip_sha256": "ab01882fac39eddcb4ecacbd67400085aaaa32ba6f8022a93e7c1aca39b5bfa5",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_dolphins-at-colts-2026-reg-10",
+   "url": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1172094,
+   "sha256": "8bacaadc9bc630623f222283ed956a24051992281a15c8702482b65ab38ad045",
+   "gzip_sha256": "331fc33ab20ed83381adc6bb9b79e0ef872865ea6dc9cafaf81678aefe0d4001",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_dolphins-at-jets-2026-reg-7",
+   "url": "https://www.nfl.com/games/dolphins-at-jets-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1191333,
+   "sha256": "ce26f3d4c97cdf30e6c7b735c8fa42725623bbe4d434b8d3c0bac41e97dda5cc",
+   "gzip_sha256": "fb212d396226dbb2f1343c39e9bec2dba973486abb7a7e4f70472f83b0474e0c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_dolphins-at-raiders-2026-reg-1",
+   "url": "https://www.nfl.com/games/dolphins-at-raiders-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1226936,
+   "sha256": "1247f3694bf6486ead7b12ec2b3ebc310753c678bad35ab2c949f2d1e32386aa",
+   "gzip_sha256": "2ab74b499774836594b24f046974e31e4d52f9787574ce7167f7d28298eb04f4",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_dolphins-at-vikings-2026-reg-4",
+   "url": "https://www.nfl.com/games/dolphins-at-vikings-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1203558,
+   "sha256": "44435cab22dda740a51c17daf0777414795a0b2d2c6da60ff5584954bdf22a7d",
+   "gzip_sha256": "7929fc544ec4bd2a516fc452814965d6428ec656af599c5344c51ec8722f5976",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_falcons-at-buccaneers-2026-reg-8",
+   "url": "https://www.nfl.com/games/falcons-at-buccaneers-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1102322,
+   "sha256": "df3404c81406f47127c6c231a5ec85d1fb810ea0479a2dbe76436ae1aba2ca48",
+   "gzip_sha256": "6f6f2c9d651374277615ade34013bfe0d093f4500e65fce86ec4a9254e6fd8bf",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_falcons-at-packers-2026-reg-3",
+   "url": "https://www.nfl.com/games/falcons-at-packers-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1240842,
+   "sha256": "80d7df8fb1d6779a2bccf9486359baea64820e67934038bae379d48d16ce64d0",
+   "gzip_sha256": "f616822ee43cf3171a8af239b49b942013c10e0bafc020a74589fc0161a39fc6",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_falcons-at-saints-2026-reg-4",
+   "url": "https://www.nfl.com/games/falcons-at-saints-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1225953,
+   "sha256": "f969c2379360e741a53df5daa76c2995a02d4a89fb0831277adbcec9b7a8e8b6",
+   "gzip_sha256": "f88d3c58deef2fe3563cc718257c7a3ad006342c5967e7c7cc7f0ba1b1b6ffdf",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_falcons-at-steelers-2026-reg-1",
+   "url": "https://www.nfl.com/games/falcons-at-steelers-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1199778,
+   "sha256": "6637b895a0960fa7b3dcd8d12f66d41542e32d7b3117ea25f76e8570c1ef117b",
+   "gzip_sha256": "617d3adae35c2bd9ab3a5e3726cfb9cdadfa9c1a4db538cc78dc4625b8c7d78b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_falcons-at-vikings-2026-reg-12",
+   "url": "https://www.nfl.com/games/falcons-at-vikings-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1098773,
+   "sha256": "284134b39ae21d38080a2ad719587779ca8b02ec600bcefca9689664453a9e6f",
+   "gzip_sha256": "0a56521c2940d206b140faf9360e58264f0f0a03da5ecf6dd2d25f3eab84602a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_hawks-at-49ers-2026-reg-12",
+   "url": "https://www.nfl.com/games/seahawks-at-49ers-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1075501,
+   "sha256": "d6857e3c9c4977e3ad53dd740e81dd5885a7f5ca297c6d59feea28b73bd2f71f",
+   "gzip_sha256": "211da63c41c3f9b84fbaadae0a1e1265968e49d4f5f868da4e6a8c23071fc2e7",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_game_hawks-at-broncos-2026-reg-6",
+   "url": "https://www.nfl.com/games/seahawks-at-broncos-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1231785,
+   "sha256": "ee38a268198ba9500e4cfe6c512891ccffc6596401dcad2f677a3730dd764a4e",
+   "gzip_sha256": "1953120843d7e05381114c82ae08b7a69c6890d7dcc3d1e06f44bc682ed0d9c2",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_hawks-at-cardinals-2026-reg-2",
+   "url": "https://www.nfl.com/games/seahawks-at-cardinals-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1125256,
+   "sha256": "52665da880774bc7d8648cf221b8730f50d228da739f9b54b49f0d6987de5591",
+   "gzip_sha256": "cd12a7071fd087a96de7e65ac4f6f1dd81a93baada64c9eed5f18af3b71c19ed",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_hawks-at-commanders-2026-reg-3",
+   "url": "https://www.nfl.com/games/seahawks-at-commanders-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1271117,
+   "sha256": "190ac3e4bb2dc10922555fcdf731f13f51e1979f3e5be17416f6f232a753c6e0",
+   "gzip_sha256": "6e78184c22a0b88ece8092a4c3b53b5a031794d8f61dd57fc82678e0c8f7ff8c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_hawks-at-raiders-2026-reg-10",
+   "url": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1170912,
+   "sha256": "45b84a13f6dee4202094d7faeed916215e3fc24b543ae1a4eaf7c417b7ed302b",
+   "gzip_sha256": "43eaa13ef95960fdc477ff0b7b1deb1bd34ef1e5e5f0184d11bd6785ae87da70",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_iants-at-colts-2026-reg-12",
+   "url": "https://www.nfl.com/games/giants-at-colts-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1093702,
+   "sha256": "7ec52bb07d3f89f1b74be3b47e499d69cb7a5c99a46df0cd0abd3601134cd92c",
+   "gzip_sha256": "dc4567c05ba983787381a56b142677d87575ed2d2e0e8b180f78a45776321502",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_iants-at-commanders-2026-reg-5",
+   "url": "https://www.nfl.com/games/giants-at-commanders-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1255109,
+   "sha256": "2303e11a30ff787e58b9145539c54bbd20f4d61cc45da324e628beb84db95ce1",
+   "gzip_sha256": "f45bd57a6c7ec30cca50d6d3e00011dfde301ef92d0acaa8a764c11d1c808161",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_iants-at-eagles-2026-reg-9",
+   "url": "https://www.nfl.com/games/giants-at-eagles-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1216150,
+   "sha256": "4718e65edba485fed923ce1b7a312659d0eff49c18c6ef7dc7f98d729b2a5345",
+   "gzip_sha256": "a33dc6f75cc4b1b33daa9775ce61eaf40ded1e855358a8eb82a3233308fa80e5",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_iants-at-rams-2026-reg-2",
+   "url": "https://www.nfl.com/games/giants-at-rams-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1197685,
+   "sha256": "b37f6c0270905282927d19cfa61d705ed720e14366cbfa7483b3f89cb665b2b7",
+   "gzip_sha256": "ed73ae437b902e1a2b649f5a98ef98c35f267739aa967d5340aee1a1b6c1a469",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_iants-at-texans-2026-reg-7",
+   "url": "https://www.nfl.com/games/giants-at-texans-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1237475,
+   "sha256": "31bb1ee87a625e6eb8603612518b8cc2f7d79200a735ebe13a62c35a6200d782",
+   "gzip_sha256": "5ac3b932ab634466aa43146d51aa69d002fcbe805bf344e58d9c9a4049579f58",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ints-at-bears-2026-reg-11",
+   "url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1094192,
+   "sha256": "876a6ee19edbe67f2a37a62a975e1d6261b14b4514f7cc802ed564faf4c835ed",
+   "gzip_sha256": "5a88b88df45f418ea8fb11cd6c06540d9a7460b0e06e8bcb1963a1609f7e943b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ints-at-bengals-2026-reg-12",
+   "url": "https://www.nfl.com/games/saints-at-bengals-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1084658,
+   "sha256": "44183bcc5c862840a8a41791e5554f40b41f7cb9a5bfc48b63243519946b5308",
+   "gzip_sha256": "b40afc838a3a12b82d19ddbac97e305b37b05c739a85c7b485ee7277cf0cdab6",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ints-at-giants-2026-reg-6",
+   "url": "https://www.nfl.com/games/saints-at-giants-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1290712,
+   "sha256": "94fcd7a6cb0e5c14884fdeb951d7e2306b1333abe7d4c82a39cf9a4e574a3ef3",
+   "gzip_sha256": "1dd3051faf6b2ffc27708483e7317654ada1684ff66f22b4f4b3aef6059bd3cf",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ints-at-lions-2026-reg-1",
+   "url": "https://www.nfl.com/games/saints-at-lions-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1291493,
+   "sha256": "4fbb9a9099276d18fbe4529b22b85aa33caf305d77875f15fb72761b3d284bb1",
+   "gzip_sha256": "988b60e1ca67295b0311c3da9b6504f3e11f8bc3360404760611cec21bb0c6f0",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ints-at-ravens-2026-reg-2",
+   "url": "https://www.nfl.com/games/saints-at-ravens-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1219854,
+   "sha256": "40bb2f747b87a5c42c77cd86a171c93873708cd63dd205096d539d614c9761e6",
+   "gzip_sha256": "133b928f443ca4c41555de671efffd28174f056dbd6394cafaf026d179d8afe6",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jaguars-at-bengals-2026-reg-4",
+   "url": "https://www.nfl.com/games/jaguars-at-bengals-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1231787,
+   "sha256": "28895efed2efef1a05ccb9e802d70b0d684a17d41aca0917c1dbc4b8ab8c6fac",
+   "gzip_sha256": "a9a1f5cf6b1588067d83b2a2c0197f297dc47912d1d10ac6f6cb1627fc61e0ed",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jaguars-at-broncos-2026-reg-2",
+   "url": "https://www.nfl.com/games/jaguars-at-broncos-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1204718,
+   "sha256": "6e1463e7568439d0519b2d5ffee34fb09125be9d00aa6dbcff2b7589073d2049",
+   "gzip_sha256": "2fb3454c7adda800bcabad2ee606c6389f8bdb63ea73b323a7686ad4a0fbc2ec",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jaguars-at-giants-2026-reg-11",
+   "url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1090387,
+   "sha256": "c90d82c204c5e6b0eb0c02d7abde2ee4981ff8ac564e52f456e042523983cdd0",
+   "gzip_sha256": "85bb62f05bf11eb97b8be6a7bcb8c9f24430e048551c525965ec0250697a055e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jaguars-at-ravens-2026-reg-9",
+   "url": "https://www.nfl.com/games/jaguars-at-ravens-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1155586,
+   "sha256": "69e38c38d29c34d3d9e6e4ffca35e41b57c48c8f354f727663264f1f220289f4",
+   "gzip_sha256": "081cc89155dba3a528315a11f6285dca5117007318e92775359ef932847be005",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jaguars-at-titans-2026-reg-10",
+   "url": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1133471,
+   "sha256": "be870feffaf42f4210b3df4123cbc11be3f8e6ed62db7dc7699418f65715f66b",
+   "gzip_sha256": "4d24560c86e1add8d09ea7a7a98293de2642c1802f1e9869b8576cb027f052c8",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jets-at-bears-2026-reg-4",
+   "url": "https://www.nfl.com/games/jets-at-bears-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1141838,
+   "sha256": "28bc8e23fcbfda2b28111a27c31073a9c3608f7c579b89d80563facbfa94b390",
+   "gzip_sha256": "da5035402692ad350464b09eaba1acdeeb21219bcdb8191362261b56816b694e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jets-at-chargers-2026-reg-11",
+   "url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1096098,
+   "sha256": "fa81ad05977dbacceef4ffea941a3e1c3c68db1f5425afe52f1e7348b4cd29b3",
+   "gzip_sha256": "31d693db51963e728f3f9025db25e0d3fd15493b3336490141295323c8f22f5b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jets-at-chiefs-2026-reg-9",
+   "url": "https://www.nfl.com/games/jets-at-chiefs-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1246706,
+   "sha256": "239fed1b2de480c3d4fff9d7c1d52cb8b970870b922dfbdf427521ab5058ffe7",
+   "gzip_sha256": "a67c7437a6e9fee93742b901eba636e8770985305d4feebf7e39b46bf44d0f24",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jets-at-dolphins-2026-reg-12",
+   "url": "https://www.nfl.com/games/jets-at-dolphins-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1070843,
+   "sha256": "9b94f5ff029af4ff1466f1e02047c5a2df90ab3b6feba9e9539d3de02468d8a6",
+   "gzip_sha256": "332fa470f6093d8b59cd2086a719d28b449dcba47403e9aeb4b6481a4ef363ac",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jets-at-lions-2026-reg-3",
+   "url": "https://www.nfl.com/games/jets-at-lions-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1223049,
+   "sha256": "8eb692d0756c9acaea17712c2d5f6c867a40a0747992b17290d130ee72b06225",
+   "gzip_sha256": "bcd7d9a2581c379c61574922da8d982e785e11a7c3401fd0e9038fa8b2dfc902",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jets-at-patriots-2026-reg-6",
+   "url": "https://www.nfl.com/games/jets-at-patriots-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1224109,
+   "sha256": "368c218dafe710d41558282a5a4c7502f1167c94c5164add9273c9fb6b03033b",
+   "gzip_sha256": "da3d5bdccf887a5876940188ceefb58f7eb9c314f36747e60b0f3b198444e07f",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_jets-at-titans-2026-reg-1",
+   "url": "https://www.nfl.com/games/jets-at-titans-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1159364,
+   "sha256": "baf4aab64db006d3544117f4b16361da1fd2e51a1276da3c0936d703676c0edc",
+   "gzip_sha256": "6b3099706c7192354f36bb6a9ab8df3d32b53a7c4409be71967cfea2a4c4784e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_les-at-bears-2026-reg-3",
+   "url": "https://www.nfl.com/games/eagles-at-bears-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1182460,
+   "sha256": "31242e6a1d03972038b12fe443cbd706fb43aff610c46090a135dff8a3089cea",
+   "gzip_sha256": "7201148d28597571e7384e8d9d1c084e5d596ff6ec526c1e691e3b4583ca9180",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_les-at-commanders-2026-reg-8",
+   "url": "https://www.nfl.com/games/eagles-at-commanders-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1158358,
+   "sha256": "4d51a30f891404d7679df955efadf385972612d74f98030ef67f0e20654c73e4",
+   "gzip_sha256": "ff27cc007af1b9fe6e0b5f9447b3c1e394ff48e70dd9c800f12c75e7ee334fb2",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_les-at-cowboys-2026-reg-12",
+   "url": "https://www.nfl.com/games/eagles-at-cowboys-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1081547,
+   "sha256": "8163d3eb326bb4d30611331d2add939ff2f72e998c8eb507bf3ffc19ab0ebd63",
+   "gzip_sha256": "ad3e755c99cb2cccdcd374c00240d7a27eedda3975edbb78f059a8c63d2ed473",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_les-at-jaguars-2026-reg-5",
+   "url": "https://www.nfl.com/games/eagles-at-jaguars-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1230262,
+   "sha256": "bf6707900747c24d67acaa513542e7c993c0d821cc123fa26cffbe27eb5fb045",
+   "gzip_sha256": "a30e957bbbffb98434d3099956496abed4ab8c2fa7c98163d7535484b5064058",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_les-at-titans-2026-reg-2",
+   "url": "https://www.nfl.com/games/eagles-at-titans-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1237524,
+   "sha256": "4e265d5a66035db86d89d0a1903c225f1d5c6d9f81565c5b22995df30cbfa3db",
+   "gzip_sha256": "32ce7e0c82701b3e4d77945e58552ee3a3002adc32b65a47dd86ab452bdd0066",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_lions-at-bills-2026-reg-2",
+   "url": "https://www.nfl.com/games/lions-at-bills-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1278359,
+   "sha256": "824c4bc90178615f3ca3029e3addcc7a504136fb65467eeebe504fbf6719e0c2",
+   "gzip_sha256": "74beff429c4f6ba7eb7162c506aef5a3c68c12de4f705f153164a8f1b83ea611",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_lions-at-cardinals-2026-reg-5",
+   "url": "https://www.nfl.com/games/lions-at-cardinals-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1267561,
+   "sha256": "8b6365b004008d9a669c4b04bfbe8e3b32b52ad563babae374bae0bce47c06f5",
+   "gzip_sha256": "434848970445efe9f0704dc6042b4b0ba3f18131401e4f24ea2e219dfaca3970",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_lions-at-dolphins-2026-reg-9",
+   "url": "https://www.nfl.com/games/lions-at-dolphins-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1156473,
+   "sha256": "ec12e1a8d7d9fe6c1b0e8f0134b7e71ef7a36df0c036069812468818a09ec247",
+   "gzip_sha256": "f3d57977cd44c4a545dad8c9112f28abc2c15f72e09de0cb18cfb8c00ed89e2a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_lions-at-panthers-2026-reg-4",
+   "url": "https://www.nfl.com/games/lions-at-panthers-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1273161,
+   "sha256": "1549c86d209f94077a2d89751bc3564e6b9dfee98ce119a4dc4cc0ea86871a82",
+   "gzip_sha256": "26e077e3a2eb44c9f608c4a6943b5356d67c7eff3e6fa78e55e8ba772e17da98",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_packers-at-buccaneers-2026-reg-4",
+   "url": "https://www.nfl.com/games/packers-at-buccaneers-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1175887,
+   "sha256": "051e9dacb23d7112bde1252e6e53c1a5e8aba9df0132f0ca01e5154303dd1617",
+   "gzip_sha256": "ae6c46322dc69644696d0c478d8d10b1e8cd641a1bb771ce2153644dd7b32f39",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_packers-at-jets-2026-reg-2",
+   "url": "https://www.nfl.com/games/packers-at-jets-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1240469,
+   "sha256": "204f2fdb449db1e9461995306c8deb4501b39e5d05cac8820300507e4a5bbc06",
+   "gzip_sha256": "d542b9fba580bde4696c259aad38827ba37d05974aaac915670f62fe321b911e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_packers-at-lions-2026-reg-7",
+   "url": "https://www.nfl.com/games/packers-at-lions-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1186326,
+   "sha256": "eb36ded88e3207bc6a3a4152b8bfb2a22cb246a0f523e5b93b2c1a58393b6bb2",
+   "gzip_sha256": "8a03530c1290857e4c7eb8e31c2fe1ca3761fc6fb92edee4788bdd5341c5851c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_packers-at-patriots-2026-reg-9",
+   "url": "https://www.nfl.com/games/packers-at-patriots-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1267930,
+   "sha256": "28e8c4bb39af54eb1e4aa97d4ff49bda474b4936e6fc76d0115131f18f0aadb2",
+   "gzip_sha256": "34a0a03a377fc09757c35651b93c42580f6060a73f441d5c5bb19aca3e64f45e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_packers-at-rams-2026-reg-12",
+   "url": "https://www.nfl.com/games/packers-at-rams-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1106804,
+   "sha256": "63535978dffe4dfda08998f0944540d636b0771a7c1679338e606741778cd962",
+   "gzip_sha256": "33221aac981244960fc26e238e9bff5eda4c7e82f07ca9874bfa1d213879e79d",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_packers-at-vikings-2026-reg-1",
+   "url": "https://www.nfl.com/games/packers-at-vikings-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1224037,
+   "sha256": "0a5ab4f6bb0b9e59fe56620d6b8d2aa4c8ef9de214fee4a2a43a5fe6d07bf43c",
+   "gzip_sha256": "e5493e9e2b41a51a87a2eb5c73d63c8d03289f5e8616be60a28e1f5776e96f8b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_panthers-at-browns-2026-reg-3",
+   "url": "https://www.nfl.com/games/panthers-at-browns-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1254179,
+   "sha256": "bd06f8a088bbd746a04a04cc47f75adb14ec649e6699e9dd0b1eb774c7021636",
+   "gzip_sha256": "c79f9dd09c8ba38cd989f8dc6491c8dd5a85b0a0206c44942c6f57060e50cc4c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_panthers-at-buccaneers-2026-reg-12",
+   "url": "https://www.nfl.com/games/panthers-at-buccaneers-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1072941,
+   "sha256": "1c7932f78f8bc3e0b4fc0676941b56f2f3f2c80d6f019e98e8d510dc48533a35",
+   "gzip_sha256": "d577f155cb9f1fda6db6229a9fd5c46af53da14dbad6a8b824d59a461f09280a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_panthers-at-eagles-2026-reg-6",
+   "url": "https://www.nfl.com/games/panthers-at-eagles-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1234272,
+   "sha256": "48e5c772064d11f1e58430c3c5b0dced5f99aa95ebe5c4123c69c2bf4cf8856e",
+   "gzip_sha256": "0cdc7c593f18e0619ea7e99be35f8284b683bb9804545492072190c06ffbc55f",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_panthers-at-falcons-2026-reg-2",
+   "url": "https://www.nfl.com/games/panthers-at-falcons-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1191102,
+   "sha256": "89e04efc993bd07e18ad642634f7be436955f7f2a3d59688f58ff4c8ea248e02",
+   "gzip_sha256": "dc92eae622e2ae66088a8836088ed88794eebcf4b3d0ab5b5420a37e7c8ee392",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_panthers-at-packers-2026-reg-8",
+   "url": "https://www.nfl.com/games/panthers-at-packers-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1222370,
+   "sha256": "4eec5ca01bcbf8465d26c69a913c3d0562c6ca4c0257caf24969f1e793c1af4a",
+   "gzip_sha256": "ec14202c0b3060f18d3b1e2b735612b5e35297d43b8ec813d88608cec1c41d63",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_panthers-at-saints-2026-reg-10",
+   "url": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1151262,
+   "sha256": "0f7046916f57ac55aad537812e2fba1a1697ab364bbc26ff5f8fd26f1c6bd73e",
+   "gzip_sha256": "bc4c58ce5db99ac32ff542877064367c9d0d5156ace6d4396c9b5f066720f0da",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_patriots-at-bears-2026-reg-7",
+   "url": "https://www.nfl.com/games/patriots-at-bears-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1218555,
+   "sha256": "c4918a528246bab0ca0dc804e18f4b7eccef86d4dd4245200e3699dde40ee312",
+   "gzip_sha256": "b16930d3e6d643a62883d9d254bfa2b99dd26d3c098817ed001364733b2c5ce5",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_patriots-at-bills-2026-reg-4",
+   "url": "https://www.nfl.com/games/patriots-at-bills-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1219329,
+   "sha256": "f31a0265c55d5fd33743cfe7b2298bdb0d36041aab98c6b3ec92a821c4c8c26a",
+   "gzip_sha256": "c7cd9e8d3884dc2253fce25a1ae67c4b518f3961b453089b84709c59a58c5952",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_patriots-at-chargers-2026-reg-12",
+   "url": "https://www.nfl.com/games/patriots-at-chargers-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1097845,
+   "sha256": "d2a4e7cf2332614bcc949f9b69a54f348bcfe4070595673aec71757fa44eafb2",
+   "gzip_sha256": "6ec5c5da7da8f8e31e641679349d470b7ca6f2650fb7223ef65922f35bfba54a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_patriots-at-dolphins-2026-reg-8",
+   "url": "https://www.nfl.com/games/patriots-at-dolphins-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1176030,
+   "sha256": "81a3ace42af321ebb0add24b835c55ddc9d445fda3c1d8ee3627b4c8eb3576ff",
+   "gzip_sha256": "01a018d77e1aea5fbae028c6d4b03f7340f38ce11ecb5b2bc4c3e814d7df52eb",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_patriots-at-jaguars-2026-reg-3",
+   "url": "https://www.nfl.com/games/patriots-at-jaguars-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1194572,
+   "sha256": "cbf16f4d90fffb7b90197cf2e12f270d232cd4215f7136e0cc6c485b25dce5f0",
+   "gzip_sha256": "4994af494c45bdc05c355a952fe9575d670f4d9779d3a20b09169e5c86843605",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_patriots-at-lions-2026-reg-10",
+   "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1175538,
+   "sha256": "e1f606284107ccbdf0bd684b4173f61f667d024e80e27d9223ca00f18ac82e70",
+   "gzip_sha256": "6cb98b87e0dda6818e3361a07f684c9e4782ae0ce7133cc0927f41d938b1d423",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_patriots-at-seahawks-2026-reg-1",
+   "url": "https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1191404,
+   "sha256": "11e4202ff20fcba8e4efdb026bba362cdd0adca1e5357ad699f693b4812bcc58",
+   "gzip_sha256": "12e74c6501b1ccfb205efabf667795a699682dd56e3bfe3690c5c920af3eaa3d",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_raiders-at-49ers-2026-reg-9",
+   "url": "https://www.nfl.com/games/raiders-at-49ers-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1230887,
+   "sha256": "df95b2a63f790194432c0df3e72b1fd74abe17e2a282c2a029e0d7013134e776",
+   "gzip_sha256": "9e4700e406ba400fc05e417730b787e8e859c4beebb2d677f8d37de18448c228",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_raiders-at-broncos-2026-reg-11",
+   "url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1086701,
+   "sha256": "33fb365cbe8300b8da2f2fc08e33ef064740a20d608f889dfb8e279bb3061004",
+   "gzip_sha256": "4103ddd8be8251bc949241a04ba9542156156c2e4af6a4f8a6cc25d16c0b140d",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_raiders-at-browns-2026-reg-12",
+   "url": "https://www.nfl.com/games/raiders-at-browns-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1101502,
+   "sha256": "b91cd2050bb66ad504944e9daa567bd24eb735320b8e04559488405bba29edf8",
+   "gzip_sha256": "cf695335d87248bef3a8fa5b2e71257d8a00cfe80078c129dcbcfd5bbaf884d9",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_raiders-at-chargers-2026-reg-2",
+   "url": "https://www.nfl.com/games/raiders-at-chargers-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1177539,
+   "sha256": "90de4d049f3c529cdcc730b93031c5106f46bd343f1b2b4c26685cfbdbdbae8f",
+   "gzip_sha256": "ae0e3ae00276a9d698f831629e0e024cbb42cddd2c811f2fb23075ddc5fe4553",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_raiders-at-jets-2026-reg-8",
+   "url": "https://www.nfl.com/games/raiders-at-jets-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1269450,
+   "sha256": "b6f277b9772e48f43265d2aca016ddad1791bc256501224af2d8d9c9cbfd15ed",
+   "gzip_sha256": "b57a632680e6c054d18eb190cdcf59020ec7ba5d1cc784e532fd22acaf533159",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_raiders-at-patriots-2026-reg-5",
+   "url": "https://www.nfl.com/games/raiders-at-patriots-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1247167,
+   "sha256": "dc9d80682fb85ac48326aec3d3940f4e3ee562628f5729c2d91a1cf7d8c78a7c",
+   "gzip_sha256": "e6f4a225fb1ec29baeaeb577c39e5832a613b7ed77d48530d5450f6b64930472",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_raiders-at-saints-2026-reg-3",
+   "url": "https://www.nfl.com/games/raiders-at-saints-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1269703,
+   "sha256": "039d0c262247635fba9d3fd61a20e77555bd17c5595178e8004c6f790b26c847",
+   "gzip_sha256": "d88e4c931d87477e2f2754cf2e6c264536e46278d6dd4d2ac8821f1a28059a4e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_rams-at-broncos-2026-reg-3",
+   "url": "https://www.nfl.com/games/rams-at-broncos-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1266078,
+   "sha256": "e1b552c1ebdef00dbe3a9af34ef15bc9ad1731940b22f6eb53b555477faaa43e",
+   "gzip_sha256": "0b47347d2c2da5516801fa660a17f15a3ff3a9cb716f5fbdea2d70f15d4fec89",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_rams-at-cardinals-2026-reg-10",
+   "url": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1158611,
+   "sha256": "7f59edc6a1fb5dbc44d0916f57508068e65d09d9e4307ab7680014c6069be468",
+   "gzip_sha256": "4dd3b9b3258366c0dbc1283155b0100c0738897cae99e9c806d373b1f8b9ccbe",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_rams-at-commanders-2026-reg-9",
+   "url": "https://www.nfl.com/games/rams-at-commanders-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1236385,
+   "sha256": "65b224a5cad8b2c3c2119daf01f911b7b2d79581dccc51acc87144099afc459e",
+   "gzip_sha256": "cb9b05c388bcf85e9739ea3eb38f8027beb66e0a87bd589627cc63670bcb9930",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_rams-at-eagles-2026-reg-4",
+   "url": "https://www.nfl.com/games/rams-at-eagles-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1245491,
+   "sha256": "e17b2bed5263e84f801f9a9a3c537c82c17f228430cf60cc16240234b559fa9c",
+   "gzip_sha256": "d532e0f9fe620bb4f47f19126ad925cbe7d9d59ebc7a242a0b25bf5d004105c3",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_rams-at-raiders-2026-reg-7",
+   "url": "https://www.nfl.com/games/rams-at-raiders-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1253310,
+   "sha256": "e3f4f17dcfe0bc59e254b7e7db469f0f29d87b24ef2855d85e2c188f399f26c1",
+   "gzip_sha256": "46d16e984d68c23a39405807acf922c8a62f4933bdd8a0c880c82c30fcf0da07",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ravens-at-bills-2026-reg-8",
+   "url": "https://www.nfl.com/games/ravens-at-bills-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1230338,
+   "sha256": "f9f179ec03da8d373a4113f511910d4d09420af55f7fb992306c024f2b35f9fd",
+   "gzip_sha256": "3df30b6be6752b306afe88064ea53522f7667c25390e0f5a7198f668ca8b9fdd",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ravens-at-browns-2026-reg-6",
+   "url": "https://www.nfl.com/games/ravens-at-browns-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1160354,
+   "sha256": "5ed333fd6dd5fa941afdd81c3c3e6d4c370a75515f485af326dbfd0c9ae1296f",
+   "gzip_sha256": "99eb73791ab771b20fa9c4b8da8783798b33370632ead31ab9950d0a66ceae88",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ravens-at-colts-2026-reg-1",
+   "url": "https://www.nfl.com/games/ravens-at-colts-2026-reg-1",
+   "http_status": 200,
+   "bytes": 1228467,
+   "sha256": "f086870c6b878e009c9fb4839a8270ce69928147f1ae9af9aedca8d59228fd69",
+   "gzip_sha256": "4c5ab5171d66e78bca7ae63505f815019feea6a57f100c8aa663555efae7c181",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ravens-at-cowboys-2026-reg-3",
+   "url": "https://www.nfl.com/games/ravens-at-cowboys-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1265339,
+   "sha256": "dbcc6c8c5437701cbfe623d4e9082a1303642c89912fc5413949e92365fbc55a",
+   "gzip_sha256": "9a3aaebea37711186e5036e8970b9e18ce85bfe0826ac9a710c6fd05365deb62",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ravens-at-falcons-2026-reg-5",
+   "url": "https://www.nfl.com/games/ravens-at-falcons-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1280633,
+   "sha256": "2362a250e3d27fd8893ef04d3085e78f3197c670ba4afc1964c49217c076b11f",
+   "gzip_sha256": "ef36dc6107ef9805d64b150ba542c15be68739d44fb52026fff0bba20e109504",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ravens-at-panthers-2026-reg-11",
+   "url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1101180,
+   "sha256": "b3f5d3fc61746fa4d1f220e540b4d253444db5a466693e004b3ba9c26dd36da1",
+   "gzip_sha256": "fdc1ab5dc9f619a642f181e4044165aefd616f4faf4b8da6153d4a2f3af102b9",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_ravens-at-texans-2026-reg-12",
+   "url": "https://www.nfl.com/games/ravens-at-texans-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1099234,
+   "sha256": "736e2e5284e8cbb7d81b9c3433727362ccdd28c4ccf31e4b803699c0fe7363ee",
+   "gzip_sha256": "5e9d83eb53a8050feaeb7cd55358d70e8f24e8b77fb95a522005f6e358b64e5e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_teelers-at-bengals-2026-reg-10",
+   "url": "https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1140017,
+   "sha256": "623d4eb4703023d678dd5dfef5ff296aaf277f09b003c60f6af86ce152299a06",
+   "gzip_sha256": "3002af3deb5525becc60b7aed5eda8b412fb6b5e5fb2a3c1d3716e86f45bf7b8",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_teelers-at-browns-2026-reg-4",
+   "url": "https://www.nfl.com/games/steelers-at-browns-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1232864,
+   "sha256": "149514d909240502926be95e2c151be6c595845cd3316c21b4f7700b0aaa41e4",
+   "gzip_sha256": "1cd34b996a0e1ebeaefb5f2450aee42b0b54d2b8c492b77969ca57f55b6d027c",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_teelers-at-buccaneers-2026-reg-6",
+   "url": "https://www.nfl.com/games/steelers-at-buccaneers-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1293057,
+   "sha256": "0bc66b5c02d90e58a19579519bcc53a65f35003512c826b4179264960ff441ef",
+   "gzip_sha256": "96de6c25e8414916b52ce0ffc8a49a8df15456737b405c3cdfa9ef5b88b167cc",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_teelers-at-eagles-2026-reg-11",
+   "url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1096009,
+   "sha256": "4da12239ece3d37ac2b9ae6e312bcbfd5fa214b40a5f0402e8d85ed9003944a1",
+   "gzip_sha256": "783bc93de63c74918bbde89a3dcc0ab061545a5b1b2a2f486c99958802553923",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_teelers-at-patriots-2026-reg-2",
+   "url": "https://www.nfl.com/games/steelers-at-patriots-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1191085,
+   "sha256": "9711fb50a595a9a03cb9c5b19d11443bb0df10748b26e0a78b825154b5408a8d",
+   "gzip_sha256": "672104362a4554dd1fbe75f358cf6f5f1759efc3542aa8cbc16f0edcbe77df84",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_teelers-at-saints-2026-reg-7",
+   "url": "https://www.nfl.com/games/steelers-at-saints-2026-reg-7",
+   "http_status": 200,
+   "bytes": 1185574,
+   "sha256": "e85fef42f866b65550aded4700257a1ea55e1c5b1255cf68e067688ec4333e57",
+   "gzip_sha256": "16b5df0bce98d64dd0bd192eec9935a8229dfa65c40ca1bf0b8c5301df13b4ea",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_texans-at-browns-2026-reg-10",
+   "url": "https://www.nfl.com/games/texans-at-browns-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1178934,
+   "sha256": "455a03a50c364645af1e40647d80dab56bc44f502352479dc864ddaf59cdb490",
+   "gzip_sha256": "af200489e2047415157f727c752ed3c3cf158ebbb6157f0f26ff0bbce526a562",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_texans-at-chargers-2026-reg-9",
+   "url": "https://www.nfl.com/games/texans-at-chargers-2026-reg-9",
+   "http_status": 200,
+   "bytes": 1264821,
+   "sha256": "039625bec070aedc07b54fadcb0c71042a53ea55c158572a539055e3c8cd9c63",
+   "gzip_sha256": "543f7571afd64daefca09684a3d308ba779e7dc719d87604a59a9e2cb8b71e1d",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_texans-at-colts-2026-reg-3",
+   "url": "https://www.nfl.com/games/texans-at-colts-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1208448,
+   "sha256": "56047850692f4cc086b0b1ed94ca8f296349db541c187160b5fcb80a0f3b614a",
+   "gzip_sha256": "1f1250f79af34e84bea77c48bda2d89dc84a03faa18c2327704c7eb0e9e60b1a",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_texans-at-jaguars-2026-reg-6",
+   "url": "https://www.nfl.com/games/texans-at-jaguars-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1247086,
+   "sha256": "2811598100f09c2c9ee08f672641c3286da0952ec36274734f9300ddbf2cca51",
+   "gzip_sha256": "34c5b9e0d86022f916076f589a87ffa5dc8f1b804d6ef1a8d48f481fbe709e0d",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_texans-at-titans-2026-reg-5",
+   "url": "https://www.nfl.com/games/texans-at-titans-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1175690,
+   "sha256": "2d3f7e945bfa47de2af3db442615bd6e2ea9b22e47e0d6e342f49335c3642fb8",
+   "gzip_sha256": "6ff8603d912c8de161f98df3a509e67e5d2fb08de1f5efb2a3caae6c0ea3b4d4",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_titans-at-bengals-2026-reg-8",
+   "url": "https://www.nfl.com/games/titans-at-bengals-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1301403,
+   "sha256": "e047efaf057412dc6f4741628b146f3184bfc67793d8b5e41100dd75675616b4",
+   "gzip_sha256": "959383ad8ac41ca34d4626e33e11cebf23c02fdbd8788787fea8f63df363c5ab",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_titans-at-colts-2026-reg-6",
+   "url": "https://www.nfl.com/games/titans-at-colts-2026-reg-6",
+   "http_status": 200,
+   "bytes": 1200327,
+   "sha256": "554ca5d06029620592910d99aa47debfc6920dfad8ced315fbe71225fd547f05",
+   "gzip_sha256": "61a3e7b5fc53f80bd788e3e43635b417695aa3e95e13045938bd477ad19b90ec",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_game_titans-at-cowboys-2026-reg-11",
+   "url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1085679,
+   "sha256": "627254328b96afc5c81dbe97cfe47fa06bc5af75836f075fac7c5bedadf077be",
+   "gzip_sha256": "80c1af60147925620ec831543e08f70f0e9732b54bfaf0735114f29a224109d6",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_titans-at-giants-2026-reg-3",
+   "url": "https://www.nfl.com/games/titans-at-giants-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1189736,
+   "sha256": "3baf99ac0503433afa096ef20aa94cec8a673c1e51c9efab626f654eb61524df",
+   "gzip_sha256": "6f2c28ae4097ce86653433c78a895713bb1bb5cf4a1b6fef57214596a8e3ed3e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_titans-at-jaguars-2026-reg-12",
+   "url": "https://www.nfl.com/games/titans-at-jaguars-2026-reg-12",
+   "http_status": 200,
+   "bytes": 1043534,
+   "sha256": "4302adbab8eb93e677ee57f530891c97e783b94e14b34264814cbbcdbaf54873",
+   "gzip_sha256": "3c188cf9a60a6e38a63a87a953e5bcac18513fa5b945df175efc87cf51649f11",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_game_titans-at-ravens-2026-reg-4",
+   "url": "https://www.nfl.com/games/titans-at-ravens-2026-reg-4",
+   "http_status": 200,
+   "bytes": 1218597,
+   "sha256": "e8198a56fcdee2c950d03e414d3943754aab12fe146f2c1315641670fc3ab0ea",
+   "gzip_sha256": "7cea479480e84fd337d5404a1066e63afef15395cb58efc40e65ac6bb7d250fd",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:25+00:00"
+  },
+  {
+   "key": "nfl_lab_game_vikings-at-49ers-2026-reg-11",
+   "url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+   "http_status": 200,
+   "bytes": 1081985,
+   "sha256": "184d979cd43de742ffe46195045db8eda31dfed90acebf0b52c882d2e867d8aa",
+   "gzip_sha256": "a226d36f79128d7591ebd61a11f27961ccfbab082e5276296bf2884a247e9995",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:28+00:00"
+  },
+  {
+   "key": "nfl_lab_game_vikings-at-bears-2026-reg-2",
+   "url": "https://www.nfl.com/games/vikings-at-bears-2026-reg-2",
+   "http_status": 200,
+   "bytes": 1173743,
+   "sha256": "3e7eed9aac4647aa321f53d53e5e3e823fffbeaaebdce301309fb6743e3e67b6",
+   "gzip_sha256": "15c2bf52676623c628ba03867907362f7fec2f34184c3de859f4bb3cf4be4946",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:23+00:00"
+  },
+  {
+   "key": "nfl_lab_game_vikings-at-buccaneers-2026-reg-3",
+   "url": "https://www.nfl.com/games/vikings-at-buccaneers-2026-reg-3",
+   "http_status": 200,
+   "bytes": 1239606,
+   "sha256": "bc1189dc24262810fece568bfb7e72fdbed1057dd0e65250e45dbf79e84177bf",
+   "gzip_sha256": "63fd11389c689ee5bd2155f51603e10f2d33e5747e760048f9963ada4eb0c75e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:24+00:00"
+  },
+  {
+   "key": "nfl_lab_game_vikings-at-lions-2026-reg-8",
+   "url": "https://www.nfl.com/games/vikings-at-lions-2026-reg-8",
+   "http_status": 200,
+   "bytes": 1176162,
+   "sha256": "e505a3bec23889069c4b0be9da11bf7fb7d919d4bf614a6b9a7108c101eedc6b",
+   "gzip_sha256": "e4e2f6d24ba2419f7e9b6adf0006214491d278eb96c2cd0c9b4343e44932fcb3",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:27+00:00"
+  },
+  {
+   "key": "nfl_lab_game_vikings-at-packers-2026-reg-10",
+   "url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+   "http_status": 200,
+   "bytes": 1156128,
+   "sha256": "368b1a1cc578fee0ee8ad9c08a78296e9302efe5a1b17830d1fbbb581ab8e479",
+   "gzip_sha256": "7d23b7f262d2b8dde6462d26614f24465740da41eb2f57081df24b1393f403e7",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:22+00:00"
+  },
+  {
+   "key": "nfl_lab_game_vikings-at-saints-2026-reg-5",
+   "url": "https://www.nfl.com/games/vikings-at-saints-2026-reg-5",
+   "http_status": 200,
+   "bytes": 1179617,
+   "sha256": "3bb17ad249042a1d53ece3b610b6da764a1b06060e25a3146bebda33d667b007",
+   "gzip_sha256": "c3de86c87faa7aeda8eff9869dee69ecc252ede9e360a81b05d7ad4372c0f4b2",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:08:26+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_000",
+   "url": "https://static.www.nfl.com/image/upload/v1789038923/gamecenter/a8fb0d78-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331170,
+   "sha256": "789e8a140b26d164a6be4d3d980eb4007f8f93f4e4aedfa748fbbc10f940651d",
+   "gzip_sha256": "2e5e9d584c26f048676dd8f92b8453e8b3be7775020b34f567ee28a23e372d6b",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_001",
+   "url": "https://static.www.nfl.com/image/upload/v1789125324/gamecenter/a8fc08da-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 330765,
+   "sha256": "2736d016da3071ce6b7f21b147b3b78b1b687e99cd0b33a92168b7f451ee4600",
+   "gzip_sha256": "7f27e5121a3665f1f072e2d455ded4069550b84357ea832a3d8017045f07f9a3",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_002",
+   "url": "https://static.www.nfl.com/image/upload/v1789384525/gamecenter/a8fc106b-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337174,
+   "sha256": "5b01e99a5954423d9a6207c0883ed4e7af4fcb39b58c3226497965565e3f1f15",
+   "gzip_sha256": "999f45c0ceefc8ea359af81590e93d3da54ce14fa89fe12b645f20aabf573e76",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_003",
+   "url": "https://static.www.nfl.com/image/upload/v1789384525/gamecenter/a8fc1728-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337549,
+   "sha256": "b9192fe209c95c537c034a1feaf0855f2f6aee614d2be09ed9b900579fd14c98",
+   "gzip_sha256": "1d8cf0e193dbe1bd5e9917e63b450b1c441489770ecf150cb4ad2a86dd2b27e4",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_004",
+   "url": "https://static.www.nfl.com/image/upload/v1789384525/gamecenter/a8fc1998-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 332538,
+   "sha256": "5b71f57145e8e418105ddcb4111da016f7a8d66aabec93b2ca166458934c5cea",
+   "gzip_sha256": "69f0072addae08a2e09d924c4c92509cf0ae6c6facd7198a57e9ed08df4b2526",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_005",
+   "url": "https://static.www.nfl.com/image/upload/v1789384526/gamecenter/a8fc1393-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340896,
+   "sha256": "b8546989b3420cdcd4f64340da5d3e774ee9a08a6ce9451c5482ee2f695f3dfe",
+   "gzip_sha256": "f173fb68536c152e0ce7a3684dc65676bc84085323074f7a8d947a6d94a4179a",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_006",
+   "url": "https://static.www.nfl.com/image/upload/v1789384526/gamecenter/a8fc15bd-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336811,
+   "sha256": "6faad3e7c72444cd59642a54dc51926ac11e9afe9b1a33d5cb3384ee338712e3",
+   "gzip_sha256": "a27c8c860e3438ccbfd63ef4f599c268d2932e1a315270d284788a00f9d35139",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_007",
+   "url": "https://static.www.nfl.com/image/upload/v1789384526/gamecenter/a8fc1864-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339035,
+   "sha256": "7da2e8e77bf775e90cdc021debe3029634c2e4dc1ba8978d3f17dde3cfdc8ced",
+   "gzip_sha256": "1a5342d5d74144fea48838ed8038a410e102631a2ce317b8b13b11fcee9fd7c7",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_008",
+   "url": "https://static.www.nfl.com/image/upload/v1789384528/gamecenter/a8fc0e5c-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 347096,
+   "sha256": "6a44773f1340ecb7c0436c0fab1d00a72ee772f753fd766163838d2648089ef3",
+   "gzip_sha256": "420149779d94324aaf68e59a687842bbb0a50dc54b86c2735bfbf228bf984fc0",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_009",
+   "url": "https://static.www.nfl.com/image/upload/v1789384528/gamecenter/a9a87603-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 332866,
+   "sha256": "fac0be40b5b68964d075f12f529888c8456c3edb4f172464c7b59611373be63c",
+   "gzip_sha256": "54398d970b16fc2c14558e629fb507af810cba6210443a4918f92c49a2760256",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_010",
+   "url": "https://static.www.nfl.com/image/upload/v1789384528/gamecenter/a9a889dd-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333686,
+   "sha256": "8d1457e5bcf1287f6ace7a13c4d2a213c5fedd7288373de2c0e246819ef06c8f",
+   "gzip_sha256": "fe8f0d89d203af4a1b68618de04f605decd635de1e5a94b262389f56e1c124d1",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_011",
+   "url": "https://static.www.nfl.com/image/upload/v1789384530/gamecenter/a8fc1203-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 365235,
+   "sha256": "1f278ffaeabaa2a2fcb15296f9d08059f2b63a16b849802ff5b79251c5390e34",
+   "gzip_sha256": "531ac449376fb51becb0592fcf02d5860efbe9a196343e4cb5faea6f889e585c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_012",
+   "url": "https://static.www.nfl.com/image/upload/v1789384530/gamecenter/a9a88d52-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335096,
+   "sha256": "5a19f188b4887261d6778edfc69f50343f0b5a86efc6a793aba6e11cec03e9b1",
+   "gzip_sha256": "b48c9dc604d1cedaea5ba94e49548967336f26b4665668ec429972e94aafd082",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:29+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_013",
+   "url": "https://static.www.nfl.com/image/upload/v1789384531/gamecenter/a9a881ca-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335847,
+   "sha256": "9e14388ce2cbf94ea6c0b35b12af354ec88745ab0aa95e5cf400c992df975d59",
+   "gzip_sha256": "6944fbf3f98f02618760fd6ba78ae297e1ddf0992f18c9bae70a353803ee9fba",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_014",
+   "url": "https://static.www.nfl.com/image/upload/v1789395325/gamecenter/a9a88631-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 341603,
+   "sha256": "efc959435ccc994a09efeca80c243d0c7d0e4bd4826c1d6435e34d00c66e1489",
+   "gzip_sha256": "a73b4871aeab05c9a704ed002d979a312e887a038ddbea198e12cf6046d1f26d",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_015",
+   "url": "https://static.www.nfl.com/image/upload/v1789470925/gamecenter/a9a890ed-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339041,
+   "sha256": "a3e19937256b973d60e4e7f5712bb7ebb01f2c58b6d2a83688537068ab66392c",
+   "gzip_sha256": "e8dfb111e4da9eb33e127b25128eba7a8da215e1c22ef3e0306d4b21e9872607",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_016",
+   "url": "https://static.www.nfl.com/image/upload/v1789730127/gamecenter/a9a8944e-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338681,
+   "sha256": "6e76c9aee29a47acc158691cc65c7af0f5c8a12fcaff688e887f4f67d9956e11",
+   "gzip_sha256": "1c1146daed049469b731bb3d4e008af0570bfd21c3b045ccc4f45cedd9c84992",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_017",
+   "url": "https://static.www.nfl.com/image/upload/v1789989328/gamecenter/a9a89baa-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333197,
+   "sha256": "2c9285a148efb50db624f03f0ff44ab0459f7ce5ee21b0e8e9678026c8e6f745",
+   "gzip_sha256": "2664bc7d2531ad930af9383cb43080043de00e81df359b69244f4dc78204b936",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_018",
+   "url": "https://static.www.nfl.com/image/upload/v1789989328/gamecenter/a9a89edd-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 330174,
+   "sha256": "5acd250bee7df5f6a239d20b1b5002e7beb029db9a08beb233112cde3687bf07",
+   "gzip_sha256": "3cf923c7e979ad754e7ab0ec96e7fd4ed4bfb5cfcd024ea187bd1eaaaaee76cf",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_019",
+   "url": "https://static.www.nfl.com/image/upload/v1789989328/gamecenter/a9e0d18f-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336873,
+   "sha256": "c29dc6493718fe12195c59e874f75850a28b5f8f0cc46639a1c3735925f844e8",
+   "gzip_sha256": "a1e4033da2d2194fbc2f73067ad57c06fad321a4fa11559cd8e7d5fbf0745c43",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_020",
+   "url": "https://static.www.nfl.com/image/upload/v1789989329/gamecenter/a9a89841-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340215,
+   "sha256": "b24a5da3f209c71dcf01c9062d67f744f1ab7acb723f2f56f32678afa17a1bbe",
+   "gzip_sha256": "d6ae725eb71a0f81c97a6c729229a2b86db2af8c5a15c5b963ff609b24c364fe",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_021",
+   "url": "https://static.www.nfl.com/image/upload/v1789989329/gamecenter/a9e0d5a5-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 362471,
+   "sha256": "26b049c510fbc6c5167beca48953cc384acdb0188a6b4396b87152b866a9da1a",
+   "gzip_sha256": "a1f08bbcf5014c04e0fc966fd38b68ec48c99fc7078b0c526759eba71726b8ec",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_022",
+   "url": "https://static.www.nfl.com/image/upload/v1789989329/gamecenter/a9e0dc7c-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 330516,
+   "sha256": "9b04929b77ded002fca22dc1096fbae8e1e8cd41559756d50091d3d4bb0f7dcf",
+   "gzip_sha256": "31a45b81e06289c9ae1a2d7e73aaf23074440187d308bbdc0caf605e2bfc7669",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_023",
+   "url": "https://static.www.nfl.com/image/upload/v1789989331/gamecenter/a9e0c7c0-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336578,
+   "sha256": "f55d92d4ea786fa9fc637a802864b81360969c55098debb5878f54e9c29b35bd",
+   "gzip_sha256": "6d6ead4284bc963359104ba4e0677480da34017f4e0fac9314efcd16eb1f1311",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_024",
+   "url": "https://static.www.nfl.com/image/upload/v1789989331/gamecenter/a9e0d930-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340678,
+   "sha256": "9fb40b26909d66213731b757da8b8fd393a8c34b8f1fc5e8702d6182c61d11fc",
+   "gzip_sha256": "be0b6d7e305f87b2047d057b5a963946c9198af997f60c0d882549e1d32d1cef",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_025",
+   "url": "https://static.www.nfl.com/image/upload/v1789989331/gamecenter/a9e0dff8-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334785,
+   "sha256": "37cc96859450fe1a00ff513eb6253fe652d407dc3238a7bc72f47662c1f2cd5f",
+   "gzip_sha256": "732593cd0f70620a30fe9b71add8ce8c45ed2d64a0070e79a0a98b6b4223ee79",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_026",
+   "url": "https://static.www.nfl.com/image/upload/v1789989332/gamecenter/a9e0e3dd-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339718,
+   "sha256": "ae4eb6c1080ac223ff7ffbc0b2e68aa37193d1067acc81658b4a73369c03886b",
+   "gzip_sha256": "d96e8f40d18422b670a9c3fd10ab7e35653655a92954a3736a238f19a2742f28",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_027",
+   "url": "https://static.www.nfl.com/image/upload/v1789989332/gamecenter/a9e0e78e-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331945,
+   "sha256": "ad2dc6dbce0819c8db6887719727a6af587ee5230a5b92c9d84eea08e5c6db88",
+   "gzip_sha256": "182b3e117ae8de31d3aebec939ed9c32a46fe06a625fb1982ca9580964a26bf3",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_028",
+   "url": "https://static.www.nfl.com/image/upload/v1789989332/gamecenter/a9e0ef5d-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333680,
+   "sha256": "c5a71faff274bb72f982ad48738fd6ae6c881f8d0e3a0bc477debe17da1b4fd8",
+   "gzip_sha256": "fea798e20081f26d4d9f3bfbf90a3d2fafeff48967b0a3aca5c48e451a82bc59",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_029",
+   "url": "https://static.www.nfl.com/image/upload/v1789989333/gamecenter/a9e0eb90-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338002,
+   "sha256": "b37574de99bfc71dbbd9af0ba441fabaa73809c1968b84eaad5337567d07812e",
+   "gzip_sha256": "5456cd02a19842f42f406e31d7f84f80ecc732e11c93c6ed26f2df3f9340f544",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_030",
+   "url": "https://static.www.nfl.com/image/upload/v1789989333/gamecenter/aa048ee1-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 360475,
+   "sha256": "dde28094fcb4837cdfa9b058e566ce50f0daca43c74ff623c15a3dca4980113e",
+   "gzip_sha256": "f3e070c5d37d979b09ea82ce79e811e7f2b53322eb9f193fe216edbebadf13c1",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_031",
+   "url": "https://static.www.nfl.com/image/upload/v1790075729/gamecenter/aa04989c-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 332060,
+   "sha256": "5362d44465015d7baaccfd8edebe3ee7ce6616bb1840212fca80f881190ae934",
+   "gzip_sha256": "3845466ea7b9e2f97f42547a404fc1b481efce301783a1b64d4be1bd665e442c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_032",
+   "url": "https://static.www.nfl.com/image/upload/v1790334930/gamecenter/aa049c95-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334136,
+   "sha256": "fd1aa3b7038ae3a09daaab7fe876e9c642dbc751535d77765c10a119470f8448",
+   "gzip_sha256": "6cba13273e7794653dcf3b226088bdef7dc958996a60532c9b7069de2acec9ca",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_033",
+   "url": "https://static.www.nfl.com/image/upload/v1790594131/gamecenter/aa04a6ca-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333027,
+   "sha256": "13824f1031ded394c5e4f66013b0837bf245cd9571ab939d00284d216b1846e3",
+   "gzip_sha256": "4976ae10e7d68e0adf320fed20d9ba879afef48ebaead210fd19982b0b1f361f",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_034",
+   "url": "https://static.www.nfl.com/image/upload/v1790594131/gamecenter/aa04aa26-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335145,
+   "sha256": "3df7cd77fca0f4acc6a1e4b7655039bba89958fad6243a5fa1315a4685c82fbe",
+   "gzip_sha256": "91c021a59d906e0400c7a1b1ec5f1e453e57bef33c355f665a361f56d6f3c2c0",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_035",
+   "url": "https://static.www.nfl.com/image/upload/v1790594131/gamecenter/aa04ad75-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336233,
+   "sha256": "08d963f2d509e0aebf6f3a81fd849613211be600a5d915f3e63531a23a725fbc",
+   "gzip_sha256": "c43e2c980febf5fe34b4a9c1845f703c349e399a2da755f97a5f9a7329ea8d2f",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_036",
+   "url": "https://static.www.nfl.com/image/upload/v1790594133/gamecenter/aa04a395-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339896,
+   "sha256": "471e4bc1553961f65a7a29e1488c8cc2ab49911cc9090e5dded11ad7105f9cc1",
+   "gzip_sha256": "375c4090b501d1b6d5447bc14285c7aed8e402b1bae1a8c3660dbdb0dc19e628",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_037",
+   "url": "https://static.www.nfl.com/image/upload/v1790594133/gamecenter/aa04b0d8-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334171,
+   "sha256": "8c5d560ec7b36b2a38df0a97e2f5293e26807658230d63cf40cd81be564558a8",
+   "gzip_sha256": "32367b0678074d15406885f0640def20ca83021b5bfd6721cc2ec862852842db",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_038",
+   "url": "https://static.www.nfl.com/image/upload/v1790594133/gamecenter/aa29b6b0-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335740,
+   "sha256": "3dbf22741b1de6bed1523f6b2c024190ede5c260494ee317d85e1dc1f879632a",
+   "gzip_sha256": "217f16756a8c552c13ec03e8b85bf5a3bed0a5e639089df80b4f0be34724bbd3",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_039",
+   "url": "https://static.www.nfl.com/image/upload/v1790594134/gamecenter/aa04b4d9-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331847,
+   "sha256": "b6e54e844c9c3864a2d05e2d88a9f770f09179c19cbfd04ba87574f8b9615e13",
+   "gzip_sha256": "b564db49fc971b3a526f6572effb38b5cb46fda5087bddeea49eacfb4624087e",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_040",
+   "url": "https://static.www.nfl.com/image/upload/v1790594134/gamecenter/aa29c929-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340582,
+   "sha256": "3879f1524b07678c64ed9667e791dc5eea1dd7fa7b4ef542bcfc9addd5aaa03b",
+   "gzip_sha256": "fdf3f6acc5cdd2bee618c8c2c6290e0e86ed2ef545510fcd6cb31fa1488eb923",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_041",
+   "url": "https://static.www.nfl.com/image/upload/v1790594135/gamecenter/aa04a02f-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336621,
+   "sha256": "2248f94d1c59cf57a6e100ee0c74ec779ccb205ea72b6151c8c2d5ddd1b0fde7",
+   "gzip_sha256": "c781eb62c1ea5168480ccc99a83eace09cd99279f4556946a8cd341ca03edf31",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_042",
+   "url": "https://static.www.nfl.com/image/upload/v1790594135/gamecenter/aa29d062-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 342339,
+   "sha256": "33941176e611fee94ffdfea808b2593a29a4730a53b6aa16cd895dbf4b8446cd",
+   "gzip_sha256": "dede9f8ab8efbfb0a4f860862bcd21c153469723b42531a26d884e8d4d805b73",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_043",
+   "url": "https://static.www.nfl.com/image/upload/v1790594137/gamecenter/aa29c0fa-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 343781,
+   "sha256": "b09d5a377d099f0f817155e0a9de8e19a0f23cce28a4ad02a8e485a843e2db37",
+   "gzip_sha256": "b01e01f9d33d1129d86ecef6b3f95b65ea792b1d0bcf36c2ad3e50f60880d535",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_044",
+   "url": "https://static.www.nfl.com/image/upload/v1790594138/gamecenter/aa29c59c-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340704,
+   "sha256": "4f40d88e1e9a11f0f129860ee8deaeeea906a56a33a0c8749476307d7319495d",
+   "gzip_sha256": "bff03d29072ae02fe26612502bd6b74970d052dd50546c0244f3a40cd73935fa",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_045",
+   "url": "https://static.www.nfl.com/image/upload/v1790594140/gamecenter/aa29cd02-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340333,
+   "sha256": "f30d73e336df0b50929c9215b57f98b339abe3a980d84d505690d2c3344f0d68",
+   "gzip_sha256": "760e545ee3c2071a63b3d52c430dec0de8cc525e6da18275ae3907f3887a1e1b",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_046",
+   "url": "https://static.www.nfl.com/image/upload/v1790594141/gamecenter/aa29d387-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 343494,
+   "sha256": "c12fbc4f29be8c2528af2437617784907135a3dee8765a4b9c3e4b8c4f140b93",
+   "gzip_sha256": "72a434348a44c4b0b57f326f813587fea8d307f80441122df049505bf61e3c45",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_047",
+   "url": "https://static.www.nfl.com/image/upload/v1790680532/gamecenter/aa29d6db-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331486,
+   "sha256": "1e357e2076e37af9c1481f5cf2ce820601c1749df83a940e8598e692e926f972",
+   "gzip_sha256": "480e615e33a3f1d31173c5369e63a2c6a266728057b4ad3a38e929140f618660",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_048",
+   "url": "https://static.www.nfl.com/image/upload/v1790939733/gamecenter/aa29da01-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 342277,
+   "sha256": "c96c2f1dfb74d7e111a5d2b9c41097bd6fd0a618cbc11b8c0775fc0ef970f8b4",
+   "gzip_sha256": "3935dffc234ff25152cea5126a8fc77dee46d549fc2e592d089bd9bb7a389f3e",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_049",
+   "url": "https://static.www.nfl.com/image/upload/v1791201115/gamecenter/aa29dd21-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338354,
+   "sha256": "b76b27570f5ec87137812d3bc6bd2b9816cbf89c4019d2fbdafdb32cd40e52e8",
+   "gzip_sha256": "ed23338f8038ac43851c08c3d053ade27304ff87383e75adb954a6dc67fad6e7",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_050",
+   "url": "https://static.www.nfl.com/image/upload/v1791201115/gamecenter/aa4b55ce-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334738,
+   "sha256": "272dc1628b2462c4a8f0310938de73624778776b7690d68551eb811b39631ebc",
+   "gzip_sha256": "c403c5194a1370cd8f2b257fd7ceeb032fdee445bced6cf16a4c8b1d8c34929c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_051",
+   "url": "https://static.www.nfl.com/image/upload/v1791201115/gamecenter/aa4b6a4b-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331168,
+   "sha256": "204b05494cbe9766e4159ddce4ddfb42d4e0e89abfeac8f75ccdb1fd2aec2a2a",
+   "gzip_sha256": "3fcfdf626dc38cae03ea93c5363c2cc71ce39c261317c3ca3dae2b8c66952337",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_052",
+   "url": "https://static.www.nfl.com/image/upload/v1791201117/gamecenter/aa4b4811-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339463,
+   "sha256": "e9dc41547d7e803215719e9368dff1778de206b3df2641ec23567b320a5afb4a",
+   "gzip_sha256": "cc10dff2195380cf8a3c8908441107ef94a95b4f51ceb93cee53f6af268207b2",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_053",
+   "url": "https://static.www.nfl.com/image/upload/v1791201117/gamecenter/aa6b4cf4-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335762,
+   "sha256": "7e69946358337d3254131adecb8999aa2800058d3b899289720423dd247da621",
+   "gzip_sha256": "0ef2b1907236b86d1dda3093a972fbeb4f83c048f20f2fe1446efc42165accb5",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_054",
+   "url": "https://static.www.nfl.com/image/upload/v1791201118/gamecenter/aa4b51c9-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338103,
+   "sha256": "f61daac694f3c8592e569b7febc07f4736c7fd188ba375455fbf720fed40532e",
+   "gzip_sha256": "09af5df829f20a040a048f7ec022a09b4d79e95289421dc271fdf74f2eaa95b7",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_055",
+   "url": "https://static.www.nfl.com/image/upload/v1791201118/gamecenter/aa4b607b-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 342639,
+   "sha256": "9275947d2c6bd6a8093b62d585a1b730dc3242605dc2a18463a714c02ef14654",
+   "gzip_sha256": "9e4facf57b01345d300976e0a74476a92972ff69173bac81cefcb1e37d1a47bf",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_056",
+   "url": "https://static.www.nfl.com/image/upload/v1791201120/gamecenter/aa4b5c96-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339119,
+   "sha256": "c4ad95a1a247945e5b9c1b52c5584cb8a8fdaeda3ff2956bb457d75341756ccc",
+   "gzip_sha256": "e8cbd074fcb841e27be6cec155354a9b4fc44da4232c799d4f11f4e2c210796a",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_057",
+   "url": "https://static.www.nfl.com/image/upload/v1791201121/gamecenter/aa4b5943-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336213,
+   "sha256": "37430cbcd5f578d62ee88ca25c00092f0093ea4d2f695f52afcdbdd876a67e32",
+   "gzip_sha256": "3cae2bbd9e02da425c0546bc1c144b371ec3d1086559769fbf6cde1a2f5567a8",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_058",
+   "url": "https://static.www.nfl.com/image/upload/v1791201122/gamecenter/aa4b63de-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335737,
+   "sha256": "7d359e538152f4e345f81cd1024d09710d83b80679b6ca18bc7761f4e6d0d9dc",
+   "gzip_sha256": "7f57694ca6ba1899ed5a85bff222082364afd257e9cf830be2724cc7968a12c3",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_059",
+   "url": "https://static.www.nfl.com/image/upload/v1791201124/gamecenter/aa6b4255-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 343997,
+   "sha256": "f399b50bc930d3e6e8f0c52067068945f805b687899b0ff42e2976b130e96123",
+   "gzip_sha256": "b9bf6ef8353a0c81f1b3896691d882d49e30b06b71ede0d581c02b9fb60674e8",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_060",
+   "url": "https://static.www.nfl.com/image/upload/v1791201126/gamecenter/aa4b6d71-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 341567,
+   "sha256": "92561b2e5597c231e3e4acd2c2c8a53d67cd4cef53ffda295892de56296a8321",
+   "gzip_sha256": "e61a4e49cab4b24c3c1c628d32c005639c506272215ed403065ca7e00a5a2223",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_061",
+   "url": "https://static.www.nfl.com/image/upload/v1791201127/gamecenter/aa6b512d-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 341388,
+   "sha256": "a74a0cebf8ca0b214925c78fe0fd939600c71280b0709187382745c5fb343765",
+   "gzip_sha256": "afba600ccb70d1ff9cfcd0470f4d087effd4f1da361bde40ad197184be67342f",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_062",
+   "url": "https://static.www.nfl.com/image/upload/v1791229916/gamecenter/aa4b671b-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335393,
+   "sha256": "f08a6b3758016ad99dd1c00f5715ecc80d426aab580301217c23b32863a64183",
+   "gzip_sha256": "d0d7e319a100c2f27478db07dd162b0e6f23b2d3f827359a4897aad320e55fb2",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_063",
+   "url": "https://static.www.nfl.com/image/upload/v1791287516/gamecenter/aa6b5517-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337155,
+   "sha256": "50be4ad2dbf0bdc59ac167fcac55b160e45f6fa530fc712bf5bd584390ffbc3a",
+   "gzip_sha256": "2613859e5fbaedd5cc35f59bd34691cdacdd8ff0dfc01b4bcb5444a9cc1c7f7b",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_064",
+   "url": "https://static.www.nfl.com/image/upload/v1791546717/gamecenter/aa6b58bf-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336365,
+   "sha256": "38916e7baf1fda450931724bf5d54d82360438f7e827a8d734a32f37360f8f8b",
+   "gzip_sha256": "cf4c23b353bacf32dc25c36d42c2fa42d9d01de7d130553f613f3cd9aef5561c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_065",
+   "url": "https://static.www.nfl.com/image/upload/v1791805919/gamecenter/aa6b5c2b-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336727,
+   "sha256": "16cd6d1b6453173c6edb68a96ee7ef2793a25682f7600e59685a0443392ff605",
+   "gzip_sha256": "b66ae67bf7afd8d33a68a967f10998fa6a601e546301d99b870aa382f968cac3",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_066",
+   "url": "https://static.www.nfl.com/image/upload/v1791805919/gamecenter/aa6b6286-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 342871,
+   "sha256": "cdb5f0ef30a38b0017e6ee9ab3d2f3b9acb1ce1c9e5388aacfa216d43e59e551",
+   "gzip_sha256": "d25e91fc9c464320e2f27ebb2d923cbc6d08a5ab4de19075392684fee80cd3d0",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_067",
+   "url": "https://static.www.nfl.com/image/upload/v1791805919/gamecenter/aa6b65b1-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333094,
+   "sha256": "aea52e4eae6e4304940a37b77edc2a9a1a9b746fe27864800f839b3e2f68d0a6",
+   "gzip_sha256": "475fcec4b295397639e160369d93164513e4ec1686ef929f4ed541f7b4d318a4",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_068",
+   "url": "https://static.www.nfl.com/image/upload/v1791805920/gamecenter/aa6b69bb-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339605,
+   "sha256": "d7d4cb7d0d6221defc9a9022258f2f0d37a21089462074549dd22ba23735dd7a",
+   "gzip_sha256": "2dfd54c3b7114bfd1b288cd81d45b56cbf9a9c10795ed5a37108d613ba107f9a",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_069",
+   "url": "https://static.www.nfl.com/image/upload/v1791805920/gamecenter/aa94ac06-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336103,
+   "sha256": "af861d919e588539c69e2b9dd4847fa7d77159ee85c04e17696d4464c84a66d6",
+   "gzip_sha256": "42748901c769c33952951bce8c09cbd33dec12db09767ad4d1c62d909ade8d34",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_070",
+   "url": "https://static.www.nfl.com/image/upload/v1791805920/gamecenter/aa94b527-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334444,
+   "sha256": "4fac5fbf8482b62fb816e2e5e7098807182485b9adb492364bc07e035391628f",
+   "gzip_sha256": "ed86c92332009e8a60817fd9d138013254a63765bc1b66651123779a7c138c23",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_071",
+   "url": "https://static.www.nfl.com/image/upload/v1791805921/gamecenter/aa94b906-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 362516,
+   "sha256": "7af620491c84cce23d2ed3cfa482b6d4ff3ff9b4f323a2bacdf3a3cf7c6c0982",
+   "gzip_sha256": "a27f04351e81671f6e3caf5d790c5b40284408f459cff75ba21f8cde7d186da4",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_072",
+   "url": "https://static.www.nfl.com/image/upload/v1791805921/gamecenter/aa94bfce-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 342208,
+   "sha256": "d19a9e6c30627272aedb9b318dfd3d7356fe0ba03d988952c4bec8367399606a",
+   "gzip_sha256": "8a19f1067624fbd000488453f88b510526e325e981d425ad796aa6eaf15499c9",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_073",
+   "url": "https://static.www.nfl.com/image/upload/v1791805922/gamecenter/aa94c2ef-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334261,
+   "sha256": "1823224a538845bf077636ea9c3ee61cc5a6d18fa0d8631a3e11f65ee8bce54f",
+   "gzip_sha256": "a91281945290a06fff69b2a3af3085594670e7f5445c7b0ba6b008a6ccca4e4b",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_074",
+   "url": "https://static.www.nfl.com/image/upload/v1791805922/gamecenter/aa94c647-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339967,
+   "sha256": "2ceeb63f1b0e03989b2e2e378d48821389f7fdab65c3981fdff8dad5ed696db3",
+   "gzip_sha256": "4bd250dceef3d6b9a0a2c0777452d12d060fb8e27b028459767376bf9ee3f11e",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_075",
+   "url": "https://static.www.nfl.com/image/upload/v1791805923/gamecenter/aa6b5f66-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337789,
+   "sha256": "3042c1a58916231d30b451dfcda9edddd16561f3519b7f934e9a677abcf85296",
+   "gzip_sha256": "cf64bfa19d7355393e1af416eb2cdf51f7d71bc3cad9b08b52b119df20627fb4",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_076",
+   "url": "https://static.www.nfl.com/image/upload/v1791805924/gamecenter/aa94bc51-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340005,
+   "sha256": "02f77aad0a599172544827e64031cfa2de5d400c4337d9b5c6f3cf2ee090062b",
+   "gzip_sha256": "b719da0408dd2963c579e7876fcbe66ba58162c0d1afa2bb4b782bfcefb34901",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_077",
+   "url": "https://static.www.nfl.com/image/upload/v1791805924/gamecenter/aa94c94d-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 361235,
+   "sha256": "de2f5f881a71f977e0cc69906b33f2ecbcd2734e0616027e181955f75b2e9f1f",
+   "gzip_sha256": "13f76e257c5299794cb5728842882d0ef3293ff83eda811ed9a81d7a1f99a37d",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_078",
+   "url": "https://static.www.nfl.com/image/upload/v1791892319/gamecenter/aa94ccd3-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 359802,
+   "sha256": "ad3c6b4714de2cdd69b26bf50eab38d8b365ee1aea53b40bf2bf2cd4188f3c96",
+   "gzip_sha256": "d37a31663c7246571128e85523aa125d9eb8b33fbbe08605cbe05a8eda8f258a",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_079",
+   "url": "https://static.www.nfl.com/image/upload/v1792150722/gamecenter/aa94cffe-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 357041,
+   "sha256": "545ce33cf128e6e3ebb24745ef3ea32d0f988e7e2546f170de41297a0e3da44a",
+   "gzip_sha256": "4ce344d6b48ad575876df429a0179c8c5d6186ebcac0cea2b6fe7f875840c5a1",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_080",
+   "url": "https://static.www.nfl.com/image/upload/v1792409923/gamecenter/aab56e82-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340434,
+   "sha256": "bc0b2d0bef7f021e19640168ced40267c934be524d86660e8d9a567bb32ec0ac",
+   "gzip_sha256": "c66053921efd3423ad125f36d4776cb39594928e87f1aadac5d558d18e6db2b1",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_081",
+   "url": "https://static.www.nfl.com/image/upload/v1792409923/gamecenter/aab57bb8-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334376,
+   "sha256": "640db7fb1b77a0b65e26838af0d2109e8f9df1343429efc05bf1596e9cf51621",
+   "gzip_sha256": "1a6c73ca643da8d79e48181e41a16c6a4cdebfa564143d8f2201567892e915bd",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_082",
+   "url": "https://static.www.nfl.com/image/upload/v1792409923/gamecenter/aab588fe-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338602,
+   "sha256": "24d779905a8ffb0cf8823dc1ed1a6766484eefb9af690fd11d4270ca3aeffd4a",
+   "gzip_sha256": "60a83d27c750a7267aa0f1cc95034f9ef3e9561b06bf99cf00b6ba8495bf23ce",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_083",
+   "url": "https://static.www.nfl.com/image/upload/v1792409924/gamecenter/aab57f15-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337410,
+   "sha256": "03d3e5c663c0c601e47d6ba14249562c2346c4852d2518320ccfa8c5a0653cbf",
+   "gzip_sha256": "025421729923153f3240bf17a3dc587e2cf18ff93bb8360b5f206a5ff4c43ef5",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_084",
+   "url": "https://static.www.nfl.com/image/upload/v1792409924/gamecenter/aab5857e-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 345929,
+   "sha256": "1745831c6e08d66f1cc9502be48aa9052ba6cf16704523ae717c95a6311e1ad2",
+   "gzip_sha256": "b09e52b9d661e6768821dbefe9e31cc6d4b94bed7b929ad623ebf64cc164a75a",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_085",
+   "url": "https://static.www.nfl.com/image/upload/v1792409925/gamecenter/aad57852-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337632,
+   "sha256": "0b286c674338381048f1c8b04493803a88ee5b36374d35f5c545a8264ec0476f",
+   "gzip_sha256": "e5ada1252c9e0901a6c7190bba3f9b12c519c12feed7632f08de5b3676336192",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_086",
+   "url": "https://static.www.nfl.com/image/upload/v1792409926/gamecenter/aab58261-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335571,
+   "sha256": "bc27ac71f4ccf20abd10ee1491c2aef466ddf8b8f50e61a202ff13370f8b3d0e",
+   "gzip_sha256": "a5412acdfcce8d8ef309966f7379b5d68fe98286453a2b77e40ee27bfc5cf719",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_087",
+   "url": "https://static.www.nfl.com/image/upload/v1792409926/gamecenter/aab58c4b-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 362580,
+   "sha256": "d12c5826c53a7cc66b3fd4b0848da6d3d486434c5e06fcdadd77dd6ef1211725",
+   "gzip_sha256": "bbef29e589c4f8ec6ee0cfa61a513026a185e1d1b39cb1fa4d93bec9fd6508c9",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_088",
+   "url": "https://static.www.nfl.com/image/upload/v1792409927/gamecenter/aab577eb-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339362,
+   "sha256": "321bd0ac177cba708c8dffb682030bca8ef0a2311de1fdc74e2fcf038564efc8",
+   "gzip_sha256": "c98a07de1554e8724cdc6de75aa5b49786e346ee144e11fd54595fda1b6bd88a",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_089",
+   "url": "https://static.www.nfl.com/image/upload/v1792409927/gamecenter/aab58f7e-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336468,
+   "sha256": "afd2e4e76b89c5eefa24687d583cec6846e5968aaa8ebd35e09ff1ea94c490a4",
+   "gzip_sha256": "2900759b5b1cf156a1a009310f1e5e90c01791cce515623c0b0f5e7c2e3ac78c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_090",
+   "url": "https://static.www.nfl.com/image/upload/v1792409928/gamecenter/aab59281-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337920,
+   "sha256": "95dc778dad28c6fa725e1db3937667657fd0da53ddf6f6439fd464481c124d10",
+   "gzip_sha256": "27c3786d9b789fa85377c0a95a4c914587413a53a6ee243634d244a456c7836d",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_091",
+   "url": "https://static.www.nfl.com/image/upload/v1792427924/gamecenter/aad58264-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338075,
+   "sha256": "03c7e7470fc2a43946d0829aa50b940227e770547fe8c2d96686bc09e8e2093e",
+   "gzip_sha256": "c213d224ae2fad47ba21ddbf0fd887eb8fb6e803ef7dc2fe5e833aa36c53fd04",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_092",
+   "url": "https://static.www.nfl.com/image/upload/v1792496324/gamecenter/aad58635-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334445,
+   "sha256": "8a201b8d27b8c9555bc077523a59cdada843e25f6c9d30a33b2eb46aaee8c5e5",
+   "gzip_sha256": "efe2baaee0d01bd7515dee144d80539dd1fb4eb7b41b4e693a2797c543a4e231",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_093",
+   "url": "https://static.www.nfl.com/image/upload/v1792755525/gamecenter/aad58a18-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333344,
+   "sha256": "bf3f5691279cfebd4a0b295804bdbac3a3bbd96f23c07f04983805eadf034343",
+   "gzip_sha256": "7dfddeac44fb8f78de03930ea3d8cf9081fa5a4081be1b761843b2e791b2616a",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_094",
+   "url": "https://static.www.nfl.com/image/upload/v1793014726/gamecenter/aad58d7d-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 327740,
+   "sha256": "6697c8bddc0a6f08e7be82156ee058219969037a3e844210f2617f7046f580d2",
+   "gzip_sha256": "bee06675cdbd0e076539793311ff9ac3aad69e7e63ae0dc1f96bfb98a1cd555c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:30+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_095",
+   "url": "https://static.www.nfl.com/image/upload/v1793014726/gamecenter/aaf6f621-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337939,
+   "sha256": "f099d427bdd50a043f7f7585c459870b12a2e94158b599eb486620115db0aeb8",
+   "gzip_sha256": "66bc7a2f98db29de242f2d1045a36b98ad874d34f963fa00e78d18bf35237165",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_096",
+   "url": "https://static.www.nfl.com/image/upload/v1793014727/gamecenter/aad59a67-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336747,
+   "sha256": "dc36b617548e07d3f8233a23baba614e23cc601aa4959f36747a37eb18e41665",
+   "gzip_sha256": "e7cea14a8feaa0574f1967cf6552642ee33805a3c8e93a5c5fe55a0eb85d3f33",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_097",
+   "url": "https://static.www.nfl.com/image/upload/v1793014728/gamecenter/aad594ee-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333149,
+   "sha256": "68504ce3a78169ca5569a51a5e22c55009738e8074bffd0d39dd231b908dad9f",
+   "gzip_sha256": "f4b26d341a0c202a2b700950a7a7ed4df5204d559435f434d9a8474605eb8684",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_098",
+   "url": "https://static.www.nfl.com/image/upload/v1793014728/gamecenter/aad5a2ac-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 328716,
+   "sha256": "473d16ff2b553f5f9cb82add6290de2bb00a6d59e48057701aa080bdb999a125",
+   "gzip_sha256": "5977e4fd8e006a9167ee06cb75fc5df7b2a31cfef3742367f0efe13817771cbf",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_099",
+   "url": "https://static.www.nfl.com/image/upload/v1793014728/gamecenter/aaf7040e-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331619,
+   "sha256": "06a69b4b9cfebf11b59d7d72b74c780f0b245c09cd73afe1e0c1c5846665bbd7",
+   "gzip_sha256": "de661b95252b8d55ba0437ff73ba89759be7989c50199c4974f78736c2f4fbfc",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_100",
+   "url": "https://static.www.nfl.com/image/upload/v1793014729/gamecenter/aaf6ec9e-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 330101,
+   "sha256": "0174a4ec1ef09298cc51bec96f9fc025ba8457c4ca16981de872c6afafc9637a",
+   "gzip_sha256": "0ba74f36c741063b147e60c05e46bb9af47234d56bc3f9fb4f44707f4a834511",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_101",
+   "url": "https://static.www.nfl.com/image/upload/v1793014729/gamecenter/aaf6fa3b-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338384,
+   "sha256": "555f391bb3dd8c8a216853b77132b50b6191b37c588ac9ef138abc1c9e9a6849",
+   "gzip_sha256": "cfdff809ddbc5a131290a6abbfe2ef3f50ec1513de6192b93acbaa89636c3906",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_102",
+   "url": "https://static.www.nfl.com/image/upload/v1793014730/gamecenter/aad59092-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339451,
+   "sha256": "38a45c3f50778fe4d4d87d1c6aea54917f6d14ab53d62f32b383433732141842",
+   "gzip_sha256": "a88b5f50ce6c6a22b3fe08092d402d50c7a4969d75b27ed3f5678315ee1ab615",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_103",
+   "url": "https://static.www.nfl.com/image/upload/v1793014732/gamecenter/aad59e95-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 355531,
+   "sha256": "06d691416a2dbc522e60e5b91f27b6185b6405b0b25349b7e144ff6a7232b07e",
+   "gzip_sha256": "e967580568b48b7794db30476f3ce35a0ebabdb71b675e8b4430aa5252063ccc",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_104",
+   "url": "https://static.www.nfl.com/image/upload/v1793014734/gamecenter/aaf6fda2-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335217,
+   "sha256": "718d6d810d4ea91521114c60bd5de9589a053f5e7d5e24e774699ab0ba715710",
+   "gzip_sha256": "d1c30fe7bac8a3545066a5dd1df39fc86ad5a0f0a6c0fb061b8983e996766ce7",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_105",
+   "url": "https://static.www.nfl.com/image/upload/v1793014735/gamecenter/aaf700e5-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338105,
+   "sha256": "57c22452a5c979a4bda74a51e545d2db1af49425fa7a9fb7821fc544c74946e5",
+   "gzip_sha256": "5158ce80e56e03587506e917449870469c3ac2396fdf14921925b950eba62941",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_106",
+   "url": "https://static.www.nfl.com/image/upload/v1793101127/gamecenter/aaf70733-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335665,
+   "sha256": "d4a4e263753566e381c033936b1d67d24c4e7a7c02ca52a35d83b92e2a42f319",
+   "gzip_sha256": "5ecc9453be80b5b8c5a74fd6bd661cacbe7290161998211b00bb8353907404cd",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_107",
+   "url": "https://static.www.nfl.com/image/upload/v1793361096/gamecenter/aaf70a66-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338391,
+   "sha256": "3762b8d8e2b213760f638002bb48a1804ec24f0fbcdea0231148f52979e69c53",
+   "gzip_sha256": "190a45acda46576434e3196d9035a0cf545da32317566984e309b540ca5bf568",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_108",
+   "url": "https://static.www.nfl.com/image/upload/v1793617586/gamecenter/ab1667cd-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 330070,
+   "sha256": "03edb7886a51921098937bcb109c659cb6e0e0c0b1075f0ed53625de79d4b9c1",
+   "gzip_sha256": "2df0f02d50c9180110ccc219e2e61664fd50cda6a96dd91b07428f109a1a4a58",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_109",
+   "url": "https://static.www.nfl.com/image/upload/v1793617586/gamecenter/ab166ac0-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331008,
+   "sha256": "03ef684298233ea90ed990de6921656ffc0725c0dfca23942828e9630de694fe",
+   "gzip_sha256": "2041e29b979eddb9a647327579fda880b75674092c92da60644bb07b84003e47",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_110",
+   "url": "https://static.www.nfl.com/image/upload/v1793617587/gamecenter/ab1661ac-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338043,
+   "sha256": "27486bcd8910a52937767dc543e3d821f97cdb5b8e9d53cf7ed25ffaffc7383f",
+   "gzip_sha256": "12b6d02d4cb0d8a2dc1a82a18d6475b1d2915bbcb5b9da2c11d79717f62977dc",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_111",
+   "url": "https://static.www.nfl.com/image/upload/v1793617588/gamecenter/aaf70dac-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 342367,
+   "sha256": "c2a81f68ae83b5e6604f7368a5608103a8f94599403635d18fcc0f4ea68b2fe4",
+   "gzip_sha256": "59389df23c62383862253af1b35cc7e968d55fcb8c63b8c9357828c8b13eae06",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_112",
+   "url": "https://static.www.nfl.com/image/upload/v1793617588/gamecenter/ab1664ca-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 341010,
+   "sha256": "37c67e73d17a0812bf5079966ecaa1053b4b3e70b0767a6f6a9493046c73b279",
+   "gzip_sha256": "200447d33ac4de5d2fa0d817df687fd6d988228e0bcd87d52391add8e28a8806",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_113",
+   "url": "https://static.www.nfl.com/image/upload/v1793617589/gamecenter/aaf71176-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 364820,
+   "sha256": "156c0df993303c26b57bf0e4ae8f3a2abff2944e4110e9c879229747df051f2b",
+   "gzip_sha256": "aeeee045cc5eeb0d23f22d91c8cdb54fd6620cde5e817d1024d8729530214442",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_114",
+   "url": "https://static.www.nfl.com/image/upload/v1793617590/gamecenter/ab165aa8-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335038,
+   "sha256": "dffdb6bdcbe252716789bb3e6c2da99b6e986b9b23f32ba41a8db0289586336b",
+   "gzip_sha256": "746ec877a9699c7f6236f39bdb82027b867e91a4ac36b15997d8dd24e825c4cf",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_115",
+   "url": "https://static.www.nfl.com/image/upload/v1793617590/gamecenter/ab1670ad-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336042,
+   "sha256": "4b261b95f4dbd04d506fc5d42c4252fe72c5d17409c0d718cab72a8bde504de6",
+   "gzip_sha256": "d09948a64a05bbc5eee3323b075e0c838448e435dd409d285158aa9390e81668",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_116",
+   "url": "https://static.www.nfl.com/image/upload/v1793617591/gamecenter/ab16512c-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 366889,
+   "sha256": "a601090f67b982c4b1e8e40d6201f9ec0092b969fed49d0072b2a4ce2e6c9c0c",
+   "gzip_sha256": "231b6e5ffd29a2a952d90d77dc9cc9691bd5d2086f3cd0f0f9fe99ccce23bd89",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_117",
+   "url": "https://static.www.nfl.com/image/upload/v1793617592/gamecenter/ab166dc7-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 342325,
+   "sha256": "17c2272e8cdfe2e741f5dab96243800dabec623770faec16cb8c443169f087e5",
+   "gzip_sha256": "2e3332b59fae8d3e8a361e7be8e02eb76fd5842a31df93dd497f418c1868ed5c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_118",
+   "url": "https://static.www.nfl.com/image/upload/v1793642786/gamecenter/ab165e6a-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339248,
+   "sha256": "1d198aec1906d9147d3d43ab71a06e40926fc3469c4e6590a5fb407d9eaa563b",
+   "gzip_sha256": "4daf8278214e5dda6cbf7000d4fd371e2ceb12325e0f21d12f725d653a6c906e",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_119",
+   "url": "https://static.www.nfl.com/image/upload/v1793642787/gamecenter/ab167386-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336764,
+   "sha256": "6468d49d6ded8ef751c4e4fde0094ced22c984cffd444f2ef9b5f44d610de199",
+   "gzip_sha256": "f5d60d3df6c5d0ebfdde9461e850fc890d61b515d6d82890e72e3cc4ceb648ac",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_120",
+   "url": "https://static.www.nfl.com/image/upload/v1793703986/gamecenter/ab37feaa-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 335615,
+   "sha256": "d0cfa9742e93c47189eee64262f6d77fc2b23f116497b90cf6be35fe0e50036c",
+   "gzip_sha256": "48e8a39071201693b4c3d1d51751d63673767b72555968be4cf0495f7f56227c",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_121",
+   "url": "https://static.www.nfl.com/image/upload/v1793965716/gamecenter/ab380826-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339412,
+   "sha256": "88f002bb2f72bdce2b0efd9ed9ab94b28fa21dad1fc3b9867071545162907c60",
+   "gzip_sha256": "21b47ef24f01d38880492b39950447485fc9a839b822a40514a219ae3b203e26",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_122",
+   "url": "https://static.www.nfl.com/image/upload/v1794224917/gamecenter/ab381a59-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 331805,
+   "sha256": "3f3f3a818f0891b87a4ca914a16d02ea2fae96f86906ec5829398565c48fb0aa",
+   "gzip_sha256": "821c9cc8f5a48d7828fe0ad080b3b43efc904a65e0b6a3a1ce7f2d341627770e",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_123",
+   "url": "https://static.www.nfl.com/image/upload/v1794224918/gamecenter/ab380bc7-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 333732,
+   "sha256": "7af51dc2f80215d9b79bf7d75f2d9ac0c2c50d6aa68103978e6dbf707ef5e142",
+   "gzip_sha256": "33fa1807161d892dab54abc96c15a96063afc0a1418e7ef59f8ffce709d7521b",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_124",
+   "url": "https://static.www.nfl.com/image/upload/v1794224919/gamecenter/ab381724-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339351,
+   "sha256": "1df30a17cd7d4253fecea982385c5ff5e05761f1dd926ca51414253fc1426dc8",
+   "gzip_sha256": "635186a14a57e6c2fbc95bebbacc0529e3957abb5952a3c4be4cec357d0f12cb",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_125",
+   "url": "https://static.www.nfl.com/image/upload/v1794224919/gamecenter/ab382331-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 336886,
+   "sha256": "0d7dc87b284d96a36ca49a3f89a8b4ed7538a74c05bb084b027edd34022b9009",
+   "gzip_sha256": "f5a971e78d973e3ccfece2fb49997443d9620a6b945f710413db17bd7c61f700",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_126",
+   "url": "https://static.www.nfl.com/image/upload/v1794224920/gamecenter/ab380efd-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 339806,
+   "sha256": "713f8b211cbafd7000b959644bce06e399c9d6927c754c95d026a4fa29334e57",
+   "gzip_sha256": "92aa3d2005a45ceefe4cf46dad7c6de396b7ce526f2d8eeeeb7cdc731e2873db",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_127",
+   "url": "https://static.www.nfl.com/image/upload/v1794224920/gamecenter/ab38203e-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 338961,
+   "sha256": "737f2f8da91e1fabe96d9e0a5b9afa87d8ca98f6c4ea6cba0c6016fe7dd7d7c0",
+   "gzip_sha256": "b1caf03ed58e4f8127d3a99113f6781e147ff6a33aed243d4d95dd8f6623af0e",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_128",
+   "url": "https://static.www.nfl.com/image/upload/v1794224921/gamecenter/ab38123a-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340484,
+   "sha256": "b170db43856ed5bd8cc9a428f9b3382842adb4bd27660e3660314c5deda6daa4",
+   "gzip_sha256": "67241d98b1edb30e9c970b0dea4bb55edaad5a5af12920cec729c857b2aeddfe",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_129",
+   "url": "https://static.www.nfl.com/image/upload/v1794224923/gamecenter/ab581766-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 334626,
+   "sha256": "0e1895910aefbeda55a1a93ea670e5adebccc040a16c86a25d90534186dbec42",
+   "gzip_sha256": "87465d7b903ff857bc901186bceaad468a189e929a83150ce19f43c7cf8c15b6",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_130",
+   "url": "https://static.www.nfl.com/image/upload/v1794224923/gamecenter/ab581b93-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340554,
+   "sha256": "bd057892de1778997c53a5a8ac0e5dc1fefe389ab8f1a982031fa0700256e655",
+   "gzip_sha256": "1a611e577518c03c693bd1f8d8c3487109cbf1007d61d8e820f9ed54e7cf4600",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_131",
+   "url": "https://static.www.nfl.com/image/upload/v1794224924/gamecenter/ab581f17-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 332860,
+   "sha256": "6cad3f8fb51222dab9169ff90731552855f332f49f42bbd7c8064a838686a048",
+   "gzip_sha256": "fcfc484205b9c88bde5b69890813568677e87372a7911b334c759baa9bc98254",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_132",
+   "url": "https://static.www.nfl.com/image/upload/v1794224924/gamecenter/ab582247-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 340993,
+   "sha256": "e3601a28db9fe2d84d7964ecbf452dbf0c06acc84db9de5938469c9505429aeb",
+   "gzip_sha256": "e8e9e93aceedec90bdaae920efdcd32005626acb3b768a3a79904d03b1f5fdea",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_133",
+   "url": "https://static.www.nfl.com/image/upload/v1794257318/gamecenter/ab381d58-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 364793,
+   "sha256": "868b36be59c73509bb280756956e97d47164b9fc4305ae1b70344a1a19167c73",
+   "gzip_sha256": "cd0828eba3fbcf7f9debb963f278927406423a5d900df7a3e87195a2f89c6c08",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_134",
+   "url": "https://static.www.nfl.com/image/upload/v1794257318/gamecenter/ab580cb7-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 345009,
+   "sha256": "a4f337554ea07b4e0f7c951fecb7114e6ee59ad1cae3c7dee338788956943791",
+   "gzip_sha256": "9e57b52fa418cc0cedfc1b63327dedc6ad79ea470d0973e50f0c1582e904d4b2",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_135",
+   "url": "https://static.www.nfl.com/image/upload/v1794311318/gamecenter/ab5825a7-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337597,
+   "sha256": "496d35ac3187d1bc596cf6a9b8adaefd0c1af184fb5b59fc2774f6e9d0629f5f",
+   "gzip_sha256": "fa6ff51498bd75d8665e9641bb4394b42495972f32b8fdc72c9ac448ae82bcc0",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_gamebook_136",
+   "url": "https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf",
+   "http_status": 200,
+   "bytes": 337942,
+   "sha256": "12c818cc26344849773621c74100defb2ad8e5cecfb343b8e28a9df44a8f0d3f",
+   "gzip_sha256": "7bd01b08784905d63b5a7f72f295237099459405ebee39bfe52be1f7c3b42d4f",
+   "content_type": "application/pdf",
+   "retrieved_utc": "2026-11-13T13:08:31+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg01",
+   "url": "https://www.nfl.com/injuries/league/2026/reg1",
+   "http_status": 200,
+   "bytes": 380075,
+   "sha256": "24778c813ed4c004741a1427bbe300c26484251b302b9656991a48b1961675fe",
+   "gzip_sha256": "454c8c5a059ab05bdb17c939ce0231e534fd890a72d50765bd9663e359f69707",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:07:54+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg02",
+   "url": "https://www.nfl.com/injuries/league/2026/reg2",
+   "http_status": 200,
+   "bytes": 396957,
+   "sha256": "c8283e02f656ae91260e7911f07955ee4f2b7441afa7ac238ba0c698167e4c07",
+   "gzip_sha256": "12bd6b080bd2bdfaba0707c9587cf45ffaa41cfa9c2050535e1f4908761e7a90",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:07:58+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg03",
+   "url": "https://www.nfl.com/injuries/league/2026/reg3",
+   "http_status": 200,
+   "bytes": 408653,
+   "sha256": "a2b0df3afbe29229fde8b8ded1411226242b96140acfd4e4e9eb6378f832afbd",
+   "gzip_sha256": "994aa4f6e7d5a8ab533860c8f1cf221f1db5396a7e71d8d8578bb3898eab1e7a",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:01+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg04",
+   "url": "https://www.nfl.com/injuries/league/2026/reg4",
+   "http_status": 200,
+   "bytes": 413232,
+   "sha256": "6237ab395d629bf575cf0d6a5487f1d372e43052430eecb99eae5edbe2b551c0",
+   "gzip_sha256": "f0a7077229a2124087f0722033669761d410545e291c5e234cf3d4d9124064fe",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:03+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg05",
+   "url": "https://www.nfl.com/injuries/league/2026/reg5",
+   "http_status": 200,
+   "bytes": 420168,
+   "sha256": "6067454074a4c71483d88d5d8aac65b1e1e860ec4a107390b0ca5e1235145075",
+   "gzip_sha256": "fb0a2465d207abd0cc30e4ba14cb9dd06cbdb321723a3979f254d2e504ae8e3b",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:07+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg06",
+   "url": "https://www.nfl.com/injuries/league/2026/reg6",
+   "http_status": 200,
+   "bytes": 420389,
+   "sha256": "5a49514b948ee764cc5a7b3a90c877b71f00689ecef0284c8c9583fb732132ba",
+   "gzip_sha256": "94b48446c3e801820b7d3815a59960a9055aea1808f98ab4bd171080c1de92f6",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:10+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg07",
+   "url": "https://www.nfl.com/injuries/league/2026/reg7",
+   "http_status": 200,
+   "bytes": 413698,
+   "sha256": "b706c6d8995a9db122cb7e22c0a190a13d124710282901efb1dc81ba24122545",
+   "gzip_sha256": "ef5cb9e41b3c4a9cc9ed1757e077d0321e321219749592dd0f73c0ef4017acef",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:13+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg08",
+   "url": "https://www.nfl.com/injuries/league/2026/reg8",
+   "http_status": 200,
+   "bytes": 406461,
+   "sha256": "e7194e743606f15d10f523a5aafe27e76527edea25fa47b9d8adcf8950e93a12",
+   "gzip_sha256": "66970885e0aed87151393a0f51b0d8de26756192b6e7056f7aba7d1b5bdc9161",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:13+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg09",
+   "url": "https://www.nfl.com/injuries/league/2026/reg9",
+   "http_status": 200,
+   "bytes": 419948,
+   "sha256": "10ca4a37e2f5abb2a8c182bf42819d12accf7c951133dea040eca433c69e5a56",
+   "gzip_sha256": "0e0a221c1b89dfb630900aa09e508c0789b8d2707efad01010562ea02adf9c90",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:15+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg10",
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "http_status": 200,
+   "bytes": 398850,
+   "sha256": "b3f5a56bf06485a076ec27fd7403fb1ff28688fc017103cc91b2f0f5d780fca7",
+   "gzip_sha256": "ae649906842f96834f5cdd3081b70351c51c2e1d6406f5c0bdce715fc6dfa494",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:15+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg11",
+   "url": "https://www.nfl.com/injuries/league/2026/reg11",
+   "http_status": 200,
+   "bytes": 398850,
+   "sha256": "b3f5a56bf06485a076ec27fd7403fb1ff28688fc017103cc91b2f0f5d780fca7",
+   "gzip_sha256": "ae649906842f96834f5cdd3081b70351c51c2e1d6406f5c0bdce715fc6dfa494",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:15+00:00"
+  },
+  {
+   "key": "nfl_lab_injuries_reg12",
+   "url": "https://www.nfl.com/injuries/league/2026/reg12",
+   "http_status": 200,
+   "bytes": 398850,
+   "sha256": "b3f5a56bf06485a076ec27fd7403fb1ff28688fc017103cc91b2f0f5d780fca7",
+   "gzip_sha256": "89a6c8ec49f9e2d3c09d4798399d79225dcda8ae41e6e5b34e1f6f14b6b96e46",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:16+00:00"
+  },
+  {
+   "key": "nfl_lab_teams",
+   "url": "https://www.nfl.com/teams/",
+   "http_status": 200,
+   "bytes": 290378,
+   "sha256": "f7b9f47aff36dd100c7dab7462b1c3540bf68f46115b0272b075e190776a31ef",
+   "gzip_sha256": "137c9b2788071783256284f03eeed5b5fc58a08851fb6bf70b4b0c08668cf8da",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_lab_week_01",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "http_status": 200,
+   "bytes": 2290532,
+   "sha256": "8f14772e63fd0d16dd25c955e3cda6c09f22352a1085ac17097b2704c2006bf7",
+   "gzip_sha256": "f22383657472fbcc35dd6356b49b8bcaea07946fa614bb9443bfb843fd709db5",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:48+00:00"
+  },
+  {
+   "key": "nfl_lab_week_02",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-2",
+   "http_status": 200,
+   "bytes": 2285925,
+   "sha256": "f7a38ec7f249668949228a756e388a63e6d9953a7505d20d275e75aa27b98673",
+   "gzip_sha256": "14eb510e82747239fb5a13bdc44ae31e6e4cc6e1916a334f0b32c6fc46fd7dee",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:48+00:00"
+  },
+  {
+   "key": "nfl_lab_week_03",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "http_status": 200,
+   "bytes": 2293459,
+   "sha256": "089d90b01f80aaac1384e3d11c3249042a754256af65d6d9d799db056d9f8fe2",
+   "gzip_sha256": "128f8242489a00da8f899554718ed37ebfab90a78eeebd851e708c2956a404f3",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:49+00:00"
+  },
+  {
+   "key": "nfl_lab_week_04",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "http_status": 200,
+   "bytes": 2293844,
+   "sha256": "2ad476918b1de54d80c066154bc953168e3761eba401e83faa377653f634b590",
+   "gzip_sha256": "93986a17586581f50d25e02141319e86402ae34b052b3a624d6b3b2e4cb5fbaa",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:49+00:00"
+  },
+  {
+   "key": "nfl_lab_week_05",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "http_status": 200,
+   "bytes": 2278942,
+   "sha256": "82e6395d74fa72c833e3ac0ac4cd6da9fcb5d354830c38150c7aaed88b0030ad",
+   "gzip_sha256": "86f77b5567d55a36369bc65502713ece700ba93afc9b619265e62dc1fcfa59f0",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:49+00:00"
+  },
+  {
+   "key": "nfl_lab_week_06",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "http_status": 200,
+   "bytes": 2263884,
+   "sha256": "a9b0ea5de908440d8a723d0c07612b848be28b5ac64bb39784d96a1cd96ca69a",
+   "gzip_sha256": "4414f8569d55519bf1ccbf6b47501d6b3aac8a46275cf081d49fae44bd5c2f04",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:49+00:00"
+  },
+  {
+   "key": "nfl_lab_week_07",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "http_status": 200,
+   "bytes": 2263930,
+   "sha256": "186cbfd28c0512e07214151979d9c76dda2ddbaebcca8a47685652f5d11595d2",
+   "gzip_sha256": "4ed3476aee33053b3dadf27a4d02e8a84380dd2be86e906ce94de78acf477af1",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:49+00:00"
+  },
+  {
+   "key": "nfl_lab_week_08",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "http_status": 200,
+   "bytes": 2259283,
+   "sha256": "d89f9a29f3c748281b8e918f72513ecedf986e488e4ae8540973b1b06b1a9b18",
+   "gzip_sha256": "b3a6f77eb187bcc20f8de92df042665f4f26e4bb52f77b8dcd88bfc393f66c41",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:50+00:00"
+  },
+  {
+   "key": "nfl_lab_week_09",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "http_status": 200,
+   "bytes": 2280184,
+   "sha256": "74659de170b226afc6338aa05cc10a2f4abd900b66f4d7cdf2de6914812c73f8",
+   "gzip_sha256": "824cdd47faa06891c2496f4f8565d7e6a1cc2f645eb69b171c76ac28f4425fe6",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:50+00:00"
+  },
+  {
+   "key": "nfl_lab_week_10",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "http_status": 200,
+   "bytes": 2312812,
+   "sha256": "f589a7b0e0218003161428c13a412f5abf8f038086baece2a7cd34022632b3be",
+   "gzip_sha256": "665bfa8a07fd250cc322aceb61be9ff3e11622d7699eec7f86da2d9303b2890e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:50+00:00"
+  },
+  {
+   "key": "nfl_lab_week_11",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "http_status": 200,
+   "bytes": 2295423,
+   "sha256": "47b3880d9f19290649ce940d24631701ad85ecc236c2067de46678750ddca86f",
+   "gzip_sha256": "683106e78a01eda08b73998f4740a255a9acbac089a971dab87ea30b6cdced8e",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:50+00:00"
+  },
+  {
+   "key": "nfl_lab_week_12",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-12",
+   "http_status": 200,
+   "bytes": 2350187,
+   "sha256": "c8a393a714515edd19995a55226fae0603337866001578195c8081a2d421bd74",
+   "gzip_sha256": "cc705526b209c7ca5e2b6c2bd1c672c9387c40c9438e6757d2a5099eae17072b",
+   "content_type": "text/html; charset=utf-8",
+   "retrieved_utc": "2026-11-13T13:07:50+00:00"
+  },
+  {
+   "key": "nfl_player_pass",
+   "url": "https://www.nfl.com/stats/player-stats/category/passing/2026/reg/all/passingyards/desc",
+   "http_status": 200,
+   "bytes": 268761,
+   "sha256": "18e0df63ab97a1ce9bc7c13c1ba46e1f368ccae50c2c0796d9d661f4aba23cca",
+   "gzip_sha256": "23be666f01df804d4fcfcb9b4aad2d3eea98dbbf481c1a8f4b4c775e6721afe5",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:20+00:00"
+  },
+  {
+   "key": "nfl_player_recv",
+   "url": "https://www.nfl.com/stats/player-stats/category/receiving/2026/reg/all/receivingreceptions/desc",
+   "http_status": 200,
+   "bytes": 267557,
+   "sha256": "62f5b387e257964d35dd8d53a11778b06aa4ba92039d7552315880294c6bfe9c",
+   "gzip_sha256": "77edd2704f3bc8201a580e26a6d5128216051fec4dd87fdd64a0a6de205f5e1d",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:21+00:00"
+  },
+  {
+   "key": "nfl_player_rush",
+   "url": "https://www.nfl.com/stats/player-stats/category/rushing/2026/reg/all/rushingyards/desc",
+   "http_status": 200,
+   "bytes": 266122,
+   "sha256": "8d64fa253aeda7437899b9a4a6908a7c64617eac9ca7406f6304d360b0886d8a",
+   "gzip_sha256": "5294c0181cbfb882e8203a450cdca3299474f584c1ce66e40232a3df107a403d",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:20+00:00"
+  },
+  {
+   "key": "nfl_team_def_pass",
+   "url": "https://www.nfl.com/stats/team-stats/defense/passing/2026/reg/all",
+   "http_status": 200,
+   "bytes": 245550,
+   "sha256": "146e533333ab9df5c465b2a76cfe12da88f5f7b39c83cc9a6f1508558207cad5",
+   "gzip_sha256": "8a0de605a723b63afd9f76108425df6182b24e381aa691371666b361f5ac1bc3",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:18+00:00"
+  },
+  {
+   "key": "nfl_team_def_rush",
+   "url": "https://www.nfl.com/stats/team-stats/defense/rushing/2026/reg/all",
+   "http_status": 200,
+   "bytes": 243826,
+   "sha256": "a6be534e2db3636a6561bb18053f548cbc6066c2515fbcfd8cc6e533ee4e8161",
+   "gzip_sha256": "5dce3ca61fd989701ad674e2426ee8f619cd3190c7a5eca8daa229dc296c8d42",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:18+00:00"
+  },
+  {
+   "key": "nfl_team_def_score",
+   "url": "https://www.nfl.com/stats/team-stats/defense/scoring/2026/reg/all",
+   "http_status": 200,
+   "bytes": 241017,
+   "sha256": "8bf62c86a11092484c6934c3b2b6130ba0f4fbb6921ab9a4cc41444ad49cc139",
+   "gzip_sha256": "5707a96908d2201017b3c7a217aa4bd2b48e4e434c90ad9afda28e872e779dab",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:19+00:00"
+  },
+  {
+   "key": "nfl_team_off_pass",
+   "url": "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all",
+   "http_status": 200,
+   "bytes": 245629,
+   "sha256": "8cba8d7ae53181e58dd0cb113cd5ef02c314df4a81fa65ebbd29a1acc9fd6b46",
+   "gzip_sha256": "f680bb6e5c72d69ead29ba407535ed5d34eb7769528a81fb1408563e01ca0389",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:16+00:00"
+  },
+  {
+   "key": "nfl_team_off_recv",
+   "url": "https://www.nfl.com/stats/team-stats/offense/receiving/2026/reg/all",
+   "http_status": 200,
+   "bytes": 243731,
+   "sha256": "8002868a63b8375d19924b60deee4b4538c2707b457c22b5347d794bd9101ded",
+   "gzip_sha256": "310525ed62542aad61aa0054fd6e35ef810039a6b674a3c514fd5798f7627632",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:17+00:00"
+  },
+  {
+   "key": "nfl_team_off_rush",
+   "url": "https://www.nfl.com/stats/team-stats/offense/rushing/2026/reg/all",
+   "http_status": 200,
+   "bytes": 243497,
+   "sha256": "9fbae3da6c6c609f5a4c8fa6847582b042eb018365b3d88866deb5e2fdacf46c",
+   "gzip_sha256": "fd4acbcc6a486be6ba85873309182974784e30fc16811cde3ae63229282600fb",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:17+00:00"
+  },
+  {
+   "key": "nfl_team_off_score",
+   "url": "https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all",
+   "http_status": 200,
+   "bytes": 241102,
+   "sha256": "abb2a49e7fef44e97bbcfd6c63059e76487a130c0bd283a1d494bfb5c1666c9a",
+   "gzip_sha256": "45da60f9a4556942c65e9db7ae5616d11d45bce8110e187a91623ad4693ffece",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:18+00:00"
+  },
+  {
+   "key": "nfl_team_st_score",
+   "url": "https://www.nfl.com/stats/team-stats/special-teams/scoring/2026/reg/all",
+   "http_status": 200,
+   "bytes": 242515,
+   "sha256": "50300d1ca86ad81b12969aaac23a49eb2fe0624883fc6bd2edafebb0cb53e9fa",
+   "gzip_sha256": "42465691dd1e6f8e2fa44d9bb9867c09eb97f48584780ec5f4615e20a930928f",
+   "content_type": "text/html",
+   "retrieved_utc": "2026-11-13T13:08:20+00:00"
+  }
+ ]
+}
