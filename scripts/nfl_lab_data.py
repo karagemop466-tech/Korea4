@@ -584,7 +584,7 @@ HEADLINE_METRICS = [
     {"label": "Open questions", "value": "22", "note": "7 answered from official sources"},
     {"label": "Suggestions published", "value": "12", "note": "2 already implemented in this section"},
     {"label": "Injury rows transcribed", "value": "27", "note": "nfl.com Week 10, source-linked"},
-    {"label": "49ers depth slots captured", "value": "28", "note": "official chart dated 11/10/26"},
+    {"label": "49ers depth slots captured", "value": "29", "note": "official chart dated 11/10/26: 11 offense, 12 defense, 6 special teams"},
     {"label": "Depth slots with no documented backup", "value": "9", "note": "flags FL-05"},
     {"label": "Repo findings", "value": "14", "note": "1 fixed, 3 pass, 10 open"},
 ]

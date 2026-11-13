@@ -12,7 +12,7 @@ Decision-support section for NFL line origination. Live pages: [NFL Lab — over
 - **Open questions**: 22 — 7 answered from official sources
 - **Suggestions published**: 12 — 2 already implemented in this section
 - **Injury rows transcribed**: 27 — nfl.com Week 10, source-linked
-- **49ers depth slots captured**: 28 — official chart dated 11/10/26
+- **49ers depth slots captured**: 29 — official chart dated 11/10/26: 11 offense, 12 defense, 6 special teams
 - **Depth slots with no documented backup**: 9 — flags FL-05
 - **Repo findings**: 14 — 1 fixed, 3 pass, 10 open
 
