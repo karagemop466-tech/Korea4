@@ -1,5 +1,13 @@
 # COORDINATION.md — unified shared task board
 
+## Current session — `arena/85a71078-korea4` (2026-11-13 UTC) — NEW WORKSTREAM: NFL line origination
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| H1 — NFL Line Origination & Signals decision-support subsystem: requirements register, decision-readiness question set, suggestions backlog (advisory only), strategy catalogue with validation gates, correlation model, leaderboard/competition design, injury + depth/backup-deficiency tracking from official sources, executive summary, published under `nfl-model/` | in progress | `arena/85a71078-korea4` | NEW files only: `nfl-model/**` (pages, data, css), `scripts/build_nfl_model.py`, `scripts/verify_nfl_model.py`, `scripts/fetch_nfl_model_sources.py`, `research/nfl-model/**`, `.github/workflows/nfl-model.yml`; plus `COORDINATION.md` (append) and ONE nav-link hunk in `index.html` | Does not touch `data/official/**`, `scripts/collect_official.py`, `scripts/build_site.py`, or any root category page except the single `index.html` nav insertion. No overlap with open PRs #43/#41/#25/#18 file lists (verified with `gh pr view --json files` 2026-11-13). |
+
+**Non-overlap note for other sessions:** this workstream only adds a self-contained `nfl-model/` tree; it does not regenerate `data/official/*` or any root page other than the `index.html` nav line. If `index.html` conflicts, keep both nav lists.
+
 ## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
 | Task | Status | Owner | File scope | Notes |
