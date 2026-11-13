@@ -23,7 +23,7 @@ Capture date: 2026-11-13 UTC  ·  verifier: `scripts/verify_nfl_lab.py`
 
 - Pages checked: 11
 - Rows checked: 252 (official 104, repository 37, design 89, prose-with-context 22)
-- Internal links: 277 (broken 0)
+- Internal links: 299 (broken 0)
 - Registered sources: 18
 - Errors: 0
 - Warnings: 0

@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PRIMARY_PAGES = [
     "index.html", "daily.html", "calendar.html", "vacation.html", "mlb.html", "nfl.html",
     "nfl-lines.html", "nfl-strategies.html", "nfl-injuries.html", "nfl-suggestions.html",
+    "leaderboard.html", "questions.html",
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
     "methodology.html", "review.html", "executive-summary.html", "teams.html",
 ]

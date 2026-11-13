@@ -1,0 +1,103 @@
+{
+  "snapshot": {
+    "note": "Each row is an open question that must be answered before a decision can be made. 'What we know' is grounded in verified official sources; 'what we don't know' is the gap. Suggestions describe how to discover the missing information. Nothing is inferred."
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "category": "Data access",
+      "question": "Which verified, machine-readable sources will supply team strength, player stats and pace inputs for signal generation?",
+      "what_we_know": "NFL.com publishes official standings, stats, schedules and the weekly injury report (all VERIFIED here).",
+      "what_we_dont_know": "The exact machine-readable endpoints and refresh cadence, and whether they cover every needed stat (pace, efficiency, splits).",
+      "decision_blocked": "Cannot finalize the signal-input pipeline or the data-integrity gate (VG-1) scope.",
+      "suggestion": "Map each required input to a specific official NFL.com endpoint; record HTTP status, retrieved timestamp and SHA-256 per fetch, mirroring the existing official-source manifest pattern.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "Q2",
+      "category": "Line origination",
+      "question": "What is the documented, reproducible model that combines verified inputs into an originated spread, total and probability?",
+      "what_we_know": "The six-step origination method is documented (game context → strength → injury → situational → originate → validate).",
+      "what_we_dont_know": "The model's exact equation, weights and calibration method; no originated line values exist yet (blank/UNVERIFIED).",
+      "decision_blocked": "Cannot produce or validate any originated line until the model is defined and reproducible.",
+      "suggestion": "Author a versioned model spec (equation + weights + calibration) and a unit test that reproduces a sample line from a frozen input snapshot before any line is published.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "Q3",
+      "category": "Validation",
+      "question": "What is the minimum sample size and the skill-vs-luck significance threshold a strategy must clear to be ranked?",
+      "what_we_know": "Validation gates VG-2 (sample) and VG-3 (skill vs. luck) are defined as concepts; Brier score, log loss and significance testing are the chosen metrics.",
+      "what_we_dont_know": "The exact numeric thresholds (minimum bets, significance level, variance-explained cutoff).",
+      "decision_blocked": "Cannot accept any strategy to the leaderboard or award rewards without concrete thresholds.",
+      "suggestion": "Set and document numeric thresholds (e.g. minimum settled bets, p-value, variance fraction) and back-test them against a no-skill baseline before adopting.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/rulebook/",
+      "source_label": "NFL.com official playing rules"
+    },
+    {
+      "id": "Q4",
+      "category": "Correlation",
+      "question": "How are inter-leg and same-game correlations measured and what is the correlation cap for parlays and prop combos?",
+      "what_we_know": "Correlation handling is defined per strategy (S4, S5, S8); VG-4 enforces a correlation cap.",
+      "what_we_dont_know": "The correlation values themselves and the numeric cap; no correlation values are published (blank/UNVERIFIED).",
+      "decision_blocked": "Cannot build S4/S5/S8 or enforce VG-4 without measured correlations and a cap.",
+      "suggestion": "Compute historical inter-leg correlations from a frozen verified dataset, publish the values, and set the cap from the measured distribution.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "Q5",
+      "category": "Injury / roster",
+      "question": "Which official source confirms the depth order (starter / 2nd / 3rd / 4th string) so a backup-replacing-starter deficiency can be verified?",
+      "what_we_know": "The NFL.com injury report is VERIFIED for player, position, injury, practice and game status; deficiency notes are ANALYSIS.",
+      "what_we_dont_know": "The depth-order / string designation for each player; the injury report alone does not state who is the 2nd/3rd/4th string.",
+      "decision_blocked": "Cannot verify the 'backup replacing starter' deficiency (the depth_string column stays UNVERIFIED).",
+      "suggestion": "Pull the official depth chart per team (NFL.com / team sites), record the depth order per position, and cross-check the injured player's string before marking a deficiency VERIFIED.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/injuries/",
+      "source_label": "NFL.com official injury report"
+    },
+    {
+      "id": "Q6",
+      "category": "Leaderboard / rewards",
+      "question": "What rewards and tiers are offered, and over what evaluation window is the leaderboard computed?",
+      "what_we_know": "Three reward tiers and six metrics are documented as a framework.",
+      "what_we_dont_know": "The concrete reward values, the competition window (weekly / season), and the tie-break rules.",
+      "decision_blocked": "Cannot finalize the leaderboard or publish rankings/rewards.",
+      "suggestion": "Define the reward values, evaluation window and tie-breaks; publish them on the leaderboard page before any strategy is ranked.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "Q7",
+      "category": "Market reference",
+      "question": "Is any official league source for betting lines, odds or player props available, or must the model be self-originated with no market reference?",
+      "what_we_know": "No official league source publishes betting lines, odds or props; sportsbook lines are not official league values and are not used as VERIFIED inputs.",
+      "what_we_dont_know": "Whether the project will use a documented non-official market reference at all (clearly labelled non-official) or go fully model-originated.",
+      "decision_blocked": "Determines whether 'edge vs. market' can be computed or whether lines are compared only against the model's own baseline.",
+      "suggestion": "Decide and document the market-reference policy; if a non-official reference is used, label it clearly and keep it out of the VERIFIED official-source gate.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/rulebook/",
+      "source_label": "NFL.com official playing rules"
+    },
+    {
+      "id": "Q8",
+      "category": "Scope",
+      "question": "Which leagues/seasons and bet types are in scope for the leaderboard competition?",
+      "what_we_know": "The current verified snapshot is NFL Week 10, 2026; strategy types span single bet, parlay and player props.",
+      "what_we_dont_know": "Whether the competition is NFL-only, which seasons count, and whether preseason/postseason are included.",
+      "decision_blocked": "Cannot define the leaderboard's data universe or the sample-size gate scope.",
+      "suggestion": "Confirm scope (NFL regular season only, or all NFL rows) and publish it on the leaderboard page.",
+      "status": "OPEN",
+      "source_url": "https://www.nfl.com/standings/",
+      "source_label": "NFL.com official standings"
+    }
+  ]
+}

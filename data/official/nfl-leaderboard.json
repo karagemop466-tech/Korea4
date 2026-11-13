@@ -1,0 +1,191 @@
+{
+  "snapshot": {
+    "note": "Leaderboard ranks strategies by verified, out-of-sample performance. Actual metric values, ranks and rewards are blank + UNVERIFIED until strategies are run over a settled, documented dataset and pass the validation gates. No value is inferred."
+  },
+  "metrics": [
+    {
+      "metric": "Brier score",
+      "definition": "Mean squared error of predicted probabilities; lower is better. Skill baseline = 0.25 for a 50/50 coin flip.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "metric": "Log loss",
+      "definition": "Cross-entropy of predicted probabilities; lower is better; penalises confident wrong calls.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "metric": "ROI",
+      "definition": "Return on turnover: (profit or loss) / total stake across settled bets.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "metric": "Hit rate",
+      "definition": "Share of settled bets that win, by bet type.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    },
+    {
+      "metric": "Skill vs. luck",
+      "definition": "Significance test of performance vs. a no-skill baseline; separates selective skill from variance.",
+      "source_url": "https://www.nfl.com/rulebook/",
+      "source_label": "NFL.com official playing rules",
+      "status": "FRAMEWORK"
+    },
+    {
+      "metric": "Sample size",
+      "definition": "Count of settled, out-of-sample bets; gates ranking until the minimum is met.",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats",
+      "status": "FRAMEWORK"
+    }
+  ],
+  "rewards": [
+    {
+      "tier": "Tier 1 — Top strategy",
+      "requirement": "Highest verified skill-vs-luck score with minimum sample and passing all gates.",
+      "reward": "Reward (defined by the competition owner)",
+      "status": "FRAMEWORK — PENDING DEFINITION"
+    },
+    {
+      "tier": "Tier 2 — Runner-up",
+      "requirement": "Second-highest verified skill-vs-luck score with minimum sample and passing all gates.",
+      "reward": "Reward (defined by the competition owner)",
+      "status": "FRAMEWORK — PENDING DEFINITION"
+    },
+    {
+      "tier": "Tier 3 — Selective-skill qualifier",
+      "requirement": "Passes all gates and shows skill significantly above luck, regardless of rank.",
+      "reward": "Reward (defined by the competition owner)",
+      "status": "FRAMEWORK — PENDING DEFINITION"
+    }
+  ],
+  "rows": [
+    {
+      "strategy": "Straight Spread",
+      "bet_type": "Single bet",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "strategy": "Moneyline",
+      "bet_type": "Single bet",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "strategy": "Total (Over/Under)",
+      "bet_type": "Single bet",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "strategy": "Multi-Game Spread Parlay",
+      "bet_type": "Parlay",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "strategy": "Same-Game Parlay",
+      "bet_type": "Parlay",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "strategy": "Passing Yards Prop",
+      "bet_type": "Player prop",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "strategy": "Rushing Yards / TD Prop",
+      "bet_type": "Player prop",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "strategy": "Player Prop Combo Parlay",
+      "bet_type": "Player prop combo",
+      "brier_score": "",
+      "log_loss": "",
+      "roi": "",
+      "hit_rate": "",
+      "skill_vs_luck": "",
+      "sample_size": "",
+      "rank": "",
+      "verification": "UNVERIFIED — NOT YET RANKED",
+      "status": "FRAMEWORK — PENDING VALIDATION",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    }
+  ]
+}
