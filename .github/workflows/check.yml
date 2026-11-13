@@ -2,7 +2,7 @@ name: Verify final integration
 
 on:
   push:
-    branches: [arena/72e6d3f7-korea4]
+    branches: [arena/72e6d3f7-korea4, arena/3b442c81-korea4]
   pull_request:
     branches: [main]
   workflow_dispatch: {}
@@ -23,7 +23,11 @@ jobs:
         run: python -m pip install -r requirements.txt
       - name: Verify official data, source rows, links and JS
         run: |
+          python scripts/nfl_signals.py
+          python scripts/build_nfl_manifest.py
+          python scripts/build_nfl_site.py
           python scripts/verify.py
+          python -m unittest discover -s tests -p 'test_nfl_site.py' -v
           node --check js/app.js
           node tests/test_dashboard.mjs
           npm test

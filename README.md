@@ -47,3 +47,19 @@ python scripts/verify.py
 ```
 
 Raw official responses, SHA-256 hashes, and source URLs are in `research/official/manifest.json` and `research/probe/manifest.json`.
+
+
+## NFL Lines decision-support program
+
+The separate NFL Lines area is linked from [`nfl.html`](nfl.html) and starts at [`nfl-lines.html`](nfl-lines.html). It includes schedule/results, model fair lines, injury/depth availability, exploratory analysis, strategy gates, a gated leaderboard, suggestions, open questions, flagged review and a provenance manifest. The detailed [executive summary](NFL-LINES-EXECUTIVE-SUMMARY.md) describes the evidence limits.
+
+NFL Lines reproduction (using the official snapshots already present in this checkout):
+```bash
+python scripts/nfl_signals.py
+python scripts/build_nfl_manifest.py
+python scripts/build_nfl_site.py
+python -m unittest discover -s tests -p 'test_nfl_site.py' -v
+python scripts/verify.py
+```
+
+The NFL Lines checks distinguish source-link structure from a full row-value audit. Injury and depth transcription fidelity remains flagged; prices and bet outcomes are not fabricated.

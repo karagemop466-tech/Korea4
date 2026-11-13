@@ -2,7 +2,7 @@ name: Verify static Pages source
 
 on:
   push:
-    branches: [main, arena/72e6d3f7-korea4]
+    branches: [main, arena/72e6d3f7-korea4, arena/3b442c81-korea4]
   workflow_dispatch: {}
 
 permissions:
@@ -23,7 +23,13 @@ jobs:
           python-version: '3.11'
       - name: Install verification dependencies
         run: python -m pip install -r requirements.txt
-      - name: Verify official data and internal links
-        run: python scripts/verify.py
+      - name: Build NFL Lines outputs and verify source links
+        run: |
+          python scripts/nfl_signals.py
+          python scripts/build_nfl_manifest.py
+          python scripts/build_nfl_site.py
+          python scripts/verify.py
+          python -m unittest discover -s tests -p 'test_nfl_site.py' -v
+          npm test
       - name: Check browser JavaScript syntax
         run: node --check js/app.js
