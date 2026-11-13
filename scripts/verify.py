@@ -13,6 +13,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 PRIMARY_PAGES = [
     "index.html", "daily.html", "calendar.html", "vacation.html", "mlb.html", "nfl.html",
+    "nfl-lines.html", "nfl-strategies.html", "nfl-injuries.html", "nfl-suggestions.html",
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
     "methodology.html", "review.html", "executive-summary.html", "teams.html",
 ]
@@ -24,6 +25,9 @@ REPORT = ROOT / "research/verification-report.md"
 OFFICIAL_SOURCE_HOSTS = {
     "www.mlb.com", "statsapi.mlb.com",
     "www.nfl.com", "nfl.com", "media.nfl.com", "static.nfl.com", "static.www.nfl.com",
+    "nextgenstats.nfl.com",    # official NFL Next Gen Stats (verified live 2026-11-13)
+    "operations.nfl.com",      # official NFL Football Operations (verified live 2026-11-13)
+    "www.nflpa.com",           # official NFLPA (2020 CBA; verified live 2026-11-13)
     "www.49ers.com",
     "www.westwoodonesports.com",
     "gostanford.com", "calbears.com",
@@ -33,14 +37,21 @@ OFFICIAL_SOURCE_HOSTS = {
     "www.theifab.com",                                # Laws of the Game (duration reference)
     "www.nba.com", "www.nhl.com", "www.ksfo.com", "www.knbr.com", "www.957thegame.com",  # station/team pages
 }
-EXCLUDED_SOURCE_HOSTS_NOTE = "vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected"
+EXCLUDED_SOURCE_HOSTS_NOTE = "vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected; repo-internal process URLs (COORDINATION.md, live Pages data/flag pages) are allowed only as FLAG_ONLY audit/process references, never as value sources"
 
 
 # Exact URLs kept ONLY as audit evidence on flag/status rows (never as a value source):
-# IR-001 dead prior reference site, and the repo's own GitHub Pages API status check.
+# IR-001 dead prior reference site, the repo's own GitHub Pages API status check, and the
+# repo's own board/data/flag pages referenced by the NFL decision module's process rows
+# (suggestions governance S-10 and the module index rows), which are proposals/process
+# records rather than sourced values.
 FLAG_ONLY_SOURCE_URLS = {
     "https://buffedlizard55-lab.github.io/VacationSchedule/site/",
     "https://api.github.com/repos/karagemop466-tech/Korea4/pages",
+    "https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md",
+    "https://karagemop466-tech.github.io/Korea4/data/official/events.json",
+    "https://karagemop466-tech.github.io/Korea4/",
+    "https://karagemop466-tech.github.io/Korea4/flagged.html",
 }
 
 
