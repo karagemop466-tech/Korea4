@@ -162,6 +162,8 @@ Live check of the deployed Pages site caught three stale artifacts left by the r
 2. Two prose references still cited the old flag ids IR-023/IR-024 — corrected to IR-043/IR-044 (main's build-time flags IR-022…IR-026 belong to the other NFL module).
 3. The three renamed pages highlighted the wrong NAV item (their `page()` active keys still used old names) — corrected; `suggestions.json` SUG-02 status updated to IMPLEMENTED — verified after the weekly snapshot workflow ran green post-merge.
 
+Shipped as **PR #57** — merged into main as `873d7ec` at 2026-11-13T14:03Z; Pages rebuilt (run 43438782128, success) and the live hub re-verified: components table shows `nfl-analytics-injuries/lines/strategies.html`, flag references IR-043/IR-044, fresh snapshot hash aa5e3e3b (games.csv.gz, Friday cron refresh). Final session state: main @ 873d7ec contains this session's full NFL analytics module (8 pages) alongside the three parallel NFL modules; verify gate 0 errors / 0 warnings / 10,464 rows / 2,226 links 0 broken.
+
 ### H6 completion and three-way reconciliation record — 2026-11-13 (`arena/cb63182f-korea4`)
 
 **Rebase onto advanced `origin/main` (PRs #45/#46/#47/#48/#49/#51 landed mid-session).** All conflicts resolved keeping every session's work; nothing discarded:
