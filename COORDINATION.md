@@ -1,6 +1,40 @@
 # COORDINATION.md — unified shared task board
 
-## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
+## Current session — `arena/a7381587-korea4` (2026-11-13 UTC)
+
+Baseline: `main` @ `a8fa5e3` (PR #42 merged). Working tree clean at start. No other session has claimed work dated after 2026-11-05; this session therefore claims the NFL module **and acts as its own final integration session** (nav/index/exec-summary shared outputs included in scope), per the user's instruction that no manual input is to be awaited.
+
+### Task claim (published before any edit)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| N1 — Publish claim on the shared board | done | `arena/a7381587-korea4` | `COORDINATION.md` | This commit. |
+| N2 — Official-source research & live verification for the NFL line-origination / injury / depth module (NFL.com injury report + team injury pages, NFL.com depth charts, NFL Football Operations, Next Gen Stats, NFL 2026 Week 10 schedule rows, NFLPA CBA pages), all fetched live 2026-11-13, sources recorded in `research/nfl-module/` | done | `arena/a7381587-korea4` | `research/nfl-module/**` (new), `data/nfl/**` (new) | Every table row carries an official source link; unconfirmable values stay blank + UNVERIFIED. See record below. |
+| N3 — Build the NFL module pages: `nfl-lines.html` (own-line methodology), `nfl-strategies.html` (signal research, validation gates, leaderboard competition, single/parlay/player-prop correlation framework), `nfl-injuries.html` (injury + depth/backup deficiency tracking), `nfl-suggestions.html` (dedicated Suggestions section + open questions/information needed); regenerate `index.html`, `executive-summary.html`, `EXECUTIVE-SUMMARY.md`, `README.md` via `scripts/build_site.py` | done | `arena/a7381587-korea4` | `scripts/build_site.py`, `data/nfl/**`, generated root HTML, `EXECUTIVE-SUMMARY.md`, `README.md`, `data/official/meta.json` (timestamp regeneration only via offline collector) | Shared nav/index edits logged here; no other session active to conflict. |
+| N4 — Verification gate: add the new pages to `scripts/verify.py` primary set, extend the official-host allowlist **only with hosts verified live in N2**, run the full CI gate (`verify.py`, `node --check js/app.js`, `node tests/test_dashboard.mjs`, `npm test`, dashboard-generator unittest) | done | `arena/a7381587-korea4` | `scripts/verify.py`, `research/verification-report.md` | Gate PASS: 0 errors / 0 warnings; 10,207 primary rows; 864 internal links; 0 broken; all CI tests pass. |
+| N5 — Final integration: line-by-line re-check of generated pages, PR from this fixed branch → `main`, merge without waiting, confirm GitHub Pages deploy, live-site check, record PR/merge/deploy result here | pending | `arena/a7381587-korea4` | `COORDINATION.md` (record) | Flagged/unverified items do not block merge; they are published on the Flagged page and the new Suggestions page. |
+
+### N2–N4 implementation and verification record — 2026-11-13 (`arena/a7381587-korea4`)
+
+**Official sources verified live on 2026-11-13 (13, full table in `research/nfl-module/README.md`):**
+[NFL.com injury report](https://www.nfl.com/injuries/) (Week 10 of the 2026 season, per-game Player/Position/Injuries/Practice Status/Game Status tables); [49ers roster](https://www.nfl.com/teams/san-francisco-49ers/roster) (ACT status; 7-1-0, 1st NFC West); [team injuries URL](https://www.nfl.com/teams/san-francisco-49ers/injuries) (404); [team depth-chart URL](https://www.nfl.com/teams/san-francisco-49ers/depth-chart) (404); [transactions](https://www.nfl.com/transactions/) (12 trades Nov 6–10, 2026); [team stats hub](https://www.nfl.com/stats/team-stats/) (2026 REG live, all 32 clubs); [Next Gen Stats](https://nextgenstats.nfl.com/) (Week 10 charts/stats); [Football Operations](https://operations.nfl.com/) (2026 Rulebook; important dates); [Week 11 schedule change](https://www.nfl.com/news/week-11-schedule-change) (Nov 9, 2026); [sports-betting integrity policy](https://media.nfl.com/lsb/) (prohibited-wager categories; prediction markets treated as betting); [NFLPA CBA](https://www.nflpa.com/cba) (2020 executed copy); [2017 injury-report policy PDF](https://operations.nfl.com/media/2683/2017-nfl-injury-report-policy.pdf) (404); [Big Data Bowl](https://www.nfl.com/news/big-data-bowl-returns-powered-by-aws) (9th annual, $100,000 shared prize, Kaggle).
+
+**Cross-checks vs captured snapshot (2026-11-02):** Week 10 rows agree with the live injury report and NGS Week 10 labels; Week 11 — 11 of 13 rows match the official Nov 9 slate exactly, **JAX@NYG and PIT@PHI kickoff times changed after capture → IR-022** (stale values shown as captured, correction linked; captured data not hand-edited).
+
+**Module built (all rows source-linked; design parameters explicitly labelled PROPOSED):**
+- `nfl-lines.html` — pipeline L-01…L-08 (own-line origination, publication gated on validation gates), official input sources table, Week 11 currency check table (13 rows).
+- `nfl-strategies.html` — leaderboard competition B-01…B-10 (Big Data Bowl official precedent; reward values intentionally absent pending owner decision Q-04), signals G-01…G-08 (none backtested), gates V-01…V-08 (none run; V-03/V-06 blocked on odds source IR-025/Q-02), correlation research C-01…C-07 (values blank + UNVERIFIED badges; injury/prediction-market categories excluded per official policy).
+- `nfl-injuries.html` — Week 10 snapshot: 15 clubs / 7 fully captured games transcribed verbatim from the official report (NO Saints partial → excluded from counts), deficiency framework D-01…D-04, observations E-01…E-06 (IND two DTs DNP; MIN two QBs listed + Cousins traded in; NE line limited; GB 14/16 DNP-or-limited; DET two secondary Outs; JAX traded-in players DNP).
+- `nfl-suggestions.html` — suggestions S-01…S-10 (decision needed + benefit each), open questions Q-01…Q-10 (have / missing / how to discover / owner / blocks), decision-readiness checklist, discovery plan. Implemented only after a decision is recorded on this board (S-10).
+- `flagged.html` + executive summary + index + README updated; `data/official/meta.json` regenerated offline (system_today 2026-11-13; counts unchanged 6,591 rows / 748 sources; snapshot 2026-11-02 unchanged and disclosed).
+
+**Gate results (before PR):** `scripts/verify.py` PASS — 0 errors, 0 warnings; **10,207 primary static rows** with official `data-source-url` + link (was 10,066); 864 internal links, 0 broken; JS OK; allowlist extended only with `nextgenstats.nfl.com`, `operations.nfl.com`, `www.nflpa.com` (verified live); repo-internal process URLs registered FLAG_ONLY (never value sources). `node --check js/app.js` PASS; `node tests/test_dashboard.mjs` PASS; `npm test` PASS; dashboard-generator unittest 3/3 PASS. Verify-report regenerated.
+
+**Irregularities opened (published on `flagged.html`, non-blocking):** IR-022 stale Week 11 rows (official Nov 9 change); IR-023 no official team depth-chart/injury URLs and no published depth order; IR-024 dead 2017 policy PDF; IR-025 no official odds/correlation source — all correlation cells blank; IR-026 verbatim Week 10 oddity (DET K. Joseph Full practice yet Game Status Out).
+
+**Branch constraint (unchanged):** Arena fixes this session to branch `arena/a7381587-korea4`; the requested `session-<id>/<task>` naming cannot be used, so this dedicated branch carries the whole task set. `git pull --rebase` will be run before every push; commits will be small and frequent.
+
+## Prior session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|

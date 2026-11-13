@@ -1,0 +1,18 @@
+{
+  "module": "NFL decision module (line origination, strategy leaderboard, injury/depth tracking)",
+  "built_utc": "2026-11-13T13:30:00Z",
+  "verified_on": "2026-11-13",
+  "owner_session": "arena/a7381587-korea4",
+  "disclaimer": "This module is a research framework only. It contains no verified win probabilities, no betting recommendations, and no wagering instructions. Numeric strategy parameters are design proposals awaiting owner decision. Values that cannot be confirmed from an official source are left blank and flagged UNVERIFIED.",
+  "integrity_note": "The NFL's official integrity policy (media.nfl.com/lsb) flags player-injury markets, officiating-related markets, one-play-determinable outcomes and pre-determined outcomes as integrity-sensitive, and treats prediction markets as sports betting. This module excludes those categories from strategy modeling.",
+  "counts": {
+    "official_sources_verified_live": 13,
+    "irregularities_opened": "IR-022 to IR-026",
+    "injury_snapshot_teams": 15,
+    "injury_snapshot_games": "7 fully captured + 1 partial (CAR only)",
+    "signals": 8,
+    "validation_gates": 8,
+    "suggestions": 10,
+    "open_questions": 10
+  }
+}
