@@ -1,0 +1,122 @@
+[
+ {
+  "id": "D-01",
+  "decision": "Build the results archive first",
+  "option_a": "Yes: capture finals weekly starting now (SUG-01).",
+  "option_b": "No: keep the site descriptive only.",
+  "recommend": "A",
+  "why": "Everything about skill, luck and rewards is impossible without settled outcomes. It is also the cheapest item on the list.",
+  "evidence": "A-05: 0 result rows in the repo; gates G4–G7 all FAIL.",
+  "review": "After 8 weeks of capture, re-check gate G4.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-02",
+  "decision": "Snapshot the injury report daily",
+  "option_a": "Yes, per club, timestamped (SUG-02).",
+  "option_b": "No: keep only the current week.",
+  "recommend": "A",
+  "why": "A status with no timestamp cannot be shown to precede kickoff (gate G2), so no injury signal can be validated.",
+  "evidence": "Q-05/Q-06: the official page changes through the week.",
+  "review": "At the next gate review.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-03",
+  "decision": "Market lines: license a feed",
+  "option_a": "License closing (and opening) line data.",
+  "option_b": "Do not; restrict the site to origination methodology and drop P&L claims.",
+  "recommend": "Depends on budget — flagged, not assumed",
+  "why": "The NFL publishes no lines. Without a feed, G6 and the reward tiers cannot operate.",
+  "evidence": "A-06: no odds data anywhere in the repo; Q-01.",
+  "review": "Before any leaderboard ranking is attempted.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-04",
+  "decision": "If no feed: publish 'originated lines' as a methodology only",
+  "option_a": "Yes — show the exact construction rule and mark every output BLANK until an effect size has an official source.",
+  "option_b": "Publish model numbers anyway.",
+  "recommend": "A",
+  "why": "Option B would require inventing effect sizes, which your verification rule forbids.",
+  "evidence": "Effect sizes are not published by any official source (verified: NFL.com publishes stats, not marginal effects).",
+  "review": "On any future feed decision.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-05",
+  "decision": "Expand depth capture to all 32 clubs",
+  "option_a": "Yes (SUG-04).",
+  "option_b": "Stay with the 49ers focus.",
+  "recommend": "A",
+  "why": "Deficiency tracking only becomes decision-grade when it covers the opponent too, and the opponent is the other half of every game.",
+  "evidence": "S-02: only the 49ers chart is transcribed; 9 slots have no documented backup.",
+  "review": "Weekly.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-06",
+  "decision": "What the reward is",
+  "option_a": "Standing only (no payout).",
+  "option_b": "A pool or other consideration.",
+  "recommend": "A until Q-19 is answered",
+  "why": "The legal question (Q-19) is unresolved and outside the agent's competence.",
+  "evidence": "LB-08 is deliberately blank.",
+  "review": "After local legal advice.",
+  "status": "BLOCKED ON Q-19",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-07",
+  "decision": "Ranking metric",
+  "option_a": "CLV with a bootstrap variance penalty (LB-02/LB-04).",
+  "option_b": "Units of profit.",
+  "recommend": "A",
+  "why": "Profit at small samples is dominated by luck; CLV measures whether the price was beaten.",
+  "evidence": "G7 cannot separate luck from profit without a large sample.",
+  "review": "After the first 200 settled bets.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-08",
+  "decision": "Correlation policy for combos",
+  "option_a": "Pre-register a threshold (proposal |rho| > 0.30 rejects unless the joint edge survives).",
+  "option_b": "Decide per combo after seeing results.",
+  "recommend": "A",
+  "why": "Deciding after seeing results is the definition of overfitting.",
+  "evidence": "C-01…C-08 all blank; Q-15 open.",
+  "review": "Before the first combo is ranked.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-09",
+  "decision": "Fix the refresh pipeline",
+  "option_a": "Retarget the workflow to `main` and add a weekly cron (SUG-08).",
+  "option_b": "Leave it and label data as stale.",
+  "recommend": "A",
+  "why": "A dashboard whose sources are 11 days old is not decision-grade.",
+  "evidence": "A-07.",
+  "review": "Immediately after merge.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ },
+ {
+  "id": "D-10",
+  "decision": "Retire the legacy NFL file",
+  "option_a": "Delete `data/nfl-2026.json`.",
+  "option_b": "Keep it with `verified: false`.",
+  "recommend": "A",
+  "why": "It asserts verified while citing non-official sites, and nothing renders from it except the audit page.",
+  "evidence": "FL-01.",
+  "review": "At merge.",
+  "status": "AWAITING YOUR CHOICE",
+  "design_note": "choice for you; evidence column cites the check"
+ }
+]

@@ -215,12 +215,25 @@ def main():
         errors.append(f"{len(broken)} broken internal links")
     # 4. Merge markers and obvious unresolved placeholders.
     for p in ROOT.rglob("*"):
-        if not p.is_file() or ".git" in p.parts or p.suffix in (".gz", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".pdf"):
+        if (not p.is_file() or ".git" in p.parts
+                or any(part.startswith(".venv") for part in p.parts)
+                or p.suffix in (".gz", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".pdf")):
             continue
         try: text = p.read_text("utf-8")
         except (UnicodeDecodeError, OSError): continue
         if re.search(r"^<<<<<<< |^=======$|^>>>>>>> ", text, re.M):
             errors.append(f"Unresolved merge markers in {p.relative_to(ROOT)}")
+    # 4b. NFL decision-support section: stricter gate (every factual row sourced).
+    try:
+        lab = subprocess.run([sys.executable, str(ROOT / "scripts/verify_nfl_lab.py")],
+                             capture_output=True, text=True, timeout=180)
+        lab_ok = lab.returncode == 0
+        if not lab_ok:
+            errors.append("NFL decision-support gate failed: " + ((lab.stderr.strip().splitlines() or ["unknown"])[0]))
+    except Exception as e:
+        lab_ok = False
+        warnings.append(f"NFL decision-support gate unavailable: {e}")
+
     # 5. JavaScript syntax.
     try:
         proc = subprocess.run(["node", "--check", str(ROOT / "js/app.js")], capture_output=True, text=True, timeout=30)
@@ -245,6 +258,7 @@ def main():
         f"- Internal links checked: {checked_links}",
         f"- Broken internal links: {len(broken)}",
         f"- JavaScript syntax: {'PASS' if js_ok else 'NOT CHECKED / FAIL'}",
+        f"- NFL decision-support gate (scripts/verify_nfl_lab.py): {'PASS' if lab_ok else 'FAIL'} (report: research/nfl-lab-verification.md)",
         f"- Event rows checked: {row_stats['event_rows']}; row source domains checked against the official allowlist: {row_stats['rows_checked_domains']}",
         f"- Errors: {len(errors)}",
         f"- Warnings: {len(warnings)}", "",

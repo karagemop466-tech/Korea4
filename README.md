@@ -27,6 +27,14 @@ Live site: <https://karagemop466-tech.github.io/Korea4/>
 ## Pages
 `index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
 
+### NFL decision support (added 2026-11-13)
+`nfl-decision.html` (overview) · `nfl-decision-strategies.html` · `nfl-decision-validation.html` ·
+`nfl-decision-correlation.html` · `nfl-decision-injuries.html` · `nfl-decision-suggestions.html` ·
+`nfl-decision-questions.html` · `nfl-decision-decisions.html` · `nfl-decision-audit.html` ·
+`nfl-decision-flags.html` · `nfl-decision-executive.html`.
+Built by `scripts/build_nfl_decision.py` from `scripts/nfl_lab_data.py`; gated by `scripts/verify_nfl_lab.py`, which fails
+if any factual row lacks an official or repository source. It complements, and does not replace, the NFL module pages.
+
 Parallel-session dashboards are preserved at `docs/`, `site/`, and `site/pages/` and linked from every page footer.
 
 ## Reproduce

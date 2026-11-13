@@ -860,3 +860,53 @@ Final verification session on branch `arena/a9a15876-korea4` (branched from `mai
 | Local gate | `scripts/verify.py` PASS (0 errors / 0 warnings; 10,066 source-linked rows; 689 links, 0 broken); `npm test` PASS; `node --check js/app.js` PASS; 3 dashboard-generator unit tests PASS |
 | Conflict resolution | rebase onto `origin/main` (PR #39) superseded this session's code/data fix — G2's PR #38/#39 is the authoritative IR-018 resolution; my branch reset to `main` and carries only this COORDINATION.md record |
 | Irregularities | none new; IR-001…IR-021 remain published on `flagged.html`, non-blocking |
+
+---
+
+## Session log — `arena/0d4aaf2a-korea4` (2026-11-13) — H1 NFL decision support
+
+Branch `arena/0d4aaf2a-korea4`. Started from `main` @ `a8fa5e3`; **rebased onto `main` @ `742575d` (PR #45 merge)**
+mid-session after discovering that `arena/a7381587-korea4` had already merged an overlapping NFL module. Claim commit
+`9761703`, implementation commit `2b35d93` (pre-rebase, preserved as local branch `backup-nfl-lab-work`).
+
+### Task claim and final status
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| H1 — NFL decision-support build: 11 pages (injuries+depth, strategies, gates, correlation, suggestions, questions, decisions, repo audit, flags, executive, overview) + strict row-level gate + repo audit | done (pending PR) | `arena/0d4aaf2a-korea4` | `scripts/nfl_lab_data.py`, `scripts/build_nfl_decision.py`, `scripts/verify_nfl_lab.py`, `data/nfl-lab/**`, `research/nfl-lab-audit-2026-11-13.md`, `research/nfl-lab-verification.md`, `NFL-DECISION-EXECUTIVE-SUMMARY.md`, 11 × `nfl-decision*.html`; additive edits to `scripts/build_site.py` (one NAV entry, one builder hook, one index panel, `page(banner=)` switch), `scripts/verify.py` (lab gate call + `.venv*` skip in the marker scan), `README.md` (generated) | No overlap with the merged module's files (`data/nfl/**`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`). |
+
+### Conflict avoided / duplicate work found
+
+- Five other sessions claimed NFL line-origination work on 2026-11-13 (`c1806a8e`, `85a71078`, `21f65504`, `3b442c81`, `a7381587`).
+  `a7381587` merged to `main` as **PR #45** with four NFL pages, a decision module and 10 suggestions — roughly 60% overlap
+  with this task.
+- Action: rebased rather than forced a duplicate in. This section kept its own file scope, reused none of the merged
+  module's data, renamed every page to `nfl-decision-*` to avoid path collisions, and its NAV label is `NFL decision`.
+  Findings A-01/A-05/A-12/A-14 were rewritten so the section does not claim credit for fixes made by the other session.
+- Overlap recorded on the section's own overview page so the owner can choose one home for the program.
+
+### Verification performed (2026-11-13)
+
+- **Source re-reads (live, via the session's page-fetch tool):** [NFL.com Week-10 injuries](https://www.nfl.com/injuries/)
+  (26 of 28 club tables captured; 27 rows transcribed), [49ers official depth chart](https://www.49ers.com/team/depth-chart)
+  ("Updated as of 11/10/26", 29 slots, 9 with no named backup), [NFL.com Week-10 schedule](https://www.nfl.com/schedules/2026/by-week/week-10)
+  (all 14 rows match `data/official/events.json` on matchup, kickoff and home/away), [49ers official schedule](https://www.49ers.com/schedule/),
+  [NFL 2026–27 important dates](https://www.nfl.com/news/2026-27-national-football-league-important-dates) (Personnel (Injury)
+  Report Policy filing pattern), [NFL.com player stats](https://www.nfl.com/stats/player-stats/).
+- **Sandbox limitation stated on the site:** the shell reaches `github.com` only, so `scripts/fetch_official.py` could not
+  be re-run here; every official value added was read through the page-fetch tool and is dated 2026-11-13 UTC.
+- **Gates:** `python3 scripts/verify.py` PASS (0 errors / 0 warnings; 10,207 primary rows, 1,210 internal links, 0 broken);
+  `python3 scripts/verify_nfl_lab.py` PASS (0 errors / 0 warnings; 252 rows = 104 official-sourced, 37 repository-sourced,
+  89 declared design rows, 22 computed rows with provenance links); `node --check js/app.js` PASS; `npm test` PASS;
+  `python3 -m unittest tests/test_dashboard_generator.py` PASS (3 tests).
+- **Fixed:** the dashboard was serving a stale `system_today` (2026-11-05 on 2026-11-13). The collector was re-run and
+  the site rebuilt; `system_today` is now 2026-11-13 and event rows are unchanged at 6,591.
+- **Pre-existing failures not caused by this branch:** `tests/test_build.py` needs a Jekyll `_site/` tree (no Ruby in
+  this sandbox). Confirmed identical on a stashed baseline of `main` before and after. `tests/test_build.py` was left
+  untouched after that determination (it enumerates published pages explicitly).
+
+### What was deliberately not produced
+
+No originated line, probability, effect size, correlation value, ranked strategy or "best path". The NFL publishes no
+odds, no scoring baseline and no effect sizes, and the repository holds no results; every one of those numbers would
+have been invented. They are published as blanks with the source link that establishes each gap.

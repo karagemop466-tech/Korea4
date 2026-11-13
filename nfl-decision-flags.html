@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for review — FREE TIME VACATION</title>
+<meta name="description" content="Official-source Bay Area sports radio free-time dashboard, 2026–2029.">
+<link rel="stylesheet" href="css/style.css">
+
+<script>window.K4_META={"system_today":"2026-11-13","date_range":["2026-11-01","2029-12-31"],"data_start":"2026-01-01","counts":{"official_sources":748,"official_event_rows":6591,"mlb_teams":30,"days":1461,"intervals":14303,"wwo_sf_affiliate_rows":13,"line_by_line_audit_rows":2419},"durations":{"MLB":158,"NFL":192,"NCAAF":204,"MLS":120},"default_source_url":"https://www.957thegame.com/","timezone":"America/Los_Angeles (PST in winter, PDT in summer)"};</script>
+<script src="js/app.js" defer></script>
+</head><body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">FREE TIME VACATION</a>
+  <span class="tz">America/Los_Angeles · PST/PDT · 94122 AM/FM</span>
+  <nav class="main-nav"><a href="index.html" class="">Dashboard</a><a href="daily.html" class="">Daily scoreboard</a><a href="calendar.html" class="">Calendar</a><a href="vacation.html" class="">Vacation windows</a><a href="mlb.html" class="">MLB</a><a href="nfl.html" class="">NFL</a><a href="nfl-lines.html" class="">NFL lines</a><a href="nfl-strategies.html" class="">NFL strategies</a><a href="nfl-injuries.html" class="">NFL injuries</a><a href="nfl-suggestions.html" class="">Suggestions</a><a href="nfl-decision.html" class="">NFL decision</a><a href="ncaaf.html" class="">Stanford / Cal</a><a href="wwo.html" class="">Westwood One</a><a href="radio.html" class="">Radio map</a><a href="sources.html" class="">Sources</a><a href="flagged.html" class="">Flagged</a><a href="methodology.html" class="">Method</a><a href="review.html" class="">Repo review</a><a href="executive-summary.html" class="">Executive summary</a></nav>
+</div></header>
+<main>
+  <h1 class="page-title">Flagged for review</h1>
+  <p class="page-lead">Six unresolved, unverifiable or deliberately blank items from the NFL decision support section, each with its source link.</p>
+  
+  
+<div class="callout"><strong>Lab data captured 2026-11-13 UTC.</strong> This section adds official-source injury,
+depth-chart and decision-support data. It changes none of the dashboard's schedule values. Source snapshot age at this
+build: <strong>259 hours</strong> (2026-11-02T17:41:45+00:00 to 2026-11-13T13:09:05+00:00).
+Blank cells are evidence of a missing official value — see <a href="nfl-decision-flags.html">Flagged for review</a>.</div>
+<div class="callout warn"><strong>Nothing here blocks the site from building.</strong> These are the items that are
+unresolved, unverifiable from an official source, or deliberately blank. Each carries the link that either shows the
+gap or establishes the value.</div>
+<section class="panel"><h2>Flagged for review</h2>
+<div class="table-wrap" data-table="lab-flags" data-page-size="25">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter lab flags rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="no-source">No source (design)</button>
+        <button type="button" data-status-filter="unverified">Blank / unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
+      </div>
+      <div class="scroll"><table><thead><tr><th>ID</th><th>Issue</th><th>Status</th><th>Impact if ignored</th><th>Source</th></tr></thead><tbody><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-2026.json" data-row-status="unresolved — recommended for deletion (d-10)" data-row-text="fl-01 `data/nfl-2026.json` says `verified: true` but cites three non-official sites and contradicts the official home/away for week 1 (melbourne).  unresolved — recommended for deletion (d-10)  none today: nothing renders from it except the audit page. it would mislead anyone who reuses it.  this repository — data/nfl-2026.json (legacy snapshot) "><td>FL-01</td><td>`data/nfl-2026.json` says `verified: true` but cites three non-official sites and contradicts the official home/away for Week 1 (Melbourne).</td><td><span class="badge badge-neutral">UNRESOLVED — recommended for deletion (D-10)</span></td><td>None today: nothing renders from it except the audit page. It would mislead anyone who reuses it.</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-2026.json" target="_blank" rel="noopener" data-repo-kind="repo">This repository — data/nfl-2026.json (legacy snapshot)</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/.github/workflows/fetch-official.yml" data-row-status="unresolved — fix recommended (sug-08)" data-row-text="fl-02 official-source snapshot is 11 days old at rebuild (2026-11-02 vs 2026-11-13); the scheduled refresh workflow is bound to a superseded branch name.  unresolved — fix recommended (sug-08)  schedules released or changed after 2026-11-02 may be missing; injury and line work is unaffected (captured live this session).  this repository — .github/workflows/fetch-official.yml "><td>FL-02</td><td>Official-source snapshot is 11 days old at rebuild (2026-11-02 vs 2026-11-13); the scheduled refresh workflow is bound to a superseded branch name.</td><td><span class="badge badge-neutral">UNRESOLVED — fix recommended (SUG-08)</span></td><td>Schedules released or changed after 2026-11-02 may be missing; injury and line work is unaffected (captured live this session).</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/.github/workflows/fetch-official.yml" target="_blank" rel="noopener" data-repo-kind="repo">This repository — .github/workflows/fetch-official.yml</a></td></tr><tr data-source-url="https://www.49ers.com/schedule/" data-row-status="flagged as unverified — venue not confirmed on the league page in this session" data-row-text="fl-03 49ers.com lists week 11 (2026-11-22, vs vikings) at estadio banorte, 5:20 pm pst, nbc, while the league-sourced row in `events.json` carries no venue and no international marker.  flagged as unverified — venue not confirmed on the league page in this session  neutral-site/rest models (st-08) cannot use this row until the venue is confirmed from a league source.  san francisco 49ers (official club site) — 49ers 2026 schedule "><td>FL-03</td><td>49ers.com lists Week 11 (2026-11-22, vs Vikings) at Estadio Banorte, 5:20 PM PST, NBC, while the league-sourced row in `events.json` carries no venue and no international marker.</td><td><span class="badge badge-unverified">FLAGGED AS UNVERIFIED — venue not confirmed on the league page in this session</span></td><td>Neutral-site/rest models (ST-08) cannot use this row until the venue is confirmed from a league source.</td><td><a class="source-link" href="https://www.49ers.com/schedule/" target="_blank" rel="noopener">San Francisco 49ers (official club site) — 49ers 2026 Schedule</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="time-sensitive — re-capture required before any game-day decision" data-row-text="fl-04 injury report was captured mid-week: all 49ers and cowboys game-status fields were blank while 15 players combined were listed as did not participate.  time-sensitive — re-capture required before any game-day decision  a blank game status must never be read as &amp;#x27;active&amp;#x27;.  nfl.com — injuries — week 10 of the 2026 season (official injury report) "><td>FL-04</td><td>Injury report was captured mid-week: all 49ers and Cowboys game-status fields were blank while 15 players combined were listed as Did Not Participate.</td><td><span class="badge badge-neutral">TIME-SENSITIVE — re-capture required before any game-day decision</span></td><td>A blank game status must never be read as &#x27;active&#x27;.</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com — Injuries — Week 10 of the 2026 season (official injury report)</a></td></tr><tr data-source-url="https://www.49ers.com/team/depth-chart" data-row-status="unverifiable from official source — replacement quality unknown" data-row-text="fl-05 the official 49ers depth chart lists no backup at 9 slots (lcb, nb, rg, rt, fb, p, k, h, ls).  unverifiable from official source — replacement quality unknown  a &amp;#x27;3rd/4th string&amp;#x27; claim at these slots would be an inference, so none is made.  san francisco 49ers (official club site) — 49ers depth chart — updated as of 11/10/26 "><td>FL-05</td><td>The official 49ers depth chart lists no backup at 9 slots (LCB, NB, RG, RT, FB, P, K, H, LS).</td><td><span class="badge badge-neutral">UNVERIFIABLE FROM OFFICIAL SOURCE — replacement quality unknown</span></td><td>A &#x27;3rd/4th string&#x27; claim at these slots would be an inference, so none is made.</td><td><a class="source-link" href="https://www.49ers.com/team/depth-chart" target="_blank" rel="noopener">San Francisco 49ers (official club site) — 49ers Depth Chart — updated as of 11/10/26</a></td></tr></tbody></table></div>
+    </div>
+<p class="intro">One further item carries no source by construction:</p>
+<div class="table-wrap" data-table="lab-flags-unsourced" data-page-size="10">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter lab flags unsourced rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="no-source">No source (design)</button>
+        <button type="button" data-status-filter="unverified">Blank / unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
+      </div>
+      <div class="scroll"><table><thead><tr><th>ID</th><th>Issue</th><th>Status</th><th>Impact if ignored</th><th>Source</th></tr></thead><tbody><tr data-no-source="design" data-design-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="by design — not a defect unverified no-source" data-row-text="fl-06 every correlation value in this section is blank, and every strategy fails at least one gate; the leaderboard has no entries.  by design — not a defect  the competition cannot start until results and market lines exist (d-01, d-03). no official source publishes these values, which is exactly why they are blank.  no source — design   design artifact, not a fact ·  computed from scripts/nfl_lab_data.py  "><td>FL-06</td><td>Every correlation value in this section is blank, and every strategy fails at least one gate; the leaderboard has no entries.</td><td><span class="badge badge-neutral">BY DESIGN — not a defect</span></td><td>The competition cannot start until results and market lines exist (D-01, D-03). No official source publishes these values, which is exactly why they are blank.</td><td><span class="badge badge-unverified" title="No official source publishes this; it is a design artifact, not a fact.">NO SOURCE — DESIGN</span><br><span class="mini">design artifact, not a fact · <a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener">computed from scripts/nfl_lab_data.py</a></span></td></tr></tbody></table></div>
+    </div>
+</section>
+<section class="panel"><h2>How these were found</h2>
+<ul class="exec-list">
+<li>FL-01 by reading <code>data/nfl-2026.json</code> and comparing it with the official Week-1 row.</li>
+<li>FL-02 by comparing the snapshot timestamp in <code>meta.json</code> with the build timestamp and reading the workflow triggers.</li>
+<li>FL-03 by reading the 49ers schedule page and finding no venue on the league-sourced row.</li>
+<li>FL-04 by noticing 15 players listed as non-participants with blank game statuses.</li>
+<li>FL-05 by counting empty backup cells on the official depth chart.</li>
+<li>FL-06 by design: the gates cannot run, so the blanks are stated rather than hidden.</li>
+</ul>
+</section>
+
+  <footer class="footer">
+    <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
+    <a href="docs/index.html">Docs HTML edition (parallel session)</a>
+    <a href="site/index.html">Legacy anchor site</a>
+    <a href="site/pages/sources.html">Legacy category pages</a>
+    <a href="data/official/events.json">Raw official event JSON</a>
+    <a href="research/line_by_line.json">Line-by-line audit JSON</a>
+    <br><span class="mini">Built 2026-11-13T13:09:05+00:00 from 748 captured official-source records. Deployment: GitHub Pages <code>main:/</code>.</span>
+  </footer>
+</main></body></html>

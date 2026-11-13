@@ -1,0 +1,134 @@
+[
+ {
+  "id": "SUG-01",
+  "priority": "P1",
+  "suggestion": "Capture completed-game results (final scores) from NFL.com weekly pages into `data/nfl-lab/results.json` on a schedule.",
+  "why": "Without results, gates G4–G7 can never run and the leaderboard stays empty. This is the single blocking dependency.",
+  "measure": "≥200 settled NFL games archived; gate G4 turns PASS.",
+  "effort": "Low — the weekly page already renders finals (e.g. Commanders 24, Giants 21).",
+  "owner_action": "Approve automated capture.",
+  "status": "PROPOSED",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-02",
+  "priority": "P1",
+  "suggestion": "Archive a daily injury-report snapshot per club with the capture timestamp, instead of only the current week.",
+  "why": "The official page mutates daily; a signal is only usable if we can prove the value existed before kickoff (gate G2).",
+  "measure": "≥3 snapshots/week/club; G2 turns PASS.",
+  "effort": "Low",
+  "owner_action": "Approve snapshot storage growth (~0.2 MB/week compressed).",
+  "status": "PROPOSED",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-03",
+  "priority": "P1",
+  "suggestion": "Decide the market-line question explicitly: closing lines are not published by the NFL, so either license a data feed or accept that G6 can never pass.",
+  "why": "Every profitability claim depends on a closing-line benchmark. This is a missing-information decision, not a coding task.",
+  "measure": "G6 PASS or a written decision to drop profitability claims.",
+  "effort": "Decision, then either integration or scope cut.",
+  "owner_action": "Choose one of D-03 / D-04.",
+  "status": "NEEDS YOUR DECISION",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-04",
+  "priority": "P2",
+  "suggestion": "Publish the depth-chart gap list as a first-class table (slots with no documented backup), refreshed weekly for all 32 clubs.",
+  "why": "It is the only defensible way to answer 'is a 2nd/3rd/4th-string player replacing a starter?' from official data; today only the 49ers chart is captured.",
+  "measure": "32 club charts captured; gap count per club per week.",
+  "effort": "Medium — 32 fetches, one parser per chart layout family.",
+  "owner_action": "Approve scope expansion.",
+  "status": "PROPOSED",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-05",
+  "priority": "P2",
+  "suggestion": "Add a 'why is this blank?' tooltip beside every UNVERIFIED cell, carrying the exact source URL that shows the gap.",
+  "why": "Blank cells currently look like site errors; a reviewer needs to see the evidence for the blank in one click.",
+  "measure": "100% of blank cells carry a source link.",
+  "effort": "Low",
+  "owner_action": "None.",
+  "status": "IMPLEMENTED (this section)",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-06",
+  "priority": "P2",
+  "suggestion": "Show the snapshot age in hours on every page and turn the banner amber past 48 hours.",
+  "why": "Stale data is the largest silent risk in the existing dashboard: sources were 11 days old at rebuild.",
+  "measure": "Age label present on 100% of pages.",
+  "effort": "Low",
+  "owner_action": "None.",
+  "status": "IMPLEMENTED (this section) — the 15 legacy pages are owned by the main build and are unchanged.",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-07",
+  "priority": "P3",
+  "suggestion": "Split the 4.9 MB MLB page and 2.3 MB review page into paginated chunks or JSON-backed tables.",
+  "why": "Large single pages are slow on mobile radio-network connections and hard to review line by line.",
+  "measure": "Largest page under 500 KB.",
+  "effort": "Medium — build pipeline change.",
+  "owner_action": "Approve; requires editing the main build (not this session's scope).",
+  "status": "DEFERRED (file owned by another build path)",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-08",
+  "priority": "P3",
+  "suggestion": "Fix the workflow triggers: `fetch-official.yml` only fires for the superseded branch name `arena/72e6d3f7-korea4` and has no schedule.",
+  "why": "That is why the snapshot is stale. Main-branch pushes never refresh official sources.",
+  "measure": "A refresh run on `main` plus a weekly `cron`.",
+  "effort": "Low",
+  "owner_action": "Approve workflow edit (workflow files are shared).",
+  "status": "PROPOSED",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-09",
+  "priority": "P3",
+  "suggestion": "Add a decision log page where each accepted suggestion is recorded with the evidence that justified it and a review date.",
+  "why": "Prevents re-litigating decisions and makes reversal cheap.",
+  "measure": "Every accepted item has an entry with date and review trigger.",
+  "effort": "Low",
+  "owner_action": "None.",
+  "status": "IMPLEMENTED (this section: Decision register)",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-10",
+  "priority": "P3",
+  "suggestion": "Retire or annotate `data/nfl-2026.json`, which still asserts `\"verified\": true` while citing non-official sites.",
+  "why": "A file that calls itself verified but is not is worse than a missing file; it can seed future errors.",
+  "measure": "File deleted or its `verified` flag set to false with a note.",
+  "effort": "Trivial",
+  "owner_action": "Approve deletion (it is referenced only by the audit page).",
+  "status": "PROPOSED — needs approval to delete data",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-11",
+  "priority": "P3",
+  "suggestion": "Add a data-freshness SLA table per source family (schedule, injury, depth, stats) with the expected refresh cadence.",
+  "why": "Turns 'is this current?' into a measured question instead of a vibe.",
+  "measure": "Every source row has cadence and last-refresh columns.",
+  "effort": "Low",
+  "owner_action": "None.",
+  "status": "PROPOSED",
+  "design_note": "proposal, not a fact"
+ },
+ {
+  "id": "SUG-12",
+  "priority": "P3",
+  "suggestion": "Publish the gate code, not just the gate results, and version the gate rule set.",
+  "why": "Gates are the only thing separating this leaderboard from a tip sheet; they must be auditable and immutable per season.",
+  "measure": "Gate rules carry version ids; changes are dated.",
+  "effort": "Low",
+  "owner_action": "None.",
+  "status": "PROPOSED",
+  "design_note": "proposal, not a fact"
+ }
+]
