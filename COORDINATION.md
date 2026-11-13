@@ -13,6 +13,16 @@ Ordering disclosure: data exploration (nfldata download, NFL.com reads) began be
 Requests to other owners (logged, not edited): none.
 
 
+## NL1 status log — `arena/bc672c19-korea4` (2026-11-13 UTC)
+
+- **Done:** model, backtest, verifier, `tests/test_nfl_lines.py` (8/8 pass), generated `lines/` (13 pages), CI workflow, research README.
+- **Official URL checks (fetched 2026-11-13):** Week 10 game page `commanders-at-giants-2026-reg-10` (WAS 24, NYG 21, Final, Nov 12) confirmed; S-02 is VERIFIED. NFL.com news pages cited for injuries were read: Darnold (Week 10 ruled out), Nacua (likely IR), Jacobs (finger surgery), Thursday Nov 12 / Friday Nov 6 / Wednesday Nov 11 / Thursday Nov 5 roundups. Each supports its headline, but the injury table has no game status for those players, so the six rows stay FLAGGED (F-06). Week 1 and `/schedules` pages fetched. `initial_lines.csv` checked via the nfldata tarball (1,088 vs 20,490 closing rows), so Q-13 stands. `singaporepools.com.sg`, `nfl.com/teams`, `nfl.com/stats` links were removed earlier.
+- **Deviation (branch name):** session uses `arena/bc672c19-korea4` because the branch name is fixed for this session. Not renamed.
+- **Deviation (shared output, reverted):** a root dashboard rebuild was tried to satisfy a date-dependent test. It changed root shared pages. Reverted in `517998a`. Root pages are unchanged by this branch.
+- **Repo test status (not in check.yml):** `tests/test_build.py` has 3 failures (R-01 missing `_site/` artefact; R-02 eight legacy pages with no redirect entry). `tests/test_dashboard_generator.py` fails on 2026-11-13 because the root dashboard was built 2026-11-05 (R-03). **For the final integration session:** rebuild the root dashboard and add the redirects. These are logged, not fixed here.
+- **Open (not done in this session):** depth-chart deficiency analysis for offense and defense (2nd/3rd/4th string replacing starters). It needs official NFL.com depth-chart pages, which were not fetched. Injury data is a single Week 10 snapshot. Suggestions and questions pages exist; the user chooses before any implementation.
+- **Pending:** PR to `main` and merge; PR link to be recorded here after creation.
+
 ## Current session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
 | Task | Status | Owner | File scope | Notes |

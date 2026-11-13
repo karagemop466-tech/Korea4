@@ -69,9 +69,9 @@
       "id": "S-09",
       "name": "nfldata repository, data/closing_lines.csv and initial_lines.csv",
       "url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
-      "used_for": "Coverage review only (Q-13)",
+      "used_for": "Coverage review only (Q-13): initial_lines.csv has 1,088 rows vs 20,490 in closing_lines.csv (codeload tarball of nflverse/nfldata master, 7aae940). Blob pages not fetched directly.",
       "retrieved": "2026-11-13",
-      "status": "UNVERIFIED"
+      "status": "VERIFIED"
     }
   ],
   "files": [
@@ -102,8 +102,8 @@
     },
     {
       "path": "research/nfl-lines/official/nfl_injury_report_2026_week10.csv",
-      "sha256": "feae823ba587e953526a8ac4b0d27cddf53d97921158195fa223a8300bb7a5fc",
-      "bytes": 4709
+      "sha256": "b81ea03b0d93ce3dbe3474074f3ac9b057355d200b8035582372df5f1f42be01",
+      "bytes": 4823
     },
     {
       "path": "research/nfl-lines/raw/closing_lines.csv.gz",

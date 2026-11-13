@@ -399,14 +399,14 @@ def build_suggestions_page():
 REPO_REVIEW = [
     ("R-01", "Tests", "tests/test_build.py fails: _site/ is missing (a build artefact that is gitignored). Test expects a prior build.", "tests/test_build.py", "Medium"),
     ("R-02", "Tests", "tests/test_build.py LegacyRedirectSourcesTest fails: 8 tracked legacy pages have no redirect entry (review.html, nfl.html, mlb.html, ncaaf.html, sources.html, methodology.html, wwo.html, research/legacy/index-9d83abee.html).", "tests/test_build.py", "Medium"),
-    ("R-03", "Tests / data", "tests/test_dashboard_generator.py checks that data/official/meta.json system_today equals today's Pacific date. It failed on 2026-11-13 because the committed dashboard was built 2026-11-05. It passes only after the offline rebuild (see R-11), so it will fail again on any day the dashboard is not rebuilt. It is a date-dependent check, not a fixed defect.", "tests/test_dashboard_generator.py; data/official/meta.json", "Medium"),
+    ("R-03", "Tests / data", "tests/test_dashboard_generator.py checks that data/official/meta.json system_today equals today's Pacific date. It failed on 2026-11-13 because the root dashboard was built 2026-11-05. The root dashboard is a shared output, so this session did not rebuild it. Logged for the final integration session. It is date-dependent: it fails on any day the dashboard is not rebuilt.", "tests/test_dashboard_generator.py; data/official/meta.json", "Medium"),
     ("R-04", "Verification gate", "scripts/verify.py passes (0 errors, 10,066 primary rows, 689 internal links) but states that it is structural, not a line-by-line check against live sites.", "research/verification-report.md", "Info"),
     ("R-05", "Workflows", "Three workflows still target the branch arena/72e6d3f7-korea4 (listed as in progress on the board). Branch-specific triggers are fragile.", ".github/workflows/check.yml; fetch-official.yml; pages.yml; probe-sources.yml", "Low"),
     ("R-06", "Coordination board", "COORDINATION.md is 814 lines with repeated 'Current session' headings, 9 rows still 'in progress' and 6 'unclaimed' from older sessions.", "COORDINATION.md", "Low"),
     ("R-07", "Duplicate content", "Three parallel copies of the dashboard (root, docs/, site/) plus research/legacy/ and redirects/. Risk of drift.", "docs/; site/; redirects/", "Low"),
     ("R-08", "Large files", "mlb.html is 5.1 MB and review.html 2.4 MB; sources.html 0.67 MB. Slow to load on mobile.", "mlb.html; review.html; sources.html", "Low"),
     ("R-09", "Duplicate summary", "EXECUTIVE-SUMMARY.md and executive-summary.html both exist; they can diverge.", "EXECUTIVE-SUMMARY.md", "Low"),
-    ("R-11", "Regenerated output", "To make the PR check pass, the vacation dashboard was rebuilt offline from the same 2026-11-02 source snapshot (no new fetches). Changes: system_today 2026-11-05 -> 2026-11-13 and rebuild timestamps across 18 root files. Also, line_by_line audit rows changed 2423 -> 2419 with no explanation in the snapshot; flagged for manual review.", "data/official/meta.json; research/line_by_line.json", "Medium"),
+    ("R-11", "Regenerated output", "An offline rebuild of the root dashboard from the 2026-11-02 snapshot was tried and reverted, because root pages are shared outputs for the integration session. Expected result of that rebuild: system_today 2026-11-05 -> 2026-11-13 across root pages. Also, line_by_line audit rows would change 2423 -> 2419 with no explanation in the snapshot. Flagged for the integration session.", "data/official/meta.json; research/line_by_line.json", "Medium"),
     ("R-10", "Pages config", "GitHub Pages is a legacy build from branch main, path /. Pages builds are triggered by pushes to main only.", "https://api.github.com/repos/karagemop466-tech/Korea4/pages", "Info"),
 ]
 
@@ -421,7 +421,7 @@ def build_repo_review_page():
 <section class="hero small">
   <h1>Repository review</h1>
   <p>Findings from running the repository's own gates on 2026-11-13 and reading its files. Each row cites the file it refers to. Items are flagged for review; none blocks this site.</p>
-  <p class="callout">Gates run: scripts/verify.py PASS · node --check js/app.js PASS · npm test PASS · tests/test_dashboard.mjs PASS · test_dashboard_generator PASS after offline rebuild (R-03, R-11) · Python unittest discover: 3 failing tests in tests/test_build.py (R-01, R-02) · tests/test_nfl_lines.py 8/8 PASS.</p>
+  <p class="callout">Gates run: scripts/verify.py PASS · node --check js/app.js PASS · npm test PASS · tests/test_dashboard.mjs PASS · test_dashboard_generator FAIL (date-dependent; root dashboard not rebuilt, logged R-03) · Python unittest discover: 3 failing tests in tests/test_build.py (R-01, R-02) · tests/test_nfl_lines.py 8/8 PASS.</p>
 </section>
 {table(["ID", "Area", "Finding", "Evidence (file)", "Severity", "Status"], rows, "wide")}
 <p class="note">Repository evidence links: <a href="{REPO_URL}/blob/main/COORDINATION.md">COORDINATION.md</a> · <a href="{REPO_URL}/blob/main/.github/workflows/check.yml">check.yml</a> · <a href="{REPO_URL}/blob/main/tests/test_build.py">tests/test_build.py</a>.</p>
@@ -431,15 +431,15 @@ def build_repo_review_page():
 
 FLAGS = [
     ("F-01", "All betting lines (closing spread, total) come from nfldata, a third-party dataset. No official source was found.", "Q-02, Q-03", "https://github.com/nflverse/nfldata/blob/master/data/games.csv", "No"),
-    ("F-02", "Only 16 of the 2026 final scores were checked against NFL.com (Week 9 all 15 games and the Week 10 Thursday game). Other scores and all 2005–2025 scores are UNVERIFIED.", "Coverage", "https://www.nfl.com/schedules/2026/by-week/week-9", "No"),
+    ("F-02", "Only 16 of the 2026 final scores were checked against NFL.com (Week 9 all 15 games, plus the Week 10 Thursday game WAS 24–NYG 21, confirmed on its game page 2026-11-13). Other scores and all 2005–2025 scores are UNVERIFIED.", "Coverage", "https://www.nfl.com/schedules/2026/by-week/week-9", "No"),
     ("F-03", "Assumed −110 price for every bet. Real prices vary and were not used.", "Q-06", f"{REPO_URL}/blob/main/scripts/nfl_lines/backtest.py", "No"),
     ("F-04", "Spread sign convention (positive = home favoured) confirmed from data, not from the field definition.", "Q-04", "https://nflreadr.nflverse.com/articles/dictionary_schedules.html", "No"),
     ("F-05", "Injury data: one Week 10 snapshot with 9 designations. No history, so no injury backtest exists.", "Q-05", "https://www.nfl.com/injuries/", "No"),
-    ("F-06", "NFL.com news headlines conflict with the injury table for 6 players (see Injuries page). Headlines only; article bodies not read.", "Injuries", "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again", "No"),
+    ("F-06", "Six NFL.com news pages cited for injuries were read on 2026-11-13 and support the headlines. The injury table still shows no game status for these players, so they remain FLAGGED (see Injuries page).", "Injuries", "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again", "No"),
     ("F-07", "Legal: secondary websites cite the Remote Gambling Act 2014 as current law. The Singapore Statutes Online record shows it was repealed on 1 Aug 2022 (Act 15 of 2022). The GRA's current guidance is the basis used here.", "Q-01", "https://sso.agc.gov.sg/Act/RGA2014/Repealed/20220801?DocDate=20220404", "No"),
     ("F-08", "Strategy results are DERIVED from UNVERIFIED lines. Treat leaderboard ranks as provisional.", "Q-03", f"{REPO_URL}/blob/main/research/nfl-lines/analysis/backtest.json", "No"),
     ("F-09", "Repo: three tests in tests/test_build.py fail (missing _site/ build artefact; legacy redirect coverage). Not part of check.yml.", "R-01, R-02", f"{REPO_URL}/blob/main/tests/test_build.py", "No"),
-    ("F-10", "Vacation dashboard was rebuilt from the same snapshot to pass a date-dependent check. Its audit row count changed 2423 -> 2419 without explanation.", "R-03, R-11", f"{REPO_URL}/blob/main/research/line_by_line.json", "No"),
+    ("F-10", "Root dashboard date-dependent test fails (system_today 2026-11-05 vs 2026-11-13). Integration session to rebuild. Audit row count would change 2423 -> 2419 without explanation.", "R-03, R-11", f"{REPO_URL}/blob/main/data/official/meta.json", "No"),
 ]
 
 
@@ -593,7 +593,7 @@ SOURCES = [
     {"id": "S-06", "name": "Singapore Statutes Online: Remote Gambling Act 2014 (Repealed)", "url": "https://sso.agc.gov.sg/Act/RGA2014/Repealed/20220801?DocDate=20220404", "used_for": "Shows RGA 2014 repealed 1 Aug 2022", "retrieved": "2026-11-13", "status": "VERIFIED"},
     {"id": "S-07", "name": "nflverse data dictionary (schedules)", "url": "https://nflreadr.nflverse.com/articles/dictionary_schedules.html", "used_for": "Definitions of result and total (home minus away; home plus away)", "retrieved": "2026-11-13", "status": "VERIFIED"},
     {"id": "S-08", "name": "nfldata repository (Lee Sharpe), data/games.csv, commit 7aae940", "url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv", "used_for": "Game results, closing spread and total, rest days, roof; third-party", "retrieved": "2026-11-13", "status": "UNVERIFIED"},
-    {"id": "S-09", "name": "nfldata repository, data/closing_lines.csv and initial_lines.csv", "url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv", "used_for": "Coverage review only (Q-13)", "retrieved": "2026-11-13", "status": "UNVERIFIED"},
+    {"id": "S-09", "name": "nfldata repository, data/closing_lines.csv and initial_lines.csv", "url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv", "used_for": "Coverage review only (Q-13): initial_lines.csv has 1,088 rows vs 20,490 in closing_lines.csv (codeload tarball of nflverse/nfldata master, 7aae940). Blob pages not fetched directly.", "retrieved": "2026-11-13", "status": "VERIFIED"},
 ]
 
 
