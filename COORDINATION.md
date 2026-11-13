@@ -926,3 +926,33 @@ have been invented. They are published as blanks with the source link that estab
 | Local gate | `scripts/verify.py` PASS (0/0, 10,207 rows, 1,210 links, 0 broken); `scripts/verify_nfl_lab.py` PASS (0/0); `npm test`, `node --check`, dashboard-generator tests PASS |
 | Known non-blocking | FL-01…FL-06 published on `/nfl-decision-flags.html`; pre-existing `tests/test_build.py` failures (needs Jekyll `_site/`) unchanged from baseline |
 | Hand-off note for the integrator | Two parallel NFL workstreams now coexist on `main`: `nfl-lines/nfl-strategies/nfl-injuries/nfl-suggestions` (merged module) and `nfl-decision-*` (this section). They agree on the Week-10 injury data and both keep correlation/leaderboard values blank. If the owner wants one home, this section's unique contribution is the official per-club depth chart with explicit empty backup slots — the merged module's own IR-023 says that data was missing from its build. |
+
+---
+
+## Session log — `arena/3b442c81-korea4` (2026-11-13)
+
+NFL Lines program: own-line origination, strategy leaderboard, validation gates, correlation analysis,
+injury/depth deficiency tracking, suggestions register, decision register, executive summary, and a
+category-organized GitHub Pages site with source-linked tables. Branched from `main` @ `a8fa5e3`
+(PR #42 merge). Working tree clean at claim time.
+
+### Task claim (claimed 2026-11-13, before any edit)
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| NFL-1 — Official-source capture for the NFL Lines program: 2026 standings panel, official injury reports, official team depth charts, 2026 schedule/results, NFL dates/rules | in progress | `arena/3b442c81-korea4` | `research/official/raw_nfl/`, `research/official/manifest_nfl.json`, `data/nfl/*` | New directories only; no existing shared data file is touched. |
+| NFL-2 — Strategy engine: validation gates, correlation matrix, leaderboard + reward rules, originated single/parlay/player-prop lines | in progress | `arena/3b442c81-korea4` | `scripts/nfl_signals.py`, `scripts/fetch_nfl_lines.py`, `data/nfl/strategies.json`, `data/nfl/gates.json`, `data/nfl/lines.json`, `data/nfl/correlation.json`, `data/nfl/leaderboard.json` | New files only. |
+| NFL-3 — Injury / depth deficiency tracker (offense and defense, 2nd/3rd/4th string replacement detection) | in progress | `arena/3b442c81-korea4` | `data/nfl/injuries.json`, `data/nfl/depth.json`, `scripts/nfl_signals.py` | New files only. |
+| NFL-4 — Suggestions register (decision support) + open-question / information-needed register | in progress | `arena/3b442c81-korea4` | `data/nfl/suggestions.json`, `data/nfl/decisions.json` | New files only. |
+| NFL-5 — Site: new category pages + landing navigation for the NFL Lines program | in progress | `arena/3b442c81-korea4` | `scripts/build_nfl_lines.py`, `scripts/build_site.py` (NAV + new builders only), `css/style.css` (new rules only) | Existing generated pages are not rewritten except nav; new pages only. |
+| NFL-6 — Repo line-by-line review with findings and irregularities | in progress | `arena/3b442c81-korea4` | `research/repo-review-2026-11-13.md`, `data/nfl/repo_findings.json` | New files only. |
+| NFL-7 — Verification: extend the static gate to the new pages/hosts; run all checks | in progress | `arena/3b442c81-korea4` | `scripts/verify.py` (primary-page list + official-host allowlist additions only), `tests/test_nfl_lines.py` | Additive changes only. |
+| NFL-8 — Executive summary (NFL Lines) + integration, PR, merge, Pages deploy, final record | in progress | `arena/3b442c81-korea4` | `NFL-LINES-EXECUTIVE-SUMMARY.md`, `COORDINATION.md`, generated root pages | Runs last; merges branches and publishes. |
+
+### Coordination notes
+
+- Existing open PRs #43, #41, #25, #18 belong to other sessions and are **not** touched by this session.
+- Shared outputs (`scripts/build_site.py` NAV, `scripts/verify.py` page list, root landing page) are edited only in
+  small, additive ways; the pre-existing generated pages keep their current content.
+- All new official values are captured from official league or team hosts only; anything not confirmable from an
+  official source stays blank and is published on the Flagged for Review page with the source link that establishes the gap.
