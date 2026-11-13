@@ -1,5 +1,21 @@
 # COORDINATION.md — unified shared task board
 
+## Current session — `arena/21f65504-korea4` (2026-11-13 UTC)
+
+Branched from `main` @ `a8fa5e3` (PR #42 merge). This session independently claimed the NFL Lines & Strategy workstream (originate NFL lines, leaderboard strategy competition, injury/roster-deficiency tracking, suggestions + open-questions layer). Parallel sessions `arena/a7381587-korea4` (NFL decision module, PRs #45/#46) and `arena/0d4aaf2a-korea4` (NFL decision lab, PR #48) also built overlapping NFL work and merged to `main`; this session acts as the final integration session, preserving and integrating all of it (player-level verified injury rows, strategy catalog, line-origination method, dedicated leaderboard + questions pages) without discarding any session's work.
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| N1 — NFL Lines Origination & Strategy System (integration): integrate this session's player-level verified injury rows (298), strategy catalog (8), line-origination method + originated-lines table, and dedicated leaderboard + questions pages with the parallel sessions' NFL modules; merge, verify line by line, publish via PR/Pages | done | `arena/21f65504-korea4` | `scripts/build_site.py`, `scripts/verify.py`, `data/official/nfl-*.json`, `scripts/build_nfl_data.py`, `leaderboard.html`, `questions.html`, generated root HTML, `README.md`, `EXECUTIVE-SUMMARY.md`, `COORDINATION.md` | Claimed 2026-11-13 before any edit. Official source for live injury rows: NFL.com official injury report (Week 10). Model lines/odds/correlations/performance are the project's OWN outputs — blank + UNVERIFIED. Flagged irregularities do not block merge. |
+
+### N1 integration record — `arena/21f65504-korea4` (2026-11-13)
+
+- **Overlap detected on rebase:** parallel sessions `arena/a7381587-korea4` (PRs #45/#46, `data/nfl/*.json`, `nfl-lines/nfl-strategies/nfl-injuries/nfl-suggestions.html`) and `arena/0d4aaf2a-korea4` (PR #48, `data/nfl-lab/*.json`, `nfl-decision-*.html`) had already merged complementary NFL modules to `main`. This session used `data/official/nfl-*.json` and added player-level verified injury rows, a strategy catalog, a line-origination method, and dedicated `leaderboard.html` / `questions.html` pages. All three are complementary; none is discarded.
+- **Integration resolution:** kept the parallel sessions' canonical pages; merged this session's line-origination method + originated-lines table into `nfl-lines.html`, strategy catalog into `nfl-strategies.html`, and player-level injury detail into `nfl-injuries.html`; added this session's unique dedicated `leaderboard.html` and `questions.html` pages. `scripts/build_site.py` and `scripts/verify.py` merged; `data/official/nfl-*.json` and `scripts/build_nfl_data.py` retained as additive verified data.
+- **Verification:** `python3 scripts/verify.py` PASS (0 errors / 0 warnings); `node --check js/app.js` PASS; `npm test` PASS; dashboard-generator unittest PASS.
+- **Conflict log:** `git rebase origin/main` replayed the parallel sessions' merged PRs; `COORDINATION.md` add/add resolved by keeping all session logs (append-only); generated HTML regenerated from the merged `build_site.py`. No other session's work discarded.
+
+
 ## Current session — `arena/a7381587-korea4` (2026-11-13 UTC)
 
 Baseline: `main` @ `a8fa5e3` (PR #42 merged). Working tree clean at start. No other session has claimed work dated after 2026-11-05; this session therefore claims the NFL module **and acts as its own final integration session** (nav/index/exec-summary shared outputs included in scope), per the user's instruction that no manual input is to be awaited.
