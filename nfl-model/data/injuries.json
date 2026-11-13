@@ -1,0 +1,315 @@
+{
+  "retrieved": "2026-11-13",
+  "source": "nfl-injuries-reg10",
+  "page": "https://www.nfl.com/injuries/league/2026/REG10",
+  "reading_rules": [
+    "Practice status and game status are different fields with different meanings; the official definitions are Did Not Participate / Limited Participation (under 100% of normal reps) / Full Participation (100%) for practice, and Out / Doubtful / Questionable for game status.",
+    "A blank Game Status is NOT missing data: the league policy states that a player certain to play is deliberately not listed in the Game Status Report, and that deactivating such a player requires an explanation to the league.",
+    "The official page shows a single practice status per player (the latest report), not the Wednesday/Thursday/Friday ladder, and its Injuries column is frequently blank; we record what the page shows and leave the rest blank."
+  ],
+  "context": {
+    "game": "San Francisco 49ers at Dallas Cowboys",
+    "when": "Sunday, November 15, 2026, 4:25 PM ET (FOX / FOX DEPORTES)",
+    "records_shown_on_page": "SF (7-1), DAL (4-5)",
+    "note": "Records and matchup metadata are exactly as displayed on the official page retrieved 2026-11-13; the snapshot is a practice-report state, not a final lineup."
+  },
+  "rows": [
+    {
+      "club": "SF",
+      "player": "Mike Evans",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "1st string WR (WR line 1)"
+    },
+    {
+      "club": "SF",
+      "player": "Renardo Green",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "1st string LCB - the only name on that line"
+    },
+    {
+      "club": "SF",
+      "player": "Dre Greenlaw",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "1st string WILL"
+    },
+    {
+      "club": "SF",
+      "player": "Nate Hobbs",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not listed on the fetched depth chart"
+    },
+    {
+      "club": "SF",
+      "player": "Deommodore Lenoir",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "1st string RCB"
+    },
+    {
+      "club": "SF",
+      "player": "Christian McCaffrey",
+      "pos": "RB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "1st string RB"
+    },
+    {
+      "club": "SF",
+      "player": "Siran Neal",
+      "pos": "S",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "chart_depth": "2nd string FS"
+    },
+    {
+      "club": "SF",
+      "player": "Demarcus Robinson",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "2nd string on the second WR line"
+    },
+    {
+      "club": "SF",
+      "player": "Deebo Samuel Sr.",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "chart_depth": "1st string on the second WR line"
+    },
+    {
+      "club": "SF",
+      "player": "Upton Stout",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "chart_depth": "1st string NB"
+    },
+    {
+      "club": "SF",
+      "player": "C.J. West",
+      "pos": "DT",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not listed on the fetched depth chart"
+    },
+    {
+      "club": "SF",
+      "player": "Trent Williams",
+      "pos": "T",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "1st string LT"
+    },
+    {
+      "club": "DAL",
+      "player": "Jonathan Bullard",
+      "pos": "DT",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected - opponent charts were not retrieved this session"
+    },
+    {
+      "club": "DAL",
+      "player": "Alijah Clark",
+      "pos": "S",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Donovan Ezeiruaku",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Jake Ferguson",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Tyler Goodson",
+      "pos": "RB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Malik Hooker",
+      "pos": "S",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Marist Liufau",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "P.J. Locke",
+      "pos": "S",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Von Miller",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Jonathan Mingo",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Devin Moore",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "DeMarvion Overshown",
+      "pos": "LB",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "George Pickens",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Joey Porter Jr.",
+      "pos": "CB",
+      "injury": "",
+      "practice": "Did Not Participate In Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Luke Schoonmaker",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Brevyn Spann-Ford",
+      "pos": "TE",
+      "injury": "",
+      "practice": "Full Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "Juanyeh Thomas",
+      "pos": "S",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    },
+    {
+      "club": "DAL",
+      "player": "KaVontae Turpin",
+      "pos": "WR",
+      "injury": "",
+      "practice": "Limited Participation in Practice",
+      "game_status": "",
+      "chart_depth": "not collected"
+    }
+  ],
+  "coverage": [
+    {
+      "scope": "Games whose injury blocks were read directly from a fetched official page this session",
+      "count": 1,
+      "detail": "SF at DAL (Week 10, 2026)."
+    },
+    {
+      "scope": "Additional clubs visible in other fetched chunks of the same official page",
+      "count": 20,
+      "detail": "Washington, New York Giants, New England, Detroit, Kansas City, Atlanta, Minnesota, Green Bay, Jacksonville, Tennessee, Buffalo, NY Jets, Miami, Indianapolis, Carolina, New Orleans, Houston, Cleveland, LA Rams, Arizona - partial blocks only, deliberately not transcribed (see IR-034)."
+    },
+    {
+      "scope": "Clubs with a collected, structured report",
+      "count": 1,
+      "detail": "San Francisco 49ers only. The other 31 require the collector (R-03, SG-09)."
+    },
+    {
+      "scope": "Clubs whose depth chart was retrieved",
+      "count": 1,
+      "detail": "San Francisco 49ers (49ers.com, updated 11/10/26). Opponent chart not retrieved, so opponent-side deficiency is blank rather than inferred (IR-036)."
+    },
+    {
+      "scope": "Rows seen in a larger retrieval of the same page but NOT published",
+      "count": 132,
+      "detail": "One later fetch of the same URL returned 162 rows against the 30 published here. Those extra rows are withheld because they cannot be re-derived from a stored artifact; see IR-040 and run scripts/fetch_nfl_model_sources.py to capture the report properly."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+name: Verify NFL-model section
+
+on:
+  push:
+    branches:
+      - arena/85a71078-korea4
+    paths:
+      - "nfl-model/**"
+      - "scripts/build_nfl_model.py"
+      - "scripts/verify_nfl_model.py"
+      - "scripts/fetch_nfl_model_sources.py"
+      - "tests/test_nfl_model.py"
+      - ".github/workflows/nfl-model.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "nfl-model/**"
+      - "scripts/build_nfl_model.py"
+      - "scripts/verify_nfl_model.py"
+      - "scripts/fetch_nfl_model_sources.py"
+      - "tests/test_nfl_model.py"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nfl-model-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Rebuild with the published build stamp and confirm no hand edits
+        run: |
+          STAMP=$(python3 -c "import json;print(json.load(open('nfl-model/data/meta.json'))['built_utc'])")
+          python3 scripts/build_nfl_model.py --stamp "$STAMP"
+          if ! git diff --exit-code -- nfl-model; then
+            echo "Generated pages differ from the committed copies. Commit the rebuild output." >&2
+            git diff --stat -- nfl-model | head -20 >&2
+            exit 1
+          fi
+      - name: Run the section verification gate
+        run: python3 scripts/verify_nfl_model.py
+      - name: Syntax-check the browser script and the collector
+        run: |
+          node --check nfl-model/assets/model.js
+          python3 -m py_compile scripts/build_nfl_model.py scripts/verify_nfl_model.py scripts/fetch_nfl_model_sources.py
+          python3 scripts/fetch_nfl_model_sources.py --selftest
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests -p 'test_nfl_model.py' -v
+      - name: Attach the verification report
+        if: always()
+        run: cat research/nfl-model/verification-report.md || true
