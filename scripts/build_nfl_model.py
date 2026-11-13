@@ -403,6 +403,7 @@ def main() -> None:
     awaiting = [s for s in SUG["suggestions"] if s["status"] == "AWAITING-DECISION"]
     blocking_q = [q for q in QUES["questions"] if q["status"] != "ANSWERED"]
     strat_rejected = sum(1 for x in STRAT["strategies"] if x["status"] == "REJECTED-BY-GATE")
+    tested_count = sum(1 for x in STRAT["strategies"] if x["status"] in {"TRIAL-CANDIDATE", "MEASURED", "VALIDATED"})
     idx_blocks = [
         callout(
             "warn",
@@ -430,15 +431,15 @@ def main() -> None:
         ),
         '<div class="grid cards">'
         + "".join(
-            f'<div class="card"><div class="number">{counts[k]}</div><div class="label">{lbl}</div></div>'
+            f'<div class="card"><div class="number">{counts[k] if k else len(SUG["suggestions"])}</div><div class="label">{lbl}</div></div>'
             for k, lbl in (
                 ("requirements", "requirements specified"),
                 ("questions", "decision-readiness questions"),
-                ("suggestions", "suggestions awaiting a decision"),
-                ("strategies", "strategies specified (0 tested)"),
+                (None, f"suggestions in the backlog ({len(awaiting)} awaiting a decision, {len(SUG['suggestions']) - len(awaiting)} auto-done)"),
+                ("strategies", f"strategies specified ({tested_count} tested)"),
                 ("gates", "validation gates"),
                 ("flags", "irregularities flagged"),
-                ("sources", "official sources in the registry"),
+                ("sources", "entries in the source registry"),
             )
         )
         + "</div>",
