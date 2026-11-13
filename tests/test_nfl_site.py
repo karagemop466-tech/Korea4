@@ -1,4 +1,6 @@
-import csv, json, unittest
+import csv, json, sys, unittest
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'scripts'))
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 DATA=ROOT/'data'/'nfl'
@@ -30,7 +32,7 @@ class NFLLinesTests(unittest.TestCase):
             self.assertTrue(row['kickoff_et'])
             self.assertTrue(row['source_url'].startswith('https://www.nfl.com/'))
     def test_leaderboard_is_gated_without_prices(self):
-        rows=self.read('leaderboard.json')['rows']
+        rows=self.read('leaderboard-register.json')['rows']
         self.assertTrue(rows)
         self.assertTrue(all(row['eligibility']=='GATED' and row['points']=='' for row in rows))
     def test_injury_rows_have_official_sources_and_explicit_depth_gaps(self):
@@ -52,8 +54,30 @@ class NFLLinesTests(unittest.TestCase):
                 if tag=='tr' and self.inrow:
                     if self.cells and not self.rowlinks: self.bad.append('table row without source link')
                     self.inrow=False
-        pages=['nfl-lines.html','nfl-lines-overview.html','nfl-schedule.html','nfl-fair-lines.html','nfl-availability.html','nfl-analysis.html','nfl-strategies.html','nfl-leaderboard.html','nfl-flagged.html']
+        pages=['nfl-lines-overview.html','nfl-schedule.html','nfl-fair-lines.html','nfl-availability.html',
+               'nfl-analysis.html','nfl-strategy-registry.html','nfl-data-suggestions.html',
+               'nfl-leaderboard.html','nfl-questions.html','nfl-flagged.html',
+               # the dashboard's own NFL module pages must stay source-linked after integration
+               'nfl-lines.html','nfl-strategies.html','nfl-suggestions.html','nfl-injuries.html']
         for name in pages:
             parser=Audit(); parser.feed((ROOT/name).read_text())
             self.assertFalse(parser.bad, name)
+    def test_nfl_lines_landing_links_the_data_pages_without_replacing_them(self):
+        """build_site.py owns nfl-lines.html; our pages are added as a marked links block."""
+        from build_nfl_site import hub_block
+        landing=(ROOT/'nfl-lines.html').read_text()
+        block=hub_block()
+        self.assertIn(block, landing)
+        for _n,u in [('model overview','nfl-lines-overview.html'),('schedule','nfl-schedule.html'),
+                     ('registry','nfl-strategy-registry.html'),('suggestions','nfl-data-suggestions.html')]:
+            self.assertIn(u, block)
+        # the dashboard page's own framework sections remain present
+        self.assertIn('Own-line pipeline', landing)
+        gen=(ROOT/'scripts'/'build_site.py').read_text()
+        self.assertIn('nfl_hub_block()', gen)
+    def test_builder_does_not_overwrite_dashboard_owned_pages(self):
+        src=(ROOT/'scripts'/'build_nfl_site.py').read_text()
+        for owned in ['nfl-lines.html','nfl-strategies.html','nfl-suggestions.html','nfl-injuries.html']:
+            self.assertNotIn(f"write('{owned}'", src, owned)
+        self.assertIn("write('nfl-strategy-registry.html'", src)
 if __name__=='__main__': unittest.main()

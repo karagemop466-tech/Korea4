@@ -2,11 +2,12 @@
 
 Generated: 2026-11-13T13:09:05+00:00
 
-- JSON files checked: 9
-- Primary generated pages: 19
+- JSON files checked: 35
+- Primary generated pages: 29
 - Static primary table rows with source URL: 10207
-- HTML pages link-checked (including legacy trees): 102
-- Internal links checked: 1210
+- NFL Lines static table rows with allowlisted official links: 361
+- HTML pages link-checked (including legacy trees): 112
+- Internal links checked: 1367
 - Broken internal links: 0
 - JavaScript syntax: PASS
 - NFL decision-support gate (scripts/verify_nfl_lab.py): PASS (report: research/nfl-lab-verification.md)
@@ -17,6 +18,7 @@ Generated: 2026-11-13T13:09:05+00:00
 ## Structural checks (not a source-value audit)
 
 1. Static primary data rows with `data-source-url` have an HTTP link and an official-domain host (allowlist in `scripts/verify.py`); this check does not validate the source content of every row.
+1c. NFL Lines table rows have allowlisted official-host links; this is structural, not a value audit.
 1b. Event rows: no same-team matchups, no duplicate NFL games on a date, and every row source/duration URL on the official allowlist. vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected; repo-internal process URLs (COORDINATION.md, live Pages data/flag pages) are allowed only as FLAG_ONLY audit/process references, never as value sources.
 2. Dynamic daily/calendar table renderer contains source-link code.
 3. Blank-value and status-label behavior is exercised separately by dashboard tests, not exhaustively proven here.

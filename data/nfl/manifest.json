@@ -1,12 +1,12 @@
 {
   "program": "NFL Lines",
-  "generated_utc": "2026-11-13T13:33:03Z",
+  "generated_utc": "2026-11-13T13:40:42Z",
   "method": "SHA-256 over current local artifacts; source URL list extracted from each artifact where present.",
   "raw_capture_limit": "Official schedule snapshots are preserved in research/official/raw and its manifest. The Week 10 injury report and three team depth pages were read through the Arena page-fetch facility, but their full response bodies are not stored locally in this branch; their row-level fidelity remains flagged rather than certified.",
   "datasets": [
     {
       "path": "data/nfl/schedule_2026.json",
-      "sha256": "b674c3a7d965eb414dbe6860e63b869411d36dd8865877d0bf7430a095ac3861",
+      "sha256": "6172dba3c88af5297bc1ad5f5ebfd7910a3f2ffacecf88ffc7f0eaf94f168d36",
       "bytes": 267481,
       "status": "DERIVED_FROM_OFFICIAL_SNAPSHOTS",
       "source_urls": [
@@ -452,7 +452,7 @@
       "audit_note": "Program-defined scoring/settlement rules; rewards are not awarded."
     },
     {
-      "path": "data/nfl/suggestions.json",
+      "path": "data/nfl/suggestion-register.json",
       "sha256": "d38d110f2dca4c7c45765f6bf11845f37c2f67e873dc6822910a11050a02ae5e",
       "bytes": 37242,
       "status": "PROGRAM_DECISIONS",
@@ -486,6 +486,21 @@
       "status": "PROGRAM_DECISIONS",
       "source_urls": [],
       "audit_note": "Open information/decision register; owner-specific answers remain blank."
+    },
+    {
+      "path": "data/nfl/leaderboard-register.json",
+      "sha256": "37e80f79b059e60d79f94f7fe99b723ee3cd1910c54d5ac319ffd25dac9f7f83",
+      "bytes": 6430,
+      "status": "PROGRAM_DECISIONS",
+      "source_urls": [
+        "https://www.49ers.com/team/depth-chart",
+        "https://www.miamidolphins.com/team/depth-chart",
+        "https://www.nfl.com/injuries/league/2026/reg10",
+        "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+        "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "https://www.nfl.com/standings/league/2026/REG"
+      ],
+      "audit_note": "Gated leaderboard rows for this program only; the dashboard module's competition-design proposals stay in data/nfl/leaderboard.json. No reward is awarded."
     }
   ]
 }

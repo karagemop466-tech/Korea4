@@ -17,7 +17,8 @@ PRIMARY_PAGES = [
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
     "methodology.html", "review.html", "executive-summary.html", "teams.html",
     "nfl-lines-overview.html", "nfl-schedule.html", "nfl-fair-lines.html", "nfl-availability.html",
-    "nfl-analysis.html", "nfl-leaderboard.html", "nfl-questions.html", "nfl-flagged.html",
+    "nfl-analysis.html", "nfl-strategy-registry.html", "nfl-leaderboard.html",
+    "nfl-data-suggestions.html", "nfl-questions.html", "nfl-flagged.html",
 ]
 REPORT = ROOT / "research/verification-report.md"
 
@@ -201,9 +202,13 @@ def main():
         if re.search(r"<table\b", page_text, re.I) and not re.search(r"<thead\b", page_text, re.I):
             warnings.append(f"{rel}: table markup without <thead>")
     # NFL Lines tables: require an official-host link on every published data row.
-    nfl_table_pages = ["nfl-lines.html", "nfl-lines-overview.html", "nfl-schedule.html", "nfl-fair-lines.html",
-                       "nfl-availability.html", "nfl-analysis.html", "nfl-strategies.html",
-                       "nfl-suggestions.html", "nfl-leaderboard.html", "nfl-flagged.html"]
+    # Pages written by scripts/build_nfl_site.py only: the dashboard's own NFL module pages
+    # (nfl-lines.html, nfl-strategies.html, nfl-injuries.html, nfl-suggestions.html) stay
+    # owned by scripts/build_site.py and are checked by the primary-page rules above.
+    nfl_table_pages = ["nfl-lines-overview.html", "nfl-schedule.html", "nfl-fair-lines.html",
+                       "nfl-availability.html", "nfl-analysis.html", "nfl-strategy-registry.html",
+                       "nfl-data-suggestions.html", "nfl-leaderboard.html", "nfl-questions.html",
+                       "nfl-flagged.html"]
     nfl_rows_checked = 0
     for rel in nfl_table_pages:
         p = ROOT / rel

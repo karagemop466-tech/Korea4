@@ -14,8 +14,9 @@ FILES={
  'gates.json':('PROGRAM_RULES','Program-defined validation gates; not an official NFL record.'),
  'strategies.json':('PROGRAM_RULES','Program-defined strategy hypotheses and states; not official NFL values.'),
  'leaderboard_rules.json':('PROGRAM_RULES','Program-defined scoring/settlement rules; rewards are not awarded.'),
- 'suggestions.json':('PROGRAM_DECISIONS','Review proposals; none is automatically approved.'),
+ 'suggestion-register.json':('PROGRAM_DECISIONS','Review proposals; none is automatically approved.'),
  'decisions.json':('PROGRAM_DECISIONS','Open information/decision register; owner-specific answers remain blank.'),
+ 'leaderboard-register.json':('PROGRAM_DECISIONS','Gated leaderboard rows for this program only; the dashboard module\'s competition-design proposals stay in data/nfl/leaderboard.json. No reward is awarded.'),
 }
 def digest(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def source_urls(path):

@@ -10,6 +10,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+try:  # the NFL Lines data pages own their landing-page links block (single source of truth)
+    from build_nfl_site import hub_block as nfl_hub_block
+except Exception:  # pragma: no cover - standalone fallback
+    def nfl_hub_block() -> str:
+        return ""
 META = json.loads((ROOT / "data/official/meta.json").read_text())
 EVENTS = json.loads((ROOT / "data/official/events.json").read_text())
 REVIEW = json.loads((ROOT / "research/line_by_line.json").read_text())
@@ -437,6 +443,7 @@ def build_nfl_lines():
 <section class="panel"><h2>Data-currency check: Week 11 official change vs captured snapshot</h2><p class="intro">The official {esc(NFL_W11['announced'])} announcement post-dates the {esc(NFL_W11['captured_snapshot_date'])} captured snapshot. 11 of 13 Week 11 rows match exactly; 2 are stale (IR-022). Stale values are shown as captured — they are never silently overwritten.</p>
 {table(['ID','Matchup','Game date','Captured snapshot time','Official final time (ET)','Official time PT','Status'], NFL_W11['rows'], ['id','matchup','game_date','repo_time_pt','official_time_et','official_time_pt',('status','badge')], 'nfl-week11-change', 20)}
 <p><a class="control-btn" href="flagged.html">See IR-022 on the Flagged for Review page →</a></p></section>
+{nfl_hub_block()}
 '''
     write("nfl-lines.html", page("NFL lines", "nfl-lines.html", "How this site originates its own NFL numbers from official sources only: pipeline, inputs, and schedule-currency checks.", body))
 

@@ -14,7 +14,7 @@ Turns captured official sources into:
 * ``data/nfl/correlation.json``    - measured correlations: season-to-season
   persistence (skill vs luck) and the signal-correlation matrix used to gate parlays.
 * ``data/nfl/gate_results.json``   - validation-gate outcome per strategy.
-* ``data/nfl/leaderboard.json``    - leaderboard rows, reward tiers and eligibility.
+* ``data/nfl/leaderboard-register.json``    - leaderboard rows, reward tiers and eligibility.
 
 Rules honoured everywhere:
 * No value is invented. A value that no official source confirms is blank and flagged
@@ -888,7 +888,7 @@ def main():
 
     board = build_leaderboard(strategies, gate_rows, rewards.get("reward_tiers", []))
     board["scoring"] = rewards.get("scoring", {})
-    (OUT / "leaderboard.json").write_text(json.dumps(board, indent=2), encoding="utf-8")
+    (OUT / "leaderboard-register.json").write_text(json.dumps(board, indent=2), encoding="utf-8")
 
     print(json.dumps({
         "schedule_games": len(games),
