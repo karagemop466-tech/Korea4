@@ -107,6 +107,21 @@ Baseline: `main` @ `a8fa5e3` (PR #42 merged). Working tree clean at start. No ot
 
 ## Prior session — `arena/5488dbac-korea4` (2026-11-05 UTC)
 
+## Current session — `arena/cb63182f-korea4` (2026-11-13 UTC)
+
+Branch `arena/cb63182f-korea4`, base `main` @ `a8fa5e3` (PR #42 merge). Working tree clean at start.
+Open PRs #18, #25, #41, #43 and the landed PRs #45/#46/#47/#48/#49/#51 belong to other sessions; none of their file scopes are touched except the shared integration files listed for H6.
+
+| Task | Status | Owner | File scope | Notes |
+|---|---|---|---|---|
+| H1 — NFL injury & depth-chart deficiency tracking (distinct module `data/nfl-analytics/` + `nfl-analytics-*.html` pages, renamed to avoid collision with the landed `nfl-injuries.html`) | done | `arena/cb63182f-korea4` | NEW: `research/nfl/**`, `data/nfl-analytics/**`, `scripts/compute_nfl_analytics.py`, `scripts/build_nfl_analytics.py`, pages below | Claimed before any edit. |
+| H2 — NFL line origination research (EPA model, originated lines, correlation framework) | done | `arena/cb63182f-korea4` | `nfl-signals.html`, `nfl-analytics-lines.html`, `nfl-correlation.html` (generated) | No live market odds ingested. |
+| H3 — Strategy leaderboard framework | done | `arena/cb63182f-korea4` | `data/nfl-analytics/strategies.json`, `nfl-analytics-strategies.html` (generated) | |
+| H4 — Suggestions registry + Decision-questions page | done | `arena/cb63182f-korea4` | `data/nfl-analytics/suggestions.json`, `suggestions.html`, `open-questions.html` (generated) | |
+| H5 — NFL data audit of repo rows vs live official pages | done | `arena/cb63182f-korea4` | `data/official/meta.json` (flags IR-042..IR-045 append), `research/nfl/audit/**`, `flagged.html` (regenerated) | |
+| H6 — Final integration for THIS session's scopes only | in progress | `arena/cb63182f-korea4` | `scripts/build_site.py` (NAV + hook), `scripts/verify.py`, `scripts/collect_official.py` (flags), `tests/test_nfl_analytics.py` (NEW), `requirements.txt`, `.github/workflows/check.yml`, `nfl-analytics.html`, `nfl-signals.html`, `nfl-analytics-*.html`, `suggestions.html`, `open-questions.html`, `index.html`/`README.md`/`EXECUTIVE-SUMMARY.md` (regenerated), `COORDINATION.md` | Also applies session `arena/85a71078-korea4`'s requested NAV entry for `nfl-model/index.html` so the build cannot drop their link. |
+
+
 | Task | Status | Owner | File scope | Notes |
 |---|---|---|---|---|
 | F2 — Final integration follow-up: independently verify current official-source snapshot, fix stale dashboard “today” date, rebuild, run checks, and publish via PR/Pages | done | `arena/5488dbac-korea4` | `COORDINATION.md`, `scripts/collect_official.py`, `scripts/build_site.py`, `tests/test_dashboard_generator.py`, generated root dashboard/data artifacts | Merged via PR #31; Pages build and live checks passed. The official raw-source snapshot age (Nov 2) remains disclosed. |
