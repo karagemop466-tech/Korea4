@@ -13,6 +13,7 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 PRIMARY_PAGES = [
     "index.html", "daily.html", "calendar.html", "vacation.html", "mlb.html", "nfl.html",
+    "nfl-lines.html", "nfl-strategies.html", "nfl-injuries.html", "nfl-suggestions.html",
     "ncaaf.html", "wwo.html", "radio.html", "sources.html", "flagged.html",
     "methodology.html", "review.html", "executive-summary.html", "teams.html",
 ]
@@ -24,6 +25,9 @@ REPORT = ROOT / "research/verification-report.md"
 OFFICIAL_SOURCE_HOSTS = {
     "www.mlb.com", "statsapi.mlb.com",
     "www.nfl.com", "nfl.com", "media.nfl.com", "static.nfl.com", "static.www.nfl.com",
+    "nextgenstats.nfl.com",    # official NFL Next Gen Stats (verified live 2026-11-13)
+    "operations.nfl.com",      # official NFL Football Operations (verified live 2026-11-13)
+    "www.nflpa.com",           # official NFLPA (2020 CBA; verified live 2026-11-13)
     "www.49ers.com",
     "www.westwoodonesports.com",
     "gostanford.com", "calbears.com",
@@ -33,14 +37,21 @@ OFFICIAL_SOURCE_HOSTS = {
     "www.theifab.com",                                # Laws of the Game (duration reference)
     "www.nba.com", "www.nhl.com", "www.ksfo.com", "www.knbr.com", "www.957thegame.com",  # station/team pages
 }
-EXCLUDED_SOURCE_HOSTS_NOTE = "vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected"
+EXCLUDED_SOURCE_HOSTS_NOTE = "vividseats.com (ticket reseller), buffedlizard55-lab.github.io (dead prior reference) are rejected; repo-internal process URLs (COORDINATION.md, live Pages data/flag pages) are allowed only as FLAG_ONLY audit/process references, never as value sources"
 
 
 # Exact URLs kept ONLY as audit evidence on flag/status rows (never as a value source):
-# IR-001 dead prior reference site, and the repo's own GitHub Pages API status check.
+# IR-001 dead prior reference site, the repo's own GitHub Pages API status check, and the
+# repo's own board/data/flag pages referenced by the NFL decision module's process rows
+# (suggestions governance S-10 and the module index rows), which are proposals/process
+# records rather than sourced values.
 FLAG_ONLY_SOURCE_URLS = {
     "https://buffedlizard55-lab.github.io/VacationSchedule/site/",
     "https://api.github.com/repos/karagemop466-tech/Korea4/pages",
+    "https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md",
+    "https://karagemop466-tech.github.io/Korea4/data/official/events.json",
+    "https://karagemop466-tech.github.io/Korea4/",
+    "https://karagemop466-tech.github.io/Korea4/flagged.html",
 }
 
 
@@ -204,12 +215,25 @@ def main():
         errors.append(f"{len(broken)} broken internal links")
     # 4. Merge markers and obvious unresolved placeholders.
     for p in ROOT.rglob("*"):
-        if not p.is_file() or ".git" in p.parts or p.suffix in (".gz", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".pdf"):
+        if (not p.is_file() or ".git" in p.parts
+                or any(part.startswith(".venv") for part in p.parts)
+                or p.suffix in (".gz", ".png", ".jpg", ".jpeg", ".webp", ".gif", ".pdf")):
             continue
         try: text = p.read_text("utf-8")
         except (UnicodeDecodeError, OSError): continue
         if re.search(r"^<<<<<<< |^=======$|^>>>>>>> ", text, re.M):
             errors.append(f"Unresolved merge markers in {p.relative_to(ROOT)}")
+    # 4b. NFL decision-support section: stricter gate (every factual row sourced).
+    try:
+        lab = subprocess.run([sys.executable, str(ROOT / "scripts/verify_nfl_lab.py")],
+                             capture_output=True, text=True, timeout=180)
+        lab_ok = lab.returncode == 0
+        if not lab_ok:
+            errors.append("NFL decision-support gate failed: " + ((lab.stderr.strip().splitlines() or ["unknown"])[0]))
+    except Exception as e:
+        lab_ok = False
+        warnings.append(f"NFL decision-support gate unavailable: {e}")
+
     # 5. JavaScript syntax.
     try:
         proc = subprocess.run(["node", "--check", str(ROOT / "js/app.js")], capture_output=True, text=True, timeout=30)
@@ -234,6 +258,7 @@ def main():
         f"- Internal links checked: {checked_links}",
         f"- Broken internal links: {len(broken)}",
         f"- JavaScript syntax: {'PASS' if js_ok else 'NOT CHECKED / FAIL'}",
+        f"- NFL decision-support gate (scripts/verify_nfl_lab.py): {'PASS' if lab_ok else 'FAIL'} (report: research/nfl-lab-verification.md)",
         f"- Event rows checked: {row_stats['event_rows']}; row source domains checked against the official allowlist: {row_stats['rows_checked_domains']}",
         f"- Errors: {len(errors)}",
         f"- Warnings: {len(warnings)}", "",

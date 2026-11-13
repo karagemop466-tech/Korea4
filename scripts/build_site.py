@@ -5,6 +5,7 @@ from __future__ import annotations
 import html
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -16,9 +17,40 @@ DAYS_2026 = json.loads((ROOT / "data/official/days-2026.json").read_text())
 SOURCES = META["source_catalogue"]
 DEFAULT_SOURCE = SOURCES[0]["url"] if SOURCES else "https://statsapi.mlb.com/api/v1/schedule?sportId=1&season=2027"
 
+
+def _nfl(name):
+    return json.loads((ROOT / "data/nfl" / name).read_text())
+
+
+NFL_MODULE_META = _nfl("module-meta.json")
+NFL_SOURCES = _nfl("sources.json")
+NFL_LINES = _nfl("lines-methodology.json")
+NFL_SIGNALS = _nfl("signals.json")
+NFL_GATES = _nfl("validation-gates.json")
+NFL_LEADERBOARD = _nfl("leaderboard.json")
+NFL_CORR = _nfl("correlation-research.json")
+NFL_INJURY = _nfl("injury-snapshot-2026-11-13.json")
+NFL_DEPTH = _nfl("depth-deficiency.json")
+NFL_W11 = _nfl("week11-change.json")
+NFL_SUGGESTIONS = _nfl("suggestions.json")
+NFL_QUESTIONS = _nfl("open-questions.json")
+
+# Irregularities opened by the 2026-11-13 NFL decision-module session (arena/a7381587-korea4).
+# Appended to the collector's flags at build time so data/official/ stays collector-owned.
+NFL_MODULE_FLAGS = [
+    {"id": "IR-022", "issue": "Stale Week 11 rows: the official Nov 9, 2026 announcement moved JAX@NYG to 4:25 PM ET and PIT@PHI to 1:00 PM ET on Nov 22; the captured snapshot (2026-11-02) still shows 1:00 PM / 4:25 PM ET. The other 11 Week 11 rows match the official slate exactly.", "status": "UNVERIFIED IN SNAPSHOT — OFFICIAL CORRECTION LINKED", "action": "Treat the two captured Week 11 kickoff times as stale; next data-refresh session re-verifies from the official announcement. Values were not hand-edited in captured data.", "source_url": "https://www.nfl.com/news/week-11-schedule-change"},
+    {"id": "IR-023", "issue": "NFL.com has no team-level injury-report or depth-chart pages at /teams/<club>/injuries or /teams/<club>/depth-chart (404 verified 2026-11-13), and NFL.com roster pages show ACT/reserve status but no explicit depth order. Starter-vs-backup depth ordering has no single official source.", "status": "UNVERIFIED — DATA GAP", "action": "Depth/deficiency metrics stay framework-only; build per-club depth collection from official club announcements (open question Q-08).", "source_url": "https://www.nfl.com/teams/san-francisco-49ers/depth-chart"},
+    {"id": "IR-024", "issue": "The historical NFL Injury Report Policy PDF (operations.nfl.com/media/2683/2017-nfl-injury-report-policy.pdf) is a dead link (404 verified 2026-11-13).", "status": "UNVERIFIED — DEAD LINK", "action": "Cite the league's live integrity/betting policy page for policy statements instead of the dead PDF.", "source_url": "https://operations.nfl.com/media/2683/2017-nfl-injury-report-policy.pdf"},
+    {"id": "IR-025", "issue": "No official NFL source publishes betting odds, closing lines, or pair-correlation statistics; every correlation value and CLV result in the NFL module is therefore intentionally blank.", "status": "UNVERIFIED — NOT COMPUTABLE FROM OFFICIAL SOURCES", "action": "Correlation/CLV work requires an owner-selected licensed odds source (Suggestions Q-02) before any value is computed or published.", "source_url": "https://media.nfl.com/lsb/"},
+    {"id": "IR-026", "issue": "Week 10 report transcription oddity (recorded verbatim, not interpreted): Detroit Kerby Joseph (S) is listed 'Full Participation in Practice' yet Game Status 'Out' — knee, as displayed on the official report 2026-11-13.", "status": "OBSERVED — TRANSCRIBED AS DISPLAYED", "action": "No interpretation; capture the report daily and verify final game status before grading anything.", "source_url": "https://www.nfl.com/injuries/"},
+]
+
 NAV = [
     ("index.html", "Dashboard"), ("daily.html", "Daily scoreboard"), ("calendar.html", "Calendar"),
     ("vacation.html", "Vacation windows"), ("mlb.html", "MLB"), ("nfl.html", "NFL"),
+    ("nfl-lines.html", "NFL lines"), ("nfl-strategies.html", "NFL strategies"),
+    ("nfl-injuries.html", "NFL injuries"), ("nfl-suggestions.html", "Suggestions"),
+    ("nfl-decision.html", "NFL decision"),
     ("ncaaf.html", "Stanford / Cal"), ("wwo.html", "Westwood One"), ("radio.html", "Radio map"),
     ("sources.html", "Sources"), ("flagged.html", "Flagged"), ("methodology.html", "Method"),
     ("review.html", "Repo review"), ("executive-summary.html", "Executive summary"),
@@ -129,7 +161,18 @@ def table(headers, rows, columns, name, page_size=100, intro=None):
     </div>'''
 
 
-def page(title, active, lead, body, extra_head=""):
+def page(title, active, lead, body, extra_head="", banner=True):
+    """Render the page shell. banner=False suppresses the vacation-dashboard
+    snapshot callout for sections that carry their own disclosure."""
+    notice = ""
+    if banner:
+        notice = (f'<div class="callout warn"><strong>Snapshot, not a live feed.</strong> '
+                  f'Official source snapshots last refreshed {esc(META.get("source_snapshot_utc") or "UNVERIFIED")}; '
+                  f'dashboard rebuilt {esc(META["generated_utc"])}. The selected dashboard date is '
+                  f'{esc(META.get("system_today"))} Pacific Time. Schedules, broadcast carriage and actual game '
+                  f'lengths can change; some sports and future schedules are missing. Gaps are planning estimates, '
+                  f'not verified free time. Check the <a href="flagged.html">review flags</a> and original sources '
+                  f'before booking.</div>')
     nav = "".join(f'<a href="{p}" class="{"active" if p == active else ""}"{" aria-current=page" if p == active else ""}>{esc(label)}</a>' for p, label in NAV)
     meta_small = {
         "system_today": META.get("system_today"), "date_range": META.get("date_range"),
@@ -155,7 +198,7 @@ def page(title, active, lead, body, extra_head=""):
 <main>
   <h1 class="page-title">{esc(title)}</h1>
   <p class="page-lead">{lead}</p>
-  <div class="callout warn"><strong>Snapshot, not a live feed.</strong> Official source snapshots last refreshed {esc(META.get('source_snapshot_utc') or 'UNVERIFIED')}; dashboard rebuilt {esc(META["generated_utc"])}. The selected dashboard date is {esc(META.get('system_today'))} Pacific Time. Schedules, broadcast carriage and actual game lengths can change; some sports and future schedules are missing. Gaps are planning estimates, not verified free time. Check the <a href="flagged.html">review flags</a> and original sources before booking.</div>
+  {notice}
   {body}
   <footer class="footer">
     <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
@@ -268,8 +311,29 @@ def build_index():
 {table(['Topic','Finding','Status'], findings_rows, ['topic','finding',('status','badge')], 'findings', 20)}</section>
 <section class="panel"><h2>Best 1-, 2-, and 3-week candidates</h2><p class="intro">Least-conflict windows from exact official rows plus separately labelled unreleased-season models. “Strict free” means zero busy blocks; no window is certified free until future schedules are released.</p>
 {table(['Year','Length','Start','End','Busy days','Strict free','Status'], window_rows, ['year',('length_days','num'),'start','end',('busy_days','num'),('strict_free','text'),('status','badge')], 'best-windows', 20)}</section>
+<section class="panel"><h2>NFL decision module (new — 2026-11-13)</h2><p class="intro">Own-line origination, a gated strategy leaderboard, injury/depth tracking, and the dedicated suggestions section. All built from official sources fetched live 2026-11-13; numeric parameters are proposals awaiting decisions; uncomputable values stay blank (IR-022…IR-026).</p>
+{table(['Page','Purpose','Status'], [
+ {'page':'nfl-lines.html','purpose':'Own-line pipeline from official rows; Week 11 data-currency check (IR-022)','status':'FRAMEWORK — SOURCE-LINKED','source_url':'https://www.nfl.com/news/week-11-schedule-change','source_label':'NFL.com Week 11 schedule change'},
+ {'page':'nfl-strategies.html','purpose':'Leaderboard competition design, signal research, validation gates, correlation research (values blank, IR-025)','status':'FRAMEWORK — GATES NOT RUN','source_url':'https://www.nfl.com/news/big-data-bowl-returns-powered-by-aws','source_label':'NFL Big Data Bowl (official competition precedent)'},
+ {'page':'nfl-injuries.html','purpose':'Week 10 official injury-report snapshot (15 clubs), depth/deficiency framework and observations','status':'SNAPSHOT VERIFIED 2026-11-13','source_url':'https://www.nfl.com/injuries/','source_label':'NFL.com injury report'},
+ {'page':'nfl-suggestions.html','purpose':'Dedicated suggestions section + open questions/information needed before decisions','status':'PROPOSED — AWAITING REVIEW','source_url':'https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md','source_label':'COORDINATION.md shared task board'},
+], ['page','purpose',('status','badge')], 'nfl-module-index', 20)}
+<p><a class="control-btn" href="nfl-lines.html">NFL lines →</a> <a class="control-btn" href="nfl-strategies.html">NFL strategies →</a> <a class="control-btn" href="nfl-injuries.html">NFL injuries →</a> <a class="control-btn" href="nfl-suggestions.html">Suggestions →</a></p></section>
 <section class="panel"><h2>Flagged irregularities</h2>{table(['ID','Issue','Status','Action'], flag_rows, ['id','issue',('status','badge'),'action'], 'flags-index', 20)}
 <p><a class="control-btn" href="flagged.html">See all {len(META['flags'])} flags →</a></p></section>
+<section class="panel"><h2>NFL decision support — questions, gates and suggestions</h2>
+<p class="intro">A second, independent NFL workstream: the official injury rows joined to the official 49ers depth
+chart, ten pre-registered validation gates, twelve strategy test specifications, an intentionally unranked leaderboard,
+twelve suggestions, twenty-two open questions and ten decisions awaiting your choice. It publishes its own sources and
+does not alter the schedule values on this page.</p>
+<div class="grid cards">
+  <a class="card" href="nfl-decision.html"><div class="number">11</div><div class="label">pages in this section</div></a>
+  <a class="card" href="nfl-decision-injuries.html"><div class="number">27</div><div class="label">official injury rows transcribed</div></a>
+  <a class="card" href="nfl-decision-injuries.html"><div class="number">9</div><div class="label">depth slots with no documented backup</div></a>
+  <a class="card" href="nfl-decision-suggestions.html"><div class="number">12</div><div class="label">suggestions to review</div></a>
+  <a class="card" href="nfl-decision-questions.html"><div class="number">22</div><div class="label">open questions</div></a>
+</div>
+<p><a class="control-btn" href="nfl-decision.html">Open NFL decision support →</a></p></section>
 <section class="panel"><h2>Official sources for manual review</h2>{table(['ID','Title','Purpose','HTTP','Status'], source_rows, ['id','title','purpose',('http_status','num'),('status','badge')], 'sources-index', 20)}
 <p><a class="control-btn" href="sources.html">See all {len(SOURCES)} sources →</a></p></section>
 '''
@@ -362,6 +426,76 @@ def build_nfl():
     write("nfl.html", page("NFL", "nfl.html", "All 2026 preseason, regular-season, postseason and special NFL rows; 49ers focus; official links on every row.", body))
 
 
+def build_nfl_lines():
+    body = f'''
+<div class="callout warn"><strong>Framework, not picks.</strong> This page documents how the site originates its own NFL numbers. It contains no verified win probabilities and no betting recommendations. Every numeric parameter is a labelled design proposal awaiting an owner decision; unavailable values stay blank (see <a href="flagged.html">IR-022…IR-026</a>).</div>
+<section class="panel"><h2>Own-line pipeline</h2><p class="intro">Eight steps from official game rows to a publishable own number. No step may be skipped; the publication gate (L-08) keeps unpublished any line whose strategy family has not passed the <a href="nfl-strategies.html">validation gates</a>.</p>
+{table(['ID','Step','Definition','Output','Verification','Status'], NFL_LINES, ['id','step','definition','output','verification',('status','badge')], 'nfl-line-pipeline', 20)}</section>
+<section class="panel"><h2>Official inputs for line origination</h2><p class="intro">Every input source was fetched live on {esc(NFL_MODULE_META['verified_on'])}. 404 rows are evidence of data gaps, not broken site links (IR-023 / IR-024).</p>
+{table(['ID','Official source','Purpose','Verified','What was observed live','Status'], NFL_SOURCES, ['id','title','purpose','verified_on','observed',('status','badge')], 'nfl-line-sources', 20)}</section>
+<section class="panel"><h2>Data-currency check: Week 11 official change vs captured snapshot</h2><p class="intro">The official {esc(NFL_W11['announced'])} announcement post-dates the {esc(NFL_W11['captured_snapshot_date'])} captured snapshot. 11 of 13 Week 11 rows match exactly; 2 are stale (IR-022). Stale values are shown as captured — they are never silently overwritten.</p>
+{table(['ID','Matchup','Game date','Captured snapshot time','Official final time (ET)','Official time PT','Status'], NFL_W11['rows'], ['id','matchup','game_date','repo_time_pt','official_time_et','official_time_pt',('status','badge')], 'nfl-week11-change', 20)}
+<p><a class="control-btn" href="flagged.html">See IR-022 on the Flagged for Review page →</a></p></section>
+'''
+    write("nfl-lines.html", page("NFL lines", "nfl-lines.html", "How this site originates its own NFL numbers from official sources only: pipeline, inputs, and schedule-currency checks.", body))
+
+
+def build_nfl_strategies():
+    body = f'''
+<div class="callout warn"><strong>Leaderboard competition framework.</strong> A rewarded, gated strategy competition for the site's own NFL numbers — singles, parlays, and player-prop combos. Scoring, gates and rewards below are labelled proposals; none has been run. The league's own official precedent for a rewarded analytics competition is the Big Data Bowl ($100,000 shared prize, Next Gen Stats data).</div>
+<section class="panel"><h2>Competition design</h2><p class="intro">Deterministic, documented rule sets; division-scoped leaderboards; rewards gated on validation. Reward values are intentionally absent until the owner decides (Q-04).</p>
+{table(['ID','Element','Proposal','Status'], NFL_LEADERBOARD, ['id','element','proposal',('status','badge')], 'nfl-leaderboard', 20)}</section>
+<section class="panel"><h2>Signal research — candidate strategies</h2><p class="intro">Every signal is a research candidate anchored to an official data source. None is backtested yet; several are blocked on owner decisions. Signal observations shown are single-week snapshots, never ratings.</p>
+{table(['ID','Signal','Definition','Category','Data needed','Observed example (Week 10 snapshot)','Status'], NFL_SIGNALS, ['id','signal','definition','category','data_needed','observed_example',('status','badge')], 'nfl-signals', 20)}</section>
+<section class="panel"><h2>Validation gates</h2><p class="intro">A strategy earns leaderboard eligibility only after every gate passes. Luck is removed mechanically: closing-line benchmarking (V-03) plus the shuffled-selection significance test (V-07) score selective skill, not fortunate sequences. Until an odds source is selected, gates that need market data stay blocked (IR-025).</p>
+{table(['ID','Gate','Definition','Threshold','Result','Verification','Status'], NFL_GATES, ['id','gate','definition','threshold',('result','blank'),'verification',('status','badge')], 'nfl-gates', 20)}</section>
+<section class="panel"><h2>Correlation values — intentionally blank</h2><p class="intro">No official source publishes bet-pair correlations (IR-025). Values stay blank until computed from official play-by-play data plus a licensed odds source, and multi-leg tickets stay unpublishable until the V-06 cap is set. Excluded categories follow the NFL's official integrity policy.</p>
+{table(['ID','Combo pair','Why it matters','Method to measure','Value','Verification','Status'], NFL_CORR, ['id','combo_pair','why_it_matters','method',('value','blank'),'verification',('status','badge')], 'nfl-correlation', 20)}</section>
+'''
+    write("nfl-strategies.html", page("NFL strategies", "nfl-strategies.html", "Strategy leaderboard competition framework: divisions, scoring, signal research, validation gates, correlation research, and integrity exclusions.", body))
+
+
+def build_nfl_injuries():
+    snap = NFL_INJURY["teams"]
+    body = f'''
+<div class="callout warn"><strong>Dated snapshot — the injury report updates every reporting day.</strong> Counts below were transcribed from the official Week 10 report as displayed on {esc(NFL_INJURY['captured_utc'])}: {len(snap)} clubs across 7 fully captured games (+1 partial). The New Orleans Saints table was only partially captured and is excluded. Nothing here is a projection; it is a verbatim availability snapshot.</div>
+<section class="panel"><h2>Week 10 availability snapshot ({esc(NFL_INJURY['captured_utc'])})</h2><p class="intro">Practice-participation counts per club. "Out" and "Questionable" are official game statuses displayed on the capture date (IR-026 records one verbatim oddity).</p>
+{table(['ID','Club','Game (as displayed)','DNP','Limited','Full','Out','Questionable','Notables (verbatim from official report)','Capture'], snap, ['id','team','opponent_game',('dnp','num'),('limited','num'),('full','num'),('out','blank'),('questionable','num'),'notables','capture_status'], 'nfl-injury-snapshot', 20)}</section>
+<section class="panel"><h2>Depth &amp; deficiency framework</h2><p class="intro">Metrics that convert availability into a defensive/offensive deficiency signal (starters out → 2nd/3rd/4th-string backups). Position weights and thresholds are proposed design parameters; the official depth-order source does not exist on NFL.com (IR-023), so starter/backup classification needs per-club official announcements.</p>
+{table(['ID','Metric','Definition','Inputs','Status'], NFL_DEPTH['framework'], ['id','metric','definition','inputs',('status','badge')], 'nfl-depth-framework', 20)}</section>
+<section class="panel"><h2>Observed Week 10 deficiency examples (verbatim observations, not ratings)</h2>
+{table(['ID','Club','Unit','Observation','Status'], NFL_DEPTH['observed_week10_examples'], ['id','team','unit','observation',('status','badge')], 'nfl-depth-examples', 20)}</section>
+<section class="panel"><h2>Official availability &amp; roster sources</h2><p class="intro">Injury report, rosters, transactions, CBA and the policy pages this module is built on — all fetched live {esc(NFL_MODULE_META['verified_on'])}.</p>
+{table(['ID','Official source','Purpose','Verified','What was observed live','Status'], NFL_SOURCES, ['id','title','purpose','verified_on','observed',('status','badge')], 'nfl-injury-sources', 20)}</section>
+'''
+    write("nfl-injuries.html", page("NFL injuries & depth", "nfl-injuries.html", "Official injury-report snapshot, roster/transaction sources, and the starter-to-backup deficiency framework with Week 10 observations.", body))
+
+
+def build_nfl_suggestions():
+    body = f'''
+<div class="callout"><strong>Dedicated suggestions section — review before implementing.</strong> Every proposed change to this site or module is listed here first. A suggestion is implemented only after someone records a decision (approve / amend / reject) on the shared board; nothing here is live behavior yet. The open-questions table lists what must be known — and what is still missing — before each decision can reasonably be made.</div>
+<section class="panel"><h2>Site &amp; module improvement suggestions</h2><p class="intro">Each row names the decision required and the benefit. Decision records belong in <a href="https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md">COORDINATION.md</a> (S-10).</p>
+{table(['ID','Area','Suggestion','Decision needed','Benefit','Status'], NFL_SUGGESTIONS, ['id','area','suggestion','decision_needed','benefit',('status','badge')], 'nfl-suggestions', 20)}</section>
+<section class="panel"><h2>Open questions — information we have, lack, and how to discover it</h2><p class="intro">Answers that must exist before any decision can reasonably be made. "How to discover" names the concrete next step; blocked decisions are called out per question.</p>
+{table(['ID','Question','What we already have','What is missing','How to discover','Owner','Blocks','Status'], NFL_QUESTIONS, ['id','question','info_we_have','info_missing','how_to_discover','owner','blocks',('status','badge')], 'nfl-open-questions', 20)}</section>
+<section class="panel"><h2>Decision-readiness checklist</h2><ol class="exec-list">
+<li><strong>Before any odds-dependent work (CLV, correlations, parlay pricing):</strong> Q-02 odds source + Q-03 jurisdiction review + Q-06 budget. Until then, correlation cells stay blank (IR-025) and market gates stay blocked.</li>
+<li><strong>Before any reward is paid or claimed:</strong> Q-04 reward design + all gates V-01…V-08 run and passed for the strategy family.</li>
+<li><strong>Before any player-prop division goes live:</strong> Q-05 market-scope review against the official prohibited-wager categories.</li>
+<li><strong>Before depth metrics become ratings:</strong> Q-08 depth-order authority + Q-09 participation source.</li>
+<li><strong>Before any site change from a suggestion:</strong> a decision record on COORDINATION.md referencing the suggestion ID.</li>
+</ol></section>
+<section class="panel"><h2>Suggestions for discovering the missing information</h2><ol class="exec-list">
+<li>Capture the official injury report every reporting day (S-03) — it also builds the longitudinal data the backtests need.</li>
+<li>Diff official schedule pages against captured rows weekly (S-01) — catches IR-022-class changes within days.</li>
+<li>Survey official club sites for depth charts/weekly depth announcements, one club at a time, recording what exists (Q-08).</li>
+<li>Investigate official NGS participation products for a per-player weekly usage feed (Q-09).</li>
+<li>Keep every new fact tied to a dated, linked official source; leave everything else blank — the repo's existing rule.</li>
+</ol></section>
+'''
+    write("nfl-suggestions.html", page("Suggestions & open questions", "nfl-suggestions.html", "Dedicated review section: site-improvement suggestions awaiting decisions, open questions with what is known vs missing, and how to discover it.", body))
+
+
 def build_ncaaf():
     games = [e for e in EVENTS if e["category"] == "NCAAF"]
     anchors = [a for a in META["anchors"] if a["category"] == "NCAAF"]
@@ -407,6 +541,8 @@ def build_sources():
 def build_flagged():
     body = f'''
 <div class="callout danger"><strong>Review warning:</strong> Snapshot gaps cannot prove all broadcasts were captured; the older parallel dashboards may have conflicting claims. A source link is not proof that every cell was independently checked. These are published here with official source links. Unverified values remain blank in the main tables.</div>
+<section class="panel"><h2>NFL decision-module flags (2026-11-13 session)</h2><p class="intro">IR-022…IR-026 were opened by the NFL line-origination/injury module session. None blocks merge; they are review items with official evidence links.</p>
+{table(['ID','Issue','Status','Action'], NFL_MODULE_FLAGS, ['id','issue',('status','badge'),'action'], 'nfl-module-flags', 20)}</section>
 <section class="panel"><h2>Follow-up audit flags</h2>{table(['ID','Issue','Status','Action'], [
         {'id':'D1-01','issue':'Warriors, Sharks, Valkyries and other terrestrial radio game-by-game coverage is incomplete; local carriage and reception are not confirmed for each event.','status':'UNVERIFIED','action':'Do not treat displayed gaps as verified free time. Consult station and team schedules.','source_url':'https://www.nba.com/warriors/schedule'},
         {'id':'D1-02','issue':'The dashboard uses a static 2026-11-02 snapshot; future schedules and broadcast details may have changed. The automated structural checker does not independently verify each source value.','status':'UNVERIFIED','action':'Refresh and independently compare individual rows before relying on them.','source_url':'https://www.nfl.com/schedules/'},
@@ -447,11 +583,21 @@ def build_executive():
     body = f'''
 <section class="hero"><div class="kicker">Executive summary</div><h1>Verified rows, blank unknowns, clearly labelled estimates.</h1><p>{esc(META['executive_summary'])}</p></section>
 <div class="grid cards">{card(META['counts']['official_event_rows'],'official rows')}{card(META['counts']['official_sources'],'official sources')}{card(META['counts']['days'],'daily scoreboards')}{card(META['counts']['line_by_line_audit_rows'],'prior lines reviewed')}</div>
+<section class="panel"><h2>NFL decision module (added 2026-11-13)</h2>
+<p class="intro">{esc(NFL_MODULE_META['disclaimer'])}</p>
+<div class="callout"><strong>Important details.</strong> (1) The module originates the site's own NFL numbers via an 8-step pipeline anchored to official sources (NFL.com schedules/stats/injuries/transactions, Next Gen Stats, Football Operations, NFLPA CBA) — all fetched live on {esc(NFL_MODULE_META['verified_on'])}. (2) A strategy leaderboard competition is designed with three divisions (singles / parlays / player-prop combos), scoring, reward tiers and 8 validation gates; the league's own Big Data Bowl ($100k shared prize) is the official precedent. (3) Luck removal is mechanical: closing-line benchmarking (V-03) plus shuffled-selection significance (V-07) gate reward eligibility. (4) Injury/depth tracking captured the official Week 10 report snapshot ({len(NFL_INJURY['teams'])} clubs, 2026-11-13) and defines deficiency metrics for 2nd/3rd/4th-string replacement — depth ordering itself has no official NFL.com source (IR-023). (5) A dedicated Suggestions page lists 10 site improvements, 10 open questions with what is known/missing, and how to discover it. (6) New irregularities IR-022…IR-026 are published on the Flagged page, incl. two Week 11 rows made stale by the official Nov 9 schedule change.</div>
+{table(['Page','Purpose','Status'], [
+ {'page':'nfl-lines.html','purpose':'Own-line pipeline + official inputs + Week 11 currency check','status':'FRAMEWORK — SOURCE-LINKED','source_url':'https://www.nfl.com/news/week-11-schedule-change','source_label':'NFL.com Week 11 schedule change'},
+ {'page':'nfl-strategies.html','purpose':'Leaderboard design, signals, gates, correlation research (values blank)','status':'FRAMEWORK — GATES NOT RUN','source_url':'https://www.nfl.com/news/big-data-bowl-returns-powered-by-aws','source_label':'NFL Big Data Bowl announcement'},
+ {'page':'nfl-injuries.html','purpose':'Week 10 injury snapshot + deficiency framework','status':'SNAPSHOT VERIFIED 2026-11-13','source_url':'https://www.nfl.com/injuries/','source_label':'NFL.com injury report'},
+ {'page':'nfl-suggestions.html','purpose':'Suggestions + open questions + discovery plan','status':'PROPOSED — AWAITING REVIEW','source_url':'https://github.com/karagemop466-tech/Korea4/blob/main/COORDINATION.md','source_label':'COORDINATION.md'},
+], ['page','purpose',('status','badge')], 'exec-nfl-module', 20)}
+</section>
 <section class="panel"><h2>Key findings</h2>{table(['Topic','Finding','Status'], safe_findings(), ['topic','finding',('status','badge')], 'exec-findings', 50)}</section>
 <section class="panel"><h2>Vacation conclusion</h2><div class="callout danger">{esc(META['analysis_conclusion']['conclusion'])}</div>{table(['Year','Length','Start','End','Busy days','Status'], META['vacation_windows'], ['year',('length_days','num'),'start','end',('busy_days','num'),('status','badge')], 'exec-windows', 50)}</section>
-<section class="panel"><h2>Irregularities</h2>{table(['ID','Issue','Status'], META['flags'], ['id','issue',('status','badge')], 'exec-flags', 100)}</section>
+<section class="panel"><h2>Irregularities</h2>{table(['ID','Issue','Status'], META['flags'] + NFL_MODULE_FLAGS, ['id','issue',('status','badge')], 'exec-flags', 100)}</section>
 '''
-    write("executive-summary.html", page("Executive summary", "executive-summary.html", "Concise executive summary of sources, verification, findings, vacation windows, and flagged irregularities.", body))
+    write("executive-summary.html", page("Executive summary", "executive-summary.html", "Concise executive summary of sources, verification, findings, NFL decision module, vacation windows, and flagged irregularities.", body))
     md = f'''# Executive summary — FREE TIME VACATION
 
 Dashboard rebuilt {META['generated_utc']}; official source snapshots last refreshed {META.get('source_snapshot_utc') or 'UNVERIFIED'}. Uses {len(SOURCES)} captured official-source records.
@@ -463,6 +609,19 @@ Dashboard rebuilt {META['generated_utc']}; official source snapshots last refres
 - All captured official Westwood One Sports event windows across nine categories.
 - Other confirmed Bay Area AM/FM radio sports, including the full official 2026 Earthquakes radio schedule.
 - Estimated Pacific-time gaps, not verified free time, for each day from {META['date_range'][0]} through {META['date_range'][1]}.
+
+## NFL decision module (added 2026-11-13, session `arena/a7381587-korea4`)
+
+**Purpose.** Collect, organize and analyze NFL information to support originating the site's own betting lines; run a rewarded, gated strategy leaderboard (singles, parlays, player-prop combos); and track injuries/depth so lineup deficiencies (2nd/3rd/4th-string replacements) are known before lines are made. All of it is a research framework: no verified win probabilities, no recommendations.
+
+**Important details.**
+- 13 official sources fetched live on 2026-11-13 and recorded with URLs in `research/nfl-module/README.md` and `data/nfl/sources.json`: [NFL.com injury report](https://www.nfl.com/injuries/) (Week 10 live), [rosters](https://www.nfl.com/teams/san-francisco-49ers/roster), [transactions](https://www.nfl.com/transactions/) (12 trades Nov 6–10), [team stats](https://www.nfl.com/stats/team-stats/), [Next Gen Stats](https://nextgenstats.nfl.com/) (Week 10 charts), [Football Operations](https://operations.nfl.com/), [Week 11 schedule change](https://www.nfl.com/news/week-11-schedule-change), [sports-betting integrity policy](https://media.nfl.com/lsb/), [NFLPA CBA](https://www.nflpa.com/cba), [Big Data Bowl](https://www.nfl.com/news/big-data-bowl-returns-powered-by-aws).
+- **Line origination** (`nfl-lines.html`): 8-step pipeline L-01…L-08; publication is gated on the validation gates; the Week 11 official change vs the captured snapshot is shown row by row.
+- **Strategy leaderboard** (`nfl-strategies.html`): competition design B-01…B-10 (Big Data Bowl as official precedent), signal candidates G-01…G-08 (none backtested), gates V-01…V-08 (none run), correlation research C-01…C-07 (all values intentionally blank — no official source publishes correlations, IR-025).
+- **Injuries/depth** (`nfl-injuries.html`): Week 10 snapshot for 15 clubs transcribed from the official report on 2026-11-13 (e.g., IND both DTs DNP; MIN two QBs listed; NE 12 limited); deficiency framework D-01…D-04 with verbatim observations E-01…E-06.
+- **Suggestions** (`nfl-suggestions.html`): dedicated review section — 10 improvement suggestions S-01…S-10, 10 open questions Q-01…Q-10 (what we have / what is missing / how to discover), a decision-readiness checklist, and discovery suggestions. Nothing is implemented until a decision is recorded.
+- **Irregularities opened:** IR-022 (two Week 11 rows stale after the official Nov 9 change — correction linked, captured values not hand-edited), IR-023 (no official team depth-chart/injury URLs; no published depth order), IR-024 (dead 2017 policy PDF), IR-025 (no official odds/correlation source; values blank), IR-026 (one verbatim report oddity: DET K. Joseph Full practice but Game Status Out).
+- **Integrity constraints honored:** the module excludes the wager categories the NFL's official policy flags (player-injury markets, officiating-related, one-play-determinable, pre-determined outcomes) and treats prediction-market contracts as excluded ([official policy page](https://media.nfl.com/lsb/)).
 
 ## Verification rules
 1. Official/league/team/network sources only for VERIFIED values.
@@ -488,8 +647,10 @@ No 7-, 14- or 21-day trip can be certified free from all requested radio sports 
 - [Sources page](sources.html)
 - [Flagged for Review](flagged.html)
 - [Line-by-line repo review](review.html)
+- [NFL module pages](nfl-lines.html) (lines / strategies / injuries / suggestions)
 - [Official event JSON](data/official/events.json)
 - [Official-source manifest](research/official/manifest.json)
+- [NFL module verification record](research/nfl-module/README.md)
 '''
     write("EXECUTIVE-SUMMARY.md", md)
 
@@ -509,13 +670,28 @@ Live site: <https://karagemop466-tech.github.io/Korea4/>
 - KNBR, KSFO, 95.7 The Game, KNBR/KTCT 1050, 680/104.5/107.7, 960 KNEW, and other confirmed Bay Area radio mappings.
 - Other official Bay Area radio sports, including the complete 2026 San Jose Earthquakes terrestrial radio schedule.
 
+## NFL decision module (2026-11-13)
+- `nfl-lines.html` — how the site originates its own NFL numbers from official sources only (8-step pipeline, official inputs, Week 11 schedule-currency check).
+- `nfl-strategies.html` — strategy leaderboard competition framework: divisions (singles / parlays / player-prop combos), scoring, signal research, 8 validation gates, correlation research (values intentionally blank, IR-025), integrity exclusions from the official NFL policy.
+- `nfl-injuries.html` — official Week 10 injury-report snapshot (15 clubs, captured 2026-11-13), roster/transaction sources, starter-to-backup deficiency framework with verbatim observations.
+- `nfl-suggestions.html` — dedicated suggestions section: 10 improvement proposals, 10 open questions (what is known / missing / how to discover), decision-readiness checklist. Implemented only after a decision is recorded on COORDINATION.md.
+- Module data: `data/nfl/*.json`; verification record: `research/nfl-module/README.md`; new flags: IR-022…IR-026 on `flagged.html`.
+
 ## Verification labels
 - **VERIFIED** — read from an official raw response; source link on the row.
 - **UNVERIFIED** — official value blank/TBD/not released; source link establishes the gap.
 - **ESTIMATED** — documented planning model from official 2026 rows; never a released schedule.
 
 ## Pages
-`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
+`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
+
+### NFL decision support (added 2026-11-13)
+`nfl-decision.html` (overview) · `nfl-decision-strategies.html` · `nfl-decision-validation.html` ·
+`nfl-decision-correlation.html` · `nfl-decision-injuries.html` · `nfl-decision-suggestions.html` ·
+`nfl-decision-questions.html` · `nfl-decision-decisions.html` · `nfl-decision-audit.html` ·
+`nfl-decision-flags.html` · `nfl-decision-executive.html`.
+Built by `scripts/build_nfl_decision.py` from `scripts/nfl_lab_data.py`; gated by `scripts/verify_nfl_lab.py`, which fails
+if any factual row lacks an official or repository source. It complements, and does not replace, the NFL module pages.
 
 Parallel-session dashboards are preserved at `docs/`, `site/`, and `site/pages/` and linked from every page footer.
 
@@ -533,12 +709,24 @@ Raw official responses, SHA-256 hashes, and source URLs are in `research/officia
     write("README.md", readme)
 
 
+def build_nfl_decision():
+    """Render the additive NFL decision-support section in a separate process.
+
+    Kept out of this process so this module is imported only once (the section's
+    builder imports it for the page shell).
+    """
+    import subprocess
+    subprocess.run([sys.executable, str(ROOT / "scripts/build_nfl_decision.py")], check=True)
+
+
 def main():
     preserve_legacy()
     build_index(); build_daily(); build_calendar(); build_vacation(); build_mlb(); build_nfl()
+    build_nfl_lines(); build_nfl_strategies(); build_nfl_injuries(); build_nfl_suggestions()
+    build_nfl_decision()
     build_ncaaf(); build_wwo(); build_radio(); build_sources(); build_flagged(); build_methodology()
     build_review(); build_executive(); build_readme()
-    print(json.dumps({"pages": len(NAV) + 1, "source_rows": len(SOURCES), "event_rows": len(EVENTS), "audit_rows": len(REVIEW)}, indent=2))
+    print(json.dumps({"pages": len(NAV) + 1, "source_rows": len(SOURCES), "event_rows": len(EVENTS), "audit_rows": len(REVIEW), "nfl_module_flags": len(NFL_MODULE_FLAGS)}, indent=2))
 
 
 if __name__ == "__main__":

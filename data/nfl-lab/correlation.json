@@ -1,0 +1,74 @@
+[
+ {
+  "id": "C-01",
+  "pair": "Spread and total, same game",
+  "expected_sign": "Negative in practice (favoured sides tend to sit on leads), magnitude unknown",
+  "value": "",
+  "why_blank": "Requires closing lines for both markets across many games; none captured.",
+  "affects": "ST-03, ST-04, ST-07",
+  "design_note": "value blank by rule"
+ },
+ {
+  "id": "C-02",
+  "pair": "QB passing yards over and WR receiving yards over, same team",
+  "expected_sign": "Positive, magnitude unknown",
+  "value": "",
+  "why_blank": "Needs settled prop results; prop markets are not published by the league.",
+  "affects": "ST-06",
+  "design_note": "value blank by rule"
+ },
+ {
+  "id": "C-03",
+  "pair": "RB rushing yards and team total over, same team",
+  "expected_sign": "Positive, magnitude unknown",
+  "value": "",
+  "why_blank": "Needs settled results and team-total lines.",
+  "affects": "ST-07",
+  "design_note": "value blank by rule"
+ },
+ {
+  "id": "C-04",
+  "pair": "Two legs in the same game (any market)",
+  "expected_sign": "Unknown; must be measured, never assumed zero",
+  "value": "",
+  "why_blank": "Same-game legs share weather, officiating and script; measuring requires the closing lines and results.",
+  "affects": "ST-06, ST-11",
+  "design_note": "value blank by rule"
+ },
+ {
+  "id": "C-05",
+  "pair": "Two legs in different games on the same slate",
+  "expected_sign": "Near zero a priori; the gate must test it rather than assert it",
+  "value": "",
+  "why_blank": "Needs a slate-level result panel.",
+  "affects": "ST-03, ST-07",
+  "design_note": "value blank by rule"
+ },
+ {
+  "id": "C-06",
+  "pair": "Injury-news fade and opposing team total under (hedged pair)",
+  "expected_sign": "Positive in the loss state by construction",
+  "value": "",
+  "why_blank": "Deliberately correlated strategy; the gate (G8) needs the measured value before it can be sized.",
+  "affects": "ST-11",
+  "design_note": "value blank by rule"
+ },
+ {
+  "id": "C-07",
+  "pair": "Divisional total A and divisional total B, same week",
+  "expected_sign": "Unknown",
+  "value": "",
+  "why_blank": "No totals captured.",
+  "affects": "ST-04",
+  "design_note": "value blank by rule"
+ },
+ {
+  "id": "C-08",
+  "pair": "Rest/travel signal and totals signal, same game",
+  "expected_sign": "Unknown",
+  "value": "",
+  "why_blank": "No totals captured.",
+  "affects": "ST-08, ST-09",
+  "design_note": "value blank by rule"
+ }
+]

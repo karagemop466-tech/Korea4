@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NFL decision support — overview — FREE TIME VACATION</title>
+<meta name="description" content="Official-source Bay Area sports radio free-time dashboard, 2026–2029.">
+<link rel="stylesheet" href="css/style.css">
+
+<script>window.K4_META={"system_today":"2026-11-13","date_range":["2026-11-01","2029-12-31"],"data_start":"2026-01-01","counts":{"official_sources":748,"official_event_rows":6591,"mlb_teams":30,"days":1461,"intervals":14303,"wwo_sf_affiliate_rows":13,"line_by_line_audit_rows":2419},"durations":{"MLB":158,"NFL":192,"NCAAF":204,"MLS":120},"default_source_url":"https://www.957thegame.com/","timezone":"America/Los_Angeles (PST in winter, PDT in summer)"};</script>
+<script src="js/app.js" defer></script>
+</head><body>
+<header class="topbar"><div class="topbar-inner">
+  <a class="brand" href="index.html">FREE TIME VACATION</a>
+  <span class="tz">America/Los_Angeles · PST/PDT · 94122 AM/FM</span>
+  <nav class="main-nav"><a href="index.html" class="">Dashboard</a><a href="daily.html" class="">Daily scoreboard</a><a href="calendar.html" class="">Calendar</a><a href="vacation.html" class="">Vacation windows</a><a href="mlb.html" class="">MLB</a><a href="nfl.html" class="">NFL</a><a href="nfl-lines.html" class="">NFL lines</a><a href="nfl-strategies.html" class="">NFL strategies</a><a href="nfl-injuries.html" class="">NFL injuries</a><a href="nfl-suggestions.html" class="">Suggestions</a><a href="nfl-decision.html" class="active" aria-current=page>NFL decision</a><a href="ncaaf.html" class="">Stanford / Cal</a><a href="wwo.html" class="">Westwood One</a><a href="radio.html" class="">Radio map</a><a href="sources.html" class="">Sources</a><a href="flagged.html" class="">Flagged</a><a href="methodology.html" class="">Method</a><a href="review.html" class="">Repo review</a><a href="executive-summary.html" class="">Executive summary</a></nav>
+</div></header>
+<main>
+  <h1 class="page-title">NFL decision support — overview</h1>
+  <p class="page-lead">Decision support for NFL line origination: official injury and depth data, validation gates, an empty-by-design leaderboard, and every open question in one place.</p>
+  
+  
+<div class="callout"><strong>Lab data captured 2026-11-13 UTC.</strong> This section adds official-source injury,
+depth-chart and decision-support data. It changes none of the dashboard's schedule values. Source snapshot age at this
+build: <strong>259 hours</strong> (2026-11-02T17:41:45+00:00 to 2026-11-13T13:09:05+00:00).
+Blank cells are evidence of a missing official value — see <a href="nfl-decision-flags.html">Flagged for review</a>.</div>
+<section class="hero">
+  <div class="kicker">NFL decision support · captured · captured 2026-11-13 UTC</div>
+  <h1>Injuries, depth, gates and questions — before any line is staked.</h1>
+  <p>Eleven pages built from official league and club sources. Every fact carries its link. Every value that no official
+  source publishes is left blank and flagged. The strategy leaderboard is published empty on purpose: the gates that
+  separate skill from luck cannot run until results and market prices exist, and inventing either would break the
+  no-hallucination rule.</p>
+</section>
+<div class="grid cards">
+  <div class="card"><div class="number">329</div><div class="label">NFL rows in the dashboard</div></div><div class="card"><div class="number">14 of 14 match</div><div class="label">Week-10 rows re-read against NFL.com</div></div><div class="card"><div class="number">12</div><div class="label">Strategies designed</div></div><div class="card"><div class="number">0</div><div class="label">Strategies that passed every gate</div></div><div class="card"><div class="number">10</div><div class="label">Validation gates defined</div></div><div class="card"><div class="number">22</div><div class="label">Open questions</div></div>
+</div>
+
+<section class="panel"><h2>Read this first</h2>
+<div class="callout warn"><strong>Three things are true at once.</strong>
+(1) The NFL's own injury report and depth charts are rich enough to describe who is missing and who is next up —
+that part of this section is verified and linked.
+(2) The league publishes no betting lines, no effect sizes and no scoring baseline, so an <em>originated line</em>
+cannot be computed without inventing numbers; the worksheet page shows exactly which inputs exist and which do not.
+(3) Because the repository stores no final scores and no prices, <strong>zero</strong> strategies can currently be
+shown to be skill-based, so the leaderboard is empty and every correlation cell is blank.</div>
+</section>
+
+<section class="panel"><h2>All measurements in one table</h2>
+<p class="intro">Each number below is computed from the files or pages named in the source column; none is an estimate.</p>
+<div class="table-wrap" data-table="lab-metrics" data-page-size="20">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter lab metrics rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="no-source">No source (design)</button>
+        <button type="button" data-status-filter="unverified">Blank / unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
+      </div>
+      <div class="scroll"><table><thead><tr><th>Metric</th><th>Value</th><th>Detail</th><th>Source</th></tr></thead><tbody><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="nfl rows in the dashboard 329 272 regular season, 48 preseason, plus postseason anchors  computed — scripts/nfl_lab_data.py "><td>NFL rows in the dashboard</td><td>329</td><td>272 regular season, 48 preseason, plus postseason anchors</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="week-10 rows re-read against nfl.com 14 of 14 match matchup, kickoff and home/away  computed — scripts/nfl_lab_data.py "><td>Week-10 rows re-read against NFL.com</td><td>14 of 14 match</td><td>matchup, kickoff and home/away</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="strategies designed 12 singles, parlays, player-prop combos, derivatives  computed — scripts/nfl_lab_data.py "><td>Strategies designed</td><td>12</td><td>singles, parlays, player-prop combos, derivatives</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="strategies that passed every gate 0 leaderboard is empty by design  computed — scripts/nfl_lab_data.py "><td>Strategies that passed every gate</td><td>0</td><td>leaderboard is empty by design</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="validation gates defined 10 3 structural, 6 data, 1 process  computed — scripts/nfl_lab_data.py "><td>Validation gates defined</td><td>10</td><td>3 structural, 6 data, 1 process</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="open questions 22 7 answered from official sources  computed — scripts/nfl_lab_data.py "><td>Open questions</td><td>22</td><td>7 answered from official sources</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="suggestions published 12 2 already implemented in this section  computed — scripts/nfl_lab_data.py "><td>Suggestions published</td><td>12</td><td>2 already implemented in this section</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="injury rows transcribed 27 nfl.com week 10, source-linked  computed — scripts/nfl_lab_data.py "><td>Injury rows transcribed</td><td>27</td><td>nfl.com Week 10, source-linked</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="49ers depth slots captured 29 official chart dated 11/10/26: 11 offense, 12 defense, 6 special teams  computed — scripts/nfl_lab_data.py "><td>49ers depth slots captured</td><td>29</td><td>official chart dated 11/10/26: 11 offense, 12 defense, 6 special teams</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="depth slots with no documented backup 9 flags fl-05  computed — scripts/nfl_lab_data.py "><td>Depth slots with no documented backup</td><td>9</td><td>flags FL-05</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr><tr data-repo-source="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" data-row-status="" data-row-text="repo findings 14 1 fixed, 3 pass, 10 open  computed — scripts/nfl_lab_data.py "><td>Repo findings</td><td>14</td><td>1 fixed, 3 pass, 10 open</td><td><a class="source-link" href="https://github.com/karagemop466-tech/Korea4/blob/main/scripts/nfl_lab_data.py" target="_blank" rel="noopener" data-repo-kind="repo">computed — scripts/nfl_lab_data.py</a></td></tr></tbody></table></div>
+    </div>
+</section>
+
+<section class="panel"><h2>Categories</h2>
+<div class="grid cards">
+  <a class="card" href="nfl-decision-strategies.html"><strong>Strategies &amp; leaderboard</strong><span>12 designed strategies across singles, parlays, player-prop combos and derivatives; leaderboard rules; empty-by-design leaderboard.</span></a><a class="card" href="nfl-decision-validation.html"><strong>Validation gates</strong><span>10 gates, each with a rule, a test and its current result; the gate matrix per strategy.</span></a><a class="card" href="nfl-decision-correlation.html"><strong>Correlation &amp; luck</strong><span>8 correlation pairs with pre-registered rules; why every value is blank; the luck-separation method.</span></a><a class="card" href="nfl-decision-injuries.html"><strong>Injuries &amp; depth</strong><span>Official Week-10 injury rows, the 49ers depth chart, starting-slot availability and the 9 slots with no documented backup.</span></a><a class="card" href="nfl-decision-suggestions.html"><strong>Suggestions</strong><span>12 proposals, each with rationale, measurement and effort — the review-and-choose list.</span></a><a class="card" href="nfl-decision-questions.html"><strong>Open questions</strong><span>22 questions with what we have, what is missing, and whether it blocks a decision.</span></a><a class="card" href="nfl-decision-decisions.html"><strong>Decision register</strong><span>10 paths, two options each, a recommendation and the evidence behind it.</span></a><a class="card" href="nfl-decision-audit.html"><strong>Repo audit</strong><span>14 findings from the line-by-line review, with the check performed and the action taken.</span></a><a class="card" href="nfl-decision-flags.html"><strong>Flagged for review</strong><span>6 items that are unresolved, unverifiable or deliberately blank — with source links.</span></a><a class="card" href="nfl-decision-executive.html"><strong>Executive summary</strong><span>One page: what exists, the honest headline, and what you must decide.</span></a>
+</div>
+</section>
+
+<section class="panel"><h2>Where the nine starting slots stand</h2>
+<p class="intro">Six of the 49ers' listed starters were on the official Week-10 report as <em>Did Not Participate</em>.
+Five of the six have a named backup on the club's own chart. One does not.</p>
+<div class="table-wrap" data-table="lab-starting-slots" data-page-size="25">
+      
+      <div class="table-controls">
+        <input type="search" placeholder="Filter lab starting slots rows…" aria-label="Filter rows">
+        <button type="button" data-status-filter="verified">Verified</button>
+        <button type="button" data-status-filter="no-source">No source (design)</button>
+        <button type="button" data-status-filter="unverified">Blank / unverified</button>
+        <span class="pager"><button type="button" data-page-prev>‹ Prev</button><span class="pager-label"></span><button type="button" data-page-next>Next ›</button></span>
+      </div>
+      <div class="scroll"><table><thead><tr><th>Starting slot</th><th>Starter</th><th>Official practice status</th><th>Backup named on official chart</th><th>Source</th></tr></thead><tbody><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="wr mike evans  did not participate  jordan watkins  nfl.com injury report + 49ers official depth chart "><td>WR</td><td>Mike Evans</td><td><span class="badge badge-neutral">Did Not Participate</span></td><td>Jordan Watkins</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="lcb renardo green  did not participate   none listed   nfl.com injury report + 49ers official depth chart "><td>LCB</td><td>Renardo Green</td><td><span class="badge badge-neutral">Did Not Participate</span></td><td><span class="badge badge-neutral">NONE LISTED</span></td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="will dre greenlaw  did not participate  garret wallow  nfl.com injury report + 49ers official depth chart "><td>WILL</td><td>Dre Greenlaw</td><td><span class="badge badge-neutral">Did Not Participate</span></td><td>Garret Wallow</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="rcb deommodore lenoir  did not participate  ephesians prysock  nfl.com injury report + 49ers official depth chart "><td>RCB</td><td>Deommodore Lenoir</td><td><span class="badge badge-neutral">Did Not Participate</span></td><td>Ephesians Prysock</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="rb christian mccaffrey  did not participate  kaelon black  nfl.com injury report + 49ers official depth chart "><td>RB</td><td>Christian McCaffrey</td><td><span class="badge badge-neutral">Did Not Participate</span></td><td>Kaelon Black</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="lt trent williams  did not participate  vederian lowe  nfl.com injury report + 49ers official depth chart "><td>LT</td><td>Trent Williams</td><td><span class="badge badge-neutral">Did Not Participate</span></td><td>Vederian Lowe</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="nb upton stout  limited participation   none listed   nfl.com injury report + 49ers official depth chart "><td>NB</td><td>Upton Stout</td><td><span class="badge badge-neutral">Limited Participation</span></td><td><span class="badge badge-neutral">NONE LISTED</span></td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="wr deebo samuel sr.  limited participation  demarcus robinson  nfl.com injury report + 49ers official depth chart "><td>WR</td><td>Deebo Samuel Sr.</td><td><span class="badge badge-neutral">Limited Participation</span></td><td>Demarcus Robinson</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr><tr data-source-url="https://www.nfl.com/injuries/" data-row-status="" data-row-text="kor deebo samuel sr.  limited participation  jordan james  nfl.com injury report + 49ers official depth chart "><td>KOR</td><td>Deebo Samuel Sr.</td><td><span class="badge badge-neutral">Limited Participation</span></td><td>Jordan James</td><td><a class="source-link" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com injury report + 49ers official depth chart</a></td></tr></tbody></table></div>
+    </div>
+<p class="mini">Source: <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">NFL.com Week 10 injury report</a>
+joined to the <a href="https://www.49ers.com/team/depth-chart" target="_blank" rel="noopener">official 49ers depth chart (updated 11/10/26)</a>.
+Full detail on <a href="nfl-decision-injuries.html">Injuries &amp; depth</a>.</p>
+</section>
+
+<section class="panel"><h2>What this section does not claim</h2>
+<ul class="exec-list">
+<li>No profit, edge, or win rate for any strategy.</li>
+<li>No correlation value for any pair of legs (all eight register entries are blank with a stated reason).</li>
+<li>No effect size for a missing starter, because no official source publishes one.</li>
+<li>No identification of a 3rd/4th-string player at the 9 slots where the official chart lists no backup at all.</li>
+<li>No "best path" — the decision register lists the paths and the evidence, not a verdict.</li>
+</ul>
+</section>
+
+  <footer class="footer">
+    <strong>Every table row links to an official source.</strong> Blank official values are flagged UNVERIFIED. Estimates are never presented as released schedules.<br>
+    <a href="docs/index.html">Docs HTML edition (parallel session)</a>
+    <a href="site/index.html">Legacy anchor site</a>
+    <a href="site/pages/sources.html">Legacy category pages</a>
+    <a href="data/official/events.json">Raw official event JSON</a>
+    <a href="research/line_by_line.json">Line-by-line audit JSON</a>
+    <br><span class="mini">Built 2026-11-13T13:09:05+00:00 from 748 captured official-source records. Deployment: GitHub Pages <code>main:/</code>.</span>
+  </footer>
+</main></body></html>

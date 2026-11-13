@@ -1,0 +1,134 @@
+[
+ {
+  "id": "ST-01",
+  "family": "Single",
+  "name": "Official-report participation drift",
+  "thesis": "When a starting-slot player's official practice status improves across the week (DNP -> Limited -> Full), the market's pre-week line can lag the final designation. Play the side whose starting availability improved.",
+  "inputs": "nfl.com/injuries practice report, day by day (Wed/Thu/Fri pattern), plus the club depth chart for slot value",
+  "skill_or_luck": "Skill-testable: participation change is mechanical and dated.",
+  "gates": "FAILS G5/G6 (no closing-line history, no result history). PASSES G1/G3 (official, public, timestamped).",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-02",
+  "family": "Single",
+  "name": "No-listed-backup stress",
+  "thesis": "Target the unit of a team whose injured starter plays a slot with no documented backup on the official depth chart (e.g. 49ers LCB and NB on 2026-11-10). Where replacement quality is undocumented, the market prices it least efficiently.",
+  "inputs": "Official depth chart + official injury report",
+  "skill_or_luck": "Skill-testable, but sample is small: slots with no backup appear sporadically.",
+  "gates": "FAILS G4 (thin sample by construction) until 2+ seasons of charts are archived. PASSES G1/G2.",
+  "status": "DESIGNED — BLOCKED ON SAMPLE SIZE",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-03",
+  "family": "Parlay (2-leg)",
+  "name": "Cross-game injury-news fade",
+  "thesis": "Two games on the same slate where a starter's designation changed after the market opened. Correlated only through slate-wide news timing; test the correlation before sizing.",
+  "inputs": "Injury report timestamps + opening lines",
+  "skill_or_luck": "Skill in news timing; the parlay multiplies variance, so the gate requires the joint edge to exceed the product of the legs.",
+  "gates": "FAILS G6/G7 (no opening-line capture; correlation unmeasured) and G8 (needs a joint-edge test).",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-04",
+  "family": "Parlay (3-leg)",
+  "name": "Divisional totals ladder",
+  "thesis": "Divisional games repeat; if the same officiating/pace conditions repeat, totals may mean-revert slower than the market assumes. Combine three divisional totals in one week.",
+  "inputs": "Official schedule (divisional flag) + historical closing totals",
+  "skill_or_luck": "High luck content; three-leg compounding makes the skill threshold harder to clear.",
+  "gates": "BLOCKED G1: no official source publishes closing totals. This strategy is not constructible from official data alone.",
+  "status": "DESIGNED — OFFICIAL-DATA INSUFFICIENT",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-05",
+  "family": "Player prop",
+  "name": "Snap-share proxy from official stats",
+  "thesis": "Use officially published season stat volume (attempts, targets, carries) as a floor for a player's opportunity, then require the official injury report to show the player at Full practice.",
+  "inputs": "nfl.com player stats + official injury report",
+  "skill_or_luck": "Skill-testable; volume is stable week to week.",
+  "gates": "FAILS G6 (no prop line history) and G4 (snap counts are not published on the official stat page).",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-06",
+  "family": "Player prop combo (same game)",
+  "name": "QB-receiver stack under a backup OT",
+  "thesis": "If the starting left tackle is on the report and the slot has a documented backup, the QB's pressure rate should rise; pair an under on the QB with an under on the WR. Intra-game correlation is negative-to-positive depending on game script — must be measured, not assumed.",
+  "inputs": "Official injury report by position + official depth chart + official player stats",
+  "skill_or_luck": "Skill-testable but needs pressure data, which the official stat page does not publish.",
+  "gates": "FAILS G4/G6/G8. Correlation value left BLANK rather than assumed.",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-07",
+  "family": "Player prop combo (cross-game)",
+  "name": "Two RB volume unders in low-total games",
+  "thesis": "Two independent RB volume unders in games the market expects to be low-scoring. Intended as near-zero correlation; the gate must prove independence before it is rewarded.",
+  "inputs": "Official player stats + closing game totals",
+  "skill_or_luck": "Luck-dominated unless the volume model beats the market's implied volume.",
+  "gates": "FAILS G6/G7. Correlation value BLANK.",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-08",
+  "family": "Derivative",
+  "name": "Rest/travel asymmetry from official schedule",
+  "thesis": "Short week (Thursday game) or an international trip is published by the league weeks in advance. Test whether the pre-published rest/travel condition is already fully priced.",
+  "inputs": "nfl.com schedule (kickoff dates, venues, international designations)",
+  "skill_or_luck": "Pure skill test: the input is public and dated, so any edge is either real or absent.",
+  "gates": "PASSES G1/G2/G3 (official, public, complete for 2026). FAILS G6 — needs result history to measure.",
+  "status": "DESIGNED — READY ONCE RESULTS ARE CAPTURED",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-09",
+  "family": "Single",
+  "name": "Post-bye regression check",
+  "thesis": "Teams coming off a bye (official schedule shows the bye) may show a tempo reset. Test as a totals signal, not a side signal.",
+  "inputs": "Official schedule + official play-by-play/tempo data (not on the official site)",
+  "skill_or_luck": "Mostly luck; included because it is cheap to falsify.",
+  "gates": "FAILS G4 (tempo data not officially published).",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-10",
+  "family": "Single",
+  "name": "Backup-QB start under club announcement",
+  "thesis": "When a club announces a backup QB start (official club site), the opening line was set for the starter. Test whether the adjustment is complete at kickoff.",
+  "inputs": "Official club news (e.g. 49ers.com injury report index) + opening and closing lines",
+  "skill_or_luck": "Skill-testable and well documented by clubs; timestamps are the key.",
+  "gates": "PASSES G1/G3. FAILS G6 (no line history). Requires the club-announcement timestamp to be captured, which the repo does not do yet.",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-11",
+  "family": "Parlay (2-leg)",
+  "name": "Injury-hedged two-leg (side + opposing team total under)",
+  "thesis": "A structural hedge: if the injured team's offense stalls, the opposing team total under is partly protected by the same mechanism, so the legs are positively correlated in the loss state.",
+  "inputs": "Injury report + team-total markets",
+  "skill_or_luck": "Correlation is the point: the gate must show the joint distribution beats independent pricing.",
+  "gates": "FAILS G6/G7/G8. Correlation value BLANK until measured.",
+  "status": "DESIGNED — BLOCKED ON DATA",
+  "design_note": "test specification, not a fact"
+ },
+ {
+  "id": "ST-12",
+  "family": "Derivative",
+  "name": "Line-move confirmation (no bet without a move)",
+  "thesis": "A control strategy, not an edge: only act when the line has moved in the direction the official information implies. Its purpose is to measure how much of any result is information and how much is noise.",
+  "inputs": "Opening and closing lines + official injury timestamps",
+  "skill_or_luck": "This is the benchmark every other strategy must beat.",
+  "gates": "FAILS G6 only. Deliberately kept: without it the leaderboard cannot separate skill from luck.",
+  "status": "DESIGNED — BENCHMARK",
+  "design_note": "test specification, not a fact"
+ }
+]

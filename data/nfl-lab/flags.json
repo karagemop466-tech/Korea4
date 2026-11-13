@@ -1,0 +1,65 @@
+[
+ {
+  "id": "FL-01",
+  "issue": "`data/nfl-2026.json` says `verified: true` but cites three non-official sites and contradicts the official home/away for Week 1 (Melbourne).",
+  "status": "UNRESOLVED — recommended for deletion (D-10)",
+  "impact": "None today: nothing renders from it except the audit page. It would mislead anyone who reuses it.",
+  "source": "S-13",
+  "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/data/nfl-2026.json",
+  "source_label": "This repository — data/nfl-2026.json (legacy snapshot)",
+  "source_kind": "repo",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "FL-02",
+  "issue": "Official-source snapshot is 11 days old at rebuild (2026-11-02 vs 2026-11-13); the scheduled refresh workflow is bound to a superseded branch name.",
+  "status": "UNRESOLVED — fix recommended (SUG-08)",
+  "impact": "Schedules released or changed after 2026-11-02 may be missing; injury and line work is unaffected (captured live this session).",
+  "source": "S-12",
+  "source_url": "https://github.com/karagemop466-tech/Korea4/blob/main/.github/workflows/fetch-official.yml",
+  "source_label": "This repository — .github/workflows/fetch-official.yml",
+  "source_kind": "repo",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "FL-03",
+  "issue": "49ers.com lists Week 11 (2026-11-22, vs Vikings) at Estadio Banorte, 5:20 PM PST, NBC, while the league-sourced row in `events.json` carries no venue and no international marker.",
+  "status": "FLAGGED AS UNVERIFIED — venue not confirmed on the league page in this session",
+  "impact": "Neutral-site/rest models (ST-08) cannot use this row until the venue is confirmed from a league source.",
+  "source": "S-04",
+  "source_url": "https://www.49ers.com/schedule/",
+  "source_label": "San Francisco 49ers (official club site) — 49ers 2026 Schedule",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "FL-04",
+  "issue": "Injury report was captured mid-week: all 49ers and Cowboys game-status fields were blank while 15 players combined were listed as Did Not Participate.",
+  "status": "TIME-SENSITIVE — re-capture required before any game-day decision",
+  "impact": "A blank game status must never be read as 'active'.",
+  "source": "S-01",
+  "source_url": "https://www.nfl.com/injuries/",
+  "source_label": "NFL.com — Injuries — Week 10 of the 2026 season (official injury report)",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "FL-05",
+  "issue": "The official 49ers depth chart lists no backup at 9 slots (LCB, NB, RG, RT, FB, P, K, H, LS).",
+  "status": "UNVERIFIABLE FROM OFFICIAL SOURCE — replacement quality unknown",
+  "impact": "A '3rd/4th string' claim at these slots would be an inference, so none is made.",
+  "source": "S-02",
+  "source_url": "https://www.49ers.com/team/depth-chart",
+  "source_label": "San Francisco 49ers (official club site) — 49ers Depth Chart — updated as of 11/10/26",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "FL-06",
+  "issue": "Every correlation value in this section is blank, and every strategy fails at least one gate; the leaderboard has no entries.",
+  "status": "BY DESIGN — not a defect",
+  "impact": "The competition cannot start until results and market lines exist (D-01, D-03). No official source publishes these values, which is exactly why they are blank.",
+  "source": null,
+  "no_source": true
+ }
+]

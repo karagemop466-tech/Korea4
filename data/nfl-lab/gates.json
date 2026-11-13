@@ -1,0 +1,92 @@
+[
+ {
+  "id": "G1",
+  "gate": "Source authenticity",
+  "rule": "Every input traces to a league, club, network or rules-publisher URL. No aggregator, odds screen or news summary.",
+  "test": "Automated: URL host must be on an official allowlist; row must carry the URL.",
+  "result": "PASS — enforced by scripts/verify_nfl_lab.py on this page.",
+  "kind": "structural",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G2",
+  "gate": "Timestamp discipline",
+  "rule": "The input existed before the decision point. An injury status read after kickoff cannot inform that game.",
+  "test": "Each input carries a capture time; decision time must be later.",
+  "result": "PARTIAL — capture times exist for this session's fetches; historical timestamps are not archived.",
+  "kind": "structural",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G3",
+  "gate": "Reproducibility",
+  "rule": "Anyone can rebuild the same signal from the same public sources on the same date.",
+  "test": "Re-run the parser on the archived raw response; output must match byte-for-byte for values.",
+  "result": "PASS for schedule rows (offline rebuild reproduces 6,591 rows); NOT MET for injury/line inputs (not archived yet).",
+  "kind": "structural",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G4",
+  "gate": "Sample sufficiency",
+  "rule": "At least 200 independent observations, and no single week contributing more than 10% of them.",
+  "test": "Count observations; check concentration.",
+  "result": "FAIL — the repository holds 0 completed-game result rows usable for backtesting (schedule rows only).",
+  "kind": "data",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G5",
+  "gate": "Out-of-sample holdout",
+  "rule": "The rule is fixed on one season and tested untouched on the next.",
+  "test": "Freeze parameters; score the holdout only once.",
+  "result": "FAIL — no historical season of inputs is archived.",
+  "kind": "data",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G6",
+  "gate": "Market benchmark",
+  "rule": "Any claimed edge is measured against the closing line, not against a naive model.",
+  "test": "Compare strategy return with closing-line value (CLV) and with the ST-12 control.",
+  "result": "FAIL — no official source publishes closing lines; none are captured in this repo.",
+  "kind": "data",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G7",
+  "gate": "Luck separation",
+  "rule": "Bootstrap the strategy's record 10,000 times; require the 5th percentile of profit to stay positive, and require the result to survive a permutation test at p<0.05.",
+  "test": "Resampling + permutation on settled bets only.",
+  "result": "FAIL — cannot run with 0 settled bets.",
+  "kind": "data",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G8",
+  "gate": "Correlation control (combos)",
+  "rule": "For every parlay/prop combo, the measured pairwise correlation is recorded, and the joint edge must exceed the product of the leg edges after correlation.",
+  "test": "Compute correlation on settled legs; re-price the combo with the measured value.",
+  "result": "FAIL — every correlation cell on this site is BLANK by rule; no settled legs exist.",
+  "kind": "data",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G9",
+  "gate": "Drawdown and stake honesty",
+  "rule": "Report maximum drawdown and the stake that produced it; a strategy that only works at one stake size is rejected.",
+  "test": "Recompute at 0.5x/1x/2x flat stakes.",
+  "result": "FAIL — depends on G7.",
+  "kind": "data",
+  "design_note": "rule set by this section"
+ },
+ {
+  "id": "G10",
+  "gate": "No-manual-input check",
+  "rule": "The pipeline runs end to end without a human typing a value.",
+  "test": "Run the collector in CI with no edits; diff the output.",
+  "result": "PARTIAL — schedule collection is scripted; injury and market capture are not yet automated in this repository.",
+  "kind": "process",
+  "design_note": "rule set by this section"
+ }
+]

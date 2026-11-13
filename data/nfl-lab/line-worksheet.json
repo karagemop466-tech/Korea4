@@ -1,0 +1,134 @@
+[
+ {
+  "id": "LW-01",
+  "input": "Kickoff time and date",
+  "value": "2026-11-15, 1:25 PM PST (4:25 PM ET)",
+  "status": "AVAILABLE — official",
+  "source": "S-05",
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+  "source_label": "NFL.com — 2026 NFL schedule — Week 10 (by week)",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-02",
+  "input": "Teams and home/away",
+  "value": "San Francisco 49ers at Dallas Cowboys",
+  "status": "AVAILABLE — official",
+  "source": "S-05",
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+  "source_label": "NFL.com — 2026 NFL schedule — Week 10 (by week)",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-03",
+  "input": "Venue",
+  "value": "AT&T Stadium (49ers.com schedule)",
+  "status": "AVAILABLE — official (club)",
+  "source": "S-04",
+  "source_url": "https://www.49ers.com/schedule/",
+  "source_label": "San Francisco 49ers (official club site) — 49ers 2026 Schedule",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-04",
+  "input": "Team records entering the game",
+  "value": "SF 7-1, DAL 4-5",
+  "status": "AVAILABLE — official",
+  "source": "S-01",
+  "source_url": "https://www.nfl.com/injuries/",
+  "source_label": "NFL.com — Injuries — Week 10 of the 2026 season (official injury report)",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-05",
+  "input": "Injury designations",
+  "value": "12 49ers listed (6 DNP), 18 Cowboys listed (9 DNP); no game statuses issued at capture",
+  "status": "AVAILABLE — official, but time-sensitive",
+  "source": "S-01",
+  "source_url": "https://www.nfl.com/injuries/",
+  "source_label": "NFL.com — Injuries — Week 10 of the 2026 season (official injury report)",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-06",
+  "input": "Depth-chart replacements for any DNP starter",
+  "value": "49ers chart known (9 slots have no documented backup); Cowboys chart not captured",
+  "status": "PARTIAL",
+  "source": "S-02",
+  "source_url": "https://www.49ers.com/team/depth-chart",
+  "source_label": "San Francisco 49ers (official club site) — 49ers Depth Chart — updated as of 11/10/26",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-07",
+  "input": "Rest days / travel",
+  "value": "Both teams last played 2026-11-08 and 2026-11-09 respectively; travel distance not published",
+  "status": "PARTIAL — dates official, distance not official",
+  "source": "S-04",
+  "source_url": "https://www.49ers.com/schedule/",
+  "source_label": "San Francisco 49ers (official club site) — 49ers 2026 Schedule",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-08",
+  "input": "Scoring baseline for a neutral matchup",
+  "value": "",
+  "status": "MISSING — the NFL publishes results, not a baseline model",
+  "source": "S-08",
+  "source_url": "https://www.nfl.com/schedules/",
+  "source_label": "NFL.com — NFL official 2026 schedule index",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-09",
+  "input": "Marginal effect of a missing starter on points",
+  "value": "",
+  "status": "MISSING — no official source publishes effect sizes",
+  "source": "S-07",
+  "source_url": "https://www.nfl.com/stats/player-stats/",
+  "source_label": "NFL.com — 2026 NFL player statistics — passing",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-10",
+  "input": "Market opening and closing numbers",
+  "value": "",
+  "status": "MISSING — the league publishes none",
+  "source": "S-08",
+  "source_url": "https://www.nfl.com/schedules/",
+  "source_label": "NFL.com — NFL official 2026 schedule index",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-11",
+  "input": "Weather at kickoff",
+  "value": "",
+  "status": "MISSING — no official NFL weather feed in this repo (indoor venue here, so less material)",
+  "source": "S-05",
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+  "source_label": "NFL.com — 2026 NFL schedule — Week 10 (by week)",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ },
+ {
+  "id": "LW-12",
+  "input": "Therefore: the originated number",
+  "value": "",
+  "status": "BLANK BY RULE — any number would be fabricated; see D-04",
+  "source": "S-07",
+  "source_url": "https://www.nfl.com/stats/player-stats/",
+  "source_label": "NFL.com — 2026 NFL player statistics — passing",
+  "source_kind": "official",
+  "source_checked": "2026-11-13 UTC"
+ }
+]
