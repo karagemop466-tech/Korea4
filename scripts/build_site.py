@@ -35,6 +35,19 @@ NFL_W11 = _nfl("week11-change.json")
 NFL_SUGGESTIONS = _nfl("suggestions.json")
 NFL_QUESTIONS = _nfl("open-questions.json")
 
+# This session's (arena/21f65504-korea4) verified player-level injury rows, strategy
+# catalog, line-origination framework, dedicated leaderboard + questions pages.
+# K4_ prefix avoids colliding with the parallel session's NFL_* variables above.
+def _k4nfl(name):
+    return json.loads((ROOT / "data/official" / name).read_text())
+
+K4_NFL_INJURIES = _k4nfl("nfl-injuries.json")
+K4_NFL_STRATEGIES = _k4nfl("nfl-strategies.json")
+K4_NFL_LINES = _k4nfl("nfl-lines.json")
+K4_NFL_LEADERBOARD = _k4nfl("nfl-leaderboard.json")
+K4_NFL_QUESTIONS = _k4nfl("nfl-questions.json")
+K4_NFL_SUGGESTIONS = _k4nfl("nfl-suggestions.json")
+
 # Irregularities opened by the 2026-11-13 NFL decision-module session (arena/a7381587-korea4).
 # Appended to the collector's flags at build time so data/official/ stays collector-owned.
 NFL_MODULE_FLAGS = [
@@ -51,6 +64,7 @@ NAV = [
     ("nfl-lines.html", "NFL lines"), ("nfl-strategies.html", "NFL strategies"),
     ("nfl-injuries.html", "NFL injuries"), ("nfl-suggestions.html", "Suggestions"),
     ("nfl-decision.html", "NFL decision"),
+    ("leaderboard.html", "Leaderboard"), ("questions.html", "Questions"),
     ("ncaaf.html", "Stanford / Cal"), ("wwo.html", "Westwood One"), ("radio.html", "Radio map"),
     ("sources.html", "Sources"), ("flagged.html", "Flagged"), ("methodology.html", "Method"),
     ("review.html", "Repo review"), ("executive-summary.html", "Executive summary"),
@@ -436,8 +450,12 @@ def build_nfl_lines():
 <section class="panel"><h2>Data-currency check: Week 11 official change vs captured snapshot</h2><p class="intro">The official {esc(NFL_W11['announced'])} announcement post-dates the {esc(NFL_W11['captured_snapshot_date'])} captured snapshot. 11 of 13 Week 11 rows match exactly; 2 are stale (IR-022). Stale values are shown as captured — they are never silently overwritten.</p>
 {table(['ID','Matchup','Game date','Captured snapshot time','Official final time (ET)','Official time PT','Status'], NFL_W11['rows'], ['id','matchup','game_date','repo_time_pt','official_time_et','official_time_pt',('status','badge')], 'nfl-week11-change', 20)}
 <p><a class="control-btn" href="flagged.html">See IR-022 on the Flagged for Review page →</a></p></section>
+<section class="panel"><h2>Line-origination method (this session's verified inputs)</h2><p class="intro">Each step links to the official source it relies on. The model that combines them is the project's OWN output, not an official league value.</p>
+{table(['Step','Step name','Detail'], K4_NFL_LINES['snapshot']['method'], [('step','num'),'name','detail'], 'k4-line-method', 20)}</section>
+<section class="panel"><h2>Originated lines — Week 10, 2026 (game context VERIFIED; model values UNVERIFIED)</h2><p class="intro">{len(K4_NFL_LINES['lines'])} games. Game context (fixture, venue, kickoff, records) is VERIFIED; the model spread / total / probability / confidence cells are the project's OWN outputs — blank + UNVERIFIED until a documented, reproducible model run produces them. Focus game shown first.</p>
+{table(['Game','Date','Kickoff ET','Network','Venue','Away rec','Home rec','Priority','Model spread','Model total','Model win prob','Confidence','Validation'], K4_NFL_LINES['lines'], ['game','date','kickoff_et','network','venue',('away_record','text'),('home_record','text'),('focus','badge'),('model_spread','blank'),('model_total','blank'),('model_ml_prob','blank'),('confidence','blank'),('validation_status','badge')], 'k4-originated-lines', 100)}</section>
 '''
-    write("nfl-lines.html", page("NFL lines", "nfl-lines.html", "How this site originates its own NFL numbers from official sources only: pipeline, inputs, and schedule-currency checks.", body))
+    write("nfl-lines.html", page("NFL lines", "nfl-lines.html", "How this site originates its own NFL numbers from official sources only: pipeline, inputs, schedule-currency checks, method and originated-lines table.", body))
 
 
 def build_nfl_strategies():
@@ -451,12 +469,24 @@ def build_nfl_strategies():
 {table(['ID','Gate','Definition','Threshold','Result','Verification','Status'], NFL_GATES, ['id','gate','definition','threshold',('result','blank'),'verification',('status','badge')], 'nfl-gates', 20)}</section>
 <section class="panel"><h2>Correlation values — intentionally blank</h2><p class="intro">No official source publishes bet-pair correlations (IR-025). Values stay blank until computed from official play-by-play data plus a licensed odds source, and multi-leg tickets stay unpublishable until the V-06 cap is set. Excluded categories follow the NFL's official integrity policy.</p>
 {table(['ID','Combo pair','Why it matters','Method to measure','Value','Verification','Status'], NFL_CORR, ['id','combo_pair','why_it_matters','method',('value','blank'),'verification',('status','badge')], 'nfl-correlation', 20)}</section>
+<section class="panel"><h2>Strategy catalog (single bet / parlay / player-prop combos)</h2><p class="intro">{len(K4_NFL_STRATEGIES['strategies'])} strategies across the three bet types. Each must pass every validation gate before it is eligible for the leaderboard. Betting-line, odds, prop and correlation values are NOT official league values and stay blank/UNVERIFIED until a model run over verified inputs produces them.</p>
+{table(['ID','Strategy','Bet type','Signal','Verified inputs','Correlation handling','Gates','Skill metric','Status'], K4_NFL_STRATEGIES['strategies'], ['id','name','bet_type','signal','inputs','correlation','gates',('skill_metric','text'),('status','badge')], 'k4-strategy-catalog', 100)}</section>
 '''
-    write("nfl-strategies.html", page("NFL strategies", "nfl-strategies.html", "Strategy leaderboard competition framework: divisions, scoring, signal research, validation gates, correlation research, and integrity exclusions.", body))
+    write("nfl-strategies.html", page("NFL strategies", "nfl-strategies.html", "Strategy leaderboard competition framework: divisions, scoring, signal research, validation gates, correlation research, integrity exclusions, and strategy catalog.", body))
 
 
 def build_nfl_injuries():
     snap = NFL_INJURY["teams"]
+    # This session's player-level verified rows (data/official/nfl-injuries.json),
+    # sorted focus-game first, then by date. deficiency/depth notes are ANALYSIS.
+    k4_games = sorted(K4_NFL_INJURIES["games"], key=lambda g: (0 if g["focus"] else 1, g["date"]))
+    k4_all_rows = []
+    for g in k4_games:
+        for r in g["rows"]:
+            r = dict(r)
+            r["game"] = f"{g['away'][:3]} @ {g['home'][:3]} ({g['date']})"
+            k4_all_rows.append(r)
+    k4_teams = K4_NFL_INJURIES["teams"]
     body = f'''
 <div class="callout warn"><strong>Dated snapshot — the injury report updates every reporting day.</strong> Counts below were transcribed from the official Week 10 report as displayed on {esc(NFL_INJURY['captured_utc'])}: {len(snap)} clubs across 7 fully captured games (+1 partial). The New Orleans Saints table was only partially captured and is excluded. Nothing here is a projection; it is a verbatim availability snapshot.</div>
 <section class="panel"><h2>Week 10 availability snapshot ({esc(NFL_INJURY['captured_utc'])})</h2><p class="intro">Practice-participation counts per club. "Out" and "Questionable" are official game statuses displayed on the capture date (IR-026 records one verbatim oddity).</p>
@@ -467,8 +497,14 @@ def build_nfl_injuries():
 {table(['ID','Club','Unit','Observation','Status'], NFL_DEPTH['observed_week10_examples'], ['id','team','unit','observation',('status','badge')], 'nfl-depth-examples', 20)}</section>
 <section class="panel"><h2>Official availability &amp; roster sources</h2><p class="intro">Injury report, rosters, transactions, CBA and the policy pages this module is built on — all fetched live {esc(NFL_MODULE_META['verified_on'])}.</p>
 {table(['ID','Official source','Purpose','Verified','What was observed live','Status'], NFL_SOURCES, ['id','title','purpose','verified_on','observed',('status','badge')], 'nfl-injury-sources', 20)}</section>
+<section class="panel"><h2>Team deficiency summary — Week 10 (player-level, VERIFIED)</h2><p class="intro">Counts of players ruled out (Out), did not practice (DNP), questionable, limited and full participation per team, transcribed from the official NFL.com Week 10 injury report.</p>
+{table(['Team','Record','Out','DNP','Questionable','Limited','Full'], k4_teams, ['name',('record','text'),('out','num'),('dnp','num'),('questionable','num'),('limited','num'),('full','num')], 'k4-team-summary', 100)}</section>
+<section class="panel"><h2>49ers focus — player-level Week 10 injury detail</h2><p class="intro">The 49ers are the project FOCUS team. Rows are transcribed from the official report; deficiency notes are project ANALYSIS (depth-string / backup-replacing-starter is UNVERIFIED pending an official depth chart).</p>
+{table(['Game','Team','Player','Pos','Injury','Practice','Game status','Deficiency (ANALYSIS)','Verification'], [r for r in k4_all_rows if r["priority"] == "FOCUS"], ['game','team','player','position',('injury','blank'),'practice_status',('game_status','blank'),'deficiency',('verification','badge')], 'k4-nflers-injuries', 100)}</section>
+<section class="panel"><h2>Every Week 10 injury row (player-level, VERIFIED)</h2><p class="intro">{len(k4_all_rows)} rows across {len(k4_games)} games. Empty official fields are blank + UNVERIFIED; deficiency and depth_string are ANALYSIS. Every row links to the official NFL.com injury report.</p>
+{table(['Game','Team','Record','Player','Pos','Injury','Practice','Game status','Depth (UNVERIFIED)','Deficiency (ANALYSIS)','Priority','Verification'], k4_all_rows, ['game','team',('record','text'),'player','position',('injury','blank'),'practice_status',('game_status','blank'),('depth_string','blank'),'deficiency',('priority','badge'),('verification','badge')], 'k4-all-injuries', 100)}</section>
 '''
-    write("nfl-injuries.html", page("NFL injuries & depth", "nfl-injuries.html", "Official injury-report snapshot, roster/transaction sources, and the starter-to-backup deficiency framework with Week 10 observations.", body))
+    write("nfl-injuries.html", page("NFL injuries & depth", "nfl-injuries.html", "Official injury-report snapshot, roster/transaction sources, deficiency framework, and player-level verified Week 10 injury rows.", body))
 
 
 def build_nfl_suggestions():
@@ -683,7 +719,7 @@ Live site: <https://karagemop466-tech.github.io/Korea4/>
 - **ESTIMATED** — documented planning model from official 2026 rows; never a released schedule.
 
 ## Pages
-`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
+`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`, `leaderboard.html`, `questions.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
 
 ### NFL decision support (added 2026-11-13)
 `nfl-decision.html` (overview) · `nfl-decision-strategies.html` · `nfl-decision-validation.html` ·
@@ -719,14 +755,50 @@ def build_nfl_decision():
     subprocess.run([sys.executable, str(ROOT / "scripts/build_nfl_decision.py")], check=True)
 
 
+def build_leaderboard():
+    snap = K4_NFL_LEADERBOARD["snapshot"]
+    metrics = K4_NFL_LEADERBOARD["metrics"]
+    rewards = K4_NFL_LEADERBOARD["rewards"]
+    rows = K4_NFL_LEADERBOARD["rows"]
+    rcols = ["strategy", "bet_type", ("brier_score", "blank"), ("log_loss", "blank"),
+             ("roi", "blank"), ("hit_rate", "blank"), ("skill_vs_luck", "blank"),
+             ("sample_size", "blank"), ("rank", "blank"), ("status", "badge")]
+    body = f'''
+<div class="callout warn"><strong>Leaderboard competition.</strong> {esc(snap['note'])} Strategies are ranked only on verified, out-of-sample performance that passes the validation gates. Actual metric values, ranks and rewards are blank + UNVERIFIED until strategies are run over a settled, documented dataset. No value is inferred.</div>
+<section class="panel"><h2>Ranking metrics</h2><p class="intro">Metric definitions used to rank strategies and to separate skill from luck.</p>
+{table(['Metric','Definition','Status'], metrics, ['metric','definition',('status','badge')], 'k4-leaderboard-metrics', 20)}</section>
+<section class="panel"><h2>Reward tiers</h2><p class="intro">Rewards are defined by the competition owner; tiers are PENDING DEFINITION until the competition terms are set.</p>
+{table(['Tier','Requirement','Reward','Status'], rewards, ['tier','requirement','reward',('status','badge')], 'k4-leaderboard-rewards', 20)}</section>
+<section class="panel"><h2>Current standings</h2><p class="intro">All strategies are FRAMEWORK — PENDING VALIDATION. Ranks and metrics are UNVERIFIED until a strategy is run and passes the gates. See <a href="nfl-strategies.html">NFL strategies</a> for the full competition design, signal research and validation gates.</p>
+{table(['Strategy','Bet type','Brier score','Log loss','ROI','Hit rate','Skill vs. luck','Sample size','Rank','Status'], rows, rcols, 'k4-leaderboard-rows', 100)}</section>
+'''
+    write("leaderboard.html", page("Leaderboard", "leaderboard.html", "Rank strategies by verified out-of-sample performance; rewards for top performers that pass the gates.", body))
+
+
+def build_questions():
+    snap = K4_NFL_QUESTIONS["snapshot"]
+    qs = K4_NFL_QUESTIONS["questions"]
+    qheaders = ["ID", "Category", "Question", "What we know (verified)", "What we don't know",
+                "Decision blocked", "Suggestion to discover", "Status"]
+    cols = ["id", "category", "question", "what_we_know", "what_we_dont_know",
+            "decision_blocked", "suggestion", ("status", "badge")]
+    body = f'''
+<div class="callout"><strong>Open questions before any decision.</strong> {esc(snap['note'])} Answering these is required before a decision can be reasonably made from the information we have and do not have. See <a href="nfl-suggestions.html">NFL suggestions</a> for the companion suggestions and decision-readiness checklist.</div>
+<section class="panel"><h2>Questions, information and answers</h2><p class="intro">{len(qs)} open questions. Each lists what is verified, what is missing, the decision it blocks, and a suggestion to discover the missing information.</p>
+{table(qheaders, qs, cols, 'k4-open-questions', 100)}</section>
+'''
+    write("questions.html", page("Questions", "questions.html", "Clear list of open questions, the information we have and lack, and suggestions to discover missing information.", body))
+
+
 def main():
     preserve_legacy()
     build_index(); build_daily(); build_calendar(); build_vacation(); build_mlb(); build_nfl()
     build_nfl_lines(); build_nfl_strategies(); build_nfl_injuries(); build_nfl_suggestions()
     build_nfl_decision()
+    build_leaderboard(); build_questions()
     build_ncaaf(); build_wwo(); build_radio(); build_sources(); build_flagged(); build_methodology()
     build_review(); build_executive(); build_readme()
-    print(json.dumps({"pages": len(NAV) + 1, "source_rows": len(SOURCES), "event_rows": len(EVENTS), "audit_rows": len(REVIEW), "nfl_module_flags": len(NFL_MODULE_FLAGS)}, indent=2))
+    print(json.dumps({"pages": len(NAV) + 1, "source_rows": len(SOURCES), "event_rows": len(EVENTS), "audit_rows": len(REVIEW), "nfl_module_flags": len(NFL_MODULE_FLAGS), "k4_nfl_injury_rows": sum(len(g["rows"]) for g in K4_NFL_INJURIES["games"]), "k4_nfl_strategies": len(K4_NFL_STRATEGIES["strategies"])}, indent=2))
 
 
 if __name__ == "__main__":

@@ -25,7 +25,7 @@ Live site: <https://karagemop466-tech.github.io/Korea4/>
 - **ESTIMATED** — documented planning model from official 2026 rows; never a released schedule.
 
 ## Pages
-`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
+`index.html`, `daily.html`, `calendar.html`, `vacation.html`, `mlb.html`, `nfl.html`, `nfl-lines.html`, `nfl-strategies.html`, `nfl-injuries.html`, `nfl-suggestions.html`, `leaderboard.html`, `questions.html`, `ncaaf.html`, `wwo.html`, `radio.html`, `sources.html`, `flagged.html`, `methodology.html`, `review.html`, `executive-summary.html`.
 
 ### NFL decision support (added 2026-11-13)
 `nfl-decision.html` (overview) · `nfl-decision-strategies.html` · `nfl-decision-validation.html` ·

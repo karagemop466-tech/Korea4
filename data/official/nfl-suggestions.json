@@ -1,0 +1,95 @@
+{
+  "snapshot": {
+    "note": "These are proposals for improving decision-making. Each is PENDING REVIEW: a reviewer chooses the best path before any change is implemented. None is implemented yet."
+  },
+  "suggestions": [
+    {
+      "id": "SUG-1",
+      "title": "Author a versioned line-origination model spec",
+      "rationale": "A reproducible, documented model is required before any originated line can be published or validated.",
+      "impact": "High — unlocks the lines page and the data-integrity gate.",
+      "feasibility": "Medium",
+      "priority": "HIGH",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "SUG-2",
+      "title": "Build an official-source input manifest for the signal pipeline",
+      "rationale": "Mirror the existing official-source manifest (URL, HTTP status, SHA-256, retrieved timestamp) for every signal input so VG-1 is auditable.",
+      "impact": "High — makes data integrity verifiable line by line.",
+      "feasibility": "High",
+      "priority": "HIGH",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "SUG-3",
+      "title": "Publish measured correlation values and set the parlay cap",
+      "rationale": "Correlation values are currently blank/UNVERIFIED; parlay and prop-combo strategies cannot be built or gated without them.",
+      "impact": "High — required for S4/S5/S8 and gate VG-4.",
+      "feasibility": "Medium",
+      "priority": "HIGH",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    },
+    {
+      "id": "SUG-4",
+      "title": "Pull official depth charts to verify backup-replacing-starter deficiencies",
+      "rationale": "The injury report verifies status but not depth order; depth charts confirm the 2nd/3rd/4th-string designation.",
+      "impact": "High — converts deficiency ANALYSIS into VERIFIED.",
+      "feasibility": "Medium",
+      "priority": "HIGH",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/injuries/",
+      "source_label": "NFL.com official injury report"
+    },
+    {
+      "id": "SUG-5",
+      "title": "Add a weekly injury-refresh job to the build pipeline",
+      "rationale": "Injuries change weekly; a scheduled refresh keeps the injuries page current and re-verified.",
+      "impact": "Medium — keeps injury tracking timely.",
+      "feasibility": "Medium",
+      "priority": "MEDIUM",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+      "source_label": "NFL.com 2026-27 important dates"
+    },
+    {
+      "id": "SUG-6",
+      "title": "Define numeric validation thresholds and back-test them",
+      "rationale": "Sample-size and skill-vs-luck thresholds are concepts; concrete, back-tested numbers are needed to rank strategies.",
+      "impact": "High — unlocks the leaderboard.",
+      "feasibility": "Medium",
+      "priority": "HIGH",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/rulebook/",
+      "source_label": "NFL.com official playing rules"
+    },
+    {
+      "id": "SUG-7",
+      "title": "Document the market-reference policy",
+      "rationale": "Clarify whether any non-official market reference is used and how it is labelled, so 'edge' is computed honestly.",
+      "impact": "Medium — prevents overclaiming edge.",
+      "feasibility": "High",
+      "priority": "MEDIUM",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/rulebook/",
+      "source_label": "NFL.com official playing rules"
+    },
+    {
+      "id": "SUG-8",
+      "title": "Add a walk-forward out-of-sample harness",
+      "rationale": "VG-5 requires out-of-sample evaluation; a harness prevents in-sample overfitting from entering rankings.",
+      "impact": "High — protects leaderboard integrity.",
+      "feasibility": "Medium",
+      "priority": "HIGH",
+      "status": "PENDING REVIEW",
+      "source_url": "https://www.nfl.com/stats/",
+      "source_label": "NFL.com official stats"
+    }
+  ]
+}
